@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1"}
+    %title= content_for?(:title) ? yield(:title) : "Sacobs"
+    %meta{content: content_for?(:description) ? yield(:description) : "Sacobs", name: "description"}
+    %meta{content: content_for?(:keywords) ? yield(:keywords) : "Sacobs", name: "keywords"}
+    = stylesheet_link_tag :application, media: "all"
+    = javascript_include_tag :application
+    = javascript_include_tag controller_path if Rails.application.assets.find_asset "#{controller_name}.js.coffee"
+    = csrf_meta_tags
+    = yield(:head)
+  %body{class: "#{controller_name}", data: {action: action_name, controller: controller_path}}
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      %nav.navbar-inner
+        .container
+          = render 'layouts/navigation'
+    #main{role: :main}
+      .container
+        .content
+          = render 'layouts/messages'
+          - if content_for?(:sidebar)
+            .sidebar
+              = yield(:sidebar)
+            .main-section
+              = yield
+          - else
+            = yield
+    %footer
