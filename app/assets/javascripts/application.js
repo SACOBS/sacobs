@@ -15,4 +15,5 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
-//= require_tree .
+//= require sacobs
+//= require initialize

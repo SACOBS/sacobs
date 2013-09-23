@@ -31,6 +31,8 @@ gem 'haml-rails'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
 gem 'bootswatch-rails'
+gem 'twitter-bootstrap-rails-confirm'
+
 
 #Forms
 gem "simple_form", "~> 3.0.0"
