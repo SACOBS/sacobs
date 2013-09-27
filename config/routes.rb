@@ -1,5 +1,10 @@
 Sacobs::Application.routes.draw do
+
   devise_for :users
+
+  resources :cities, only: [:index]
+
+  resource :contacts, only: [:new, :create]
 
   root to: 'high_voltage/pages#show', id: 'home'
 end

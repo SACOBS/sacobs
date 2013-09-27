@@ -17,3 +17,22 @@
 //= require turbolinks
 //= require sacobs
 //= require initialize
+
+
+(function($, undefined_) {
+    return $(function() {
+        var $body, action, activeController, controller;
+        $body = $("body");
+        controller = $body.data("controller").replace(/\//g, "_");
+        action = $body.data("action");
+        activeController = Sacobs[controller];
+        if (activeController !== undefined) {
+            if ($.isFunction(activeController.init)) {
+                activeController.init();
+            }
+            if ($.isFunction(activeController[action])) {
+                return activeController[action]();
+            }
+        }
+    });
+})(jQuery);

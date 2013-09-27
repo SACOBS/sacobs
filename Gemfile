@@ -34,6 +34,12 @@ gem 'bootswatch-rails'
 gem 'twitter-bootstrap-rails-confirm'
 
 
+# Background Processing
+gem "delayed_job", "~> 4.0.0"
+gem "delayed_job_active_record", "~> 4.0.0"
+gem "workless"
+gem "daemons"
+
 #Forms
 gem "simple_form", "~> 3.0.0"
 
@@ -53,6 +59,8 @@ gem 'responders'
 # Env variables
 gem "figaro"
 
+# Email
+gem 'premailer-rails'
 
 group :development do
   gem "better_errors"

@@ -1,8 +1,9 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  include ParamsFor
   self.responder = ApplicationResponder
-  respond_to :html
+  respond_to :html,:js,:json
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
