@@ -62,6 +62,9 @@ gem "figaro"
 # Email
 gem 'premailer-rails'
 
+# Font Awesome
+gem "font-awesome-rails"
+
 group :development do
   gem "better_errors"
   gem 'annotate', '~> 2.5.0'

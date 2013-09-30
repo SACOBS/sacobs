@@ -17,4 +17,9 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(resource)
     root_path
   end
+
+  protected
+  def devise_parameter_sanitizer
+    UserSanitizer.new(User, :user, params)
+  end
 end
