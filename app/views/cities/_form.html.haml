@@ -1,0 +1,13 @@
+= simple_form_for @city do |f|
+  %fieldset
+    %legend City
+    = f.input :name, required: false
+  #venues
+    = f.simple_fields_for :venues do |venue|
+      = render 'venue_fields', f: venue
+    .links
+      %hr
+      = link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-info btn-mini'
+      %hr
+  %br
+  = f.submit class: 'btn btn-primary'

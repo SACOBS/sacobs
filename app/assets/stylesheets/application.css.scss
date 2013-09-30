@@ -9,7 +9,16 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap-sortable
  *= require normalize-rails
  *= require_tree .
  */
 
+.form-inline{
+  div {
+    display: inline-block;
+  }
+  label{
+    padding: 3px;
+  }
+}

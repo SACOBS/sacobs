@@ -2,7 +2,9 @@ Sacobs::Application.routes.draw do
 
   devise_for :users
 
-  resources :cities, only: [:index]
+  resources :cities
+
+  resources :buses
 
   resource :contacts, only: [:new, :create]
 
@@ -12,7 +14,7 @@ Sacobs::Application.routes.draw do
 
 end
 #== Route Map
-# Generated on 30 Sep 2013 10:25
+# Generated on 30 Sep 2013 14:22
 #
 #         new_user_session GET    /users/sign_in(.:format)       devise/sessions#new
 #             user_session POST   /users/sign_in(.:format)       devise/sessions#create
@@ -30,7 +32,15 @@ end
 #                          PUT    /users(.:format)               devise/registrations#update
 #                          DELETE /users(.:format)               devise/registrations#destroy
 #                   cities GET    /cities(.:format)              cities#index
+#                          POST   /cities(.:format)              cities#create
+#                 new_city GET    /cities/new(.:format)          cities#new
+#                edit_city GET    /cities/:id/edit(.:format)     cities#edit
+#                     city GET    /cities/:id(.:format)          cities#show
+#                          PATCH  /cities/:id(.:format)          cities#update
+#                          PUT    /cities/:id(.:format)          cities#update
+#                          DELETE /cities/:id(.:format)          cities#destroy
 #                 contacts POST   /contacts(.:format)            contacts#create
 #             new_contacts GET    /contacts/new(.:format)        contacts#new
 #                     root GET    /                              high_voltage/pages#show {:id=>"home"}
+#                                 (/errors)/:status(.:format)    errors#show {:status=>/\d{3}/}
 #                     page GET    /*id                           high_voltage/pages#show

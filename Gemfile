@@ -32,6 +32,7 @@ gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
 gem 'bootswatch-rails'
 gem 'twitter-bootstrap-rails-confirm'
+gem 'bootstrap_sortable_rails', "~> 0.1.3"
 
 
 # Background Processing
@@ -64,6 +65,10 @@ gem 'premailer-rails'
 
 # Font Awesome
 gem "font-awesome-rails"
+
+# Nested Forms
+gem "cocoon"
+
 
 group :development do
   gem "better_errors"

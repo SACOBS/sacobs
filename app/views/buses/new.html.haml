@@ -1,0 +1,9 @@
+= simple_form_for @bus do |f|
+  %fieldset
+    %legend Bus
+    = f.input :name, required: false
+    = f.input :capacity, required: false
+    = f.input :year, required: false
+    = f.input :model, required: false
+  %br
+  = f.submit class: 'btn btn-primary'
