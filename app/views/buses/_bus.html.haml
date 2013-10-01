@@ -1,0 +1,7 @@
+%tr[bus]
+  %td= bus.name
+  %td= bus.year
+  %td= bus.model
+  %td= bus.capacity
+  %td= link_to 'Edit', edit_bus_path(bus), icon: 'icon-edit'
+  %td= link_to 'Delete', bus, icon: 'icon-remove', data: { confirm: 'Are you sure you want to delete this bus?'}, method: :delete

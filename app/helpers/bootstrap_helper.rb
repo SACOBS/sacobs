@@ -89,4 +89,17 @@ module BootstrapHelper
       end
     end
   end
+
+  def drop_down_menu(name)
+    haml_tag :li, class: 'dropdown' do
+      haml_tag :a ,class: 'dropdown-toggle', href: '#', data: {toggle: 'dropdown'} do
+        haml_concat name
+        haml_tag :b ,class: 'caret'
+      end
+      haml_tag :ul, class: 'dropdown-menu' do
+        yield if block_given?
+      end
+    end
+  end
+
 end

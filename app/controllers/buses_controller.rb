@@ -23,7 +23,7 @@ class BusesController < ApplicationController
   def update
     @bus = find_bus(params[:id])
     @bus.update(bus_params)
-    respond_with(@bus)
+    respond_with(@bus, location: bus_url)
   end
 
   private
