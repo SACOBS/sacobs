@@ -26,6 +26,12 @@ class BusesController < ApplicationController
     respond_with(@bus, location: bus_url)
   end
 
+  def destroy
+    @bus = find_bus(params[:id])
+    @bus.destroy
+    respond_with(@bus)
+  end
+
   private
   def build_bus
     Bus.new(bus_params)

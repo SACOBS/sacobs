@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930133605) do
+ActiveRecord::Schema.define(version: 20131004122137) do
+
+  create_table "addresses", force: true do |t|
+    t.string   "street_address1"
+    t.string   "street_address2"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "category"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "buses", force: true do |t|
     t.string   "name"
@@ -24,6 +36,15 @@ ActiveRecord::Schema.define(version: 20130930133605) do
 
   create_table "cities", force: true do |t|
     t.string "name"
+  end
+
+  create_table "connections", force: true do |t|
+    t.integer  "from_city_id"
+    t.integer  "to_city_id"
+    t.integer  "distance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "route_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -52,6 +73,15 @@ ActiveRecord::Schema.define(version: 20130930133605) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "routes", force: true do |t|
+    t.integer  "start_city_id"
+    t.integer  "end_city_id"
+    t.decimal  "cost"
+    t.integer  "distance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "seats", force: true do |t|
     t.string   "row"

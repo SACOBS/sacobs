@@ -69,6 +69,9 @@ gem "font-awesome-rails"
 # Nested Forms
 gem "cocoon"
 
+# Enums
+# gem 'enumify'
+
 
 group :development do
   gem "better_errors"
