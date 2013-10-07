@@ -4,3 +4,4 @@
   %td= connection.to_city.name
   %td= "#{connection.distance} km"
   %td= number_to_percentage(connection.percentage, precision: 0)
+  %td= number_to_currency(connection.cost, unit: 'R')

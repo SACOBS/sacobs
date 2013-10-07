@@ -1,5 +1,5 @@
 .page-header
-  %h3= "Route (#{@route.start_city.name} to #{@route.end_city.name} )"
+  %h3= "Route (#{@route.start_city.name} to #{@route.end_city.name})"
   = link_to 'Back',:back
 .well.well-small
   %h5 Details:
@@ -15,6 +15,6 @@
 
 .well
   %h5 Connections:
-  - bootstrap_table headers:['','From', 'To','Distance', 'Percentage'], types: [:bordered, :condensed], html_options: {id: 'connections'} do
+  - bootstrap_table headers:['','From', 'To','Distance', 'Percentage', 'Cost', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
     = render @route.connections
 

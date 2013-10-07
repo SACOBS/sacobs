@@ -19,13 +19,16 @@ class Connection < ActiveRecord::Base
 
   validates :route,:from_city, :to_city, :distance, presence: true
 
-  before_save :calculate_percentage_of_route
+  before_save :calculate_route_percentage, :calculate_connection_cost
 
 
   protected
-  def calculate_percentage_of_route
+  def calculate_route_percentage
     self.percentage = (self.distance.to_f / self.route.distance.to_f) * 100
   end
 
+  def calculate_connection_cost
+    self.cost = (self.percentage.to_f / 100) * self.route.cost
+  end
 
 end
