@@ -15,6 +15,7 @@
 //= require twitter/bootstrap/rails/confirm
 //= require jquery.turbolinks
 //= require bootstrap
+//= require bootstrap-sortable
 //= require cocoon
 //= require turbolinks
 //= require sacobs

@@ -73,6 +73,10 @@ gem "cocoon"
 # gem 'enumify'
 
 
+# Wizard
+gem 'wicked'
+
+
 group :development do
   gem "better_errors"
   gem 'annotate', '~> 2.5.0'

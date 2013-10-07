@@ -17,6 +17,8 @@ class Route < ActiveRecord::Base
 
   has_many :connections, dependent: :destroy
 
+  accepts_nested_attributes_for :connections,  reject_if: :all_blank, allow_destroy: true
+
   validates :start_city, :end_city, :cost, :distance, presence: true
 
 end

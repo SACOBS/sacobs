@@ -1,2 +1,20 @@
-%h1 Route#show
-%p Find me in app/views/route/show.html.haml
+.page-header
+  %h3= "Route (#{@route.start_city.name} to #{@route.end_city.name} )"
+  = link_to 'Back',:back
+.well.well-small
+  %h5 Details:
+  %dl.dl-horizontal
+    %dt Start City:
+    %dd= @route.start_city.name
+    %dt End City:
+    %dd= @route.end_city.name
+    %dt Cost:
+    %dd= number_to_currency(@route.cost, unit: 'R')
+    %dt Distance:
+    %dd= "#{@route.distance} km"
+
+.well
+  %h5 Connections:
+  - bootstrap_table headers:['','From', 'To','Distance', 'Percentage'], types: [:bordered, :condensed], html_options: {id: 'connections'} do
+    = render @route.connections
+

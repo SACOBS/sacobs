@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004122137) do
+ActiveRecord::Schema.define(version: 20131007062515) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20131004122137) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "route_id"
+    t.decimal  "percentage",   precision: 2, scale: 0
   end
 
   create_table "delayed_jobs", force: true do |t|

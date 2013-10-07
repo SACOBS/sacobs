@@ -1,0 +1,5 @@
+%tr.nested-fields
+  %td= f.association :from_city, label: false
+  %td= f.association :to_city, label: false
+  %td= f.input :distance, label: false
+  %td= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-mini'
