@@ -10,6 +10,7 @@
 #  updated_at   :datetime
 #  route_id     :integer
 #  percentage   :integer
+#  cost         :integer
 #
 
 require 'spec_helper'

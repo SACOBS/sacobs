@@ -10,6 +10,7 @@
 #  updated_at   :datetime
 #  route_id     :integer
 #  percentage   :integer
+#  cost         :integer
 #
 
 class Connection < ActiveRecord::Base
@@ -17,10 +18,20 @@ class Connection < ActiveRecord::Base
   belongs_to :from_city, class_name: :City
   belongs_to :to_city, class_name: :City
 
+  attr_reader :description
+
   validates :route,:from_city, :to_city, :distance, presence: true
 
   before_save :calculate_route_percentage, :calculate_connection_cost
 
+  delegate :name, to: :from_city, prefix: true
+  delegate :name, to: :to_city, prefix: true
+
+
+
+  def description
+    @description ||= "#{self.from_city_name} to #{self.to_city_name}"
+  end
 
   protected
   def calculate_route_percentage

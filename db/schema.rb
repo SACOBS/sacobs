@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007122202) do
+ActiveRecord::Schema.define(version: 20131008120426) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -94,6 +94,26 @@ ActiveRecord::Schema.define(version: 20131007122202) do
   end
 
   add_index "seats", ["bus_id"], name: "index_seats_on_bus_id"
+
+  create_table "stops", force: true do |t|
+    t.integer  "connection_id"
+    t.integer  "trip_id"
+    t.datetime "arrive"
+    t.datetime "depart"
+    t.integer  "available_seats"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trips", force: true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "route_id"
+    t.integer  "bus_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
