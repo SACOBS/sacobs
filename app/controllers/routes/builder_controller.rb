@@ -1,6 +1,8 @@
 class Routes::BuilderController < ApplicationController
   include Wicked::Wizard
 
+  before_action :set_route, only: [:show, :update]
+
   params_for :route, :start_city_id, :end_city_id, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance]
 
   steps :details, :connections
@@ -12,12 +14,10 @@ class Routes::BuilderController < ApplicationController
   end
 
   def show
-    @route = find_route(params[:route_id])
     render_wizard
   end
 
   def update
-    @route = find_route(params[:route_id])
     @route.update(route_params)
     render_wizard @route
   end
@@ -27,8 +27,7 @@ class Routes::BuilderController < ApplicationController
     routes_url
   end
 
-  def find_route(id)
-    Route.find(id)
+  def set_route
+    @route =  Route.find(id)
   end
-
 end

@@ -1,4 +1,5 @@
 class BusesController < ApplicationController
+  before_action :set_bus, only: [:edit,:update, :destroy]
 
   params_for :bus, :name, :capacity, :year, :model, seats_attributes: [:id, :_destroy, :row, :number]
 
@@ -6,39 +7,29 @@ class BusesController < ApplicationController
     @buses = Bus.all
   end
 
-  def edit
-    @bus = find_bus(params[:id])
-  end
-
   def new
-    @bus = build_bus
+    @bus = Bus.new
   end
 
   def create
-    @bus = build_bus
+    @bus = Bus.new(bus_params)
     create_seats if @bus.save
     respond_with(@bus, location: edit_bus_url(@bus))
   end
 
   def update
-    @bus = find_bus(params[:id])
     @bus.update(bus_params)
     respond_with(@bus, location: bus_url)
   end
 
   def destroy
-    @bus = find_bus(params[:id])
     @bus.destroy
     respond_with(@bus)
   end
 
   private
-  def build_bus
-    Bus.new(bus_params)
-  end
-
-  def find_bus(id)
-    Bus.find(params[:id])
+  def set_bus
+   @bus = Bus.find(params[:id])
   end
 
   def create_seats

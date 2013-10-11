@@ -1,4 +1,5 @@
 class CitiesController < ApplicationController
+  before_action :set_city, only: [:edit, :update, :destroy]
 
   params_for :city, :name, venues_attributes: [:id, :name, :_destroy]
 
@@ -8,38 +9,28 @@ class CitiesController < ApplicationController
   end
 
   def new
-    @city = build_city
+    @city = City.new
   end
 
   def create
-    @city = build_city
-    @city.save
+    @city = City.create(city_params)
     respond_with(@city, location: cities_url)
   end
 
-  def edit
-    @city = find_city(params[:id])
-  end
-
   def update
-    @city = find_city(params[:id])
     @city.update(city_params)
     respond_with(@city, location: cities_url)
   end
 
   def destroy
-    @city = find_city(params[:id])
     @city.destroy
     respond_with(@city)
   end
 
 
   private
-  def build_city
-    City.new(city_params)
+  def set_city
+    @city = City.find(params[:id])
   end
 
-  def find_city(id)
-    City.find(id)
-  end
 end

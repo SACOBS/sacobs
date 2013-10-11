@@ -9,19 +9,12 @@ class DriversController < ApplicationController
     @drivers = Driver.all
   end
 
-  # GET /drivers/1
-  # GET /drivers/1.json
-  def show
-  end
 
   # GET /drivers/new
   def new
     @driver = Driver.new
   end
 
-  # GET /drivers/1/edit
-  def edit
-  end
 
   # POST /drivers
   # POST /drivers.json
