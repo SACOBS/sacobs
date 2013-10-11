@@ -1,0 +1,6 @@
+%tr[driver]
+  %td= driver.name
+  %td= driver.surname
+  %td= link_to 'View', driver, icon: 'icon-asterisk'
+  %td= link_to 'Edit', edit_driver_path(driver), icon: 'icon-edit'
+  %td= link_to 'Delete', driver, icon: 'icon-remove', data: { confirm: 'Are you sure you want to delete this driver?'}, method: :delete

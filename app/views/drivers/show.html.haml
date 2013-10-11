@@ -1,0 +1,13 @@
+.page-header
+  %h3= "Driver: (#{@driver.name} #{@driver.surname})"
+.well
+  %h5 Details:
+  %dl.dl-horizontal
+    %dt Name:
+    %dd= @driver.name
+    %dt Surname:
+    %dd= @driver.surname
+
+= link_to 'Edit', edit_driver_path(@driver)
+\|
+= link_to 'Back', drivers_path

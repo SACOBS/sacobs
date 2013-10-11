@@ -2,7 +2,6 @@ class AvailabilityFinder
 
   attr_reader :trip, :from_city, :to_city
 
-
   def initialize(trip ,from_city, to_city)
     @trip = trip
     @from_city = from_city
@@ -15,7 +14,6 @@ class AvailabilityFinder
     available_stops = find_stops(from, to)
   end
 
-
   def from_stop
     from_connection = find_connection(from_city: from_city)
     find_stop(connection: from_connection)
@@ -25,7 +23,6 @@ class AvailabilityFinder
     to_connection = find_connection(to_city: to_city)
     find_stop(connection: to_connection)
   end
-
 
   def find_stops(from, to)
    stops = trip.stops.en_route(from, to)
@@ -40,5 +37,4 @@ class AvailabilityFinder
   def find_stop(arg)
     trip.stops.find_by(arg)
   end
-
 end

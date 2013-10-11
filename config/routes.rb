@@ -10,6 +10,8 @@ Sacobs::Application.routes.draw do
 
   resource :contacts, only: [:new, :create]
 
+  resources :drivers
+
   resources :routes, only: [:index, :show, :destroy] do
    resources :builder, only: [:show, :update, :create],controller: 'routes/builder'
   end

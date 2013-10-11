@@ -1,0 +1,5 @@
+%h2 Drivers
+- bootstrap_table headers:['Name', 'Surname'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+  = render @drivers
+
+= link_to 'Add Driver', new_driver_path, class: 'btn btn-primary'
