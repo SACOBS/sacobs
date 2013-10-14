@@ -9,7 +9,7 @@ class Routes::BuilderController < ApplicationController
 
 
   def create
-    @route = Route.new.tap {|r| r.save(validate: false)}
+    @route = Route.new {|r| r.save(validate: false)}
     redirect_to wizard_path(steps.first, route_id: @route)
   end
 

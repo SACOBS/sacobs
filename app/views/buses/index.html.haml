@@ -1,5 +1,5 @@
 %h2 Buses
-- bootstrap_table headers:['Name', 'Year','Model', 'Capacity'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+- bootstrap_table headers:['Name', 'Year','Model', 'Capacity', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @buses
 
-= link_to 'Add Bus', new_bus_path, class: 'btn btn-primary'
+= link_to 'Setup Bus', bus_builder_index_path(bus_id: :building), method: :post, icon: 'icon-plus', class: 'btn btn-primary'

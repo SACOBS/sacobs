@@ -11,21 +11,23 @@
     = csrf_meta_tags
     = yield(:head)
   %body{class: "#{controller_name}", data: {action: action_name, controller: controller_path}}
-    %header.navbar.navbar-fixed-top.navbar-inverse
-      %nav.navbar-inner
+    #wrap
+      %header.navbar.navbar-fixed-top.navbar-inverse
+        %nav.navbar-inner
+          .container-fluid
+            = render 'layouts/navigation'
+      #main{role: :main}
         .container-fluid
-          = render 'layouts/navigation'
-    #main{role: :main}
-      .container-fluid
-        .content
-          = render 'layouts/messages'
-          - if content_for?(:sidebar)
-            .sidebar
-              = yield(:sidebar)
-            .main-section
+          .content
+            = render 'layouts/messages'
+            - if content_for?(:sidebar)
+              .sidebar
+                = yield(:sidebar)
+              .main-section
+                = yield
+            - else
               = yield
-          - else
-            = yield
+      #push
     %footer.navbar.navbar-fixed-bottom.navbar-inverse
       %nav.navbar-inner
         .container-fluid

@@ -18,4 +18,11 @@ class Bus < ActiveRecord::Base
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :capacity, :year, :model, presence: true
+
+  before_save :build_seats
+
+  protected
+  def build_seats
+    (self.capacity - self.seats.count).times { self.seats.build }
+  end
 end
