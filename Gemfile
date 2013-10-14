@@ -33,6 +33,8 @@ gem 'normalize-rails'
 gem 'bootswatch-rails'
 gem 'twitter-bootstrap-rails-confirm'
 gem 'bootstrap_sortable_rails', "~> 0.1.3"
+gem 'bootstrap-datetimepicker-rails'
+
 
 
 # Background Processing
@@ -100,8 +102,7 @@ group :test do
 
   # Factories
   gem "faker", "~> 1.1.2"
-  gem "database_cleaner", '1.0.0.RC1'
-
+  gem "database_cleaner", "~> 1.2.0"
 
   # Matchers
   gem "shoulda-matchers"

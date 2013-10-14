@@ -14,4 +14,8 @@ class Driver < ActiveRecord::Base
 
  validates :name, :surname, presence: true
 
+ def to_s
+  "#{self.name} #{self.surname}".titleize
+ end
+
 end

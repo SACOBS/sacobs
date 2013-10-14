@@ -8,6 +8,8 @@ Sacobs::Application.routes.draw do
 
   resources :buses
 
+  resources :trips
+
   resource :contacts, only: [:new, :create]
 
   resources :drivers

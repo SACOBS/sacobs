@@ -19,7 +19,7 @@ class BusesController < ApplicationController
 
   def update
     @bus.update(bus_params)
-    respond_with(@bus, location: bus_url)
+    respond_with(@bus, location: buses_url)
   end
 
   def destroy

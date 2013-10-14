@@ -1,0 +1,14 @@
+= simple_form_for(@trip) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+    = f.input :start_date, as: :date_picker
+    = f.input :end_date, as: :date_picker
+    = f.association :route, label_method: :description, include_blank: false
+    = f.association :bus, include_blank: false
+    = f.association :drivers, as: :check_boxes
+
+  .form-actions
+    = f.button :submit
+    = link_to 'Cancel', trips_path, class: 'btn'
+

@@ -17,4 +17,6 @@ class Stop < ActiveRecord::Base
  belongs_to :connection
 
  scope :en_route, -> (from, to) { where('id >= ? AND id <= ?', from, to) }
+
+
 end

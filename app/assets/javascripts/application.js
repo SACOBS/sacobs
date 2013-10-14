@@ -16,6 +16,7 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require bootstrap-sortable
+//= require bootstrap-datetimepicker
 //= require cocoon
 //= require turbolinks
 //= require sacobs

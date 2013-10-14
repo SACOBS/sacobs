@@ -125,6 +125,9 @@ SimpleForm.setup do |config|
   # type as key and the wrapper that will be used for all inputs with specified type.
   # config.wrapper_mappings = { string: :prepend }
 
+  config.wrapper_mappings = { date_time_picker: :append, date_picker: :append }
+
+
   # Default priority for time_zone inputs.
   # config.time_zone_priority = nil
 

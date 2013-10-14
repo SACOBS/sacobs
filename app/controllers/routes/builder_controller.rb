@@ -28,6 +28,6 @@ class Routes::BuilderController < ApplicationController
   end
 
   def set_route
-    @route =  Route.find(id)
+    @route =  Route.find(params[:route_id])
   end
 end

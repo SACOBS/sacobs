@@ -1,23 +1,17 @@
 class RoutesController < ApplicationController
-
+  before_action :set_route, only: [:show, :destroy]
 
   def index
     @routes = Route.all
   end
 
-  def show
-    @route = find_route(params[:id])
-  end
-
-
   def destroy
-    @route = find_route(params[:id])
     @route.destroy
     respond_with(@route, location: routes_url)
   end
 
   private
-  def find_route(id)
-    Route.includes(:connections, :start_city, :end_city).find(id)
+  def set_route
+    @route = Route.includes(:connections, :start_city, :end_city).find(params[:id])
   end
 end

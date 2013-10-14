@@ -11,5 +11,6 @@ class TripBuilderService
     bus = trip.bus
     route.connections.each { |connection| trip.stops.build(connection: connection, available_seats: bus.capacity) }
     trip.save
+    trip
   end
 end
