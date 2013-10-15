@@ -1,20 +1,33 @@
 .page-header
-  %h3= "Route (#{@route.start_city_name} to #{@route.end_city_name})"
-  = link_to 'Back',:back
-.well.well-small
-  %h5 Details:
-  %dl.dl-horizontal
-    %dt Start City:
-    %dd= @route.start_city.name
-    %dt End City:
-    %dd= @route.end_city.name
-    %dt Cost:
-    %dd= number_to_currency(@route.cost, unit: 'R')
-    %dt Distance:
-    %dd= "#{@route.distance} km"
-
+  %h2 Route
 .well
-  %h5 Connections:
-  - bootstrap_table headers:['','From', 'To','Distance', 'Percentage', 'Cost', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
-    = render @route.connections
+  %p
+    %strong Start City:
+    %br
+    = @route.start_city_name
+  %p
+    %strong End City:
+    %br
+    = @route.end_city_name
+  %p
+    %strong Cost:
+    %br
+    = number_to_currency(@route.cost, unit: 'R')
+  %p
+    %strong Distance:
+    %br
+    = "#{@route.distance} km"
+.well
+  %p
+    %strong Connections:
+    - bootstrap_table headers:['','From', 'To','Distance', 'Percentage', 'Cost'], types: [:bordered, :condensed], html_options: {id: 'connections'} do
+      = render @route.connections
+
+.form-actions
+  = link_to 'Back', routes_path, class: 'btn btn-primary', icon: 'icon-arrow-left'
+  = link_to 'Edit',route_builder_path(:details, route_id: @route), icon: 'icon-edit', class: 'btn btn-info'
+  = link_to 'Destroy', route_path(@route), method: :delete, data: { confirm: 'Are you sure?' }, icon: 'icon-remove', class: 'btn btn-danger'
+
+
+
 

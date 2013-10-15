@@ -1,6 +1,12 @@
-= simple_form_for @route, url: wizard_path do |f|
- = f.association :start_city
- = f.association :end_city
- = f.input :cost
- = f.input :distance
- = f.submit
+.page-header
+  %h2 Route
+
+= simple_form_for @route, url: wizard_path, html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.association :start_city
+    = f.association :end_city
+    = f.input :cost
+    = f.input :distance
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', routes_path, class: 'btn'

@@ -25,4 +25,4 @@ en:
       formats:
        default: "%-d %B %Y %H:%M %p"
        short: "%b %d"
-       long: "%B %d, %Y"
+       long: "%d %B %Y"

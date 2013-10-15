@@ -1,47 +1,53 @@
 .page-header
   %h1 Trip
-%p
-  %strong= Trip.human_attribute_name(:name) + ':'
-  %br
-  = @trip.name
-%p
-  %strong= Trip.human_attribute_name(:start_date) + ':'
-  %br
-  = @trip.start_date.presence || Date.tomorrow
-%p
-  %strong= Trip.human_attribute_name(:end_date) + ':'
-  %br
-  = @trip.end_date.presence || Date.today
-%p
-  %strong= Trip.human_attribute_name(:route_id) + ':'
-  %br
-  = link_to @trip.route.description, @trip.route
-%p
-  %strong= Trip.human_attribute_name(:bus_id) + ':'
-  %br
-  = @trip.bus.name
-%p
-  %strong Drivers:
-  %ul
-    = list_of(@trip.drivers) do |d|
-      = d
-
-%p
-  %strong Stops:
-  - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-    - @trip.stops.each do |stop|
-      %tr
-        %td= stop.connection.from_city_name
-        %td= stop.connection.to_city_name
-        %td= stop.arrive.presence || 'None'
-        %td= stop.depart.presence || 'None'
-
-
-
+.well
+  %p
+    %strong= Trip.human_attribute_name(:name) + ':'
+    %br
+    = @trip.name
+  %p
+    %strong= Trip.human_attribute_name(:start_date) + ':'
+    %br
+    = l(@trip.start_date.presence || Date.tomorrow, format: :long)
+  %p
+    %strong= Trip.human_attribute_name(:end_date) + ':'
+    %br
+    = l(@trip.end_date.presence || Date.today, format: :long)
+  %p
+    %strong= Trip.human_attribute_name(:route_id) + ':'
+    %br
+    =  @trip.route.description
+  %p
+    %strong= Trip.human_attribute_name(:bus_id) + ':'
+    %br
+    = @trip.bus.name
+  %p
+    %strong Drivers:
+    %ul
+      = list_of(@trip.drivers) do |d|
+        = d
+.well
+  %p
+    %strong Stops:
+    - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+      - @trip.stops.each do |stop|
+        %tr
+          %td= stop.connection.from_city_name
+          %td= stop.connection.to_city_name
+          %td= stop.arrive.presence || 'None'
+          %td= stop.depart.presence || 'None'
 .form-actions
-  = link_to 'Back', trips_path, class: 'btn btn-primary'
-  = link_to 'Edit', edit_trip_path(@trip), class: 'btn btn-info'
-  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure' }, class: 'btn btn-danger'
+  = link_to 'Back', trips_path, class: 'btn btn-primary', icon: 'icon-arrow-left'
+  = link_to 'Edit', edit_trip_path(@trip), icon: 'icon-edit', class: 'btn btn-info'
+  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure' },icon: 'icon-remove' ,class: 'btn btn-danger'
+
+
+
+
+
+
+
+
 
 
 
