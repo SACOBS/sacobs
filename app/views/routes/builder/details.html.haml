@@ -1,7 +1,7 @@
 .page-header
   %h2 Route
-
-= simple_form_for @route, url: wizard_path, html: {class: 'form-horizontal'} do |f|
+#errors= errors_for @route
+= simple_form_for @route, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
     = f.association :start_city
     = f.association :end_city

@@ -18,4 +18,7 @@ class Trip < ActiveRecord::Base
   has_many :stops , dependent: :destroy
   has_and_belongs_to_many :drivers
 
+  accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
+
+  validates :name, :start_date, :end_date, :route, :bus, presence: true
  end

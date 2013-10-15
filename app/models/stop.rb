@@ -18,5 +18,7 @@ class Stop < ActiveRecord::Base
 
  scope :en_route, -> (from, to) { where('id >= ? AND id <= ?', from, to) }
 
+  validates :arrive, :depart, presence: true
+
 
 end

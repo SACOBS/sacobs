@@ -11,4 +11,6 @@
 
 class Venue < ActiveRecord::Base
   belongs_to :city, touch: true
+
+  validates :name, :city, presence: true
 end

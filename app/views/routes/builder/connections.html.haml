@@ -1,6 +1,7 @@
 .page-header
   %h2 Connections
-= simple_form_for @route, url: wizard_path do |f|
+#errors= errors_for @route
+= simple_form_for @route, defaults: {error: false} , url: wizard_path do |f|
   %fieldset
     - bootstrap_table headers:['From', 'To','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
       = f.simple_fields_for :connections, wrapper: false do |connection|

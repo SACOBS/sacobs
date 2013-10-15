@@ -27,6 +27,8 @@ class Connection < ActiveRecord::Base
   delegate :name, to: :from_city, prefix: true
   delegate :name, to: :to_city, prefix: true
 
+  validates :from_city, :to_city, :distance, :route, presence: true
+
 
 
   def description

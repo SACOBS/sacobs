@@ -7,5 +7,5 @@
   %td= l trip.created_at
   %td
     = link_to 'Show', trip, icon: 'icon-info', class: 'btn btn-info btn-mini'
-    = link_to 'Edit', edit_trip_path(trip), icon: 'icon-edit',  class: 'btn btn-inverse btn-mini'
+    = link_to 'Edit', trip_builder_path(:details, trip_id: trip), icon: 'icon-edit',  class: 'btn btn-inverse btn-mini'
     = link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger', icon: 'icon-remove'

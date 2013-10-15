@@ -15,6 +15,8 @@ class Seat < ActiveRecord::Base
 
   belongs_to :bus, touch: true
 
+  validates :row, :number, presence: true
+
   private
   def defaults
     {row: 'A-Z', number: 0}

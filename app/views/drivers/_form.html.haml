@@ -1,4 +1,5 @@
-= simple_form_for @driver do |f|
+#errors= errors_for @driver
+= simple_form_for @driver,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
     = f.input :name
     = f.input :surname

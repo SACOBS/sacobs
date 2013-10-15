@@ -1,6 +1,7 @@
 .page-header
   %h2 Bus
-= simple_form_for @bus, url: wizard_path, html: {class: 'form-horizontal'} do |f|
+#errors= errors_for @bus
+= simple_form_for @bus, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
     = f.input :name, required: false
     = f.input :capacity

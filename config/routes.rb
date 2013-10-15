@@ -4,11 +4,13 @@ Sacobs::Application.routes.draw do
 
   resources :cities
 
-  resources :trips
-
   resource :contacts, only: [:new, :create]
 
   resources :drivers
+
+  resources :trips, only: [:index, :show, :destroy] do
+    resources :builder, only: [:show, :update, :create],controller: 'trips/builder'
+  end
 
   resources :routes, only: [:index, :show, :destroy] do
    resources :builder, only: [:show, :update, :create],controller: 'routes/builder'

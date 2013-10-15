@@ -1,0 +1,12 @@
+.page-header
+  %h2 Stops
+#errors= errors_for @trip
+= simple_form_for @trip, defaults: {error: false} ,url: wizard_path do |f|
+  %fieldset
+    - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :condensed], html_options: {id: 'stops'} do
+      = f.simple_fields_for :stops, wrapper: false do |stop|
+        = render 'trips/builder/stop_fields', f: stop
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', trips_path, class: 'btn'
+
