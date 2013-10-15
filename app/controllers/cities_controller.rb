@@ -1,11 +1,10 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:edit, :update, :destroy]
+  before_action :set_city, only: [:show, :edit, :update, :destroy]
 
   params_for :city, :name, venues_attributes: [:id, :name, :_destroy]
 
   def index
     @cities = City.all
-    respond_with @cities
   end
 
   def new

@@ -1,0 +1,24 @@
+.page-header
+  %h2 City
+.well
+  %p
+    %strong= City.human_attribute_name(:name) + ':'
+    %br
+    = @city.name
+  %p
+    %strong Venues:
+    - if @city.venues.any?
+      %ul
+        = list_of(@city.venues) do |v|
+          = v.name
+    - else
+      %br
+      None
+.form-actions
+  = link_to 'Back', cities_path, class: 'btn btn-primary', icon: 'icon-arrow-left'
+  = link_to 'Edit', edit_city_path(@city), icon: 'icon-edit', class: 'btn btn-info'
+  = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: 'Are you sure?' }, icon: 'icon-remove', class: 'btn btn-danger'
+
+
+
+

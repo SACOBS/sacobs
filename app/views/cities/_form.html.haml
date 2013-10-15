@@ -1,6 +1,5 @@
 = simple_form_for @city do |f|
   %fieldset
-    %legend City
     = f.input :name, required: false
   #venues
     = f.simple_fields_for :venues do |venue|
@@ -9,5 +8,6 @@
       %hr
       = link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-info btn-mini'
       %hr
-  %br
-  = f.submit class: 'btn btn-primary'
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', cities_path, class: 'btn'

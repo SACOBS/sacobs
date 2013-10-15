@@ -1,7 +1,8 @@
 = simple_form_for @driver do |f|
   %fieldset
-    %legend Driver
     = f.input :name
     = f.input :surname
-  %br
-  = f.submit class: 'btn btn-primary'
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', drivers_path, class: 'btn'
+

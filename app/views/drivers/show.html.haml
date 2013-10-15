@@ -1,13 +1,22 @@
 .page-header
-  %h3= "Driver: (#{@driver.name} #{@driver.surname})"
+  %h2 Driver
 .well
-  %h5 Details:
-  %dl.dl-horizontal
-    %dt Name:
-    %dd= @driver.name
-    %dt Surname:
-    %dd= @driver.surname
+  %p
+    %strong= Driver.human_attribute_name(:name) + ':'
+    %br
+    = @driver.name
+  %p
+    %strong= Driver.human_attribute_name(:surname) + ':'
+    %br
+    = @driver.surname
 
-= link_to 'Edit', edit_driver_path(@driver)
-\|
-= link_to 'Back', drivers_path
+.form-actions
+  = link_to 'Back', drivers_path, class: 'btn btn-primary', icon: 'icon-arrow-left'
+  = link_to 'Edit',edit_driver_path(@driver), icon: 'icon-edit', class: 'btn btn-info'
+  = link_to 'Destroy', driver_path(@driver), method: :delete, data: { confirm: 'Are you sure?' }, icon: 'icon-remove', class: 'btn btn-danger'
+
+
+
+
+
+

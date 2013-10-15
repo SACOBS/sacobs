@@ -19,7 +19,7 @@ class Bus < ActiveRecord::Base
 
   validates :name, :capacity, :year, :model, presence: true
 
-  before_save :build_seats
+  before_update :build_seats
 
   protected
   def build_seats

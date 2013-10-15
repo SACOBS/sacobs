@@ -1,8 +1,12 @@
+.page-header
+  %h2 Seats
 = simple_form_for @bus, url: wizard_path do |f|
-  - bootstrap_table headers:['Row', 'Number',''], types: [:bordered, :condensed], html_options: {id: 'seats'} do
-    = f.simple_fields_for :seats, wrapper: false do |seat|
-      = render 'buses/builder/seat_fields', f: seat
-  .links
-    = link_to_add_association 'Add Seat', f, :seats, data: {association_insertion_node: 'tbody', association_insertion_method: 'append'}
-  %br
-  = f.submit
+  %fieldset
+    - bootstrap_table headers:['Row', 'Number',''], types: [:bordered, :condensed], html_options: {id: 'seats'} do
+      = f.simple_fields_for :seats, wrapper: false do |seat|
+        = render 'buses/builder/seat_fields', f: seat
+    .links
+      = link_to_add_association 'Add Seat', f, :seats, data: {association_insertion_node: 'tbody', association_insertion_method: 'append'}
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', buses_path, class: 'btn'

@@ -1,6 +1,6 @@
-%h2 Cities
-
-- bootstrap_table headers:['Name', 'Venues',''], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+.page-header
+  %h2 Cities
+- bootstrap_table headers:['Name', 'Venues','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @cities
 
-= link_to 'Add City', new_city_path, class: 'btn btn-primary'
+= link_to 'Setup City', new_city_path, class: 'btn btn-primary', icon: 'icon-plus'

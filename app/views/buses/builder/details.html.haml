@@ -1,8 +1,11 @@
-= simple_form_for @bus, url: wizard_path do |f|
+.page-header
+  %h2 Bus
+= simple_form_for @bus, url: wizard_path, html: {class: 'form-horizontal'} do |f|
   %fieldset
-    %legend Bus
     = f.input :name, required: false
     = f.input :capacity
     = f.input :year
     = f.input :model
-  = f.submit
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', buses_path, class: 'btn'

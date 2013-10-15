@@ -1,32 +1,34 @@
 .page-header
-  %h1 Bus
-%p
-  %strong= Bus.human_attribute_name(:name) + ':'
-  %br
-  = @bus.name
-%p
-  %strong= Bus.human_attribute_name(:capacity) + ':'
-  %br
-  = @bus.capacity
-%p
-  %strong= Bus.human_attribute_name(:year) + ':'
-  %br
-  = @bus.year
-%p
-  %strong= Bus.human_attribute_name(:model) + ':'
-  %br
-  = @bus.model
-%p
-  %strong= Bus.human_attribute_name(:created_at) + ':'
-  %br
-  = l @bus.created_at
-%p
-  %strong Seats:
-  - bootstrap_table headers:['Row', 'Number',], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-    - @bus.seats.each do |seat|
-      %tr
-        %td= seat.row
-        %td= seat.number
+  %h2 Bus
+.well
+  %p
+    %strong= Bus.human_attribute_name(:name) + ':'
+    %br
+    = @bus.name
+  %p
+    %strong= Bus.human_attribute_name(:capacity) + ':'
+    %br
+    = @bus.capacity
+  %p
+    %strong= Bus.human_attribute_name(:year) + ':'
+    %br
+    = @bus.year
+  %p
+    %strong= Bus.human_attribute_name(:model) + ':'
+    %br
+    = @bus.model
+  %p
+    %strong= Bus.human_attribute_name(:created_at) + ':'
+    %br
+    = l @bus.created_at
+.well
+  %p
+    %strong Seats:
+    - bootstrap_table headers:['Row', 'Number',], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+      - @bus.seats.each do |seat|
+        %tr
+          %td= seat.row
+          %td= seat.number
 .form-actions
   = link_to 'Back', buses_path, class: 'btn btn-primary', icon: 'icon-arrow-left'
   = link_to 'Edit', bus_builder_path(:details, bus_id: @bus), icon: 'icon-edit', class: 'btn btn-info'

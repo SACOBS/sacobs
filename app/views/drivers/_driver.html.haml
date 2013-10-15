@@ -1,6 +1,10 @@
 %tr[driver]
   %td= driver.name
   %td= driver.surname
-  %td= link_to 'View', driver, icon: 'icon-asterisk'
-  %td= link_to 'Edit', edit_driver_path(driver), icon: 'icon-edit'
-  %td= link_to 'Delete', driver, icon: 'icon-remove', data: { confirm: 'Are you sure you want to delete this driver?'}, method: :delete
+  %td
+    = link_to 'Show', driver, icon: 'icon-info', class: 'btn btn-info btn-mini'
+    = link_to 'Edit', edit_driver_path(driver), icon: 'icon-edit', class: 'btn btn-inverse btn-mini'
+    = link_to 'Destroy', driver, icon: 'icon-remove', data: { confirm: 'Are you sure you want to destroy this driver?'}, method: :delete, class: 'btn btn-danger btn-mini'
+
+
+

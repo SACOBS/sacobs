@@ -1,5 +1,7 @@
 %tr[city]
   %td= city.name
   %td= city.venues.size
-  %td= link_to 'Edit', edit_city_path(city), icon: 'icon-edit'
-  %td= link_to 'Delete', city, icon: 'icon-remove', data: { confirm: 'Are you sure you want to delete this city?'}, method: :delete
+  %td
+    = link_to 'View',city, icon: 'icon-info', class: 'btn btn-info btn-mini'
+    = link_to 'Edit', edit_city_path(city), icon: 'icon-edit', class: 'btn btn-mini btn-inverse'
+    = link_to 'Destroy', city, icon: 'icon-remove', data: { confirm: 'Are you sure you want to destroy this city?'}, method: :delete, class: 'btn btn-mini btn-danger'

@@ -38,8 +38,11 @@ class DriversController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_driver
       @driver = Driver.find(params[:id])
+    end
+
+    def interpolation_options
+      { resource_name: @driver }
     end
 end
