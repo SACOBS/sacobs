@@ -1,7 +1,7 @@
 class Buses::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  before_action :set_bus, only: [:show, :update]
+  before_action :set_bus, only: [:destroy, :show, :update]
 
   params_for :bus, :name, :capacity, :year, :model, seats_attributes: [:id, :_destroy, :row, :number]
 
@@ -20,6 +20,11 @@ class Buses::BuilderController < ApplicationController
   def update
     @bus.update(bus_params)
     render_wizard @bus
+  end
+
+  def destroy
+    @bus.destroy if @bus.empty?
+    redirect_to_finish_wizard
   end
 
   private

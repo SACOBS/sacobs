@@ -1,7 +1,7 @@
 class Trips::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  before_action :set_trip, only: [:show, :update]
+  before_action :set_trip, only: [:destroy, :show, :update]
 
   params_for :trip, :name, :start_date, :end_date, :route_id, :bus_id, driver_ids: [], stops_attributes: [:id, :_destroy, :arrive, :depart]
 
@@ -20,6 +20,11 @@ class Trips::BuilderController < ApplicationController
   def update
     @trip = TripService.new(@trip).update(trip_params)
     render_wizard @trip
+  end
+
+  def destroy
+    @trip.destroy if @trip.empty?
+    redirect_to_finish_wizard
   end
 
   private

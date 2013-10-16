@@ -9,15 +9,15 @@ Sacobs::Application.routes.draw do
   resources :drivers
 
   resources :trips, only: [:index, :show, :destroy] do
-    resources :builder, only: [:show, :update, :create],controller: 'trips/builder'
+    resources :builder, only: [:show, :update, :create, :destroy],controller: 'trips/builder'
   end
 
   resources :routes, only: [:index, :show, :destroy] do
-   resources :builder, only: [:show, :update, :create],controller: 'routes/builder'
+   resources :builder, only: [:show, :update, :create, :destroy],controller: 'routes/builder'
   end
 
   resources :buses, only: [:index, :show, :destroy] do
-    resources :builder, only: [:show, :update, :create],controller: 'buses/builder'
+    resources :builder, only: [:show, :update, :create, :destroy],controller: 'buses/builder'
   end
 
   root to: 'high_voltage/pages#show', id: 'home'

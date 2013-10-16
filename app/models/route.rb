@@ -12,6 +12,8 @@
 #
 
 class Route < ActiveRecord::Base
+  include AttributesEmpty
+
   attr_reader :description
 
   belongs_to :start_city, class_name: :City
@@ -29,6 +31,5 @@ class Route < ActiveRecord::Base
   def description
     @description ||= "#{start_city_name} to #{end_city_name}"
   end
-
 
 end

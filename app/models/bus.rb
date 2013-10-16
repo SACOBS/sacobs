@@ -12,6 +12,7 @@
 #
 
 class Bus < ActiveRecord::Base
+  include AttributesEmpty
 
   has_many :seats, dependent: :destroy
 
