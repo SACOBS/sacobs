@@ -2,8 +2,8 @@
   %td=link_to trip.name, trip_path(trip)
   %td= l trip.start_date, format: :long
   %td= l trip.end_date, format: :long
-  %td= trip.route.description
-  %td= trip.bus.name
+  %td= trip.route.presence
+  %td= trip.bus_name.presence
   %td= l trip.created_at
   %td
     = link_to 'Show', trip, icon: 'icon-info', class: 'btn btn-info btn-mini'

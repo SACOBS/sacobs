@@ -3,8 +3,8 @@
 #errors= errors_for @route
 = simple_form_for @route, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
-    = f.association :start_city
-    = f.association :end_city
+    = f.association :start_city, include_blank: false, prompt: 'Select Start City'
+    = f.association :end_city, include_blank: false ,prompt: 'Select End City'
     = f.input :cost
     = f.input :distance
   .form-actions

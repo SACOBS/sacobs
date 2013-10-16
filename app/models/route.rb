@@ -14,8 +14,6 @@
 class Route < ActiveRecord::Base
   include AttributesEmpty
 
-  attr_reader :description
-
   belongs_to :start_city, class_name: :City
   belongs_to :end_city, class_name: :City
 
@@ -28,8 +26,8 @@ class Route < ActiveRecord::Base
   delegate :name, to: :start_city, prefix: true, allow_nil: true
   delegate :name, to: :end_city, prefix: true, allow_nil: true
 
-  def description
-    @description ||= "#{start_city_name} to #{end_city_name}"
+  def to_s
+    "#{start_city_name} to #{end_city_name}"
   end
 
 end

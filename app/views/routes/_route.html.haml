@@ -1,7 +1,7 @@
 %tr[route]
-  %td= link_to route.description, route
-  %td= route.start_city.name
-  %td= route.end_city.name
+  %td= link_to route, route
+  %td= route.start_city_name.presence
+  %td= route.end_city_name.presence
   %td= number_to_currency(route.cost, unit: 'R')
   %td= "#{route.distance} km"
   %td= route.connections.size

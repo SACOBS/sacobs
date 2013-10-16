@@ -2,5 +2,4 @@
   %fieldset
     %legend Venue
     = f.input :name
-    = f.hidden_field :id, value: f.object.id
     = link_to_remove_association "Remove", f, class: 'btn btn-danger btn-mini'
