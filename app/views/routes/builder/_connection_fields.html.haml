@@ -1,5 +1,8 @@
 %tr.nested-fields
   %td= f.association :from_city, label: false, include_blank: false, prompt: 'Select From City'
   %td= f.association :to_city, label: false, include_blank: false,  prompt: 'Select To City'
-  %td= f.input :distance, label: false
+  %td
+    = f.input :distance, wrapper: :append, label: false do
+      = f.input_field :distance
+      %span.add-on> Km
   %td= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-mini'

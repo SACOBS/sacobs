@@ -5,8 +5,13 @@
   %fieldset
     = f.association :start_city, include_blank: false, prompt: 'Select Start City'
     = f.association :end_city, include_blank: false ,prompt: 'Select End City'
-    = f.input :cost
-    = f.input :distance
+    = f.input :cost, wrapper: :prepend do
+      %span.add-on> R
+      = f.input_field :cost
+    = f.input :distance, wrapper: :append do
+      = f.input_field :distance
+      %span.add-on> Km
+
   .form-actions
     = f.submit class: 'btn btn-primary'
     = link_to 'Cancel', route_builder_path(route_id: @route), method: :delete ,class: 'btn'

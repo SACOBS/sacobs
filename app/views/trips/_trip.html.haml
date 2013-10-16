@@ -1,7 +1,7 @@
 %tr
   %td=link_to trip.name, trip_path(trip)
-  %td= l trip.start_date, format: :long
-  %td= l trip.end_date, format: :long
+  %td= l trip.start_date, format: :long if trip.start_date.present?
+  %td= l trip.end_date, format: :long if trip.end_date.present?
   %td= trip.route.presence
   %td= trip.bus_name.presence
   %td= l trip.created_at
