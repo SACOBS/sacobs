@@ -41,7 +41,7 @@ class Connection < ActiveRecord::Base
   end
 
   def calculate_connection_cost
-    self.cost = (self.percentage.to_f / 100) * self.route.cost
+    self.cost = ((self.percentage.to_f / 100) * self.route.cost).round(2)
   end
 
 end
