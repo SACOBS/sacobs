@@ -1,5 +1,5 @@
 %tr[city]
-  %td= city.name
+  %td= link_to city.name, city
   %td= city.venues.size
   %td
     = link_to 'View',city, icon: 'icon-info', class: 'btn btn-info btn-mini'
