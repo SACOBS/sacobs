@@ -17,7 +17,7 @@ class Route < ActiveRecord::Base
   belongs_to :start_city, class_name: :City
   belongs_to :end_city, class_name: :City
 
-  has_many :connections, dependent: :destroy
+  has_many :connections, dependent: :destroy, autosave: true
 
   accepts_nested_attributes_for :connections,  reject_if: :all_blank, allow_destroy: true
 
@@ -26,8 +26,15 @@ class Route < ActiveRecord::Base
   delegate :name, to: :start_city, prefix: true, allow_nil: true
   delegate :name, to: :end_city, prefix: true, allow_nil: true
 
+  after_update :update_children
+
+
   def to_s
     "#{start_city_name} to #{end_city_name}"
   end
 
+  protected
+  def update_children
+    self.connections.each(&:save) if (self.cost_changed? || self.distance_changed?)
+  end
 end
