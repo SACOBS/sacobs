@@ -26,7 +26,7 @@ class Route < ActiveRecord::Base
   delegate :name, to: :start_city, prefix: true, allow_nil: true
   delegate :name, to: :end_city, prefix: true, allow_nil: true
 
-  after_update :update_children
+  before_update :mark_children_for_change
 
 
   def to_s
@@ -34,7 +34,12 @@ class Route < ActiveRecord::Base
   end
 
   protected
-  def update_children
-    self.connections.each(&:save) if (self.cost_changed? || self.distance_changed?)
+  def mark_children_for_change
+    if self.distance_changed? || self.cost_changed?
+      self.connections.each do |c|
+        c.percentage_will_change!
+        c.cost_will_change!
+      end
+    end
   end
 end

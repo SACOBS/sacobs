@@ -1,11 +1,12 @@
 class AvailabilityFinder
 
-  attr_reader :trip, :from_city, :to_city
+  attr_reader :trip, :from_city, :to_city, :seats
 
-  def initialize(trip ,from_city, to_city)
+  def initialize(trip ,from_city, to_city, seats)
     @trip = trip
     @from_city = from_city
     @to_city = to_city
+    @seats = seats
   end
 
   def check
@@ -26,7 +27,7 @@ class AvailabilityFinder
 
   def find_stops(from, to)
    stops = trip.stops.en_route(from, to)
-   return Stop.none if stops.any? { |s| s.available_seats.zero? }
+   return Stop.none if stops.any? { |s| s.available_seats < seats }
    stops
   end
 

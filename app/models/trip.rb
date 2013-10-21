@@ -25,6 +25,6 @@ class Trip < ActiveRecord::Base
   delegate :description, to: :route, prefix: true, allow_nil: true
   delegate :name, to: :bus, prefix: true, allow_nil: true
 
-
   validates :name, :start_date, :end_date, :route, :bus, presence: true
+  
  end
