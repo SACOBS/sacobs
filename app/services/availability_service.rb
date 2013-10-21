@@ -14,25 +14,11 @@ class AvailabilityService
     return Trip.none if trips.empty?
     available_trips = []
     trips.each do |trip|
-      departing = from_stop(trip)
-      destination = to_stop(trip)
+      departing = trip.stops.from(from_city).first
+      destination = trip.stops.to(to_city).first
       stops = trip.stops.en_route(departing, destination)
       available_trips << trip unless stops.empty? || stops.any? { |s| s.available_seats < seats }
     end
     available_trips
-  end
-
-  def from_stop(trip)
-    if from_city
-      from_connection = trip.route.connections.find_by(from_city: from_city)
-      trip.stops.find_by(connection: from_connection)
-    end
-  end
-
-  def to_stop(trip)
-    if to_city
-      to_connection = trip.route.connections.find_by(to_city: to_city)
-      trip.stops.find_by(connection: to_connection)
-    end
   end
 end

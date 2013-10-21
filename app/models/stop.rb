@@ -16,5 +16,11 @@ class Stop < ActiveRecord::Base
  belongs_to :trip, touch: true
  belongs_to :connection
 
+ scope :from, -> (city){ joins(connection: :from_city).where('connections.from_city_id = cities.id AND cities.id = ?', city.id) }
+ scope :to, -> (city){ joins(connection: :to_city).where('connections.to_city_id = cities.id AND cities.id = ?', city.id) }
+
  scope :en_route, -> (from, to) { where('id >= ? AND id <= ?', from, to) }
+
+
 end
+
