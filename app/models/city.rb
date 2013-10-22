@@ -7,6 +7,7 @@
 #
 
 class City < ActiveRecord::Base
+
   has_many :venues, dependent: :destroy
   accepts_nested_attributes_for :venues, reject_if: :all_blank, allow_destroy: true
 

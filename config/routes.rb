@@ -1,5 +1,12 @@
 Sacobs::Application.routes.draw do
 
+
+  namespace :availability do
+    get :new
+    post :check
+  end
+
+
   devise_for :users
 
   resources :cities

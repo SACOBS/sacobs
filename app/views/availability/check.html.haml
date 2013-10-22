@@ -1,0 +1,12 @@
+%h1 Results
+
+- if @trips.any?
+  %h2 Results
+  - bootstrap_table headers:['Name', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+    - @trips.each do |trip|
+      %tr[trip]
+        %td= trip.name
+        %td= link_to 'Book', buses_path
+
+- else
+  %h3 Unfortunately there are no available seats to book

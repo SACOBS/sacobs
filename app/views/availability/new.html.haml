@@ -1,0 +1,9 @@
+.page-header
+  %h2 Check Availability
+= simple_form_for :availability, url: availability_check_url, html: {class: 'form-horizontal'} do |f|
+  = f.input :travel_date, as: :date_picker
+  = f.input :from, collection: City.all, prompt: 'Choose a city'
+  = f.input :to, collection: City.all, prompt: 'Choose a city'
+  = f.input :seats, as: :integer
+  = f.submit 'Check'
+
