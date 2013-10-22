@@ -78,6 +78,9 @@ gem "cocoon"
 # Wizard
 gem 'wicked'
 
+# Copying Records
+gem 'amoeba'
+
 
 group :development do
   gem "better_errors"

@@ -9,6 +9,9 @@ Sacobs::Application.routes.draw do
   resources :drivers
 
   resources :trips, only: [:index, :show, :destroy] do
+    member do
+     post :copy
+    end
     resources :builder, only: [:show, :update, :create, :destroy],controller: 'trips/builder'
   end
 

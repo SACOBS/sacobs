@@ -26,6 +26,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    amoeba (2.0.0)
+      activerecord (>= 3.0)
     annotate (2.5.0)
       rake
     arel (4.0.0)
@@ -309,6 +311,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  amoeba
   annotate (~> 2.5.0)
   better_errors
   bootstrap-datetimepicker-rails

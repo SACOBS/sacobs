@@ -20,6 +20,8 @@ class Trip < ActiveRecord::Base
   has_many :stops , dependent: :destroy
   has_and_belongs_to_many :drivers
 
+  amoeba { enable }
+
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
   delegate :description, to: :route, prefix: true, allow_nil: true
