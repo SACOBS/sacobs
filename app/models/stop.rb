@@ -23,6 +23,8 @@ class Stop < ActiveRecord::Base
 
  scope :en_route, -> (from, to) { where('id >= ? AND id <= ?', from, to) }
 
+ delegate :from_city, :to_city, to: :connection
+
 
 end
 

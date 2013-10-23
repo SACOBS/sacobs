@@ -28,5 +28,16 @@ class Trip < ActiveRecord::Base
   delegate :name, to: :bus, prefix: true, allow_nil: true
 
   validates :name, :start_date, :end_date, :route, :bus, presence: true
+
+  def from
+    stops.first.from_city
+  end
+
+  def to
+    stops.last.to_city
+  end
+
+
+
   
  end

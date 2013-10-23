@@ -1,9 +1,23 @@
 .page-header
-  %h2 Check Availability
-= simple_form_for :availability, url: availability_check_url, html: {class: 'form-horizontal'} do |f|
-  = f.input :travel_date, as: :date_picker
-  = f.input :from, collection: City.all, prompt: 'Choose a city'
-  = f.input :to, collection: City.all, prompt: 'Choose a city'
-  = f.input :seats, as: :integer
-  = f.submit 'Check'
+  %h3 Select A Trip
+
+
+- bootstrap_table headers:['Trips'], types: [:striped] do
+  - @trips.each do |trip|
+    %tr
+      %td
+        = simple_form_for :trip, namespace: trip.id ,url: availability_check_url, wrapper: false, defaults: {label: false} do |f|
+          %table.table-bordered
+            - table_headers(['Name', 'Start', 'End', 'From', 'To', 'Qty', 'Actions'])
+            %tr
+              %td= trip.name
+              %td= l trip.start_date, format: :long
+              %td= l trip.end_date, format: :long
+              %td= f.input :from, collection: City.all, selected: trip.from.id
+              %td= f.input :to, collection: City.all, selected: trip.to.id
+              %td= f.input :seats, as: :integer
+              %td
+                = f.hidden_field :trip_id, value: trip.id
+                = f.submit 'Go'
+
 
