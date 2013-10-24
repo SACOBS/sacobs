@@ -37,7 +37,9 @@ class Trip < ActiveRecord::Base
     stops.last.to_city
   end
 
-
-
-  
+  def available_stops(from, to)
+    departing = self.stops.departing(from).first
+    destination = self.stops.destination(to).first
+    self.stops.en_route(departing, destination)
+  end
  end

@@ -1,6 +1,6 @@
 class AvailabilityService
 
-  attr_reader :travel_date, :from_city, :to_city, :seats
+  attr_reader :trip, :from, :to, :seats
 
   def initialize(*args)
     options = args.extract_options!

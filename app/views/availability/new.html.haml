@@ -17,7 +17,7 @@
               %td= f.input :to, collection: City.all, selected: trip.to.id
               %td= f.input :seats, as: :integer
               %td
-                = f.hidden_field :trip_id, value: trip.id
+                = f.hidden_field :id, value: trip.id
                 = f.submit 'Go'
 
 

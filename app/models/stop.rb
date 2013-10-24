@@ -19,7 +19,7 @@ class Stop < ActiveRecord::Base
 
  scope :departing, -> (from_city) { joins(connection: :from_city).where(cities: {id: from_city}) }
 
- scope :destination, -> (city) { joins(connection: :to_city).where(cities: {id: city}) }
+ scope :destination, -> (to_city) { joins(connection: :to_city).where(cities: {id: to_city}) }
 
  scope :en_route, -> (from, to) { where('id >= ? AND id <= ?', from, to) }
 

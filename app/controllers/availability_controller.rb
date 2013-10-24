@@ -6,12 +6,10 @@ class AvailabilityController < ApplicationController
   end
 
   def check
-    departing = trip.stops.departing(from_city).first
-    destination = trip.stops.destination(to_city).first
-    stops = trip.stops.en_route(departing, destination)
-    if stops.empty? || stops.any? { |s| s.available_seats < seats }
-      flash.now[:alert] = 'There are no available seats.'
-      render :new
+    trip = Trip.find(params[:trip][:id])
+    stops = trip.available_stops(params[:trip][:from], params[:trip][:to])
+    if stops.empty? || stops.any? { |s| s.available_seats <  params[:trip][:seats].to_i }
+      redirect_to availability_new_url, alert: 'There are no available seats'
     else
       redirect_to root_url
     end
