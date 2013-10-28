@@ -24,9 +24,9 @@
       = render @route.connections
 
 .form-actions
-  = link_to 'Back', routes_path, class: 'btn btn-primary', icon: 'icon-arrow-left'
-  = link_to 'Edit',route_builder_path(:details, route_id: @route), icon: 'icon-edit', class: 'btn btn-info'
-  = link_to 'Destroy', route_path(@route), method: :delete, data: { confirm: 'Are you sure?' }, icon: 'icon-remove', class: 'btn btn-danger'
+  = link_to 'Back', routes_path, class: 'btn btn-primary', icon: 'fa fa-arrow-left'
+  = link_to 'Edit',route_builder_path(:details, route_id: @route), icon: 'fa fa-edit', class: 'btn btn-info'
+  = link_to 'Destroy', route_path(@route), method: :delete, data: { confirm: 'Are you sure?' }, icon: 'fa fa-times', class: 'btn btn-danger'
 
 
 

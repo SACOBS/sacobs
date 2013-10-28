@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017135701) do
+ActiveRecord::Schema.define(version: 20131028125559) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 20131017135701) do
     t.datetime "updated_at"
   end
 
+  create_table "bookings", force: true do |t|
+    t.integer  "trip_id"
+    t.decimal  "price"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quantity",    default: 0
+    t.datetime "expiry_date"
+    t.integer  "client_id"
+  end
+
+  create_table "bookings_stops", force: true do |t|
+    t.integer "booking_id"
+    t.integer "stop_id"
+  end
+
   create_table "buses", force: true do |t|
     t.string   "name"
     t.integer  "capacity"
@@ -36,6 +52,13 @@ ActiveRecord::Schema.define(version: 20131017135701) do
 
   create_table "cities", force: true do |t|
     t.string "name"
+  end
+
+  create_table "clients", force: true do |t|
+    t.string   "name"
+    t.string   "surname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "connections", force: true do |t|

@@ -11,6 +11,8 @@ class AvailabilityController < ApplicationController
     if stops.empty? || stops.any? { |s| s.available_seats <  params[:trip][:seats].to_i }
       redirect_to availability_new_url, alert: 'There are no available seats'
     else
+      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i)
+      booking.stops << stops
       redirect_to root_url
     end
   end

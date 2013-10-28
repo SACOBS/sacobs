@@ -18,6 +18,7 @@
 //= require bootstrap-sortable
 //= require bootstrap-datetimepicker
 //= require cocoon
+//= require select2
 //= require turbolinks
 //= require sacobs
 //= require initialize

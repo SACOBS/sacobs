@@ -10,7 +10,7 @@
 #  updated_at   :datetime
 #  route_id     :integer
 #  percentage   :integer
-#  cost         :integer
+#  cost         :decimal(8, 2)
 #
 
 class Connection < ActiveRecord::Base

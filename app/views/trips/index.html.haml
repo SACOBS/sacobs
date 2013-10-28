@@ -4,5 +4,5 @@
 - bootstrap_table headers:['Name', 'Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @trips
 
-= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: 'btn btn-primary', icon: 'icon-plus', method: :post
+= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: 'btn btn-primary', icon: 'fa fa-plus', method: :post
 
