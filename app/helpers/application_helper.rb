@@ -11,12 +11,6 @@ module ApplicationHelper
     content_for(:keywords, keywords)
   end
 
-  def link_to(text, path, options = {}, &block)
-    icon = options.delete(:icon)
-    text = content_tag(:i, " #{text}", class: icon) if icon
-    super
-  end
-
   def errors_for(model)
     if model && model.errors.any?
       content_tag(:div, class: 'error_explanation well well small') do
@@ -28,9 +22,4 @@ module ApplicationHelper
       end
     end
   end
-
-  def iconize(name)
-    "fa fa-#{name.to_s.gsub('_','-')}"
-  end
-
 end
