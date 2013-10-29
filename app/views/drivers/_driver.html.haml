@@ -2,9 +2,9 @@
   %td= driver.name
   %td= driver.surname
   %td
-    = link_to 'Show', driver, icon: 'fa fa-info', class: 'btn btn-info btn-mini'
-    = link_to 'Edit', edit_driver_path(driver), icon: 'fa fa-edit', class: 'btn btn-inverse btn-mini'
-    = link_to 'Destroy', driver, icon: 'fa-times', data: { confirm: 'Are you sure you want to destroy this driver?'}, method: :delete, class: 'btn btn-danger btn-mini'
+    = link_to 'Show', driver, icon: iconize(:info), class: 'btn btn-info btn-mini'
+    = link_to 'Edit', edit_driver_path(driver), icon: iconize(:edit), class: 'btn btn-inverse btn-mini'
+    = link_to 'Destroy', driver, icon: iconize(:times), data: { confirm: 'Are you sure you want to destroy this driver?'}, method: :delete, class: 'btn btn-danger btn-mini'
 
 
 

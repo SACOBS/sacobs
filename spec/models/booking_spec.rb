@@ -10,6 +10,7 @@
 #  updated_at  :datetime
 #  quantity    :integer          default(0)
 #  expiry_date :datetime
+#  client_id   :integer
 #
 
 require 'spec_helper'

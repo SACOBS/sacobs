@@ -6,7 +6,7 @@
   %td= "#{route.distance} km"
   %td= route.connections.size
   %td
-    = link_to 'Show', route, icon: 'fa fa-info', class: 'btn btn-info btn-mini'
-    = link_to 'Edit', route_builder_path(:details, route_id: route), icon: 'fa fa-edit',  class: 'btn btn-inverse btn-mini'
-    = link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger', icon: 'fa fa-times'
+    = link_to 'Show', route, icon: iconize(:info), class: 'btn btn-info btn-mini'
+    = link_to 'Edit', route_builder_path(:details, route_id: route), icon: iconize(:edit),  class: 'btn btn-inverse btn-mini'
+    = link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger', icon: iconize(:times)
 

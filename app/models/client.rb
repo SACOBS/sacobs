@@ -10,10 +10,14 @@
 #
 
 class Client < ActiveRecord::Base
-  has_many :bookings
+  has_one :address, as: :addressable
+  has_many :bookings, dependent: :destroy
 
-  def full_name
-    "#{self.name} #{self.surname}"
+  accepts_nested_attributes_for :address
+
+  delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false
+
+  def to_s
+    "#{self.name} #{self.surname}".titleize
   end
-
 end

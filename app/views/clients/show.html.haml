@@ -1,0 +1,39 @@
+.page-header
+  %h3= @client
+.well
+  %p
+    %strong= Client.human_attribute_name(:name) + ':'
+    %br
+    = @client.name
+  %p
+    %strong= Client.human_attribute_name(:surname) + ':'
+    %br
+    = @client.surname
+  %p
+    %strong= Client.human_attribute_name(:tel_no) + ':'
+    %br
+    = @client.telephone
+  %p
+    %strong= Client.human_attribute_name(:cell_no) + ':'
+    %br
+    = @client.cellphone
+  %p
+    %strong= Client.human_attribute_name(:email) + ':'
+    %br
+    = @client.email
+
+  %p
+    %strong Address:
+    %address
+      = @client.street_address1
+      %br
+      = @client.street_address2
+      %br
+      = @client.city
+      %br
+      = @client.postal_code
+.actions
+  = @client.back_link
+  = @client.edit_link
+  = @client.destroy_link
+

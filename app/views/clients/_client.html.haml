@@ -1,0 +1,10 @@
+%tr[client]
+  %td= client.name
+  %td= client.surname
+  %td
+    = link_to 'Show', client, icon: iconize(:info), class: 'btn btn-info btn-mini'
+    = link_to 'Edit', edit_client_path(client), icon: iconize(:edit), class: 'btn btn-inverse btn-mini'
+    = link_to 'Destroy', client, icon: iconize(:times), data: { confirm: 'Are you sure you want to destroy this client?'}, method: :delete, class: 'btn btn-danger btn-mini'
+
+
+

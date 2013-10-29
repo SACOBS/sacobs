@@ -15,9 +15,9 @@
       %br
       None
 .form-actions
-  = link_to 'Back', cities_path, class: 'btn btn-primary', icon: 'fa fa-arrow-left'
-  = link_to 'Edit', edit_city_path(@city), icon: 'fa fa-edit', class: 'btn btn-info'
-  = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: 'Are you sure?' }, icon: 'fa fa-times', class: 'btn btn-danger'
+  = link_to 'Back', cities_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
+  = link_to 'Edit', edit_city_path(@city), icon: iconize(:edit), class: 'btn btn-info'
+  = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: 'Are you sure?' }, icon: iconize(:times), class: 'btn btn-danger'
 
 
 

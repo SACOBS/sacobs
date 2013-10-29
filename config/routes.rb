@@ -9,6 +9,10 @@ Sacobs::Application.routes.draw do
 
   devise_for :users
 
+  resources :bookings
+
+  resources :clients
+
   resources :cities
 
   resource :contacts, only: [:new, :create]

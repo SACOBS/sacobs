@@ -29,4 +29,8 @@ module ApplicationHelper
     end
   end
 
+  def iconize(name)
+    "fa fa-#{name.to_s.gsub('_','-')}"
+  end
+
 end
