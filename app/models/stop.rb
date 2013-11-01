@@ -25,6 +25,8 @@ class Stop < ActiveRecord::Base
 
  scope :en_route, -> (from, to) { where('id >= ? AND id <= ?', from, to) }
 
+ scope :cost, -> { includes(:connection).sum('connections.cost')}
+
  delegate :from_city, :to_city, to: :connection
 
 
