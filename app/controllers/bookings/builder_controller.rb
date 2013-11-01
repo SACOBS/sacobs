@@ -41,6 +41,7 @@ class Bookings::BuilderController < ApplicationController
     case step
       when :client
         @booking.build_client
+        @booking.client.build_address
       when :passengers
         @booking.quantity.times {  @booking.passengers.build name: @booking.client.name, surname: @booking.client.surname }
     end

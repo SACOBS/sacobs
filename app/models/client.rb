@@ -20,14 +20,8 @@ class Client < ActiveRecord::Base
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
 
-  after_initialize :new_address, if: :new_record?
-
   def full_name
     "#{self.name} #{self.surname}".titleize
   end
 
-  protected
-  def new_address
-    self.build_address
-  end
 end
