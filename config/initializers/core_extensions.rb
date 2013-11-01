@@ -1,0 +1,1 @@
+require "#{Rails.application.root}/lib/core_extensions/hash_blank.rb"

@@ -2,11 +2,11 @@
   %h3 Select A Trip
 
 
-- bootstrap_table headers:['Trips'], types: [:striped] do
+- bootstrap_table headers:['Trips'], types: [:bordered] do
   - @trips.each do |trip|
     %tr
       %td
-        = simple_form_for :trip, namespace: trip.id ,url: availability_check_url, wrapper: false, defaults: {label: false} do |f|
+        = simple_form_for :trip, namespace: trip.id ,url: booking_builder_index_url, wrapper: false, defaults: {label: false} do |f|
           %table.table-bordered
             - table_headers(['Name', 'Start', 'End', 'From', 'To', 'Qty', 'Actions'])
             %tr

@@ -14,7 +14,7 @@
       %li.divider
       %li= link_to 'Trips', trips_path
     - drop_down_menu('Booking') do
-      %li= link_to 'Check Availability', availability_new_path
+      %li= link_to 'New', new_booking_builder_path(booking_id: :start)
 
 
   %ul.nav.pull-right

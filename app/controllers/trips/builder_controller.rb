@@ -8,6 +8,8 @@ class Trips::BuilderController < ApplicationController
   steps :details, :stops
 
 
+
+
   def create
     @trip = Trip.new {|r| r.save(validate: false)}
     redirect_to wizard_path(steps.first, trip_id: @trip)

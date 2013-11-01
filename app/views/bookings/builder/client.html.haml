@@ -1,0 +1,27 @@
+.page-header
+  %h3 Client
+  %h4 Search for an existing client or enter details for a new client
+#errors= errors_for @booking
+= simple_form_for @booking, url: wizard_path, defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
+  = f.association :client , collection: Client.all, label_method: :full_name, prompt: 'Select A Client', input_html: {rel: :autocomplete }
+  = f.simple_fields_for :client do |client|
+    %fieldset
+      %legend Details
+      = client.input :name
+      = client.input :surname
+      = client.input :tel_no, as: :tel
+      = client.input :cell_no, as: :tel
+      = client.input :email, as: :email
+    #address
+      = client.simple_fields_for :address do |address|
+        %fieldset
+          %legend Address
+          = address.input :street_address1
+          = address.input :street_address2
+          = address.input :city
+          = address.input :postal_code
+
+
+
+  .form-actions
+    = f.submit class: 'btn btn-primary'

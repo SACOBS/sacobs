@@ -16,15 +16,19 @@
 class Booking < ActiveRecord::Base
   include AttributeDefaults
 
-  STATUSES = %w(confirmed reserved cancelled incomplete)
-  STATUSES.each { |status| define_method("#{status}?") { self.status == status } }
+  STATUSES = %w(confirmed reserved cancelled processing)
+  STATUSES.each do |status|
+    define_method("#{status}?") { self.status == status }
+    scope status, -> { where(status: status ) }
+  end
 
   belongs_to :trip, touch: true
   belongs_to :client, touch: true
+  has_many :passengers, dependent: :destroy
   has_and_belongs_to_many :stops, after_add: :decrement_seats, before_remove: :increment_seats
 
-  scope :reserved, -> { where(status: :reserved) }
-  scope :confirmed, -> { where(status: :confirmed) }
+  accepts_nested_attributes_for :client, reject_if: :all_blank
+
 
   before_create :set_expiry_date
 
@@ -35,7 +39,7 @@ class Booking < ActiveRecord::Base
 
   private
   def defaults
-    {status: 'reserved'}
+    { status: 'processing' }
   end
 
   protected
