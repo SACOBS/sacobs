@@ -7,15 +7,20 @@
 #  surname    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  slug       :string(255)
 #
 
 class Driver < ActiveRecord::Base
+  extend FriendlyId
   has_and_belongs_to_many :trips
 
- validates :name, :surname, presence: true
+  friendly_id :full_name, use: :slugged
 
- def to_s
-  "#{self.name} #{self.surname}".titleize
+
+  validates :name, :surname, presence: true
+
+ def full_name
+  "#{self.name} #{self.surname}"
  end
 
 end

@@ -10,6 +10,7 @@
 #  tel_no     :string(255)
 #  cell_no    :string(255)
 #  email      :string(255)
+#  slug       :string(255)
 #
 
 require 'spec_helper'

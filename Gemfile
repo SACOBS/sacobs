@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', ' ~> 4.0.1.rc3'
+gem 'rails', ' ~> 4.0.1'
 
 
 # Use SCSS for stylesheets
@@ -73,8 +73,8 @@ gem 'font-awesome-rails'
 # Nested Forms
 gem "cocoon"
 
-# Enums
-# gem 'enumify'
+# Friendly Id
+gem 'friendly_id', '~> 5.0.0'
 
 
 # Wizard

@@ -39,10 +39,10 @@ class DriversController < ApplicationController
 
   private
     def set_driver
-      @driver = Driver.find(params[:id])
+      @driver = Driver.friendly.find(params[:id])
     end
 
     def interpolation_options
-      { resource_name: @driver }
+      { resource_name: @driver.full_name }
     end
 end

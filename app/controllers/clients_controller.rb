@@ -11,7 +11,7 @@ class ClientsController < ApplicationController
 
 
   def show
-    @client = ClientDecorator.new(Client.find(params[:id]))
+    @client = ClientDecorator.new(Client.friendly.find(params[:id]))
   end
 
   # GET /clients/new
@@ -43,10 +43,10 @@ class ClientsController < ApplicationController
 
   private
     def set_client
-      @client = Client.find(params[:id])
+      @client = Client.friendly.find(params[:id])
     end
 
     def interpolation_options
-      { resource_name: @client }
+      { resource_name: @client.full_name }
     end
 end

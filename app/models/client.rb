@@ -10,9 +10,12 @@
 #  tel_no     :string(255)
 #  cell_no    :string(255)
 #  email      :string(255)
+#  slug       :string(255)
 #
 
 class Client < ActiveRecord::Base
+  extend FriendlyId
+
   has_one :address, as: :addressable
   has_many :bookings, dependent: :destroy
 
@@ -20,8 +23,10 @@ class Client < ActiveRecord::Base
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
 
+  friendly_id :full_name, use: :slugged
+
   def full_name
-    "#{self.name} #{self.surname}".titleize
+    "#{self.name} #{self.surname}"
   end
 
 end
