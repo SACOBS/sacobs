@@ -12,9 +12,17 @@
 class Invoice < ActiveRecord::Base
   include AttributeDefaults
 
-
   belongs_to :booking, touch: true
   has_many :line_items, dependent: :destroy
+
+  attr_reader :total
+
+  def total
+    @total ||= self.line_items.sum(:amount).round(2)
+  end
+
+
+
 
   private
   def defaults

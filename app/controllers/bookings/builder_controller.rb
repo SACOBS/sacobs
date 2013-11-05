@@ -43,7 +43,10 @@ class Bookings::BuilderController < ApplicationController
         @booking.build_client
         @booking.client.build_address
       when :passengers
-        @booking.quantity.times {  @booking.passengers.build name: @booking.client.name, surname: @booking.client.surname }
+        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname }
+        flash[:notice]= "#{@booking.passengers.size} 10"
+      when :billing
+        InvoiceBuilder.new(@booking).build
     end
     render_wizard
   end

@@ -1,2 +1,13 @@
-- @booking.passengers.each do |p|
- %p= p.name
+.page-header
+  %h2 Passenger Details
+#errors= errors_for @booking
+= simple_form_for @booking,  defaults: {error: false, label: false} ,url: wizard_path do |f|
+  %fieldset
+    - bootstrap_table headers:['Name', 'Surname','Type'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
+      = f.simple_fields_for :passengers, wrapper: false do |passenger|
+        %tr
+          %td= passenger.input :name
+          %td= passenger.input :surname
+          %td= passenger.input :type
+  .form-actions
+    = f.submit class: 'btn btn-primary'

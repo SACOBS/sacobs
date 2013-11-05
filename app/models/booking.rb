@@ -24,10 +24,12 @@ class Booking < ActiveRecord::Base
 
   belongs_to :trip, touch: true
   belongs_to :client, touch: true
+  has_one :invoice
   has_many :passengers, dependent: :destroy
   has_and_belongs_to_many :stops, after_add: :decrement_seats, before_remove: :increment_seats
 
   accepts_nested_attributes_for :client, reject_if: :all_blank
+  accepts_nested_attributes_for :passengers, reject_if: :all_blank
 
 
   before_create :set_expiry_date

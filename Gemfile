@@ -83,6 +83,10 @@ gem 'wicked'
 # Copying Records
 gem 'amoeba'
 
+# Decorators
+gem 'draper', '~> 1.3'
+
+
 
 group :development do
   gem "better_errors"

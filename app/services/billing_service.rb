@@ -1,6 +1,5 @@
 class BillingService
 
-
   attr_reader :original_amount, :discount_percentage
 
   def initialize(amount, discount_percentage)

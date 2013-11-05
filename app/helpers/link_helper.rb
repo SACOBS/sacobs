@@ -10,4 +10,8 @@ module LinkHelper
     "fa fa-#{name.to_s.gsub('_','-')}"
   end
 
+  def back_to(path)
+   link_to 'Back', path, class: 'btn btn-primary', icon: :arrow_left
+  end
+
 end

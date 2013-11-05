@@ -1,36 +1,35 @@
-class ClientDecorator < ApplicationDecorator
-
-  attr_reader :client
-
-  def initialize(client)
-    @client = client
-  end
+class ClientDecorator < Draper::Decorator
+  delegate_all
 
   def telephone
-    client.cell_no ? h.number_to_phone(client.tel_no) : 'None'
+   return 'N/A' unless tel_no.present?
+   h.number_to_phone(tel_no)
   end
 
   def cellphone
-    client.cell_no ? h.number_to_phone(client.cell_no) : 'None'
+    return 'N/A' unless cell_no.present?
+    h.number_to_phone(cell_no)
   end
 
   def email
-    client.email ? h.mail_to(client.email) : 'None'
+    return 'N/A' unless model.email.present?
+    h.mail_to(model.email)
   end
 
-  def to_s
-    client
+  def edit_link
+    h.link_to 'Edit', edit_path, icon: :edit, class: 'btn btn-info'
   end
 
-  def to_param
-    client.to_param
+  def destroy_link
+   h.link_to 'Destroy', destroy_path , method: :delete, data: { confirm: 'Are you sure you want to delete this client?' }, icon: :times, class: 'btn btn-danger'
   end
 
-  def method_missing(method_name, *args, &block)
-    client.send(method_name, *args, &block)
+  private
+  def edit_path
+    h.edit_client_path(model)
   end
 
-  def respond_to_missing?(method_name, include_private = false)
-    client.respond_to?(method_name, include_private) || super
+  def destroy_path
+    h.client_path(model)
   end
 end

@@ -11,7 +11,7 @@ class ClientsController < ApplicationController
 
 
   def show
-    @client = ClientDecorator.new(Client.friendly.find(params[:id]))
+    @client = Client.friendly.find(params[:id]).decorate
   end
 
   # GET /clients/new
