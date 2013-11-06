@@ -10,22 +10,6 @@ class Bookings::BuilderController < ApplicationController
              passengers_attributes: [:id, :name, :surname, :passenger_type_id],
              invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :amount, :discount_percentage, :discount_amount]]
 
-#  amount              :decimal(8, 2)
-#  discount_percentage :integer
-#  discount_amount     :decimal(8, 2)
-#  invoice_id
-
-
-#  trip_id     :integer
-#  price       :decimal(, )
-#  status      :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  quantity    :integer          default(0)
-#  expiry_date :datetime
-#  client_id   :integer
-
-
 
 
   def new
@@ -36,10 +20,9 @@ class Bookings::BuilderController < ApplicationController
     trip = Trip.find(params[:trip][:id])
     stops = trip.available_stops(params[:trip][:from], params[:trip][:to])
     if stops.empty? || stops.any? { |s| s.available_seats <  params[:trip][:seats].to_i }
-      redirect_to new_booking_url, alert: 'There are no available seats on the selected trip'
+      redirect_to new_booking_builder_path(booking_id: :start), alert: 'There are no available seats on the selected trip'
     else
-      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i)
-      booking.stops << stops
+      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: stops)
       redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
     end
   end
@@ -57,13 +40,14 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
+    @booking.reserve if steps.last
     @booking.update(booking_params)
     render_wizard @booking
   end
 
   private
     def finish_wizard_path
-      bookings_url
+      root_url
     end
 
     def build_client
@@ -79,7 +63,7 @@ class Bookings::BuilderController < ApplicationController
 
     def build_invoice
       invoice = InvoiceBuilder.new(@booking).build
-      invoice.save
+      invoice.save!
     end
 
     def set_booking

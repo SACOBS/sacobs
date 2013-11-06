@@ -26,7 +26,7 @@ class Booking < ActiveRecord::Base
   belongs_to :client, touch: true
   has_one :invoice
   has_many :passengers, dependent: :destroy
-  has_and_belongs_to_many :stops, after_add: :decrement_seats, before_remove: :increment_seats
+  has_and_belongs_to_many :stops, autosave: true
 
   accepts_nested_attributes_for :client, reject_if: :all_blank
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
@@ -35,7 +35,13 @@ class Booking < ActiveRecord::Base
 
   before_create :set_expiry_date
 
+  def reserve
+    self.stops.each { |s| s.decrement(:available_seats, self.quantity) }
+    self.status = 'reserved'
+  end
+
   def cancel
+    self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
     self.stops.destroy_all
     self.status = 'cancelled'
   end
@@ -50,12 +56,5 @@ class Booking < ActiveRecord::Base
     self.expiry_date = Time.zone.now + 24.hours
   end
 
-  def decrement_seats(stop)
-     stop.decrement!(:available_seats, self.quantity)
-  end
-
-  def increment_seats(stop)
-    stop.increment!(:available_seats, self.quantity)
-  end
 
 end
