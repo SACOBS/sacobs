@@ -44,6 +44,7 @@ class Booking < ActiveRecord::Base
     self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
     self.stops.destroy_all
     self.status = 'cancelled'
+    save
   end
 
   private

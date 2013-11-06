@@ -1,19 +1,20 @@
-.page-header
-  %h2 Driver
-.well
-  %p
-    %strong= Driver.human_attribute_name(:name) + ':'
-    %br
-    = @driver.name
-  %p
-    %strong= Driver.human_attribute_name(:surname) + ':'
-    %br
-    = @driver.surname
+- cache @driver do
+  .page-header
+    %h2 Driver
+  .well
+    %p
+      %strong= Driver.human_attribute_name(:name) + ':'
+      %br
+      = @driver.name
+    %p
+      %strong= Driver.human_attribute_name(:surname) + ':'
+      %br
+      = @driver.surname
 
-.form-actions
-  = link_to 'Back', drivers_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
-  = link_to 'Edit',edit_driver_path(@driver), icon: iconize(:edit), class: 'btn btn-info'
-  = link_to 'Destroy', driver_path(@driver), method: :delete, data: { confirm: 'Are you sure?' }, icon: iconize(:times), class: 'btn btn-danger'
+  .form-actions
+    = link_to 'Back', drivers_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
+    = link_to 'Edit',edit_driver_path(@driver), icon: iconize(:edit), class: 'btn btn-info'
+    = link_to 'Destroy', driver_path(@driver), method: :delete, data: { confirm: 'Are you sure?' }, icon: iconize(:times), class: 'btn btn-danger'
 
 
 

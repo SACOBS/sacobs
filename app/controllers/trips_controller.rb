@@ -7,6 +7,10 @@ class TripsController < ApplicationController
     @trips = Trip.all
   end
 
+  def show
+    @trip = @trip.decorate
+  end
+
   def copy
     new_trip = @trip.amoeba_dup
     if new_trip.save
@@ -23,6 +27,6 @@ class TripsController < ApplicationController
 
   private
     def set_trip
-      @trip = Trip.find(params[:id])
+      @trip = Trip.includes(:stops).find(params[:id])
     end
 end

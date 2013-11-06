@@ -9,6 +9,7 @@
 #  distance      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  name          :string(255)
 #
 
 class Route < ActiveRecord::Base
@@ -26,14 +27,14 @@ class Route < ActiveRecord::Base
   delegate :name, to: :start_city, prefix: true, allow_nil: true
   delegate :name, to: :end_city, prefix: true, allow_nil: true
 
+  before_save :set_name
   before_update :mark_children_for_change
 
-
-  def to_s
-    "#{start_city_name} to #{end_city_name}"
+  protected
+  def set_name
+    self.name = "#{start_city_name} to #{end_city_name}"
   end
 
-  protected
   def mark_children_for_change
     if self.distance_changed? || self.cost_changed?
       self.connections.each do |c|

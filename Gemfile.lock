@@ -69,6 +69,7 @@ GEM
     css_parser (1.3.5)
       addressable
     daemons (1.1.9)
+    dalli (2.6.4)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     debugger (1.6.2)
@@ -165,6 +166,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     method_source (0.8.2)
     mime-types (1.25)
     mini_portile (0.5.2)
@@ -331,6 +333,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.0.0)
   daemons
+  dalli
   database_cleaner (~> 1.2.0)
   delayed_job (~> 4.0.0)
   delayed_job_active_record (~> 4.0.0)
@@ -350,6 +353,7 @@ DEPENDENCIES
   jquery-turbolinks
   json_spec
   launchy (~> 2.2.0)
+  memcachier
   normalize-rails
   pg
   premailer-rails

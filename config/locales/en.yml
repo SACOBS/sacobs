@@ -26,3 +26,6 @@ en:
        default: "%-d %B %Y %H:%M %p"
        short: "%b %d"
        long: "%d %B %Y"
+  distance:
+    unit: 'km'
+

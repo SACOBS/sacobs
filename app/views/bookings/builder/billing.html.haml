@@ -7,7 +7,7 @@
       = invoice.simple_fields_for :line_items, wrapper: false do |line_item|
         %tr
           %td= line_item.input :description
-          %td= line_item.object.discount_percentage
+          %td= number_to_percentage(line_item.object.discount_percentage, precision: 0)
           %td= line_item.input :discount_amount
           %td= line_item.input :amount
       %tr

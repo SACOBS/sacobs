@@ -11,6 +11,7 @@
 #  route_id     :integer
 #  percentage   :integer
 #  cost         :decimal(8, 2)
+#  name         :string(255)
 #
 
 require 'spec_helper'

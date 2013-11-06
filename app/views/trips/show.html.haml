@@ -2,30 +2,30 @@
   %h1 Trip
 .well
   %p
-    %strong= Trip.human_attribute_name(:name) + ':'
+    %strong Name:
     %br
     = @trip.name
   %p
-    %strong= Trip.human_attribute_name(:start_date) + ':'
+    %strong Start Date:
     %br
-    = l(@trip.start_date.presence || Date.tomorrow, format: :long)
+    = @trip.start_date
   %p
-    %strong= Trip.human_attribute_name(:end_date) + ':'
+    %strong End Date:
     %br
-    = l(@trip.end_date.presence || Date.today, format: :long)
+    = @trip.end_date
   %p
-    %strong= Trip.human_attribute_name(:route_id) + ':'
+    %strong Route
     %br
-    =  @trip.route.description
+    =  @trip.route
   %p
-    %strong= Trip.human_attribute_name(:bus_id) + ':'
+    %strong Bus
     %br
-    = @trip.bus.name
+    = @trip.bus
   %p
     %strong Drivers:
     %ul
       = list_of(@trip.drivers) do |driver|
-        = driver
+        = driver.full_name
 .well
   %p
     %strong Stops:
@@ -38,7 +38,7 @@
           %td= stop.depart.presence || 'None'
 .form-actions
   = link_to 'Back', trips_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
-  = link_to 'Edit', edit_trip_path(@trip), icon: iconize(:edit), class: 'btn btn-info'
+  = link_to 'Edit', trip_builder_path(:details, trip_id: @trip), icon: iconize(:edit), class: 'btn btn-info'
   = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure' },icon: iconize(:times) ,class: 'btn btn-danger'
 
 

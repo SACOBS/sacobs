@@ -11,6 +11,7 @@
 #  route_id     :integer
 #  percentage   :integer
 #  cost         :decimal(8, 2)
+#  name         :string(255)
 #
 
 class Connection < ActiveRecord::Base
@@ -18,28 +19,27 @@ class Connection < ActiveRecord::Base
   belongs_to :from_city, class_name: :City
   belongs_to :to_city, class_name: :City
 
-  attr_reader :description
 
   validates :route,:from_city, :to_city, :distance, presence: true
 
-  before_save :calculate_percentage_of_route, :calculate_connection_cost
+  before_save :calculate_percentage_of_route, :calculate_connection_cost, :set_name
 
   delegate :name, to: :from_city, prefix: true
   delegate :name, to: :to_city, prefix: true
 
   validates :from_city, :to_city, :distance, :route, presence: true
 
-  def description
-    @description ||= "#{self.from_city_name} to #{self.to_city_name}"
-  end
-
   protected
   def calculate_percentage_of_route
-    self.percentage = ((self.distance.to_f / self.route.distance.to_f) * 100.0).round
+    self.percentage = ((BigDecimal(self.distance) / BigDecimal(self.route.distance)) * 100.0).round(2)
   end
 
   def calculate_connection_cost
     self.cost = ((BigDecimal(self.percentage) / 100) * self.route.cost)
+  end
+
+  def set_name
+    self.name = "#{self.from_city_name} to #{self.to_city_name}"
   end
 
 end

@@ -3,12 +3,12 @@ class ClientDecorator < Draper::Decorator
 
   def telephone
    return 'N/A' unless tel_no.present?
-   h.number_to_phone(tel_no)
+   h.number_to_phone(tel_no, area: true)
   end
 
   def cellphone
     return 'N/A' unless cell_no.present?
-    h.number_to_phone(cell_no)
+    h.number_to_phone(cell_no, area: true)
   end
 
   def email

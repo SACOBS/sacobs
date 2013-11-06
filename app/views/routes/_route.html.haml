@@ -1,9 +1,9 @@
 %tr[route]
-  %td= link_to route, route
+  %td= link_to route.name, route
   %td= route.start_city_name.presence
   %td= route.end_city_name.presence
   %td= number_to_currency(route.cost, unit: 'R')
-  %td= "#{route.distance} km"
+  %td= number_to_human(route.distance, units: :distance)
   %td= route.connections.size
   %td
     = link_to 'Show', route, icon: iconize(:info), class: 'btn btn-info btn-mini'

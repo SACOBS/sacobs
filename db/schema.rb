@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106092921) do
+ActiveRecord::Schema.define(version: 20131106131446) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20131106092921) do
     t.integer  "route_id"
     t.integer  "percentage",   limit: 2
     t.decimal  "cost",                   precision: 8, scale: 2
+    t.string   "name"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 20131106092921) do
     t.integer  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "seats", force: true do |t|

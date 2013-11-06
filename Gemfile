@@ -77,6 +77,12 @@ gem "cocoon"
 gem 'friendly_id', '~> 5.0.0'
 
 
+# Caching
+gem 'dalli'
+gem 'memcachier'
+
+
+
 # Wizard
 gem 'wicked'
 
