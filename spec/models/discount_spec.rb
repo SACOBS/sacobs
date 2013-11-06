@@ -1,18 +1,16 @@
 # == Schema Information
 #
-# Table name: passengers
+# Table name: discounts
 #
 #  id                :integer          not null, primary key
-#  name              :string(255)
-#  surname           :string(255)
-#  booking_id        :integer
+#  percentage        :integer
+#  passenger_type_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
-#  passenger_type_id :integer
 #
 
 require 'spec_helper'
 
-describe Passenger do
+describe Discount do
   pending "add some examples to (or delete) #{__FILE__}"
 end

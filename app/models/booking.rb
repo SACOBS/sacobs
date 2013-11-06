@@ -30,6 +30,7 @@ class Booking < ActiveRecord::Base
 
   accepts_nested_attributes_for :client, reject_if: :all_blank
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
+  accepts_nested_attributes_for :invoice, reject_if: :all_blank
 
 
   before_create :set_expiry_date

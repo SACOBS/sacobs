@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104121300) do
+ActiveRecord::Schema.define(version: 20131106092921) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(version: 20131104121300) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "discounts", force: true do |t|
+    t.integer  "percentage"
+    t.integer  "passenger_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "drivers", force: true do |t|
     t.string   "name"
     t.string   "surname"
@@ -130,10 +137,16 @@ ActiveRecord::Schema.define(version: 20131104121300) do
 
   create_table "line_items", force: true do |t|
     t.string   "description"
-    t.decimal  "amount"
+    t.decimal  "amount",              precision: 8, scale: 2
     t.integer  "discount_percentage"
-    t.decimal  "discount_amount"
+    t.decimal  "discount_amount",     precision: 8, scale: 2
     t.integer  "invoice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "passenger_types", force: true do |t|
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -141,10 +154,10 @@ ActiveRecord::Schema.define(version: 20131104121300) do
   create_table "passengers", force: true do |t|
     t.string   "name"
     t.string   "surname"
-    t.string   "type"
     t.integer  "booking_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "passenger_type_id"
   end
 
   create_table "roles", force: true do |t|
@@ -161,7 +174,7 @@ ActiveRecord::Schema.define(version: 20131104121300) do
   create_table "routes", force: true do |t|
     t.integer  "start_city_id"
     t.integer  "end_city_id"
-    t.decimal  "cost"
+    t.decimal  "cost",          precision: 8, scale: 2
     t.integer  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"

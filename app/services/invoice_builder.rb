@@ -17,11 +17,12 @@ class InvoiceBuilder
 
   private
     def build_line_item(price, passenger)
+     discount = Discount.find_by(passenger_type: passenger.passenger_type)
      invoice.line_items.build do |line_item|
        line_item.description = passenger.full_name
-       line_item.discount_percentage = 10
-       line_item.discount_amount = calculate_discount(price, line_item.discount_percentage)
-       line_item.amount = price
+       line_item.discount_percentage = discount.percentage
+       line_item.discount_amount = calculate_discount(price, discount.percentage)
+       line_item.amount = price - line_item.discount_amount
      end
     end
 

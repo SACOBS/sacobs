@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  start_city_id :integer
 #  end_city_id   :integer
-#  cost          :decimal(, )
+#  cost          :decimal(8, 2)
 #  distance      :integer
 #  created_at    :datetime
 #  updated_at    :datetime

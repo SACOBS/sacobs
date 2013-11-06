@@ -3,10 +3,17 @@ class Bookings::BuilderController < ApplicationController
 
   steps :client, :passengers, :billing
 
-
   before_action :set_booking, only: [:destroy, :show, :update]
 
-  params_for :booking, :trip_id, :price, :status, :quantity, :client_id, client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ]
+  params_for :booking, :trip_id, :price, :status, :quantity, :client_id,
+             client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
+             passengers_attributes: [:id, :name, :surname, :passenger_type_id],
+             invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :amount, :discount_percentage, :discount_amount]]
+
+#  amount              :decimal(8, 2)
+#  discount_percentage :integer
+#  discount_amount     :decimal(8, 2)
+#  invoice_id
 
 
 #  trip_id     :integer
@@ -33,20 +40,18 @@ class Bookings::BuilderController < ApplicationController
     else
       booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i)
       booking.stops << stops
-      redirect_to wizard_path(steps.first, booking_id: booking)
+      redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
     end
   end
 
   def show
     case step
       when :client
-        @booking.build_client
-        @booking.client.build_address
+        build_client
       when :passengers
-        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname }
-        flash[:notice]= "#{@booking.passengers.size} 10"
+        build_passengers
       when :billing
-        InvoiceBuilder.new(@booking).build
+        build_invoice
     end
     render_wizard
   end
@@ -57,11 +62,27 @@ class Bookings::BuilderController < ApplicationController
   end
 
   private
-  def finish_wizard_path
-    bookings_url
-  end
+    def finish_wizard_path
+      bookings_url
+    end
 
-  def set_booking
-    @booking =  Booking.find(params[:booking_id])
-  end
+    def build_client
+      @booking.build_client { |client| client.build_address }
+    end
+
+    def build_passengers
+      unless @booking.passengers.any?
+        default_passenger_type = PassengerType.find_by(description: :standard)
+        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname, passenger_type: default_passenger_type  }
+      end
+    end
+
+    def build_invoice
+      invoice = InvoiceBuilder.new(@booking).build
+      invoice.save
+    end
+
+    def set_booking
+      @booking =  Booking.find(params[:booking_id])
+    end
 end

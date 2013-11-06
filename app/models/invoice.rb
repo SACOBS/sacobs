@@ -15,6 +15,9 @@ class Invoice < ActiveRecord::Base
   belongs_to :booking, touch: true
   has_many :line_items, dependent: :destroy
 
+  accepts_nested_attributes_for :line_items, reject_if: :all_blank
+
+
   attr_reader :total
 
   def total

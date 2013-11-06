@@ -1,0 +1,21 @@
+.page-header
+  %h3 Billing
+#errors= errors_for @booking
+= simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false} do |f|
+  = f.simple_fields_for :invoice do |invoice|
+    - bootstrap_table headers:['Description', 'Discount Percentage', 'Discount Amount','Amount'], types: [:condensed], html_options: {id: 'line_items'} do
+      = invoice.simple_fields_for :line_items, wrapper: false do |line_item|
+        %tr
+          %td= line_item.input :description
+          %td= line_item.object.discount_percentage
+          %td= line_item.input :discount_amount
+          %td= line_item.input :amount
+      %tr
+        %td
+          %strong Total:
+        %td
+        %td
+        %td
+          %strong= number_to_currency(@booking.invoice.total, unit: 'R')
+    .form-actions
+      = f.submit 'Complete', class: 'btn btn-primary'
