@@ -22,7 +22,7 @@ class Connection < ActiveRecord::Base
 
   validates :route,:from_city, :to_city, :distance, presence: true
 
-  before_save :calculate_percentage_of_route, :calculate_connection_cost, :set_name
+  before_save :calculate_connection_cost, :set_name
 
   delegate :name, to: :from_city, prefix: true
   delegate :name, to: :to_city, prefix: true
@@ -30,10 +30,6 @@ class Connection < ActiveRecord::Base
   validates :from_city, :to_city, :distance, :route, presence: true
 
   protected
-  def calculate_percentage_of_route
-    self.percentage = ((BigDecimal(self.distance) / BigDecimal(self.route.distance)) * 100.0).round(2)
-  end
-
   def calculate_connection_cost
     self.cost = ((BigDecimal(self.percentage) / 100) * self.route.cost)
   end

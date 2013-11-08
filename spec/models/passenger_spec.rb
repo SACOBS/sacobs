@@ -9,6 +9,8 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  passenger_type_id :integer
+#  cell_no           :string(255)
+#  email             :string(255)
 #
 
 require 'spec_helper'

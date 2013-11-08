@@ -7,7 +7,7 @@ class Bookings::BuilderController < ApplicationController
 
   params_for :booking, :trip_id, :price, :status, :quantity, :client_id,
              client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
-             passengers_attributes: [:id, :name, :surname, :passenger_type_id],
+             passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
              invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :amount, :discount_percentage, :discount_amount]]
 
 

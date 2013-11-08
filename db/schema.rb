@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106131446) do
+ActiveRecord::Schema.define(version: 20131107112402) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -51,7 +51,10 @@ ActiveRecord::Schema.define(version: 20131106131446) do
 
   create_table "cities", force: true do |t|
     t.string "name"
+    t.string "slug"
   end
+
+  add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -159,6 +162,8 @@ ActiveRecord::Schema.define(version: 20131106131446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "passenger_type_id"
+    t.string   "cell_no"
+    t.string   "email"
   end
 
   create_table "roles", force: true do |t|
@@ -180,7 +185,10 @@ ActiveRecord::Schema.define(version: 20131106131446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "slug"
   end
+
+  add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true
 
   create_table "seats", force: true do |t|
     t.string   "row"

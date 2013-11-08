@@ -25,10 +25,11 @@
         - bootstrap_table headers:['','From', 'To','Distance', 'Percentage', 'Cost'], types: [:bordered, :condensed], html_options: {id: 'connections'} do
           = render @route.connections
 
+
   .form-actions
-    = link_to 'Back', routes_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
-    = link_to 'Edit',route_builder_path(:details, route_id: @route), icon: iconize(:edit), class: 'btn btn-info'
-    = link_to 'Destroy', route_path(@route), method: :delete, data: { confirm: 'Are you sure?' }, icon: iconize(:times), class: 'btn btn-danger'
+    = back_to routes_path
+    = @route.edit_link
+    = @route.destroy_link
 
 
 

@@ -10,10 +10,15 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  name          :string(255)
+#  slug          :string(255)
 #
 
 class Route < ActiveRecord::Base
   include AttributesEmpty
+  extend FriendlyId
+
+  friendly_id :name, use: :slugged
+
 
   belongs_to :start_city, class_name: :City
   belongs_to :end_city, class_name: :City
