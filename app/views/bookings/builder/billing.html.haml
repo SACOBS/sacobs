@@ -3,16 +3,18 @@
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false} do |f|
   = f.simple_fields_for :invoice do |invoice|
-    - bootstrap_table headers:['Description', 'Discount Percentage', 'Discount Amount','Amount'], types: [:condensed], html_options: {id: 'line_items'} do
+    - bootstrap_table headers:['Description','Gross Price', 'Discount %','Discount','Nett Price'], types: [:condensed], html_options: {id: 'line_items'} do
       = invoice.simple_fields_for :line_items, wrapper: false do |line_item|
         %tr[line_item.object]
           %td= line_item.input :description
-          %td= number_to_percentage(line_item.object.discount_percentage, precision: 0)
-          %td.discount= line_item.input :discount_amount
-          %td.amount= line_item.input :amount
+          %td.gross= line_item.input :gross_price, input_html: {value: number_with_precision(line_item.object.gross_price, precision: 2)}
+          %td.percentage= number_to_percentage(line_item.object.discount_percentage, precision: 0)
+          %td.discount= line_item.input :discount_amount, input_html: {value: number_with_precision(line_item.object.discount_amount, precision: 2)}
+          %td.nett= line_item.input :nett_price, input_html: {value: number_with_precision(line_item.object.nett_price, precision: 2)}
       %tr
         %td
           %strong Total:
+        %td
         %td
         %td
         %td.total

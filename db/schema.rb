@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107112402) do
+ActiveRecord::Schema.define(version: 20131111064247) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -141,12 +141,13 @@ ActiveRecord::Schema.define(version: 20131107112402) do
 
   create_table "line_items", force: true do |t|
     t.string   "description"
-    t.decimal  "amount",              precision: 8, scale: 2
     t.integer  "discount_percentage"
     t.decimal  "discount_amount",     precision: 8, scale: 2
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "gross_price",         precision: 8, scale: 2
+    t.decimal  "nett_price",          precision: 8, scale: 2
   end
 
   create_table "passenger_types", force: true do |t|

@@ -21,7 +21,7 @@ class Invoice < ActiveRecord::Base
   attr_reader :total
 
   def total
-    @total ||= self.line_items.sum(:amount).round(2)
+    @total ||= self.line_items.sum(:nett_price).round(2)
   end
 
 

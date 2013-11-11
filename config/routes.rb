@@ -42,7 +42,7 @@ Sacobs::Application.routes.draw do
 
 end
 #== Route Map
-# Generated on 01 Nov 2013 12:20
+# Generated on 08 Nov 2013 15:10
 #
 #         availability_new GET    /availability/new(.:format)                 availability#new
 #       availability_check POST   /availability/check(.:format)               availability#check

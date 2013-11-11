@@ -22,7 +22,8 @@ class InvoiceBuilder
        line_item.description = passenger.full_name
        line_item.discount_percentage = discount.percentage
        line_item.discount_amount = calculate_discount(price, discount.percentage)
-       line_item.amount = price - line_item.discount_amount
+       line_item.gross_price = price
+       line_item.nett_price = price - line_item.discount_amount
      end
     end
 
