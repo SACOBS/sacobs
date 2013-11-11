@@ -1,7 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:copy, :show, :edit, :destroy]
-
-  params_for :trip, :name, :start_date, :end_date, :route_id, :bus_id, driver_ids: []
+  before_action :set_trip, only: [:copy, :show, :destroy]
 
   def index
     @trips = Trip.all
@@ -13,6 +11,7 @@ class TripsController < ApplicationController
 
   def copy
     new_trip = @trip.amoeba_dup
+    new_trip.user_id = current_user.id
     if new_trip.save
       redirect_to trip_builder_path(:details, trip_id: new_trip)
     else

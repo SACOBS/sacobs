@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111111602) do
+ActiveRecord::Schema.define(version: 20131111180156) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131111111602) do
     t.integer  "quantity",    default: 0
     t.datetime "expiry_date"
     t.integer  "client_id"
+    t.integer  "user_id"
   end
 
   create_table "bookings_stops", force: true do |t|
@@ -47,11 +48,13 @@ ActiveRecord::Schema.define(version: 20131111111602) do
     t.string   "model"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "cities", force: true do |t|
-    t.string "name"
-    t.string "slug"
+    t.string  "name"
+    t.string  "slug"
+    t.integer "user_id"
   end
 
   add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true
@@ -111,6 +114,7 @@ ActiveRecord::Schema.define(version: 20131111111602) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.integer  "user_id"
   end
 
   add_index "drivers", ["slug"], name: "index_drivers_on_slug", unique: true
@@ -188,6 +192,7 @@ ActiveRecord::Schema.define(version: 20131111111602) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "slug"
+    t.integer  "user_id"
   end
 
   add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true
@@ -220,6 +225,7 @@ ActiveRecord::Schema.define(version: 20131111111602) do
     t.integer  "bus_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|

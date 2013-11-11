@@ -34,6 +34,10 @@ class Trips::BuilderController < ApplicationController
     trips_url
   end
 
+  def user
+    { user_id: current_user.id }
+  end
+
   def set_trip
     @trip =  Trip.find(params[:trip_id])
   end

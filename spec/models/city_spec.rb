@@ -2,9 +2,10 @@
 #
 # Table name: cities
 #
-#  id   :integer          not null, primary key
-#  name :string(255)
-#  slug :string(255)
+#  id      :integer          not null, primary key
+#  name    :string(255)
+#  slug    :string(255)
+#  user_id :integer
 #
 
 require 'spec_helper'

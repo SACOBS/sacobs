@@ -32,6 +32,10 @@ class Routes::BuilderController < ApplicationController
     routes_url
   end
 
+  def user
+    { user_id: current_user.id }
+  end
+
   def set_route
     @route =  Route.find(params[:route_id])
   end

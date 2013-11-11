@@ -11,6 +11,7 @@
 #  updated_at    :datetime
 #  name          :string(255)
 #  slug          :string(255)
+#  user_id       :integer
 #
 
 class Route < ActiveRecord::Base

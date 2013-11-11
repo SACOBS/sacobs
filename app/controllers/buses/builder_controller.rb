@@ -32,6 +32,10 @@ class Buses::BuilderController < ApplicationController
     buses_url
   end
 
+  def user
+    { user_id: current_user.id }
+  end
+
   def set_bus
     @bus =  Bus.find(params[:bus_id])
   end

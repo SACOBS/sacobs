@@ -61,6 +61,10 @@ class Bookings::BuilderController < ApplicationController
       end
     end
 
+    def user
+      { user_id: current_user.id }
+    end
+
     def build_invoice
       invoice = InvoiceBuilder.new(@booking).build
       invoice.save!

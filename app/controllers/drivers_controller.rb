@@ -42,6 +42,10 @@ class DriversController < ApplicationController
       @driver = Driver.friendly.find(params[:id])
     end
 
+    def user
+      { user_id: current_user.id }
+    end
+
     def interpolation_options
       { resource_name: @driver.full_name }
     end

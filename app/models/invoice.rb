@@ -17,15 +17,11 @@ class Invoice < ActiveRecord::Base
 
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
 
-
   attr_reader :total
 
   def total
     @total ||= self.line_items.sum(:nett_price).round(2)
   end
-
-
-
 
   private
   def defaults

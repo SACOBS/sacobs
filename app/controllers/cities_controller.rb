@@ -32,4 +32,8 @@ class CitiesController < ApplicationController
     @city = City.find(params[:id])
   end
 
+  def user
+    { user_id: current_user.id }
+  end
+
 end
