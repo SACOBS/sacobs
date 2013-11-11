@@ -16,7 +16,7 @@
 class Booking < ActiveRecord::Base
   include AttributeDefaults
 
-  STATUSES = %w(confirmed reserved cancelled processing)
+  STATUSES = %w(paid reserved cancelled processing)
   STATUSES.each do |status|
     define_method("#{status}?") { self.status == status }
     scope status, -> { where(status: status ) }
@@ -42,7 +42,6 @@ class Booking < ActiveRecord::Base
 
   def cancel
     self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
-    self.stops.destroy_all
     self.status = 'cancelled'
     save
   end

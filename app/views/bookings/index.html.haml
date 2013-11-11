@@ -1,0 +1,7 @@
+.page-header
+  %h2 Bookings
+
+- bootstrap_table headers:['Client','Trip Date','Passengers','Trip','From','To','Total Stops','Status','Booking Date', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+  = render @bookings
+
+= link_to 'Make Booking', new_booking_builder_path(booking_id: :start), icon: 'fa fa-plus', class: 'btn btn-primary'

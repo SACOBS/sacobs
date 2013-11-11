@@ -9,7 +9,11 @@ Sacobs::Application.routes.draw do
 
   devise_for :users
 
-  resources :bookings do
+  resources :bookings, only: [:show, :index, :destroy] do
+    member do
+      patch :mark_as_paid
+      patch :cancel
+    end
     resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder'
   end
 

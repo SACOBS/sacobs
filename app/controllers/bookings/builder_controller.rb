@@ -8,7 +8,7 @@ class Bookings::BuilderController < ApplicationController
   params_for :booking, :trip_id, :price, :status, :quantity, :client_id,
              client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
              passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
-             invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :amount, :discount_percentage, :discount_amount]]
+             invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]]
 
 
 
@@ -40,14 +40,14 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    @booking.reserve if steps.last
+    @booking.reserve and flash[:notice] = 'Booking has been made succesfully.' if steps.last
     @booking.update(booking_params)
     render_wizard @booking
   end
 
   private
     def finish_wizard_path
-      root_url
+      bookings_url
     end
 
     def build_client
