@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111064247) do
+ActiveRecord::Schema.define(version: 20131111111602) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20131111064247) do
     t.string   "cell_no"
     t.string   "email"
     t.string   "slug"
+    t.integer  "user_id"
   end
 
   add_index "clients", ["slug"], name: "index_clients_on_slug", unique: true

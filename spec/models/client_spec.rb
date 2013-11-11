@@ -11,6 +11,7 @@
 #  cell_no    :string(255)
 #  email      :string(255)
 #  slug       :string(255)
+#  user_id    :integer
 #
 
 require 'spec_helper'

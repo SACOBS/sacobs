@@ -4,7 +4,6 @@
 #
 #  id                  :integer          not null, primary key
 #  description         :string(255)
-#  amount              :decimal(8, 2)
 #  discount_percentage :integer
 #  discount_amount     :decimal(8, 2)
 #  invoice_id          :integer

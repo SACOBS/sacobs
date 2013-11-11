@@ -3,12 +3,9 @@ class ClientsController < ApplicationController
 
   params_for :client, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]
 
-  # GET /clients
-  # GET /clients.json
   def index
     @clients = Client.all
   end
-
 
   def show
     @client = Client.friendly.find(params[:id]).decorate
@@ -42,6 +39,10 @@ class ClientsController < ApplicationController
   end
 
   private
+    def user
+      { user_id: current_user.id }
+    end
+
     def set_client
       @client = Client.friendly.find(params[:id])
     end
