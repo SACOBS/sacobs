@@ -1,6 +1,14 @@
-%h2 Routes
+.page-header
+  %h2 Routes
+
+.search.pull-right
+  = simple_form_for :q, url: routes_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
+    = f.input :name_cont, placeholder: 'Search', input_html: {class: 'search-query'}
+    = f.submit 'Search', class: 'btn btn-primary'
 
 - bootstrap_table headers:['Description','Start City', 'End City','Cost', 'Distance','Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @routes
 
-= link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: 'fa fa-plus', class: 'btn btn-primary'
+= link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: 'btn btn-primary'
+= link_to 'Refresh', routes_path, class: 'btn btn-default', icon: :refresh
+

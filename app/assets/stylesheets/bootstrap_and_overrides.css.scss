@@ -53,12 +53,7 @@ body {
   @extend .row-fluid;
 }
 
-
-.sidebar{
-  @include makeColumn(3);
-  @extend .well;
+.search{
+  margin-bottom: 2em;
 }
 
-.main-section{
-  @include makeColumn(10);
-}

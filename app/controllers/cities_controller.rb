@@ -4,7 +4,8 @@ class CitiesController < ApplicationController
   params_for :city, :name, venues_attributes: [:id, :name, :_destroy]
 
   def index
-    @cities = City.all
+    @q = City.search(params[:q])
+    @cities = @q.result(distinct: true)
   end
 
   def new

@@ -92,6 +92,9 @@ gem 'amoeba'
 # Decorators
 gem 'draper', '~> 1.3'
 
+# Search
+gem 'ransack'
+
 
 
 group :development do

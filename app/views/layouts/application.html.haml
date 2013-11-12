@@ -21,9 +21,9 @@
           .content
             = render 'layouts/messages'
             - if content_for?(:sidebar)
-              .sidebar
+              .sidebar.span2.well
                 = yield(:sidebar)
-              .main-section
+              .main-section.span10
                 = yield
             - else
               = yield

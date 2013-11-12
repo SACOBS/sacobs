@@ -6,7 +6,8 @@ class DriversController < ApplicationController
   # GET /drivers
   # GET /drivers.json
   def index
-    @drivers = Driver.all
+    @q = Driver.search(params[:q])
+    @drivers = @q.result(distinct: true)
   end
 
 

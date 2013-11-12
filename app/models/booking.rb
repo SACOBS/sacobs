@@ -41,6 +41,12 @@ class Booking < ActiveRecord::Base
     self.status = 'reserved'
   end
 
+  def mark_as_paid
+    self.status = 'paid'
+    self.reference_no = SecureRandom.hex(4)
+    save
+  end
+
   def cancel
     self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
     self.status = 'cancelled'
@@ -51,6 +57,8 @@ class Booking < ActiveRecord::Base
   def defaults
     { status: 'processing' }
   end
+
+
 
   protected
   def set_expiry_date

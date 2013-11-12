@@ -1,7 +1,13 @@
 .page-header
   %h2 Clients
+.search.pull-right
+  = simple_form_for :q, url: clients_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
+    = f.input :name_or_surname_cont, placeholder: 'Search', input_html: {class: 'search-query'}
+    = f.submit 'Search', class: 'btn btn-primary'
 - bootstrap_table headers:['Name', 'Surname','Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @clients
 
-= link_to 'Setup Client', new_client_path, class: 'btn btn-primary', icon: iconize(:plus)
+= link_to 'Setup Client', new_client_path, class: 'btn btn-primary', icon: :plus
+= link_to 'Refresh', clients_path, class: 'btn btn-default', icon: :refresh
+
 

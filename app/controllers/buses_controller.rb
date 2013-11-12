@@ -2,7 +2,8 @@ class BusesController < ApplicationController
   before_action :set_bus, only: [:show, :destroy]
 
   def index
-    @buses = Bus.all
+    @q = Bus.search(params[:q])
+    @buses = @q.result(distinct: true)
   end
 
   def destroy

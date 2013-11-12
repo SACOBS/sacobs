@@ -2,7 +2,8 @@ class RoutesController < ApplicationController
   before_action :set_route, only: [:show, :destroy]
 
   def index
-    @routes = Route.all
+    @q = Route.search(params[:q])
+    @routes = @q.result(distinct: true)
   end
 
   def show

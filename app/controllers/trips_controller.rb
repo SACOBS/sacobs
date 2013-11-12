@@ -2,7 +2,8 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:copy, :show, :destroy]
 
   def index
-    @trips = Trip.all
+    @q = Trip.search(params[:q])
+    @trips = @q.result(distinct: true)
   end
 
   def show

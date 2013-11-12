@@ -1,8 +1,15 @@
 .page-header
   %h2 Trips
 
+.search.pull-right
+  = simple_form_for :q, url: trips_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
+    = f.input :name_cont, placeholder: 'Search', input_html: {class: 'search-query'}
+    = f.submit 'Search', class: 'btn btn-primary'
+
 - bootstrap_table headers:['Name', 'Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @trips
 
-= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: 'btn btn-primary', icon: 'fa fa-plus', method: :post
+= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: 'btn btn-primary', icon: :plus, method: :post
+= link_to 'Refresh', trips_path, class: 'btn btn-default', icon: :refresh
+
 

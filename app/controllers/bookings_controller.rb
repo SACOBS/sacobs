@@ -15,8 +15,7 @@ class BookingsController < ApplicationController
   end
 
   def mark_as_paid
-    @booking.status = 'paid'
-    @booking.save
+    @booking.mark_as_paid
     respond_with(@booking,location: bookings_url, notice: 'Booking was succesfully marked as paid')
   end
 
