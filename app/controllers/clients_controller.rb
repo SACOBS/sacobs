@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
   params_for :client, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]
 
   def index
-    @clients = Client.all
+    @clients = Client.all.decorate
   end
 
   def show

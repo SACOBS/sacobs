@@ -13,5 +13,4 @@ module LinkHelper
   def back_to(path)
    link_to 'Back', path, class: 'btn btn-primary', icon: :arrow_left
   end
-
 end

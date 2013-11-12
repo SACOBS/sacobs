@@ -31,7 +31,7 @@
           %td= seat.number
 .form-actions
   = link_to 'Back', buses_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
-  = link_to 'Edit', bus_builder_path(:details, bus_id: @bus), icon: iconize(:edit), class: 'btn btn-info'
+  = link_to 'Edit', bus_builder_path(:details, bus_id: @bus), icon: iconize(:edit), class: 'btn btn-inverse'
   = link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: 'Are you sure?' }, icon: iconize(:times), class: 'btn btn-danger'
 
 

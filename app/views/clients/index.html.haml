@@ -1,6 +1,6 @@
 .page-header
   %h2 Clients
-- bootstrap_table headers:['Name', 'Surname','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+- bootstrap_table headers:['Name', 'Surname','Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @clients
 
 = link_to 'Setup Client', new_client_path, class: 'btn btn-primary', icon: iconize(:plus)

@@ -17,6 +17,7 @@
 class Client < ActiveRecord::Base
   extend FriendlyId
 
+
   has_one :address, as: :addressable
   has_many :bookings, dependent: :destroy
 
