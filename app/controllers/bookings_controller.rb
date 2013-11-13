@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.decorate
+    @booking = @booking.decorate
   end
 
   def destroy

@@ -1,5 +1,11 @@
 class BookingDecorator < Draper::Decorator
   delegate_all
+  decorates_association :client
+  decorates_association :passengers
+
+  def reference
+    model.reference_no.presence || 'None'
+  end
 
   def client_name
     model.client.full_name.capitalize
@@ -30,6 +36,10 @@ class BookingDecorator < Draper::Decorator
   end
 
   def booking_date
-    l booking.created_at, format: :long
+    l model.created_at, format: :long
+  end
+
+  def price
+    h.number_to_currency(model.invoice.total, unit: 'R')
   end
 end

@@ -1,9 +1,8 @@
-class ClientDecorator < Draper::Decorator
+class PassengerDecorator < Draper::Decorator
   delegate_all
 
-  def telephone
-   return 'N/A' unless tel_no.present?
-   h.number_to_phone(tel_no, area_code: true)
+  def passenger_type
+    model.passenger_type.description.capitalize
   end
 
   def cellphone
@@ -14,9 +13,5 @@ class ClientDecorator < Draper::Decorator
   def email
     return 'N/A' unless model.email.present?
     h.mail_to(model.email)
-  end
-
-  def modifier
-    User.find(model.user_id)
   end
 end
