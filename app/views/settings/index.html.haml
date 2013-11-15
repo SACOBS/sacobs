@@ -1,13 +1,14 @@
 .page-header
   %h2 Settings
 
-= form_tag settings_path, method: :patch do
-  - @settings.each do |setting|
-    = fields_for 'settings[]', setting do |setting_field|
-      = setting_field.label :value, "#{setting.key.humanize}:"
-      = setting_field.text_field :value
-  .actions
-    = submit_tag 'Save', class: 'btn btn-default'
+- if @settings.any?
+  = form_tag settings_path, method: :patch do
+    - @settings.each do |setting|
+      = fields_for 'settings[]', setting do |setting_field|
+        = setting_field.label :value, "#{setting.key.humanize}:"
+        = setting_field.text_field :value
+    .actions
+      = submit_tag 'Save', class: 'btn btn-default'
 
 = link_to 'Add Setting', new_setting_path , class: 'btn btn-primary', icon: :plus
 
