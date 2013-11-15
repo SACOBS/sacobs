@@ -10,8 +10,6 @@ class Bookings::BuilderController < ApplicationController
              passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
              invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]]
 
-
-
   def new
     @trips = Trip.all
   end
@@ -22,7 +20,7 @@ class Bookings::BuilderController < ApplicationController
     if stops.empty? || stops.any? { |s| s.available_seats <  params[:trip][:seats].to_i }
       redirect_to new_booking_builder_path(booking_id: :start), alert: 'There are no available seats on the selected trip'
     else
-      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: stops)
+      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: stops, expiry_date: calculate_expiry_date)
       redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
     end
   end
@@ -40,7 +38,10 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    @booking.reserve and flash[:notice] = 'Booking has been made succesfully.' if steps.last
+    if steps.last
+      @booking.reserve
+      flash[:notice] = 'Booking has been made succesfully.'
+    end
     @booking.update(booking_params)
     render_wizard @booking
   end
@@ -59,6 +60,10 @@ class Bookings::BuilderController < ApplicationController
         default_passenger_type = PassengerType.find_by(description: :standard)
         @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname, passenger_type: default_passenger_type  }
       end
+    end
+
+    def calculate_expiry_date
+      Time.zone.now + (settings['booking_expiry_period'].to_i).hours
     end
 
     def user

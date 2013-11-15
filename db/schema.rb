@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112073654) do
+ActiveRecord::Schema.define(version: 20131115065204) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -207,6 +207,13 @@ ActiveRecord::Schema.define(version: 20131112073654) do
   end
 
   add_index "seats", ["bus_id"], name: "index_seats_on_bus_id"
+
+  create_table "settings", force: true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stops", force: true do |t|
     t.integer  "connection_id"

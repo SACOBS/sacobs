@@ -34,8 +34,6 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
 
 
-  before_create :set_expiry_date
-
   def reserve
     self.stops.each { |s| s.decrement(:available_seats, self.quantity) }
     self.status = 'reserved'
@@ -57,13 +55,4 @@ class Booking < ActiveRecord::Base
   def defaults
     { status: 'processing' }
   end
-
-
-
-  protected
-  def set_expiry_date
-    self.expiry_date = Time.zone.now + 24.hours
-  end
-
-
 end
