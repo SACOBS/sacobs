@@ -1,0 +1,9 @@
+#errors= errors_for @setting
+= simple_form_for @setting,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.input :key, label: 'Name'
+    = f.input :value
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', settings_path, class: 'btn btn-danger'
+
