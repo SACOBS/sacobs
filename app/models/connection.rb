@@ -31,7 +31,7 @@ class Connection < ActiveRecord::Base
 
   protected
   def calculate_connection_cost
-    self.cost = ((BigDecimal(self.percentage) / 100) * self.route.cost)
+    self.cost = (BigDecimal((BigDecimal(self.percentage) / 100) * self.route.cost) / 5.0).ceil * 5
   end
 
   def set_name

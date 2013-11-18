@@ -3,10 +3,9 @@ class Routes::BuilderController < ApplicationController
 
   before_action :set_route, only: [:show, :update, :destroy]
 
-  params_for :route, :start_city_id, :end_city_id, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance]
+  params_for :route, :start_city_id, :end_city_id, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance, :percentage]
 
   steps :details, :connections
-
 
   def create
     @route = Route.new {|r| r.save(validate: false)}
@@ -37,6 +36,6 @@ class Routes::BuilderController < ApplicationController
   end
 
   def set_route
-    @route =  Route.find(params[:route_id])
+    @route =  Route.friendly.find(params[:route_id])
   end
 end

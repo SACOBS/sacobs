@@ -95,6 +95,10 @@ gem 'draper', '~> 1.3'
 # Search
 gem 'ransack'
 
+# PDF
+gem 'wicked_pdf'
+gem "wkhtmltopdf-binary"
+
 
 
 group :development do

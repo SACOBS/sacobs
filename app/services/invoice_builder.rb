@@ -29,6 +29,6 @@ class InvoiceBuilder
 
     def calculate_discount(price, percentage)
       percentage = BigDecimal(percentage)
-      ((percentage / 100) * price).round(2)
+      BigDecimal(((percentage / 100) * price) / 5.0).ceil * 5
     end
 end
