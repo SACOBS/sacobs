@@ -16,10 +16,13 @@
 class Trip < ActiveRecord::Base
   include AttributesEmpty
 
+  has_many :journeys
+  has_many :bookings, through: :journeys
+
   belongs_to :bus
   belongs_to :route, -> { includes(:connections) }
   has_many :stops , dependent: :destroy
-  has_many :bookings, dependent: :destroy
+ # has_many :bookings, dependent: :destroy
   has_and_belongs_to_many :drivers
 
   amoeba { enable }

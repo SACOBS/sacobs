@@ -3,7 +3,7 @@ class Bookings::BuilderController < ApplicationController
 
   steps :client, :passengers, :billing
 
-  before_action :set_booking, only: [:destroy, :show, :update]
+  before_action :set_booking, only: [ :show, :update]
 
   params_for :booking, :trip_id, :price, :status, :quantity, :client_id,
              client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],

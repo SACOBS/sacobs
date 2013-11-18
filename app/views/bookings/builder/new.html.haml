@@ -1,6 +1,14 @@
 .page-header
   %h3 Select A Trip
 
+.finder
+  = simple_form_for :journey do |f|
+    = f.input :departure_date, as: :date_picker
+    = f.input :return_date, as: :date_picker
+    = f.input :qty
+    = f.input :return, as: :boolean
+    = f.submit
+
 
 - bootstrap_table headers:['Trips'], types: [:bordered] do
   - @trips.each do |trip|

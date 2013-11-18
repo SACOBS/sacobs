@@ -22,6 +22,11 @@ module Sacobs
 
     config.exceptions_app = self.routes
 
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += %w(pdf.css)
+    config.assets.precompile += %w(bookings\builder.js)
+
+
 
     config.generators do |g|
       g.test_framework :rspec,
