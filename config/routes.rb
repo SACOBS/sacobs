@@ -1,6 +1,8 @@
 Sacobs::Application.routes.draw do
 
 
+  get "voucher/new"
+  get "voucher/create"
   namespace :availability do
     get :new
     post :check
@@ -24,7 +26,9 @@ Sacobs::Application.routes.draw do
   end
 
 
-  resources :clients
+  resources :clients do
+    resources :vouchers, only: [:new, :create]
+  end
 
   resources :cities
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118101448) do
+ActiveRecord::Schema.define(version: 20131119131055) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -274,6 +274,15 @@ ActiveRecord::Schema.define(version: 20131118101448) do
   create_table "venues", force: true do |t|
     t.string   "name"
     t.integer  "city_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vouchers", force: true do |t|
+    t.string   "ref_no"
+    t.decimal  "amount"
+    t.boolean  "active",     default: true
+    t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

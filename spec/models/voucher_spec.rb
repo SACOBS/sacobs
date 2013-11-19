@@ -1,16 +1,18 @@
 # == Schema Information
 #
-# Table name: settings
+# Table name: vouchers
 #
 #  id         :integer          not null, primary key
-#  key        :string(255)
-#  value      :string(255)
+#  ref_no     :string(255)
+#  amount     :decimal(, )
+#  active     :boolean          default(TRUE)
+#  client_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 require 'spec_helper'
 
-describe Setting do
+describe Voucher do
   pending "add some examples to (or delete) #{__FILE__}"
 end

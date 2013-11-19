@@ -76,12 +76,9 @@ gem "cocoon"
 # Friendly Id
 gem 'friendly_id', '~> 5.0.0'
 
-
 # Caching
 gem 'dalli'
 gem 'memcachier'
-
-
 
 # Wizard
 gem 'wicked'
@@ -99,7 +96,8 @@ gem 'ransack'
 gem 'wicked_pdf'
 gem "wkhtmltopdf-binary"
 
-
+# Time Difference Calculations
+gem 'time_difference'
 
 group :development do
   gem "better_errors"

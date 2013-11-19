@@ -20,6 +20,7 @@ class Client < ActiveRecord::Base
 
   has_one :address, as: :addressable
   has_many :bookings, dependent: :destroy
+  has_many :vouchers, dependent: :destroy
 
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
