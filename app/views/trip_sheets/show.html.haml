@@ -17,18 +17,20 @@
 
 %hr
 %p.pull-left Bookings: 0861102426
+%p.pull-right Bookings: 0861102426
 %h4.text-center
   Bookings and Reservations
-%p.pull-left Bookings: 0861102426
 %hr
 
 - bootstrap_table headers:['Clients', 'From','To', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do
-  %tr
-    %td Jim
-    %td East London
-    %td Cape Town
-    %td 2
-    %td 043-2234555
+  - @trip.bookings.each do |booking|
+    - booking.passengers.each do |passenger|
+      %tr
+        %td= passenger.full_name
+        %td= booking.stops.first.from_city.name
+        %td= booking.stops.last.to_city.name
+        %td= 1
+        %td= passenger.cell_no
 
 %br
 = render partial: 'additional_info'

@@ -16,8 +16,8 @@
 class Trip < ActiveRecord::Base
   include AttributesEmpty
 
-  has_many :journeys
-  has_many :bookings, through: :journeys
+  #has_many :journeys
+  #has_many :bookings, through: :journeys
 
   belongs_to :bus
   belongs_to :route, -> { includes(:connections) }
