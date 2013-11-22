@@ -2,7 +2,7 @@ module Responders
   module PDFResponder
     def initialize(controller, resources, options={})
       super
-      @file_name = options.delete(:file_name).gsub(' ', '_')
+      @file_name = options.delete(:file_name)
     end
 
     def to_pdf
@@ -11,7 +11,7 @@ module Responders
 
     protected
     def file_name
-      @file_name ||= "#{Time.zone.now.to_i}"
+      (@file_name ||= "#{Time.zone.now.to_i}").gsub(' ', '_')
     end
   end
 end
