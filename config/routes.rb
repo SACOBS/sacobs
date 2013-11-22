@@ -1,8 +1,11 @@
 Sacobs::Application.routes.draw do
 
+  resources :trip_sheets, only: [:show] do
+   member do
+     get :print
+   end
+  end
 
-  get "voucher/new"
-  get "voucher/create"
   namespace :availability do
     get :new
     post :check

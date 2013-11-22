@@ -7,6 +7,7 @@
   %td= l trip.created_at
   %td
     = link_to 'Copy', copy_trip_path(trip), icon: iconize(:copy) ,class: 'btn btn-warning btn-mini', method: :post
+    = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: 'btn btn-default btn-mini'
     = link_to 'Show', trip, icon: iconize(:info), class: 'btn btn-info btn-mini'
     = link_to 'Edit', trip_builder_path(:details, trip_id: trip), icon: iconize(:edit),  class: 'btn btn-inverse btn-mini'
     = link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger', icon: iconize(:times)
