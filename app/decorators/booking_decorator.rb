@@ -23,8 +23,16 @@ class BookingDecorator < Draper::Decorator
     model.stops.first.from_city.name
   end
 
+  def from_venue
+    model.stops.first.from_city.venues.any? ? model.stops.first.from_city.venues.first.name : 'None'
+  end
+
   def to
-    model.stops.first.to_city.name
+    model.stops.last.to_city.name
+  end
+
+  def to_venue
+    model.stops.last.to_city.venues.any? ? model.stops.first.from_city.venues.first.name : 'None'
   end
 
   def number_of_stops

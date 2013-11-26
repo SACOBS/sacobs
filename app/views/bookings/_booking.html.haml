@@ -9,7 +9,8 @@
   %td= booking.status.capitalize
   %td= l booking.created_at, format: :long
   %td
-    = link_to 'Show', booking, icon: iconize(:info), class: 'btn btn-info btn-mini'
-    = link_to 'Mark As Paid', mark_as_paid_booking_path(booking), method: :patch, icon: iconize(:money), class: 'btn btn-mini btn-inverse' if booking.reserved?
-    = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: iconize(:warning), class: 'btn btn-mini btn-default btn-warning'
-    = link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger', icon: iconize(:times)
+    = link_to 'Show', booking, icon: :info, class: 'btn btn-info btn-mini'
+    = link_to 'Ticket', ticket_path(booking), class: 'btn btn-default'
+    = link_to 'Mark As Paid', mark_as_paid_booking_path(booking), method: :patch, icon: :money, class: 'btn btn-mini btn-inverse' if booking.reserved?
+    = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: 'btn btn-mini btn-default btn-warning'
+    = link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger', icon: :times

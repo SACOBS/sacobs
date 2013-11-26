@@ -57,3 +57,16 @@ body {
   margin-bottom: 2em;
 }
 
+.rounded{
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+}
+
+.ticket-details {
+  background-color: dodgerblue;
+  h3, h4{
+    color: whitesmoke;
+  }
+}
+

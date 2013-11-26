@@ -23,6 +23,11 @@ class Invoice < ActiveRecord::Base
     @total ||= self.line_items.sum(:nett_price).round(2)
   end
 
+  def total_discount
+    @total_discount ||= self.line_items.sum(:discount_amount).round(2)
+  end
+
+
   private
   def defaults
     { billing_date: Time.zone.now }

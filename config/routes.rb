@@ -1,5 +1,12 @@
 Sacobs::Application.routes.draw do
 
+
+  resources :tickets, only: [:show] do
+    member do
+      get :print
+    end
+  end
+
   resources :trip_sheets, only: [:show] do
    member do
      get :print

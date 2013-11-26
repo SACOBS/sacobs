@@ -1,0 +1,74 @@
+.page-header.text-center
+  %h1 SA CONNECTION
+
+.client.pull-left
+  %p
+    %strong Name:
+    = @booking.client_name
+  %p
+    %strong Tel No:
+    = @booking.client.telephone
+  %p
+    %strong Cell No:
+    = @booking.client.cellphone
+
+.details.pull-right
+  %p
+    %strong Reference No:
+    = @booking.reference_no
+  %p
+    %strong Today's Date:
+    = l Time.zone.now, format: :long
+%br
+%br
+
+.passengers
+  - bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure Time', 'Arrival Time'], types: [:bordered] do
+    - @booking.passengers.each do |passenger|
+      %tr
+        %td= @booking.trip.start_date
+        %td= passenger.full_name
+        %td= @booking.from
+        %td= @booking.from_venue
+        %td= @booking.to
+        %td= @booking.to_venue
+        %td= @booking.stops.first.depart || Time.current
+        %td= @booking.stops.first.arrive || Time.current
+
+%br
+
+.costs.pull-left
+  %p
+    %strong Amount:
+    = number_to_currency @booking.invoice.total, unit: 'R'
+  %p
+    %strong Discount:
+    = number_to_currency @booking.invoice.total_discount, unit: 'R'
+%br
+%br
+.special-instructions.text-center
+  %p
+    = simple_format("Please note that the arrival times could be affected by road, traffic or weather conditions.Baggage not to exceed 20kgs. EXTRA WEIGHT WILL BE CHARGED AT R5.00/Kg.")
+
+%br
+.scripture.text-center
+  %p
+    %strong Thought for today
+    = simple_format("<em>Do not remember the sins of my youth or my transgressions; According to Your loving kindness remember me, For Your goodness' sake, O LORD.</em>")
+
+%br
+%br
+.ticket-details.rounded.text-center.pull-left
+  %h4 Contact Details
+  %h4 Office: 043 722 0284
+  %h4 P.O. Box 7485, East London
+
+
+.ticket-details.rounded.text-center.pull-right
+  %h3 Bookings
+  %h3 086 110 2426
+
+
+
+
+

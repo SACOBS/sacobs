@@ -112,6 +112,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem "factory_girl_rails", "~> 4.2.1"
+  gem 'rails_db_info'
 end
 
 group :test do
