@@ -1,0 +1,36 @@
+.page-header.text-center
+  %h5.pull-left
+    %strong SA Connection
+  %h5.pull-right
+    %strong
+      = l(Time.zone.now)
+  %h2
+    = "TRIP SHEET FOR #{@trip.name}"
+%p.pull-left
+  %strong Drivers:
+  - @trip.drivers.each do |driver|
+    = driver.name
+%p.pull-right
+  %strong Bus:
+  = @trip.bus.name
+%br
+
+%hr
+%p.pull-left Bookings: 0861102426
+%p.pull-right Bookings: 0861102426
+%h4.text-center
+  Bookings and Reservations
+%hr
+
+- bootstrap_table headers:['Clients', 'From','To', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do
+  - @trip.bookings.each do |booking|
+    - booking.passengers.each do |passenger|
+      %tr
+        %td= passenger.full_name
+        %td= booking.stops.first.from_city.name
+        %td= booking.stops.last.to_city.name
+        %td= 1
+        %td= passenger.cell_no
+
+%br
+= render partial: 'additional_info'
