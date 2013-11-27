@@ -24,7 +24,7 @@ module Sacobs
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w(pdf.css)
-    config.assets.precompile += %w(bookings\builder.js)
+    config.assets.precompile += %w(builder.js)
 
 
 
