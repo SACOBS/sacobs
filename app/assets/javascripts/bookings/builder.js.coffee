@@ -1,14 +1,5 @@
 class BookingsBuilderController
   init: ->
-    $('.journey_return_date').hide()
-
-  new: ->
-    $(document).on 'click', 'input[name= "journey[return]"]', ->
-      if $(this).is(':checked')
-        $('.journey_return_date').show()
-      else
-        $('.journey_return_date').hide()
-        $('input[name="journey[return_date]"]').val('')
 
   show: ->
       $(document).on 'change', '.discount, .gross', ->
