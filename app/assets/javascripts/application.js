@@ -22,6 +22,7 @@
 //= require turbolinks
 //= require sacobs
 //= require initialize
+//= require bookings
 
 
 (function($, undefined_) {
