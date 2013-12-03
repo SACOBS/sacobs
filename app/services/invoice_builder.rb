@@ -37,8 +37,6 @@ class InvoiceBuilder
       if booking.client.vouchers.any?
         invoice.line_items.build do |line_item|
           line_item.description = 'Client Credit'
-          line_item.discount_percentage = 0
-          line_item.discount_amount = 0
           line_item.gross_price =  line_item.nett_price = booking.client.vouchers.sum(:amount) * -1
         end
         booking.client.vouchers.each { |v| v.update(active: false)}

@@ -16,12 +16,11 @@ class Bookings::BuilderController < ApplicationController
 
   def create
     trip = Trip.find(params[:trip][:id])
-    stops = trip.available_stops(params[:trip][:from], params[:trip][:to])
-    if stops.empty? || stops.any? { |s| s.available_seats <  params[:trip][:seats].to_i }
-      redirect_to new_booking_builder_path(booking_id: :start), alert: 'There are no available seats on the selected trip'
-    else
-      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: stops, expiry_date: calculate_expiry_date)
+    if trip.seats_available?(params[:trip][:from], params[:trip][:to], params[:trip][:seats].to_i)
+      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: trip.available_stops(params[:trip][:from], params[:trip][:to]), expiry_date: calculate_expiry_date)
       redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
+    else
+      redirect_to new_booking_builder_path(booking_id: :start), alert: 'There are no available seats on the selected trip'
     end
   end
 

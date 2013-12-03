@@ -14,5 +14,18 @@
 #
 
 class LineItem < ActiveRecord::Base
+  include AttributeDefaults
+
   belongs_to :invoice, touch: true
+
+
+  private
+    def defaults
+     {
+        discount_percentage: 0,
+        discount_amount: 0,
+        gross_price: 0,
+        nett_price: 0
+     }
+    end
 end

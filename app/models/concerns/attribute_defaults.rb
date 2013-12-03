@@ -12,6 +12,6 @@ module AttributeDefaults
 
   protected
   def set_default_attributes
-     defaults.each { |key, value| write_attribute(key, value) if read_attribute(key).nil? }
+     defaults.each { |key, value| write_attribute(key, value) unless read_attribute(key) }
   end
 end

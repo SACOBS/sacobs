@@ -46,4 +46,11 @@ class Trip < ActiveRecord::Base
     destination = self.stops.destination(to).first
     self.stops.en_route(departing, destination)
   end
+
+  def seats_available?(from, to, qty)
+    departing = self.stops.departing(from).first
+    destination = self.stops.destination(to).first
+    locations = self.stops.en_route(departing, destination)
+    true unless locations.empty? || locations.any? { |s| s.available_seats < qty }
+  end
  end

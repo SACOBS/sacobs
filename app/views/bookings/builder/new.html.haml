@@ -1,6 +1,17 @@
 .page-header
   %h3 Select A Trip
 
+
+-#= simple_form_for :booking, url: booking_builder_index_url  do |f|
+-#  = f.input :departure_date, as: :date_picker
+-#  = f.input :return_date, as: :date_picker
+-#  = f.input :from, collection: City.all, include_blank: false
+-#  = f.input :to, collection: City.all.order(id: :desc), include_blank: false
+-#  = f.input :quantity, as: :integer
+-#  = f.input :return, as: :boolean
+-#  = f.input :return_destination, collection: City.all
+-#  = f.submit 'Go'
+
 - bootstrap_table headers:['Trips'], types: [:bordered] do
   - @trips.each do |trip|
     %tr

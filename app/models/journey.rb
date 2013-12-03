@@ -18,6 +18,6 @@ class Journey < ActiveRecord::Base
 
   private
    def defaults
-     { return: false}
+     { return: false }
    end
 end
