@@ -18,7 +18,7 @@ class Seat < ActiveRecord::Base
   validates :row, :number, presence: true
 
   private
-  def defaults
-    {row: 'A-Z', number: 0}
-  end
+    def defaults
+      { row: 'A-Z', number: 0 }
+    end
 end

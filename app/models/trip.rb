@@ -16,9 +16,6 @@
 class Trip < ActiveRecord::Base
   include AttributesEmpty
 
-  #has_many :journeys
-  #has_many :bookings, through: :journeys
-
   belongs_to :bus
   belongs_to :route, -> { includes(:connections) }
   has_many :stops , dependent: :destroy
@@ -32,6 +29,8 @@ class Trip < ActiveRecord::Base
   delegate :name, to: :bus, prefix: true, allow_nil: true
 
   validates :name, :start_date, :end_date, :route, :bus, presence: true
+
+  scope :starting, -> (city) { joins(stops: {connection: :from_city}).where(cities: {id: city}) }
 
   def from
     stops.first.from_city
@@ -50,7 +49,9 @@ class Trip < ActiveRecord::Base
   def seats_available?(from, to, qty)
     departing = self.stops.departing(from).first
     destination = self.stops.destination(to).first
+
     locations = self.stops.en_route(departing, destination)
     true unless locations.empty? || locations.any? { |s| s.available_seats < qty }
   end
+
  end

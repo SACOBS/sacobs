@@ -101,7 +101,7 @@ gem 'time_difference'
 
 group :development do
   gem "better_errors"
-  gem 'annotate', '~> 2.5.0'
+  gem 'annotate'
   gem 'jazz_hands'
   gem 'quiet_assets'
 end

@@ -1,6 +1,5 @@
 class InvoiceBuilder
 
-  attr_reader :invoice, :booking
 
   def initialize(booking)
     @booking = booking

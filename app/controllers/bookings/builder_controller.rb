@@ -1,7 +1,7 @@
 class Bookings::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  steps :client, :passengers, :billing
+  steps :return, :client, :passengers, :billing
 
   before_action :set_booking, only: [ :show, :update]
 
@@ -15,10 +15,11 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def create
-    trip = Trip.find(params[:trip][:id])
+    trip = find_trip
     if trip.seats_available?(params[:trip][:from], params[:trip][:to], params[:trip][:seats].to_i)
-      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: trip.available_stops(params[:trip][:from], params[:trip][:to]), expiry_date: calculate_expiry_date)
-      redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
+      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: trip.available_stops(params[:trip][:from], params[:trip][:to]), expiry_date: calculate_expiry_date, return: false)
+      next_wizard_step = params[:trip][:return] ? :return : :client
+      redirect_to wizard_path(next_wizard_step, booking_id: booking)
     else
       redirect_to new_booking_builder_path(booking_id: :start), alert: 'There are no available seats on the selected trip'
     end
@@ -26,6 +27,8 @@ class Bookings::BuilderController < ApplicationController
 
   def show
     case step
+      when :return
+        @trips = Trip.starting @booking.trip.to
       when :client
         build_client
       when :passengers
@@ -37,11 +40,14 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    if steps.last
-      @booking.reserve
-      flash[:notice] = 'Booking has been made succesfully.'
+    case step
+      when :return
+        build_return
+      when :billing
+        reserve_booking(@booking)
+        reserve_booking(@booking.return_booking)
     end
-    @booking.update(booking_params)
+    @booking.update (booking_params)
     render_wizard @booking
   end
 
@@ -76,5 +82,19 @@ class Bookings::BuilderController < ApplicationController
 
     def set_booking
       @booking =  Booking.find(params[:booking_id])
+    end
+
+    def build_return
+      trip = find_trip
+      @booking.return_booking = trip.bookings.build(quantity: @booking.quantity, stops: trip.available_stops(params[:trip][:from], params[:trip][:to]), expiry_date: @booking.expiry_date, return: true) if trip.seats_available?(params[:trip][:from], params[:trip][:to], params[:trip][:seats].to_i)
+    end
+
+    def find_trip
+      Trip.find(params[:trip][:id])
+    end
+
+    def reserve_booking(booking)
+        booking.stops.each { |s| s.decrement(:available_seats, booking.quantity) }
+        booking.status = 'reserved'
     end
 end

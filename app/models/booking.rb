@@ -13,6 +13,8 @@
 #  client_id    :integer
 #  user_id      :integer
 #  reference_no :string(255)
+#  return_id    :integer
+#  return       :boolean
 #
 
 class Booking < ActiveRecord::Base
@@ -24,18 +26,16 @@ class Booking < ActiveRecord::Base
     scope status, -> { where(status: status ) }
   end
 
-  #has_many :journeys
-  #has_many :trips, through: :journeys
   belongs_to :trip, touch: true
   belongs_to :client, touch: true
   has_one :invoice
+  has_one :return_booking, class_name: 'Booking', foreign_key: 'return_id', autosave: true
   has_many :passengers, dependent: :destroy
   has_and_belongs_to_many :stops, autosave: true
 
   accepts_nested_attributes_for :client, reject_if: :all_blank
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
-
 
   def reserve
     self.stops.each { |s| s.decrement(:available_seats, self.quantity) }
