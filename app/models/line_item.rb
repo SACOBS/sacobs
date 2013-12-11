@@ -16,7 +16,7 @@
 class LineItem < ActiveRecord::Base
   include AttributeDefaults
 
-  belongs_to :invoice, touch: true
+  belongs_to :invoice
 
 
   private

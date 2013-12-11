@@ -26,8 +26,8 @@ class Booking < ActiveRecord::Base
     scope status, -> { where(status: status ) }
   end
 
-  belongs_to :trip, touch: true
-  belongs_to :client, touch: true
+  belongs_to :trip
+  belongs_to :client
   has_one :invoice
   has_one :return_booking, class_name: 'Booking', foreign_key: 'return_id', autosave: true
   has_many :passengers, dependent: :destroy
@@ -37,9 +37,12 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
 
+  before_destroy :open_seats
+
   def reserve
     self.stops.each { |s| s.decrement(:available_seats, self.quantity) }
     self.status = 'reserved'
+    save
   end
 
   def mark_as_paid
@@ -55,7 +58,12 @@ class Booking < ActiveRecord::Base
   end
 
   private
-  def defaults
-    { status: 'processing' }
-  end
+    def defaults
+      { status: 'processing' }
+    end
+
+  protected
+    def open_seats
+      self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
+    end
 end

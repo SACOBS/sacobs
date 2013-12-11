@@ -1,6 +1,9 @@
 Sacobs::Application.routes.draw do
 
 
+  resources :discounts, except: [:show]
+
+
   resources :tickets, only: [:show] do
     member do
       get :print
@@ -13,11 +16,6 @@ Sacobs::Application.routes.draw do
      get :print
      get :download
    end
-  end
-
-  namespace :availability do
-    get :new
-    post :check
   end
 
 

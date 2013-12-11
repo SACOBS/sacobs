@@ -1,0 +1,8 @@
+.page-header
+  %h2 Discounts
+- bootstrap_table headers:['Passenger Type', 'Percentage', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+  = render @discounts
+
+= link_to 'Setup Discount', new_discount_path, class: 'btn btn-primary',icon: :plus
+
+

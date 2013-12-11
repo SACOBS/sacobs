@@ -1,0 +1,13 @@
+.page-header
+  %h2 Edit Discount
+
+#errors= errors_for @discount
+= simple_form_for @discount,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.association :passenger_type, label_method: :description, include_blank: false, input_html: {rel: 'autocomplete'}
+    = f.input :percentage
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Cancel', discounts_path, class: 'btn'
+
+

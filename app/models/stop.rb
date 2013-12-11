@@ -14,7 +14,7 @@
 
 class Stop < ActiveRecord::Base
 
- belongs_to :trip, touch: true
+ belongs_to :trip
  belongs_to :connection
  has_and_belongs_to_many :bookings
 

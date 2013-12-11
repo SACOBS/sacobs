@@ -15,7 +15,7 @@
 #
 
 class Connection < ActiveRecord::Base
-  belongs_to :route, touch: true
+  belongs_to :route
   belongs_to :from_city, class_name: :City
   belongs_to :to_city, class_name: :City
 

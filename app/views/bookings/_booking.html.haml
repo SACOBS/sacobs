@@ -1,13 +1,13 @@
 %tr
-  %td= booking.client.full_name
-  %td= l booking.trip.start_date, format: :long
+  %td= booking.client_name
+  %td= booking.travel_date
   %td= booking.quantity
-  %td= booking.trip.name
-  %td= booking.stops.first.from_city.name
-  %td= booking.stops.last.to_city.name
-  %td= booking.stops.size
-  %td= booking.status.capitalize
-  %td= l booking.created_at, format: :long
+  %td= booking.trip_name
+  %td= booking.from
+  %td= booking.to
+  %td= booking.number_of_stops
+  %td= booking.status
+  %td= booking.booking_date
   %td
     = link_to 'Show', booking, icon: :info, class: 'btn btn-info btn-mini'
     = link_to 'Generate Ticket', ticket_path(booking),icon: :tasks, class: 'btn btn-default btn-mini'

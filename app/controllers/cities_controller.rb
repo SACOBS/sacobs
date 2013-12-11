@@ -29,12 +29,12 @@ class CitiesController < ApplicationController
 
 
   private
-  def set_city
-    @city = City.find(params[:id])
-  end
+    def set_city
+      @city = City.friendly.find(params[:id])
+    end
 
-  def user
-    { user_id: current_user.id }
-  end
+    def user
+      { user_id: current_user.id }
+    end
 
 end

@@ -8,15 +8,15 @@ class BookingDecorator < Draper::Decorator
   end
 
   def client_name
-    model.client.full_name.capitalize
+    model.client.full_name.capitalize if model.client
   end
 
   def travel_date
-    l booking.trip.start_date, format: :long
+    l booking.trip.start_date, format: :long if model.trip
   end
 
   def trip_name
-    model.trip.name
+    model.trip.name if model.trip
   end
 
   def from

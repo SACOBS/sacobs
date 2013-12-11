@@ -11,6 +11,8 @@
 class City < ActiveRecord::Base
   extend FriendlyId
 
+  default_scope -> { order(name: :asc) }
+
   friendly_id :name, use: :slugged
 
   has_many :venues, dependent: :destroy

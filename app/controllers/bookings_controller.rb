@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
 
   def index
     @q = Booking.includes(:trip, :client, :stops, :passengers).search(params[:q])
-    @bookings = @q.result(distinct: true)
+    @bookings = @q.result(distinct: true).decorate
   end
 
   def show

@@ -11,4 +11,6 @@
 
 class Discount < ActiveRecord::Base
   belongs_to :passenger_type
+
+  accepts_nested_attributes_for :passenger_type, reject_if: :all_blank, allow_destroy: true
 end

@@ -23,6 +23,4 @@ class Voucher < ActiveRecord::Base
    def generate_reference_no
      self.ref_no = SecureRandom.hex(4)
    end
-
-
 end

@@ -10,7 +10,7 @@
 #
 
 class Venue < ActiveRecord::Base
-  belongs_to :city, touch: true
+  belongs_to :city
 
   validates :name, :city, presence: true
 end

@@ -1,0 +1,9 @@
+%tr[discount]
+  %td= discount.passenger_type
+  %td= discount.percentage
+  %td
+    = link_to 'Edit', edit_discount_path(discount), icon: :edit, class: 'btn btn-inverse btn-mini'
+    = link_to 'Destroy', discount, icon: :times, data: { confirm: 'Are you sure you want to destroy this driver?'}, method: :delete, class: 'btn btn-danger btn-mini'
+
+
+

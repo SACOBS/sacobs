@@ -12,7 +12,7 @@
 class Invoice < ActiveRecord::Base
   include AttributeDefaults
 
-  belongs_to :booking, touch: true
+  belongs_to :booking
   has_many :line_items, dependent: :destroy
 
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
