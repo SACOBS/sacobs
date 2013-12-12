@@ -9,9 +9,7 @@ class TicketsController < ApplicationController
               disposition: :attachment)
   end
 
-  def show
-
-  end
+  def show;end
 
   def print
     respond_with @booking do |format|

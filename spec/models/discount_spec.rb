@@ -3,10 +3,11 @@
 # Table name: discounts
 #
 #  id                :integer          not null, primary key
-#  percentage        :integer
+#  percentage        :decimal(2, 5)
 #  passenger_type_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
+#  user_id           :integer
 #
 
 require 'spec_helper'

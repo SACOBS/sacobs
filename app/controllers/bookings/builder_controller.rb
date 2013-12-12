@@ -71,10 +71,6 @@ class Bookings::BuilderController < ApplicationController
       Time.zone.now + (settings['booking_expiry_period'].to_i).hours
     end
 
-    def user
-      { user_id: current_user.id }
-    end
-
     def build_invoice
       invoice = InvoiceBuilder.new(@booking).build
       invoice.save!

@@ -10,9 +10,15 @@
 #  slug       :string(255)
 #  user_id    :integer
 #
+# Indexes
+#
+#  index_drivers_on_slug  (slug) UNIQUE
+#
 
 class Driver < ActiveRecord::Base
   extend FriendlyId
+
+  belongs_to :user
   has_and_belongs_to_many :trips
 
   friendly_id :full_name, use: :slugged

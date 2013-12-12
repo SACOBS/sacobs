@@ -18,7 +18,6 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :invoice
 
-
   private
     def defaults
      {

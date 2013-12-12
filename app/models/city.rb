@@ -7,6 +7,10 @@
 #  slug    :string(255)
 #  user_id :integer
 #
+# Indexes
+#
+#  index_cities_on_slug  (slug) UNIQUE
+#
 
 class City < ActiveRecord::Base
   extend FriendlyId
@@ -14,6 +18,8 @@ class City < ActiveRecord::Base
   default_scope -> { order(name: :asc) }
 
   friendly_id :name, use: :slugged
+
+  belongs_to :user
 
   has_many :venues, dependent: :destroy
   accepts_nested_attributes_for :venues, reject_if: :all_blank, allow_destroy: true

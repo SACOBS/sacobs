@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
       root_path
     end
 
+    def user
+      { user: current_user }
+    end
+
   protected
     def devise_parameter_sanitizer
       UserSanitizer.new(User, :user, params)

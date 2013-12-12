@@ -32,9 +32,4 @@ class CitiesController < ApplicationController
     def set_city
       @city = City.friendly.find(params[:id])
     end
-
-    def user
-      { user_id: current_user.id }
-    end
-
 end

@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: clients
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  surname    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  tel_no     :string(255)
+#  cell_no    :string(255)
+#  email      :string(255)
+#  slug       :string(255)
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_clients_on_slug  (slug) UNIQUE
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

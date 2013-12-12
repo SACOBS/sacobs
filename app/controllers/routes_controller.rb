@@ -16,7 +16,7 @@ class RoutesController < ApplicationController
   end
 
   private
-  def set_route
-    @route = Route.includes(:connections, :start_city, :end_city).friendly.find(params[:id])
-  end
+    def set_route
+      @route = Route.includes(:connections, :start_city, :end_city).friendly.find(params[:id])
+    end
 end

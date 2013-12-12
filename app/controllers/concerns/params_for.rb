@@ -2,9 +2,9 @@ module ParamsFor
   extend ActiveSupport::Concern
 
   private
-  def user
-    {}
-  end
+    def user
+      {}
+    end
 
   module ClassMethods
     def params_for(model, *attributes)

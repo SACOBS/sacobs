@@ -16,6 +16,7 @@
 class Trip < ActiveRecord::Base
   include AttributesEmpty
 
+  belongs_to :user
   belongs_to :bus
   belongs_to :route, -> { includes(:connections) }
   has_many :stops , dependent: :destroy

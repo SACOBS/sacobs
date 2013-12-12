@@ -27,15 +27,12 @@ class Routes::BuilderController < ApplicationController
   end
 
   private
-  def finish_wizard_path
-    routes_url
-  end
+    def finish_wizard_path
+      routes_url
+    end
 
-  def user
-    { user_id: current_user.id }
-  end
 
-  def set_route
-    @route =  Route.friendly.find(params[:route_id])
-  end
+    def set_route
+      @route =  Route.friendly.find(params[:route_id])
+    end
 end

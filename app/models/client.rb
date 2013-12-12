@@ -13,11 +13,15 @@
 #  slug       :string(255)
 #  user_id    :integer
 #
+# Indexes
+#
+#  index_clients_on_slug  (slug) UNIQUE
+#
 
 class Client < ActiveRecord::Base
   extend FriendlyId
 
-
+  belongs_to :user
   has_one :address, as: :addressable
   has_many :bookings, dependent: :destroy
   has_many :vouchers, dependent: :destroy

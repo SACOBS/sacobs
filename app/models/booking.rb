@@ -26,6 +26,7 @@ class Booking < ActiveRecord::Base
     scope status, -> { where(status: status ) }
   end
 
+  belongs_to :user
   belongs_to :trip
   belongs_to :client
   has_one :invoice

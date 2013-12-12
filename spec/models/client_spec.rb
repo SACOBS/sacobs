@@ -13,6 +13,10 @@
 #  slug       :string(255)
 #  user_id    :integer
 #
+# Indexes
+#
+#  index_clients_on_slug  (slug) UNIQUE
+#
 
 require 'spec_helper'
 

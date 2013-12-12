@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: buses
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  capacity   :integer
+#  year       :string(255)
+#  model      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  user_id    :integer
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

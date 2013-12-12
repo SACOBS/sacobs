@@ -15,6 +15,7 @@
 class Bus < ActiveRecord::Base
   include AttributesEmpty
 
+  belongs_to :user
   has_many :seats, dependent: :destroy
 
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true

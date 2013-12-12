@@ -12,10 +12,10 @@ class TripDecorator < Draper::Decorator
   end
 
   def route
-    model.route.name
+    model.route.try(:name) || 'None'
   end
 
   def bus
-    model.bus.name
+    model.bus.try(:name) || 'None'
   end
 end

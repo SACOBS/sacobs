@@ -40,10 +40,6 @@ class ClientsController < ApplicationController
   end
 
   private
-    def user
-      { user_id: current_user.id }
-    end
-
     def set_client
       @client = Client.friendly.find(params[:id])
     end

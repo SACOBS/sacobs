@@ -13,6 +13,10 @@
 #  slug          :string(255)
 #  user_id       :integer
 #
+# Indexes
+#
+#  index_routes_on_slug  (slug) UNIQUE
+#
 
 class Route < ActiveRecord::Base
   include AttributesEmpty
@@ -21,6 +25,7 @@ class Route < ActiveRecord::Base
   friendly_id :name, use: :slugged
 
 
+  belongs_to :user
   belongs_to :start_city, class_name: :City
   belongs_to :end_city, class_name: :City
 

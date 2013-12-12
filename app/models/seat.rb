@@ -9,6 +9,10 @@
 #  created_at :datetime
 #  updated_at :datetime
 #
+# Indexes
+#
+#  index_seats_on_bus_id  (bus_id)
+#
 
 class Seat < ActiveRecord::Base
   include AttributeDefaults

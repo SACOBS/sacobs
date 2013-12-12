@@ -1,12 +1,11 @@
 class ContactsController < ApplicationController
   params_for :contact, :name, :email, :message, :nickname
 
-  def new
-    @contact = build_contact
-  end
+  before_action :build_contact
+
+  def new;end
 
   def create
-    @contact = build_contact
     if @contact.valid?
       ContactMailer.delay.contact_us(@contact)
       flash[:notice] = "Thank you for your message. We will get back to you as soon as possible."
@@ -18,7 +17,7 @@ class ContactsController < ApplicationController
   end
 
   private
-  def build_contact
-    Contact.new(contact_params)
-  end
+    def build_contact
+      @contact = Contact.new(contact_params)
+    end
 end

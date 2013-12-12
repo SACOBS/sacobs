@@ -17,6 +17,6 @@ class ClientDecorator < Draper::Decorator
   end
 
   def modifier
-    User.find(model.user_id) if model.user_id
+    model.try(:user)
   end
 end

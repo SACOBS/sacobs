@@ -12,7 +12,7 @@ class BusesController < ApplicationController
   end
 
   private
-  def set_bus
-   @bus = Bus.find(params[:id])
-  end
+   def set_bus
+    @bus = Bus.find(params[:id])
+   end
 end

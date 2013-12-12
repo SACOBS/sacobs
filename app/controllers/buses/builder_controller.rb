@@ -28,15 +28,11 @@ class Buses::BuilderController < ApplicationController
   end
 
   private
-  def finish_wizard_path
-    buses_url
-  end
+    def finish_wizard_path
+      buses_url
+    end
 
-  def user
-    { user_id: current_user.id }
-  end
-
-  def set_bus
-    @bus =  Bus.find(params[:bus_id])
-  end
+    def set_bus
+      @bus =  Bus.find(params[:bus_id])
+    end
 end
