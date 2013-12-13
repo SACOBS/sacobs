@@ -25,6 +25,12 @@ class Bookings::BuilderController < ApplicationController
     end
   end
 
+  def find_trips
+    start_date = Date.parse(params[:trip_search][:date])
+    route = Route.find(params[:trip_search][:route])
+    @trips = Trip.where(start_date: start_date, route: route )
+  end
+
   def show
     case step
       when :return

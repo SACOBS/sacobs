@@ -4,13 +4,7 @@ class TripSheetsController < ApplicationController
   def download
     html = render_to_string(template: 'trip_sheets/_trip_sheet.html.haml', layout: "pdf.html")
     pdf = WickedPdf.new.pdf_from_string(html)
-    send_data(pdf,
-              filename: generate_file_name,
-              disposition: :attachment)
-  end
-
-
-  def show
+    send_data(pdf,filename: generate_file_name,disposition: :attachment)
   end
 
   def print

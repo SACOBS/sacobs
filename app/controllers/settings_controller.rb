@@ -1,7 +1,5 @@
 class SettingsController < ApplicationController
 
-  params_for :setting, :key, :value
-
   def index
    @settings = Setting.all
   end

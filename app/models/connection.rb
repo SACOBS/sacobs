@@ -9,33 +9,33 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  route_id     :integer
-#  percentage   :integer
+#  percentage   :decimal(2, 5)
 #  cost         :decimal(8, 2)
 #  name         :string(255)
 #
 
 class Connection < ActiveRecord::Base
+  include AttributeDefaults
+
   belongs_to :route
   belongs_to :from_city, class_name: :City
   belongs_to :to_city, class_name: :City
 
+  validates :route,:from_city, :to_city, presence: true
 
-  validates :route,:from_city, :to_city, :distance, presence: true
-
-  before_save :calculate_connection_cost, :set_name
+  before_save :set_name
 
   delegate :name, to: :from_city, prefix: true
   delegate :name, to: :to_city, prefix: true
 
-  validates :from_city, :to_city, :distance, :route, presence: true
+  private
+   def defaults
+     { distance: 0, cost: 0, percentage: 0 }
+   end
 
   protected
-  def calculate_connection_cost
-    self.cost = (BigDecimal((BigDecimal(self.percentage) / 100) * self.route.cost) / 5.0).ceil * 5
-  end
-
-  def set_name
-    self.name = "#{self.from_city_name} to #{self.to_city_name}"
-  end
+    def set_name
+      self.name = "#{self.from_city_name} to #{self.to_city_name}"
+    end
 
 end

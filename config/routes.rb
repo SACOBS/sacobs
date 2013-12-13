@@ -26,7 +26,11 @@ Sacobs::Application.routes.draw do
       patch :mark_as_paid
       patch :cancel
     end
-    resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder'
+    resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder' do
+      collection do
+        get :find_trips
+      end
+    end
   end
 
   resources :settings, only: [:new, :create, :index] do

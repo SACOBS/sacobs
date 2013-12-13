@@ -12,7 +12,7 @@ class TripsController < ApplicationController
 
   def copy
     new_trip = @trip.amoeba_dup
-    new_trip.user_id = current_user.id
+    new_trip.user = current_user
     if new_trip.save
       redirect_to trip_builder_path(:details, trip_id: new_trip)
     else

@@ -3,9 +3,9 @@ class Routes::BuilderController < ApplicationController
 
   before_action :set_route, only: [:show, :update, :destroy]
 
-  params_for :route, :start_city_id, :end_city_id, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance, :percentage]
+  params_for :route, :start_city_id, :end_city_id, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance, :percentage], destinations_attributes: [:city_id, :order]
 
-  steps :details, :connections
+  steps :details, :destinations ,:connections
 
   def create
     @route = Route.new {|r| r.save(validate: false)}
@@ -13,6 +13,7 @@ class Routes::BuilderController < ApplicationController
   end
 
   def show
+    build_connections if step == :connections
     render_wizard
   end
 
@@ -31,8 +32,11 @@ class Routes::BuilderController < ApplicationController
       routes_url
     end
 
-
     def set_route
       @route =  Route.friendly.find(params[:route_id])
+    end
+
+    def build_connections
+      ConnectionBuilder.new(@route).tap {|builder| builder.build }
     end
 end

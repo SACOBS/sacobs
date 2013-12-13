@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212135251) do
+ActiveRecord::Schema.define(version: 20131213122001) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 20131212135251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "route_id"
-    t.integer  "percentage",   limit: 2
-    t.decimal  "cost",                   precision: 8, scale: 2
+    t.decimal  "percentage",   precision: 2, scale: 5
+    t.decimal  "cost",         precision: 8, scale: 2
     t.string   "name"
   end
 
@@ -103,6 +103,14 @@ ActiveRecord::Schema.define(version: 20131212135251) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "destinations", force: true do |t|
+    t.integer  "route_id"
+    t.integer  "city_id"
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "discounts", force: true do |t|
     t.decimal  "percentage",        precision: 2, scale: 5

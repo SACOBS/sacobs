@@ -9,7 +9,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  route_id     :integer
-#  percentage   :integer
+#  percentage   :decimal(2, 5)
 #  cost         :decimal(8, 2)
 #  name         :string(255)
 #

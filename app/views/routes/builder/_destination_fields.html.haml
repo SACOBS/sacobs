@@ -1,0 +1,4 @@
+%tr.nested-fields
+  %td= f.association :city, label: false, include_blank: false, prompt: 'Select City', input_html: {rel: 'autocomplete'}
+  %td= f.input :order, label: false
+  %td= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-mini'

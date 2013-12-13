@@ -1,0 +1,24 @@
+- if @trips
+  - bootstrap_table headers:['Trips'], types: [:bordered] do
+    - @trips.each do |trip|
+      %tr
+        %td
+          = simple_form_for :trip, namespace: trip.id ,url: booking_builder_index_url, wrapper: false, defaults: {label: false} do |f|
+            %table.table-bordered
+              - table_headers(['Name', 'Start', 'End', 'From', 'To', 'Qty', 'Return' , 'Actions'])
+              %tr
+                %td= trip.name
+                %td= l trip.start_date, format: :long
+                %td= l trip.end_date, format: :long
+                %td= f.input :from, collection: City.all, selected: trip.from.id
+                %td= f.input :to, collection: City.all, selected: trip.to.id
+                %td= f.input :seats, as: :integer
+                %td= f.input :return, as: :boolean
+                %td
+                  = f.hidden_field :id, value: trip.id
+                  = f.submit 'Go'
+- else
+  %p
+    %strong
+      No trips could be found
+
