@@ -4,6 +4,6 @@
   %td= bus.model
   %td= bus.capacity
   %td
-    = link_to 'Show', bus, icon: iconize(:info), class: 'btn btn-info btn-mini'
-    = link_to 'Edit', bus_builder_path(:details, bus_id: bus), icon: iconize(:edit), class: 'btn btn-inverse btn-mini'
-    = link_to 'Delete', bus, icon: iconize(:times), data: { confirm: 'Are you sure you want to delete this bus?'}, method: :delete, class: 'btn btn-danger btn-mini'
+    = link_to 'Show', bus, icon: :info, class: t('buttons.mini.info')
+    = link_to 'Edit', bus_builder_path(:details, bus_id: bus), icon: :edit, class: t('buttons.mini.inverse')
+    = link_to 'Delete', bus, icon: :times, data: { confirm: 'Are you sure you want to delete this bus?'}, method: :delete, class: t('buttons.mini.danger')

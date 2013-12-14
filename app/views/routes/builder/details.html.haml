@@ -13,5 +13,5 @@
       %span.add-on> Km
 
   .form-actions
-    = f.submit class: 'btn btn-primary'
-    = link_to 'Cancel', route_builder_path(route_id: @route), method: :delete ,class: 'btn'
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', route_builder_path(route_id: @route), method: :delete ,class: t('buttons.default')

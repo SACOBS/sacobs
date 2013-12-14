@@ -4,11 +4,11 @@
 .search.pull-right
   = simple_form_for :q, url: bookings_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
     = f.input :reference_no_or_status_or_trip_name_or_client_name_or_client_surname_or_passengers_name_or_passengers_surname_cont, placeholder: 'Search', input_html: { class: 'search-query' }
-    = f.submit 'Search', class: 'btn btn-primary'
+    = f.submit 'Search', class: t('buttons.primary')
 
 - bootstrap_table headers:['Client','Trip Date','Passengers','Trip','From','To','Total Stops','Status','Booking Date', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @bookings
 
-= link_to 'Make Booking', new_booking_builder_path(booking_id: :start), icon: :plus, class: 'btn btn-primary'
-= link_to 'Refresh', bookings_path, class: 'btn btn-default', icon: :refresh
+= link_to 'Make Booking', new_booking_builder_path(booking_id: :start), icon: :plus, class: t('buttons.primary')
+= link_to 'Refresh', bookings_path, class: t('buttons.default'), icon: :refresh
 

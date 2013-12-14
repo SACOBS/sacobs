@@ -1,6 +1,6 @@
 module BootstrapHelper
 
-  TABLE_CLASSES = { bordered: 'table-bordered', striped: 'table-striped', hover: 'table-hover', condensed: 'table-condensed' }
+  TABLE_CLASSES = { default: 'table', bordered: 'table-bordered', striped: 'table-striped', hover: 'table-hover', condensed: 'table-condensed' }
 
 
   def glyph(*names)
@@ -30,13 +30,7 @@ module BootstrapHelper
   end
 
   def table_classes(classes)
-    table_classes = %w(table)
-    classes.each do |c|
-      if TABLE_CLASSES.has_key?(c)
-       table_classes << TABLE_CLASSES[c]
-      end
-    end
-    table_classes
+    (classes.map { |item| TABLE_CLASSES[item] }).compact.push(TABLE_CLASSES[:default])
   end
 
   def table_headers(headers)

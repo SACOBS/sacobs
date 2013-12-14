@@ -7,7 +7,7 @@
     %fieldset
       = f.input :amount
     .form-actions
-      = f.submit class: 'btn btn-primary'
-      = link_to 'Cancel', @client, class: 'btn btn-default'
+      = f.submit class: t('buttons.primary')
+      = link_to 'Cancel', @client, class: t('buttons.default')
 
 

@@ -3,23 +3,23 @@
     %h3= @client.full_name
   .well
     %p
-      %strong= Client.human_attribute_name(:name) + ':'
+      %strong Name:
       %br
       = @client.name
     %p
-      %strong= Client.human_attribute_name(:surname) + ':'
+      %strong Surname:
       %br
       = @client.surname
     %p
-      %strong= Client.human_attribute_name(:tel_no) + ':'
+      %strong Telephone No:
       %br
       = @client.telephone
     %p
-      %strong= Client.human_attribute_name(:cell_no) + ':'
+      %strong Cellphone No:
       %br
       = @client.cellphone
     %p
-      %strong= Client.human_attribute_name(:email) + ':'
+      %strong Email:
       %br
       = @client.email
     %p
@@ -42,6 +42,6 @@
             %td= number_to_currency(voucher.amount, unit: 'R')
   .actions
     = back_to clients_path
-    = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: 'btn btn-warning'
-    = link_to 'Edit', edit_client_path(@client), icon: :edit, class: 'btn btn-inverse'
-    = link_to 'Destroy', @client, icon: :times, data: { confirm: 'Are you sure you want to destroy this client?'}, method: :delete, class: 'btn btn-danger'
+    = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.warning')
+    = link_to 'Edit', edit_client_path(@client), icon: :edit, class: t('buttons.inverse')
+    = link_to 'Destroy', @client, icon: :times, data: { confirm: 'Are you sure you want to destroy this client?'}, method: :delete, class: t('buttons.danger')

@@ -37,9 +37,9 @@
           %td= stop.arrive.presence || 'None'
           %td= stop.depart.presence || 'None'
 .form-actions
-  = link_to 'Back', trips_path, class: 'btn btn-primary', icon: iconize(:arrow_left)
-  = link_to 'Edit', trip_builder_path(:details, trip_id: @trip), icon: iconize(:edit), class: 'btn btn-info'
-  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure' },icon: iconize(:times) ,class: 'btn btn-danger'
+  = back_to trips_path
+  = link_to 'Edit', trip_builder_path(:details, trip_id: @trip), icon: :edit, class: t('buttons.info')
+  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure' },icon: :times ,class: t('buttons.danger')
 
 
 

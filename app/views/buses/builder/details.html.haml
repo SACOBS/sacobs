@@ -8,5 +8,5 @@
     = f.input :year
     = f.input :model
   .form-actions
-    = f.submit class: 'btn btn-primary'
-    = link_to 'Cancel', bus_builder_path(bus_id: @bus), method: :delete ,class: 'btn'
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', bus_builder_path(bus_id: @bus), method: :delete ,class: t('buttons.default')

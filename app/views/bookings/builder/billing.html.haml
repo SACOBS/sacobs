@@ -20,4 +20,4 @@
         %td.total
           %strong= number_to_currency(@booking.invoice.total, unit: 'R')
     .form-actions
-      = f.submit 'Complete', class: 'btn btn-primary'
+      = f.submit 'Complete', class: t('buttons.primary')

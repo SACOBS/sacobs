@@ -8,9 +8,9 @@
         = setting_field.label :value, "#{setting.key.humanize}:"
         = setting_field.text_field :value
     .actions
-      = submit_tag 'Save', class: 'btn btn-default'
+      = submit_tag 'Save', class: t('buttons.default')
 
-= link_to 'Add Setting', new_setting_path , class: 'btn btn-primary', icon: :plus
+= link_to 'Add Setting', new_setting_path , class: t('buttons.primary'), icon: :plus
 
 
 

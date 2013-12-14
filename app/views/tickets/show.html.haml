@@ -3,8 +3,8 @@
 %br
 %br
 .actions.text-center
-  = link_to 'Print', print_ticket_path(@booking, format: :pdf), class: 'btn btn-primary'
-  = link_to 'Download', download_ticket_path(@booking), class: 'btn btn-info'
+  = link_to 'Print', print_ticket_path(@booking, format: :pdf), class: t('buttons.primary')
+  = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info')
 
 
 

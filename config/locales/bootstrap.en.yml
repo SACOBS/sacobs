@@ -1,0 +1,23 @@
+en:
+  buttons:
+    default: 'btn btn-default'
+    danger: 'btn btn-danger'
+    info: 'btn btn-info'
+    inverse: 'btn btn-inverse'
+    primary: 'btn btn-primary'
+    warning: 'btn btn-warning'
+    mini:
+     default: 'btn btn-default btn-mini'
+     danger: 'btn btn-danger btn-mini'
+     info: 'btn btn-info btn-mini'
+     inverse: 'btn btn-inverse btn-mini'
+     primary: 'btn btn-primary btn-mini'
+     warning: 'btn btn-warning btn-mini'
+    large:
+     default: 'btn btn-default btn-large'
+     danger: 'btn btn-danger btn-large'
+     info: 'btn btn-info btn-large'
+     inverse: 'btn btn-inverse btn-large'
+     primary: 'btn btn-primary btn-large'
+     warning: 'btn btn-warning btn-large'
+

@@ -6,9 +6,9 @@
   %td= client.email
   %td= client.modifier
   %td
-    = link_to 'Show', client, icon: :info, class: 'btn btn-info btn-mini'
-    = link_to 'Edit', edit_client_path(client), icon: :edit, class: 'btn btn-inverse btn-mini'
-    = link_to 'Destroy', client, icon: :times, data: { confirm: 'Are you sure you want to destroy this client?'}, method: :delete, class: 'btn btn-danger btn-mini'
+    = link_to 'Show', client, icon: :info, class: t('buttons.mini.info')
+    = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.mini.inverse')
+    = link_to 'Destroy', client, icon: :times, data: { confirm: 'Are you sure you want to destroy this client?'}, method: :delete, class: t('buttons.mini.danger')
 
 
 

@@ -60,7 +60,7 @@ class Booking < ActiveRecord::Base
 
   private
     def defaults
-      { status: 'processing' }
+      { status: 'processing', return: false }
     end
 
   protected

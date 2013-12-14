@@ -3,12 +3,12 @@
 .search.pull-right
   = simple_form_for :q, url: drivers_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
     = f.input :name_or_surname_cont, placeholder: 'Search', input_html: {class: 'search-query'}
-    = f.submit 'Search', class: 'btn btn-primary'
+    = f.submit 'Search', class: t('buttons.primary')
 
 - bootstrap_table headers:['Name', 'Surname', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @drivers
 
-= link_to 'Setup Driver', new_driver_path, class: 'btn btn-primary',icon: :plus
-= link_to 'Refresh', drivers_path, class: 'btn btn-default', icon: :refresh
+= link_to 'Setup Driver', new_driver_path, class: t('buttons.primary'),icon: :plus
+= link_to 'Refresh', drivers_path, class: t('buttons.default'), icon: :refresh
 
 

@@ -10,5 +10,5 @@
     = f.simple_fields_for :address do |address|
       = render 'clients/address_fields', f: address
   .form-actions
-    = f.submit class: 'btn btn-primary'
-    = link_to 'Cancel', clients_path, class: 'btn'
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', clients_path, class: t('buttons.default')

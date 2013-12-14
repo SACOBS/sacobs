@@ -312,7 +312,7 @@ GEM
       coffee-rails
     twitter-bootstrap-rails-confirm (1.0.2)
     tzinfo (0.3.38)
-    uglifier (2.3.2)
+    uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
@@ -320,7 +320,7 @@ GEM
     websocket (1.0.7)
     wicked (1.0.2)
       rails (>= 3.0.7)
-    wicked_pdf (0.9.9)
+    wicked_pdf (0.9.10)
       rails
     wkhtmltopdf-binary (0.9.9.1)
     workless (1.2.3)

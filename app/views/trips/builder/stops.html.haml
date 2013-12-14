@@ -7,6 +7,7 @@
       = f.simple_fields_for :stops, wrapper: false do |stop|
         = render 'trips/builder/stop_fields', f: stop
   .form-actions
-    = f.submit class: 'btn btn-primary'
-    = link_to 'Cancel', trip_builder_path(trip_id: @trip), method: :delete ,class: 'btn'
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', trip_builder_path(trip_id: @trip), method: :delete ,class: t('buttons.default')
+
 

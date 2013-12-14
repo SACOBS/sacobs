@@ -3,10 +3,10 @@
 .search.pull-right
   = simple_form_for :q, url: cities_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
     = f.input :name_cont, placeholder: 'Search', input_html: {class: 'search-query'}
-    = f.submit 'Search', class: 'btn btn-primary'
+    = f.submit 'Search', class: t('buttons.primary')
 - bootstrap_table headers:['Name', 'Venues','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @cities
 
-= link_to 'Setup City', new_city_path, class: 'btn btn-primary', icon: :plus
-= link_to 'Refresh', cities_path, class: 'btn btn-default', icon: :refresh
+= link_to 'Setup City', new_city_path, class: t('buttons.primary'), icon: :plus
+= link_to 'Refresh', cities_path, class: t('buttons.default'), icon: :refresh
 

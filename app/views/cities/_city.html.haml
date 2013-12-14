@@ -2,6 +2,6 @@
   %td= link_to city.name, city
   %td= city.venues.size
   %td
-    = link_to 'View',city, icon: iconize(:info), class: 'btn btn-info btn-mini'
-    = link_to 'Edit', edit_city_path(city), icon: iconize(:edit), class: 'btn btn-mini btn-inverse'
-    = link_to 'Destroy', city, icon: 'fa-times', data: { confirm: 'Are you sure you want to destroy this city?'}, method: :delete, class: 'btn btn-mini btn-danger'
+    = link_to 'View',city, icon: :info, class: t('buttons.mini.info')
+    = link_to 'Edit', edit_city_path(city), icon: :edit, class: t('buttons.mini.inverse')
+    = link_to 'Destroy', city, icon: :times, data: { confirm: 'Are you sure you want to destroy this city?'}, method: :delete, class: t('buttons.mini.danger')

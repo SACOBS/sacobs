@@ -1,6 +1,6 @@
-= render :partial => 'trip_sheet'
+= render 'trip_sheets/trip_sheet'
 
 
 .actions.text-center
-  = link_to 'Print', print_trip_sheet_path(@trip, format: :pdf), class: 'btn btn-primary'
-  = link_to 'Download', download_trip_sheet_path(@trip), class: 'btn btn-info'
+  = link_to 'Print', print_trip_sheet_path(@trip, format: :pdf), class: t('buttons.primary')
+  = link_to 'Download', download_trip_sheet_path(@trip), class: t('buttons.info')
