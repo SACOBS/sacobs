@@ -1,11 +1,14 @@
 %tr.nested-fields
   %td= f.association :from_city, label: false, include_blank: false, prompt: 'Select From City', input_html: {rel: 'autocomplete'}
   %td= f.association :to_city, label: false, include_blank: false,  prompt: 'Select To City', input_html: {rel: 'autocomplete'}
-  %td= f.input :percentage, label: false, input_html: {class: 'input-mini'}
   %td
-    = f.input :cost, wrapper: :prepend, label: false ,input_html: {class: 'input-small'} do
+    = f.input :percentage, wrapper: :append,label: false do
+      = f.input_field :percentage,  class: 'input-mini'
+      %span.add-on> %
+  %td
+    = f.input :cost, wrapper: :prepend, label: false  do
       %span.add-on> R
-      = f.input_field :cost
+      = f.input_field :cost,  class: 'input-small'
   %td
     = f.input :distance, wrapper: :append, label: false do
       = f.input_field :distance,  class: 'input-small'

@@ -32,6 +32,8 @@ class Client < ActiveRecord::Base
 
   friendly_id :full_name, use: :slugged
 
+  validates :name, presence: true
+
   def full_name
     "#{self.name} #{self.surname}"
   end

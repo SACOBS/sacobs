@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
 
   def index
     @q = Route.search(params[:q])
-    @routes = @q.result(distinct: true)
+    @routes = @q.result(distinct: true).decorate
   end
 
   def show
@@ -17,6 +17,6 @@ class RoutesController < ApplicationController
 
   private
     def set_route
-      @route = Route.includes(:connections, :start_city, :end_city).friendly.find(params[:id])
+      @route = Route.includes(:connections, :destinations).friendly.find(params[:id])
     end
 end

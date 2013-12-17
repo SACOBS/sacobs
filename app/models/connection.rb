@@ -17,7 +17,7 @@
 class Connection < ActiveRecord::Base
   include AttributeDefaults
 
-  belongs_to :route
+  belongs_to :route, counter_cache: true
   belongs_to :from_city, class_name: :City
   belongs_to :to_city, class_name: :City
 

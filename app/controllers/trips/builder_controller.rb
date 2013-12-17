@@ -11,7 +11,7 @@ class Trips::BuilderController < ApplicationController
 
 
   def create
-    @trip = Trip.new {|r| r.save(validate: false)}
+    @trip = Trip.create
     redirect_to wizard_path(steps.first, trip_id: @trip)
   end
 

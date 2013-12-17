@@ -3,12 +3,12 @@ class Routes::BuilderController < ApplicationController
 
   before_action :set_route, only: [:show, :update, :destroy]
 
-  params_for :route, :start_city_id, :end_city_id, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance, :percentage], destinations_attributes: [:city_id, :order]
+  params_for :route, :name, :cost, :distance, connections_attributes: [:id, :_destroy, :from_city_id, :to_city_id, :distance, :percentage], destinations_attributes: [:city_id, :destination_order]
 
   steps :details, :destinations ,:connections
 
   def create
-    @route = Route.new {|r| r.save(validate: false)}
+    @route = Route.create
     redirect_to wizard_path(steps.first, route_id: @route)
   end
 

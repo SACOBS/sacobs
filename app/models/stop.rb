@@ -18,7 +18,6 @@ class Stop < ActiveRecord::Base
  belongs_to :connection
  has_and_belongs_to_many :bookings
 
-
  scope :departing, -> (from_city) { joins(connection: :from_city).where(cities: {id: from_city}) }
 
  scope :destination, -> (to_city) { joins(connection: :to_city).where(cities: {id: to_city}) }

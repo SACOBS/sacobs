@@ -29,7 +29,7 @@ class Trip < ActiveRecord::Base
 
   delegate :name, to: :bus, prefix: true, allow_nil: true
 
-  validates :name, :start_date, :end_date, :route, :bus, presence: true
+  validates :name, :start_date, :end_date, :route, :bus, presence: true, on: :update
 
   scope :starting, -> (city) { joins(stops: {connection: :from_city}).where(cities: {id: city}) }
 

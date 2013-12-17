@@ -13,7 +13,7 @@ class ConnectionBuilder
 
   private
    def generate_connections(current)
-     available_destinations = @destinations.dup.tap {|ad| ad.shift(current.order)}
+     available_destinations = @destinations.dup.tap {|ad| ad.shift(current.destination_order)}
      available_destinations.each { |destination|  @route.connections.create!(from_city: current.city, to_city: destination.city) }
    end
 

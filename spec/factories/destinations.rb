@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: destinations
+#
+#  id                :integer          not null, primary key
+#  route_id          :integer
+#  city_id           :integer
+#  destination_order :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

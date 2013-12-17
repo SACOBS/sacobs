@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217075853) do
+ActiveRecord::Schema.define(version: 20131217103143) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20131217075853) do
   create_table "destinations", force: true do |t|
     t.integer  "route_id"
     t.integer  "city_id"
-    t.integer  "order"
+    t.integer  "destination_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -196,15 +196,14 @@ ActiveRecord::Schema.define(version: 20131217075853) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "routes", force: true do |t|
-    t.integer  "start_city_id"
-    t.integer  "end_city_id"
-    t.decimal  "cost",          precision: 8, scale: 2
+    t.decimal  "cost",              precision: 8, scale: 2
     t.integer  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
     t.string   "slug"
     t.integer  "user_id"
+    t.integer  "connections_count",                         default: 0
   end
 
   add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true

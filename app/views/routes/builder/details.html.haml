@@ -3,8 +3,7 @@
 #errors= errors_for @route
 = simple_form_for @route, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
-    = f.association :start_city, include_blank: false, prompt: 'Select Start City', input_html: {rel: 'autocomplete'}
-    = f.association :end_city, include_blank: false ,prompt: 'Select End City', input_html: {rel: 'autocomplete'}
+    = f.input :name
     = f.input :cost, wrapper: :prepend do
       %span.add-on> R
       = f.input_field :cost

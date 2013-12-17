@@ -20,7 +20,7 @@ class Bus < ActiveRecord::Base
 
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, :capacity, :year, :model, presence: true
+  validates :name, :capacity, :year, :model, presence: true, on: :update
 
   before_update :build_seats
 

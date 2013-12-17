@@ -9,7 +9,7 @@ class Buses::BuilderController < ApplicationController
 
 
   def create
-    @bus = Bus.new {|b| b.save(validate: false)}
+    @bus = Bus.create
     redirect_to wizard_path(steps.first, bus_id: @bus)
   end
 
