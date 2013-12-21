@@ -1,4 +1,4 @@
-class AvailabilityService
+class SeatingService
   def initialize(trip, connection)
     @trip = trip
     @route = trip.route
@@ -23,7 +23,7 @@ class AvailabilityService
    def affected_stops
      destination = find_destination
      affected_destinations = find_affected_destinations(destination)
-     related_connections = find_related_connections(destinations)
+     related_connections = find_related_connections(affected_destinations)
      find_stops_by_connection(related_connections)
    end
 

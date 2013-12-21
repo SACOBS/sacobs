@@ -3,7 +3,7 @@ class TripsController < ApplicationController
 
   def index
     @q = Trip.search(params[:q])
-    @trips = @q.result(distinct: true)
+    @trips = @q.result(distinct: true).decorate
   end
 
   def show

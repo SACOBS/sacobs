@@ -15,4 +15,6 @@ class Destination < ActiveRecord::Base
   belongs_to :route
 
   validates :destination_order, :route, :city, presence: true
+
+  delegate :name, to: :city
 end

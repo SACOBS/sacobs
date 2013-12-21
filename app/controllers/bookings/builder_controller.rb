@@ -11,17 +11,17 @@ class Bookings::BuilderController < ApplicationController
              invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]]
 
   def new
-    @trips = Trip.all
+    @trips = Trip.all.decorate
   end
 
   def create
-    trip = find_trip
-    if trip.seats_available?(params[:trip][:from], params[:trip][:to], params[:trip][:seats].to_i)
-      booking = trip.bookings.create!(quantity: params[:trip][:seats].to_i, stops: trip.available_stops(params[:trip][:from], params[:trip][:to]), expiry_date: calculate_expiry_date, return: false)
-      next_wizard_step = params[:trip][:return] ? :return : :client
+    booking_service = BookingService.new(params[:trip])
+    if booking_service.seats_available?
+      booking =  booking_service.create_booking!
+      next_wizard_step = :client
       redirect_to wizard_path(next_wizard_step, booking_id: booking)
     else
-      redirect_to new_booking_builder_path(booking_id: :start), alert: 'There are no available seats on the selected trip'
+      redirect_to new_booking_builder_path(booking_id: :start), alert: "There are only #{booking_service.available_seats} available seats on the selected trip"
     end
   end
 
@@ -51,7 +51,6 @@ class Bookings::BuilderController < ApplicationController
         build_return
       when :billing
         reserve_booking(@booking)
-        reserve_booking(@booking.return_booking)
     end
     @booking.update (booking_params)
     render_wizard @booking
@@ -73,9 +72,6 @@ class Bookings::BuilderController < ApplicationController
       end
     end
 
-    def calculate_expiry_date
-      Time.zone.now + (settings['booking_expiry_period'].to_i).hours
-    end
 
     def build_invoice
       invoice = InvoiceBuilder.new(@booking).build
@@ -96,7 +92,9 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def reserve_booking(booking)
-        booking.stops.each { |s| s.decrement(:available_seats, booking.quantity) }
+        trip = booking.trip
+        connection = booking.stops.first.connection
+        SeatingService.new(trip, connection).decrement_seating(booking.quantity)
         booking.status = 'reserved'
     end
 end

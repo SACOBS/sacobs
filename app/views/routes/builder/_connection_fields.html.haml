@@ -1,6 +1,6 @@
 %tr.nested-fields
-  %td= f.association :from_city, label: false, include_blank: false, prompt: 'Select From City', input_html: {rel: 'autocomplete'}
-  %td= f.association :to_city, label: false, include_blank: false,  prompt: 'Select To City', input_html: {rel: 'autocomplete'}
+  %td= f.association :from_destination, label: false, include_blank: false, prompt: 'Select From Destination', input_html: {rel: 'autocomplete'}
+  %td= f.association :to_destination, label: false, include_blank: false,  prompt: 'Select To Destination', input_html: {rel: 'autocomplete'}
   %td
     = f.input :percentage, wrapper: :append,label: false do
       = f.input_field :percentage,  class: 'input-mini'

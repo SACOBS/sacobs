@@ -11,6 +11,10 @@ class TripDecorator < Draper::Decorator
    l(model.end_date, format: :long)
   end
 
+  def connections
+    stops.map { |s| s.connection }
+  end
+
   def route
     model.route.try(:name) || 'None'
   end
@@ -18,4 +22,9 @@ class TripDecorator < Draper::Decorator
   def bus
     model.bus.try(:name) || 'None'
   end
+
+  def created_at
+    l(model.created_at, format: :long)
+  end
+
 end

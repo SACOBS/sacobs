@@ -7,18 +7,18 @@ class InvoiceBuilder
   end
 
   def build
-    price = BigDecimal(booking.stops.cost)
-    booking.passengers.each do |passenger|
+    price = BigDecimal(@booking.stops.cost)
+    @booking.passengers.each do |passenger|
       build_line_item(price, passenger )
     end
     build_client_credit
-    invoice
+    @invoice
   end
 
   private
     def build_line_item(price, passenger)
      discount = Discount.find_by(passenger_type: passenger.passenger_type)
-     invoice.line_items.build do |line_item|
+     @invoice.line_items.build do |line_item|
        line_item.description = passenger.full_name
        line_item.discount_percentage = discount.percentage
        line_item.discount_amount = calculate_discount(price, discount.percentage)
@@ -33,12 +33,12 @@ class InvoiceBuilder
     end
 
     def build_client_credit
-      if booking.client.vouchers.any?
-        invoice.line_items.build do |line_item|
+      if @booking.client.vouchers.any?
+        @invoice.line_items.build do |line_item|
           line_item.description = 'Client Credit'
-          line_item.gross_price =  line_item.nett_price = booking.client.vouchers.sum(:amount) * -1
+          line_item.gross_price =  line_item.nett_price = @booking.client.vouchers.sum(:amount) * -1
         end
-        booking.client.vouchers.each { |v| v.update(active: false)}
+        @booking.client.vouchers.each { |v| v.update(active: false)}
       end
     end
 end

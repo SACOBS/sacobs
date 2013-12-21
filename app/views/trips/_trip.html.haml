@@ -1,10 +1,10 @@
 %tr
   %td=link_to trip.name, trip_path(trip)
-  %td= l trip.start_date, format: :long if trip.start_date.present?
-  %td= l trip.end_date, format: :long if trip.end_date.present?
-  %td= trip.route.name.presence
-  %td= trip.bus_name.presence
-  %td= l trip.created_at
+  %td= trip.start_date
+  %td= trip.end_date
+  %td= trip.route
+  %td= trip.bus
+  %td= trip.created_at
   %td
     = link_to 'Copy', copy_trip_path(trip), icon: :copy ,class: t('buttons.mini.warning'), method: :post
     = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: t('buttons.mini.default')

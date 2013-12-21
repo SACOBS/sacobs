@@ -18,15 +18,13 @@ class Connection < ActiveRecord::Base
   include AttributeDefaults
 
   belongs_to :route, counter_cache: true
-  belongs_to :from_city, class_name: :City
-  belongs_to :to_city, class_name: :City
+  belongs_to :from_destination, class_name: :Destination
+  belongs_to :to_destination, class_name: :Destination
 
-  validates :route,:from_city, :to_city, presence: true
+  validates :route, :from_destination, :to_destination, presence: true
 
   before_save :set_name
 
-  delegate :name, to: :from_city, prefix: true
-  delegate :name, to: :to_city, prefix: true
 
   private
    def defaults
@@ -35,7 +33,7 @@ class Connection < ActiveRecord::Base
 
   protected
     def set_name
-      self.name = "#{self.from_city_name} to #{self.to_city_name}"
+      self.name = "#{self.from_destination.name} to #{self.to_destination.name}"
     end
 
 end

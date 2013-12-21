@@ -10,6 +10,7 @@ class RoutesController < ApplicationController
     @route = @route.decorate
   end
 
+
   def destroy
     @route.destroy
     respond_with(@route, location: routes_url)

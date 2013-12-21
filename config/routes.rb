@@ -1,8 +1,6 @@
 Sacobs::Application.routes.draw do
 
-
   resources :discounts, except: [:show]
-
 
   resources :tickets, only: [:show] do
     member do
