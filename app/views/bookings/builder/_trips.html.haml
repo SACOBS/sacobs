@@ -5,17 +5,17 @@
         %td
           = simple_form_for :trip, namespace: trip.id ,url: booking_builder_index_url, wrapper: false, defaults: {label: false} do |f|
             %table.table-bordered
-              - table_headers(['Name', 'Start', 'End', 'Connection', 'Qty', 'Return' , 'Actions'])
+              - table_headers(['Name', 'Start', 'End', 'Connection', 'Qty', 'Return'])
               %tr
                 %td= trip.name
                 %td= trip.start_date
                 %td= trip.end_date
-                %td= f.input :connection, collection: trip.connections, include_blank: false
+                %td= f.input :stop, collection: trip.stops, label_method: :name, include_blank: false, input_html: {rel: 'autocomplete'}
                 %td= f.input :seats, as: :integer
                 %td= f.input :return, as: :boolean
                 %td
                   = f.hidden_field :id, value: trip.id
-                  = f.submit 'Go'
+                  = f.submit 'Book this trip'
 - else
   %p
     %strong

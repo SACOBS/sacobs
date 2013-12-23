@@ -26,7 +26,8 @@ class Stop < ActiveRecord::Base
 
  scope :cost, -> { includes(:connection).sum('connections.cost')}
 
- delegate :from_city, :to_city, to: :connection
+ delegate :name, :from_destination, :to_destination, to: :connection
+
 
 
 end

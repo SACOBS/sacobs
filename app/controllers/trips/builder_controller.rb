@@ -7,9 +7,6 @@ class Trips::BuilderController < ApplicationController
 
   steps :details, :stops
 
-
-
-
   def create
     @trip = Trip.create
     redirect_to wizard_path(steps.first, trip_id: @trip)

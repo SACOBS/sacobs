@@ -20,19 +20,19 @@ class BookingDecorator < Draper::Decorator
   end
 
   def from
-    model.stops.first.from_city.name
+    model.stops.first.from_destination.name
   end
 
   def from_venue
-    model.stops.first.from_city.venues.any? ? model.stops.first.from_city.venues.first.name : 'None'
+    model.stops.first.from_destination.city.venues.any? ? model.stops.first.from_destination.city.venues.first.name : 'None'
   end
 
   def to
-    model.stops.last.to_city.name
+    model.stops.last.from_destination.name
   end
 
   def to_venue
-    model.stops.last.to_city.venues.any? ? model.stops.first.from_city.venues.first.name : 'None'
+    model.stops.last.to_destination.city.venues.any? ? model.stops.first.to_destination.city.venues.first.name : 'None'
   end
 
   def number_of_stops
@@ -49,5 +49,14 @@ class BookingDecorator < Draper::Decorator
 
   def price
     h.number_to_currency(model.invoice.total, unit: 'R')
+  end
+
+  def row_class
+    case model.status
+      when 'paid'
+        'success'
+      else
+        'error'
+    end
   end
 end
