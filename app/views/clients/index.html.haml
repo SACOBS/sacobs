@@ -2,7 +2,7 @@
   %h2 Clients
 .search.pull-right
   = simple_form_for :q, url: clients_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
-    = f.input :name_or_surname_cont, placeholder: 'Search', input_html: {class: 'search-query'}
+    = f.input :name_or_surname_or_email_or_cell_no_cont, placeholder: 'Search', input_html: {class: 'search-query'}
     = f.submit 'Search', class: t('buttons.primary')
 - bootstrap_table headers:['Name', 'Surname','Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @clients

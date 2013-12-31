@@ -11,7 +11,7 @@
     = f.association :bus, include_blank: false, prompt: 'Select Bus', input_html: {rel: 'autocomplete'}
     = f.association :drivers, as: :check_boxes
   .form-actions
-    = f.submit class: t('buttons.primary')
+    = f.submit 'Next', class: t('buttons.primary')
     = link_to 'Cancel', trip_builder_path(trip_id: @trip), method: :delete ,class: t('buttons.default')
 
 

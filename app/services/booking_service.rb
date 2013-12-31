@@ -6,7 +6,7 @@ class BookingService
   end
 
   def create_booking!
-   @trip.bookings.create!(quantity: @quantity, stops: [@stop], expiry_date: booking_expiry, return: false)
+   @trip.bookings.create!(quantity: @quantity, stops: [@stop], expiry_date: booking_expiry)
   end
 
   def available_seats

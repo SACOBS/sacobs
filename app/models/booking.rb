@@ -30,7 +30,6 @@ class Booking < ActiveRecord::Base
   belongs_to :trip
   belongs_to :client
   has_one :invoice
-  has_one :return_booking, class_name: 'Booking', foreign_key: 'return_id', autosave: true
   has_many :passengers, dependent: :destroy
   has_and_belongs_to_many :stops, autosave: true
 
@@ -58,9 +57,13 @@ class Booking < ActiveRecord::Base
     save
   end
 
+  def expired?
+    self.expiry_date <= Time.zone.now
+  end
+
   private
     def defaults
-      { status: 'processing', return: false }
+      { status: 'processing' }
     end
 
   protected

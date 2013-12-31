@@ -6,7 +6,7 @@
     = f.input :reference_no_or_status_or_trip_name_or_client_name_or_client_surname_or_passengers_name_or_passengers_surname_cont, placeholder: 'Search', input_html: { class: 'search-query' }
     = f.submit 'Search', class: t('buttons.primary')
 
-- bootstrap_table headers:['Client','Trip Date','Passengers','Trip','From','To','Total Stops','Status','Booking Date', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+- bootstrap_table headers:['Client','Trip Date','Qty','Trip','From','To','Status','Booking Date', 'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @bookings
 
 = link_to 'Make Booking', new_booking_builder_path(booking_id: :start), icon: :plus, class: t('buttons.primary')

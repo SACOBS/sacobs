@@ -1,7 +1,7 @@
 class Bookings::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  steps :return, :client, :passengers, :billing
+  steps :client, :passengers, :billing
 
   before_action :set_booking, only: [ :show, :update]
 
@@ -18,8 +18,7 @@ class Bookings::BuilderController < ApplicationController
     booking_service = BookingService.new(params[:trip])
     if booking_service.seats_available?
       booking =  booking_service.create_booking!
-      next_wizard_step = :client
-      redirect_to wizard_path(next_wizard_step, booking_id: booking)
+      redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
     else
       redirect_to new_booking_builder_path(booking_id: :start), alert: "There are only #{booking_service.available_seats} available seats on the selected trip"
     end
@@ -33,25 +32,19 @@ class Bookings::BuilderController < ApplicationController
 
   def show
     case step
-      when :return
-        @trips = Trip.starting @booking.trip.to
       when :client
         build_client
       when :passengers
         build_passengers
       when :billing
         build_invoice
+      else
     end
     render_wizard
   end
 
   def update
-    case step
-      when :return
-        build_return
-      when :billing
-        reserve_booking(@booking)
-    end
+    reserve_booking(@booking) if step == :billing
     @booking.update (booking_params)
     render_wizard @booking
   end
@@ -80,11 +73,6 @@ class Bookings::BuilderController < ApplicationController
 
     def set_booking
       @booking =  Booking.find(params[:booking_id])
-    end
-
-    def build_return
-      trip = find_trip
-      @booking.return_booking = trip.bookings.build(quantity: @booking.quantity, stops: trip.available_stops(params[:trip][:from], params[:trip][:to]), expiry_date: @booking.expiry_date, return: true) if trip.seats_available?(params[:trip][:from], params[:trip][:to], params[:trip][:seats].to_i)
     end
 
     def find_trip

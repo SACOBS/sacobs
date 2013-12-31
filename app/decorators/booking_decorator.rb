@@ -35,16 +35,16 @@ class BookingDecorator < Draper::Decorator
     model.stops.last.to_destination.city.venues.any? ? model.stops.first.to_destination.city.venues.first.name : 'None'
   end
 
-  def number_of_stops
-    model.stops.size
-  end
-
   def status
     model.status.capitalize
   end
 
   def booking_date
-    l model.created_at, format: :long
+    l model.created_at
+  end
+
+  def expiry_date
+    l model.expiry_date
   end
 
   def price
@@ -52,11 +52,6 @@ class BookingDecorator < Draper::Decorator
   end
 
   def row_class
-    case model.status
-      when 'paid'
-        'success'
-      else
-        'error'
-    end
+    'warning' if model.expired?
   end
 end

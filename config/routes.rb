@@ -5,6 +5,7 @@ Sacobs::Application.routes.draw do
   resources :tickets, only: [:show] do
     member do
       get :print
+      post :email
       get :download
     end
   end
@@ -15,7 +16,6 @@ Sacobs::Application.routes.draw do
      get :download
    end
   end
-
 
   devise_for :users
 
