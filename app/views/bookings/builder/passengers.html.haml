@@ -12,4 +12,4 @@
           %td= passenger.input :email
           %td= passenger.association :passenger_type, collection: PassengerType.all, include_blank: false, label_method: :description
   .form-actions
-    = f.submit class: t('buttons.primary')
+    = f.submit 'Next', class: t('buttons.primary')

@@ -32,8 +32,8 @@
     - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
       - @trip.stops.each do |stop|
         %tr
-          %td= stop.connection.from_city_name
-          %td= stop.connection.to_city_name
+          %td= stop.connection.from_destination.name
+          %td= stop.connection.to_destination.name
           %td= stop.arrive.presence || 'None'
           %td= stop.depart.presence || 'None'
 .form-actions

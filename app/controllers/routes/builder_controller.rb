@@ -3,7 +3,7 @@ class Routes::BuilderController < ApplicationController
 
   before_action :set_route, only: [:show, :update, :destroy]
 
-  params_for :route, :name, :cost, :distance, connections_attributes: [:id, :_destroy, :from_destination_id, :to_destination_id, :distance, :percentage], destinations_attributes: [:city_id, :destination_order]
+  params_for :route, :name, :cost, :distance, connections_attributes: [:id, :_destroy, :from_destination_id, :to_destination_id, :distance, :percentage, :cost], destinations_attributes: [:city_id, :destination_order]
 
   steps :details, :destinations ,:connections
 
