@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
   end
 
   def email
-    TicketMailer.send_ticket(@booking).deliver
+    TicketMailer.delay.send_ticket(@booking)
     respond_with @booking, location: ticket_url(@booking), notice: 'Ticket has been emailed successfully'
   end
 

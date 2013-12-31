@@ -4,6 +4,6 @@ class TicketMailer < ActionMailer::Base
 
   def send_ticket(booking)
     @booking = booking
-    mail to: 'paul@searleconsulting.co.za', subject: 'Your Ticket'
+    mail to: booking.client.email, subject: 'Your Ticket'
   end
 end
