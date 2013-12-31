@@ -27,13 +27,12 @@ class SeatingService
      find_stops_by_connection(related_connections)
    end
 
-
    def find_affected_destinations(destination)
-     @route.destinations.preceding(destination.destination_order)
+     @route.destinations.preceding(destination.destination_order).pluck(:id)
    end
 
    def find_related_connections(destinations)
-     @route.connections.where(from_destination_id: destinations)
+     @route.connections.where(from_destination_id: destinations).pluck(:id)
    end
 
    def find_stops_by_connection(connections)
