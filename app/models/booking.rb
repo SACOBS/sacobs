@@ -13,8 +13,6 @@
 #  client_id    :integer
 #  user_id      :integer
 #  reference_no :string(255)
-#  return_id    :integer
-#  return       :boolean
 #
 
 class Booking < ActiveRecord::Base
@@ -40,7 +38,6 @@ class Booking < ActiveRecord::Base
   before_destroy :open_seats
 
   def reserve
-    self.stops.each { |s| s.decrement(:available_seats, self.quantity) }
     self.status = 'reserved'
     save
   end
@@ -52,7 +49,6 @@ class Booking < ActiveRecord::Base
   end
 
   def cancel
-    self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
     self.status = 'cancelled'
     save
   end

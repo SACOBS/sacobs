@@ -13,8 +13,6 @@
 #  client_id    :integer
 #  user_id      :integer
 #  reference_no :string(255)
-#  return_id    :integer
-#  return       :boolean
 #
 
 require 'spec_helper'

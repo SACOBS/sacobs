@@ -11,6 +11,7 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    SeatingService.new(@booking.trip, @booking.stop.connection).increment_seating(@booking.quantity)
     @booking.destroy
     respond_with(@booking)
   end
@@ -21,6 +22,7 @@ class BookingsController < ApplicationController
   end
 
   def cancel
+    SeatingService.new(@booking.trip, @booking.stop.connection).increment_seating(@booking.quantity)
     @booking.cancel
     respond_with(@booking, location: bookings_url, notice: 'Booking was succesfully cancelled')
   end

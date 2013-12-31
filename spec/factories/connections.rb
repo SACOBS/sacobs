@@ -2,16 +2,16 @@
 #
 # Table name: connections
 #
-#  id           :integer          not null, primary key
-#  from_city_id :integer
-#  to_city_id   :integer
-#  distance     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  route_id     :integer
-#  percentage   :decimal(2, 5)
-#  cost         :decimal(8, 2)
-#  name         :string(255)
+#  id                  :integer          not null, primary key
+#  distance            :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#  route_id            :integer
+#  percentage          :decimal(2, 5)
+#  cost                :decimal(8, 2)
+#  name                :string(255)
+#  from_destination_id :integer
+#  to_destination_id   :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
