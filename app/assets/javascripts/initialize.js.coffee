@@ -9,3 +9,8 @@ $ ->
       width: 'element',
       placeholder: $(this).data('default')
     });
+
+  $(document).on 'hidden', '#client_contact_detail', ->
+    $(this).remove()
+
+
