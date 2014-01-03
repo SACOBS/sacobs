@@ -46,15 +46,16 @@
   = number_to_currency @booking.invoice.total_discount, unit: 'R'
 %br
 %br
+%br
 .special-instructions.text-center
   %p
-    = simple_format("Please note that the arrival times could be affected by road, traffic or weather conditions.Baggage not to exceed 20kgs. EXTRA WEIGHT WILL BE CHARGED AT R5.00/Kg.")
+    %em= simple_format("Please note that the arrival times could be affected by road, traffic or weather conditions.Baggage not to exceed 20kgs. EXTRA WEIGHT WILL BE CHARGED AT R5.00/Kg.")
 %br
 %br
 .scripture.text-center
   %p
   %strong Thought for today
-  = simple_format("<em>#{ScriptureService.fetch}</em>")
+  %em= simple_format("#{ScriptureService.fetch}")
 
 %br
 %br
