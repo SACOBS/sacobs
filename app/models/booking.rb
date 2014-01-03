@@ -44,7 +44,6 @@ class Booking < ActiveRecord::Base
 
   def mark_as_paid
     self.status = 'paid'
-    self.reference_no = SecureRandom.hex(4)
     save
   end
 

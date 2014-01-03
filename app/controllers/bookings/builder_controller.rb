@@ -84,5 +84,10 @@ class Bookings::BuilderController < ApplicationController
         connection = booking.stops.first.connection
         SeatingService.new(trip, connection).decrement_seating(booking.quantity)
         booking.status = 'reserved'
+        booking.reference_no = generate_ref_no(booking)
+    end
+
+    def generate_ref_no(booking)
+      "#{booking.created_at.strftime('%Y%m%d')} #{booking.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "")
     end
 end
