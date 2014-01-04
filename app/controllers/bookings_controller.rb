@@ -11,19 +11,19 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    SeatingService.new(@booking.trip, @booking.stops.first.connection).increment_seating(@booking.quantity)
+    AssignSeating.new(@booking.trip, @booking.stops.first.connection).increment_seating(@booking.quantity)
     @booking.destroy
     respond_with(@booking)
   end
 
   def mark_as_paid
-    @booking.mark_as_paid
+    @booking.update(status: :paid)
     respond_with(@booking,location: bookings_url, notice: 'Booking was succesfully marked as paid')
   end
 
   def cancel
-    SeatingService.new(@booking.trip, @booking.stops.first.connection).increment_seating(@booking.quantity)
-    @booking.cancel
+    AssignSeating.new(@booking.trip, @booking.stops.first.connection).increment_seating(@booking.quantity)
+    @booking.update(status: :cancelled)
     respond_with(@booking, location: bookings_url, notice: 'Booking was succesfully cancelled')
   end
 

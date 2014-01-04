@@ -18,11 +18,8 @@
 class Booking < ActiveRecord::Base
   include AttributeDefaults
 
-  STATUSES = %w(paid reserved cancelled processing)
-  STATUSES.each do |status|
-    define_method("#{status}?") { self.status == status }
-    scope status, -> { where(status: status ) }
-  end
+  enum :status, [:paid, :reserved, :cancelled, :processing]
+
 
   belongs_to :user
   belongs_to :trip
@@ -35,22 +32,7 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
 
-  before_destroy :open_seats
-
-  def reserve
-    self.status = 'reserved'
-    save
-  end
-
-  def mark_as_paid
-    self.status = 'paid'
-    save
-  end
-
-  def cancel
-    self.status = 'cancelled'
-    save
-  end
+  delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
   def expired?
     self.expiry_date <= Time.zone.now
@@ -58,11 +40,6 @@ class Booking < ActiveRecord::Base
 
   private
     def defaults
-      { status: 'processing' }
-    end
-
-  protected
-    def open_seats
-      self.stops.each { |s| s.increment!(:available_seats, self.quantity) }
+      { status: :processing }
     end
 end

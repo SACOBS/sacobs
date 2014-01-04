@@ -27,19 +27,15 @@ class Trip < ActiveRecord::Base
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
-  delegate :name, to: :bus, prefix: true, allow_nil: true
+  delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
 
   validates :name, :start_date, :end_date, :route, :bus, presence: true, on: :update
 
-  scope :starting, -> (city) { joins(stops: {connection: :from_city}).where(cities: {id: city}) }
+  before_update :generate_stops, if: :route_id_changed?
 
-  def from
-    stops.first.from_city
-  end
-
-  def to
-    stops.last.to_city
-  end
-
-
+  protected
+   def generate_stops
+     self.stops.clear
+     self.route.connections.each { |connection| self.stops.build(connection: connection, available_seats: self.bus_capacity) }
+   end
  end

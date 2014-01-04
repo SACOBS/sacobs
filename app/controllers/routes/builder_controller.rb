@@ -13,7 +13,10 @@ class Routes::BuilderController < ApplicationController
   end
 
   def show
-    build_connections if step == :connections
+    case step
+      when :connections
+        build_connections
+    end
     render_wizard
   end
 

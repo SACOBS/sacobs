@@ -38,7 +38,6 @@ class Bookings::BuilderController < ApplicationController
         build_passengers
       when :billing
         build_invoice
-      else
     end
     render_wizard
   end
@@ -75,15 +74,11 @@ class Bookings::BuilderController < ApplicationController
       @booking =  Booking.find(params[:booking_id])
     end
 
-    def find_trip
-      Trip.find(params[:trip][:id])
-    end
-
     def reserve_booking(booking)
         trip = booking.trip
         connection = booking.stops.first.connection
-        SeatingService.new(trip, connection).decrement_seating(booking.quantity)
-        booking.status = 'reserved'
+        AssignSeating.new(trip, connection).decrement_seating(booking.quantity)
+        booking.status = :reserved
         booking.reference_no = generate_ref_no(booking)
     end
 

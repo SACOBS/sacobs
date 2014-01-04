@@ -19,6 +19,8 @@ class Stop < ActiveRecord::Base
  has_and_belongs_to_many :bookings
 
  scope :cost, -> { includes(:connection).sum('connections.cost')}
+ scope :en_route, -> (route, sequence) { joins(:trip,connection: [:from_destination, :route]).where('routes.id = ? And destination_order < ?',route, sequence)}
+
 
  delegate :name, :from_destination, :to_destination, to: :connection
 

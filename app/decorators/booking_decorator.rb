@@ -12,12 +12,9 @@ class BookingDecorator < Draper::Decorator
   end
 
   def travel_date
-    l booking.trip.start_date, format: :long if model.trip
+    l model.trip_start_date, format: :long
   end
 
-  def trip_name
-    model.trip.name if model.trip
-  end
 
   def from
     model.stops.first.from_destination.name

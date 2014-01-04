@@ -33,16 +33,4 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :cost, :distance, presence: true, on: :update
-
-  before_update :mark_children_for_change
-
-  protected
-    def mark_children_for_change
-      if self.distance_changed? || self.cost_changed?
-        self.connections.each do |c|
-          c.percentage_will_change!
-          c.cost_will_change!
-        end
-      end
-    end
 end

@@ -6,9 +6,7 @@ class ConnectionBuilder
   end
 
   def build
-    @destinations.each do |destination|
-      generate_connections(destination)
-    end
+    @destinations.each { |destination| generate_connections(destination) }
   end
 
   private

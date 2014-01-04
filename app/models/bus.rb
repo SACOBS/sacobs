@@ -14,6 +14,7 @@
 
 class Bus < ActiveRecord::Base
   include AttributesEmpty
+  include AttributeDefaults
 
   belongs_to :user
   has_many :seats, dependent: :destroy
@@ -21,11 +22,10 @@ class Bus < ActiveRecord::Base
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :capacity, :year, :model, presence: true, on: :update
+  validates :capacity, numericality: { greater_than: 0 }, on: :update
 
-  before_update :build_seats
-
-  protected
-  def build_seats
-    (self.capacity - self.seats.count).times { self.seats.build }
-  end
+  private
+   def defaults
+     {name: 'Bus', capacity: 0, year: 1, model: 'bus'}
+   end
 end

@@ -10,10 +10,14 @@ class Buses::BuilderController < ApplicationController
 
   def create
     @bus = Bus.create
-    redirect_to wizard_path(steps.first, bus_id: @bus)
+    redirect_to wizard_path(Wicked::FIRST_STEP, bus_id: @bus)
   end
 
   def show
+    case step
+     when :seats
+       build_seats
+    end
     render_wizard
   end
 
@@ -34,5 +38,9 @@ class Buses::BuilderController < ApplicationController
 
     def set_bus
       @bus =  Bus.find(params[:bus_id])
+    end
+
+    def build_seats
+      (@bus.capacity - @bus.seats.size).times { @bus.seats.build }
     end
 end

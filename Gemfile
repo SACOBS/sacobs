@@ -99,6 +99,9 @@ gem "wkhtmltopdf-binary"
 # Time Difference Calculations
 gem 'time_difference'
 
+# Enum
+gem 'enumify'
+
 
 # Scriptures
 gem "scripture", "~> 0.1.0"

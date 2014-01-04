@@ -9,7 +9,7 @@ class Trips::BuilderController < ApplicationController
 
   def create
     @trip = Trip.create
-    redirect_to wizard_path(steps.first, trip_id: @trip)
+    redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
   end
 
   def show
@@ -17,7 +17,7 @@ class Trips::BuilderController < ApplicationController
   end
 
   def update
-    @trip = TripService.new(@trip).update(trip_params)
+    @trip.update(trip_params)
     render_wizard @trip
   end
 

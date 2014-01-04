@@ -3,10 +3,10 @@
 #errors= errors_for @bus
 = simple_form_for @bus, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
-    = f.input :name, required: false
+    = f.input :name
     = f.input :capacity
     = f.input :year
     = f.input :model
   .form-actions
-    = f.submit class: t('buttons.primary')
+    = f.submit 'Next', class: t('buttons.primary')
     = link_to 'Cancel', bus_builder_path(bus_id: @bus), method: :delete ,class: t('buttons.default')
