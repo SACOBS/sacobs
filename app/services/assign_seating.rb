@@ -15,6 +15,6 @@ class AssignSeating
 
   private
     def affected_stops
-      @trip.stops.en_route(@route, @connection.to_destination.destination_order)
+      @trip.stops.en_route(@route, @connection.to_destination.destination_order).readonly(false)
     end
 end
