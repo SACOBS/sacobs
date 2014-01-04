@@ -77,7 +77,7 @@ class Bookings::BuilderController < ApplicationController
     def reserve_booking(booking)
         trip = booking.trip
         connection = booking.stops.first.connection
-        AssignSeating.new(trip, connection).decrement_seating(booking.quantity)
+        AssignSeating.new(trip, connection).decrement(booking.quantity)
         booking.status = :reserved
         booking.reference_no = generate_ref_no(booking)
     end
