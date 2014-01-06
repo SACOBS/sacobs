@@ -64,7 +64,6 @@ class Bookings::BuilderController < ApplicationController
       end
     end
 
-
     def build_invoice
       invoice = InvoiceBuilder.new(@booking).build
       invoice.save!
@@ -77,11 +76,6 @@ class Bookings::BuilderController < ApplicationController
     def reserve_booking
         assign_seats
         @booking.status = :reserved
-        @booking.reference_no = generate_ref_no(booking)
-    end
-
-    def generate_ref_no(booking)
-      "#{booking.created_at.strftime('%Y%m%d')} #{booking.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "")
     end
 
     def assign_seats

@@ -49,6 +49,16 @@ class BookingDecorator < Draper::Decorator
   end
 
   def row_class
-    'warning' if model.expired?
-  end
+   return 'warning' if model.expired?
+   case model.status
+     when :paid
+       'success'
+     when :reserved
+       'info'
+     when :cancelled
+       'error'
+     else
+       ''
+   end
+ end
 end
