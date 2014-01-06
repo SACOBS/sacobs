@@ -32,7 +32,7 @@
 .form-actions
   = back_to buses_path
   = link_to 'Edit', bus_builder_path(:details, bus_id: @bus), icon: :edit, class: t('buttons.inverse')
-  = link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: 'Are you sure?' }, icon: :times, class: t('buttons.danger')
+  = link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: t('messages.confirm', resource: :bus) }, icon: :times, class: t('buttons.danger')
 
 
 

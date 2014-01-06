@@ -3,12 +3,17 @@ module ApplicationHelper
     content_for(:title, title)
   end
 
+
   def description(description)
     content_for(:description, description)
   end
 
   def keywords(keywords)
     content_for(:keywords, keywords)
+  end
+
+  def resource_to_human(resource)
+    resource.class.model_name.human.downcase
   end
 
   def errors_for(model)

@@ -13,4 +13,4 @@
     = link_to 'Generate Ticket', ticket_path(booking),icon: :tasks, class: t('buttons.mini.default')
     = link_to 'Mark As Paid', mark_as_paid_booking_path(booking), method: :patch, icon: :money, class: t('buttons.mini.inverse') if booking.reserved?
     = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.mini.warning')
-    = link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }, class: t('buttons.mini.danger'), icon: :times
+    = link_to 'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.mini.danger'), icon: :times

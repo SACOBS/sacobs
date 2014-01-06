@@ -39,7 +39,7 @@
 .form-actions
   = back_to trips_path
   = link_to 'Edit', trip_builder_path(:details, trip_id: @trip), icon: :edit, class: t('buttons.info')
-  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: 'Are you sure' },icon: :times ,class: t('buttons.danger')
+  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
 
 
 

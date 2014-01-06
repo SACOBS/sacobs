@@ -17,7 +17,7 @@
 .form-actions
   = back_to cities_path
   = link_to 'Edit', edit_city_path(@city), icon: :edit, class: t('buttons.info')
-  = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: 'Are you sure?' }, icon: :times, class: t('buttons.danger')
+  = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: t('messages.confirm', resource: :city) }, icon: :times, class: t('buttons.danger')
 
 
 

@@ -27,7 +27,7 @@
   .form-actions
     = back_to routes_path
     = link_to 'Edit', route_builder_path(:details, route_id: @route), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', @route , method: :delete, data: { confirm: 'Are you sure?' }, icon: :times, class: t('buttons.danger')
+    = link_to 'Destroy', @route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
 
 
 

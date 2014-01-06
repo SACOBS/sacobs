@@ -3,7 +3,7 @@
   %td= discount.percentage
   %td
     = link_to 'Edit', edit_discount_path(discount), icon: :edit, class: t('buttons.mini.inverse')
-    = link_to 'Destroy', discount, icon: :times, data: { confirm: 'Are you sure you want to destroy this driver?'}, method: :delete, class: t('buttons.mini.danger')
+    = link_to 'Destroy', discount, icon: :times, data: { confirm: t('messages.confirm', resource: :discount)}, method: :delete, class: t('buttons.mini.danger')
 
 
 
