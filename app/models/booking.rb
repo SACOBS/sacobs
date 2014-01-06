@@ -18,8 +18,7 @@
 class Booking < ActiveRecord::Base
   include AttributeDefaults
 
-  enum :status, [:paid, :reserved, :cancelled, :processing]
-
+  enum :status, [:paid, :reserved, :cancelled, :in_process]
 
   belongs_to :user
   belongs_to :trip
@@ -34,9 +33,9 @@ class Booking < ActiveRecord::Base
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
-  ransacker :created_at_date, type: :date do |parent|
-    Arel::Nodes::SqlLiteral.new "date(bookings.created_at)"
-  end
+  before_save :generate_reference, if: :reserved?
+
+  ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
   def expired?
     self.expiry_date <= Time.zone.now
@@ -44,6 +43,11 @@ class Booking < ActiveRecord::Base
 
   private
     def defaults
-      { status: :processing }
+      { status: :in_process }
+    end
+
+  protected
+    def generate_reference
+      self.reference_no = "#{self.created_at.strftime('%Y%m%d')} #{self.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "") unless self.reference_no.present?
     end
 end
