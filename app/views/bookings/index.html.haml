@@ -3,6 +3,7 @@
 
 .search.pull-right
   = simple_form_for :q, url: bookings_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
+    = f.input :created_at_date_eq, as: :date_picker, placeholder: 'Search booking dates'
     = f.input :reference_no_or_status_or_trip_name_or_client_name_or_client_surname_or_passengers_name_or_passengers_surname_cont, placeholder: 'Search', input_html: { class: 'search-query' }
     = f.submit 'Search', class: t('buttons.primary')
 

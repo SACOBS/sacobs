@@ -43,7 +43,7 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    reserve_booking(@booking) if step == :billing
+    reserve_booking if step == :billing
     @booking.update (booking_params)
     render_wizard @booking
   end
@@ -71,18 +71,20 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def set_booking
-      @booking =  Booking.find(params[:booking_id])
+      @booking = Booking.find(params[:booking_id])
     end
 
-    def reserve_booking(booking)
-        trip = booking.trip
-        connection = booking.stops.first.connection
-        AssignSeating.new(trip, connection).decrement(booking.quantity)
-        booking.status = :reserved
-        booking.reference_no = generate_ref_no(booking)
+    def reserve_booking
+        assign_seats
+        @booking.status = :reserved
+        @booking.reference_no = generate_ref_no(booking)
     end
 
     def generate_ref_no(booking)
       "#{booking.created_at.strftime('%Y%m%d')} #{booking.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "")
+    end
+
+    def assign_seats
+      SeatingAssigner.new(@booking).assign
     end
 end

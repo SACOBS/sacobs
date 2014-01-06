@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    AssignSeating.new(@booking.trip, @booking.stops.first.connection).increment_seating(@booking.quantity)
+    unassign_seats
     @booking.destroy
     respond_with(@booking)
   end
@@ -22,14 +22,18 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    AssignSeating.new(@booking.trip, @booking.stops.first.connection).increment_seating(@booking.quantity)
+    unassign_seats
     @booking.update(status: :cancelled)
     respond_with(@booking, location: bookings_url, notice: 'Booking was succesfully cancelled')
   end
 
   private
-  def set_booking
+   def set_booking
     @booking = Booking.includes(:trip, :client, :stops, :passengers).find(params[:id])
-  end
+   end
+
+   def unassign_seats
+     SeatingAssigner.new(@booking).unassign
+   end
 
 end

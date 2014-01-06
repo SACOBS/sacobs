@@ -34,6 +34,10 @@ class Booking < ActiveRecord::Base
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
+  ransacker :created_at_date, type: :date do |parent|
+    Arel::Nodes::SqlLiteral.new "date(bookings.created_at)"
+  end
+
   def expired?
     self.expiry_date <= Time.zone.now
   end
