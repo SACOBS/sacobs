@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109091001) do
+ActiveRecord::Schema.define(version: 20140109102316) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
 
   create_table "bookings", force: true do |t|
     t.integer  "trip_id"
@@ -37,10 +39,17 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.string   "reference_no"
   end
 
+  add_index "bookings", ["client_id"], name: "index_bookings_on_client_id"
+  add_index "bookings", ["trip_id"], name: "index_bookings_on_trip_id"
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
+
   create_table "bookings_stops", force: true do |t|
     t.integer "booking_id"
     t.integer "stop_id"
   end
+
+  add_index "bookings_stops", ["booking_id", "stop_id"], name: "index_bookings_stops_on_booking_id_and_stop_id"
+  add_index "bookings_stops", ["stop_id", "booking_id"], name: "index_bookings_stops_on_stop_id_and_booking_id"
 
   create_table "buses", force: true do |t|
     t.string   "name"
@@ -52,6 +61,8 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.integer  "user_id"
   end
 
+  add_index "buses", ["user_id"], name: "index_buses_on_user_id"
+
   create_table "cities", force: true do |t|
     t.string  "name"
     t.string  "slug"
@@ -60,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140109091001) do
   end
 
   add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true
+  add_index "cities", ["user_id"], name: "index_cities_on_user_id"
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -74,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140109091001) do
   end
 
   add_index "clients", ["slug"], name: "index_clients_on_slug", unique: true
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id"
 
   create_table "connections", force: true do |t|
     t.integer  "distance"
@@ -86,6 +99,10 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.integer  "from_id"
     t.integer  "to_id"
   end
+
+  add_index "connections", ["from_id"], name: "index_connections_on_from_id"
+  add_index "connections", ["route_id"], name: "index_connections_on_route_id"
+  add_index "connections", ["to_id"], name: "index_connections_on_to_id"
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -111,6 +128,10 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "updated_at"
   end
 
+  add_index "destinations", ["city_id", "route_id"], name: "index_destinations_on_city_id_and_route_id"
+  add_index "destinations", ["city_id"], name: "index_destinations_on_city_id"
+  add_index "destinations", ["route_id"], name: "index_destinations_on_route_id"
+
   create_table "discounts", force: true do |t|
     t.decimal  "percentage",        precision: 2, scale: 5
     t.integer  "passenger_type_id"
@@ -118,6 +139,9 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "discounts", ["passenger_type_id"], name: "index_discounts_on_passenger_type_id"
+  add_index "discounts", ["user_id"], name: "index_discounts_on_user_id"
 
   create_table "drivers", force: true do |t|
     t.string   "name"
@@ -129,11 +153,15 @@ ActiveRecord::Schema.define(version: 20140109091001) do
   end
 
   add_index "drivers", ["slug"], name: "index_drivers_on_slug", unique: true
+  add_index "drivers", ["user_id"], name: "index_drivers_on_user_id"
 
   create_table "drivers_trips", force: true do |t|
     t.integer "driver_id"
     t.integer "trip_id"
   end
+
+  add_index "drivers_trips", ["driver_id", "trip_id"], name: "index_drivers_trips_on_driver_id_and_trip_id"
+  add_index "drivers_trips", ["trip_id", "driver_id"], name: "index_drivers_trips_on_trip_id_and_driver_id"
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -155,6 +183,8 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "billing_date"
   end
 
+  add_index "invoices", ["booking_id"], name: "index_invoices_on_booking_id"
+
   create_table "line_items", force: true do |t|
     t.string   "description"
     t.integer  "discount_percentage"
@@ -165,6 +195,8 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.decimal  "gross_price",         precision: 8, scale: 2
     t.decimal  "nett_price",          precision: 8, scale: 2
   end
+
+  add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id"
 
   create_table "passenger_types", force: true do |t|
     t.string   "description"
@@ -182,6 +214,9 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.string   "cell_no"
     t.string   "email"
   end
+
+  add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id"
+  add_index "passengers", ["passenger_type_id"], name: "index_passengers_on_passenger_type_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -206,6 +241,7 @@ ActiveRecord::Schema.define(version: 20140109091001) do
   end
 
   add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true
+  add_index "routes", ["user_id"], name: "index_routes_on_user_id"
 
   create_table "scriptures", force: true do |t|
     t.string   "verse"
@@ -223,6 +259,12 @@ ActiveRecord::Schema.define(version: 20140109091001) do
 
   add_index "seats", ["bus_id"], name: "index_seats_on_bus_id"
 
+  create_table "settings", force: true do |t|
+    t.integer  "booking_expiry_period"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stops", force: true do |t|
     t.integer  "connection_id"
     t.integer  "trip_id"
@@ -232,6 +274,9 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "stops", ["connection_id"], name: "index_stops_on_connection_id"
+  add_index "stops", ["trip_id"], name: "index_stops_on_trip_id"
 
   create_table "trips", force: true do |t|
     t.string   "name"
@@ -243,6 +288,10 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "trips", ["bus_id"], name: "index_trips_on_bus_id"
+  add_index "trips", ["route_id"], name: "index_trips_on_route_id"
+  add_index "trips", ["user_id"], name: "index_trips_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -278,6 +327,8 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "updated_at"
   end
 
+  add_index "venues", ["city_id"], name: "index_venues_on_city_id"
+
   create_table "vouchers", force: true do |t|
     t.string   "ref_no"
     t.decimal  "amount"
@@ -287,5 +338,8 @@ ActiveRecord::Schema.define(version: 20140109091001) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "vouchers", ["client_id"], name: "index_vouchers_on_client_id"
+  add_index "vouchers", ["user_id"], name: "index_vouchers_on_user_id"
 
 end

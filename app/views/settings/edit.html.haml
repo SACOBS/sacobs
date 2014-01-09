@@ -1,0 +1,10 @@
+.page-header
+  %h2 Edit Setting
+#errors= errors_for @setting
+= simple_form_for @setting,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.input :booking_expiry_period
+  .form-actions
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', drivers_path, class: t('buttons.default')
+

@@ -12,10 +12,6 @@ module ApplicationHelper
     content_for(:keywords, keywords)
   end
 
-  def resource_to_human(resource)
-    resource.class.model_name.human.downcase
-  end
-
   def errors_for(model)
     if model && model.errors.any?
       content_tag(:div, class: 'error_explanation well well small') do

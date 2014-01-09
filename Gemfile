@@ -112,6 +112,8 @@ group :development do
   gem 'jazz_hands'
   gem 'quiet_assets'
   gem "bullet"
+  gem "lol_dba"
+  gem 'rails_best_practices'
 end
 
 group :development, :test do

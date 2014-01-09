@@ -27,6 +27,7 @@ Sacobs::Application.routes.draw do
     resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder'
   end
 
+  resource :setting, only: [:show, :edit, :update]
 
   resources :clients do
     resources :vouchers, only: [:new, :create]

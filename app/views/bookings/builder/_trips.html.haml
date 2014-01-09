@@ -11,6 +11,7 @@
             %td= stop.available_seats
             %td= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, value: 0}
             %td
+              = token_tag
               = f.hidden_field :trip_id, value: stop.trip.id
               = f.hidden_field :stop_ids, value: stop.id
               = f.submit 'Book', class: t('buttons.primary')

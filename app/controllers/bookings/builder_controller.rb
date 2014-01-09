@@ -17,7 +17,7 @@ class Bookings::BuilderController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.expiry_date = Time.zone.now + 8.hours
+    @booking.expiry_date = set_booking_expiry_date
     if @booking.save
       redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: @booking)
     else
@@ -85,5 +85,9 @@ class Bookings::BuilderController < ApplicationController
 
     def end_of_wizard?
       step == :billing
+    end
+
+    def set_booking_expiry_date
+      Time.zone.now.advance hours: settings.booking_expiry_period
     end
 end

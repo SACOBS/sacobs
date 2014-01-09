@@ -1,0 +1,15 @@
+- cache @setting do
+  .page-header
+    %h2 Settings
+  .well
+    %p
+      %strong Booking_Expiry_Period:
+      = "#{@setting.booking_expiry_period} hours"
+  .actions
+    = link_to 'Edit', edit_setting_path, icon: :edit, class: t('buttons.info')
+
+
+
+
+
+
