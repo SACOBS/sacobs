@@ -33,6 +33,9 @@ class Booking < ActiveRecord::Base
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
+  validates :quantity, numericality: { greater_than: 0 }
+  validate :seats_over_limit
+
   before_save :generate_reference, if: :reserved?
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
@@ -44,6 +47,11 @@ class Booking < ActiveRecord::Base
   private
     def defaults
       { status: :in_process }
+    end
+
+    def seats_over_limit
+      available_seats = self.stops.first.available_seats
+      self.errors.add(:base,"There are not enough seats (#{available_seats}) available for this booking (#{self.quantity}).") unless available_seats >= self.quantity
     end
 
   protected

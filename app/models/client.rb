@@ -34,8 +34,17 @@ class Client < ActiveRecord::Base
 
   validates :name, presence: true
 
+  after_initialize :init_address, if: :new_record?
+
   def full_name
     "#{self.name} #{self.surname}"
   end
+
+  protected
+    def init_address
+      self.build_address unless self.address.present?
+    end
+
+
 
 end

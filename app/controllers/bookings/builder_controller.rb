@@ -4,31 +4,28 @@ class Bookings::BuilderController < ApplicationController
   steps :client, :passengers, :billing
 
   before_action :set_booking, only: [ :show, :update]
+  before_action :clean_search_query, only: :new
 
-  params_for :booking, :trip_id, :price, :status, :quantity, :client_id,
+  params_for :booking, :trip_id, :stop_ids, :price, :status, :quantity, :client_id,
              client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
              passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
              invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]]
 
   def new
-    @trips = Trip.all.decorate
+    @stops = Stop.search(params[:q]).result(distinct: true)
   end
 
   def create
-    booking_service = BookingService.new(params[:trip])
-    if booking_service.seats_available?
-      booking =  booking_service.create_booking!
-      redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: booking)
+    @booking = Booking.new(booking_params)
+    @booking.expiry_date = Time.zone.now + 8.hours
+    if @booking.save
+      redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: @booking)
     else
-      redirect_to new_booking_builder_path(booking_id: :start), alert: "There are only #{booking_service.available_seats} available seats on the selected trip"
+      flash[:alert] = "#{@booking.errors.full_messages.first}"
+      redirect_to new_booking_builder_url
     end
   end
 
-  def find_trips
-    start_date = Date.parse(params[:trip_search][:date])
-    route = Route.find(params[:trip_search][:route])
-    @trips = Trip.where(start_date: start_date, route: route )
-  end
 
   def show
     case step
@@ -43,7 +40,7 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    reserve_booking if step == :billing
+    reserve_booking if end_of_wizard?
     @booking.update (booking_params)
     render_wizard @booking
   end
@@ -54,7 +51,7 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def build_client
-      @booking.build_client { |client| client.build_address }
+      @booking.build_client
     end
 
     def build_passengers
@@ -80,5 +77,13 @@ class Bookings::BuilderController < ApplicationController
 
     def assign_seats
       SeatingAssigner.new(@booking).assign
+    end
+
+    def clean_search_query
+      params[:q].delete_if{|k, v| v == 'Select from city' || v == 'Select to city' } if params[:q]
+    end
+
+    def end_of_wizard?
+      step == :billing
     end
 end

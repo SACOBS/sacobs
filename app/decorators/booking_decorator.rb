@@ -17,19 +17,19 @@ class BookingDecorator < Draper::Decorator
 
 
   def from
-    model.stops.first.from_destination.name
+    model.stops.first.from.name
   end
 
   def from_venue
-    model.stops.first.from_destination.city.venues.any? ? model.stops.first.from_destination.city.venues.first.name : 'None'
+    model.stops.first.from.city.venues.any? ? model.stops.first.from.city.venues.first.name : 'None'
   end
 
   def to
-    model.stops.last.from_destination.name
+    model.stops.last.from.name
   end
 
   def to_venue
-    model.stops.last.to_destination.city.venues.any? ? model.stops.first.to_destination.city.venues.first.name : 'None'
+    model.stops.last.to.city.venues.any? ? model.stops.first.to.city.venues.first.name : 'None'
   end
 
   def status

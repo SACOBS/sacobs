@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
     respond_with(@booking)
   end
 
-  def mark_as_paid
+  def confirm
     @booking.update(status: :paid)
     respond_with(@booking,location: bookings_url, notice: 'Booking was succesfully marked as paid')
   end

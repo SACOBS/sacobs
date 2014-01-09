@@ -14,8 +14,13 @@ class SeatingAssigner
     affected_stops.each { |stop| stop.decrement!(:available_seats, @booking.quantity) }
   end
 
+
   private
    def affected_stops
-    @trip.stops.en_route(@trip.route, @stop.connection.to_destination.destination_order).select(:*)
+     @trip.stops.en_route(destination.destination_order)
+   end
+
+   def destination
+     @stop.connection.from
    end
 end

@@ -1,12 +1,12 @@
 class ConnectionDecorator < Draper::Decorator
   delegate_all
 
-  def from_destination
-    model.from_destination.try(:name) || 'None'
+  def from
+    model.from.try(:name) || 'None'
   end
 
-  def to_destination
-    model.to_destination.try(:name) || 'None'
+  def to
+    model.to.try(:name) || 'None'
   end
 
   def distance

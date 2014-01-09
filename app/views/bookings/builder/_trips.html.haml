@@ -1,20 +1,19 @@
-- if @trips
-  - bootstrap_table headers:['Trips'], types: [:bordered] do
-    - @trips.each do |trip|
-      %tr
-        %td
-          = simple_form_for :trip, namespace: trip.id ,url: booking_builder_index_url, wrapper: false, defaults: {label: false} do |f|
-            %table.table-bordered
-              - table_headers(['Name', 'Start', 'End', 'Connection', 'Qty'])
-              %tr
-                %td= trip.name
-                %td= trip.start_date
-                %td= trip.end_date
-                %td= f.input :stop, collection: trip.stops, label_method: :name, include_blank: false, input_html: {rel: 'autocomplete'}
-                %td= f.input :seats, as: :integer
-                %td
-                  = f.hidden_field :id, value: trip.id
-                  = f.submit 'Book', class: t('buttons.primary')
+- if @stops
+  %table.table-bordered
+    - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Qty'], types: [:bordered], html_options: {class: 'sortable'} do
+      - @stops.each do |stop|
+        %tr
+          = simple_form_for :booking, namespace: stop.id ,url: booking_builder_index_url, wrapper: false, defaults: {label: false} do |f|
+            %td= stop.trip.name
+            %td= l stop.trip.start_date, format: :long
+            %td= stop.from.city.name
+            %td= stop.to.city.name
+            %td= stop.available_seats
+            %td= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, value: 0}
+            %td
+              = f.hidden_field :trip_id, value: stop.trip.id
+              = f.hidden_field :stop_ids, value: stop.id
+              = f.submit 'Book', class: t('buttons.primary')
 - else
   %p
     %strong

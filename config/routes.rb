@@ -21,14 +21,10 @@ Sacobs::Application.routes.draw do
 
   resources :bookings, only: [:show, :index, :destroy] do
     member do
-      patch :mark_as_paid
+      patch :confirm
       patch :cancel
     end
-    resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder' do
-      collection do
-        get :find_trips
-      end
-    end
+    resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder'
   end
 
   resources :settings, only: [:new, :create, :index] do

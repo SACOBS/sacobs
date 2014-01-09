@@ -2,11 +2,13 @@
   %h3 Booking
   %h4 Select a trip
 
-.trip-finder.well
-  = simple_form_for :trip_search, url: find_trips_booking_builder_index_path, html: {class: 'form-inline'}, method: :get ,remote: true do |f|
-    = f.input :date, as: :date_picker, placeholder: 'Select a date', label: false
-    = f.input :route, collection: Route.all, include_blank: false, label: false, prompt: 'Select a route'
-    = f.submit 'Search'
+.trip-finder.well.well-small
+  %h5 Search
+  = simple_form_for :q, url: new_booking_builder_path, html: {class: 'form-inline'}, method: :get ,remote: true do |f|
+    = f.input :trip_start_date_eq, as: :date_picker, placeholder: 'Select a date', label: false
+    = f.input :connection_from_city_id_eq, collection: City.all,include_blank: false, label: false, prompt: 'Select from city'
+    = f.input :connection_to_city_id_eq, collection: City.all, include_blank: false, label: false, prompt: 'Select to city'
+    = f.submit 'Search', class: t('buttons.inverse')
 
 .trips
   = render partial: 'bookings/builder/trips'

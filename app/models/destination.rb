@@ -14,7 +14,7 @@ class Destination < ActiveRecord::Base
   belongs_to :city
   belongs_to :route
 
-  scope :preceding, ->(sequence) { where("destination_order < ?", sequence )  }
+  scope :proceeding, ->(sequence) { where("destination_order > ?", sequence )  }
 
   validates :destination_order, :route, :city, presence: true
 

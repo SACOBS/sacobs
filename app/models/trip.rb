@@ -33,6 +33,9 @@ class Trip < ActiveRecord::Base
 
   before_update :generate_stops, if: :route_id_changed?
 
+  ransacker(:start_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(trips.start_date)" }
+
+
   protected
    def generate_stops
      self.stops.clear
