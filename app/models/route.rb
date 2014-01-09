@@ -27,7 +27,7 @@ class Route < ActiveRecord::Base
 
   has_many :destinations, -> { order(:sequence) }
   has_many :cities, through: :destinations
-  has_many :connections, dependent: :destroy, autosave: true
+  has_many :connections, -> { includes(:from, :to) }, dependent: :destroy, autosave: true
 
   accepts_nested_attributes_for :connections,  reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true

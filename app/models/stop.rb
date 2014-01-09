@@ -15,7 +15,7 @@
 class Stop < ActiveRecord::Base
 
  belongs_to :trip
- belongs_to :connection
+ belongs_to :connection, -> { includes(:from, :to) }
  has_and_belongs_to_many :bookings
 
  scope :cost, -> { includes(:connection).sum('connections.cost')}

@@ -61,7 +61,7 @@
         %td= passenger.email
 .form-actions
   = back_to bookings_path
-  = link_to 'Mark As Paid', mark_as_paid_booking_path(@booking), method: :patch, icon: :money, class: t('buttons.inverse') if @booking.reserved?
+  = link_to 'Confirm', confirm_booking_path(@booking), method: :patch, icon: :money, class: t('buttons.inverse') if @booking.reserved?
   = link_to 'Cancel', cancel_booking_path(@booking), method: :patch, icon: :warning, class: t('buttons.warning') unless @booking.cancelled?
   = link_to 'Destroy', @booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times
 

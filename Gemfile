@@ -111,6 +111,7 @@ group :development do
   gem 'annotate'
   gem 'jazz_hands'
   gem 'quiet_assets'
+  gem "bullet"
 end
 
 group :development, :test do

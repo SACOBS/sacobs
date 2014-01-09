@@ -25,7 +25,7 @@ class BookingDecorator < Draper::Decorator
   end
 
   def to
-    model.stops.last.from.name
+    model.stops.last.to.name
   end
 
   def to_venue

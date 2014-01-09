@@ -27,6 +27,6 @@ class TripsController < ApplicationController
 
   private
     def set_trip
-      @trip = Trip.includes(:stops).find(params[:id])
+      @trip = Trip.includes(stops: :connection).find(params[:id])
     end
 end

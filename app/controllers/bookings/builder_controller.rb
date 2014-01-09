@@ -12,7 +12,7 @@ class Bookings::BuilderController < ApplicationController
              invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]]
 
   def new
-    @stops = Stop.search(params[:q]).result(distinct: true)
+    @stops = Stop.includes(:trip, :connection).search(params[:q]).result(distinct: true)
   end
 
   def create

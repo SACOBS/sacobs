@@ -10,7 +10,7 @@
 #
 
 class Venue < ActiveRecord::Base
-  belongs_to :city
+  belongs_to :city, counter_cache: true
 
   validates :name, :city, presence: true
 end

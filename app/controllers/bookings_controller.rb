@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :mark_as_paid, :destroy]
 
   def index
-    @q = Booking.includes(:trip, :client, :stops, :passengers).search(params[:q])
+    @q = Booking.search(params[:q])
     @bookings = @q.result(distinct: true).decorate
   end
 

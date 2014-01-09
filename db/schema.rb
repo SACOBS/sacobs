@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109071249) do
+ActiveRecord::Schema.define(version: 20140109091001) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140109071249) do
     t.string  "name"
     t.string  "slug"
     t.integer "user_id"
+    t.integer "venues_count", default: 0
   end
 
   add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true
@@ -221,13 +222,6 @@ ActiveRecord::Schema.define(version: 20140109071249) do
   end
 
   add_index "seats", ["bus_id"], name: "index_seats_on_bus_id"
-
-  create_table "settings", force: true do |t|
-    t.string   "key"
-    t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "stops", force: true do |t|
     t.integer  "connection_id"

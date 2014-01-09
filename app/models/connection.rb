@@ -18,8 +18,8 @@ class Connection < ActiveRecord::Base
   include AttributeDefaults
 
   belongs_to :route, counter_cache: true
-  belongs_to :from, class_name: :Destination
-  belongs_to :to, class_name: :Destination
+  belongs_to :from, -> {includes(:city)}, class_name: :Destination
+  belongs_to :to,-> {includes(:city)} ,class_name: :Destination
 
   validates :route, :from, :to, presence: true
 
