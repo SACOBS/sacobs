@@ -5,7 +5,7 @@
 #  id                :integer          not null, primary key
 #  route_id          :integer
 #  city_id           :integer
-#  destination_order :integer
+#  sequence :integer
 #  created_at        :datetime
 #  updated_at        :datetime
 #

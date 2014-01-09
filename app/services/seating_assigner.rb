@@ -17,10 +17,6 @@ class SeatingAssigner
 
   private
    def affected_stops
-     @trip.stops.en_route(destination.destination_order)
-   end
-
-   def destination
-     @stop.connection.from
+     @trip.stops.en_route(@stop.connection.to).to_a.reject {|stop| stop.connection.to == @stop.connection.from}
    end
 end

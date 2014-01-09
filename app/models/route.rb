@@ -25,7 +25,7 @@ class Route < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :destinations, -> { order(:destination_order) }
+  has_many :destinations, -> { order(:sequence) }
   has_many :cities, through: :destinations
   has_many :connections, dependent: :destroy, autosave: true
 

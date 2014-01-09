@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108062601) do
+ActiveRecord::Schema.define(version: 20140109071249) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20140108062601) do
   create_table "destinations", force: true do |t|
     t.integer  "route_id"
     t.integer  "city_id"
-    t.integer  "destination_order"
+    t.integer  "sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

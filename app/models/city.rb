@@ -15,7 +15,7 @@
 class City < ActiveRecord::Base
   extend FriendlyId
 
-  default_scope -> { order(name: :asc) }
+  default_scope -> { order(:name) }
 
   friendly_id :name, use: :slugged
 

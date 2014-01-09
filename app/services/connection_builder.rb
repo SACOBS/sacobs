@@ -11,7 +11,7 @@ class ConnectionBuilder
 
   private
    def generate_connections(current)
-     available_destinations = @destinations.dup.tap {|ad| ad.shift(current.destination_order)}
+     available_destinations = @destinations.dup.tap {|ad| ad.shift(current.sequence)}
      available_destinations.each { |destination|  @route.connections.create!(from: current, to: destination) }
    end
 end
