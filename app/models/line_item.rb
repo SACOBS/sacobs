@@ -12,6 +12,10 @@
 #  gross_price         :decimal(8, 2)
 #  nett_price          :decimal(8, 2)
 #
+# Indexes
+#
+#  index_line_items_on_invoice_id  (invoice_id)
+#
 
 class LineItem < ActiveRecord::Base
   include AttributeDefaults

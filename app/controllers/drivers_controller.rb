@@ -1,7 +1,6 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
 
-  params_for :driver, :name, :surname
 
   # GET /drivers
   # GET /drivers.json
@@ -41,6 +40,10 @@ class DriversController < ApplicationController
   private
     def set_driver
       @driver = Driver.friendly.find(params[:id])
+    end
+
+    def driver_params
+      params.require(:driver).permit(:name, :surname).merge(user: current_user)
     end
 
     def interpolation_options

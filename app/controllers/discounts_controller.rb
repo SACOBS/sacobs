@@ -1,8 +1,6 @@
 class DiscountsController < ApplicationController
   before_action :set_discount, only: [:edit, :update, :destroy]
 
-  params_for :discount, :percentage, :passenger_type_id, passenger_type_attributes: [:description]
-
   def index
     @discounts = Discount.includes(:passenger_type).decorate
   end
@@ -31,5 +29,9 @@ class DiscountsController < ApplicationController
   private
     def set_discount
      @discount = Discount.find(params[:id])
+    end
+
+    def discount_params
+      params.require(:discount).permit(:percentage, :passenger_type_id, passenger_type_attributes: [:description]).merge(user: current_user)
     end
 end

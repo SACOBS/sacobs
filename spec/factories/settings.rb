@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: settings
+#
+#  id                    :integer          not null, primary key
+#  booking_expiry_period :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

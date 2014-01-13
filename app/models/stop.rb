@@ -11,6 +11,11 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #
+# Indexes
+#
+#  index_stops_on_connection_id  (connection_id)
+#  index_stops_on_trip_id        (trip_id)
+#
 
 class Stop < ActiveRecord::Base
 

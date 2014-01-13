@@ -11,6 +11,11 @@
 #  updated_at :datetime
 #  user_id    :integer
 #
+# Indexes
+#
+#  index_vouchers_on_client_id  (client_id)
+#  index_vouchers_on_user_id    (user_id)
+#
 
 require 'spec_helper'
 

@@ -3,10 +3,7 @@ class Buses::BuilderController < ApplicationController
 
   before_action :set_bus, only: [:destroy, :show, :update]
 
-  params_for :bus, :name, :capacity, :year, :model, seats_attributes: [:id, :_destroy, :row, :number]
-
   steps :details, :seats
-
 
   def create
     @bus = Bus.create
@@ -42,5 +39,13 @@ class Buses::BuilderController < ApplicationController
 
     def build_seats
       (@bus.capacity - @bus.seats.size).times { @bus.seats.build }
+    end
+
+    def bus_params
+      params.require(:bus).permit(:name,
+                                  :capacity,
+                                  :year,
+                                  :model,
+                                  seats_attributes: [:id, :_destroy, :row, :number]).merge(user: current_user)
     end
 end

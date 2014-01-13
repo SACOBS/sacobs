@@ -35,7 +35,7 @@ Sacobs::Application.configure do
 
   config.after_initialize do
     Delayed::Job.scaler = :null
-    Bullet.enable = true
+    Bullet.enable = false
     Bullet.alert = true
     Bullet.bullet_logger = true
     Bullet.console = true

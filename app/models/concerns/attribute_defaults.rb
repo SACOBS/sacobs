@@ -12,6 +12,6 @@ module AttributeDefaults
 
   protected
     def set_default_attributes
-       defaults.each { |key, value| write_attribute(key, value) unless read_attribute(key) }
+       defaults.each { |key, value| self[key] ||= value  }
     end
 end

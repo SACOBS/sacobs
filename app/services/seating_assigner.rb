@@ -5,7 +5,6 @@ class SeatingAssigner
     @stop = booking.stops.first
   end
 
-
   def unassign
     affected_stops.each { |stop| stop.increment!(:available_seats, @booking.quantity) }
   end

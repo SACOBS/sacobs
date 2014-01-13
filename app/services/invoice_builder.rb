@@ -1,16 +1,14 @@
 class InvoiceBuilder
 
-
   def initialize(booking)
     @booking = booking
+    @return = booking.return
     @invoice = booking.build_invoice
   end
 
   def build
-    price = BigDecimal(@booking.stops.cost)
-    @booking.passengers.each do |passenger|
-      build_line_item(price, passenger )
-    end
+    @booking.passengers.each { |p| build_line_item(booking_cost, p) }
+    @return.passengers.each { |p| build_line_item(return_cost, p) } if @booking.return
     build_client_credit
     @invoice
   end
@@ -29,7 +27,7 @@ class InvoiceBuilder
 
     def calculate_discount(price, percentage)
       percentage = BigDecimal(percentage)
-      BigDecimal(((percentage / 100) * price) / 5.0).ceil * 5
+      round_up(BigDecimal((percentage / 100) * price))
     end
 
     def build_client_credit
@@ -40,5 +38,17 @@ class InvoiceBuilder
         end
         @booking.client.vouchers.each { |v| v.update(active: false)}
       end
+    end
+
+    def booking_cost
+      round_up(BigDecimal(@booking.stops.cost))
+    end
+
+    def return_cost
+      round_up(BigDecimal(@return.stops.cost))
+    end
+
+    def round_up(cost)
+      (cost / 5.0).ceil * 5
     end
 end

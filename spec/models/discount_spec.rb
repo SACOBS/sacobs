@@ -9,6 +9,11 @@
 #  updated_at        :datetime
 #  user_id           :integer
 #
+# Indexes
+#
+#  index_discounts_on_passenger_type_id  (passenger_type_id)
+#  index_discounts_on_user_id            (user_id)
+#
 
 require 'spec_helper'
 

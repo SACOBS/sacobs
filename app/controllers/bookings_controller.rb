@@ -1,9 +1,14 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :cancel, :mark_as_paid, :destroy]
+  before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
     @q = Booking.search(params[:q])
     @bookings = @q.result(distinct: true).decorate
+  end
+
+  def create
+    @booking = Booking.create
+    redirect_to booking_builder_url(@booking, :details)
   end
 
   def show
@@ -35,5 +40,4 @@ class BookingsController < ApplicationController
    def unassign_seats
      SeatingAssigner.new(@booking).unassign
    end
-
 end

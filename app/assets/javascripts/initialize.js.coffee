@@ -13,4 +13,3 @@ $ ->
   $(document).on 'hidden', '#client_contact_detail', ->
     $(this).remove()
 
-

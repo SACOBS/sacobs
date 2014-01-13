@@ -13,6 +13,15 @@
 #  client_id    :integer
 #  user_id      :integer
 #  reference_no :string(255)
+#  main_id      :integer
+#  has_return   :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_bookings_on_client_id  (client_id)
+#  index_bookings_on_main_id    (main_id)
+#  index_bookings_on_trip_id    (trip_id)
+#  index_bookings_on_user_id    (user_id)
 #
 
 require 'spec_helper'

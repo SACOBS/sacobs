@@ -1,8 +1,6 @@
 class VouchersController < ApplicationController
   before_action :set_client, only: [:new, :create]
 
-  params_for :voucher, :amount
-
   def new
     @voucher = @client.vouchers.new
   end
@@ -15,5 +13,9 @@ class VouchersController < ApplicationController
   private
    def set_client
      @client = Client.friendly.find(params[:client_id])
+   end
+
+   def voucher_params
+     params.require(:voucher).permit(:amount).merge(user: current_user)
    end
 end

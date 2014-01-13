@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
       root_path
     end
 
-    def user
-      { user: current_user }
-    end
-
     def has_layout?
      false if request.xhr?
     end

@@ -8,6 +8,10 @@
 #  updated_at   :datetime
 #  billing_date :datetime
 #
+# Indexes
+#
+#  index_invoices_on_booking_id  (booking_id)
+#
 
 require 'spec_helper'
 

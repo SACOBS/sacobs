@@ -12,6 +12,12 @@
 #  updated_at :datetime
 #  user_id    :integer
 #
+# Indexes
+#
+#  index_trips_on_bus_id    (bus_id)
+#  index_trips_on_route_id  (route_id)
+#  index_trips_on_user_id   (user_id)
+#
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 

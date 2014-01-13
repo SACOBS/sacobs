@@ -3,8 +3,6 @@ class Routes::BuilderController < ApplicationController
 
   before_action :set_route, only: [:show, :update, :destroy]
 
-  params_for :route, :name, :cost, :distance, connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost], destinations_attributes: [:city_id, :sequence]
-
   steps :details, :destinations ,:connections
 
   def create
@@ -41,5 +39,14 @@ class Routes::BuilderController < ApplicationController
 
     def build_connections
       ConnectionBuilder.new(@route).tap {|builder| builder.build }
+    end
+
+    def route_params
+     params.require(:route).permit(:name,
+                                   :cost,
+                                   :distance,
+                                   connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost],
+                                   destinations_attributes: [:city_id, :sequence]).merge(user: current_user)
+
     end
 end

@@ -3,8 +3,6 @@ class Trips::BuilderController < ApplicationController
 
   before_action :set_trip, only: [:destroy, :show, :update]
 
-  params_for :trip, :name, :start_date, :end_date, :route_id, :bus_id, driver_ids: [], stops_attributes: [:id, :_destroy, :arrive, :depart]
-
   steps :details, :stops
 
   def create
@@ -33,5 +31,15 @@ class Trips::BuilderController < ApplicationController
 
     def set_trip
       @trip =  Trip.find(params[:trip_id])
+    end
+
+    def trip_params
+      params.require(:trip).require(:name,
+                                    :start_date,
+                                    :end_date,
+                                    :route_id,
+                                    :bus_id,
+                                    driver_ids: [],
+                                    stops_attributes: [:id, :_destroy, :arrive, :depart]).merge(user: current_user)
     end
 end

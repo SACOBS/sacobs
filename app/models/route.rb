@@ -14,7 +14,8 @@
 #
 # Indexes
 #
-#  index_routes_on_slug  (slug) UNIQUE
+#  index_routes_on_slug     (slug) UNIQUE
+#  index_routes_on_user_id  (user_id)
 #
 
 class Route < ActiveRecord::Base

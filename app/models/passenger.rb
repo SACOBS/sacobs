@@ -12,6 +12,11 @@
 #  cell_no           :string(255)
 #  email             :string(255)
 #
+# Indexes
+#
+#  index_passengers_on_booking_id         (booking_id)
+#  index_passengers_on_passenger_type_id  (passenger_type_id)
+#
 
 class Passenger < ActiveRecord::Base
   include AttributeDefaults

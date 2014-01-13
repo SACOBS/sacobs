@@ -1,47 +1,32 @@
 class Bookings::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  steps :client, :passengers, :billing
+  steps  :details, :returns ,:client, :passengers, :billing
 
-  before_action :set_booking, only: [ :show, :update]
-  before_action :clean_search_query, only: :new
+  before_action :set_booking, only: [:index, :show, :update]
 
-  params_for :booking, :trip_id, :stop_ids, :price, :status, :quantity, :client_id,
-             client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
-             passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
-             invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]]
-
-  def new
-    @stops = Stop.includes(:trip, :connection).search(params[:q]).result(distinct: true)
-  end
-
-  def create
-    @booking = Booking.new(booking_params)
-    @booking.expiry_date = set_booking_expiry_date
-    if @booking.save
-      redirect_to wizard_path(Wicked::FIRST_STEP, booking_id: @booking)
-    else
-      flash[:alert] = "#{@booking.errors.full_messages.first}"
-      redirect_to new_booking_builder_url
-    end
+  def index
+    @stops = Stop.includes(:trip, :connection).search(clean_search_params).result(distinct: true)
   end
 
 
   def show
     case step
-      when :client
-        build_client
-      when :passengers
-        build_passengers
-      when :billing
-        build_invoice
+      when :details then fetch_stops
+      when :client then build_client
+      when :returns then @booking.has_return? ? fetch_stops : skip_step
+      when :passengers then build_passengers
+      when :billing then build_invoice
     end
     render_wizard
   end
 
   def update
-    reserve_booking if end_of_wizard?
-    @booking.update (booking_params)
+    @booking.attributes = booking_params
+    case step
+      when :details then build_return
+      when :billing then reserve_booking
+    end
     render_wizard @booking
   end
 
@@ -52,6 +37,10 @@ class Bookings::BuilderController < ApplicationController
 
     def build_client
       @booking.build_client
+    end
+
+    def build_return
+      @booking.build_return(quantity: @booking.quantity, user: current_user) if @booking.has_return?
     end
 
     def build_passengers
@@ -71,23 +60,34 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def reserve_booking
-        assign_seats
-        @booking.status = :reserved
+        expiry_date = set_booking_expiry_date
+        @booking.reserve(expiry_date)
+        @booking.return.reserve(expiry_date) if @booking.return
     end
 
-    def assign_seats
-      SeatingAssigner.new(@booking).assign
+    def clean_search_params
+     params[:q].reject!{|k, v| v =~ /Select/ } if params[:q]
     end
 
-    def clean_search_query
-      params[:q].delete_if{|k, v| v == 'Select from city' || v == 'Select to city' } if params[:q]
-    end
-
-    def end_of_wizard?
-      step == :billing
+    def fetch_stops
+      @stops = Stop.includes(:trip, :connection)
     end
 
     def set_booking_expiry_date
       Time.zone.now.advance hours: settings.booking_expiry_period
+    end
+
+    def booking_params
+      params.require(:booking).permit(:trip_id,
+                                      :stop_ids,
+                                      :price,
+                                      :status,
+                                      :quantity,
+                                      :client_id,
+                                      :has_return,
+                                      client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
+                                      passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
+                                      invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]],
+                                      return_attributes: [:stop_ids, :quantity, :trip_id, :id]).merge(user: current_user)
     end
 end

@@ -13,6 +13,12 @@
 #  from_id    :integer
 #  to_id      :integer
 #
+# Indexes
+#
+#  index_connections_on_from_id   (from_id)
+#  index_connections_on_route_id  (route_id)
+#  index_connections_on_to_id     (to_id)
+#
 
 class Connection < ActiveRecord::Base
   include AttributeDefaults

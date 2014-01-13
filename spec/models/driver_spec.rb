@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_drivers_on_slug  (slug) UNIQUE
+#  index_drivers_on_slug     (slug) UNIQUE
+#  index_drivers_on_user_id  (user_id)
 #
 
 require 'spec_helper'

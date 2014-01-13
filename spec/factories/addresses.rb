@@ -12,6 +12,10 @@
 #  created_at       :datetime
 #  updated_at       :datetime
 #
+# Indexes
+#
+#  index_addresses_on_addressable_id_and_addressable_type  (addressable_id,addressable_type)
+#
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 

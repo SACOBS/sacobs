@@ -1,8 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:edit, :update, :destroy]
 
-  params_for :client, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]
-
   def index
     @q = Client.includes(:user).search(params[:q])
     @clients = @q.result(distinct: true).decorate
@@ -42,6 +40,10 @@ class ClientsController < ApplicationController
   private
     def set_client
       @client = Client.friendly.find(params[:id])
+    end
+
+    def client_params
+       params.require(:client).permit(:name, :surname, :cell_no, :tel_no, :email, address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]).merge(user: current_user)
     end
 
     def interpolation_options

@@ -1,69 +1,20 @@
-Sacobs::Application.routes.draw do
-
-  resources :discounts, except: [:show]
-
-  resources :tickets, only: [:show] do
-    member do
-      get :print
-      post :email
-      get :download
-    end
-  end
-
-  resources :trip_sheets, only: [:show] do
-   member do
-     get :print
-     get :download
-   end
-  end
-
-  devise_for :users
-
-  resources :bookings, only: [:show, :index, :destroy] do
-    member do
-      patch :confirm
-      patch :cancel
-    end
-    resources :builder, only: [:new, :create, :show, :update],controller: 'bookings/builder'
-  end
-
-  resource :setting, only: [:show, :edit, :update]
-
-  resources :clients do
-    resources :vouchers, only: [:new, :create]
-  end
-
-  resources :cities
-
-  resource :contacts, only: [:new, :create]
-
-  resources :drivers
-
-  resources :trips, only: [:index, :show, :destroy] do
-    member do
-     post :copy
-    end
-    resources :builder, only: [:show, :update, :create, :destroy],controller: 'trips/builder'
-  end
-
-  resources :routes, only: [:index, :show, :destroy] do
-   resources :builder, only: [:show, :update, :create, :destroy],controller: 'routes/builder'
-  end
-
-  resources :buses, only: [:index, :show, :destroy] do
-    resources :builder, only: [:show, :update, :create, :destroy],controller: 'buses/builder'
-  end
-
-  root to: 'high_voltage/pages#show', id: 'home'
-
-  match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
-
-end
-#== Route Map
-# Generated on 08 Nov 2013 15:10
+# == Route Map (Updated 2014-01-10 08:20)
 #
-#         availability_new GET    /availability/new(.:format)                 availability#new
-#       availability_check POST   /availability/check(.:format)               availability#check
+#                   Prefix Verb   URI Pattern                                 Controller#Action
+#                discounts GET    /discounts(.:format)                        discounts#index
+#                          POST   /discounts(.:format)                        discounts#create
+#             new_discount GET    /discounts/new(.:format)                    discounts#new
+#            edit_discount GET    /discounts/:id/edit(.:format)               discounts#edit
+#                 discount PATCH  /discounts/:id(.:format)                    discounts#update
+#                          PUT    /discounts/:id(.:format)                    discounts#update
+#                          DELETE /discounts/:id(.:format)                    discounts#destroy
+#             print_ticket GET    /tickets/:id/print(.:format)                tickets#print
+#             email_ticket POST   /tickets/:id/email(.:format)                tickets#email
+#          download_ticket GET    /tickets/:id/download(.:format)             tickets#download
+#                   ticket GET    /tickets/:id(.:format)                      tickets#show
+#         print_trip_sheet GET    /trip_sheets/:id/print(.:format)            trip_sheets#print
+#      download_trip_sheet GET    /trip_sheets/:id/download(.:format)         trip_sheets#download
+#               trip_sheet GET    /trip_sheets/:id(.:format)                  trip_sheets#show
 #         new_user_session GET    /users/sign_in(.:format)                    devise/sessions#new
 #             user_session POST   /users/sign_in(.:format)                    devise/sessions#create
 #     destroy_user_session DELETE /users/sign_out(.:format)                   devise/sessions#destroy
@@ -79,6 +30,8 @@ end
 #                          PATCH  /users(.:format)                            devise/registrations#update
 #                          PUT    /users(.:format)                            devise/registrations#update
 #                          DELETE /users(.:format)                            devise/registrations#destroy
+#          confirm_booking PATCH  /bookings/:id/confirm(.:format)             bookings#confirm
+#           cancel_booking PATCH  /bookings/:id/cancel(.:format)              bookings#cancel
 #    booking_builder_index POST   /bookings/:booking_id/builder(.:format)     bookings/builder#create
 #      new_booking_builder GET    /bookings/:booking_id/builder/new(.:format) bookings/builder#new
 #          booking_builder GET    /bookings/:booking_id/builder/:id(.:format) bookings/builder#show
@@ -87,11 +40,14 @@ end
 #                 bookings GET    /bookings(.:format)                         bookings#index
 #                          POST   /bookings(.:format)                         bookings#create
 #              new_booking GET    /bookings/new(.:format)                     bookings#new
-#             edit_booking GET    /bookings/:id/edit(.:format)                bookings#edit
 #                  booking GET    /bookings/:id(.:format)                     bookings#show
-#                          PATCH  /bookings/:id(.:format)                     bookings#update
-#                          PUT    /bookings/:id(.:format)                     bookings#update
 #                          DELETE /bookings/:id(.:format)                     bookings#destroy
+#             edit_setting GET    /setting/edit(.:format)                     settings#edit
+#                  setting GET    /setting(.:format)                          settings#show
+#                          PATCH  /setting(.:format)                          settings#update
+#                          PUT    /setting(.:format)                          settings#update
+#          client_vouchers POST   /clients/:client_id/vouchers(.:format)      vouchers#create
+#       new_client_voucher GET    /clients/:client_id/vouchers/new(.:format)  vouchers#new
 #                  clients GET    /clients(.:format)                          clients#index
 #                          POST   /clients(.:format)                          clients#create
 #               new_client GET    /clients/new(.:format)                      clients#new
@@ -145,4 +101,73 @@ end
 #                          DELETE /buses/:id(.:format)                        buses#destroy
 #                     root GET    /                                           high_voltage/pages#show {:id=>"home"}
 #                                 (/errors)/:status(.:format)                 errors#show {:status=>/\d{3}/}
+#            rails_db_info        /rails/info/db                              RailsDbInfo::Engine
 #                     page GET    /*id                                        high_voltage/pages#show
+#
+# Routes for RailsDbInfo::Engine:
+#          root GET /                                   rails_db_info/tables#index
+# table_entries GET /tables/:table_id/entries(.:format) rails_db_info/tables#entries
+#        tables GET /tables(.:format)                   rails_db_info/tables#index
+#         table GET /tables/:id(.:format)               rails_db_info/tables#show
+#
+
+Sacobs::Application.routes.draw do
+  resources :discounts, except: [:show]
+
+  resources :tickets, only: [:show] do
+    member do
+      get :print
+      post :email
+      get :download
+    end
+  end
+
+  resources :trip_sheets, only: [:show] do
+   member do
+     get :print
+     get :download
+   end
+  end
+
+  devise_for :users
+
+  resources :bookings, only: [:create, :show, :index, :destroy] do
+    member do
+      patch :confirm
+      patch :cancel
+    end
+    resources :builder, only: [:index, :show, :update], controller: 'bookings/builder'
+  end
+
+  resource :setting, only: [:show, :edit, :update]
+
+  resources :clients do
+    resources :vouchers, only: [:new, :create]
+  end
+
+  resources :cities
+
+  resource :contacts, only: [:new, :create]
+
+  resources :drivers
+
+  resources :trips, only: [:index, :show, :destroy] do
+    member do
+     post :copy
+    end
+    resources :builder, only: [:show, :update, :create, :destroy],controller: 'trips/builder'
+  end
+
+  resources :routes, only: [:index, :show, :destroy] do
+   resources :builder, only: [:show, :update, :create, :destroy],controller: 'routes/builder'
+  end
+
+  resources :buses, only: [:index, :show, :destroy] do
+    resources :builder, only: [:show, :update, :create, :destroy],controller: 'buses/builder'
+  end
+
+  root to: 'high_voltage/pages#show', id: 'home'
+
+  match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
+
+end

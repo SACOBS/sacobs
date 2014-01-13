@@ -8,6 +8,10 @@
 #  created_at :datetime
 #  updated_at :datetime
 #
+# Indexes
+#
+#  index_venues_on_city_id  (city_id)
+#
 
 require 'spec_helper'
 

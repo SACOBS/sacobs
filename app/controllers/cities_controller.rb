@@ -1,8 +1,6 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 
-  params_for :city, :name, venues_attributes: [:id, :name, :_destroy]
-
   def index
     @q = City.search(params[:q])
     @cities = @q.result(distinct: true)
@@ -32,4 +30,10 @@ class CitiesController < ApplicationController
     def set_city
       @city = City.friendly.find(params[:id])
     end
+
+    def city_params
+      params.require(:city).permit(:name, venues_attributes: [:id, :name, :_destroy]).merge(user: current_user)
+    end
+
+
 end
