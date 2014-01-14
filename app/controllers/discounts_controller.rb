@@ -32,6 +32,6 @@ class DiscountsController < ApplicationController
     end
 
     def discount_params
-      params.require(:discount).permit(:percentage, :passenger_type_id, passenger_type_attributes: [:description]).merge(user: current_user)
+      DiscountParameters.new(params).permit(user: current_user)
     end
 end

@@ -78,16 +78,6 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def booking_params
-      params.require(:booking).permit(:trip_id,
-                                      :stop_ids,
-                                      :price,
-                                      :status,
-                                      :quantity,
-                                      :client_id,
-                                      :has_return,
-                                      client_attributes: [:id, :_destroy, :name, :surname, :cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ],
-                                      passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id],
-                                      invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]],
-                                      return_attributes: [:stop_ids, :quantity, :trip_id, :id]).merge(user: current_user)
+      BookingParameters.new(params).permit(user: current_user)
     end
 end

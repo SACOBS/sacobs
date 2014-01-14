@@ -34,12 +34,6 @@ class Trips::BuilderController < ApplicationController
     end
 
     def trip_params
-      params.require(:trip).require(:name,
-                                    :start_date,
-                                    :end_date,
-                                    :route_id,
-                                    :bus_id,
-                                    driver_ids: [],
-                                    stops_attributes: [:id, :_destroy, :arrive, :depart]).merge(user: current_user)
+      TripParameters.new(params).permit(user: current_user)
     end
 end

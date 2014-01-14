@@ -1,5 +1,4 @@
 class ContactsController < ApplicationController
-  params_for :contact, :name, :email, :message, :nickname
 
   before_action :build_contact
 
@@ -19,5 +18,9 @@ class ContactsController < ApplicationController
   private
     def build_contact
       @contact = Contact.new(contact_params)
+    end
+
+    def contact_params
+      ContactParameters.new(params).permit
     end
 end

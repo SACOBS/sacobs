@@ -12,8 +12,7 @@ class Buses::BuilderController < ApplicationController
 
   def show
     case step
-     when :seats
-       build_seats
+     when :seats then build_seats
     end
     render_wizard
   end
@@ -42,10 +41,6 @@ class Buses::BuilderController < ApplicationController
     end
 
     def bus_params
-      params.require(:bus).permit(:name,
-                                  :capacity,
-                                  :year,
-                                  :model,
-                                  seats_attributes: [:id, :_destroy, :row, :number]).merge(user: current_user)
+      BusParameters.new(params).permit(user: current_user)
     end
 end

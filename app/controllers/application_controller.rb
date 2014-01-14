@@ -1,7 +1,6 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
-  include ParamsFor
   self.responder = ApplicationResponder
   respond_to :html,:js,:json, :pdf
 

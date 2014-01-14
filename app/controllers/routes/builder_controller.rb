@@ -42,11 +42,6 @@ class Routes::BuilderController < ApplicationController
     end
 
     def route_params
-     params.require(:route).permit(:name,
-                                   :cost,
-                                   :distance,
-                                   connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost],
-                                   destinations_attributes: [:city_id, :sequence]).merge(user: current_user)
-
+      RouteParameters.new(params).permit(user: current_user)
     end
 end

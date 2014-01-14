@@ -26,6 +26,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
+    puts client_params.inspect
     @client.update(client_params)
     respond_with @client
   end
@@ -43,7 +44,7 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-       params.require(:client).permit(:name, :surname, :cell_no, :tel_no, :email, address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]).merge(user: current_user)
+      ClientParameters.new(params).permit(user: current_user)
     end
 
     def interpolation_options

@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking.update(status: :paid)
-    respond_with(@booking,location: bookings_url, notice: 'Booking was succesfully marked as paid')
+    respond_with(@booking,location: bookings_url, notice: 'Booking was succesfully confirmed')
   end
 
   def cancel

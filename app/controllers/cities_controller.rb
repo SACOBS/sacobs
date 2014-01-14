@@ -32,8 +32,6 @@ class CitiesController < ApplicationController
     end
 
     def city_params
-      params.require(:city).permit(:name, venues_attributes: [:id, :name, :_destroy]).merge(user: current_user)
+      CityParameters.new(params).permit(user: current_user)
     end
-
-
 end

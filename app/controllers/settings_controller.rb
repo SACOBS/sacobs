@@ -2,11 +2,7 @@ class SettingsController < ApplicationController
 
   before_action :set_setting
 
-  params_for :setting, :booking_expiry_period
-
-  def edit
-
-  end
+  def edit;end
 
   def update
     @setting.update(setting_params)
@@ -16,5 +12,9 @@ class SettingsController < ApplicationController
   private
     def set_setting
       @setting = Setting.first_or_create
+    end
+
+    def setting_params
+      SettingParameters.new(params).permit
     end
 end
