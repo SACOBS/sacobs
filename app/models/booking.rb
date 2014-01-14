@@ -49,7 +49,6 @@ class Booking < ActiveRecord::Base
   validate :seats_over_limit, on: :update
 
   before_save :generate_reference, if: :reserved?
-  before_save :set_associations_on_return
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
@@ -76,12 +75,5 @@ class Booking < ActiveRecord::Base
   protected
     def generate_reference
       self.reference_no = "#{self.created_at.strftime('%Y%m%d')} #{self.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "") unless self.reference_no.present?
-    end
-
-    def set_associations_on_return
-       if self.has_return
-         self.return.client = self.client unless self.return.client
-         self.return.passengers << (self.passengers.dup.each { |p| p.booking_id = nil }) if self.return.passengers.empty?
-       end
     end
 end

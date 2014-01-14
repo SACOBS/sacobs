@@ -27,4 +27,10 @@ module ApplicationHelper
   def ticket_scripture
    ScriptureService.new.fetch || settings.default_scripture
   end
+
+  def invoice_total(booking)
+    total = booking.invoice.total
+    return_total = booking.return.invoice.total if booking.return
+    total += (return_total || 0)
+  end
 end

@@ -2,13 +2,11 @@ class InvoiceBuilder
 
   def initialize(booking)
     @booking = booking
-    @return = booking.return
-    @invoice = booking.build_invoice
+    @invoice = Invoice.new
   end
 
   def build
     @booking.passengers.each { |p| build_line_item(booking_cost, p) }
-    @return.passengers.each { |p| build_line_item(return_cost, p) } if @booking.return
     build_client_credit
     @invoice
   end
@@ -42,10 +40,6 @@ class InvoiceBuilder
 
     def booking_cost
       round_up(BigDecimal(@booking.stops.cost))
-    end
-
-    def return_cost
-      round_up(BigDecimal(@return.stops.cost))
     end
 
     def round_up(cost)

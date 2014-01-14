@@ -25,6 +25,7 @@ class Bookings::BuilderController < ApplicationController
     @booking.attributes = booking_params
     case step
       when :details then build_return
+      when :passengers then update_return_associations
       when :billing then reserve_booking
     end
     render_wizard @booking
@@ -43,6 +44,15 @@ class Bookings::BuilderController < ApplicationController
       @booking.build_return(quantity: @booking.quantity, user: current_user) if @booking.has_return?
     end
 
+    def update_return_associations
+      if @booking.return
+        @booking.return.client = @booking.client
+        @booking.passengers.each do |passenger|
+          @booking.return.passengers << passenger.dup
+        end
+      end
+    end
+
     def build_passengers
       unless @booking.passengers.any?
         default_passenger_type = PassengerType.find_by(description: :standard)
@@ -51,8 +61,8 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def build_invoice
-      invoice = InvoiceBuilder.new(@booking).build
-      invoice.save!
+      @booking.invoice = InvoiceBuilder.new(@booking).build
+      @booking.return.invoice = InvoiceBuilder.new(@booking.return).build if @booking.return
     end
 
     def set_booking

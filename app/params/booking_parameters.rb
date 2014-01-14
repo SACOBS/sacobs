@@ -25,6 +25,6 @@ class BookingParameters < Struct.new(:params)
    end
 
    def return_attributes
-     { return_attributes: [:stop_ids, :quantity, :trip_id, :id] }
+     { return_attributes: [:stop_ids, :quantity, :trip_id, :id, invoice_attributes] }
    end
 end
