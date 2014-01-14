@@ -1,4 +1,4 @@
-class BookingParameters < Struct.new(params)
+class BookingParameters < Struct.new(:params)
   def permit(additional_attr = {})
     params.require(:booking).permit(booking_attributes,
                                     client_attributes,

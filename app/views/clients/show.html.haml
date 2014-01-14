@@ -40,8 +40,9 @@
           %tr
             %td= voucher.ref_no
             %td= number_to_currency(voucher.amount, unit: 'R')
+      = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.warning')
+
   .actions
     = back_to clients_path
-    = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.warning')
     = link_to 'Edit', edit_client_path(@client), icon: :edit, class: t('buttons.inverse')
     = link_to 'Destroy', @client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, class: t('buttons.danger')

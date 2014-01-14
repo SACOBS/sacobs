@@ -5,6 +5,6 @@ class SettingParameters < Struct.new(:params)
 
   private
     def setting_attributes
-      [:booking_expiry_period]
+      [ :booking_expiry_period, :ticket_instructions, :default_scripture ]
     end
 end

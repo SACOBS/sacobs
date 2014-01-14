@@ -5,7 +5,7 @@ class DiscountParameters < Struct.new(:params)
 
   private
    def discount_attributes
-    [:percentage, :passenger_type_id]
+    [ :percentage ]
    end
 
    def passenger_type_attributes

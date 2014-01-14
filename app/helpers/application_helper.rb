@@ -23,4 +23,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def ticket_scripture
+   ScriptureService.new.fetch || settings.default_scripture
+  end
 end

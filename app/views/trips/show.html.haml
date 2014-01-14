@@ -29,13 +29,14 @@
 .well
   %p
     %strong Stops:
-    - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+    - bootstrap_table headers:['From', 'To','Arrive', 'Depart', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
       - @trip.stops.each do |stop|
         %tr
           %td= stop.connection.from.name
           %td= stop.connection.to.name
           %td= stop.arrive.presence || 'None'
           %td= stop.depart.presence || 'None'
+          %td= stop.available_seats
 .form-actions
   = back_to trips_path
   = link_to 'Edit', trip_builder_path(:details, trip_id: @trip), icon: :edit, class: t('buttons.info')

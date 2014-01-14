@@ -3,8 +3,14 @@
     %h2 Settings
   .well
     %p
-      %strong Booking_Expiry_Period:
+      %strong Booking Expiry Period:
       = "#{@setting.booking_expiry_period} hours"
+    %p
+      %strong Ticket Instructions:
+      =simple_format(@setting.ticket_instructions)
+    %p
+      %strong Default Scripture:
+      =simple_format(@setting.default_scripture)
   .actions
     = link_to 'Edit', edit_setting_path, icon: :edit, class: t('buttons.info')
 

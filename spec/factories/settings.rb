@@ -6,6 +6,7 @@
 #  booking_expiry_period :integer
 #  created_at            :datetime
 #  updated_at            :datetime
+#  ticket_instructions   :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -40,22 +40,22 @@
 .costs.pull-left
   %p
   %strong Amount:
-  = number_to_currency @booking.invoice.total, unit: 'R'
+  = number_to_currency @booking.invoice.total, unit: 'R' if @booking.invoice
   %p
   %strong Discount:
-  = number_to_currency @booking.invoice.total_discount, unit: 'R'
+  = number_to_currency @booking.invoice.total_discount, unit: 'R' if @booking.invoice
 %br
 %br
 %br
 .special-instructions.text-center
   %p
-    %em= simple_format("Please note that the arrival times could be affected by road, traffic or weather conditions.Baggage not to exceed 20kgs. EXTRA WEIGHT WILL BE CHARGED AT R5.00/Kg.")
+    %em= simple_format(settings.ticket_instructions)
 %br
 %br
 .scripture.text-center
   %p
   %strong Thought for today
-  %em= simple_format("#{ScriptureService.fetch}")
+  %em= simple_format(ticket_scripture)
 
 %br
 %br

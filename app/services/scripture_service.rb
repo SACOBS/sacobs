@@ -1,10 +1,15 @@
 require 'scripture'
 class ScriptureService
-  def self.fetch
+
+  def initialize
+    @attempts = 0
+  end
+
+  def fetch
     verse = Bible::Scripture.limit(1).order("RANDOM()").pluck(:verse).first
     Scripture.get_verse(verse)
   rescue
-    fetch
+    return
   end
 
 end

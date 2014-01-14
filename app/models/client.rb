@@ -23,7 +23,7 @@ class Client < ActiveRecord::Base
   extend FriendlyId
 
   belongs_to :user
-  has_one :address, as: :addressable
+  has_one :address, as: :addressable, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :vouchers, dependent: :destroy
 
