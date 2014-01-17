@@ -3,7 +3,9 @@
 .search.pull-right
   = simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
     = f.input :name_or_model_cont, placeholder: 'Search', input_html: {class: 'search-query'}
-    = f.submit 'Search', class: t('buttons.primary')
+    = f.submit 'Search', class: t('buttons.mini.warning')
+    = link_to 'Clear', buses_path, class: t('buttons.mini.inverse'), icon: :times
+
 - bootstrap_table headers:['Name', 'Year','Model', 'Capacity', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @buses
 
