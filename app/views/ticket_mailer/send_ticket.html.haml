@@ -4,18 +4,18 @@
 .client.pull-left
   %p
     %strong Name:
-    = @booking.client_name
+    = @ticket.client.full_name
   %p
     %strong Tel No:
-    = @booking.client.telephone
+    = @ticket.client.telephone
   %p
     %strong Cell No:
-    = @booking.client.cellphone
+    = @ticket.client.cellphone
 
 .details.pull-right
   %p
     %strong Reference No:
-    = @booking.reference_no
+    = @ticket.booking.reference_no
   %p
     %strong Today's Date:
     = l Time.zone.now, format: :long
@@ -24,37 +24,47 @@
 
 .passengers
 - bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure Time', 'Arrival Time'], types: [:bordered] do
-  - @booking.passengers.each do |passenger|
+  - @ticket.passengers.each do |passenger|
     %tr
-    %td= @booking.trip_start_date
+    %td= @ticket.booking.trip_start_date
     %td= passenger.full_name
-    %td= @booking.from
-    %td= @booking.from_venue
-    %td= @booking.to
-    %td= @booking.to_venue
-    %td= @booking.stops.first.depart || Time.current
-    %td= @booking.stops.first.arrive || Time.current
-
+    %td= @ticket.booking.from
+    %td= @ticket.booking.from_venue
+    %td= @ticket.booking.to
+    %td= @ticket.booking.to_venue
+    %td= @ticket.booking.stops.first.depart || l(Time.zone.now, format: :long)
+    %td= @ticket.booking.stops.first.arrive || l(Time.zone.now, format: :long)
+  - @ticket.passengers.each do |passenger|
+    %tr
+    %td= @ticket.return.trip_start_date
+    %td= passenger.full_name
+    %td= @ticket.return.from
+    %td= @ticket.return.from_venue
+    %td= @ticket.return.to
+    %td= @ticket.return.to_venue
+    %td= @ticket.return.stops.first.depart || l(Time.zone.now, format: :long)
+    %td= @ticket.return.stops.first.arrive || l(Time.zone.now, format: :long)
 %br
 
 .costs.pull-left
   %p
   %strong Amount:
-  = number_to_currency @booking.invoice.total, unit: 'R'
+  = number_to_currency @ticket.total, unit: 'R'
   %p
   %strong Discount:
-  = number_to_currency @booking.invoice.total_discount, unit: 'R'
+  = number_to_currency @ticket.total_discount, unit: 'R'
+%br
 %br
 %br
 .special-instructions.text-center
   %p
-    = simple_format("Please note that the arrival times could be affected by road, traffic or weather conditions.Baggage not to exceed 20kgs. EXTRA WEIGHT WILL BE CHARGED AT R5.00/Kg.")
+    %em= simple_format(settings.ticket_instructions)
 %br
 %br
 .scripture.text-center
   %p
   %strong Thought for today
-  = simple_format("<em>Do not remember the sins of my youth or my transgressions; According to Your loving kindness remember me, For Your goodness' sake, O LORD.</em>")
+  %em= simple_format(ticket_scripture)
 
 %br
 %br

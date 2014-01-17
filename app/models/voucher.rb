@@ -20,7 +20,7 @@
 class Voucher < ActiveRecord::Base
   default_scope -> { where(active: true) }
 
-  belongs_to :client
+  belongs_to :client, touch: true
   belongs_to :user
 
   before_create :generate_reference_no

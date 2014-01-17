@@ -2,16 +2,20 @@ class TicketsController < ApplicationController
   before_action :set_booking
 
   def download
+    @ticket = Ticket.new(@booking)
     pdf = generate_pdf
     send_data(pdf,
               filename: generate_file_name,
               disposition: :attachment)
   end
 
-  def show;end
+  def show
+    @ticket = Ticket.new(@booking)
+  end
 
   def print
-    respond_with @booking do |format|
+    @ticket = Ticket.new(@booking)
+    respond_to do |format|
       format.pdf do
         render pdf: generate_file_name,
                template: 'tickets/_ticket.html.haml',
@@ -28,7 +32,7 @@ class TicketsController < ApplicationController
 
   private
    def set_booking
-     @booking = Booking.find(params[:id]).decorate
+     @booking = Booking.find(params[:id])
    end
 
    def generate_file_name

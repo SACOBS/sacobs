@@ -3,7 +3,7 @@ class TicketMailer < ActionMailer::Base
   default from: "tickets@sacobs.com"
 
   def send_ticket(booking)
-    @booking = booking
+    @ticket = Ticket.new(booking)
     mail to: booking.client.email, subject: 'Your Ticket'
   end
 end

@@ -17,7 +17,7 @@ class ContactsController < ApplicationController
 
   private
     def build_contact
-      @contact = Contact.new(contact_params)
+      @contact = Contact.new
     end
 
     def contact_params

@@ -1,5 +1,16 @@
-- bootstrap_table headers:['Drivers', 'From','Time','O/Reading', 'To', 'Time', 'O/Reading', 'Depot', 'R', 'L', 'O/Reading', 'R/KM' ], types: [:bordered] do
-  - 10.times do
+%p
+  %strong NB!
+  Please do not allow passengers to open/close doors unattended.
+%p
+  %strong NB! For insurance purposes:
+  Names of all persons in the vehicle must be on the trip sheet
+  Please record all relevant details
+  %b i.e Full Name, Surname and contact numbers
+%p
+  %strong Use colour coded stickers on baggage to identify the same.
+
+- bootstrap_table headers:['Drivers', 'From','Time','O/Reading', 'To', 'Time'], types: [:bordered] do
+  - 5.times do
     %tr
       %td
       %td
@@ -7,9 +18,61 @@
       %td
       %td
       %td
-      %td
-      %td
-      %td
-      %td
-      %td
-      %td
+
+- bootstrap_table headers:[], types: [:bordered, :condensed] do
+  %tr
+    %td cash
+    %td
+  %tr
+    %td cash send
+    %td
+  %tr
+    %td cash send
+    %td
+  %tr
+    %td POB
+    %td
+  %tr
+    %td difference
+    %td
+
+- bootstrap_table headers:['Trip remarks'], types: [:bordered, :condensed] do
+  %tr
+    %td Diesel
+  %tr
+    %td PE
+    %td
+    %td Diesel
+  %tr
+    %td Toll
+    %td
+    %td
+    %td Mos
+    %td
+  %tr
+    %td Mos
+    %td
+    %td
+    %td Toll
+    %td
+  %tr
+    %td Cpt
+    %td
+    %td
+    %td PE
+    %td
+
+- bootstrap_table headers:['Items on checklist to report pm'], types: [:bordered, :condensed] do
+  %tr
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+%p
+  %strong
+    Please ensure the home keys left in place of safety.
+    The vehicle fuel level is above a 1/4 tank at all times.
+%p.pull-right
+  PTO

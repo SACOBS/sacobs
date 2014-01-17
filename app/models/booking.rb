@@ -29,6 +29,8 @@ class Booking < ActiveRecord::Base
 
   enum :status, [:paid, :reserved, :cancelled, :in_process]
 
+
+
   belongs_to :user
   belongs_to :trip
   belongs_to :client
@@ -60,6 +62,10 @@ class Booking < ActiveRecord::Base
     SeatingAssigner.new(self).assign
     self.expiry_date = expiring_on
     self.status = :reserved
+  end
+
+  def is_return?
+    self.main_id?
   end
 
   private

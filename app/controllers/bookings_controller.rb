@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    @q = Booking.search(params[:q])
+    @q = Booking.not_in_process.search(params[:q])
     @bookings = @q.result(distinct: true).decorate
   end
 

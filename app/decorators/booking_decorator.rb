@@ -1,5 +1,7 @@
 class BookingDecorator < Draper::Decorator
   delegate_all
+  decorates_association :main
+  decorates_association :return
   decorates_association :client
   decorates_association :passengers
 
