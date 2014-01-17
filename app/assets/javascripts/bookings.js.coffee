@@ -1,3 +1,8 @@
+#Client
+$(document).on 'click', '#add_new', ->
+  $('.new_client').slideToggle('slow');
+
+#Billing
 $(document).on 'change', '.discount, .gross', ->
   line_item =  $(this).closest('tr')
   discount = Number(line_item.find('td.discount input').val())
