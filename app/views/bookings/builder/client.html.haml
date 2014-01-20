@@ -1,13 +1,11 @@
 .page-header
   %h3 Client
-  %h4 Search for an existing client or enter details for a new client
 #errors= errors_for @booking
-= link_to 'Add New Client', '#', id: 'add_new'
-%br
-%br
 = simple_form_for @booking, url: wizard_path, defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
-  = f.association :client , collection: Client.all, label_method: :full_name, prompt: 'Select A Client', input_html: {rel: :autocomplete }
-  .new_client{style: 'display:none'}
+  %h4 Search for an existing or create a new client
+  .well
+    = f.association :client, collection: Client.all,label: false,label_method: :full_name, hint: raw("#{link_to('Add New Client', '#', icon: :plus, id: 'new_client')}") ,prompt: 'Select Existing Client',input_html: {rel: :autocomplete }
+  .new_client_fields{style: 'display:none'}
     = f.simple_fields_for :client do |client|
       %fieldset
         %legend Details

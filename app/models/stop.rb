@@ -25,6 +25,7 @@ class Stop < ActiveRecord::Base
 
  scope :cost, -> { includes(:connection).sum('connections.cost')}
  scope :en_route, -> (destination) { joins(:trip,connection: [:to,:route]).where('destinations.sequence > ?', destination.sequence).readonly(false)}
+ scope :valid, -> { joins(:trip).merge(Trip.valid) }
 
  delegate :name, :from, :to, to: :connection
 

@@ -1,6 +1,6 @@
 #Client
-$(document).on 'click', '#add_new', ->
-  $('.new_client').slideToggle('slow');
+$(document).on 'click', '#new_client', ->
+  $('.new_client_fields').fadeToggle('slow', 'linear');
 
 #Billing
 $(document).on 'change', '.discount, .gross', ->

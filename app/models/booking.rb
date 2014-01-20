@@ -54,10 +54,10 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
-
+  scope :active, -> { joins(:trip).merge(Trip.valid) }
 
   def expired?
-    self.expiry_date <= Time.zone.now
+    self.expiry_date <= Time.zone.now && self.reserved?
   end
 
   def reserve(expiring_on)

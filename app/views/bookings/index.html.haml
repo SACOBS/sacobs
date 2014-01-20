@@ -9,6 +9,17 @@
     = link_to 'Clear', bookings_path, class: t('buttons.mini.inverse'), icon: :times
 
 
+.well.well-small.pull-left
+  %h4 Legend
+  %span.label.label-warning Expired
+  %br
+  %span.label.label-success Paid
+  %br
+  %span.label.label-info Reserved
+  %br
+  %span.label.label-important Cancelled
+
+
 - bootstrap_table headers:['Client','Trip Date','Qty','Trip','From','To','Status','Booking Date', 'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @bookings
 

@@ -6,7 +6,7 @@ class Bookings::BuilderController < ApplicationController
   before_action :set_booking, only: [:index, :show, :update]
 
   def index
-    @stops = JourneySearch.new(@booking, params[:q]).results
+    @stops = fetch_stops
   end
 
 
@@ -80,7 +80,8 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def fetch_stops
-      @stops = Stop.includes(:trip, :connection)
+      criteria = params[:q] ||= {}
+      @stops = JourneySearch.new(@booking, criteria).results
     end
 
     def set_booking_expiry_date
