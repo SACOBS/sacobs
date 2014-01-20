@@ -37,15 +37,14 @@ class Client < ActiveRecord::Base
 
   after_initialize :init_address, if: :new_record?
 
-  def full_name
-    "#{self.name} #{self.surname}"
-  end
+  before_save :set_full_name
 
   protected
     def init_address
       self.build_address unless self.address.present?
     end
 
-
-
+    def set_full_name
+      self.full_name = "#{name} #{surname}"
+    end
 end

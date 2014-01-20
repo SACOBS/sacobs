@@ -6,7 +6,7 @@ class Bookings::BuilderController < ApplicationController
   before_action :set_booking, only: [:index, :show, :update]
 
   def index
-    @stops = Stop.includes(:trip, :connection).search(clean_search_params).result(distinct: true)
+    @stops = JourneySearch.new(@booking, params[:q]).results
   end
 
 

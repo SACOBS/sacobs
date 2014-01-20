@@ -26,7 +26,7 @@ class Route < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :destinations, -> { order(:sequence) }
+  has_many :destinations, -> { includes(:city).order(:sequence) }
   has_many :cities, through: :destinations
   has_many :connections, -> { includes(:from, :to) }, dependent: :destroy, autosave: true
 
@@ -34,4 +34,12 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :cost, :distance, presence: true, on: :update
+
+  def start_city
+    self.destinations.first.city unless self.destinations.empty?
+  end
+
+  def end_city
+    self.destinations.last.city unless self.destinations.empty?
+  end
 end

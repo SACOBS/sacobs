@@ -54,6 +54,8 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
+
+
   def expired?
     self.expiry_date <= Time.zone.now
   end
