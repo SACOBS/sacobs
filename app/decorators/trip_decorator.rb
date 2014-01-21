@@ -2,13 +2,13 @@ class TripDecorator < Draper::Decorator
   delegate_all
 
   def start_date
-    return 'None' unless model.start_date
-    l(model.start_date, format: :long)
+   return 'None' unless model.start_date
+   model.start_date
   end
 
   def end_date
    return 'None' unless model.end_date
-   l(model.end_date, format: :long)
+   model.end_date
   end
 
   def connections
@@ -24,7 +24,7 @@ class TripDecorator < Draper::Decorator
   end
 
   def created_at
-    l(model.created_at, format: :long)
+    model.created_at
   end
 
 end

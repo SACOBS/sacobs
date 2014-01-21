@@ -14,7 +14,7 @@ class BookingDecorator < Draper::Decorator
   end
 
   def travel_date
-    l model.trip_start_date, format: :long
+    model.trip_start_date
   end
 
 
@@ -39,11 +39,11 @@ class BookingDecorator < Draper::Decorator
   end
 
   def booking_date
-    l model.created_at
+    model.created_at
   end
 
   def expiry_date
-    l model.expiry_date
+    model.expiry_date
   end
 
   def price

@@ -5,7 +5,7 @@
         %td{style: 'display:none'}
           = simple_form_for :booking, namespace: stop.id ,url: wizard_path(:details), method: :patch ,wrapper: false, defaults: {label: false} do |f|
             %td= stop.trip.name
-            %td= l stop.trip.start_date, format: :long
+            %td= stop.trip.start_date
             %td= stop.from.city.name
             %td= stop.to.city.name
             %td= stop.available_seats

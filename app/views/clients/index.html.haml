@@ -7,7 +7,7 @@
     = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
 
-- bootstrap_table headers:['Name', 'Surname','Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+- bootstrap_table headers:['Name', 'Surname', 'High Risk','Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @clients
 
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus

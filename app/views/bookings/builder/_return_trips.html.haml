@@ -6,7 +6,7 @@
           = simple_form_for @booking, namespace: stop.id, url: wizard_path(:returns) ,method: :patch ,wrapper: false, defaults: {label: false} do |f|
             = f.simple_fields_for :return do |return_f|
               %td= stop.trip.name
-              %td= l stop.trip.start_date, format: :long
+              %td= stop.trip.start_date
               %td= stop.from.city.name
               %td= stop.to.city.name
               %td= stop.available_seats
