@@ -39,7 +39,7 @@ class InvoiceBuilder
     end
 
     def booking_cost
-      round_up(BigDecimal(@booking.stops.cost))
+      round_up(BigDecimal(@booking.stop.connection.cost))
     end
 
     def round_up(cost)

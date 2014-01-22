@@ -31,13 +31,13 @@ class Booking < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :trip
+  belongs_to :stop
   belongs_to :client
   belongs_to :main, class_name: :Booking, foreign_key: :main_id
   has_one :return, class_name: :Booking, foreign_key: :main_id, dependent: :destroy
   has_one :invoice, -> {includes(:line_items)}, dependent: :destroy
   has_one :payment_detail, dependent: :destroy
   has_many :passengers, dependent: :destroy
-  has_and_belongs_to_many :stops, autosave: true
 
   accepts_nested_attributes_for :client, reject_if: proc { |attrs| attrs.except(:high_risk, :bank_id).all? { |k, v| v.blank? } }
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
@@ -55,9 +55,6 @@ class Booking < ActiveRecord::Base
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
 
-  def expired?
-    self.expiry_date <= Time.zone.now && self.reserved?
-  end
 
   def reserve(expiring_on)
     SeatingAssigner.new(self).assign
@@ -75,7 +72,7 @@ class Booking < ActiveRecord::Base
     end
 
     def seats_over_limit
-        available_seats = self.stops.first.available_seats
+        available_seats = self.stop.available_seats
         self.errors.add(:base,"There are not enough seats (#{available_seats}) available for this booking (#{self.quantity}).") unless available_seats >= self.quantity
     end
 

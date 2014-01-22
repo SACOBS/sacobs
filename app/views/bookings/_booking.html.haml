@@ -2,11 +2,11 @@
   %td= link_to booking.client_name, client_path(booking.client), remote: true
   %td= booking.travel_date
   %td= booking.quantity
-  %td= booking.trip_name
   %td= booking.from
   %td= booking.to
   %td= booking.status
   %td= booking.booking_date
+  %td= booking.expires_in
   %td= booking.expiry_date
   %td
     = link_to 'Show', booking, icon: :info, class: t('buttons.mini.info')

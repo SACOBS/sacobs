@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122132804) do
+ActiveRecord::Schema.define(version: 20140122155300) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -43,20 +43,13 @@ ActiveRecord::Schema.define(version: 20140122132804) do
     t.string   "reference_no"
     t.integer  "main_id"
     t.boolean  "has_return",   default: false
+    t.integer  "stop_id"
   end
 
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id"
   add_index "bookings", ["main_id"], name: "index_bookings_on_main_id"
   add_index "bookings", ["trip_id"], name: "index_bookings_on_trip_id"
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
-
-  create_table "bookings_stops", force: true do |t|
-    t.integer "booking_id"
-    t.integer "stop_id"
-  end
-
-  add_index "bookings_stops", ["booking_id", "stop_id"], name: "index_bookings_stops_on_booking_id_and_stop_id"
-  add_index "bookings_stops", ["stop_id", "booking_id"], name: "index_bookings_stops_on_stop_id_and_booking_id"
 
   create_table "buses", force: true do |t|
     t.string   "name"

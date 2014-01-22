@@ -9,7 +9,7 @@ class BookingParameters < Struct.new(:params)
 
   private
    def booking_attributes
-     [:trip_id, :stop_ids, :price, :status, :quantity, :client_id, :has_return,]
+     [:trip_id, :price, :status, :quantity, :client_id, :has_return, :stop_id]
    end
 
    def client_attributes
@@ -25,6 +25,6 @@ class BookingParameters < Struct.new(:params)
    end
 
    def return_attributes
-     { return_attributes: [:stop_ids, :quantity, :trip_id, :id, invoice_attributes] }
+     { return_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
    end
 end

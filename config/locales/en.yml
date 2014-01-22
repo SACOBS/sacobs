@@ -22,11 +22,10 @@
 en:
   time:
       formats:
-       default: "%B %d, %Y %H:%M%p"
+       default: "%-d %B %Y %H:%M %p"
        short: "%b %d"
        long: "%d %B %Y"
        numeric: "%Y%m%d"
-       dateless: "%H:%M%p"
   distance:
     unit: 'km'
   messages:

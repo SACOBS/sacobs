@@ -9,6 +9,14 @@ class ConnectionDecorator < Draper::Decorator
     model.to.try(:name) || 'None'
   end
 
+  def from_city
+    model.from.city
+  end
+
+  def to_city
+    model.to.city
+  end
+
   def distance
     h.number_to_human(model.distance, units: :distance)
   end

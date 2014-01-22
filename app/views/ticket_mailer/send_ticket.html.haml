@@ -32,8 +32,8 @@
     %td= @ticket.booking.from_venue
     %td= @ticket.booking.to
     %td= @ticket.booking.to_venue
-    %td= @ticket.booking.stops.first.depart || l(Time.zone.now, format: :long)
-    %td= @ticket.booking.stops.first.arrive || l(Time.zone.now, format: :long)
+    %td= @ticket.booking.stop.depart
+    %td= @ticket.booking.stop.arrive
   - @ticket.passengers.each do |passenger|
     %tr
     %td= @ticket.return.trip_start_date
@@ -42,8 +42,8 @@
     %td= @ticket.return.from_venue
     %td= @ticket.return.to
     %td= @ticket.return.to_venue
-    %td= @ticket.return.stops.first.depart || l(Time.zone.now, format: :long)
-    %td= @ticket.return.stops.first.arrive || l(Time.zone.now, format: :long)
+    %td= @ticket.return.stop.depart
+    %td= @ticket.return.stop.arrive
 %br
 
 .costs.pull-left

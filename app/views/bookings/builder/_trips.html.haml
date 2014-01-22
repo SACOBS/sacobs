@@ -14,7 +14,7 @@
             %td
               = token_tag
               = f.hidden_field :trip_id, value: stop.trip.id
-              = f.hidden_field :stop_ids, value: stop.id
+              = f.hidden_field :stop_id, value: stop.id
               = f.submit 'Book', class: t('buttons.primary')
 - else
   %p

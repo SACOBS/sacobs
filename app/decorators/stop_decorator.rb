@@ -3,6 +3,15 @@ class StopDecorator < Draper::Decorator
 
   decorates_association :connection
 
+
+  def from_city
+    connection.from_city
+  end
+
+  def to_city
+    connection.to_city
+  end
+
   def from
     connection.from
   end
@@ -12,11 +21,11 @@ class StopDecorator < Draper::Decorator
   end
 
   def arrive
-    l model.arrive, format: :dateless
+    model.arrive.strftime("%H:%M%p")
   end
 
   def depart
-    l model.depart, format: :dateless
+    model.depart.strftime("%H:%M%p")
   end
 
 

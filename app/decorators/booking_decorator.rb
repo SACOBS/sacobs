@@ -4,6 +4,7 @@ class BookingDecorator < Draper::Decorator
   decorates_association :return
   decorates_association :client
   decorates_association :passengers
+  decorates_association :stop
 
   def reference
     model.reference_no.presence || 'None'
@@ -17,21 +18,20 @@ class BookingDecorator < Draper::Decorator
     model.trip_start_date
   end
 
-
   def from
-    stops.first.from.name
+    stop.from
   end
 
   def from_venue
-    stops.first.from.city.venues.any? ? model.stops.first.from.city.venues.first.name : 'None'
+   stop.connection.from_city.venues.any? ? stop.connection.from_city.venues.first.name : 'None'
   end
 
   def to
-    stops.last.to.name
+    stop.to
   end
 
   def to_venue
-   stops.last.to.city.venues.any? ? model.stops.first.to.city.venues.first.name : 'None'
+    stop.connection.to_city.venues.any? ? stop.connection.to_city.venues.first.name : 'None'
   end
 
   def status
@@ -39,11 +39,12 @@ class BookingDecorator < Draper::Decorator
   end
 
   def booking_date
-   l model.created_at
+    model.created_at
   end
 
-  def expiry_date
-   l model.expiry_date
+
+  def expires_in
+    h.distance_of_time_in_words_to_now(expiry_date)
   end
 
   def price
@@ -51,7 +52,7 @@ class BookingDecorator < Draper::Decorator
   end
 
   def payment_date
-   l payment_detail.payment_date if payment_detail
+    payment_detail.payment_date if payment_detail
   end
 
   def payment_bank
@@ -63,7 +64,7 @@ class BookingDecorator < Draper::Decorator
   end
 
   def row_class
-   return 'warning' if model.expired?
+   return 'warning' if expired?
    case model.status
      when :paid
        'success'
@@ -74,5 +75,9 @@ class BookingDecorator < Draper::Decorator
      else
        ''
    end
- end
+  end
+
+  def expired?
+    expiry_date <= Time.zone.now && reserved?
+  end
 end
