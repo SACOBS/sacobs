@@ -12,6 +12,9 @@
 #  email      :string(255)
 #  slug       :string(255)
 #  user_id    :integer
+#  full_name  :string(255)
+#  high_risk  :boolean          default(FALSE)
+#  bank_id    :integer
 #
 # Indexes
 #

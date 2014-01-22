@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121100434) do
+ActiveRecord::Schema.define(version: 20140122132804) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 20140121100434) do
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
+
+  create_table "banks", force: true do |t|
+    t.string "name"
+  end
 
   create_table "bookings", force: true do |t|
     t.integer  "trip_id"
@@ -88,6 +92,7 @@ ActiveRecord::Schema.define(version: 20140121100434) do
     t.integer  "user_id"
     t.string   "full_name"
     t.boolean  "high_risk",  default: false
+    t.integer  "bank_id"
   end
 
   add_index "clients", ["slug"], name: "index_clients_on_slug", unique: true
@@ -223,6 +228,13 @@ ActiveRecord::Schema.define(version: 20140121100434) do
   add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id"
   add_index "passengers", ["passenger_type_id"], name: "index_passengers_on_passenger_type_id"
 
+  create_table "payment_details", force: true do |t|
+    t.datetime "payment_date"
+    t.integer  "bank_id"
+    t.integer  "booking_id"
+    t.string   "reference"
+  end
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -275,8 +287,8 @@ ActiveRecord::Schema.define(version: 20140121100434) do
   create_table "stops", force: true do |t|
     t.integer  "connection_id"
     t.integer  "trip_id"
-    t.datetime "arrive"
-    t.datetime "depart"
+    t.time     "arrive"
+    t.time     "depart"
     t.integer  "available_seats"
     t.datetime "created_at"
     t.datetime "updated_at"

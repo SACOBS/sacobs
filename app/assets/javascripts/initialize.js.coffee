@@ -2,6 +2,7 @@ $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs'
 
 $ ->
   $('.datepicker').datetimepicker({pickTime: false});
+  $('.timepicker').datetimepicker({pickDate: false, pickSeconds: false});
   $('.datetimepicker').datetimepicker();
 
   $('select[rel="autocomplete"]').each ->
@@ -12,4 +13,9 @@ $ ->
 
   $(document).on 'hidden', '#client_contact_detail', ->
     $(this).remove()
+
+  $('#Tabbed a').click (e)->
+    e.preventDefault()
+    $(this).tab('show')
+
 

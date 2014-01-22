@@ -13,3 +13,5 @@
 #errors= errors_for @booking
 .trips
   = render partial: 'bookings/builder/trips'
+
+= link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')

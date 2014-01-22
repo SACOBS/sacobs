@@ -1,0 +1,29 @@
+.page-header
+  %h2 Edit Bus
+
+#errors= errors_for @bus
+
+%ul#Tabbed.nav.nav-tabs
+  %li.active
+    %a{href: "#details"} Details
+  %li
+    %a{href: "#seating"} Seating
+
+
+= simple_form_for @bus, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  .tab-content
+    #details.tab-pane.active
+      %fieldset
+        = f.input :name
+        = f.input :capacity, disabled: true
+        = f.input :year
+        = f.input :model
+    #seating.tab-pane
+      %fieldset
+        - bootstrap_table headers:['Row', 'Number',''], types: [:bordered, :condensed], html_options: {id: 'seats'} do
+          = f.simple_fields_for :seats, wrapper: false do |seat|
+            %tr
+              %td= seat.input :row, label: false, class: 'input-small'
+              %td= seat.input :number, label: false, class: 'input-small'
+  .form-actions
+    = f.submit class: t('buttons.primary')

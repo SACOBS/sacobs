@@ -1,7 +1,7 @@
 class Trips::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  before_action :set_trip, only: [:destroy, :show, :update]
+  before_action :set_trip, only: [:show, :update]
 
   steps :details, :stops
 
@@ -19,10 +19,6 @@ class Trips::BuilderController < ApplicationController
     render_wizard @trip
   end
 
-  def destroy
-    @trip.destroy if @trip.empty?
-    redirect_to_finish_wizard
-  end
 
   private
     def finish_wizard_path

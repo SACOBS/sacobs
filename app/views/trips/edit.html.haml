@@ -1,0 +1,33 @@
+.page-header
+  %h2 Edit Trip
+
+#errors= errors_for @trip
+
+%ul#Tabbed.nav.nav-tabs
+  %li.active
+    %a{href: "#details"} Details
+  %li
+    %a{href: "#stops"} Stops
+
+
+= simple_form_for @trip, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  .tab-content
+    #details.tab-pane.active
+      %fieldset
+        = f.input :name
+        = f.input :start_date, as: :date_picker
+        = f.input :end_date, as: :date_picker
+        = f.association :route, include_blank: false, prompt: 'Select Route', disabled: true
+        = f.association :bus, include_blank: false, prompt: 'Select Bus', input_html: {rel: 'autocomplete'}
+        = f.association :drivers, as: :check_boxes
+    #stops.tab-pane
+      %fieldset
+        - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :condensed], html_options: {id: 'stops'} do
+          = f.simple_fields_for :stops, wrapper: false do |stop|
+            %tr
+              %td= stop.object.connection.from.name
+              %td= stop.object.connection.to.name
+              %td= stop.input :arrive, as: :time_picker, label: false
+              %td= stop.input :depart, as: :time_picker, label: false
+  .form-actions
+    = f.submit class: t('buttons.primary')

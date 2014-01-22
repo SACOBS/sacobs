@@ -1,4 +1,4 @@
-- if @stops
+- if @stops.any?
   - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Qty', 'Return?'], types: [:bordered], html_options: {class: 'datatable'} do
     - @stops.each do |stop|
       %tr

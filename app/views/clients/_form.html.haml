@@ -4,6 +4,7 @@
     = f.input :name
     = f.input :surname
     = f.input :high_risk
+    = f.association :bank, include_blank: false, prompt: 'Select a bank'
     = f.input :tel_no, as: :tel
     = f.input :cell_no, as: :tel
     = f.input :email, as: :email

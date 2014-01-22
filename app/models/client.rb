@@ -12,6 +12,9 @@
 #  email      :string(255)
 #  slug       :string(255)
 #  user_id    :integer
+#  full_name  :string(255)
+#  high_risk  :boolean          default(FALSE)
+#  bank_id    :integer
 #
 # Indexes
 #
@@ -23,6 +26,7 @@ class Client < ActiveRecord::Base
   extend FriendlyId
 
   belongs_to :user
+  belongs_to :bank
   has_one :address, as: :addressable, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :vouchers, dependent: :destroy
@@ -30,6 +34,7 @@ class Client < ActiveRecord::Base
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
+  delegate :name, to: :bank, prefix: true, allow_nil: true
 
   friendly_id :full_name, use: :slugged
 
@@ -45,6 +50,6 @@ class Client < ActiveRecord::Base
     end
 
     def set_full_name
-      self.full_name = "#{name} #{surname}"
+      self.full_name = "#{self.name} #{self.surname}"
     end
 end

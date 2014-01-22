@@ -7,6 +7,7 @@
 #  created_at            :datetime
 #  updated_at            :datetime
 #  ticket_instructions   :string(255)
+#  default_scripture     :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

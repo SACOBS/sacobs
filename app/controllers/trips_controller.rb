@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:copy, :show, :destroy]
+  before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
   def index
     @q = Trip.search(params[:q])
@@ -20,6 +20,11 @@ class TripsController < ApplicationController
     end
   end
 
+  def update
+    @trip.update(trip_params)
+    respond_with @trip
+  end
+
   def destroy
     @trip.destroy
     respond_with(@trip)
@@ -28,5 +33,9 @@ class TripsController < ApplicationController
   private
     def set_trip
       @trip = Trip.includes(stops: :connection).find(params[:id])
+    end
+
+    def trip_params
+      TripParameters.new(params).permit(user_id: current_user)
     end
 end

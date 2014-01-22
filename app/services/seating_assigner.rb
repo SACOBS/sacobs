@@ -6,10 +6,12 @@ class SeatingAssigner
   end
 
   def unassign
+    return unless @booking.trip && @booking.stops.any?
     affected_stops.each { |stop| stop.increment!(:available_seats, @booking.quantity) }
   end
 
   def assign
+    return unless @booking.trip && @booking.stops.any?
     affected_stops.each { |stop| stop.decrement!(:available_seats, @booking.quantity) }
   end
 

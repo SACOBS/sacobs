@@ -11,7 +11,7 @@
         %legend Details
         = client.input :name
         = client.input :surname
-        = client.input :high_risk
+        = client.association :bank, prompt: 'Select a bank', include_blank: false
         = client.input :tel_no, as: :tel
         = client.input :cell_no, as: :tel
         = client.input :email, as: :email
@@ -28,3 +28,8 @@
 
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
+
+
+

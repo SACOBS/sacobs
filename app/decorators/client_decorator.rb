@@ -20,6 +20,10 @@ class ClientDecorator < Draper::Decorator
     h.mail_to(model.email)
   end
 
+  def bank
+    model.bank_name.presence || 'None'
+  end
+
   def modifier
     model.try(:user)
   end

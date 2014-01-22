@@ -1,0 +1,13 @@
+.page-header
+  %h2 Enter Payment Details
+  %h4= "Booking Reference: #{@booking.reference_no}"
+
+#errors= errors_for @payment_detail
+= simple_form_for [@booking ,@payment_detail],  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.association :bank, include_blank: false, prompt: 'Select a bank'
+    = f.input :payment_date, as: :date_time_picker
+  .form-actions
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', bookings_path, class: t('buttons.default')
+

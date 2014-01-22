@@ -20,7 +20,7 @@
 #
 
 class Trip < ActiveRecord::Base
-  include AttributesEmpty
+  include AttributeDefaults
 
   belongs_to :user
   belongs_to :bus
@@ -43,6 +43,11 @@ class Trip < ActiveRecord::Base
 
   scope :valid, -> { where('start_date >= ?', Date.today) }
   scope :from, -> (location) { joins(route: :destinations).where(destinations: { city_id: location, sequence: 1 } ) }
+
+  private
+   def defaults
+     { start_date: Date.today, end_date: Date.tomorrow }
+   end
 
   protected
    def generate_stops

@@ -8,6 +8,6 @@
         = render 'trips/builder/stop_fields', f: stop
   .form-actions
     = f.submit 'Finish', class: t('buttons.primary')
-    = link_to 'Cancel', trip_builder_path(trip_id: @trip), method: :delete ,class: t('buttons.default')
+    = link_to 'Cancel', trip_path(@trip), method: :delete ,class: t('buttons.danger')
 
 

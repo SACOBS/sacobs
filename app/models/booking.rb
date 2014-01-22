@@ -29,18 +29,17 @@ class Booking < ActiveRecord::Base
 
   enum :status, [:paid, :reserved, :cancelled, :in_process]
 
-
-
   belongs_to :user
   belongs_to :trip
   belongs_to :client
   belongs_to :main, class_name: :Booking, foreign_key: :main_id
-  has_one :return, class_name: :Booking, foreign_key: :main_id
-  has_one :invoice, -> {includes(:line_items)}
+  has_one :return, class_name: :Booking, foreign_key: :main_id, dependent: :destroy
+  has_one :invoice, -> {includes(:line_items)}, dependent: :destroy
+  has_one :payment_detail, dependent: :destroy
   has_many :passengers, dependent: :destroy
   has_and_belongs_to_many :stops, autosave: true
 
-  accepts_nested_attributes_for :client, reject_if: :all_blank
+  accepts_nested_attributes_for :client, reject_if: proc { |attrs| attrs.except(:high_risk, :bank_id).all? { |k, v| v.blank? } }
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
   accepts_nested_attributes_for :return, reject_if: :all_blank

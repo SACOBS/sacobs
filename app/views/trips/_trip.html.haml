@@ -9,5 +9,5 @@
     = link_to 'Copy', copy_trip_path(trip), icon: :copy ,class: t('buttons.mini.warning'), method: :post
     = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: t('buttons.mini.default'), target: '_blank'
     = link_to 'Show', trip, icon: :info, class: t('buttons.mini.info')
-    = link_to 'Edit', trip_builder_path(:details, trip_id: trip), icon: :edit,  class: t('buttons.mini.inverse')
+    = link_to 'Edit', edit_trip_path(trip), icon: :edit,  class: t('buttons.mini.inverse')
     = link_to 'Destroy', trip, method: :delete, data: { confirm: t('messages.confirm', resource: :trip) }, class: 'btn btn-mini btn-danger', icon: :times

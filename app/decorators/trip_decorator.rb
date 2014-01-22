@@ -1,6 +1,8 @@
 class TripDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :stops
+
   def start_date
    return 'None' unless model.start_date
    model.start_date

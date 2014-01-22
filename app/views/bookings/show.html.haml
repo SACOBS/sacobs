@@ -29,6 +29,23 @@
     %strong Price:
     %br
     = @booking.price
+
+.well
+  %h3 Payment Detail
+  %p
+    %strong Bank:
+    %br
+    = @booking.payment_bank
+  %p
+    %strong Payment Date:
+    %br
+    = @booking.payment_date
+
+  %p
+    %strong Reference:
+    %br
+    =  @booking.payment_reference
+
 .well
   %h3 Client
   %p

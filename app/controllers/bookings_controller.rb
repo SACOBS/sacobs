@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    @q = Booking.not_in_process.search(params[:q])
+    @q = Booking.not_in_process.active.search(params[:q])
     @bookings = @q.result(distinct: true).decorate
   end
 
@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking.update(status: :paid)
-    respond_with(@booking,location: bookings_url, notice: 'Booking was succesfully confirmed')
+    respond_with(@booking,location: new_booking_payment_detail_url(@booking), notice: 'Booking was succesfully confirmed')
   end
 
   def cancel

@@ -30,3 +30,5 @@
         %strong= number_to_currency(invoice_total(@booking), unit: 'R')
   .form-actions
     = f.submit 'Complete', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+

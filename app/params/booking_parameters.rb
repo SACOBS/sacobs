@@ -13,7 +13,7 @@ class BookingParameters < Struct.new(:params)
    end
 
    def client_attributes
-     { client_attributes: [:id, :_destroy, :name, :surname, :high_risk,:cell_no, :tel_no, :email ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ] }
+     { client_attributes: [:id, :_destroy, :name, :surname, :high_risk,:cell_no, :tel_no, :email, :bank_id ,address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy] ] }
    end
 
    def passenger_attributes

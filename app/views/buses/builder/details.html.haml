@@ -9,4 +9,4 @@
     = f.input :model
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', bus_builder_path(bus_id: @bus), method: :delete ,class: t('buttons.default')
+    = link_to 'Cancel', bus_path(@bus), method: :delete ,class: t('buttons.danger')

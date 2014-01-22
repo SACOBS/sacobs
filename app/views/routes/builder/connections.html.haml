@@ -10,5 +10,5 @@
       = link_to_add_association 'Add Connection', f, :connections, data: {association_insertion_node: 'tbody', association_insertion_method: 'append'}
   .form-actions
     = f.submit 'Finish', class: t('buttons.primary')
-    = link_to 'Cancel', route_builder_path(route_id: @route), method: :delete ,class: t('buttons.default')
+    = link_to 'Cancel', route_path(@route), method: :delete ,class: t('buttons.danger')
 

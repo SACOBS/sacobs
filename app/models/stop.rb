@@ -5,8 +5,8 @@
 #  id              :integer          not null, primary key
 #  connection_id   :integer
 #  trip_id         :integer
-#  arrive          :datetime
-#  depart          :datetime
+#  arrive          :time
+#  depart          :time
 #  available_seats :integer
 #  created_at      :datetime
 #  updated_at      :datetime
@@ -18,6 +18,7 @@
 #
 
 class Stop < ActiveRecord::Base
+  include AttributeDefaults
 
  belongs_to :trip
  belongs_to :connection, -> { includes(:from, :to) }
@@ -28,6 +29,12 @@ class Stop < ActiveRecord::Base
  scope :valid, -> { joins(:trip).merge(Trip.valid) }
 
  delegate :name, :from, :to, to: :connection
+
+
+ private
+  def defaults
+    { arrive: Time.current, depart: Time.current }
+  end
 
 end
 

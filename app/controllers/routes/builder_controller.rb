@@ -1,7 +1,7 @@
 class Routes::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  before_action :set_route, only: [:show, :update, :destroy]
+  before_action :set_route, only: [:show, :update]
 
   steps :details, :destinations ,:connections
 
@@ -23,10 +23,6 @@ class Routes::BuilderController < ApplicationController
     render_wizard @route
   end
 
-  def destroy
-    @route.destroy if @route.empty?
-    redirect_to_finish_wizard
-  end
 
   private
     def finish_wizard_path

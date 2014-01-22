@@ -137,6 +137,7 @@ Sacobs::Application.routes.draw do
       patch :cancel
     end
     resources :builder, only: [:index, :show, :update], controller: 'bookings/builder'
+    resources :payment_details, only: [:new, :create]
   end
 
   resource :setting, only: [:show, :edit, :update]
@@ -151,19 +152,19 @@ Sacobs::Application.routes.draw do
 
   resources :drivers
 
-  resources :trips, only: [:index, :show, :destroy] do
+  resources :trips, only: [:index, :show, :edit, :update ,:destroy] do
     member do
      post :copy
     end
-    resources :builder, only: [:show, :update, :create, :destroy],controller: 'trips/builder'
+    resources :builder, only: [:show, :update, :create],controller: 'trips/builder'
   end
 
   resources :routes, only: [:index, :show, :destroy] do
-   resources :builder, only: [:show, :update, :create, :destroy],controller: 'routes/builder'
+   resources :builder, only: [:show, :update, :create],controller: 'routes/builder'
   end
 
-  resources :buses, only: [:index, :show, :destroy] do
-    resources :builder, only: [:show, :update, :create, :destroy],controller: 'buses/builder'
+  resources :buses, only: [:index, :show, :edit, :update,:destroy] do
+    resources :builder, only: [:show, :update, :create],controller: 'buses/builder'
   end
 
   root to: 'high_voltage/pages#show', id: 'home'
