@@ -20,15 +20,18 @@
 class LineItem < ActiveRecord::Base
   include AttributeDefaults
 
+  enum :line_item_type, [:debit, :credit]
+
   belongs_to :invoice
+
+  scope :total_debits, -> { where(line_item_type: :debit).sum(:amount) }
+  scope :total_credits, -> { where(line_item_type: :credit).sum(:amount) }
+
 
   private
     def defaults
      {
-        discount_percentage: 0,
-        discount_amount: 0,
-        gross_price: 0,
-        nett_price: 0
+        amount: 0
      }
     end
 end

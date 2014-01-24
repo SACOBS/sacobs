@@ -21,7 +21,7 @@ class BookingParameters < Struct.new(:params)
    end
 
    def invoice_attributes
-     { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :gross_price,:nett_price, :discount_percentage, :discount_amount]] }
+     { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :amount, :line_item_type]] }
    end
 
    def return_attributes

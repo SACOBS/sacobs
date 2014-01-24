@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122155300) do
+ActiveRecord::Schema.define(version: 20140124102613) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140122155300) do
 
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id"
   add_index "bookings", ["main_id"], name: "index_bookings_on_main_id"
+  add_index "bookings", ["stop_id"], name: "index_bookings_on_stop_id"
   add_index "bookings", ["trip_id"], name: "index_bookings_on_trip_id"
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
 
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140122155300) do
     t.integer  "bank_id"
   end
 
+  add_index "clients", ["bank_id"], name: "index_clients_on_bank_id"
   add_index "clients", ["slug"], name: "index_clients_on_slug", unique: true
   add_index "clients", ["user_id"], name: "index_clients_on_user_id"
 
@@ -190,13 +192,11 @@ ActiveRecord::Schema.define(version: 20140122155300) do
 
   create_table "line_items", force: true do |t|
     t.string   "description"
-    t.integer  "discount_percentage"
-    t.decimal  "discount_amount",     precision: 8, scale: 2
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "gross_price",         precision: 8, scale: 2
-    t.decimal  "nett_price",          precision: 8, scale: 2
+    t.decimal  "amount",         precision: 8, scale: 2
+    t.string   "line_item_type"
   end
 
   add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id"
@@ -226,7 +226,12 @@ ActiveRecord::Schema.define(version: 20140122155300) do
     t.integer  "bank_id"
     t.integer  "booking_id"
     t.string   "reference"
+    t.integer  "user_id"
   end
+
+  add_index "payment_details", ["bank_id"], name: "index_payment_details_on_bank_id"
+  add_index "payment_details", ["booking_id"], name: "index_payment_details_on_booking_id"
+  add_index "payment_details", ["user_id"], name: "index_payment_details_on_user_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -258,6 +263,18 @@ ActiveRecord::Schema.define(version: 20140122155300) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "seasonal_markups", force: true do |t|
+    t.decimal  "percentage"
+    t.date     "period_from"
+    t.date     "period_to"
+    t.boolean  "active",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "seasonal_markups", ["user_id"], name: "index_seasonal_markups_on_user_id"
 
   create_table "seats", force: true do |t|
     t.string   "row"

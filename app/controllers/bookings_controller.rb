@@ -22,13 +22,13 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-    @booking.update(status: :paid)
+    @booking.update(status: :paid, user: current_user)
     respond_with(@booking,location: new_booking_payment_detail_url(@booking), notice: 'Booking was succesfully confirmed')
   end
 
   def cancel
     unassign_seats
-    @booking.update(status: :cancelled)
+    @booking.update(status: :cancelled, user: current_user)
     respond_with(@booking, location: bookings_url, notice: 'Booking was succesfully cancelled')
   end
 

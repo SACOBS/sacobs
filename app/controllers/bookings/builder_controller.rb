@@ -70,9 +70,9 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def reserve_booking
-        expiry_date = set_booking_expiry_date
-        @booking.reserve(expiry_date)
-        @booking.return.reserve(expiry_date) if @booking.return
+      expiry_date = set_booking_expiry_date
+      @booking.reserve(expiry_date)
+      @booking.return.reserve(expiry_date) if @booking.return
     end
 
     def clean_search_params

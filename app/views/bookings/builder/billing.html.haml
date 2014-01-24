@@ -2,30 +2,24 @@
   %h3 Billing
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false} do |f|
-  - bootstrap_table headers:['Description','Gross Price', 'Discount %','Discount','Nett Price'], types: [:condensed], html_options: {id: 'line_items'} do
+  - bootstrap_table headers:['Description','Amount'], types: [:condensed], html_options: {id: 'line_items'} do
     = f.simple_fields_for :invoice do |invoice|
       = invoice.simple_fields_for :line_items, wrapper: false do |line_item|
-        %tr[line_item.object]
+        %tr[line_item.object]{data: {type: line_item.object.line_item_type}}
           %td= line_item.input :description
-          %td.gross= line_item.input :gross_price, input_html: {value: number_with_precision(line_item.object.gross_price, precision: 2)}
-          %td.percentage= number_to_percentage(line_item.object.discount_percentage, precision: 0)
-          %td.discount= line_item.input :discount_amount, input_html: {value: number_with_precision(line_item.object.discount_amount, precision: 2)}
-          %td.nett= line_item.input :nett_price, input_html: {value: number_with_precision(line_item.object.nett_price, precision: 2)}
+          %td.amount= line_item.input :amount, input_html: {value: number_with_precision(line_item.object.amount, precision: 2)}
+          = line_item.input :line_item_type, as: :hidden, value: line_item.object.line_item_type
     = f.simple_fields_for :return do |rf|
       = rf.simple_fields_for :invoice do |rf_invoice|
         = rf_invoice.simple_fields_for :line_items, wrapper: false do |rf_line_item|
-          %tr[rf_line_item.object]
+          %tr[rf_line_item.object]{data: {type: rf_line_item.object.line_item_type}}
             %td= rf_line_item.input :description
-            %td.gross= rf_line_item.input :gross_price, input_html: {value: number_with_precision(rf_line_item.object.gross_price, precision: 2)}
-            %td.percentage= number_to_percentage(rf_line_item.object.discount_percentage, precision: 0)
-            %td.discount= rf_line_item.input :discount_amount, input_html: {value: number_with_precision(rf_line_item.object.discount_amount, precision: 2)}
-            %td.nett= rf_line_item.input :nett_price, input_html: {value: number_with_precision(rf_line_item.object.nett_price, precision: 2)}
+            %td.amount= rf_line_item.input :amount, input_html: {value: number_with_precision(rf_line_item.object.amount, precision: 2)}
+            = rf_line_item.input :line_item_type, as: :hidden, value: rf_line_item.object.line_item_type
+
     %tr
       %td
         %strong Total:
-      %td
-      %td
-      %td
       %td.total
         %strong= number_to_currency(invoice_total(@booking), unit: 'R')
   .form-actions

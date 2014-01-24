@@ -1,0 +1,9 @@
+.page-header
+  %h2 Seasonal Markups
+
+- bootstrap_table headers:['Percentage', 'Period From', 'Period To', 'Active', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+  = render @seasonal_markups
+
+= link_to 'Setup Seasonal Markup', new_seasonal_markup_path, class: t('buttons.primary'),icon: :plus
+
+

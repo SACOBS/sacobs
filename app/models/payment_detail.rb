@@ -14,6 +14,7 @@ class PaymentDetail < ActiveRecord::Base
 
   belongs_to :bank
   belongs_to :booking
+  belongs_to :user
 
   validates :bank, presence: true
 

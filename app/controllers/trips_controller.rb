@@ -36,6 +36,6 @@ class TripsController < ApplicationController
     end
 
     def trip_params
-      TripParameters.new(params).permit(user_id: current_user)
+      TripParameters.new(params).permit(user: current_user)
     end
 end

@@ -15,6 +15,7 @@
 #  reference_no :string(255)
 #  main_id      :integer
 #  has_return   :boolean          default(FALSE)
+#  stop_id      :integer
 #
 # Indexes
 #

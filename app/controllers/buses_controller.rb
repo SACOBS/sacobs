@@ -22,6 +22,6 @@ class BusesController < ApplicationController
    end
 
    def bus_params
-     BusParameters.new(params).permit
+     BusParameters.new(params).permit(user: current_user)
    end
 end

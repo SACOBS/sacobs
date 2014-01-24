@@ -21,14 +21,12 @@ class Invoice < ActiveRecord::Base
 
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
 
-  attr_reader :total
-
   def total
-    @total ||= self.line_items.sum(:nett_price).round(2)
+   self.line_items.total_debits.round(2) - self.line_items.total_credits.round(2)
   end
 
   def total_discount
-    @total_discount ||= self.line_items.sum(:discount_amount).round(2)
+   self.line_items.total_credits.round(2)
   end
 
 

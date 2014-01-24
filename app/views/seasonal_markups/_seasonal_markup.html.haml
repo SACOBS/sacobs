@@ -1,0 +1,9 @@
+%tr[seasonal_markup]
+  %td= seasonal_markup.percentage
+  %td= seasonal_markup.from
+  %td= seasonal_markup.to
+  %td= seasonal_markup.active
+  %td
+    = link_to 'Deactivate', seasonal_markup_path(seasonal_markup, seasonal_markup: {active: false}), icon: :times,  method: :patch, class: t('buttons.mini.danger')
+
+

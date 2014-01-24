@@ -22,12 +22,12 @@ class Stop < ActiveRecord::Base
 
  belongs_to :trip
  belongs_to :connection, -> { includes(:from, :to) }
- has_and_belongs_to_many :bookings
+ has_many :bookings
 
  scope :en_route, -> (destination) { joins(:trip,connection: [:to,:route]).where('destinations.sequence > ?', destination.sequence).readonly(false)}
  scope :valid, -> { joins(:trip).merge(Trip.valid) }
 
- delegate :name, :from, :to, to: :connection
+ delegate :name, :from, :to, :cost, to: :connection
 
 
  private

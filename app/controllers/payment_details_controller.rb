@@ -17,6 +17,6 @@ class PaymentDetailsController < ApplicationController
    end
 
    def payment_details_params
-     PaymentDetailParameters.new(params).permit
+     PaymentDetailParameters.new(params).permit(user: current_user)
    end
 end

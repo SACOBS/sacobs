@@ -6,40 +6,74 @@ class InvoiceBuilder
   end
 
   def build
-    @booking.passengers.each { |p| build_line_item(booking_cost, p) }
-    build_client_credit
+    @booking.passengers.each do |p|
+      build_ticket_cost(p)
+      build_markup(p)
+      build_passenger_discount(p)
+    end
+    build_client_credit(@booking.client)
     @invoice
   end
 
+
+  module Helpers
+    extend ActionView::Helpers::NumberHelper
+  end
+
   private
-    def build_line_item(price, passenger)
-     discount = Discount.find_by(passenger_type: passenger.passenger_type)
-     @invoice.line_items.build do |line_item|
-       line_item.description = passenger.full_name
-       line_item.discount_percentage = discount.percentage
-       line_item.discount_amount = calculate_discount(price, discount.percentage)
-       line_item.gross_price = price
-       line_item.nett_price = price - line_item.discount_amount
-     end
+    def build_ticket_cost(passenger)
+      build_line_item(passenger.full_name, price, :debit)
     end
 
-    def calculate_discount(price, percentage)
-      percentage = BigDecimal(percentage)
-      round_up(BigDecimal((percentage / 100) * price))
+  def build_markup(passenger)
+    if @markup
+      description = "#{passenger.full_name} Seasonal Fee"
+      amount = calculate_markup
+      build_line_item(passenger.full_name, amount, :debit)
+    end
+  end
+
+
+  def build_passenger_discount(passenger)
+      passenger_discount = find_discount(passenger)
+      description = "Discount #{passenger.passenger_type.description} - #{Helpers.number_to_percentage(passenger_discount.percentage, precision: 0)}".capitalize
+      amount = calculate_discount(passenger_discount)
+      build_line_item(description, amount, :credit )
     end
 
-    def build_client_credit
+
+    def build_client_credit(client)
       if @booking.client.vouchers.any?
-        @invoice.line_items.build do |line_item|
-          line_item.description = 'Client Credit'
-          line_item.gross_price =  line_item.nett_price = @booking.client.vouchers.sum(:amount) * -1
-        end
-        @booking.client.vouchers.each { |v| v.update(active: false)}
+        build_line_item('Client Credit', client.vouchers.sum(:amount), :credit )
+        client.vouchers.each { |v| v.update(active: false)}
       end
     end
 
-    def booking_cost
-      round_up(BigDecimal(@booking.stop.connection.cost))
+    def price
+      @price ||= round_up(BigDecimal(@booking.stop.cost))
+    end
+
+    def build_line_item(description, amount, type)
+      @invoice.line_items.build(description: description, amount: amount, line_item_type: type)
+    end
+
+
+    def calculate_discount(discount)
+     percentage = BigDecimal(discount.percentage / 100)
+     round_up(percentage * price)
+    end
+
+    def markup
+      @markup ||= SeasonalMarkup.in_period(Date.today).active.take
+    end
+
+    def calculate_markup
+      percentage = BigDecimal(@markup.percentage / 100 + 1)
+      round_up(percentage * price)
+    end
+
+    def find_discount(passenger)
+      Discount.find_by(passenger_type: passenger.passenger_type)
     end
 
     def round_up(cost)
