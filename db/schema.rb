@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140124102613) do
+ActiveRecord::Schema.define(version: 20140125083129) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -65,10 +65,12 @@ ActiveRecord::Schema.define(version: 20140124102613) do
   add_index "buses", ["user_id"], name: "index_buses_on_user_id"
 
   create_table "cities", force: true do |t|
-    t.string  "name"
-    t.string  "slug"
-    t.integer "user_id"
-    t.integer "venues_count", default: 0
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.integer  "venues_count", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true

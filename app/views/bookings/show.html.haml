@@ -1,86 +1,85 @@
-.page-header
-  %h2 Booking
-.well
-  %p
-    %strong Reference No:
-    %br
-    = @booking.reference
-  %p
-    %strong Trip:
-    %br
-    = @booking.trip_name
-  %p
-    %strong Travel Date:
-    %br
-    = @booking.travel_date
-  %p
-    %strong From:
-    %br
-    = @booking.from
-  %p
-    %strong To:
-    %br
-    =  @booking.to
-  %p
-    %strong Status:
-    %br
-    = @booking.status
-  %p
-    %strong Price:
-    %br
-    = @booking.price
+- cache booking do
+  .page-header
+    %h2 Booking
+  .well
+    %p
+      %strong Reference No:
+      %br
+      = booking.reference
+    %p
+      %strong Trip:
+      %br
+      = booking.trip_name
+    %p
+      %strong Travel Date:
+      %br
+      = booking.travel_date
+    %p
+      %strong From:
+      %br
+      = booking.from
+    %p
+      %strong To:
+      %br
+      =  booking.to
+    %p
+      %strong Status:
+      %br
+      = booking.status
+    %p
+      %strong Price:
+      %br
+      = booking.price
 
-.well
-  %h3 Payment Detail
-  %p
-    %strong Bank:
-    %br
-    = @booking.payment_bank
-  %p
-    %strong Payment Date:
-    %br
-    = @booking.payment_date
+  .well
+    %h3 Payment Detail
+    %p
+      %strong Bank:
+      %br
+      = booking.payment_bank
+    %p
+      %strong Payment Date:
+      %br
+      = booking.payment_date
 
-  %p
-    %strong Reference:
-    %br
-    =  @booking.payment_reference
+    %p
+      %strong Reference:
+      %br
+      =  booking.payment_reference
 
-.well
-  %h3 Client
-  %p
-    %strong Full Name:
-    %br
-    = @booking.client_name
-  %p
-    %strong Email:
-    %br
-    = @booking.client.email
-  %p
-    %strong CellPhone:
-    %br
-    = @booking.client.cellphone
-  %p
-    %strong Telephone:
-    %br
-    = @booking.client.telephone
-.well
-  %h3 Passengers
-  %p
-  %strong Connections:
-  - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
-    - @booking.passengers.each do |passenger|
-      %tr
-        %td= passenger.name
-        %td= passenger.surname
-        %td= passenger.passenger_type
-        %td= passenger.cellphone
-        %td= passenger.email
-.form-actions
-  = back_to bookings_path
-  = link_to 'Confirm', confirm_booking_path(@booking), method: :patch, icon: :money, class: t('buttons.inverse') if @booking.reserved?
-  = link_to 'Cancel', cancel_booking_path(@booking), method: :patch, icon: :warning, class: t('buttons.warning') unless @booking.cancelled?
-  = link_to 'Destroy', @booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times
+  .well
+    %h3 Client
+    %p
+      %strong Full Name:
+      %br
+      = booking.client_name
+    %p
+      %strong Email:
+      %br
+      = booking.client.email
+    %p
+      %strong CellPhone:
+      %br
+      = booking.client.cellphone
+    %p
+      %strong Telephone:
+      %br
+      = booking.client.telephone
+  .well
+    %h3 Passengers
+    - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
+      - booking.passengers.each do |passenger|
+        %tr
+          %td= passenger.name
+          %td= passenger.surname
+          %td= passenger.passenger_type
+          %td= passenger.cellphone
+          %td= passenger.email
+  .form-actions
+    = back_to bookings_path
+    = link_to 'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse') if @booking.reserved?
+    = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning') unless @booking.cancelled?
+    = link_to 'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times
 
 
 

@@ -21,7 +21,7 @@
 
 
 - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render @bookings
+  = render bookings
 
 = link_to 'Make Booking', bookings_path, method: :post, icon: :plus, class: t('buttons.primary')
 = link_to 'Refresh', bookings_path, class: t('buttons.default'), icon: :refresh

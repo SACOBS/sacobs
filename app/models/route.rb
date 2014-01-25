@@ -42,4 +42,9 @@ class Route < ActiveRecord::Base
   def end_city
     self.destinations.last.city unless self.destinations.empty?
   end
+
+  private
+   def should_generate_new_friendly_id?
+     name_changed?
+   end
 end

@@ -1,13 +1,16 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:edit, :update, :destroy]
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  decorates_assigned :client
+  decorates_assigned :clients
+
 
   def index
     @q = Client.includes(:user).search(params[:q])
-    @clients = @q.result(distinct: true).decorate
+    @clients = @q.result(distinct: true)
   end
 
   def show
-    @client = Client.friendly.find(params[:id]).decorate
+    fresh_when @client, last_modified: @client.updated_at
   end
 
   # GET /clients/new
@@ -26,7 +29,6 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
-    puts client_params.inspect
     @client.update(client_params)
     respond_with @client
   end

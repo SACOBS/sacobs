@@ -20,7 +20,7 @@
 class Stop < ActiveRecord::Base
   include AttributeDefaults
 
- belongs_to :trip
+ belongs_to :trip, touch: true
  belongs_to :connection, -> { includes(:from, :to) }
  has_many :bookings
 

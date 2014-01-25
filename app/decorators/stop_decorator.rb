@@ -20,11 +20,11 @@ class StopDecorator < Draper::Decorator
     connection.to
   end
 
-  def arrive
+  def arrive_time
     model.arrive.strftime("%H:%M%p")
   end
 
-  def depart
+  def depart_time
     model.depart.strftime("%H:%M%p")
   end
 

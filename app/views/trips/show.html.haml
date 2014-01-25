@@ -1,46 +1,48 @@
-.page-header
-  %h1 Trip
-.well
-  %p
-    %strong Name:
-    %br
-    = @trip.name
-  %p
-    %strong Start Date:
-    %br
-    = @trip.start_date
-  %p
-    %strong End Date:
-    %br
-    = @trip.end_date
-  %p
-    %strong Route
-    %br
-    =  @trip.route
-  %p
-    %strong Bus
-    %br
-    = @trip.bus
-  %p
-    %strong Drivers:
-    %ul
-      = list_of(@trip.drivers) do |driver|
-        = driver.full_name
-.well
-  %p
-    %strong Stops:
-    - bootstrap_table headers:['From', 'To','Arrive', 'Depart', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-      - @trip.stops.each do |stop|
-        %tr
-          %td= stop.from
-          %td= stop.to
-          %td= stop.arrive
-          %td= stop.depart
-          %td= stop.available_seats
-.form-actions
-  = back_to trips_path
-  = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
-  = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
+- cache trip do
+  .page-header
+    %h1 Trip
+  .well
+    %p
+      %strong Name:
+      %br
+      = trip.name
+    %p
+      %strong Start Date:
+      %br
+      = trip.start_date
+    %p
+      %strong End Date:
+      %br
+      = trip.end_date
+    %p
+      %strong Route
+      %br
+      =  trip.route
+    %p
+      %strong Bus
+      %br
+      = trip.bus
+    %p
+      %strong Drivers:
+      %ul
+        = list_of(trip.drivers) do |driver|
+          = driver.full_name
+  - cache trip.stops do
+    .well
+      %p
+        %strong Stops:
+        - bootstrap_table headers:['From', 'To','Arrive', 'Depart', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+          - trip.stops.each do |stop|
+            %tr
+              %td= stop.from
+              %td= stop.to
+              %td= stop.arrive_time
+              %td= stop.depart_time
+              %td= stop.available_seats
+  .form-actions
+    = back_to trips_path
+    = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
 
 
 

@@ -1,9 +1,11 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
+  decorates_assigned :bookings
+  decorates_assigned :booking
 
   def index
     @q = Booking.not_in_process.active.search(params[:q])
-    @bookings = @q.result(distinct: true).decorate
+    @bookings = @q.result(distinct: true)
   end
 
   def create
@@ -12,7 +14,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = @booking.decorate
+    fresh_when @booking, last_modified: @booking.updated_at
   end
 
   def destroy

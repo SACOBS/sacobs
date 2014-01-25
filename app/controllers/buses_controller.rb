@@ -6,6 +6,10 @@ class BusesController < ApplicationController
     @buses = @q.result(distinct: true)
   end
 
+  def show
+    fresh_when @bus, last_modified: @bus.updated_at
+  end
+
   def update
     @bus.update(bus_params)
     respond_with @bus

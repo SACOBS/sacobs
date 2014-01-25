@@ -1,56 +1,56 @@
-- cache @client do
+- cache client do
   .page-header
-    %h3= @client.full_name
+    %h3= client.full_name
   .well
     %p
       %strong Name:
       %br
-      = @client.name
+      = client.name
     %p
       %strong Surname:
       %br
-      = @client.surname
+      = client.surname
     %p
       %strong Bank:
       %br
-      = @client.bank
+      = client.bank
     %p
       %strong High Risk:
       %br
-      = @client.high_risk
+      = client.high_risk
     %p
       %strong Telephone No:
       %br
-      = @client.telephone
+      = client.telephone
     %p
       %strong Cellphone No:
       %br
-      = @client.cellphone
+      = client.cellphone
     %p
       %strong Email:
       %br
-      = @client.email
+      = client.email
     %p
       %strong Address:
       %address
-        = @client.street_address1
+        = client.street_address1
         %br
-        = @client.street_address2
+        = client.street_address2
         %br
-        = @client.city
+        = client.city
         %br
-        = @client.postal_code
+        = client.postal_code
   .well
     %p
       %strong Credit Vouchers:
       - bootstrap_table headers:['Reference', 'Amount',], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-        - @client.vouchers.each do |voucher|
+        - client.vouchers.each do |voucher|
           %tr
             %td= voucher.ref_no
             %td= number_to_currency(voucher.amount, unit: 'R')
-      = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.warning')
+      = link_to 'Add Credit Voucher', new_client_voucher_path(client), icon: :money, class: t('buttons.warning')
 
   .actions
     = back_to clients_path
-    = link_to 'Edit', edit_client_path(@client), icon: :edit, class: t('buttons.inverse')
-    = link_to 'Destroy', @client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, class: t('buttons.danger')
+    = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.inverse')
+    = link_to 'Destroy', client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, class: t('buttons.danger')

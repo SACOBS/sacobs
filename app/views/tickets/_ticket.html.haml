@@ -32,18 +32,19 @@
     %td= @ticket.booking.from_venue
     %td= @ticket.booking.to
     %td= @ticket.booking.to_venue
-    %td= @ticket.booking.stop.depart || l(Time.zone.now, format: :long)
-    %td= @ticket.booking.stop.arrive || l(Time.zone.now, format: :long)
-  - @ticket.passengers.each do |passenger|
-    %tr
-    %td= @ticket.return.trip_start_date
-    %td= passenger.full_name
-    %td= @ticket.return.from
-    %td= @ticket.return.from_venue
-    %td= @ticket.return.to
-    %td= @ticket.return.to_venue
-    %td= @ticket.return.stop.depart || l(Time.zone.now, format: :long)
-    %td= @ticket.return.stop.arrive || l(Time.zone.now, format: :long)
+    %td= @ticket.booking.stop.depart_time || l(Time.zone.now, format: :long)
+    %td= @ticket.booking.stop.arrive_time || l(Time.zone.now, format: :long)
+  - if @ticket.return
+    - @ticket.passengers.each do |passenger|
+      %tr
+      %td= @ticket.return.trip_start_date
+      %td= passenger.full_name
+      %td= @ticket.return.from
+      %td= @ticket.return.from_venue
+      %td= @ticket.return.to
+      %td= @ticket.return.to_venue
+      %td= @ticket.return.stop.depart_time || l(Time.zone.now, format: :long)
+      %td= @ticket.return.stop.arrive_time || l(Time.zone.now, format: :long)
 %br
 
 .costs.pull-left

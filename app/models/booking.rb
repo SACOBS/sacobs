@@ -34,7 +34,7 @@ class Booking < ActiveRecord::Base
   belongs_to :trip
   belongs_to :stop
   belongs_to :client
-  belongs_to :main, class_name: :Booking, foreign_key: :main_id
+  belongs_to :main, class_name: :Booking, foreign_key: :main_id, touch: true
   has_one :return, class_name: :Booking, foreign_key: :main_id, dependent: :destroy
   has_one :invoice, -> {includes(:line_items)}, dependent: :destroy
   has_one :payment_detail, dependent: :destroy

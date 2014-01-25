@@ -24,12 +24,16 @@ class Driver < ActiveRecord::Base
 
   friendly_id :full_name, use: :slugged
 
-
   validates :name, :surname, presence: true
   validates :name, length: { maximum: 5 }
 
  def full_name
   "#{self.name} #{self.surname}"
  end
+
+ private
+  def should_generate_new_friendly_id?
+    name_changed? || surname_changed?
+  end
 
 end

@@ -1,12 +1,13 @@
-%tr[route]
-  %td= link_to route.name, route
-  %td= route.start_city
-  %td= route.end_city
-  %td= route.cost
-  %td= route.distance
-  %td= route.connections_count
-  %td
-    = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
-    = link_to 'Edit', route_builder_path(:details, route_id: route), icon: :edit,  class: t('buttons.mini.inverse')
-    = link_to 'Destroy', route, method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, class: t('buttons.mini.danger'), icon: :times
+- cache route do
+  %tr[route]
+    %td= link_to route.name, route
+    %td= route.start_city
+    %td= route.end_city
+    %td= route.cost
+    %td= route.distance
+    %td= route.connections_count
+    %td
+      = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
+      = link_to 'Edit', route_builder_path(:details, route_id: route), icon: :edit,  class: t('buttons.mini.inverse')
+      = link_to 'Destroy', route, method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, class: t('buttons.mini.danger'), icon: :times
 

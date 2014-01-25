@@ -8,7 +8,7 @@
     = link_to 'Clear', routes_path, class: t('buttons.mini.inverse'), icon: :times
 
 - bootstrap_table headers:['Description','Start City', 'End City','Cost', 'Distance','Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render @routes
+  = render routes
 
 = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
 = link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh

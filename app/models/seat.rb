@@ -17,7 +17,7 @@
 class Seat < ActiveRecord::Base
   include AttributeDefaults
 
-  belongs_to :bus
+  belongs_to :bus, touch: true
 
   validates :row, :number, presence: true
 

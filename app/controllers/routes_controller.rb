@@ -1,13 +1,15 @@
 class RoutesController < ApplicationController
   before_action :set_route, only: [:show, :destroy]
+  decorates_assigned :routes
+  decorates_assigned :route
 
   def index
     @q = Route.search(params[:q])
-    @routes = @q.result(distinct: true).decorate
+    @routes = @q.result(distinct: true)
   end
 
   def show
-    @route = @route.decorate
+    fresh_when @route, last_modified: @route.updated_at
   end
 
 

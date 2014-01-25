@@ -14,7 +14,7 @@
 #
 
 class Venue < ActiveRecord::Base
-  belongs_to :city, counter_cache: true
+  belongs_to :city, counter_cache: true, touch: true
 
   validates :name, presence: true
 end

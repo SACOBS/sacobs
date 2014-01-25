@@ -13,7 +13,7 @@ class PaymentDetail < ActiveRecord::Base
   include AttributeDefaults
 
   belongs_to :bank
-  belongs_to :booking
+  belongs_to :booking, touch: true
   belongs_to :user
 
   validates :bank, presence: true

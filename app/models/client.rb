@@ -42,7 +42,7 @@ class Client < ActiveRecord::Base
 
   after_initialize :init_address, if: :new_record?
 
-  before_save :set_full_name
+  before_validation :set_full_name, prepend: true
 
   protected
     def init_address
@@ -50,6 +50,10 @@ class Client < ActiveRecord::Base
     end
 
     def set_full_name
-      self.full_name = "#{self.name} #{self.surname}"
+      self.full_name = "#{self.name} #{self.surname}"  if name_changed? || surname_changed?
+    end
+
+    def should_generate_new_friendly_id?
+     full_name_changed?
     end
 end

@@ -1,33 +1,33 @@
-- cache @route do
+- cache route do
   .page-header
     %h2 Route
   .well
     %p
       %strong Start City:
       %br
-      = @route.start_city
+      = route.start_city
     %p
       %strong End City:
       %br
-      = @route.end_city
+      = route.end_city
     %p
       %strong Cost:
       %br
-      = @route.cost
+      = route.cost
     %p
       %strong Distance:
       %br
-      = @route.distance
+      = route.distance
   .well
-    - cache @route.connections do
+    - cache route.connections do
       %p
         %strong Connections:
         - bootstrap_table headers:['','From', 'To','Distance', 'Percentage', 'Cost'], types: [:bordered, :condensed], html_options: {id: 'connections'} do
-          = render @route.connections
+          = render route.connections
   .form-actions
     = back_to routes_path
-    = link_to 'Edit', route_builder_path(:details, route_id: @route), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', @route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
+    = link_to 'Edit', route_builder_path(:details, route_id: route), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
 
 
 
