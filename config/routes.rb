@@ -152,7 +152,7 @@ Sacobs::Application.routes.draw do
     resources :builder, only: [:show, :update, :create],controller: 'trips/builder'
   end
 
-  resources :routes, only: [:index, :show, :destroy] do
+  resources :routes, only: [:index, :edit, :update ,:show, :destroy] do
    resources :builder, only: [:show, :update, :create],controller: 'routes/builder'
   end
 

@@ -8,6 +8,6 @@
     %td= route.connections_count
     %td
       = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
-      = link_to 'Edit', route_builder_path(:details, route_id: route), icon: :edit,  class: t('buttons.mini.inverse')
+      = link_to 'Edit', edit_route_path(route), icon: :edit,  class: t('buttons.mini.inverse')
       = link_to 'Destroy', route, method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, class: t('buttons.mini.danger'), icon: :times
 

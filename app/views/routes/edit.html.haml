@@ -1,0 +1,45 @@
+.page-header
+  %h2 Edit Route
+
+#errors= errors_for @route
+
+%ul#Tabbed.nav.nav-tabs
+  %li.active
+    %a{href: "#details"} Details
+  %li
+    %a{href: "#connections"} Connections
+
+
+= simple_form_for @route, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  .tab-content
+    #details.tab-pane.active
+      %fieldset
+        = f.input :name
+        = f.input :cost, wrapper: :prepend do
+          %span.add-on> R
+          = f.input_field :cost
+        = f.input :distance, wrapper: :append do
+          = f.input_field :distance
+          %span.add-on> Km
+    #connections.tab-pane
+      %fieldset
+        = f.simple_fields_for :connections, wrapper: false do |connection|
+          - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
+            %tr
+              %td= connection.object.from.name
+              %td= connection.object.to.name
+              %td
+                = connection.input :percentage, wrapper: :append,label: false do
+                  = connection.input_field :percentage,  class: 'input-mini'
+                  %span.add-on> %
+              %td
+                = connection.input :cost, wrapper: :prepend, label: false  do
+                  %span.add-on> R
+                  = connection.input_field :cost,  class: 'input-small'
+              %td
+                = connection.input :distance, wrapper: :append, label: false do
+                  = connection.input_field :distance,  class: 'input-small'
+                  %span.add-on> Km
+
+  .form-actions
+    = f.submit class: t('buttons.primary')

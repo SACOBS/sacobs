@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: [:show, :destroy]
+  before_action :set_route, only: [:show, :edit, :update,:destroy]
   decorates_assigned :routes
   decorates_assigned :route
 
@@ -12,6 +12,10 @@ class RoutesController < ApplicationController
     fresh_when @route, last_modified: @route.updated_at
   end
 
+  def update
+    @route.update(route_params)
+    respond_with @route
+  end
 
   def destroy
     @route.destroy
@@ -21,5 +25,9 @@ class RoutesController < ApplicationController
   private
     def set_route
       @route = Route.includes(:connections ,:destinations).friendly.find(params[:id])
+    end
+
+    def route_params
+      RouteParameters.new(params).permit(user: current_user)
     end
 end
