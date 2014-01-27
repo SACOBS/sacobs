@@ -11,7 +11,7 @@ $ ->
       placeholder: $(this).data('default')
     });
 
-  $(document).on 'hidden', '#client_contact_detail', ->
+  $(document).on 'hidden', '.modal', ->
     $(this).remove()
 
   $('#Tabbed a').click (e)->

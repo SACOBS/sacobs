@@ -122,6 +122,7 @@
 Sacobs::Application.routes.draw do
 
 
+  get "pricing/show"
   devise_for :users
 
   resources :bookings, only: [:create, :show, :index, :destroy] do
@@ -181,6 +182,8 @@ Sacobs::Application.routes.draw do
   end
 
   root to: 'high_voltage/pages#show', id: 'home'
+
+  get 'pricing/:stop_id', to: 'pricing#show', as: :pricing
 
   match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
 

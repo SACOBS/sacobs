@@ -1,5 +1,5 @@
 - if @stops.any?
-  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Qty'], types: [:bordered]  do
+  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Pricing','Available Seats', 'Qty'], types: [:bordered]  do
     - @stops.each do |stop|
       %tr
         %td{style: 'display:none'}
@@ -9,6 +9,7 @@
               %td= stop.trip.start_date
               %td= stop.from.city.name
               %td= stop.to.city.name
+              %td=link_to 'View Prices', pricing_show_url(stop_id: stop), remote: true
               %td= stop.available_seats
               %td= @booking.quantity
               %td

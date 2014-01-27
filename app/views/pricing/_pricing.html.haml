@@ -1,0 +1,13 @@
+#pricing.modal.hide.fade{aria_hidden:  'true', aria_labelledby: 'pricingLabel', role: "dialog", tabindex: "-1"}
+  .modal-header
+    %button.close{aria_hidden: "true", data: {dismiss: "modal"}, type: "button"} ×
+    %h4#pricingLabel="#{@pricing.connection_name} (per person)"
+    .modal-body
+      .well.well-small
+        %p
+          %strong="Ticket Price (Cost #{number_to_currency(@pricing.cost, unit: 'R')} + Seasonal Fee #{number_to_currency(@pricing.fees, unit: 'R')}):"
+          =number_to_currency(@pricing.price, unit: 'R')
+        - @pricing.discounts.each do |key, value|
+          %p
+            %strong=key.to_s.humanize
+            =number_to_currency(value, unit: 'R')

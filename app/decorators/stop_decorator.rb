@@ -27,6 +27,4 @@ class StopDecorator < Draper::Decorator
   def depart_time
     model.depart.strftime("%H:%M%p")
   end
-
-
 end
