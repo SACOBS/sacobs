@@ -1,7 +1,7 @@
 module LinkHelper
 
   def link_to(text, path, options = {}, &block)
-    icon = iconize options.delete(:icon)
+    icon = iconize options.delete(:icon) unless options.empty?
     text = content_tag(:i, " #{text}", class: icon) if icon
     super
   end

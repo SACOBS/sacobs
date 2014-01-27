@@ -185,6 +185,8 @@ Sacobs::Application.routes.draw do
 
   get 'pricing/:stop_id', to: 'pricing#show', as: :pricing
 
+  get '/dashboard', to: 'dashboard#show', as: :dashboard
+
   match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
 
 end

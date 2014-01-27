@@ -1,0 +1,16 @@
+.row.hero-unit
+  .span5.pull-left.text-center
+    = link_to bookings_path, {} do
+      = image_tag 'btn_bookings.png'
+    %br
+    %br
+    = link_to trips_path, {} do
+      = image_tag 'btn_trips.png'
+    %br
+    %br
+    = link_to clients_path, {} do
+      = image_tag 'btn_clients.png'
+
+  .span5.pull-right
+    = link_to bookings_path, method: :post do
+      = image_tag 'btn_book.png'

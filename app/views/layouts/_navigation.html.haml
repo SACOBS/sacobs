@@ -1,5 +1,5 @@
-= link_to "Home", root_path, class: 'brand'
 - if user_signed_in?
+  = link_to "Home", dashboard_path, class: 'brand'
   %ul.nav.pull-left
     - drop_down_menu('Manage') do
       %li= link_to 'Bookings', bookings_path
@@ -32,6 +32,7 @@
       %li= link_to 'Logout', destroy_user_session_path, method: :delete
     %li.divider-vertical
 - else
+  = link_to "Home", root_path, class: 'brand'
   %ul.nav
     %li= link_to 'Login', new_user_session_path
     %li= link_to 'Sign up', new_user_registration_path
