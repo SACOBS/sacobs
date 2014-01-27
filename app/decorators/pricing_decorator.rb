@@ -19,6 +19,7 @@ class PricingDecorator
   end
 
   def fees
+    return 0 unless markup
     @fees ||= calculate_percentage_amount(markup.percentage)
   end
 
