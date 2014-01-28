@@ -36,13 +36,6 @@ gem 'bootstrap_sortable_rails', "~> 0.1.3"
 gem 'bootstrap-datetimepicker-rails'
 
 
-
-# Background Processing
-gem "delayed_job", "~> 4.0.0"
-gem "delayed_job_active_record", "~> 4.0.0"
-gem "workless"
-gem "daemons"
-
 #Forms
 gem "simple_form", "~> 3.0.0"
 gem 'select2-rails'
@@ -52,7 +45,7 @@ gem 'select2-rails'
 gem 'devise'
 
 #Roles
-gem 'rolify'
+gem "rolify", "3.3.0.rc4"
 
 #Static Pages
 gem 'high_voltage'
@@ -105,6 +98,10 @@ gem 'enumify'
 
 # Scriptures
 gem "scripture", "~> 0.1.0"
+
+# Background Processing
+gem 'sucker_punch', '~> 1.0'
+
 
 
 group :development do

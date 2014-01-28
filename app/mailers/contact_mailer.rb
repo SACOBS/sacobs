@@ -1,12 +1,11 @@
 class ContactMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "contact@sacobs.com"
 
-  def contact_us(info)
-    @info = info
+  def contact_us(contact)
+    @contact = contact
     mail(
-        to: 'info@saconnection.co.za',
-        subject: info.name,
-        from: 'Sacob'
+        to: contact.email,
+        subject: contact.name,
     )
   end
 end

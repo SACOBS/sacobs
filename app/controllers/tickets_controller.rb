@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
   end
 
   def email
-    TicketMailer.delay.send_ticket(@booking)
+    TicketMailJob.new.async.perform(@booking)
     respond_with @booking, location: ticket_url(@booking), notice: 'Ticket has been emailed successfully'
   end
 

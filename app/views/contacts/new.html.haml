@@ -1,16 +1,15 @@
 %h2 Contact and Support
 %br
-%h5 Got a question? Check these out:
-%h4= link_to 'Frequently Asked Questions', page_path('faq')
 %h5 Email us at:
-%h4
 %a{href: "mailto:Support@SearleConsulting.co.za"} Support@SearleConsulting.co.za
 
 %h5 Let us get back to you:
-= simple_form_for @contact, defaults: { required: false } do |f|
-  = f.input :name
-  = f.input :email
-  = f.input :message, as: :text
-  .hidden
-    = f.input :nickname, hint: 'Leave this field blank!'
-  = f.button :submit, 'Send message', class: t('buttons.primary')
+.row.span12
+  = simple_form_for @contact, defaults: { required: false } do |f|
+    = f.input :name
+    = f.input :email
+    = f.input :message, as: :text, label: false,input_html: { class: 'input-xxlarge', rows: '10' }
+    = f.button :submit, 'Send message', class: t('buttons.primary')
+
+
+
