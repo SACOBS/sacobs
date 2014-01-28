@@ -59,6 +59,7 @@ gem "figaro"
 
 # Email
 gem 'premailer-rails'
+gem 'nokogiri'
 
 # Font Awesome
 gem 'font-awesome-rails'

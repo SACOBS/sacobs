@@ -386,6 +386,7 @@ DEPENDENCIES
   launchy (~> 2.2.0)
   lol_dba
   memcachier
+  nokogiri
   normalize-rails
   pg (= 0.17.0)
   premailer-rails
