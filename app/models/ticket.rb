@@ -4,10 +4,10 @@ attr_reader :booking, :return ,:client
 
   def initialize(booking)
     if booking.is_return?
-      @booking = booking.main.decorate
+      @booking = booking.main.decorate if @booking.main
       @return = booking.decorate
     else
-      @booking = booking.decorate
+      @booking = booking.decorate 
       @return = booking.return.decorate if @booking.return
     end
     @client = booking.client.decorate
