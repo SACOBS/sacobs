@@ -15,7 +15,7 @@ class PaymentDetailsController < ApplicationController
         @booking.return.create_payment_detail(payment_details_params) if @booking.return
       end
     end
-    respond_with @payment_detail, location: booking_url(@booking)
+    respond_with @payment_detail, location: bookings_url
   end
 
   private

@@ -3,12 +3,16 @@ class Ticket
 attr_reader :booking, :return ,:client
 
   def initialize(booking)
-    if booking.is_return?
-      @booking = booking.main.decorate if @booking.main
-      @return = booking.decorate
-    else
-      @booking = booking.decorate 
+    if booking.has_return?
+      @booking = booking.decorate
       @return = booking.return.decorate if @booking.return
+    else
+      if booking.return
+        @booking = booking.main.decorate
+        @return = booking.decorate
+      else
+        @booking = booking.decorate
+      end
     end
     @client = booking.client.decorate
   end

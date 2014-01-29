@@ -34,6 +34,7 @@ class BookingsController < ApplicationController
 
   def cancel
     unassign_seats
+    @booking.toggle(:has_return) if @booking.has_return
     @booking.update(status: :cancelled, user: current_user)
     respond_with(@booking, location: bookings_url, notice: 'Booking was succesfully cancelled')
   end
