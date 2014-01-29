@@ -35,7 +35,7 @@ class Booking < ActiveRecord::Base
   belongs_to :stop
   belongs_to :client
   belongs_to :main, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id, touch: true
-  has_one :return, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id, dependent: :destroy
+  has_one :return, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id
   has_one :invoice, -> {includes(:line_items)}, dependent: :destroy
   has_one :payment_detail, dependent: :destroy
   has_many :passengers, dependent: :destroy
@@ -47,21 +47,14 @@ class Booking < ActiveRecord::Base
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
-  validates :quantity, numericality: { greater_than: 0 }, on: :update
-  validate :seats_over_limit, on: :update
+ validates :quantity, numericality: { greater_than: 0 }, on: :update
+ validate :seats_over_limit, on: :update
 
   before_save :generate_reference, if: :reserved?
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
-
-
-  def reserve(expiring_on)
-    SeatingAssigner.new(self).assign
-    self.expiry_date = expiring_on
-    self.status = :reserved
-  end
 
   def is_return?
     self.main_id?

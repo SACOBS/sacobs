@@ -23,20 +23,20 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-    @booking.update(status: :paid, user: current_user)
-    if booking.is_return?
-      @booking.main.update(status: :paid, user: current_user) if @booking.main
+    if ConfirmBooking.new(@booking, current_user).confirm
+      redirect_to new_booking_payment_detail_url(@booking), notice: 'Booking was successfully confirmed.'
     else
-      @booking.return.update(status: :paid, user: current_user) if @booking.return
+      redirect_to bookings_url, alert: 'Booking could not be confirmed.'
     end
-    respond_with(@booking,location: new_booking_payment_detail_url(@booking), notice: 'Booking was succesfully confirmed')
   end
 
   def cancel
-    unassign_seats
-    @booking.toggle(:has_return) if @booking.has_return
-    @booking.update(status: :cancelled, user: current_user)
-    respond_with(@booking, location: bookings_url, notice: 'Booking was succesfully cancelled')
+    if CancelBooking.new(@booking, current_user).cancel
+      flash[:notice] = 'Booking was succesfully cancelled.'
+    else
+      flash[:alert] = 'Booking could not be cancelled.'
+    end
+    redirect_to bookings_url
   end
 
   private
