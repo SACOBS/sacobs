@@ -9,7 +9,7 @@
             %td= stop.from.city.name
             %td= stop.to.city.name
             %td= stop.available_seats
-            %td=link_to 'View Prices', pricing_show_url(stop_id: stop), remote: true
+            %td=link_to 'View Prices', pricing_path(stop_id: stop), remote: true
             %td= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, value: 0}
             %td= f.input :has_return, as: :boolean
             %td
