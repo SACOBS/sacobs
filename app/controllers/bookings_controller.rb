@@ -24,6 +24,11 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking.update(status: :paid, user: current_user)
+    if booking.is_return?
+      @booking.main.update(status: :paid, user: current_user) if @booking.main
+    else
+      @booking.return.update(status: :paid, user: current_user) if @booking.return
+    end
     respond_with(@booking,location: new_booking_payment_detail_url(@booking), notice: 'Booking was succesfully confirmed')
   end
 
