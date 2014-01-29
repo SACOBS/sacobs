@@ -18,7 +18,6 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    unassign_seats
     @booking.destroy
     respond_with(@booking)
   end
