@@ -36,7 +36,7 @@ class TicketsController < ApplicationController
    end
 
    def generate_file_name
-     "#{@booking.trip_name}_#{@booking.client_name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
+     "#{@booking.trip_name}_#{@booking.client.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
    end
 
    def generate_pdf
