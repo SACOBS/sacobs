@@ -180,11 +180,11 @@ Sacobs::Application.routes.draw do
     end
   end
 
-  root to: 'high_voltage/pages#show', id: 'home'
-
   authenticated :user do
     root to: 'dashboard#show', as: :authenticated_root
   end
+
+  root to: 'high_voltage/pages#show', id: 'home'
 
 
   get 'pricing/:stop_id', to: 'pricing#show', as: :pricing
