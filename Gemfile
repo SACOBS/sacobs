@@ -45,7 +45,8 @@ gem 'select2-rails'
 gem 'devise'
 
 #Roles
-gem "rolify", "~> 3.4.0"
+gem "rolify", "3.3.0.rc4"
+
 
 #Static Pages
 gem 'high_voltage'
