@@ -24,8 +24,8 @@
     #connections.tab-pane
       %fieldset
         - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
-          %tr
-            = f.simple_fields_for :connections, wrapper: false do |connection|
+          = f.simple_fields_for :connections, wrapper: false do |connection|
+            %tr
               %td= connection.object.from.name
               %td= connection.object.to.name
               %td
