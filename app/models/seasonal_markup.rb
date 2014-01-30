@@ -23,7 +23,7 @@ class SeasonalMarkup < ActiveRecord::Base
 
 
   scope :active, -> { where(active: true) }
-  scope :in_period, ->(date) { where(':date > period_from AND :date < period_to', {date: date})  }
+  scope :in_period, ->(date) { where(':date >= period_from AND :date <= period_to', {date: date})  }
 
 
   private
