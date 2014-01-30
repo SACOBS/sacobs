@@ -26,10 +26,10 @@ class InvoiceBuilder
     end
 
   def build_markup(passenger)
-    if @markup
+    if markup
       description = "#{passenger.full_name} Seasonal Fee"
       amount = calculate_markup
-      build_line_item(passenger.full_name, amount, :debit)
+      build_line_item(description, amount, :debit)
     end
   end
 
@@ -70,7 +70,7 @@ class InvoiceBuilder
     end
 
     def calculate_markup
-      percentage = BigDecimal(@markup.percentage / 100 + 1)
+      percentage = BigDecimal(@markup.percentage / 100)
       round_up(percentage * price)
     end
 
