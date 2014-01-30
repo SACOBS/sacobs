@@ -5,6 +5,6 @@ class SeasonalMarkupParameters < Struct.new(:params)
 
   private
   def seasonal_markup_attributes
-    [ :percentage, :from, :to, :active ]
+    [ :percentage, :period_from, :period_to, :active ]
   end
 end
