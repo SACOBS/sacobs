@@ -2,14 +2,18 @@
 #
 # Table name: seasonal_markups
 #
-#  id         :integer          not null, primary key
-#  percentage :decimal(, )
-#  from       :date
-#  to         :date
-#  active     :boolean          default(FALSE)
-#  created_at :datetime
-#  updated_at :datetime
-#  user_id    :integer
+#  id          :integer          not null, primary key
+#  percentage  :decimal(, )
+#  period_from :date
+#  period_to   :date
+#  active      :boolean          default(FALSE)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  user_id     :integer
+#
+# Indexes
+#
+#  index_seasonal_markups_on_user_id  (user_id)
 #
 
 class SeasonalMarkup < ActiveRecord::Base
@@ -24,6 +28,6 @@ class SeasonalMarkup < ActiveRecord::Base
 
   private
    def defaults
-     { percentage: 0, from: Date.today, to: Date.tomorrow }
+     { percentage: 0, period_from: Date.today, period_to: Date.tomorrow }
    end
 end

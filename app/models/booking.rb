@@ -21,6 +21,7 @@
 #
 #  index_bookings_on_client_id  (client_id)
 #  index_bookings_on_main_id    (main_id)
+#  index_bookings_on_stop_id    (stop_id)
 #  index_bookings_on_trip_id    (trip_id)
 #  index_bookings_on_user_id    (user_id)
 #

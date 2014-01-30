@@ -18,6 +18,7 @@
 #
 # Indexes
 #
+#  index_clients_on_bank_id  (bank_id)
 #  index_clients_on_slug     (slug) UNIQUE
 #  index_clients_on_user_id  (user_id)
 #

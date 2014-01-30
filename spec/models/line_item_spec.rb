@@ -2,15 +2,13 @@
 #
 # Table name: line_items
 #
-#  id                  :integer          not null, primary key
-#  description         :string(255)
-#  discount_percentage :integer
-#  discount_amount     :decimal(8, 2)
-#  invoice_id          :integer
-#  created_at          :datetime
-#  updated_at          :datetime
-#  gross_price         :decimal(8, 2)
-#  nett_price          :decimal(8, 2)
+#  id             :integer          not null, primary key
+#  description    :string(255)
+#  invoice_id     :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  amount         :decimal(8, 2)
+#  line_item_type :string(255)
 #
 # Indexes
 #
