@@ -18,7 +18,7 @@ module BootstrapHelper
 
   def bootstrap_table(*args)
     options = args.extract_options!
-    options[:html_options] ? html_options = options[:html_options] : html_options = {}
+    html_options = options.fetch(:html_options) { Hash.new }
     html_options[:class] ||= []
     html_options[:class] = table_classes(options[:types])  <<  html_options[:class].split
     haml_tag :table, html_options do

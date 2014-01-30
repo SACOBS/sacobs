@@ -35,6 +35,8 @@ class Route < ActiveRecord::Base
 
   validates :name, :cost, :distance, presence: true, on: :update
 
+  before_save :set_connection_costs, if: :cost_changed?
+
   def start_city
     self.destinations.first.city unless self.destinations.empty?
   end
@@ -46,5 +48,11 @@ class Route < ActiveRecord::Base
   private
    def should_generate_new_friendly_id?
      name_changed?
+   end
+
+   def set_connection_costs
+     self.connections.each do |c|
+       c.cost = ((self.cost * (c.percentage / 100)) / 5.0).ceil * 5
+     end
    end
 end

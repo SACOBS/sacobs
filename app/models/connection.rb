@@ -29,8 +29,9 @@ class Connection < ActiveRecord::Base
 
   validates :route, :from, :to, presence: true
 
-  before_save :set_name
 
+  before_save :set_name
+  before_create :set_percentage
 
   private
    def defaults
@@ -42,4 +43,7 @@ class Connection < ActiveRecord::Base
       self.name = "#{self.from.name} to #{self.to.name}"
     end
 
+    def set_percentage
+      self.percentage = ((self.cost / self.route.cost) * 100).round
+    end
 end

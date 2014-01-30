@@ -11,6 +11,13 @@ $ ->
       placeholder: $(this).data('default')
     });
 
+  $(document).on 'cocoon:after-insert', ->
+    $('select[rel="autocomplete"]').each ->
+      $(this).select2({
+        width: 'element',
+        placeholder: $(this).data('default')
+      });
+
   $(document).on 'hidden', '.modal', ->
     $(this).remove()
 

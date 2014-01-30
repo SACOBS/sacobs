@@ -24,10 +24,13 @@ class Bookings::BuilderController < ApplicationController
   def update
     @booking.attributes = booking_params
     case step
-      when :details then build_return
+      when :details
+        build_return if @booking.valid?
+        fetch_stops unless @booking.valid?
       when :passengers then update_return_associations
       when :billing then reserve_booking
     end
+
     render_wizard @booking
   end
 

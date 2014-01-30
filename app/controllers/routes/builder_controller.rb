@@ -12,8 +12,7 @@ class Routes::BuilderController < ApplicationController
 
   def show
     case step
-      when :connections
-        build_connections
+      when :connections then build_connections
     end
     render_wizard
   end
