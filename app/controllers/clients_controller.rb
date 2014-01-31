@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
 
   def index
     @q = Client.includes(:user).search(params[:q])
-    @clients = @q.result(distinct: true)
+    @clients = @q.result(distinct: true).page(params[:page])
   end
 
   def show

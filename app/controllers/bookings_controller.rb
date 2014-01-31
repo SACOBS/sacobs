@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
 
   def index
     @q = Booking.not_in_process.active.search(params[:q])
-    @bookings = @q.result(distinct: true)
+    @bookings = @q.result(distinct: true).page(params[:page])
   end
 
   def create

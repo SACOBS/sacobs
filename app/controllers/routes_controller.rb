@@ -5,7 +5,7 @@ class RoutesController < ApplicationController
 
   def index
     @q = Route.search(params[:q])
-    @routes = @q.result(distinct: true)
+    @routes = @q.result(distinct: true).page(params[:page])
   end
 
   def show

@@ -20,6 +20,7 @@
   %span.label.label-important Cancelled
 
 
+= paginate bookings
 - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render bookings
 

@@ -5,7 +5,7 @@ class TripsController < ApplicationController
 
   def index
     @q = Trip.search(params[:q])
-    @trips = @q.result(distinct: true)
+    @trips = @q.result(distinct: true).page(params[:page])
   end
 
   def show

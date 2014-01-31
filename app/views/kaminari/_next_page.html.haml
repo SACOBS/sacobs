@@ -1,0 +1,3 @@
+%li
+  - unless current_page.last?
+    = link_to 'Next', url, rel: 'next', remote: remote, icon: :chevron_right, class: t('buttons.mini.primary')

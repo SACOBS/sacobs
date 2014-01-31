@@ -7,6 +7,7 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', routes_path, class: t('buttons.mini.inverse'), icon: :times
 
+= paginate routes
 - bootstrap_table headers:['Description','Start City', 'End City','Cost', 'Distance','Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render routes
 

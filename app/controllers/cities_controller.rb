@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
 
   def index
     @q = City.search(params[:q])
-    @cities = @q.result(distinct: true)
+    @cities = @q.result(distinct: true).page(params[:page])
   end
 
   def new

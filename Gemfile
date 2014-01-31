@@ -34,6 +34,9 @@ gem 'bootswatch-rails'
 gem 'twitter-bootstrap-rails-confirm'
 gem 'bootstrap_sortable_rails', "~> 0.1.3"
 gem 'bootstrap-datetimepicker-rails'
+gem 'kaminari'
+
+
 
 
 #Forms
