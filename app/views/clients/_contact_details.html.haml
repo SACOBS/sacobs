@@ -4,9 +4,13 @@
     %h3#clientContactDetailLabel= @client.full_name
     .modal-body
       %p
-        %strong Telephone No:
+        %strong Home Telephone No:
         %br
-        = client.telephone
+        = client.home_telephone
+      %p
+        %strong Work Telephone No:
+        %br
+        = client.work_telephone
       %p
         %strong Cellphone No:
         %br

@@ -12,7 +12,8 @@
         = client.input :name
         = client.input :surname
         = client.association :bank, prompt: 'Select a bank', include_blank: false
-        = client.input :tel_no, as: :tel
+        = client.input :home_no, as: :tel
+        = client.input :work_no, as: :tel
         = client.input :cell_no, as: :tel
         = client.input :email, as: :email
       #address

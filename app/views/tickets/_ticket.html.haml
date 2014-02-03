@@ -6,8 +6,11 @@
     %strong Name:
     = @ticket.client.full_name
   %p
-    %strong Tel No:
-    = @ticket.client.telephone
+    %strong Home Tel No:
+    = @ticket.client.home_telephone
+  %p
+    %strong Work Tel No:
+    = @ticket.client.work_telephone
   %p
     %strong Cell No:
     = @ticket.client.cellphone
@@ -78,3 +81,16 @@
 .ticket-details.rounded.text-center.pull-right
   %h3 Bookings
   %h3 086 110 2426
+
+
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+#brake
+.terms
+  %h5.text-center Terms and Conditions
+  = render partial: 'terms'

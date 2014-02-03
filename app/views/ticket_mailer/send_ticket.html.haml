@@ -6,8 +6,11 @@
     %strong Name:
     = @ticket.client.full_name
   %p
-    %strong Tel No:
-    = @ticket.client.telephone
+    %strong Home Tel No:
+    = @ticket.client.home_telephone
+  %p
+    %strong Work Tel No:
+    = @ticket.client.work_telephone
   %p
     %strong Cell No:
     = @ticket.client.cellphone

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128070257) do
+ActiveRecord::Schema.define(version: 20140203092737) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20140128070257) do
     t.string   "surname"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tel_no"
+    t.string   "home_no"
     t.string   "cell_no"
     t.string   "email"
     t.string   "slug"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140128070257) do
     t.string   "full_name"
     t.boolean  "high_risk",  default: false
     t.integer  "bank_id"
+    t.string   "work_no"
   end
 
   add_index "clients", ["bank_id"], name: "index_clients_on_bank_id"

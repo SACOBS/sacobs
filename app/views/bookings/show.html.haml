@@ -62,9 +62,14 @@
       %br
       = booking.client.cellphone
     %p
-      %strong Telephone:
+      %strong Home Telephone:
       %br
-      = booking.client.telephone
+      = booking.client.home_no
+    %p
+      %strong Work Telephone:
+      %br
+      = booking.client.work_no
+
   .well
     %h3 Passengers
     - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do

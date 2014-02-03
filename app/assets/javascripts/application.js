@@ -20,6 +20,8 @@
 //= require cocoon
 //= require select2
 //= require turbolinks
+//= require vendor/jquery.plugin
+//= require vendor/jquery.calculator
 //= require sacobs
 //= require initialize
 //= require bookings

@@ -59,7 +59,7 @@ class Bookings::BuilderController < ApplicationController
     def build_passengers
       unless @booking.passengers.any?
         default_passenger_type = PassengerType.find_by(description: :standard)
-        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname, cell_no: @booking.client.tel_no , email: @booking.client.email  ,passenger_type: default_passenger_type  }
+        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname, cell_no: @booking.client.cell_no , email: @booking.client.email  ,passenger_type: default_passenger_type  }
       end
     end
 

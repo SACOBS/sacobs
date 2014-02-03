@@ -5,9 +5,14 @@ class ClientDecorator < Draper::Decorator
     model.high_risk? ? 'Yes' : 'No'
   end
 
-  def telephone
-   return 'N/A' unless tel_no.present?
-   h.number_to_phone(tel_no, area_code: true)
+  def home_telephone
+    return 'N/A' unless home_no.present?
+    h.number_to_phone(home_no, area_code: true)
+  end
+
+  def work_telephone
+    return 'N/A' unless work_no.present?
+    h.number_to_phone(work_no, area_code: true)
   end
 
   def cellphone

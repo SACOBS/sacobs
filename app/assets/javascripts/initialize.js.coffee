@@ -5,6 +5,9 @@ $ ->
   $('.timepicker').datetimepicker({pickDate: false, pickSeconds: false});
   $('.datetimepicker').datetimepicker();
 
+  $('.calc').each ->
+    $(this).calculator();
+
   $('select[rel="autocomplete"]').each ->
     $(this).select2({
       width: 'element',

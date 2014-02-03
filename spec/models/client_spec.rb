@@ -7,7 +7,7 @@
 #  surname    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  tel_no     :string(255)
+#  home_no    :string(255)
 #  cell_no    :string(255)
 #  email      :string(255)
 #  slug       :string(255)
@@ -15,6 +15,7 @@
 #  full_name  :string(255)
 #  high_risk  :boolean          default(FALSE)
 #  bank_id    :integer
+#  work_no    :string(255)
 #
 # Indexes
 #
