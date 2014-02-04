@@ -36,13 +36,13 @@
             %tr
               %td= stop.from
               %td= stop.to
-              %td= stop.arrive_time
               %td= stop.depart_time
+              %td= stop.arrive_time
               %td= stop.available_seats
   .form-actions
     = back_to trips_path
-    = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
+    = link_to 'Edit', edit_trip_path(trip), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', trip_path(trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
 
 
 

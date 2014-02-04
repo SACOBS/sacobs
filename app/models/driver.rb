@@ -28,7 +28,7 @@ class Driver < ActiveRecord::Base
   validates :name, length: { maximum: 5 }
 
  def full_name
-  "#{self.name} #{self.surname}"
+  "#{name} #{surname}"
  end
 
  private

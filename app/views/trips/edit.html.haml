@@ -27,7 +27,7 @@
             %tr
               %td= stop.object.from.name
               %td= stop.object.to.name
-              %td= stop.input :arrive, as: :time_picker, label: false
               %td= stop.input :depart, as: :time_picker, label: false
+              %td= stop.input :arrive, as: :time_picker, label: false
   .form-actions
     = f.submit class: t('buttons.primary')
