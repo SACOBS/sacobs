@@ -24,11 +24,17 @@ class Route < ActiveRecord::Base
 
   friendly_id :name, use: :slugged
 
-  belongs_to :user
 
-  has_many :destinations, -> { includes(:city).order(:sequence) }, dependent: :destroy
+  belongs_to :user
+  has_many :destinations, -> { includes(:city).order(:sequence) }, dependent: :destroy, inverse_of: :route
   has_many :cities, through: :destinations
-  has_many :connections, -> { includes(:from, :to) }, dependent: :destroy, autosave: true
+  has_many :connections, -> { includes(:from, :to) }, dependent: :destroy, autosave: true, inverse_of: :route
+
+  amoeba do
+    nullify :connections_count
+    prepend name: 'Copy of'
+    enable
+  end
 
   accepts_nested_attributes_for :connections,  reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true

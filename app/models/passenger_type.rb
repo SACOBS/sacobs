@@ -13,9 +13,6 @@ class PassengerType < ActiveRecord::Base
 
   before_create :format_description
 
-
-
-
   protected
    def format_description
      self.description.downcase!

@@ -29,7 +29,10 @@ class Trip < ActiveRecord::Base
   has_many :bookings, dependent: :destroy
   has_and_belongs_to_many :drivers
 
-  amoeba { enable }
+  amoeba do
+    prepend name: 'Copy of'
+    enable
+  end
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 

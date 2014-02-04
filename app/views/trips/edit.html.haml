@@ -31,3 +31,5 @@
               %td= stop.input :arrive, as: :time_picker, label: false
   .form-actions
     = f.submit class: t('buttons.primary')
+    = link_to 'Back', trips_path, class: t('buttons.info')
+

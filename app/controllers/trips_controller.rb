@@ -13,13 +13,10 @@ class TripsController < ApplicationController
   end
 
   def copy
-    new_trip = @trip.amoeba_dup
-    new_trip.user = current_user
-    if new_trip.save
-      redirect_to trip_builder_path(:details, trip_id: new_trip)
-    else
-      redirect_to :index, alert: 'There was an error while copying the trip. Please try again.'
-    end
+    copy = @trip.amoeba_dup
+    copy.user = current_user
+    copy.save
+    respond_with copy, location: trips_url
   end
 
   def update

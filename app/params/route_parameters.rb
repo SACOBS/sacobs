@@ -13,6 +13,6 @@ class RouteParameters < Struct.new(:params)
   end
 
   def destinations_attributes
-    { destinations_attributes: [:city_id, :sequence] }
+    { destinations_attributes: [:city_id, :sequence, :_destroy] }
   end
 end

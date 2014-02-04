@@ -23,7 +23,7 @@
 class Connection < ActiveRecord::Base
   include AttributeDefaults
 
-  belongs_to :route, counter_cache: true, touch: true
+  belongs_to :route, counter_cache: true, touch: true, inverse_of: :connections
   belongs_to :from, -> {includes(:city)}, class_name: :Destination
   belongs_to :to,-> {includes(:city)} ,class_name: :Destination
 

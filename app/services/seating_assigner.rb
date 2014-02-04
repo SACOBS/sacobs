@@ -15,7 +15,6 @@ class SeatingAssigner
     affected_stops.each { |stop| stop.decrement!(:available_seats, @booking.quantity) }
   end
 
-
   private
    def affected_stops
      @trip.stops.en_route(@stop.connection.from).to_a.reject {|stop| stop.connection.to == @stop.connection.from}

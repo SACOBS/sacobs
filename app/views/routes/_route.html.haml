@@ -7,6 +7,7 @@
     %td= route.distance
     %td= route.connections_count
     %td
+      = link_to 'Copy', copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post
       = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
       = link_to 'Edit', edit_route_path(route), icon: :edit,  class: t('buttons.mini.inverse')
       = link_to 'Destroy', route, method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, class: t('buttons.mini.danger'), icon: :times

@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: [:show, :edit, :update,:destroy]
+  before_action :set_route, only: [:copy, :show, :edit, :update,:destroy]
   decorates_assigned :routes
   decorates_assigned :route
 
@@ -19,7 +19,14 @@ class RoutesController < ApplicationController
 
   def destroy
     @route.destroy
-    respond_with(@route, location: routes_url)
+    respond_with @route
+  end
+
+  def copy
+    copy = @route.amoeba_dup
+    copy.user = current_user
+    copy.save
+    respond_with copy, location: routes_url
   end
 
   private

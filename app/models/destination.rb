@@ -18,7 +18,7 @@
 
 class Destination < ActiveRecord::Base
   belongs_to :city
-  belongs_to :route
+  belongs_to :route, inverse_of: :destinations
 
   validates :sequence, :route, :city, presence: true
 
