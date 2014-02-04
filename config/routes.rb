@@ -155,6 +155,7 @@ Sacobs::Application.routes.draw do
   resources :routes, only: [:index, :edit, :update ,:show, :destroy] do
    member do
      post :copy
+     post :reverse_copy
    end
    resources :builder, only: [:show, :update, :create],controller: 'routes/builder'
   end

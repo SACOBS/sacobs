@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: [:copy, :show, :edit, :update,:destroy]
+  before_action :set_route, only: [:copy, :reverse_copy ,:show, :edit, :update,:destroy]
   decorates_assigned :routes
   decorates_assigned :route
 
@@ -27,6 +27,12 @@ class RoutesController < ApplicationController
     copy.user = current_user
     copy.save
     respond_with copy, location: routes_url
+  end
+  
+  def reverse_copy
+    reverse_copy = ReverseRouteBuilder.new(@route).build
+    reverse_copy.save
+    respond_with reverse_copy, location: routes_url
   end
 
   private
