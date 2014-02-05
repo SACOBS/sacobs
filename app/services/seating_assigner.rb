@@ -6,13 +6,17 @@ class SeatingAssigner
   end
 
   def unassign
-    return unless @stop
-    affected_stops.each { |stop| stop.increment!(:available_seats, @booking.quantity) }
+    affected_stops.each do |stop|
+      stop.increment(:available_seats, @booking.quantity)
+      stop.save!
+    end
   end
 
   def assign
-    return unless @stop
-    affected_stops.each { |stop| stop.decrement!(:available_seats, @booking.quantity) }
+    affected_stops.each do |stop|
+      stop.decrement(:available_seats, @booking.quantity)
+      stop.save!
+    end
   end
 
   private

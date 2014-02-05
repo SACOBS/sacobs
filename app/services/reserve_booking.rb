@@ -9,7 +9,7 @@ class ReserveBooking
   def reserve
     Booking.transaction do
       seating_assigner(@booking).assign
-      seating_assigner(@related_booking).assign
+      seating_assigner(@related_booking).assign if @related_booking
       @booking.update!(expiry_date: @expiry_date ,status: :reserved, user: @user)
       @related_booking.update!(expiry_date: @expiry_date, status: :reserved, user: @user) if @related_booking
     end
