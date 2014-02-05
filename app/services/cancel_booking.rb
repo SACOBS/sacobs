@@ -6,8 +6,8 @@ class CancelBooking
 
   def cancel
     Booking.transaction do
-      seating_assigner(@booking).unassign
       @booking.update!(status: :cancelled, user: @user)
+      seating_assigner(@booking).unassign
     end
     true
   rescue

@@ -29,10 +29,16 @@ class Stop < ActiveRecord::Base
 
  delegate :name, :from, :to, :cost, to: :connection
 
+ before_save :check_seats
+
 
  private
   def defaults
     { arrive: Time.current, depart: Time.current }
+  end
+
+  def check_seats
+    self.available_seats = 0 if available_seats < 0
   end
 
 end

@@ -49,7 +49,7 @@ class Booking < ActiveRecord::Base
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
  validates :quantity, numericality: { greater_than: 0 }, on: :update
- validate :seats_over_limit, on: :update
+ validate :seats_over_limit, on: :update, if: :in_process?
 
   before_save :generate_reference, if: :reserved?
 

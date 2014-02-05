@@ -46,7 +46,8 @@ class InvoiceBuilder
       if @booking.client.vouchers.any?
         build_line_item('Client Credit', client.vouchers.sum(:amount), :credit )
         @booking.client.vouchers.each do |v|
-          v.update(active: false)
+          v.active = false
+          v.save
         end
       end
     end
