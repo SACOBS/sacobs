@@ -24,6 +24,14 @@ module ApplicationHelper
     end
   end
 
+  def cities
+    @cities ||= City.select(:id, :name)
+  end
+
+  def route_cities(route)
+    @route_cities ||= route.destinations.map(&:city)
+  end
+
   def ticket_scripture
    ScriptureService.new.fetch || settings.default_scripture
   end

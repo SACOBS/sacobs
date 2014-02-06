@@ -4,7 +4,7 @@ class RoutesController < ApplicationController
   decorates_assigned :route
 
   def index
-    @q = Route.search(params[:q])
+    @q = Route.includes(:destinations, :destinations).search(params[:q])
     @routes = @q.result(distinct: true).page(params[:page])
   end
 

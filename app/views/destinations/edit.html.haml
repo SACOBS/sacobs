@@ -1,0 +1,12 @@
+.page-header
+  %h2 Edit Destinations
+%ol
+  - @route.destinations.each do |d|
+    %li= d.name
+
+
+= simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
+  = f.input :city, collection: cities, prompt: 'Select a city'
+  = f.input :preceding_city, collection: route_cities(@route), include_blank: 'None'
+  = f.submit 'Save', class: t('buttons.primary')
+  = link_to 'Back', routes_path, class: t('buttons.info')

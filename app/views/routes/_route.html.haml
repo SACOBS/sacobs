@@ -7,6 +7,7 @@
     %td= route.distance
     %td= route.connections_count
     %td
+      = link_to 'Add Destination', edit_route_destinations_path(route), icon: :plus, class: t('buttons.mini.primary')
       = link_to 'Copy', copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post
       = link_to 'Reverse Copy', reverse_copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post
       = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
