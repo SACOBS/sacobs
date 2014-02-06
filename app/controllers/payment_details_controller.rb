@@ -3,7 +3,7 @@ class PaymentDetailsController < ApplicationController
   before_action :set_booking
 
   def new
-    @payment_detail = @booking.build_payment_detail
+    @payment_detail = @booking.build_payment_detail(payment_type: PaymentType.find_by(description: @booking.client.bank.name))
   end
 
   def create

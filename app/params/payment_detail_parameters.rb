@@ -6,6 +6,6 @@ class PaymentDetailParameters < Struct.new(:params)
 
   private
   def payment_detail_attributes
-    [:booking_id, :payment_date, :bank_id, :reference ]
+    [:booking_id, :payment_date, :payment_type_id, :reference ]
   end
 end

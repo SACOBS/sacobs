@@ -55,8 +55,8 @@ class BookingDecorator < Draper::Decorator
     payment_detail.payment_date if payment_detail
   end
 
-  def payment_bank
-    payment_detail.bank_name if payment_detail
+  def payment_type
+    payment_detail.payment_type_description if payment_detail
   end
 
   def payment_reference
