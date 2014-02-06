@@ -139,6 +139,8 @@ Sacobs::Application.routes.draw do
     resources :vouchers, only: [:new, :create]
   end
 
+  resources :payment_types, only: [:index, :create, :destroy]
+
   resources :cities
 
   resource :contacts, only: [:new, :create]
