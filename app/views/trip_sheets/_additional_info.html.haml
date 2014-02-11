@@ -1,13 +1,9 @@
 %p
-  %strong NB!
-  Please do not allow passengers to open/close doors unattended.
+  %strong= settings.trip_sheet_note1
 %p
-  %strong NB! For insurance purposes:
-  Names of all persons in the vehicle must be on the trip sheet
-  Please record all relevant details
-  %b i.e Full Name, Surname and contact numbers
+  %strong= settings.trip_sheet_note2
 %p
-  %strong Use colour coded stickers on baggage to identify the same.
+  %strong= settings.trip_sheet_note3
 
 - bootstrap_table headers:['Drivers', 'From','Time','O/Reading', 'To', 'Time'], types: [:bordered] do
   - 5.times do
@@ -71,8 +67,6 @@
     %td
     %td
 %p
-  %strong
-    Please ensure the home keys left in place of safety.
-    The vehicle fuel level is above a 1/4 tank at all times.
+  %strong= settings.trip_sheet_note4
 %p.pull-right
   PTO

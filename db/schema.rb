@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206133110) do
+ActiveRecord::Schema.define(version: 20140211113119) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(version: 20140206133110) do
   end
 
   add_index "buses", ["user_id"], name: "index_buses_on_user_id"
+
+  create_table "charges", force: true do |t|
+    t.decimal  "percentage",  precision: 5, scale: 2
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+  end
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -284,6 +292,10 @@ ActiveRecord::Schema.define(version: 20140206133110) do
     t.datetime "updated_at"
     t.string   "ticket_instructions"
     t.string   "default_scripture"
+    t.string   "trip_sheet_note1"
+    t.string   "trip_sheet_note2"
+    t.string   "trip_sheet_note3"
+    t.string   "trip_sheet_note4"
   end
 
   create_table "stops", force: true do |t|

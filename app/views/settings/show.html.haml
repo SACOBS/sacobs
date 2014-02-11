@@ -10,6 +10,20 @@
   %p
     %strong Default Scripture:
     =simple_format(@setting.default_scripture)
+  %p
+    %strong="#{1.ordinalize} Trip Sheet Note:"
+    =simple_format(@setting.trip_sheet_note1)
+  %p
+    %strong="#{2.ordinalize} Trip Sheet Note:"
+    =simple_format(@setting.trip_sheet_note2)
+  %p
+    %strong="#{3.ordinalize} Trip Sheet Note:"
+    =simple_format(@setting.trip_sheet_note3)
+
+  %p
+    %strong="#{4.ordinalize} Trip Sheet Note:"
+    =simple_format(@setting.trip_sheet_note4)
+
 .actions
   = link_to 'Edit', edit_setting_path, icon: :edit, class: t('buttons.info')
 

@@ -6,7 +6,11 @@
     = f.input :booking_expiry_period
     = f.input :ticket_instructions, as: :text
     = f.input :default_scripture, as: :text
+    = f.input :trip_sheet_note1, as: :text
+    = f.input :trip_sheet_note2, as: :text
+    = f.input :trip_sheet_note3, as: :text
+    = f.input :trip_sheet_note4, as: :text
   .form-actions
     = f.submit class: t('buttons.primary')
-    = link_to 'Cancel', drivers_path, class: t('buttons.default')
+    = link_to 'Cancel', root_path, class: t('buttons.default')
 

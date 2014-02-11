@@ -7,10 +7,6 @@
       %td= p.description
       %td= link_to 'Destroy', p, icon: :times, data: { confirm: t('messages.confirm', resource: :payment_type)}, method: :delete, class: t('buttons.mini.danger')
 
-
-
-
-
 %h6 New Payment Type
 = simple_form_for :payment_type, url: payment_types_path, method: :post do |f|
   = f.input :description, label: false, placeholder: 'Enter Description'

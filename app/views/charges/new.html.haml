@@ -1,0 +1,13 @@
+.page-header
+  %h2 New Charge
+
+#errors= errors_for @charge
+= simple_form_for @charge,  defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.input :description
+    = f.input :percentage
+  .form-actions
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', charges_path, class: t('buttons.default')
+
+
