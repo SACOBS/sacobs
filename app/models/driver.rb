@@ -27,6 +27,8 @@ class Driver < ActiveRecord::Base
   validates :name, :surname, presence: true
   validates :name, length: { maximum: 5 }
 
+  before_save :touch_trips
+
  def full_name
   "#{name} #{surname}"
  end
@@ -34,6 +36,11 @@ class Driver < ActiveRecord::Base
  private
   def should_generate_new_friendly_id?
     name_changed? || surname_changed?
+  end
+
+ protected
+  def touch_trips
+    trips.update_all(updated_at: Time.now) if trips.any?
   end
 
 end

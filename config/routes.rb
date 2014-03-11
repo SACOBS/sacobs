@@ -1,4 +1,4 @@
-# == Route Map (Updated 2014-01-23 08:56)
+# == Route Map (Updated 2014-03-11 10:57)
 #
 #                     Prefix Verb   URI Pattern                                         Controller#Action
 #           new_user_session GET    /users/sign_in(.:format)                            devise/sessions#new
@@ -42,6 +42,9 @@
 #                            PATCH  /clients/:id(.:format)                              clients#update
 #                            PUT    /clients/:id(.:format)                              clients#update
 #                            DELETE /clients/:id(.:format)                              clients#destroy
+#              payment_types GET    /payment_types(.:format)                            payment_types#index
+#                            POST   /payment_types(.:format)                            payment_types#create
+#               payment_type DELETE /payment_types/:id(.:format)                        payment_types#destroy
 #                     cities GET    /cities(.:format)                                   cities#index
 #                            POST   /cities(.:format)                                   cities#create
 #                   new_city GET    /cities/new(.:format)                               cities#new
@@ -71,12 +74,19 @@
 #                            PATCH  /trips/:id(.:format)                                trips#update
 #                            PUT    /trips/:id(.:format)                                trips#update
 #                            DELETE /trips/:id(.:format)                                trips#destroy
+#                 copy_route POST   /routes/:id/copy(.:format)                          routes#copy
+#         reverse_copy_route POST   /routes/:id/reverse_copy(.:format)                  routes#reverse_copy
+#    edit_route_destinations GET    /routes/:route_id/destinations/edit(.:format)       destinations#edit
+#         route_destinations PATCH  /routes/:route_id/destinations(.:format)            destinations#update
 #        route_builder_index POST   /routes/:route_id/builder(.:format)                 routes/builder#create
 #              route_builder GET    /routes/:route_id/builder/:id(.:format)             routes/builder#show
 #                            PATCH  /routes/:route_id/builder/:id(.:format)             routes/builder#update
 #                            PUT    /routes/:route_id/builder/:id(.:format)             routes/builder#update
 #                     routes GET    /routes(.:format)                                   routes#index
+#                 edit_route GET    /routes/:id/edit(.:format)                          routes#edit
 #                      route GET    /routes/:id(.:format)                               routes#show
+#                            PATCH  /routes/:id(.:format)                               routes#update
+#                            PUT    /routes/:id(.:format)                               routes#update
 #                            DELETE /routes/:id(.:format)                               routes#destroy
 #          bus_builder_index POST   /buses/:bus_id/builder(.:format)                    buses/builder#create
 #                bus_builder GET    /buses/:bus_id/builder/:id(.:format)                buses/builder#show
@@ -100,6 +110,13 @@
 #                   discount PATCH  /discounts/:id(.:format)                            discounts#update
 #                            PUT    /discounts/:id(.:format)                            discounts#update
 #                            DELETE /discounts/:id(.:format)                            discounts#destroy
+#                    charges GET    /charges(.:format)                                  charges#index
+#                            POST   /charges(.:format)                                  charges#create
+#                 new_charge GET    /charges/new(.:format)                              charges#new
+#                edit_charge GET    /charges/:id/edit(.:format)                         charges#edit
+#                     charge PATCH  /charges/:id(.:format)                              charges#update
+#                            PUT    /charges/:id(.:format)                              charges#update
+#                            DELETE /charges/:id(.:format)                              charges#destroy
 #               print_ticket GET    /tickets/:id/print(.:format)                        tickets#print
 #               email_ticket POST   /tickets/:id/email(.:format)                        tickets#email
 #            download_ticket GET    /tickets/:id/download(.:format)                     tickets#download
@@ -107,7 +124,10 @@
 #           print_trip_sheet GET    /trip_sheets/:id/print(.:format)                    trip_sheets#print
 #        download_trip_sheet GET    /trip_sheets/:id/download(.:format)                 trip_sheets#download
 #                 trip_sheet GET    /trip_sheets/:id(.:format)                          trip_sheets#show
+#         authenticated_root GET    /                                                   dashboard#show
 #                       root GET    /                                                   high_voltage/pages#show {:id=>"home"}
+#                    pricing GET    /pricing/:stop_id(.:format)                         pricing#show
+#                  dashboard GET    /dashboard(.:format)                                dashboard#show
 #                                   (/errors)/:status(.:format)                         errors#show {:status=>/\d{3}/}
 #              rails_db_info        /rails/info/db                                      RailsDbInfo::Engine
 #                       page GET    /*id                                                high_voltage/pages#show

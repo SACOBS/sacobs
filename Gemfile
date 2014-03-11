@@ -107,6 +107,9 @@ gem "scripture", "~> 0.1.0"
 # Background Processing
 gem 'sucker_punch', '~> 1.0'
 
+# Calculate Age
+gem "adroit-age"
+
 
 group :development do
   gem "better_errors"

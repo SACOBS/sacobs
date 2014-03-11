@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211113119) do
+ActiveRecord::Schema.define(version: 20140311100215) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -95,9 +95,11 @@ ActiveRecord::Schema.define(version: 20140211113119) do
     t.string   "slug"
     t.integer  "user_id"
     t.string   "full_name"
-    t.boolean  "high_risk",  default: false
+    t.boolean  "high_risk",     default: false
     t.integer  "bank_id"
     t.string   "work_no"
+    t.date     "date_of_birth"
+    t.string   "title"
   end
 
   add_index "clients", ["bank_id"], name: "index_clients_on_bank_id"
@@ -310,6 +312,10 @@ ActiveRecord::Schema.define(version: 20140211113119) do
 
   add_index "stops", ["connection_id"], name: "index_stops_on_connection_id"
   add_index "stops", ["trip_id"], name: "index_stops_on_trip_id"
+
+  create_table "titles", force: true do |t|
+    t.string "name"
+  end
 
   create_table "trips", force: true do |t|
     t.string   "name"
