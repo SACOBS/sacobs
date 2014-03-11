@@ -22,6 +22,7 @@
 //= require turbolinks
 //= require vendor/jquery.plugin
 //= require vendor/jquery.calculator
+//= require vendor/jquery.blockui
 //= require sacobs
 //= require initialize
 //= require bookings
@@ -44,3 +45,10 @@
         }
     });
 })(jQuery);
+
+
+$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
+$(document).on("page:fetch", $.blockUI);
+
+$(document).on("page:receive", $.unblockUI);
