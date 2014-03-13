@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def titles
-    @titles ||= Title.select(:id, :name)
+    @titles ||= Title.select(:name)
   end
 
   def route_cities(route)
