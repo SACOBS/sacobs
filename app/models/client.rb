@@ -49,6 +49,7 @@ class Client < ActiveRecord::Base
   before_validation :set_full_name, prepend: true
 
   def age
+    return unless date_of_birth
     @age ||= date_of_birth.find_age
   end
 

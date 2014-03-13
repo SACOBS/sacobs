@@ -28,6 +28,7 @@ class Connection < ActiveRecord::Base
   belongs_to :to,-> {includes(:city)} ,class_name: :Destination
 
   validates :route, :from, :to, presence: true
+  validates :cost, :percentage, presence: true, numericality: true
 
 
   before_save :set_name

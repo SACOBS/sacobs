@@ -56,7 +56,7 @@ class Route < ActiveRecord::Base
    end
 
    def set_connection_costs
-     self.connections.each do |c|
+     connections.each do |c|
        c.cost = ((self.cost * (c.percentage / 100)) / 5.0).ceil * 5
      end
    end

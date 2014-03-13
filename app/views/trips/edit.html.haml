@@ -11,6 +11,9 @@
 
 
 = simple_form_for @trip, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  .form-actions
+    = f.submit class: t('buttons.primary')
+    = link_to 'Back', trips_path, class: t('buttons.info')
   .tab-content
     #details.tab-pane.active
       %fieldset

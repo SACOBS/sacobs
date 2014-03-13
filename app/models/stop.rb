@@ -20,7 +20,7 @@
 class Stop < ActiveRecord::Base
   include AttributeDefaults
 
- belongs_to :trip, touch: true
+ belongs_to :trip, touch: true, inverse_of: :stops
  belongs_to :connection, -> { includes(:from, :to) }
  has_many :bookings
 
@@ -30,7 +30,6 @@ class Stop < ActiveRecord::Base
  delegate :name, :from, :to, :cost, to: :connection
 
  before_save :check_seats
-
 
  private
   def defaults
