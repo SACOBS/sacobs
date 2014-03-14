@@ -9,7 +9,7 @@
     = f.simple_fields_for :client do |client|
       %fieldset
         %legend Details
-        = client.input :title, collection: titles,include_blank: false, prompt: 'Select a title'
+        = client.input :title, collection: titles, include_blank: false, prompt: 'Select a title'
         = client.input :name
         = client.input :surname
         = client.input :date_of_birth, as: :date_picker
@@ -26,8 +26,6 @@
             = address.input :street_address2
             = address.input :city
             = address.input :postal_code
-
-
 
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
