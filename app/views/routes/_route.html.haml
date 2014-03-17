@@ -7,9 +7,9 @@
     %td= route.distance
     %td= route.connections_count
     %td
-      = link_to 'Add Destination', edit_route_destinations_path(route), icon: :plus, class: t('buttons.mini.primary')
-      = link_to 'Copy', copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post
-      = link_to 'Reverse Copy', reverse_copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post
+      = link_to 'Add Destination', edit_route_destinations_path(route), icon: :plus, class: t('buttons.mini.primary'), data: {toggle: "tooltip", title:"Click here to add a new destination (eg East London) to the route."}, rel: 'tooltip'
+      = link_to 'Copy', copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post, data: {toggle: "tooltip", title:"Click here to create a copy of this route."}, rel: 'tooltip'
+      = link_to 'Reverse Copy', reverse_copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post, data: {toggle: "tooltip", title:"Click here to create a copy of this route in reverse(eg EL to PE will be copied as PE to EL)."}, rel: 'tooltip'
       = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
       = link_to 'Edit', edit_route_path(route), icon: :edit,  class: t('buttons.mini.inverse')
       = link_to 'Destroy', route, method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, class: t('buttons.mini.danger'), icon: :times

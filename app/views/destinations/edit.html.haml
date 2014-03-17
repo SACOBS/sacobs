@@ -1,12 +1,31 @@
 .page-header
   %h2 Edit Destinations
-%ol
-  - @route.destinations.each do |d|
-    %li= d.name
+.row.span10
+  .span5
+    %ol
+      - @route.destinations.each do |d|
+        %li= d.name
+
+    = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
+      = f.input :city, collection: cities, prompt: 'Select a city'
+      = f.input :preceding_city, collection: route_cities(@route), include_blank: 'None'
+      = f.submit 'Save', class: t('buttons.primary')
+      = link_to 'Back', routes_path, class: t('buttons.info')
+  .span5
+    .well
+      %h3 Instructions
+      %ol
+        %li
+          Select the city you want to add to the route from the City dropdown.
+        %li
+          Select the city that comes before it on the route from the preceding city dropdown. For example, If Port Alfred is selected then East London will be the preceding city.
+        %li
+          If the city being added is going to be the starting city on the route, please select  None as the preceding city. For example
+      %p
+        %b NB
+        %br
+        %em
+          Please note that connections are generated based on the city selected and for all the cities coming before it.
+          Thus it is important to choose the correct preceding city (None if the new city is the start of the route) as a number of connections could be created that are incorrect.
 
 
-= simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
-  = f.input :city, collection: cities, prompt: 'Select a city'
-  = f.input :preceding_city, collection: route_cities(@route), include_blank: 'None'
-  = f.submit 'Save', class: t('buttons.primary')
-  = link_to 'Back', routes_path, class: t('buttons.info')

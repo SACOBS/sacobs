@@ -14,6 +14,9 @@ $ ->
       placeholder: $(this).data('default')
     });
 
+
+  $('[rel~="tooltip"]').tooltip();
+
   $(document).on 'cocoon:after-insert', ->
     $('select[rel="autocomplete"]').each ->
       $(this).select2({
