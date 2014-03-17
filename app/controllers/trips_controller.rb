@@ -1,11 +1,15 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
+
   decorates_assigned :trips
   decorates_assigned :trip
 
   def index
-    @q = Trip.search(params[:q])
-    @trips = @q.result(distinct: true).valid.page(params[:page])
+    @trips = Trip.valid.search(params[:q]).result(distinct: true).page(params[:page])
+  end
+
+  def archived
+    @trips = Trip.archived.search(params[:q]).result(distinct: true).page(params[:page])
   end
 
   def show

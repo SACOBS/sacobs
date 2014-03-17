@@ -1,4 +1,4 @@
-# == Route Map (Updated 2014-03-11 10:57)
+# == Route Map (Updated 2014-03-17 14:29)
 #
 #                     Prefix Verb   URI Pattern                                         Controller#Action
 #           new_user_session GET    /users/sign_in(.:format)                            devise/sessions#new
@@ -64,6 +64,7 @@
 #                            PUT    /drivers/:id(.:format)                              drivers#update
 #                            DELETE /drivers/:id(.:format)                              drivers#destroy
 #                  copy_trip POST   /trips/:id/copy(.:format)                           trips#copy
+#             archived_trips GET    /trips/archived(.:format)                           trips#archived
 #         trip_builder_index POST   /trips/:trip_id/builder(.:format)                   trips/builder#create
 #               trip_builder GET    /trips/:trip_id/builder/:id(.:format)               trips/builder#show
 #                            PATCH  /trips/:trip_id/builder/:id(.:format)               trips/builder#update
@@ -133,10 +134,10 @@
 #                       page GET    /*id                                                high_voltage/pages#show
 #
 # Routes for RailsDbInfo::Engine:
-#          root GET /                                   rails_db_info/tables#index
-# table_entries GET /tables/:table_id/entries(.:format) rails_db_info/tables#entries
-#        tables GET /tables(.:format)                   rails_db_info/tables#index
-#         table GET /tables/:id(.:format)               rails_db_info/tables#show
+#          root GET  /                                   rails_db_info/tables#index
+# table_entries GET  /tables/:table_id/entries(.:format) rails_db_info/tables#entries
+#        tables GET  /tables(.:format)                   rails_db_info/tables#index
+#         table GET  /tables/:id(.:format)               rails_db_info/tables#show
 #
 
 Sacobs::Application.routes.draw do
@@ -170,6 +171,9 @@ Sacobs::Application.routes.draw do
   resources :trips, only: [:index, :show, :edit, :update ,:destroy] do
     member do
      post :copy
+    end
+    collection do
+      get :archived
     end
     resources :builder, only: [:show, :update, :create],controller: 'trips/builder'
   end
