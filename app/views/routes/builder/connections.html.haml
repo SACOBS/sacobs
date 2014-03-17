@@ -6,9 +6,12 @@
     - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
       = f.simple_fields_for :connections, wrapper: false do |connection|
         = render 'routes/builder/connection_fields', f: connection
-    .links
-      = link_to_add_association 'Add Connection', f, :connections, data: {association_insertion_node: 'tbody', association_insertion_method: 'append'}
+    -#.links
+    -#  = link_to_add_association 'Add Connection', f, :connections, data: {association_insertion_node: 'tbody', association_insertion_method: 'append'}
   .form-actions
     = f.submit 'Finish', class: t('buttons.primary')
     = link_to 'Cancel', route_path(@route), method: :delete ,class: t('buttons.danger')
+
+
+
 
