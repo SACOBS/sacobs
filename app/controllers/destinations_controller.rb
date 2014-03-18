@@ -6,6 +6,7 @@ class DestinationsController < ApplicationController
   def update
     @route.transaction do
       city = City.find(destination_params[:city])
+      raise 'Destination already exists' if @route.destinations.exists?(city: city)
       preceding_destination = @route.destinations.find_by(city_id: destination_params[:preceding_city])
       DestinationSequencer.new(@route, city, preceding_destination).resequence
       @route.reload
@@ -13,8 +14,8 @@ class DestinationsController < ApplicationController
       @route.save
     end
     redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
-  rescue
-    flash[:alert] = 'The new destination could not be added.'
+  rescue => e
+    flash[:alert] = e.message
     render :edit
   end
 

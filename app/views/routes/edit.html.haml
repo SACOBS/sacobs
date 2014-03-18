@@ -27,7 +27,7 @@
           %span.add-on> Km
     #connections.tab-pane
       %fieldset
-        - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections'} do
+        - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
           = f.simple_fields_for :connections, wrapper: false do |connection|
             %tr
               %td= connection.object.from.name
