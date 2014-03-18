@@ -10,7 +10,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    #fresh_when @client, last_modified: @client.updated_at
+    fresh_when @client, last_modified: @client.updated_at
   end
 
   # GET /clients/new
