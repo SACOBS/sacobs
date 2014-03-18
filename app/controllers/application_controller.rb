@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   layout :has_layout?
 
+  etag { current_user.try :id }
+
 
   def settings
     @settings ||= Setting.first

@@ -30,7 +30,6 @@ class Connection < ActiveRecord::Base
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
-
   before_save :set_name
   before_create :set_percentage
 
