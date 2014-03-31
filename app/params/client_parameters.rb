@@ -1,6 +1,6 @@
 class ClientParameters < Struct.new(:params)
   def permit(additional_attr = {})
-    params.require(:client).permit(client_attributes, address_attributes).merge(additional_attr)
+    params.fetch(:client, {}).permit(client_attributes, address_attributes).merge(additional_attr)
   end
 
   private

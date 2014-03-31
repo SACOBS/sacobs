@@ -1,6 +1,6 @@
 class BookingParameters < Struct.new(:params)
   def permit(additional_attr = {})
-    params.require(:booking).permit(booking_attributes,
+    params.fetch(:booking, {}).permit(booking_attributes,
                                     client_attributes,
                                     passenger_attributes,
                                     invoice_attributes,

@@ -19,7 +19,7 @@
       #main{role: :main}
         .container-fluid
           .content
-            = render 'layouts/messages'
+            .unobtrusive-flash-container
             - if content_for?(:sidebar)
               .sidebar.span2.well
                 = yield(:sidebar)
