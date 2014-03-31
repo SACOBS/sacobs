@@ -10,19 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require twitter/bootstrap/rails/confirm
-//= require jquery.turbolinks
-//= require bootstrap
-//= require bootstrap-sortable
-//= require bootstrap-datetimepicker
-//= require cocoon
-//= require select2
-//= require turbolinks
-//= require vendor/jquery.plugin
-//= require vendor/jquery.calculator
-//= require vendor/jquery.blockui
+
 //= require_tree .
 
 
