@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311100215) do
+ActiveRecord::Schema.define(version: 20140324111425) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20140311100215) do
     t.datetime "updated_at"
     t.string   "description"
   end
+
+  add_index "charges", ["user_id"], name: "index_charges_on_user_id"
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -227,6 +229,7 @@ ActiveRecord::Schema.define(version: 20140311100215) do
   end
 
   add_index "payment_details", ["booking_id"], name: "index_payment_details_on_booking_id"
+  add_index "payment_details", ["payment_type_id"], name: "index_payment_details_on_payment_type_id"
   add_index "payment_details", ["user_id"], name: "index_payment_details_on_user_id"
 
   create_table "payment_types", force: true do |t|

@@ -4,7 +4,7 @@
 = simple_form_for @booking, url: wizard_path, defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
   %h4 Search for an existing or create a new client
   .well
-    = f.association :client, collection: Client.all,label: false,label_method: lambda {|client| client.high_risk? ? "#{client.full_name} - High Risk" : client.full_name  }, hint: raw("#{link_to('Add New Client', '#', icon: :plus, id: 'new_client')}") ,prompt: 'Select Existing Client',input_html: {rel: :autocomplete }
+    = f.association :client, collection: clients,label: false,label_method: lambda {|client| client.high_risk? ? "#{client.full_name} - High Risk" : client.full_name  }, hint: raw("#{link_to('Add New Client', '#', icon: :plus, id: 'new_client')}") ,prompt: 'Select Existing Client',input_html: {rel: :autocomplete }
   .new_client_fields{style: 'display:none'}
     = f.simple_fields_for :client do |client|
       %fieldset

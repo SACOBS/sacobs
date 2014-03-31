@@ -43,8 +43,4 @@ class BookingsController < ApplicationController
    def set_booking
     @booking = Booking.includes(:trip, :client, :stop, :passengers).find(params[:id])
    end
-
-   def unassign_seats
-     SeatingAssigner.new(@booking).unassign
-   end
 end

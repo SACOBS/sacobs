@@ -12,11 +12,11 @@ class Bookings::BuilderController < ApplicationController
 
   def show
     case step
-      when :details then fetch_stops
-      when :client then build_client
-      when :returns then @booking.has_return? ? fetch_stops : skip_step
-      when :passengers then build_passengers
-      when :billing then build_invoice
+    when :details then fetch_stops
+    when :client then build_client
+    when :returns then @booking.has_return? ? fetch_stops : skip_step
+    when :passengers then build_passengers
+    when :billing then build_invoice
     end
     render_wizard
   end
@@ -75,10 +75,6 @@ class Bookings::BuilderController < ApplicationController
     def reserve_booking
       expiry_date = set_booking_expiry_date
       ReserveBooking.new(@booking, current_user, expiry_date).reserve
-    end
-
-    def clean_search_params
-     params[:q].reject!{|k, v| v =~ /Select/ } if params[:q]
     end
 
     def fetch_stops

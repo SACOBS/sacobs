@@ -7,7 +7,7 @@
     %td= trip.bus
     %td= trip.created_at
     %td
-      = link_to 'Copy', copy_trip_path(trip), icon: :copy ,class: t('buttons.mini.warning'), method: :post
+      = link_to 'Copy', copy_trip_path(trip), icon: :copy ,class: t('buttons.mini.warning'), method: :post, data: {toggle: "tooltip", title:"Click here to create a copy of this trip."}, rel: 'tooltip'
       = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: t('buttons.mini.default'), target: '_blank'
       = link_to 'Show', trip, icon: :info, class: t('buttons.mini.info')
       = link_to 'Edit', edit_trip_path(trip), icon: :edit,  class: t('buttons.mini.inverse')

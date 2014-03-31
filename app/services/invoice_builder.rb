@@ -62,7 +62,7 @@ class InvoiceBuilder
 
 
     def calculate_discount(discount)
-     percentage = BigDecimal(discount.percentage / 100)
+     percentage = Calculations.percentage(discount.percentage)
      round_up(percentage * price)
     end
 
@@ -71,7 +71,7 @@ class InvoiceBuilder
     end
 
     def calculate_markup
-      percentage = BigDecimal(@markup.percentage / 100)
+      percentage = Calculations.percentage(@markup.percentage)
       round_up(percentage * price)
     end
 
@@ -80,6 +80,6 @@ class InvoiceBuilder
     end
 
     def round_up(cost)
-      (cost / 5.0).ceil * 5
+      Calculations.roundup(cost)
     end
 end

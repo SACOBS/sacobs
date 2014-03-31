@@ -24,6 +24,10 @@ module ApplicationHelper
     end
   end
 
+  def clients
+    @clients ||= Client.select(:id,:full_name,:high_risk)
+  end
+
   def cities
     @cities ||= City.select(:id, :name)
   end
