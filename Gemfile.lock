@@ -132,6 +132,8 @@ GEM
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
+    heroku-deflater (0.5.3)
+      rack (>= 1.4.5)
     high_voltage (2.1.0)
     hike (1.2.3)
     hirb (0.7.1)
@@ -383,6 +385,7 @@ DEPENDENCIES
   font-awesome-rails
   friendly_id (~> 5.0.0)
   haml-rails
+  heroku-deflater
   high_voltage
   jazz_hands
   jbuilder (~> 1.2)
