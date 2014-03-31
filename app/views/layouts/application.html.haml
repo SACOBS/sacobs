@@ -5,11 +5,11 @@
     %title= content_for?(:title) ? yield(:title) : "Sacobs"
     %meta{content: content_for?(:description) ? yield(:description) : "Sacobs", name: "description"}
     %meta{content: content_for?(:keywords) ? yield(:keywords) : "Sacobs", name: "keywords"}
-    = stylesheet_link_tag :application, media: "all"
-    = javascript_include_tag :application
+    = stylesheet_link_tag :application, media: "all",  "data-turbolinks-track" => true
+    = javascript_include_tag :application,  "data-turbolinks-track" => true
     = csrf_meta_tags
     = yield(:head)
-  %body{class: "#{controller_name}", data: {action: action_name, controller: controller_path}}
+  %body{class: "#{controller_path}", data: {action: action_name, controller: controller_path}}
     #wrap
       %header.navbar.navbar-fixed-top.navbar-inverse
         %nav.navbar-inner

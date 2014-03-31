@@ -23,32 +23,9 @@
 //= require vendor/jquery.plugin
 //= require vendor/jquery.calculator
 //= require vendor/jquery.blockui
-//= require sacobs
-//= require initialize
-//= require bookings
+//= require_tree .
 
 
-(function($, undefined_) {
-    return $(function() {
-        var $body, action, activeController, controller;
-        $body = $("body");
-        controller = $body.data("controller").replace(/\//g, "_");
-        action = $body.data("action");
-        activeController = Sacobs[controller];
-        if (activeController !== undefined) {
-            if ($.isFunction(activeController.init)) {
-                activeController.init();
-            }
-            if ($.isFunction(activeController[action])) {
-                return activeController[action]();
-            }
-        }
-    });
-})(jQuery);
+$.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs';
 
 
-$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
-
-$(document).on("page:fetch", $.blockUI);
-
-$(document).on("page:receive", $.unblockUI);
