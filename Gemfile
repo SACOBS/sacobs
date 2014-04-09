@@ -114,10 +114,6 @@ gem "adroit-age"
 gem 'unobtrusive_flash'
 
 
-
-# Memory
-gem "oink"
-
 group :development do
   gem "better_errors"
   gem 'annotate'

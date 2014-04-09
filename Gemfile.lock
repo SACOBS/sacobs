@@ -136,7 +136,6 @@ GEM
     high_voltage (2.1.0)
     hike (1.2.3)
     hirb (0.7.1)
-    hodel_3000_compliant_logger (0.1.1)
     htmlentities (4.3.1)
     httparty (0.13.1)
       json (~> 1.8)
@@ -189,9 +188,6 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     normalize-rails (3.0.1)
-    oink (0.10.1)
-      activerecord
-      hodel_3000_compliant_logger
     orm_adapter (0.5.0)
     pg (0.17.0)
     polyamorous (0.6.4)
@@ -402,7 +398,6 @@ DEPENDENCIES
   memcachier
   nokogiri
   normalize-rails
-  oink
   pg (= 0.17.0)
   premailer-rails
   puma
