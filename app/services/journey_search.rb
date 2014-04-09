@@ -10,7 +10,7 @@ class JourneySearch
   def results
     stops = Stop.all
     apply_return_filters
-    stops.search(@criteria).result(distinct: true).valid
+    stops.search(@criteria).result(distinct: true).valid.limit(30)
   end
 
   private

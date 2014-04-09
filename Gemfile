@@ -32,7 +32,7 @@ gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
 gem 'bootswatch-rails'
 gem 'twitter-bootstrap-rails-confirm'
-gem 'bootstrap_sortable_rails', "~> 0.1.3"
+gem 'bootstrap_sortable_rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'kaminari'
 
@@ -114,6 +114,9 @@ gem "adroit-age"
 gem 'unobtrusive_flash'
 
 
+
+# Memory
+gem "oink"
 
 group :development do
   gem "better_errors"
