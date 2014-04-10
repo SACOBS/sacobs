@@ -24,10 +24,11 @@
     - drop_down_menu('Booking') do
       %li= link_to 'New', bookings_path, method: :post
     - drop_down_menu('Trips') do
+      %li= link_to 'New', trip_builder_index_path(trip_id: :building)
+      %li.divider
       %li= link_to 'Current', trips_path
       %li.divider
       %li= link_to 'Archived', archived_trips_path
-
 
     %li= link_to 'Settings', setting_path
 

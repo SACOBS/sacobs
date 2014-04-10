@@ -13,6 +13,11 @@ class TripDecorator < Draper::Decorator
    model.end_date
   end
 
+  def trip_day
+    return 'None' unless model.start_date
+    model.start_date.strftime('%A')
+  end
+
   def connections
     stops.map { |s| s.connection }
   end

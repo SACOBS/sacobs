@@ -7,8 +7,11 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', trips_path, class: t('buttons.mini.inverse'), icon: :times
 
-- bootstrap_table headers:['Name', 'Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+= paginate trips
+
+- bootstrap_table headers:['Name','Day of Week','Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render trips
+  
 = paginate trips
 
 
