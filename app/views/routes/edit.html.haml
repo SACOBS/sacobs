@@ -27,7 +27,7 @@
           %span.add-on> Km
     #connections.tab-pane
       %fieldset
-        - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', ''], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
+        - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', 'Depart Time', 'Arrive Time' ,''], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
           = f.simple_fields_for :connections, wrapper: false do |connection|
             %tr
               %td= connection.object.from.name
@@ -44,8 +44,8 @@
                 = connection.input :distance, wrapper: :append, label: false do
                   = connection.input_field :distance,  class: 'input-small'
                   %span.add-on> Km
-              %td= connection.input :depart, as: :time_picker, label: false
-              %td= connection.input :arrive, as: :time_picker, label: false
+              %td= connection.input :depart, as: :time_picker, label: false, input_html: {class: 'input-small'}
+              %td= connection.input :arrive, as: :time_picker, label: false, input_html: {class: 'input-small'}
 
   .form-actions
     = f.submit class: t('buttons.primary')

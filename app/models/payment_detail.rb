@@ -11,8 +11,9 @@
 #
 # Indexes
 #
-#  index_payment_details_on_booking_id  (booking_id)
-#  index_payment_details_on_user_id     (user_id)
+#  index_payment_details_on_booking_id       (booking_id)
+#  index_payment_details_on_payment_type_id  (payment_type_id)
+#  index_payment_details_on_user_id          (user_id)
 #
 
 class PaymentDetail < ActiveRecord::Base

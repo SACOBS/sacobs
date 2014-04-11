@@ -12,6 +12,8 @@
 #  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
+#  arrive     :time
+#  depart     :time
 #
 # Indexes
 #

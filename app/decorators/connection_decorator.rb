@@ -28,4 +28,12 @@ class ConnectionDecorator < Draper::Decorator
   def cost
     h.number_to_currency(model.cost, unit: 'R')
   end
+
+  def arrive_time
+    model.arrive.strftime("%H:%M%p") if model.arrive
+  end
+
+  def depart_time
+    model.depart.strftime("%H:%M%p") if model.depart
+  end
 end

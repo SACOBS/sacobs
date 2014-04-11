@@ -9,6 +9,10 @@
 #  updated_at  :datetime
 #  description :string(255)
 #
+# Indexes
+#
+#  index_charges_on_user_id  (user_id)
+#
 
 class Charge < ActiveRecord::Base
   belongs_to :passenger_type

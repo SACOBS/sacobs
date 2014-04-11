@@ -13,6 +13,6 @@
     = f.input :distance, wrapper: :append, label: false do
       = f.input_field :distance,  class: 'input-small'
       %span.add-on> Km
-  %td= f.input :depart, as: :time_picker, label: false
-  %td= f.input :arrive, as: :time_picker, label: false
+  %td= f.input :depart, as: :time_picker, label: false,  input_html: {class: 'input-small'}
+  %td= f.input :arrive, as: :time_picker, label: false,  input_html: {class: 'input-small'}
   %td= link_to_remove_association "Remove", f, class: t('buttons.mini.danger')

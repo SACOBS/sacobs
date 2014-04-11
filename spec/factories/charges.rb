@@ -9,6 +9,10 @@
 #  updated_at  :datetime
 #  description :string(255)
 #
+# Indexes
+#
+#  index_charges_on_user_id  (user_id)
+#
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
