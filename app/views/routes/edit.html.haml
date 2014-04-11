@@ -19,12 +19,8 @@
     #details.tab-pane.active
       %fieldset
         = f.input :name
-        = f.input :cost, wrapper: :prepend do
-          %span.add-on> R
-          = f.input_field :cost
-        = f.input :distance, wrapper: :append do
-          = f.input_field :distance
-          %span.add-on> Km
+        = f.input :cost, as: :cost
+        = f.input :distance, as: :distance
     #connections.tab-pane
       %fieldset
         - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', 'Depart Time', 'Arrive Time' ,''], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
@@ -32,20 +28,11 @@
             %tr
               %td= connection.object.from.name
               %td= connection.object.to.name
-              %td
-                = connection.input :percentage, wrapper: :append,label: false do
-                  = connection.input_field :percentage,  class: 'input-mini calc'
-                  %span.add-on> %
-              %td
-                = connection.input :cost, wrapper: :prepend, label: false  do
-                  %span.add-on> R
-                  = connection.input_field :cost,  class: 'input-small'
-              %td
-                = connection.input :distance, wrapper: :append, label: false do
-                  = connection.input_field :distance,  class: 'input-small'
-                  %span.add-on> Km
-              %td= connection.input :depart, as: :time_picker, label: false, input_html: {class: 'input-small'}
-              %td= connection.input :arrive, as: :time_picker, label: false, input_html: {class: 'input-small'}
+              %td= connection.input_field :percentage, as: :percentage, label: false,class: 'input-small calc'
+              %td= connection.input_field :cost, as: :cost, label: false,class: 'input-small'
+              %td= connection.input_field :distance, as: :distance, label: false,class: 'input-small'
+              %td= connection.input_field :depart, as: :time_picker, label: false, class: 'input-small'
+              %td= connection.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
 
   .form-actions
     = f.submit class: t('buttons.primary')

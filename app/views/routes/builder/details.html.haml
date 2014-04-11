@@ -4,13 +4,8 @@
 = simple_form_for @route, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
     = f.input :name
-    = f.input :cost, wrapper: :prepend do
-      %span.add-on> R
-      = f.input_field :cost
-    = f.input :distance, wrapper: :append do
-      = f.input_field :distance
-      %span.add-on> Km
-
+    = f.input :cost, as: :cost
+    = f.input :distance, as: :distance
   .form-actions
     = f.submit 'Next',class: t('buttons.primary')
     = link_to 'Cancel', @route, method: :delete ,class: t('buttons.danger')
