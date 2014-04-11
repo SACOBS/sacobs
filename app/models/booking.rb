@@ -36,7 +36,7 @@ class Booking < ActiveRecord::Base
   belongs_to :stop
   belongs_to :client
   belongs_to :main, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id, touch: true
-  has_one :return, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id
+  has_one :return_booking, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id
   has_one :invoice, -> {includes(:line_items)}, dependent: :destroy
   has_one :payment_detail, dependent: :destroy
   has_many :passengers, dependent: :destroy
@@ -44,12 +44,12 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :client, reject_if: proc { |attrs| attrs.except(:high_risk, :bank_id, :title).all? { |k, v| v.blank? } }
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
-  accepts_nested_attributes_for :return, reject_if: :all_blank
+  accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
- validates :quantity, numericality: { greater_than: 0 }, on: :update
- validate :seats_over_limit, on: :update, if: :in_process?
+  validates :quantity, numericality: { greater_than: 0 }, on: :update
+  validate :seats_over_limit, on: :update, if: :in_process?
 
   before_save :generate_reference, if: :reserved?
 
@@ -67,11 +67,13 @@ class Booking < ActiveRecord::Base
     end
 
     def seats_over_limit
-        available_seats = self.stop.available_seats
-        self.errors.add(:base,"There are not enough seats (#{available_seats}) available for this booking (#{self.quantity}).") unless available_seats >= self.quantity
+      available_seats = self.stop.available_seats
+      self.errors.add(:base,"There are not enough seats (#{available_seats}) available for this booking (#{self.quantity}).") unless available_seats >= self.quantity
     end
 
   protected
+
+
     def generate_reference
       self.reference_no = "#{self.created_at.strftime('%Y%m%d')} #{self.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "") unless self.reference_no.present?
     end

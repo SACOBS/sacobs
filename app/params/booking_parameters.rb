@@ -4,12 +4,12 @@ class BookingParameters < Struct.new(:params)
                                     client_attributes,
                                     passenger_attributes,
                                     invoice_attributes,
-                                    return_attributes).merge(additional_attr)
+                                    return_booking_attributes).merge(additional_attr)
   end
 
   private
    def booking_attributes
-     [:trip_id, :price, :status, :quantity, :client_id, :has_return, :stop_id]
+     [:trip_id, :price, :status, :quantity, :client_id, :has_return, :stop_id, :id]
    end
 
    def client_attributes
@@ -24,7 +24,7 @@ class BookingParameters < Struct.new(:params)
      { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id,:description, :amount, :line_item_type]] }
    end
 
-   def return_attributes
-     { return_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
+   def return_booking_attributes
+     { return_booking_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
    end
 end

@@ -12,7 +12,7 @@ class PaymentDetailsController < ApplicationController
       if @booking.is_return?
         @booking.main.create_payment_detail(payment_details_params)  if @booking.main
       else
-        @booking.return.create_payment_detail(payment_details_params) if @booking.return
+        @booking.return_booking.create_payment_detail(payment_details_params) if @booking.return_booking
       end
     end
     respond_with @payment_detail, location: bookings_url

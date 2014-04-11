@@ -4,8 +4,8 @@ attr_reader :booking, :return ,:client
 
   def initialize(booking)
     @booking = booking.main ? booking.main.decorate : booking.decorate
-    @return = @booking.return.decorate if @booking.return
-    @client = booking.client.decorate
+    @return = @booking.return_booking if @booking.return_booking
+    @client = @booking.client
   end
 
   def passengers

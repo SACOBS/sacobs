@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324111425) do
+ActiveRecord::Schema.define(version: 20140410113537) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -118,6 +118,8 @@ ActiveRecord::Schema.define(version: 20140324111425) do
     t.string   "name"
     t.integer  "from_id"
     t.integer  "to_id"
+    t.time     "arrive"
+    t.time     "depart"
   end
 
   add_index "connections", ["from_id"], name: "index_connections_on_from_id"

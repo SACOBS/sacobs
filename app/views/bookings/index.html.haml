@@ -1,5 +1,9 @@
 .page-header
-  %h2 Bookings
+  %h2
+    Bookings
+    %br
+    %small Total: #{active_bookings_count}
+
 
 .search.pull-right
   = simple_form_for :q, url: bookings_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|

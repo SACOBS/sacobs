@@ -15,7 +15,7 @@ class JourneySearch
 
   private
    def apply_return_filters
-     @criteria.merge!(trip_id_in: return_trips) if @booking.has_return
+     @criteria.merge!(trip_id_in: return_trips, available_seats_gteq: @booking.quantity) if @booking.has_return
    end
 
    def return_trips

@@ -1,7 +1,7 @@
 class ReserveBooking
   def initialize(booking, user, expiry_date)
     @booking = booking
-    @related_booking = booking.main || booking.return
+    @related_booking = booking.main || booking.return_booking
     @user = user
     @expiry_date = expiry_date
   end

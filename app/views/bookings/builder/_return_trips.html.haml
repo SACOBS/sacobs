@@ -1,10 +1,11 @@
 - if @stops.any?
-  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Pricing','Available Seats', 'Qty'], types: [:bordered]  do
+  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Pricing','Available Seats', 'Qty'], types: [:bordered], html_options: {class: 'sortable'} do
     - @stops.each do |stop|
       %tr
         %td{style: 'display:none'}
           = simple_form_for @booking, namespace: stop.id, url: wizard_path(:returns) ,method: :patch ,wrapper: false, defaults: {label: false} do |f|
-            = f.simple_fields_for :return do |return_f|
+            = f.hidden_field :id, value: @booking.id
+            = f.simple_fields_for :return_booking do |return_f|
               %td= stop.trip.name
               %td= stop.trip.start_date
               %td= stop.from.city.name

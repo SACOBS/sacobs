@@ -44,6 +44,8 @@
                 = connection.input :distance, wrapper: :append, label: false do
                   = connection.input_field :distance,  class: 'input-small'
                   %span.add-on> Km
+              %td= connection.input :depart, as: :time_picker, label: false
+              %td= connection.input :arrive, as: :time_picker, label: false
 
   .form-actions
     = f.submit class: t('buttons.primary')

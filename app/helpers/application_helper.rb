@@ -46,7 +46,15 @@ module ApplicationHelper
 
   def invoice_total(booking)
     total = booking.invoice.total
-    return_total = booking.return.invoice.total if booking.return
+    return_total = booking.return_booking.invoice.total if booking.return_booking
     total += (return_total || 0)
+  end
+
+  def current_trips_count
+    @current_trips_count ||= Trip.valid.count
+  end
+
+  def active_bookings_count
+    @active_bookings_count ||= Booking.not_in_process.active.count
   end
 end

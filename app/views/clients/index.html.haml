@@ -2,7 +2,7 @@
   %h2 Clients
 .search.pull-right
   = simple_form_for :q, url: clients_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
-    = f.input :name_or_surname_or_email_or_cell_no_cont, placeholder: 'Search', input_html: {class: 'search-query'}
+    = f.input :name_or_surname_or_email_or_cell_no_or_work_no_or_home_no_cont, placeholder: 'Search', input_html: {class: 'search-query'}
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
@@ -10,6 +10,8 @@
 
 - bootstrap_table headers:['Name', 'Surname', 'High Risk','Home Telephone', 'Work Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render clients
+
+= paginate clients
 
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh

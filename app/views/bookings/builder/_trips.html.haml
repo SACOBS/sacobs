@@ -1,5 +1,5 @@
 - if @stops.any?
-  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty', 'Return?'], types: [:bordered], html_options: {class: 'datatable'} do
+  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty', 'Return?'], types: [:bordered], html_options: {class: 'sortable'} do
     - @stops.each do |stop|
       %tr
         %td{style: 'display:none'}

@@ -9,7 +9,7 @@
           %td= line_item.input :description
           %td.amount= line_item.input :amount, input_html: {value: number_with_precision(line_item.object.amount, precision: 2)}
           = line_item.input :line_item_type, as: :hidden, value: line_item.object.line_item_type
-    = f.simple_fields_for :return do |rf|
+    = f.simple_fields_for :return_booking do |rf|
       = rf.simple_fields_for :invoice do |rf_invoice|
         = rf_invoice.simple_fields_for :line_items, wrapper: false do |rf_line_item|
           %tr[rf_line_item.object]{data: {type: rf_line_item.object.line_item_type}}

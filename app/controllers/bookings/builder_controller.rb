@@ -9,12 +9,17 @@ class Bookings::BuilderController < ApplicationController
     @stops = fetch_stops
   end
 
-
   def show
     case step
     when :details then fetch_stops
-    when :client then build_client
-    when :returns then @booking.has_return? ? fetch_stops : skip_step
+    when :client then @booking.build_client
+      when :returns
+        if @booking.has_return?
+          @booking.build_return_booking(quantity: @booking.quantity, user: current_user)
+          fetch_stops
+        else
+          skip_step
+        end
     when :passengers then build_passengers
     when :billing then build_invoice
     end
@@ -22,14 +27,13 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    @booking.attributes = booking_params
     case step
-      when :details
-        build_return if @booking.valid?
-        fetch_stops unless @booking.valid?
-      when :passengers then update_return_associations
-      when :billing then reserve_booking
+      when :details then fetch_stops unless @booking.valid?
+      when :client then @booking.return_booking.client = @booking.client if @booking.return_booking && @booking.valid?
+      when :passengers then @booking.passengers.each { |p| @booking.return_booking.passengers << p.dup } if @booking.return_booking && @booking.valid?
+      when :billing then reserve_booking if @booking.valid?
     end
+    persist
 
     render_wizard @booking
   end
@@ -37,23 +41,6 @@ class Bookings::BuilderController < ApplicationController
   private
     def finish_wizard_path
       bookings_url
-    end
-
-    def build_client
-      @booking.build_client
-    end
-
-    def build_return
-      @booking.build_return(quantity: @booking.quantity, user: current_user) if @booking.has_return?
-    end
-
-    def update_return_associations
-      if @booking.return
-        @booking.return.client = @booking.client
-        @booking.passengers.each do |passenger|
-          @booking.return.passengers << passenger.dup
-        end
-      end
     end
 
     def build_passengers
@@ -65,11 +52,22 @@ class Bookings::BuilderController < ApplicationController
 
     def build_invoice
       @booking.invoice = InvoiceBuilder.new(@booking).build
-      @booking.return.invoice = InvoiceBuilder.new(@booking.return).build if @booking.return
+      @booking.return_booking.invoice = InvoiceBuilder.new(@booking.return_booking).build if @booking.return_booking
+    end
+
+    def persist
+      if @booking.return_booking
+        Booking.transaction do
+          raise ActiveRecord::Rollback unless @booking.save && @booking.return_booking.save
+        end
+      else
+        @booking.save
+      end
     end
 
     def set_booking
       @booking = Booking.find(params[:booking_id])
+      @booking.assign_attributes(booking_params)
     end
 
     def reserve_booking

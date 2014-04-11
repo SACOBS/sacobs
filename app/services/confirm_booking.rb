@@ -1,7 +1,7 @@
 class ConfirmBooking
   def initialize(booking, user)
     @booking = booking
-    @related_booking = booking.main || booking.return
+    @related_booking = booking.main || booking.return_booking
     @user = user
   end
 
