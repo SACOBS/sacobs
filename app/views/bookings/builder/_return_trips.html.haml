@@ -1,26 +1,26 @@
 - if @stops.any?
-  - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Pricing','Available Seats', 'Qty'], types: [:bordered], html_options: {class: 'sortable'} do
+  - bootstrap_table types: [:condensed] do
     - @stops.each do |stop|
       %tr
-        %td{style: 'display:none'}
+        %td
           = simple_form_for @booking, namespace: stop.id, url: wizard_path(:returns) ,method: :patch ,wrapper: false, defaults: {label: false} do |f|
-            = f.hidden_field :id, value: @booking.id
-            = f.simple_fields_for :return_booking do |return_f|
-              %td= stop.trip.name
-              %td= stop.trip.start_date
-              %td= stop.from.city.name
-              %td= stop.to.city.name
-              %td=link_to 'View Prices', pricing_path(stop_id: stop), remote: true
-              %td= stop.available_seats
-              %td= @booking.quantity
-              %td
-                = token_tag
-                = return_f.hidden_field :quantity, value: @booking.quantity
-                = return_f.hidden_field :trip_id, value: stop.trip.id
-                = return_f.hidden_field :stop_id, value: stop.id
+            - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty'], types: [:condensed], html_options: {class: 'sortable'} do
+              = f.simple_fields_for :return_booking do |return_f|
+                %td= stop.trip.name
+                %td= stop.trip.start_date
+                %td= stop.from.city.name
+                %td= stop.to.city.name
+                %td=link_to 'View Prices', pricing_path(stop_id: stop), remote: true
+                %td= stop.available_seats
+                %td= @booking.quantity
+                %td
+                  = token_tag
+                  = return_f.hidden_field :quantity, value: @booking.quantity
+                  = return_f.hidden_field :trip_id, value: stop.trip.id
+                  = return_f.hidden_field :stop_id, value: stop.id
 
 
-            %td= f.submit 'Book Return', class: t('buttons.primary')
+                %td= f.submit 'Book Return', class: t('buttons.primary')
 - else
   %p
     %strong

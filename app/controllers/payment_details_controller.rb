@@ -25,7 +25,7 @@ class PaymentDetailsController < ApplicationController
 
    def find_payment_type
      return unless @booking.client.bank
-     PaymentType.find_by(description: @booking.client.bank.name)
+     PaymentType.find_by(description: @booking.client.bank_name)
    end
 
    def payment_details_params

@@ -29,6 +29,8 @@
 class Client < ActiveRecord::Base
   extend FriendlyId
 
+  TITLES = [:Mr, :Mrs, :Dr, :Miss, :Ms]
+
   belongs_to :user
   belongs_to :bank
   has_one :address, as: :addressable, dependent: :destroy

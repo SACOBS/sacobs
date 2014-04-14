@@ -32,9 +32,6 @@ module ApplicationHelper
     @cities ||= City.select(:id, :name)
   end
 
-  def titles
-    @titles ||= Title.select(:name)
-  end
 
   def route_cities(route)
     @route_cities ||= route.destinations.map(&:city)
