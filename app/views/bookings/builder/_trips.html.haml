@@ -4,7 +4,7 @@
       %tr
         %td
           = simple_form_for :booking, namespace: stop.id ,url: wizard_path(:details), method: :patch ,wrapper: false, defaults: {label: false} do |f|
-            - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty', 'Return?'], types: [:condensed], html_options: {class: 'sortable'} do
+            - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty', 'Return?'], types: [:condensed] do
               %tr
                 %td= stop.trip.name
                 %td= stop.trip.start_date
@@ -13,15 +13,12 @@
                 %td= stop.available_seats
                 %td=link_to 'View Prices', pricing_path(stop_id: stop), remote: true
                 %td= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, value: 0, class: 'input-mini'}
-                %td= f.input :has_return, as: :boolean, input_html: {class: 'input-mini'}
+                %td= f.input :has_return, as: :boolean, input_html: {class: 'input-mini', checked: @booking.stop == stop && @booking.has_return }
                 %td
                   = token_tag
                   = f.hidden_field :trip_id, value: stop.trip.id
                   = f.hidden_field :stop_id, value: stop.id
                   = f.submit 'Book', class: t('buttons.primary')
-
-
-
 - else
   %p
     %strong

@@ -2,8 +2,6 @@
   %h3 Booking
   %h4 Select a trip
 
-#errors= errors_for @booking
-
 .trip-finder.well.well-small
   %h5 Search
   = simple_form_for :q, url: booking_builder_index_path(@booking, return: false), html: {class: 'form-inline'}, method: :get ,remote: true do |f|
@@ -11,6 +9,7 @@
     = f.input :connection_from_city_id_eq, collection: cities,include_blank: false, label: false, prompt: 'Select from city'
     = f.input :connection_to_city_id_eq, collection: cities, include_blank: false, label: false, prompt: 'Select to city'
     = f.submit 'Search', class: t('buttons.inverse')
+#errors= errors_for @booking
 
 .trips
   = render partial: 'bookings/builder/trips'

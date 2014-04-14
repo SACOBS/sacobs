@@ -4,22 +4,17 @@ class Bookings::BuilderController < ApplicationController
   steps  :details, :returns ,:client, :passengers, :billing
 
   before_action :set_booking, only: [:index, :show, :update]
+  before_action :set_attributes, only: :update
 
   def index
-    @stops = fetch_stops
+    fetch_stops
   end
 
   def show
     case step
-    when :details then fetch_stops
+    when :details then  fetch_stops
+    when :returns then @booking.has_return? ? fetch_stops : skip_step
     when :client then @booking.build_client
-      when :returns
-        if @booking.has_return?
-          @booking.build_return_booking(quantity: @booking.quantity, user: current_user)
-          fetch_stops
-        else
-          skip_step
-        end
     when :passengers then build_passengers
     when :billing then build_invoice
     end
@@ -29,12 +24,12 @@ class Bookings::BuilderController < ApplicationController
   def update
     case step
       when :details then fetch_stops unless @booking.valid?
+      when :returns then @booking.build_return_booking(return_booking_params)
       when :client then @booking.return_booking.client = @booking.client if @booking.return_booking && @booking.valid?
       when :passengers then @booking.passengers.each { |p| @booking.return_booking.passengers << p.dup } if @booking.return_booking && @booking.valid?
       when :billing then reserve_booking if @booking.valid?
     end
     persist
-
     render_wizard @booking
   end
 
@@ -67,6 +62,9 @@ class Bookings::BuilderController < ApplicationController
 
     def set_booking
       @booking = Booking.find(params[:booking_id])
+    end
+
+    def set_attributes
       @booking.assign_attributes(booking_params)
     end
 
@@ -87,4 +85,10 @@ class Bookings::BuilderController < ApplicationController
     def booking_params
       BookingParameters.new(params).permit(user: current_user)
     end
+
+    def return_booking_params
+      ReturnBookingParameters.new(params).permit(user: current_user)
+    end
+
+
 end
