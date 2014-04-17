@@ -12,11 +12,11 @@ class Bookings::BuilderController < ApplicationController
 
   def show
     case step
-    when :details then  fetch_stops
-    when :returns then @booking.has_return? ? fetch_stops : skip_step
-    when :client then @booking.build_client
-    when :passengers then build_passengers
-    when :billing then build_invoice
+      when :details then  fetch_stops
+      when :returns then @booking.has_return? ? fetch_stops : skip_step
+      when :client then @booking.build_client
+      when :passengers then build_passengers
+      when :billing then build_invoice
     end
     render_wizard
   end

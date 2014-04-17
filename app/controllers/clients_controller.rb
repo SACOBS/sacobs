@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:contact_details, :show, :edit, :update, :destroy]
   decorates_assigned :client
   decorates_assigned :clients
 
@@ -10,6 +10,10 @@ class ClientsController < ApplicationController
   end
 
   def show
+    fresh_when @client, last_modified: @client.updated_at
+  end
+
+  def contact_details
     fresh_when @client, last_modified: @client.updated_at
   end
 

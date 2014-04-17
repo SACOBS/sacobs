@@ -11,6 +11,7 @@
     = f.input :work_no, as: :tel
     = f.input :cell_no, as: :tel
     = f.input :email, as: :email
+    = f.input :notes, as: :text
   #address
     = f.simple_fields_for :address do |address|
       = render 'clients/address_fields', f: address

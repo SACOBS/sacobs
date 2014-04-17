@@ -157,6 +157,9 @@ Sacobs::Application.routes.draw do
   resource :setting, only: [:show, :edit, :update]
 
   resources :clients do
+    member do
+      get :contact_details
+    end
     resources :vouchers, only: [:new, :create]
   end
 
