@@ -31,6 +31,8 @@ class Booking < ActiveRecord::Base
 
   enum :status, [:paid, :reserved, :cancelled, :in_process]
 
+  attr_accessor :expired
+
   belongs_to :user
   belongs_to :trip
   belongs_to :stop
@@ -52,10 +54,13 @@ class Booking < ActiveRecord::Base
   validate :seats_over_limit, on: :update, if: :in_process?
 
   before_save :generate_reference, if: :reserved?
+  after_find :check_expiration
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
+  scope :standby, -> { reserved.where('expiry_date <= ?', Time.zone.now) }
+
 
   def is_return?
     self.main_id?
@@ -73,8 +78,11 @@ class Booking < ActiveRecord::Base
 
   protected
 
-
     def generate_reference
-      self.reference_no = "#{self.created_at.strftime('%Y%m%d')} #{self.client.full_name} #{SecureRandom.hex(2)}".gsub(/\s+/, "") unless self.reference_no.present?
+      self.reference_no =  Digest::SHA1.hexdigest([Time.now, rand].join)[0..5].upcase unless reference_no.present?
+    end
+
+    def check_expiration
+      self.expired = (expiry_date <= Time.zone.now)
     end
 end

@@ -12,7 +12,9 @@
 - bootstrap_table headers:['Name', 'Surname', 'High Risk','Home Telephone', 'Work Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render clients
 
+%br
 = paginate clients
+
 
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
