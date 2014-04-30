@@ -83,6 +83,6 @@ class Booking < ActiveRecord::Base
     end
 
     def check_expiration
-      self.expired = (expiry_date <= Time.zone.now)
+      self.expired = (expiry_date <= Time.zone.now) rescue false
     end
 end
