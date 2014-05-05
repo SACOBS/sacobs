@@ -9,7 +9,7 @@ class RouteParameters < Struct.new(:params)
   end
 
   def connections_attributes
-    { connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost] }
+    { connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive] }
   end
 
   def destinations_attributes

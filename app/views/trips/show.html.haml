@@ -31,7 +31,7 @@
     .well
       %p
         %strong Stops:
-        - bootstrap_table headers:['From', 'To','Arrive', 'Depart', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+        - bootstrap_table headers:['From', 'To','Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
           - trip.stops.each do |stop|
             %tr
               %td= stop.from
