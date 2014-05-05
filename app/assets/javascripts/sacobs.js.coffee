@@ -20,8 +20,10 @@ SACOBS =
 
   bookings_builder:
     init: ->
-      $(document).on 'click', '#new_client', ->
-        $('.new_client_fields').fadeToggle('slow', 'linear')
+      $(document).on 'click', '#new_client',(e) ->
+        e.preventDefault()
+        $('.new_client_fields').fadeIn 'slow'
+        $('#new_client').hide()
 
       $(document).on 'change', '.amount', ->
         UTIL.refresh_total()
@@ -43,10 +45,16 @@ SACOBS =
       $('.calc').calculator();
 
 
+
   trips:
     init: ->
     edit: ->
      UTIL.init_tabs()
+
+  trips_builder:
+    init: ->
+      $('.trip_start_date').on 'changeDate', (e) ->
+       $('.trip_end_date').datetimepicker('setDate', e.date);
 
 
 

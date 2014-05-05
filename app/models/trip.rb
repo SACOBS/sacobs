@@ -50,7 +50,7 @@ class Trip < ActiveRecord::Base
 
   private
    def defaults
-     { start_date: Date.today, end_date: Date.tomorrow }
+     { start_date: Date.today, end_date: Date.today }
    end
 
   protected
