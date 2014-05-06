@@ -5,6 +5,10 @@
 %p
   %strong= settings.trip_sheet_note3
 
+
+%p
+  %strong= @trip.notes
+
 - bootstrap_table headers:['Drivers', 'From','Time','O/Reading', 'To', 'Time'], types: [:bordered] do
   - 5.times do
     %tr

@@ -10,6 +10,7 @@
     = f.association :route, include_blank: false, prompt: 'Select Route', input_html: {rel: 'autocomplete'}
     = f.association :bus, include_blank: false, prompt: 'Select Bus', input_html: {rel: 'autocomplete'}
     = f.association :drivers, as: :check_boxes
+    = f.input :notes, as: :text
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
     = link_to 'Cancel', trip_path(@trip), method: :delete ,class: t('buttons.danger')

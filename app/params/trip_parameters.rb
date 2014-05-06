@@ -5,7 +5,7 @@ class TripParameters < Struct.new(:params)
 
   private
    def trip_attributes
-    [ :name, :start_date, :end_date, :route_id ,:bus_id, driver_ids: []]
+    [ :name, :start_date, :end_date, :route_id ,:bus_id, :notes ,driver_ids: []]
    end
 
    def stops_attributes
