@@ -13,7 +13,10 @@ class RoutesController < ApplicationController
   end
 
   def update
-    @route.update(route_params)
+    @route.transaction do
+      @route.update(route_params)
+      @route.connections.each(&:save!)
+    end
     respond_with @route
   end
 

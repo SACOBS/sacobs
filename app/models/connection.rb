@@ -35,6 +35,7 @@ class Connection < ActiveRecord::Base
   before_save :set_name
   before_create :set_percentage
 
+
   private
    def defaults
      { distance: 0, cost: 0, percentage: 0 }

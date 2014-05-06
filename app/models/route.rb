@@ -27,7 +27,7 @@ class Route < ActiveRecord::Base
 
   belongs_to :user
   has_many :destinations, -> { includes(:city).order(:sequence) }, dependent: :destroy, inverse_of: :route
-  has_many :connections, -> { includes(:from, :to).order(:from_id) }, dependent: :destroy, autosave: true, inverse_of: :route
+  has_many :connections, -> { includes(:from, :to).order(:from_id) }, dependent: :destroy, inverse_of: :route
 
   amoeba do
     nullify :connections_count
@@ -60,4 +60,5 @@ class Route < ActiveRecord::Base
        c.cost = ((self.cost * (c.percentage / 100)) / 5.0).ceil * 5
      end
    end
+
 end
