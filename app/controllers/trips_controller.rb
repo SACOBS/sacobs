@@ -9,7 +9,8 @@ class TripsController < ApplicationController
   end
 
   def archived
-    @trips = Trip.archived.search(params[:q]).result(distinct: true).page(params[:page])
+    @q = Trip.archived.search(params[:q])
+    @trips = @q.result(distinct: true).page(params[:page])
   end
 
   def show
