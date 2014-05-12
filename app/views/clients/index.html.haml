@@ -6,18 +6,17 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
-
-= paginate clients
-
 - cache(cache_key_for_collection(@clients, build_cache_key_from_ransack_search(@q))) do
+  = paginate clients
+
   - bootstrap_table headers:['Name', 'Surname', 'High Risk','Home Telephone', 'Work Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
     = render clients
 
-%br
-= paginate clients
+  %br
+  = paginate clients
 
 
-= link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
-= link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
+  = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
+  = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
 
 

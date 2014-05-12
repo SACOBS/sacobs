@@ -8,11 +8,11 @@ class BookingsController < ApplicationController
 
   def index
     @q = Booking.not_in_process.active.search(params[:q])
-    bookings = @q.result(distinct: true)
-    @reserved_bookings = Kaminari.paginate_array(bookings.select{|b| b.reserved? && !b.expired}).page(params[:reserved_page])
-    @standby_bookings = Kaminari.paginate_array(bookings.select{|b| b.reserved? && b.expired}).page(params[:standby_page])
-    @paid_bookings = Kaminari.paginate_array(bookings.select(&:paid?)).page(params[:paid_page])
-    @cancelled_bookings = Kaminari.paginate_array(bookings.select(&:cancelled?)).page(params[:cancelled_page])
+    @bookings = @q.result(distinct: true)
+    @reserved_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && !b.expired}).page(params[:reserved_page])
+    @standby_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && b.expired}).page(params[:standby_page])
+    @paid_bookings = Kaminari.paginate_array(@bookings.select(&:paid?)).page(params[:paid_page])
+    @cancelled_bookings = Kaminari.paginate_array(@bookings.select(&:cancelled?)).page(params[:cancelled_page])
 
   end
 

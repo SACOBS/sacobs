@@ -11,15 +11,17 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', trips_path, class: t('buttons.mini.inverse'), icon: :times
 
-= paginate trips
+- cache(cache_key_for_collection(@trips, build_cache_key_from_ransack_search(@q))) do
 
-- bootstrap_table headers:['Name','Day of Week','Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render trips
+  = paginate trips
 
-= paginate trips
+  - bootstrap_table headers:['Name','Day of Week','Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+    = render trips
+
+  = paginate trips
 
 
-= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
-= link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
+  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
+  = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 

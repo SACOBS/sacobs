@@ -113,6 +113,10 @@ gem "adroit-age"
 # Flash
 gem 'unobtrusive_flash'
 
+# PG
+gem "pg"
+
+
 
 group :development do
   gem "better_errors"
@@ -125,7 +129,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem "factory_girl_rails", "~> 4.2.1"
   gem 'rails_db_info'
@@ -151,7 +154,6 @@ end
 group :production do
   # Post Gres
   gem "puma"
-  gem "pg", '0.17.0'
   gem 'rails_12factor'
   gem 'heroku-deflater'
 end
