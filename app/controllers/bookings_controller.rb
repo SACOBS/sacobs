@@ -31,20 +31,13 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-    if ConfirmBooking.new(@booking, current_user).confirm
+      ConfirmBooking.execute(@booking, current_user)
       redirect_to new_booking_payment_detail_url(@booking), notice: 'Booking was successfully confirmed.'
-    else
-      redirect_to bookings_url, alert: 'Booking could not be confirmed.'
-    end
   end
 
   def cancel
-    if CancelBooking.new(@booking, current_user).cancel
-      flash[:notice] = 'Booking was succesfully cancelled.'
-    else
-      flash[:alert] = 'Booking could not be cancelled.'
-    end
-    redirect_to bookings_url
+    CancelBooking.execute(@booking, current_user)
+    redirect_to bookings_url, notice: 'Booking was succesfully cancelled.'
   end
 
   private

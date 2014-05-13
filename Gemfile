@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', ' ~> 4.0.1'
+gem 'rails', ' ~> 4.1.0'
 
 
 # Use SCSS for stylesheets
@@ -35,8 +35,6 @@ gem 'twitter-bootstrap-rails-confirm'
 gem 'bootstrap_sortable_rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'kaminari'
-
-
 
 
 #Forms
@@ -126,6 +124,7 @@ group :development do
   gem "bullet"
   gem "lol_dba"
   gem 'rails_best_practices'
+  gem 'spring'
 end
 
 group :development, :test do

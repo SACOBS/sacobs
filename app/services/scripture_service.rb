@@ -11,5 +11,4 @@ class ScriptureService
   rescue
     return
   end
-
 end

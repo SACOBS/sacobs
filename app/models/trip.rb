@@ -46,7 +46,7 @@ class Trip < ActiveRecord::Base
 
   scope :valid, -> { where(arel_table[:start_date].gteq(Date.today)) }
   scope :archived, -> { where(arel_table[:start_date].lteq(Date.today)) }
-  scope :from, -> (location) { joins(route: :destinations).where(destinations: { city_id: location, sequence: 1 } ) }
+  scope :from_location, -> (location) { joins(route: :destinations).where(destinations: { city_id: location, sequence: 1 } ) }
 
   private
    def defaults

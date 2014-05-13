@@ -19,6 +19,6 @@ class JourneySearch
    end
 
    def return_trips
-     Trip.from(@booking.trip.route.end_city).pluck(:id)
+     Trip.from_location(@booking.trip.route.end_city).pluck(:id)
    end
 end

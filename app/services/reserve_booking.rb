@@ -8,18 +8,14 @@ class ReserveBooking
 
   def reserve
     Booking.transaction do
+      AssignSeating.execute(@booking.quantity, @booking.stop)
       @booking.update!(expiry_date: @expiry_date ,status: :reserved, user: @user)
+      AssignSeating.execute(@related_booking.quantity, @related_booking.stop) if @related_booking
       @related_booking.update!(expiry_date: @expiry_date, status: :reserved, user: @user) if @related_booking
-      seating_assigner(@booking).assign
-      seating_assigner(@related_booking).assign if @related_booking
     end
     true
   rescue
     false
   end
 
-  private
-  def seating_assigner(booking)
-    @seating_assigner ||= SeatingAssigner.new(booking)
-  end
 end
