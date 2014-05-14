@@ -30,7 +30,7 @@ class ReverseRouteBuilder
    end
 
    def build_reverse_destinations
-      sequence = 1
+     sequence = 1
      @route.destinations.reverse.each do |d|
        reverse_destination = d.dup
        reverse_destination.sequence = sequence
