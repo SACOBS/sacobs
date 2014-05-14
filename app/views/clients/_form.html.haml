@@ -1,5 +1,8 @@
 #errors= errors_for @client
 = simple_form_for @client, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  .form-actions
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', clients_path, class: t('buttons.default')
   %fieldset
     = f.input :title, collection: Client::TITLES,include_blank: false, prompt: 'Select a title'
     = f.input :name

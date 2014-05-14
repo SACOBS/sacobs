@@ -6,6 +6,9 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', buses_path, class: t('buttons.mini.inverse'), icon: :times
 
+= link_to 'Setup Bus', bus_builder_index_path(bus_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
+= link_to 'Refresh', buses_path, class: t('buttons.default'), icon: :refresh
+
 - bootstrap_table headers:['Name', 'Year','Model', 'Capacity', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
   = render @buses
 

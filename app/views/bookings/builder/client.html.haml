@@ -2,6 +2,10 @@
   %h3 Client
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
   %h4 Search for an existing or create a new client
   .well
     = f.association :client, collection: clients,label: false,label_method: lambda {|client| client.high_risk? ? "#{client.full_name} - High Risk" : client.full_name  }, hint: raw("#{link_to('Add New Client', '#', icon: :plus, id: 'new_client')}") ,prompt: 'Select Existing Client',input_html: {rel: :autocomplete }

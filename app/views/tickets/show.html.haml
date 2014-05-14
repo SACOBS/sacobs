@@ -1,3 +1,8 @@
+.actions.text-center
+  = link_to 'Print', print_ticket_path(@booking, format: :pdf), class: t('buttons.primary')
+  = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info')
+  = link_to 'Email', email_ticket_path(@booking), method: :post, class: t('buttons.inverse')
+
 = render partial: 'ticket'
 
 %br

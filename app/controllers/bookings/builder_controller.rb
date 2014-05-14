@@ -13,7 +13,7 @@ class Bookings::BuilderController < ApplicationController
   def show
     case step
       when :details then  fetch_stops
-      when :returns then @booking.has_return? ? fetch_stops : skip_step
+      when :returns then @booking.has_return? ? fetch_return_stops : skip_step
       when :client then @booking.build_client
       when :passengers then build_passengers
       when :billing then build_invoice
@@ -74,8 +74,13 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def fetch_stops
-      criteria = params[:q] ||= {}
-      @stops = JourneySearch.new(@booking, criteria).results
+      criteria = params[:q]||= {}
+      @stops = TripSearch.execute(criteria)
+    end
+
+    def fetch_return_stops
+      criteria = params[:q]||= {}
+      @stops = ReturnTripSearch.execute(@booking.trip, @booking.quantity, criteria)
     end
 
     def set_booking_expiry_date

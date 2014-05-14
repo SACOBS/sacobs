@@ -10,6 +10,8 @@
 
 
 - cache(cache_key_for_collection(@trips, build_cache_key_from_ransack_search(@q))) do
+  = link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh
+
 
   = paginate trips
   - bootstrap_table headers:['Name', 'Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do

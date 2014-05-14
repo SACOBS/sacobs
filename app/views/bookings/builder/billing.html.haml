@@ -2,6 +2,11 @@
   %h3 Billing
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false} do |f|
+  .form-actions
+    = f.submit 'Complete', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
+
   - bootstrap_table headers:['Description','Amount'], types: [:condensed], html_options: {id: 'line_items'} do
     = f.simple_fields_for :invoice do |invoice|
       = invoice.simple_fields_for :line_items, wrapper: false do |line_item|

@@ -1,6 +1,12 @@
 - cache trip do
   .page-header
     %h1 Trip
+
+  .form-actions
+    = back_to trips_path
+    = link_to 'Edit', edit_trip_path(trip), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', trip_path(trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
+
   .well
     %p
       %strong Name:

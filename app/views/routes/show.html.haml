@@ -1,6 +1,12 @@
 - cache route do
   .page-header
     %h2 Route
+
+  .form-actions
+    = back_to routes_path
+    = link_to 'Edit', edit_route_path(route), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
+
   .well
     %p
       %strong Start City:

@@ -4,7 +4,7 @@
       %tr
         %td
           = simple_form_for :return_booking, namespace: stop.id, url: wizard_path(:returns) ,method: :patch ,wrapper: false, defaults: {label: false} do |f|
-            - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty'], types: [:condensed] do
+            - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Pricing','Available Seats' ,'Qty'], types: [:condensed] do
               %tr
                 %td= stop.trip.name
                 %td= stop.trip.start_date

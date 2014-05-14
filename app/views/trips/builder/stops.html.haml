@@ -2,6 +2,10 @@
   %h2 Stops
 #errors= errors_for @trip
 = simple_form_for @trip, defaults: {error: false} ,url: wizard_path do |f|
+  .form-actions
+    = f.submit 'Finish', class: t('buttons.primary')
+    = link_to 'Cancel', trip_path(@trip), method: :delete ,class: t('buttons.danger')
+
   %fieldset
     - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :condensed], html_options: {id: 'stops'} do
       = f.simple_fields_for :stops, wrapper: false do |stop|

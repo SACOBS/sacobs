@@ -1,6 +1,7 @@
 #errors= errors_for @city
 = simple_form_for @city, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
+    %legend City
     = f.input :name, required: false
   #venues
     = f.simple_fields_for :venues do |venue|

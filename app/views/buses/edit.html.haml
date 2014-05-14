@@ -11,6 +11,8 @@
 
 
 = simple_form_for @bus, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  .form-actions
+    = f.submit class: t('buttons.primary')
   .tab-content
     #details.tab-pane.active
       %fieldset

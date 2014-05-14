@@ -1,5 +1,10 @@
 .page-header
   %h2 Settings
+
+.actions
+  = link_to 'Edit', edit_setting_path, icon: :edit, class: t('buttons.info')
+%br
+
 .well
   %p
     %strong Booking Expiry Period:

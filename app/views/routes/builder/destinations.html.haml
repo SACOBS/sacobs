@@ -2,6 +2,10 @@
   %h2 Destinations
 #errors= errors_for @route
 = simple_form_for @route, defaults: {error: false} , url: wizard_path do |f|
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', route_path(@route), method: :delete ,class: t('buttons.danger')
+
   %fieldset
     - bootstrap_table headers:['City', 'Order', ''], types: [:bordered, :condensed], html_options: {id: 'destinations'} do
       = f.simple_fields_for :destinations, wrapper: false do |destination|

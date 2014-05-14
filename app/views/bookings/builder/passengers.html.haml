@@ -2,6 +2,10 @@
   %h2 Passenger Details
 #errors= errors_for @booking
 = simple_form_for @booking,  defaults: {error: false, label: false} ,url: wizard_path do |f|
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
   %fieldset
     - bootstrap_table headers:['Name', 'Surname','Cell No','Email','Type'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
       = f.simple_fields_for :passengers, wrapper: false do |passenger|
