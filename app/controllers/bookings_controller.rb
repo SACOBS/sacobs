@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
   decorates_assigned :booking
 
   def index
-    @q = Booking.not_in_process.active.search(params[:q])
+    @q = Booking.includes(:trip).not_in_process.active.search(params[:q])
     @bookings = @q.result(distinct: true)
     @reserved_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && !b.expired}).page(params[:reserved_page])
     @standby_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && b.expired}).page(params[:standby_page])
@@ -42,6 +42,6 @@ class BookingsController < ApplicationController
 
   private
    def set_booking
-    @booking = Booking.includes(:trip, :client, :stop, :passengers).find(params[:id])
+    @booking = Booking.find(params[:id])
    end
 end

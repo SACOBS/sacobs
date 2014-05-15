@@ -39,7 +39,7 @@ class Booking < ActiveRecord::Base
   belongs_to :client
   belongs_to :main, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id, touch: true
   has_one :return_booking, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id
-  has_one :invoice, -> {includes(:line_items)}, dependent: :destroy
+  has_one :invoice, dependent: :destroy
   has_one :payment_detail, dependent: :destroy
   has_many :passengers, dependent: :destroy
 

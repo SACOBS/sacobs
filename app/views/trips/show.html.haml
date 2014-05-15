@@ -37,12 +37,12 @@
       %ul
         = list_of(trip.drivers) do |driver|
           = driver.full_name
-  - cache trip.stops do
-    .well
-      %p
-        %strong Stops:
-        - bootstrap_table headers:['From', 'To','Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-          - trip.stops.each do |stop|
+  .well
+    %p
+      %strong Stops:
+      - bootstrap_table headers:['From', 'To','Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+        - trip.stops.each do |stop|
+          - cache stop do
             %tr
               %td= stop.from
               %td= stop.to

@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
 
 
   def index
-    @q = Client.search(params[:q])
+    @q = Client.includes(:user).search(params[:q])
     @clients = @q.result(distinct: true).includes(:address).page(params[:page])
     fresh_when(etag: CacheHelper.cache_key_for_collection(@clients, CacheHelper.build_cache_key_from_ransack_search(@q)))
   end

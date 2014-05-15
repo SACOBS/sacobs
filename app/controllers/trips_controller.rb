@@ -5,7 +5,7 @@ class TripsController < ApplicationController
   decorates_assigned :trip
 
   def index
-    @q = Trip.valid.search(params[:q])
+    @q = Trip.includes(:route, :bus).valid.search(params[:q])
     @trips = @q.result(distinct: true).page(params[:page])
     fresh_when(etag: CacheHelper.cache_key_for_collection(@trips, CacheHelper.build_cache_key_from_ransack_search(@q)))
   end

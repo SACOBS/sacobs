@@ -4,7 +4,7 @@ class RoutesController < ApplicationController
   decorates_assigned :route
 
   def index
-    @q = Route.includes(:destinations, :destinations).search(params[:q])
+    @q = Route.search(params[:q])
     @routes = @q.result(distinct: true).page(params[:page])
   end
 
@@ -43,7 +43,7 @@ class RoutesController < ApplicationController
 
   private
     def set_route
-      @route = Route.includes(:connections, :destinations).friendly.find(params[:id])
+      @route = Route.friendly.find(params[:id])
     end
 
     def route_params
