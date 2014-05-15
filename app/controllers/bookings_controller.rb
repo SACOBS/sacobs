@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     @standby_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && b.expired}).page(params[:standby_page])
     @paid_bookings = Kaminari.paginate_array(@bookings.select(&:paid?)).page(params[:paid_page])
     @cancelled_bookings = Kaminari.paginate_array(@bookings.select(&:cancelled?)).page(params[:cancelled_page])
-
+    fresh_when(etag: CacheHelper.cache_key_for_collection(@bookings, CacheHelper.build_cache_key_from_ransack_search(@q)))
   end
 
   def create

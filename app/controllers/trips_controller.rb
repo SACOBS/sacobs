@@ -5,12 +5,15 @@ class TripsController < ApplicationController
   decorates_assigned :trip
 
   def index
-    @trips = Trip.valid.search(params[:q]).result(distinct: true).page(params[:page])
+    @q = Trip.valid.search(params[:q])
+    @trips = @q.result(distinct: true).page(params[:page])
+    fresh_when(etag: CacheHelper.cache_key_for_collection(@trips, CacheHelper.build_cache_key_from_ransack_search(@q)))
   end
 
   def archived
     @q = Trip.archived.search(params[:q])
     @trips = @q.result(distinct: true).page(params[:page])
+    fresh_when(etag: CacheHelper.cache_key_for_collection(@trips, CacheHelper.build_cache_key_from_ransack_search(@q)))
   end
 
   def show
