@@ -1,0 +1,10 @@
+%tr
+  %td=link_to trip.name, trip_path(trip)
+  %td= trip.start_date
+  %td= trip.end_date
+  %td= trip.route
+  %td= trip.bus
+  %td= trip.created_at
+  %td
+    = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: t('buttons.mini.default'), target: '_blank'
+    = link_to 'Show', trip, icon: :info, class: t('buttons.mini.info')

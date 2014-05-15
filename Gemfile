@@ -72,6 +72,7 @@ gem 'friendly_id', '~> 5.0.0'
 # Caching
 gem 'dalli'
 gem 'memcachier'
+gem 'multi_fetch_fragments'
 
 # Wizard
 gem 'wicked'
@@ -116,7 +117,6 @@ gem "pg"
 group :development do
   gem "better_errors"
   gem 'annotate'
-  gem 'jazz_hands'
   gem 'quiet_assets'
   gem "bullet"
   gem "lol_dba"
@@ -128,6 +128,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem "factory_girl_rails", "~> 4.2.1"
   gem 'rails_db_info'
+  gem 'jazz_hands'
 end
 
 group :test do

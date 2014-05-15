@@ -25,11 +25,10 @@
       %br
       = route.distance
   .well
-    - cache route.connections do
-      %p
-        %strong Connections:
-        - bootstrap_table headers:['From', 'To','Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
-          = render route.connections
+    %p
+      %strong Connections:
+      - bootstrap_table headers:['From', 'To','Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
+        = render partial: 'connections/connection', collection: route.connections, cache: true
   .form-actions
     = back_to routes_path
     = link_to 'Edit', edit_route_path(route), icon: :edit, class: t('buttons.info')

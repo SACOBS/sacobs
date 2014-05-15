@@ -185,6 +185,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (5.3.3)
+    multi_fetch_fragments (0.0.17)
     multi_json (1.10.0)
     multi_xml (0.5.5)
     nokogiri (1.6.2.1)
@@ -403,6 +404,7 @@ DEPENDENCIES
   launchy (~> 2.2.0)
   lol_dba
   memcachier
+  multi_fetch_fragments
   nokogiri
   normalize-rails
   pg

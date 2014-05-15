@@ -41,14 +41,7 @@
     %p
       %strong Stops:
       - bootstrap_table headers:['From', 'To','Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-        - trip.stops.each do |stop|
-          - cache stop do
-            %tr
-              %td= stop.from
-              %td= stop.to
-              %td= stop.depart_time
-              %td= stop.arrive_time
-              %td= stop.available_seats
+        = render partial: 'stops/stop', collection: trip.stops, cache: true
   .form-actions
     = back_to trips_path
     = link_to 'Edit', edit_trip_path(trip), icon: :edit, class: t('buttons.info')

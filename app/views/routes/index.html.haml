@@ -12,7 +12,7 @@
 
 = paginate routes
 - bootstrap_table headers:['Description','Start City', 'End City','Cost', 'Distance','Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render routes
+  = render partial: 'route', collection: routes, cache: true
 = paginate routes
 
 
