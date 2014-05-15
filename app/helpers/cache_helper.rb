@@ -10,9 +10,10 @@ module CacheHelper
 
   def self.cache_key_for_collection(collection, suffix='')
     ids = collection.pluck(:id).join('-')
+    count = collection.model.count
     max_updated_at = collection.pluck(:updated_at).max
     collection_name = collection.model.to_s.downcase.pluralize
-    "#{collection_name}/#{ids}-#{max_updated_at.to_i}#{suffix}"
+    "#{collection_name}_#{count}/#{ids}-#{max_updated_at.to_i}#{suffix}"
   end
 
   def self.build_cache_key_from_ransack_search(search_obj)

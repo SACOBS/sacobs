@@ -1,5 +1,9 @@
 class InvoiceBuilder
 
+  module Helpers
+    extend ActionView::Helpers::NumberHelper
+  end
+
   def initialize(booking)
     @booking = booking
     @invoice = Invoice.new
@@ -15,10 +19,6 @@ class InvoiceBuilder
     @invoice
   end
 
-
-  module Helpers
-    extend ActionView::Helpers::NumberHelper
-  end
 
   private
     def build_ticket_cost(passenger)

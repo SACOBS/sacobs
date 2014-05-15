@@ -70,7 +70,7 @@ class Bookings::BuilderController < ApplicationController
 
     def reserve_booking
       expiry_date = set_booking_expiry_date
-      ReserveBooking.new(@booking, current_user, expiry_date).reserve
+      ReserveBooking.execute(@booking, current_user, expiry_date)
     end
 
     def fetch_stops
