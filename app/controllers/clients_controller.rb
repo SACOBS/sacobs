@@ -7,6 +7,7 @@ class ClientsController < ApplicationController
   def index
     @q = Client.search(params[:q])
     @clients = @q.result(distinct: true).includes(:address, :user).page(params[:page])
+    fresh_when etag: CacheHelper.cache_key_for_collection(@clients)
   end
 
   def show

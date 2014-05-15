@@ -66,6 +66,7 @@ class Booking < ActiveRecord::Base
     self.main_id?
   end
 
+
   private
     def defaults
       { status: :in_process }
