@@ -226,7 +226,9 @@ Sacobs::Application.routes.draw do
     root to: 'dashboard#show', as: :authenticated_root
   end
 
-  root to: 'high_voltage/pages#show', id: 'home'
+  root to: 'pages#show', id: 'home'
+
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
 
   get 'pricing/:stop_id', to: 'pricing#show', as: :pricing

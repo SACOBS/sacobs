@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html,:js,:json,:pdf
 
+  before_action :authenticate_user!
   after_action :prepare_unobtrusive_flash
 
   # Prevent CSRF attacks by raising an exception.
