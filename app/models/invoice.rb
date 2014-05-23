@@ -22,11 +22,11 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
 
   def total
-   self.line_items.total_debits.round(2) - self.line_items.total_credits.round(2)
+   line_items.total_debits.round(2) - total_discount
   end
 
   def total_discount
-   self.line_items.total_credits.round(2)
+   line_items.total_credits.round(2)
   end
 
 

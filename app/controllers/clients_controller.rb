@@ -1,46 +1,53 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:contact_details, :show, :edit, :update, :destroy]
+  after_action :verify_policy_scoped, only: :index
+  after_action :verify_authorized, except: :index
+
   decorates_assigned :client
   decorates_assigned :clients
 
 
   def index
-    @q = Client.search(params[:q])
+    @q = policy_scope(Client).search(params[:q])
     @clients = @q.result(distinct: true).includes(:address, :user).page(params[:page])
     fresh_when etag: CacheHelper.cache_key_for_collection(@clients)
   end
 
   def show
+    authorize @client
     fresh_when @client, last_modified: @client.updated_at
   end
 
   def contact_details
+    authorize @client, :show?
     fresh_when @client, last_modified: @client.updated_at
   end
 
-  # GET /clients/new
   def new
     @client = Client.new
     @client.build_address
+    authorize @client
   end
 
-  # POST /clients
-  # POST /clients.json
   def create
-    @client = Client.create(client_params)
+    @client = Client.new(client_params)
+    authorize @client
+    @client.save
     respond_with @client
   end
 
-  # PATCH/PUT /clients/1
-  # PATCH/PUT /clients/1.json
+  def edit
+    authorize @client
+  end
+
   def update
+    authorize @client
     @client.update(client_params)
     respond_with @client
   end
 
-  # DELETE /clients/1
-  # DELETE /clients/1.json
   def destroy
+    authorize @client
     @client.destroy
     respond_with @client
   end

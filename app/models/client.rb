@@ -18,6 +18,7 @@
 #  work_no       :string(255)
 #  date_of_birth :date
 #  title         :string(255)
+#  notes         :text
 #
 # Indexes
 #

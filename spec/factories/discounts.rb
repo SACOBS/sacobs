@@ -3,7 +3,7 @@
 # Table name: discounts
 #
 #  id                :integer          not null, primary key
-#  percentage        :decimal(2, 5)
+#  percentage        :decimal(5, 2)
 #  passenger_type_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime

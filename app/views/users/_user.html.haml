@@ -1,0 +1,9 @@
+%tr[user]
+  %td=user
+  %td= obfuscate_email user.email
+  %td
+    %span.label.label-info=user.role.capitalize
+  %td
+    =link_to 'Upgrade Role', user_path(user, user: {role: :admin}), icon: :user, method: :put,class: t('buttons.mini.warning')
+    =link_to 'Downgrade Role', user_path(user, user: {role: :clerk}), icon: :user, method: :put,class: t('buttons.mini.warning')
+

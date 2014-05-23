@@ -222,6 +222,8 @@ Sacobs::Application.routes.draw do
     end
   end
 
+  resources :users, only: [:index, :update]
+
   authenticated :user do
     root to: 'dashboard#show', as: :authenticated_root
   end

@@ -45,6 +45,9 @@ gem 'select2-rails'
 #Authentication
 gem 'devise'
 
+#Authorization
+gem 'pundit'
+
 
 #Static Pages
 gem 'high_voltage'
@@ -112,6 +115,12 @@ gem 'unobtrusive_flash'
 # PG
 gem "pg"
 
+
+# Charts
+gem 'lazy_high_charts'
+
+# Email Obfuscation
+gem 'obfuscatejs'
 
 
 group :development do

@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  name                   :string(255)
 #  surname                :string(255)
+#  role                   :string(255)
 #
 # Indexes
 #
@@ -25,13 +26,26 @@
 #
 
 class User < ActiveRecord::Base
+  include AttributeDefaults
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  enum :role, [:admin, :clerk]
+
+  scope :all_except,->(user){where.not(id: user)}
+
+
 
   def to_s
     "#{self.name} #{self.surname}".titleize
   end
+
+  private
+   def defaults
+     {
+         role: :clerk
+     }
+   end
 end

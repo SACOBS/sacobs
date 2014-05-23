@@ -22,6 +22,8 @@ module Sacobs
 
     config.exceptions_app = self.routes
 
+    config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
+
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w(pdf.css)
 

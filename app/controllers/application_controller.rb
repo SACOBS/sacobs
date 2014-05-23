@@ -1,6 +1,8 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  include Pundit
+
   self.responder = ApplicationResponder
   respond_to :html,:js,:json,:pdf
 
@@ -14,6 +16,7 @@ class ApplicationController < ActionController::Base
   layout :has_layout?
 
   etag { current_user.try :id }
+
 
 
   def settings

@@ -30,8 +30,8 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-      ConfirmBooking.execute(@booking, current_user)
-      redirect_to new_booking_payment_detail_url(@booking), notice: 'Booking was successfully confirmed.'
+    ConfirmBooking.execute(@booking, current_user)
+    redirect_to new_booking_payment_detail_url(@booking), notice: 'Booking was successfully confirmed.'
   end
 
   def cancel
