@@ -17,7 +17,6 @@
 #
 
 class SeasonalMarkup < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :user
 

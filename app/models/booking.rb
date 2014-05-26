@@ -27,7 +27,6 @@
 #
 
 class Booking < ActiveRecord::Base
-  include AttributeDefaults
 
   enum :status, [:paid, :reserved, :cancelled, :in_process]
 

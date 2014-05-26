@@ -16,7 +16,6 @@
 #
 
 class LineItem < ActiveRecord::Base
-  include AttributeDefaults
 
   enum :line_item_type, [:debit, :credit]
 

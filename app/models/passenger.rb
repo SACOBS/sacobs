@@ -19,7 +19,6 @@
 #
 
 class Passenger < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :booking
   belongs_to :passenger_type

@@ -14,7 +14,6 @@
 #
 
 class Invoice < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :booking
   has_many :line_items, dependent: :destroy

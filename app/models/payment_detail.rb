@@ -17,7 +17,6 @@
 #
 
 class PaymentDetail < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :payment_type
   belongs_to :booking, touch: true

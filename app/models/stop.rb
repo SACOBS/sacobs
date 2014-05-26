@@ -18,7 +18,6 @@
 #
 
 class Stop < ActiveRecord::Base
-  include AttributeDefaults
 
  belongs_to :trip, touch: true, inverse_of: :stops
  belongs_to :connection, -> { includes(:from, :to) }

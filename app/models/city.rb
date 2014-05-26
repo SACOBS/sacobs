@@ -19,6 +19,7 @@
 class City < ActiveRecord::Base
   extend FriendlyId
 
+
   default_scope -> { order(:name) }
 
   friendly_id :name, use: :slugged
@@ -29,4 +30,5 @@ class City < ActiveRecord::Base
   accepts_nested_attributes_for :venues, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true
+
 end

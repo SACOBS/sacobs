@@ -24,6 +24,9 @@ module Sacobs
 
     config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
 
+
+    config.autoload_paths += %W(#{config.root}/lib)
+
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w(pdf.css)
 

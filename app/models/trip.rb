@@ -21,7 +21,6 @@
 #
 
 class Trip < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :user
   belongs_to :bus

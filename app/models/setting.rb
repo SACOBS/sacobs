@@ -15,7 +15,6 @@
 #
 
 class Setting < ActiveRecord::Base
-  include AttributeDefaults
 
 
   private

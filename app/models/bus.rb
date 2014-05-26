@@ -17,7 +17,6 @@
 #
 
 class Bus < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :user
   has_many :seats, dependent: :destroy
@@ -31,7 +30,7 @@ class Bus < ActiveRecord::Base
 
   private
    def defaults
-     {name: 'Bus', capacity: 0, year: 1, model: 'bus'}
+     { name: 'Bus', capacity: 0, year: 1, model: 'bus'}
    end
 
    def seating_matches_capacity

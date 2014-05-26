@@ -15,7 +15,6 @@
 #
 
 class Seat < ActiveRecord::Base
-  include AttributeDefaults
 
   belongs_to :bus, touch: true
 
