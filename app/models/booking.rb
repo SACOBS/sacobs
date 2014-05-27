@@ -42,7 +42,7 @@ class Booking < ActiveRecord::Base
   has_one :payment_detail, dependent: :destroy
   has_many :passengers, dependent: :destroy
 
-  accepts_nested_attributes_for :client, reject_if: proc { |attrs| attrs.except(:high_risk, :bank_id, :title).all? { |k, v| v.blank? } }
+  accepts_nested_attributes_for :client, reject_if: proc { |attributes| attributes.blank? }
   accepts_nested_attributes_for :passengers, reject_if: :all_blank
   accepts_nested_attributes_for :invoice, reject_if: :all_blank
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank

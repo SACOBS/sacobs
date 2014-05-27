@@ -1,21 +1,4 @@
-.page-header.text-center
-  %h1 SA CONNECTION
-
-.client.pull-left
-  %p
-    %strong Name:
-    = @ticket.client.full_name
-  %p
-    %strong Home Tel No:
-    = @ticket.client.home_telephone
-  %p
-    %strong Work Tel No:
-    = @ticket.client.work_telephone
-  %p
-    %strong Cell No:
-    = @ticket.client.cellphone
-
-.details.pull-right
+.details
   %p
     %strong Reference No:
     = @ticket.booking.reference_no
@@ -69,28 +52,3 @@
   %p
   %strong Thought for today
   %em= simple_format(ticket_scripture)
-
-%br
-%br
-.ticket-details.rounded.text-center.pull-left
-  %h4 Contact Details
-  %h4 Office: 043 722 0284
-  %h4 P.O. Box 7485, East London
-
-
-.ticket-details.rounded.text-center.pull-right
-  %h3 Bookings
-  %h3 086 110 2426
-
-
-%br
-%br
-%br
-%br
-%br
-%br
-%br
-#brake
-.terms
-  %h5.text-center Terms and Conditions
-  = render partial: 'terms'

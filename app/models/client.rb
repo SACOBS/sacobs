@@ -30,7 +30,7 @@
 class Client < ActiveRecord::Base
   extend FriendlyId
 
-  TITLES = [:Mr, :Mrs, :Dr, :Miss, :Ms]
+  TITLES = [:Mr, :Mrs, :Dr, :Miss, :Ms].freeze
 
   belongs_to :user
   belongs_to :bank
@@ -38,7 +38,7 @@ class Client < ActiveRecord::Base
   has_many :bookings, dependent: :destroy
   has_many :vouchers, dependent: :destroy
 
-  accepts_nested_attributes_for :address, reject_if: lambda {|a| a['street_address1'].blank? && a['street_address2'].blank? && a['city'].blank? && a['postal_code'].blank? } , allow_destroy: true
+  accepts_nested_attributes_for :address, reject_if: proc { |attributes| attributes.blank? }, allow_destroy: true
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
   delegate :name, to: :bank, prefix: true, allow_nil: true

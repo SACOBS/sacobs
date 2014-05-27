@@ -60,7 +60,6 @@ class InvoiceBuilder
       @invoice.line_items.build(description: description, amount: amount, line_item_type: type)
     end
 
-
     def calculate_discount(discount)
      percentage = Calculations.percentage(discount.percentage)
      round_up(percentage * price)

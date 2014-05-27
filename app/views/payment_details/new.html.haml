@@ -5,9 +5,9 @@
 #errors= errors_for @payment_detail
 = simple_form_for [@booking ,@payment_detail],  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   %fieldset
-    = f.association :payment_type, label_method: :description ,include_blank: false, prompt: 'Select a payment type'
+    = f.association :payment_type, label_method: :description ,include_blank: true, prompt: 'Select a payment type'
     = f.input :payment_date, as: :date_time_picker
-    = f.input :reference
+    = f.input :reference, label: 'Client Payment Reference', hint: 'Bank reference for client payment.'
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', bookings_path, class: t('buttons.default')

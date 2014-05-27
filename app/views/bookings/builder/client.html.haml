@@ -13,11 +13,11 @@
     = f.simple_fields_for :client do |client|
       %fieldset
         %legend Details
-        = client.input :title, collection: Client::TITLES, include_blank: false, prompt: 'Select a title'
+        = client.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title'
         = client.input :name
         = client.input :surname
         = client.input :date_of_birth, as: :date_picker
-        = client.association :bank, prompt: 'Select a bank', include_blank: false
+        = client.association :bank, include_blank: true,  label: 'Select a bank'
         = client.input :home_no, as: :tel
         = client.input :work_no, as: :tel
         = client.input :cell_no, as: :tel

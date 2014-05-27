@@ -13,7 +13,9 @@
  *= require bootstrap-sortable
  *= require select2
  *= require font-awesome
- *= require_tree .
+ *= require cities
+ *= require bootstrap_and_overrides
+ *= require jquery.calculator
  */
 
 .form-inline{

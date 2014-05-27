@@ -25,7 +25,7 @@ class Bookings::BuilderController < ApplicationController
     case step
       when :details then fetch_stops unless @booking.valid?
       when :returns then @booking.build_return_booking(return_booking_params)
-      when :client then @booking.return_booking.client = @booking.client if @booking.return_booking && @booking.valid?
+      when :client then @booking.return_booking.client_id = @booking.client_id if @booking.return_booking && @booking.valid?
       when :passengers then @booking.passengers.each { |p| @booking.return_booking.passengers << p.dup } if @booking.return_booking && @booking.valid?
       when :billing then reserve_booking if @booking.valid?
     end
