@@ -2,7 +2,7 @@ class ChargesController < ApplicationController
   before_action :set_charge, only: [:edit, :update, :destroy]
 
   def index
-    @charges = Charge.includes(:passenger_type).decorate
+    @charges = Charge.decorate
   end
 
 

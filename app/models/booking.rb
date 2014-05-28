@@ -49,12 +49,14 @@ class Booking < ActiveRecord::Base
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
-  validates :quantity, numericality: { greater_than: 0 }, on: :update
-  validates :stop, uniqueness: {scope: [:client, :trip], message: 'This client already has a booking for this route on this trip on this date. '}, on: :update, allow_nil: true
-  validate :seats_over_limit, on: :update, if: :in_process?
+  validates :quantity, numericality: { greater_than: 0 }
+  validate :quantity_available, if: :stop
 
   before_save :generate_reference, if: :reserved?
+  before_save :update_return_booking, if: :in_process?
+
   after_find :check_expiration
+
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
@@ -69,15 +71,22 @@ class Booking < ActiveRecord::Base
 
   private
     def defaults
-      { status: :in_process }
+      { status: :in_process, quantity: 1 }
     end
 
-    def seats_over_limit
-      available_seats = self.stop.available_seats
-      self.errors.add(:base,"There are not enough seats (#{available_seats}) available for this booking (#{self.quantity}).") unless available_seats >= self.quantity
-    end
 
   protected
+    def quantity_available
+      self.errors.add(:quantity,'The number of seats selected exceeds the available seating on the bus for this connection.') unless quantity <= stop.available_seats
+    end
+
+    def update_return_booking
+      if  return_booking
+        return_booking.client_id = client_id unless return_booking.client_id.present?
+        passengers.each {|p| return_booking.passengers << p.dup } unless return_booking.passengers.any?
+      end
+    end
+
     def generate_reference
       self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
       self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{"%03d" % sequence_id}" unless reference_no.present?

@@ -131,6 +131,7 @@ group :development do
   gem "lol_dba"
   gem 'rails_best_practices'
   gem 'spring'
+  gem 'flatten_migrations'
 end
 
 group :development, :test do
@@ -138,6 +139,8 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.2.1"
   gem 'rails_db_info'
   gem 'jazz_hands'
+  gem "faker", "~> 1.1.2"
+
 end
 
 group :test do
@@ -147,8 +150,8 @@ group :test do
 
 
   # Factories
-  gem "faker", "~> 1.1.2"
   gem "database_cleaner", "~> 1.2.0"
+  gem 'stepford'
 
   # Matchers
   gem "shoulda-matchers"

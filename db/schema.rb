@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528065159) do
+ActiveRecord::Schema.define(version: 20140528101638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20140528065159) do
     t.integer  "main_id"
     t.boolean  "has_return",   default: false
     t.integer  "stop_id"
-    t.integer  "state",        default: 0
     t.integer  "sequence_id"
   end
 
@@ -202,9 +201,8 @@ ActiveRecord::Schema.define(version: 20140528065159) do
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",           precision: 8, scale: 2
+    t.decimal  "amount",         precision: 8, scale: 2
     t.string   "line_item_type"
-    t.integer  "transaction_type",                         default: 0
   end
 
   add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
