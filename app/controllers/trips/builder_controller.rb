@@ -7,6 +7,7 @@ class Trips::BuilderController < ApplicationController
 
   def create
     @trip = Trip.create
+    @trip.persisted?
     redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
   end
 

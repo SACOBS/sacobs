@@ -50,6 +50,7 @@ class Booking < ActiveRecord::Base
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
   validates :quantity, numericality: { greater_than: 0 }, on: :update
+  validates :stop, uniqueness: {scope: [:client, :trip], message: 'This client already has a booking for this route on this trip on this date. '}, on: :update, allow_nil: true
   validate :seats_over_limit, on: :update, if: :in_process?
 
   before_save :generate_reference, if: :reserved?
@@ -77,9 +78,9 @@ class Booking < ActiveRecord::Base
     end
 
   protected
-
     def generate_reference
-      self.reference_no =  Digest::SHA1.hexdigest([Time.now, rand].join)[0..5].upcase unless reference_no.present?
+      self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
+      self.reference_no = "#{Digest::SHA1.hexdigest([Time.now, rand].join)[0..5].upcase}#{"%03d" % sequence_id}" unless reference_no.present?
     end
 
     def check_expiration

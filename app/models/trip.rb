@@ -40,6 +40,8 @@ class Trip < ActiveRecord::Base
 
   validates :name, :start_date, :end_date, :route, :bus, presence: true, on: :update
 
+  validates :route, :bus, uniqueness: {scope: :start_date},on: :update
+
   before_update :generate_stops, if: :route_id_changed?
 
   ransacker(:start_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(trips.start_date)" }
