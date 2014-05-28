@@ -7,19 +7,13 @@ class Bookings::BuilderController < ApplicationController
   before_action :set_attributes, only: :update
 
   def index
-    fetch_stops
+    (params[:return] == 'false') ? fetch_stops : fetch_return_stops
   end
 
   def show
     case step
       when :details then fetch_stops
-      when :returns then
-        if @booking.has_return?
-          @booking.build_return_booking
-          fetch_return_stops
-        else
-          skip_step
-        end
+      when :returns then @booking.has_return? ? fetch_return_stops : skip_step
       when :client then @booking.build_client
       when :passengers then build_passengers
       when :billing then build_invoice
@@ -36,16 +30,17 @@ class Bookings::BuilderController < ApplicationController
   end
 
   private
+    def search_criteria
+      params[:q]||= {}
+    end
+
     def fetch_stops
-      criteria = params[:q]||= {}
-      @stops = TripSearch.execute(criteria)
+      @stops = TripSearch.execute(search_criteria)
     end
 
     def fetch_return_stops
-      criteria = params[:q]||= {}
-      @stops = ReturnTripSearch.execute(@booking.trip, @booking.quantity, criteria)
+      @stops = ReturnTripSearch.execute(@booking.trip, @booking.quantity, search_criteria)
     end
-
 
     def finish_wizard_path
       bookings_url
@@ -64,14 +59,6 @@ class Bookings::BuilderController < ApplicationController
     end
 
 
-    def set_booking
-      @booking = Booking.find(params[:booking_id])
-    end
-
-    def set_attributes
-      @booking.assign_attributes(booking_params)
-    end
-
     def reserve_booking
       expiry_date = set_booking_expiry_date
       ReserveBooking.execute(@booking, current_user, expiry_date)
@@ -79,6 +66,14 @@ class Bookings::BuilderController < ApplicationController
 
     def set_booking_expiry_date
       Time.zone.now.advance hours: settings.booking_expiry_period
+    end
+
+    def set_booking
+      @booking = Booking.find(params[:booking_id])
+    end
+
+    def set_attributes
+      @booking.assign_attributes(booking_params)
     end
 
     def booking_params

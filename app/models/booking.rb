@@ -52,8 +52,10 @@ class Booking < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
 
-  before_save :generate_reference, if: :reserved?
-  before_save :update_return_booking, if: :in_process?
+  before_save :init_return_booking, prepend: true
+  before_save :set_shared_booking_data
+  before_save :generate_reference
+
 
   after_find :check_expiration
 
@@ -71,7 +73,7 @@ class Booking < ActiveRecord::Base
 
   private
     def defaults
-      { status: :in_process, quantity: 1 }
+      { status: 'in_process' }
     end
 
 
@@ -80,16 +82,22 @@ class Booking < ActiveRecord::Base
       self.errors.add(:quantity,'The number of seats selected exceeds the available seating on the bus for this connection.') unless quantity <= stop.available_seats
     end
 
-    def update_return_booking
-      if  return_booking
+    def init_return_booking
+      self.build_return_booking(quantity: self.quantity) if has_return? && !return_booking
+    end
+
+    def set_shared_booking_data
+      if return_booking
         return_booking.client_id = client_id unless return_booking.client_id.present?
         passengers.each {|p| return_booking.passengers << p.dup } unless return_booking.passengers.any?
       end
     end
 
     def generate_reference
-      self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
-      self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{"%03d" % sequence_id}" unless reference_no.present?
+      if reserved?
+       self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
+       self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{"%03d" % sequence_id}" unless reference_no.present?
+      end
     end
 
     def check_expiration
