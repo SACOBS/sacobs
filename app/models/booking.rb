@@ -80,7 +80,7 @@ class Booking < ActiveRecord::Base
   protected
     def generate_reference
       self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
-      self.reference_no = "#{Digest::SHA1.hexdigest([Time.now, rand].join)[0..5].upcase}#{"%03d" % sequence_id}" unless reference_no.present?
+      self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{"%03d" % sequence_id}" unless reference_no.present?
     end
 
     def check_expiration
