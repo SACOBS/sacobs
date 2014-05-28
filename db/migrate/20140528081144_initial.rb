@@ -4,7 +4,7 @@ class Initial < ActiveRecord::Migration
 	  # These are extensions that must be enabled in order to support this database
 	  enable_extension "plpgsql"
 	
-	  create_table "addresses", force: true do |t|
+	  create_table "addresses" do |t|
 	    t.string   "street_address1"
 	    t.string   "street_address2"
 	    t.string   "city"
@@ -17,11 +17,11 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 	
-	  create_table "banks", force: true do |t|
+	  create_table "banks" do |t|
 	    t.string "name"
 	  end
 	
-	  create_table "bookings", force: true do |t|
+	  create_table "bookings" do |t|
 	    t.integer  "trip_id"
 	    t.decimal  "price"
 	    t.string   "status"
@@ -44,7 +44,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "bookings", ["trip_id"], name: "index_bookings_on_trip_id", using: :btree
 	  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 	
-	  create_table "buses", force: true do |t|
+	  create_table "buses" do |t|
 	    t.string   "name"
 	    t.integer  "capacity"
 	    t.string   "year"
@@ -56,7 +56,7 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "buses", ["user_id"], name: "index_buses_on_user_id", using: :btree
 	
-	  create_table "charges", force: true do |t|
+	  create_table "charges" do |t|
 	    t.decimal  "percentage",  precision: 5, scale: 2
 	    t.integer  "user_id"
 	    t.datetime "created_at"
@@ -66,7 +66,7 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "charges", ["user_id"], name: "index_charges_on_user_id", using: :btree
 	
-	  create_table "cities", force: true do |t|
+	  create_table "cities" do |t|
 	    t.string   "name"
 	    t.string   "slug"
 	    t.integer  "user_id"
@@ -78,7 +78,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true, using: :btree
 	  add_index "cities", ["user_id"], name: "index_cities_on_user_id", using: :btree
 	
-	  create_table "clients", force: true do |t|
+	  create_table "clients" do |t|
 	    t.string   "name"
 	    t.string   "surname"
 	    t.datetime "created_at"
@@ -101,7 +101,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "clients", ["slug"], name: "index_clients_on_slug", unique: true, using: :btree
 	  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 	
-	  create_table "connections", force: true do |t|
+	  create_table "connections" do |t|
 	    t.integer  "distance"
 	    t.datetime "created_at"
 	    t.datetime "updated_at"
@@ -119,7 +119,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "connections", ["route_id"], name: "index_connections_on_route_id", using: :btree
 	  add_index "connections", ["to_id"], name: "index_connections_on_to_id", using: :btree
 	
-	  create_table "destinations", force: true do |t|
+	  create_table "destinations" do |t|
 	    t.integer  "route_id"
 	    t.integer  "city_id"
 	    t.integer  "sequence"
@@ -131,7 +131,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "destinations", ["city_id"], name: "index_destinations_on_city_id", using: :btree
 	  add_index "destinations", ["route_id"], name: "index_destinations_on_route_id", using: :btree
 	
-	  create_table "discounts", force: true do |t|
+	  create_table "discounts" do |t|
 	    t.decimal  "percentage",        precision: 5, scale: 2
 	    t.integer  "passenger_type_id"
 	    t.datetime "created_at"
@@ -142,7 +142,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "discounts", ["passenger_type_id"], name: "index_discounts_on_passenger_type_id", using: :btree
 	  add_index "discounts", ["user_id"], name: "index_discounts_on_user_id", using: :btree
 	
-	  create_table "drivers", force: true do |t|
+	  create_table "drivers" do |t|
 	    t.string   "name"
 	    t.string   "surname"
 	    t.datetime "created_at"
@@ -154,7 +154,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "drivers", ["slug"], name: "index_drivers_on_slug", unique: true, using: :btree
 	  add_index "drivers", ["user_id"], name: "index_drivers_on_user_id", using: :btree
 	
-	  create_table "drivers_trips", force: true do |t|
+	  create_table "drivers_trips" do |t|
 	    t.integer "driver_id"
 	    t.integer "trip_id"
 	  end
@@ -162,7 +162,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "drivers_trips", ["driver_id", "trip_id"], name: "index_drivers_trips_on_driver_id_and_trip_id", using: :btree
 	  add_index "drivers_trips", ["trip_id", "driver_id"], name: "index_drivers_trips_on_trip_id_and_driver_id", using: :btree
 	
-	  create_table "friendly_id_slugs", force: true do |t|
+	  create_table "friendly_id_slugs" do |t|
 	    t.string   "slug",                      null: false
 	    t.integer  "sluggable_id",              null: false
 	    t.string   "sluggable_type", limit: 50
@@ -175,7 +175,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
 	  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 	
-	  create_table "invoices", force: true do |t|
+	  create_table "invoices" do |t|
 	    t.integer  "booking_id"
 	    t.datetime "created_at"
 	    t.datetime "updated_at"
@@ -184,7 +184,7 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "invoices", ["booking_id"], name: "index_invoices_on_booking_id", using: :btree
 	
-	  create_table "line_items", force: true do |t|
+	  create_table "line_items" do |t|
 	    t.string   "description"
 	    t.integer  "invoice_id"
 	    t.datetime "created_at"
@@ -195,13 +195,13 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
 	
-	  create_table "passenger_types", force: true do |t|
+	  create_table "passenger_types" do |t|
 	    t.string   "description"
 	    t.datetime "created_at"
 	    t.datetime "updated_at"
 	  end
 	
-	  create_table "passengers", force: true do |t|
+	  create_table "passengers" do |t|
 	    t.string   "name"
 	    t.string   "surname"
 	    t.integer  "booking_id"
@@ -215,7 +215,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id", using: :btree
 	  add_index "passengers", ["passenger_type_id"], name: "index_passengers_on_passenger_type_id", using: :btree
 	
-	  create_table "payment_details", force: true do |t|
+	  create_table "payment_details" do |t|
 	    t.datetime "payment_date"
 	    t.integer  "booking_id"
 	    t.string   "reference"
@@ -227,13 +227,13 @@ class Initial < ActiveRecord::Migration
 	  add_index "payment_details", ["payment_type_id"], name: "index_payment_details_on_payment_type_id", using: :btree
 	  add_index "payment_details", ["user_id"], name: "index_payment_details_on_user_id", using: :btree
 	
-	  create_table "payment_types", force: true do |t|
+	  create_table "payment_types" do |t|
 	    t.string   "description"
 	    t.datetime "created_at"
 	    t.datetime "updated_at"
 	  end
 	
-	  create_table "routes", force: true do |t|
+	  create_table "routes" do |t|
 	    t.decimal  "cost",              precision: 8, scale: 2
 	    t.integer  "distance"
 	    t.datetime "created_at"
@@ -247,13 +247,13 @@ class Initial < ActiveRecord::Migration
 	  add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true, using: :btree
 	  add_index "routes", ["user_id"], name: "index_routes_on_user_id", using: :btree
 	
-	  create_table "scriptures", force: true do |t|
+	  create_table "scriptures" do |t|
 	    t.string   "verse"
 	    t.datetime "created_at"
 	    t.datetime "updated_at"
 	  end
 	
-	  create_table "seasonal_markups", force: true do |t|
+	  create_table "seasonal_markups" do |t|
 	    t.decimal  "percentage"
 	    t.date     "period_from"
 	    t.date     "period_to"
@@ -265,7 +265,7 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "seasonal_markups", ["user_id"], name: "index_seasonal_markups_on_user_id", using: :btree
 	
-	  create_table "seats", force: true do |t|
+	  create_table "seats" do |t|
 	    t.string   "row"
 	    t.integer  "number"
 	    t.integer  "bus_id"
@@ -275,7 +275,7 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "seats", ["bus_id"], name: "index_seats_on_bus_id", using: :btree
 	
-	  create_table "settings", force: true do |t|
+	  create_table "settings" do |t|
 	    t.integer  "booking_expiry_period"
 	    t.datetime "created_at"
 	    t.datetime "updated_at"
@@ -287,7 +287,7 @@ class Initial < ActiveRecord::Migration
 	    t.string   "trip_sheet_note4"
 	  end
 	
-	  create_table "stops", force: true do |t|
+	  create_table "stops" do |t|
 	    t.integer  "connection_id"
 	    t.integer  "trip_id"
 	    t.time     "arrive"
@@ -300,7 +300,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "stops", ["connection_id"], name: "index_stops_on_connection_id", using: :btree
 	  add_index "stops", ["trip_id"], name: "index_stops_on_trip_id", using: :btree
 	
-	  create_table "trips", force: true do |t|
+	  create_table "trips" do |t|
 	    t.string   "name"
 	    t.date     "start_date"
 	    t.date     "end_date"
@@ -316,7 +316,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "trips", ["route_id"], name: "index_trips_on_route_id", using: :btree
 	  add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 	
-	  create_table "users", force: true do |t|
+	  create_table "users" do |t|
 	    t.string   "email",                  default: "", null: false
 	    t.string   "encrypted_password",     default: "", null: false
 	    t.string   "reset_password_token"
@@ -337,7 +337,7 @@ class Initial < ActiveRecord::Migration
 	  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 	  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 	
-	  create_table "venues", force: true do |t|
+	  create_table "venues" do |t|
 	    t.string   "name"
 	    t.integer  "city_id"
 	    t.datetime "created_at"
@@ -346,7 +346,7 @@ class Initial < ActiveRecord::Migration
 	
 	  add_index "venues", ["city_id"], name: "index_venues_on_city_id", using: :btree
 	
-	  create_table "vouchers", force: true do |t|
+	  create_table "vouchers" do |t|
 	    t.string   "ref_no"
 	    t.decimal  "amount"
 	    t.boolean  "active",     default: true
