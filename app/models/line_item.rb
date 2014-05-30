@@ -21,10 +21,6 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :invoice
 
-  scope :total_debits, -> { where(line_item_type: :debit).sum(:amount) }
-  scope :total_credits, -> { where(line_item_type: :credit).sum(:amount) }
-
-
   private
     def defaults
      {
