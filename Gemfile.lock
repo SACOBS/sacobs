@@ -458,7 +458,6 @@ DEPENDENCIES
   rails_best_practices
   rails_db_info
   ransack
-  rb-fsevent
   responders
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0)

@@ -142,8 +142,6 @@ group :development, :test do
   gem "faker", "~> 1.1.2"
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
-  gem 'rb-fsevent' if `uname` =~ /Darwin/
-
 end
 
 group :test do

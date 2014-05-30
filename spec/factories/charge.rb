@@ -4,6 +4,7 @@ FactoryGirl.define do
   
   factory :charge do
     user
+    percentage 10
     sequence(:id)
     description 'Test Charge'
   end
