@@ -45,7 +45,7 @@ class Client < ActiveRecord::Base
 
   friendly_id :full_name, use: :slugged
 
-  validates :name, presence: true
+  validates :name, :surname ,presence: true
 
   after_initialize :init_address
 

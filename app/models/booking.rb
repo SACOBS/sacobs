@@ -55,8 +55,6 @@ class Booking < ActiveRecord::Base
   before_save :init_return_booking, prepend: true
   before_save :set_shared_booking_data
   before_save :generate_reference
-
-
   after_find :check_expiration
 
 

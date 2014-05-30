@@ -4,6 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require "email_spec"
+require 'validations_helper'
 
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -25,6 +26,8 @@ RSpec.configure do |config|
 
   #FactoryGirl
   config.include FactoryGirl::Syntax::Methods
+
+  config.include ValidationsHelper
 
 
   # ## Mock Framework

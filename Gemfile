@@ -140,6 +140,9 @@ group :development, :test do
   gem 'rails_db_info'
   gem 'jazz_hands'
   gem "faker", "~> 1.1.2"
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec'
+  gem 'rb-fsevent' if `uname` =~ /Darwin/
 
 end
 
@@ -155,6 +158,7 @@ group :test do
 
   # Matchers
   gem "shoulda-matchers"
+  gem "shoulda-callback-matchers", "~> 1.0"
   gem 'json_spec'
   gem 'email_spec'
 end

@@ -25,15 +25,10 @@ class Bus < ActiveRecord::Base
 
   validates :name, :capacity, :year, :model, presence: true, on: :update
   validates :capacity, numericality: { greater_than: 0 }, on: :update
-  #validate :seating_matches_capacity, on: :update
 
 
   private
    def defaults
      { name: 'Bus', capacity: 0, year: 1, model: 'bus'}
    end
-
-   def seating_matches_capacity
-    self.errors.add(:base,"The number of seats (#{self.seats.size}) does not match the capacity of the bus (#{self.capacity}).") unless self.capacity == self.seats.size
-  end
 end
