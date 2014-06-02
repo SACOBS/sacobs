@@ -48,7 +48,7 @@ describe Booking do
       context 'has_return is true and return booking does exist' do
         it 'does not build a return booking' do
           booking = build(:booking, has_return: true)
-          return_booking = build(:booking)
+          return_booking = build_stubbed(:booking)
           booking.return_booking = return_booking
           booking.send(:init_return_booking)
           expect(booking.return_booking).to eql(return_booking)
@@ -69,7 +69,7 @@ describe Booking do
 
     describe '#generate_reference' do
       describe 'sets the sequence_id and reference_no for a reserved booking' do
-        let(:booking){ build(:booking, reference_no: nil, sequence_id: nil) }
+        let(:booking){ build_stubbed(:booking, reference_no: nil, sequence_id: nil) }
 
         context 'booking is reserved' do
           it 'sets the sequence_id and reference_no' do
@@ -93,13 +93,13 @@ describe Booking do
 
     describe '#check_expiration' do
       describe 'sets the expired flag based on the expiry date' do
-        let(:booking){ build(:booking) }
+        let(:booking){ build_stubbed(:booking) }
 
         context 'booking is expired' do
           it 'sets expired flag to true' do
             booking.expiry_date = Time.zone.now - 1.day
             booking.send(:check_expiration)
-            expect(booking.expired).to be_true
+            expect(booking.expired).to be true
           end
         end
 
@@ -107,29 +107,28 @@ describe Booking do
           it 'sets expired flag to false' do
             booking.expiry_date = Time.zone.now + 1.day
             booking.send(:check_expiration)
-            expect(booking.expired).to be_false
+            expect(booking.expired).to be false
           end
         end
       end
     end
   end
 
-
   describe 'validations' do
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
 
     describe 'quantity does not exceed available seating' do
-      let(:stop){ build(:stop, available_seats: 10)  }
-      subject(:booking) { build(:booking, stop: stop) }
+      let(:stop){ build_stubbed(:stop, available_seats: 10)  }
+      subject(:booking) { build_stubbed(:booking, stop: stop) }
 
       context 'valid quantity' do
-        before(:each) { booking.quantity = 1 }
+        before { booking.quantity = 1 }
 
         it { should be_valid }
       end
 
       context 'invalid quantity' do
-        before(:each) { booking.quantity = 11 }
+        before { booking.quantity = 11 }
 
         it { should_not be_valid }
       end

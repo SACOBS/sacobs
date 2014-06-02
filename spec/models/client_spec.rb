@@ -27,7 +27,7 @@ describe Client do
 
     describe '#init_address' do
         it 'builds a new address' do
-          client = build(:client, address: nil)
+          client = build_stubbed(:client, address: nil)
           client.send(:init_address)
           expect(client.address).to be_new_record
         end
@@ -35,7 +35,7 @@ describe Client do
 
     describe '#set_full_name' do
       it 'sets the full_name of the client from the name and surname' do
-        client = build(:client, name: 'Jim', surname: 'Johnson')
+        client = build_stubbed(:client, name: 'Jim', surname: 'Johnson')
         client.send(:set_full_name)
         expect(client.full_name).to eq('Jim Johnson')
       end
@@ -47,13 +47,13 @@ describe Client do
     describe '#age' do
       context 'date of birth is present' do
         it 'returns the clients age' do
-          client = build(:client, date_of_birth: Date.today - 10.years)
+          client = build_stubbed(:client, date_of_birth: Date.today - 10.years)
           expect(client.age).to eq(10)
         end
       end
       context 'date of birth is not present' do
         it 'returns a nil value for age' do
-          client = build(:client)
+          client = build_stubbed(:client)
           expect(client.age).to be_nil
         end
       end

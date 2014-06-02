@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Contact do
+  subject(:contact) { Contact.new(name: 'ben', message: 'Test message') }
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }

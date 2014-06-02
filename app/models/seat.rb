@@ -19,6 +19,7 @@ class Seat < ActiveRecord::Base
   belongs_to :bus, touch: true
 
   validates :row, :number, presence: true
+  validates :number, numericality: true
 
   private
     def defaults

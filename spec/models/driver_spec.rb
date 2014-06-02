@@ -10,7 +10,7 @@ describe Driver do
   describe 'instance methods' do
     describe '#full_name' do
       it 'should concatenate the driver name and surname' do
-        driver = build(:driver, name: 'Jim', surname: 'James')
+        driver = build_stubbed(:driver, name: 'Jim', surname: 'James')
         expect(driver.full_name).to eq('Jim James')
       end
     end

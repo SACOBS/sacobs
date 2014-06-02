@@ -22,8 +22,12 @@ class SeasonalMarkup < ActiveRecord::Base
 
 
   scope :active, -> { where(active: true) }
-  scope :in_period, ->(date) { where(':date >= period_from AND :date <= period_to', {date: date})  }
+  scope :in_period, -> (date) { where(seasonal_markup[:period_from].lteq(date).and(seasonal_markup[:period_to].gteq(date))) }
 
+  def self.seasonal_markup
+    self.arel_table
+  end
+  private_class_method :seasonal_markup
 
   private
    def defaults

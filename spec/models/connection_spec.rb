@@ -21,7 +21,7 @@ describe Connection do
 
     describe '#set_name' do
       it 'sets the connection name' do
-        connection = build(:connection)
+        connection = build_stubbed(:connection)
         expected = "#{connection.from.name} to #{connection.to.name}"
         connection.send(:set_name)
         expect(connection.name).to eq(expected)
@@ -30,7 +30,7 @@ describe Connection do
 
     describe '#set_percentage' do
       it 'sets the percentage' do
-        connection = build(:connection)
+        connection = build_stubbed(:connection)
         expected = ((connection.cost / connection.route.cost) * 100).round
         connection.send(:set_percentage)
         expect(connection.percentage).to eq(expected)
