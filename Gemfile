@@ -135,19 +135,19 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.0'
-  gem "factory_girl_rails", "~> 4.2.1"
+  gem 'rspec-rails'
+  gem "factory_girl_rails"
   gem 'rails_db_info'
   gem 'jazz_hands'
-  gem "faker", "~> 1.1.2"
+  gem "faker"
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
 end
 
 group :test do
   # Test suites
-  gem "capybara", "~> 2.0.2"
-  gem "launchy", "~> 2.2.0"
+  gem "capybara"
+  gem "launchy"
 
 
   # Factories
@@ -156,7 +156,7 @@ group :test do
 
   # Matchers
   gem "shoulda-matchers"
-  gem "shoulda-callback-matchers", "~> 1.0"
+  gem "shoulda-callback-matchers"
   gem 'json_spec'
   gem 'email_spec'
 end
