@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Voucher do
+describe Voucher, :type => :model do
 
-  it { should belong_to(:client).touch(true) }
-  it { should belong_to(:user) }
+  it { is_expected.to belong_to(:client).touch(true) }
+  it { is_expected.to belong_to(:user) }
 
   describe 'callbacks' do
-    it { should callback(:generate_reference_no).before(:create) }
+    it { is_expected.to callback(:generate_reference_no).before(:create) }
 
     describe '#generate_reference_no' do
       it 'generates a new random reference' do

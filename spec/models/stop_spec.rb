@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe Stop do
- it { should belong_to(:trip).touch(true) }
- it { should belong_to(:connection) }
- it { should have_many(:bookings) }
+describe Stop, :type => :model do
+ it { is_expected.to belong_to(:trip).touch(true) }
+ it { is_expected.to belong_to(:connection) }
+ it { is_expected.to have_many(:bookings) }
 
- it { should delegate_method(:name).to(:connection) }
- it { should delegate_method(:from).to(:connection) }
- it { should delegate_method(:to).to(:connection) }
- it { should delegate_method(:cost).to(:connection) }
+ it { is_expected.to delegate_method(:name).to(:connection) }
+ it { is_expected.to delegate_method(:from).to(:connection) }
+ it { is_expected.to delegate_method(:to).to(:connection) }
+ it { is_expected.to delegate_method(:cost).to(:connection) }
 
 
  describe 'callbacks' do
-   it { should callback(:check_seats).before(:save) }
+   it { is_expected.to callback(:check_seats).before(:save) }
 
    describe '#check_seats' do
      it 'sets the seats to zero if a negative number' do

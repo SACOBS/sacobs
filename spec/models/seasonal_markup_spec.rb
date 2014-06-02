@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SeasonalMarkup do
- it {should belong_to(:user) }
+describe SeasonalMarkup, :type => :model do
+ it {is_expected.to belong_to(:user) }
 
  describe 'class methods' do
    describe '.active' do

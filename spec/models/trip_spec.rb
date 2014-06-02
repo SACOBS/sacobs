@@ -1,33 +1,33 @@
 require 'spec_helper'
 
-describe Trip do
+describe Trip, :type => :model do
 
-  it { should belong_to(:user) }
-  it { should belong_to(:bus) }
-  it { should belong_to(:route) }
-  it { should have_many(:stops).dependent(:destroy) }
-  it { should have_many(:bookings).dependent(:destroy) }
-  it { should have_and_belong_to_many(:drivers) }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:bus) }
+  it { is_expected.to belong_to(:route) }
+  it { is_expected.to have_many(:stops).dependent(:destroy) }
+  it { is_expected.to have_many(:bookings).dependent(:destroy) }
+  it { is_expected.to have_and_belong_to_many(:drivers) }
 
-  it { should accept_nested_attributes_for(:stops).allow_destroy(true) }
+  it { is_expected.to accept_nested_attributes_for(:stops).allow_destroy(true) }
 
-  it { should delegate_method(:bus_name).to(:bus).as(:name) }
-  it { should delegate_method(:bus_capacity).to(:bus).as(:capacity) }
+  it { is_expected.to delegate_method(:bus_name).to(:bus).as(:name) }
+  it { is_expected.to delegate_method(:bus_capacity).to(:bus).as(:capacity) }
 
   describe 'validations' do
     subject(:trip) { build_stubbed(:trip) }
 
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:start_date) }
-    it { should validate_presence_of(:end_date) }
-    it { should validate_presence_of(:route) }
-    it { should validate_presence_of(:bus) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:start_date) }
+    it { is_expected.to validate_presence_of(:end_date) }
+    it { is_expected.to validate_presence_of(:route) }
+    it { is_expected.to validate_presence_of(:bus) }
 
 
   end
 
   describe 'callbacks' do
-    it { should callback(:generate_stops).before(:update) }
+    it { is_expected.to callback(:generate_stops).before(:update) }
 
     describe '#generate_stops' do
       it 'creates the stops for the trip from the route connections' do

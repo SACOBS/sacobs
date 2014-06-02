@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Setting do
+describe Setting, :type => :model do
 end

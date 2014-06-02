@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Seat do
+describe Seat, :type => :model do
 
-  it { should belong_to(:bus).touch(true) }
-  it { should validate_presence_of(:row) }
-  it { should validate_presence_of(:number) }
-  it { should validate_numericality_of(:number) }
+  it { is_expected.to belong_to(:bus).touch(true) }
+  it { is_expected.to validate_presence_of(:row) }
+  it { is_expected.to validate_presence_of(:number) }
+  it { is_expected.to validate_numericality_of(:number) }
 
 
 

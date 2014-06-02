@@ -1,29 +1,29 @@
 require 'spec_helper'
 
-describe Client do
-  it { should belong_to(:user) }
-  it { should belong_to(:bank) }
-  it { should have_one(:address).dependent(:destroy) }
-  it { should have_many(:bookings).dependent(:destroy) }
-  it { should have_many(:vouchers).dependent(:destroy) }
+describe Client, :type => :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:bank) }
+  it { is_expected.to have_one(:address).dependent(:destroy) }
+  it { is_expected.to have_many(:bookings).dependent(:destroy) }
+  it { is_expected.to have_many(:vouchers).dependent(:destroy) }
 
-  it { should accept_nested_attributes_for(:address).allow_destroy(true) }
+  it { is_expected.to accept_nested_attributes_for(:address).allow_destroy(true) }
 
 
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:surname) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:surname) }
 
   describe 'delegation' do
-    it { should delegate_method(:bank_name).to(:bank).as(:name) }
-    it { should delegate_method(:street_address1).to(:address) }
-    it { should delegate_method(:street_address2).to(:address) }
-    it { should delegate_method(:postal_code).to(:address) }
-    it { should delegate_method(:city).to(:address) }
+    it { is_expected.to delegate_method(:bank_name).to(:bank).as(:name) }
+    it { is_expected.to delegate_method(:street_address1).to(:address) }
+    it { is_expected.to delegate_method(:street_address2).to(:address) }
+    it { is_expected.to delegate_method(:postal_code).to(:address) }
+    it { is_expected.to delegate_method(:city).to(:address) }
   end
 
   describe 'callbacks' do
-    it { should callback(:init_address).after(:initialize) }
-    it { should callback(:set_full_name).before(:validation) }
+    it { is_expected.to callback(:init_address).after(:initialize) }
+    it { is_expected.to callback(:set_full_name).before(:validation) }
 
     describe '#init_address' do
         it 'builds a new address' do

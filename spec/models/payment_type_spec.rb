@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe PaymentType do
+describe PaymentType, :type => :model do
 
 end

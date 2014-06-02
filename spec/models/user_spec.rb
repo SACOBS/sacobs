@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
 
   describe 'class methods' do
     describe '.all_except' do

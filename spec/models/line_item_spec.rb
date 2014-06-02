@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe LineItem do
-  it { should belong_to(:invoice) }
+describe LineItem, :type => :model do
+  it { is_expected.to belong_to(:invoice) }
 end

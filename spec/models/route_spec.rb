@@ -1,25 +1,25 @@
 require 'spec_helper'
 
-describe Route do
+describe Route, :type => :model do
 
-  it { should belong_to(:user) }
-  it { should have_many(:destinations).order(:sequence).dependent(:destroy) }
-  it { should have_many(:connections).order(:from_id).dependent(:destroy) }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_many(:destinations).order(:sequence).dependent(:destroy) }
+  it { is_expected.to have_many(:connections).order(:from_id).dependent(:destroy) }
 
-  it { should accept_nested_attributes_for(:connections).allow_destroy(true) }
-  it { should accept_nested_attributes_for(:destinations).allow_destroy(true) }
+  it { is_expected.to accept_nested_attributes_for(:connections).allow_destroy(true) }
+  it { is_expected.to accept_nested_attributes_for(:destinations).allow_destroy(true) }
 
 
   describe 'validations' do
     subject(:route) { create(:route) }
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:cost) }
-    it { should validate_presence_of(:distance) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:cost) }
+    it { is_expected.to validate_presence_of(:distance) }
   end
 
 
   describe 'callbacks' do
-    it { should callback(:set_connection_costs).before(:save).if(:cost_changed?) }
+    it { is_expected.to callback(:set_connection_costs).before(:save).if(:cost_changed?) }
 
     describe '#set_connection_costs?' do
       it 'updates the cost of a connection' do

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Discount do
-  it { should belong_to(:passenger_type) }
-  it { should belong_to(:user) }
-  it { should accept_nested_attributes_for(:passenger_type).allow_destroy(true) }
+describe Discount, :type => :model do
+  it { is_expected.to belong_to(:passenger_type) }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to accept_nested_attributes_for(:passenger_type).allow_destroy(true) }
 
 
 end

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Invoice do
+describe Invoice, :type => :model do
 
-  it { should belong_to(:booking) }
-  it { should have_many(:line_items).dependent(:destroy) }
+  it { is_expected.to belong_to(:booking) }
+  it { is_expected.to have_many(:line_items).dependent(:destroy) }
 
-  it { should accept_nested_attributes_for(:line_items)}
+  it { is_expected.to accept_nested_attributes_for(:line_items)}
 
 
   describe 'instance methods' do

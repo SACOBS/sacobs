@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Passenger do
+describe Passenger, :type => :model do
 
-  it { should belong_to(:booking) }
-  it { should belong_to(:passenger_type) }
+  it { is_expected.to belong_to(:booking) }
+  it { is_expected.to belong_to(:passenger_type) }
 
   describe 'instance methods' do
     describe '#full_name' do

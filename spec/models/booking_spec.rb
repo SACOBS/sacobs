@@ -1,38 +1,38 @@
 require 'spec_helper'
 
-describe Booking do
+describe Booking, :type => :model do
 
   describe 'relationships' do
-    it { should belong_to(:user) }
-    it { should belong_to(:trip) }
-    it { should belong_to(:stop) }
-    it { should belong_to(:client) }
-    it { should belong_to(:main).conditions('where status != cancelled').class_name('Booking').with_foreign_key(:main_id).touch(true) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:trip) }
+    it { is_expected.to belong_to(:stop) }
+    it { is_expected.to belong_to(:client) }
+    it { is_expected.to belong_to(:main).conditions('where status != cancelled').class_name('Booking').with_foreign_key(:main_id).touch(true) }
 
-    it { should have_one(:return_booking).conditions('where status != cancelled').class_name('Booking').with_foreign_key(:main_id) }
-    it { should have_one(:invoice).dependent(:destroy) }
-    it { should have_one(:payment_detail).dependent(:destroy) }
+    it { is_expected.to have_one(:return_booking).conditions('where status != cancelled').class_name('Booking').with_foreign_key(:main_id) }
+    it { is_expected.to have_one(:invoice).dependent(:destroy) }
+    it { is_expected.to have_one(:payment_detail).dependent(:destroy) }
 
-    it { should have_many(:passengers).dependent(:destroy) }
+    it { is_expected.to have_many(:passengers).dependent(:destroy) }
 
 
-    it { should accept_nested_attributes_for(:client) }
-    it { should accept_nested_attributes_for(:passengers) }
-    it { should accept_nested_attributes_for(:invoice) }
-    it { should accept_nested_attributes_for(:return_booking) }
+    it { is_expected.to accept_nested_attributes_for(:client) }
+    it { is_expected.to accept_nested_attributes_for(:passengers) }
+    it { is_expected.to accept_nested_attributes_for(:invoice) }
+    it { is_expected.to accept_nested_attributes_for(:return_booking) }
 
-    it { should delegate_method(:trip_name).to(:trip).as(:name) }
-    it { should delegate_method(:trip_start_date).to(:trip).as(:start_date) }
-    it { should delegate_method(:trip_end_date).to(:trip).as(:end_date) }
+    it { is_expected.to delegate_method(:trip_name).to(:trip).as(:name) }
+    it { is_expected.to delegate_method(:trip_start_date).to(:trip).as(:start_date) }
+    it { is_expected.to delegate_method(:trip_end_date).to(:trip).as(:end_date) }
 
 
   end
 
   describe 'callbacks' do
-    it { should callback(:init_return_booking).before(:save) }
-    it { should callback(:set_shared_booking_data).before(:save) }
-    it { should callback(:generate_reference).before(:save) }
-    it { should callback(:check_expiration).after(:find) }
+    it { is_expected.to callback(:init_return_booking).before(:save) }
+    it { is_expected.to callback(:set_shared_booking_data).before(:save) }
+    it { is_expected.to callback(:generate_reference).before(:save) }
+    it { is_expected.to callback(:check_expiration).after(:find) }
   end
 
   describe 'callback methods' do
@@ -115,7 +115,7 @@ describe Booking do
   end
 
   describe 'validations' do
-    it { should validate_numericality_of(:quantity).is_greater_than(0) }
+    it { is_expected.to validate_numericality_of(:quantity).is_greater_than(0) }
 
     describe 'quantity does not exceed available seating' do
       let(:stop){ build_stubbed(:stop, available_seats: 10)  }
@@ -124,13 +124,13 @@ describe Booking do
       context 'valid quantity' do
         before { booking.quantity = 1 }
 
-        it { should be_valid }
+        it { is_expected.to be_valid }
       end
 
       context 'invalid quantity' do
         before { booking.quantity = 11 }
 
-        it { should_not be_valid }
+        it { is_expected.not_to be_valid }
       end
     end
   end

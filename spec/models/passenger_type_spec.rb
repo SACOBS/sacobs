@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe PassengerType do
-  it { should validate_presence_of(:description) }
+describe PassengerType, :type => :model do
+  it { is_expected.to validate_presence_of(:description) }
 
   describe 'callbacks' do
-    it { should callback(:format_description).before(:create) }
+    it { is_expected.to callback(:format_description).before(:create) }
 
     describe '#format_description' do
       it 'downcases the description' do

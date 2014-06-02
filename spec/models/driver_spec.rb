@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Driver do
-  it { should belong_to(:user) }
-  it { should have_and_belong_to_many(:trips) }
+describe Driver, :type => :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_and_belong_to_many(:trips) }
 
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:surname) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:surname) }
 
   describe 'instance methods' do
     describe '#full_name' do
