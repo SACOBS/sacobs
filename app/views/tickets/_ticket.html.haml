@@ -1,15 +1,12 @@
 .details
-  %p
+  %p.pull-left
     %strong Reference No:
     = @ticket.booking.reference_no
-  %p
+  %p.pull-right
     %strong Today's Date:
     = l Time.zone.now, format: :long
-%br
-%br
-
 .passengers
-- bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure Time', 'Arrival Time'], types: [:bordered] do
+- bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure', 'Arrival'], types: [:bordered, :condensed] do
   - @ticket.passengers.each do |passenger|
     %tr
     %td= @ticket.booking.trip_start_date
@@ -31,23 +28,16 @@
       %td= @ticket.return.to_venue
       %td= @ticket.return.stop.depart_time || l(Time.zone.now, format: :long)
       %td= @ticket.return.stop.arrive_time || l(Time.zone.now, format: :long)
-%br
-
-.costs.pull-left
-  %p
+%p.pull-left
   %strong Amount:
   = number_to_currency @ticket.total, unit: 'R'
-  %p
+%p.pull-right
   %strong Discount:
   = number_to_currency @ticket.total_discount, unit: 'R'
-%br
-%br
 %br
 .special-instructions.text-center
   %p
     %em= simple_format(settings.ticket_instructions)
-%br
-%br
 .scripture.text-center
   %p
   %strong Thought for today
