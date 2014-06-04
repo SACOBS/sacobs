@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Contact, :type => :model do
+describe Contact, type: :model do
   subject(:contact) { Contact.new(name: 'ben', message: 'Test message') }
 
   it { is_expected.to validate_presence_of(:name) }

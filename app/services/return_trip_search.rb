@@ -1,7 +1,7 @@
 class ReturnTripSearch
   include Service
 
-  def initialize(trip, qty_seats,criteria)
+  def initialize(trip, qty_seats, criteria)
     @criteria = criteria.reject{|k, v| v =~ /Select/ }
     @trip = trip
     @qty_seats = qty_seats

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Booking, :type => :model do
+describe Booking, type: :model do
 
   describe 'relationships' do
     it { is_expected.to belong_to(:user) }
@@ -40,7 +40,7 @@ describe Booking, :type => :model do
     describe '#init_return_booking' do
       context 'has_return is true and return booking does not exist' do
         it 'builds a return booking' do
-          booking = build(:booking, has_return: true)
+          booking = build_stubbed(:booking, has_return: true)
           booking.send(:init_return_booking)
           expect(booking.return_booking).to_not be_nil
         end
@@ -48,7 +48,7 @@ describe Booking, :type => :model do
       context 'has_return is true and return booking does exist' do
         it 'does not build a return booking' do
           booking = build(:booking, has_return: true)
-          return_booking = build_stubbed(:booking)
+          return_booking = build(:booking)
           booking.return_booking = return_booking
           booking.send(:init_return_booking)
           expect(booking.return_booking).to eql(return_booking)

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Discount, :type => :model do
   it { is_expected.to belong_to(:passenger_type) }

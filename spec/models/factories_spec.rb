@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'stepford/factory_girl/rspec_helpers'
 
 describe 'validate factories build', :type => :model do

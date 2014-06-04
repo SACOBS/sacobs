@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', ' ~> 4.1.0'
@@ -135,13 +135,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.0'
   gem "factory_girl_rails"
   gem 'rails_db_info'
-  gem 'jazz_hands'
   gem "faker"
   gem 'spring-commands-rspec'
-  gem 'guard-rspec'
 end
 
 group :test do
@@ -157,7 +155,6 @@ group :test do
   # Matchers
   gem "shoulda-matchers"
   gem "shoulda-callback-matchers"
-  gem 'json_spec'
   gem 'email_spec'
 end
 

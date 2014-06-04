@@ -1,11 +1,14 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe User, :type => :model do
 
   describe 'class methods' do
     describe '.all_except' do
+      let(:user) { create(:user) }
+      let(:another_user) { create(:user) }
+
       it 'returns all users except the one passed in' do
-        user = create(:user)
+
         another_user = create(:user)
         result = User.all_except(user)
         expect(result).to eq [another_user]

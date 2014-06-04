@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe LocateStops do
    let(:east_london) {  create(:city, name: 'East London') }
