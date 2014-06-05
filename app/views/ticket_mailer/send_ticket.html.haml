@@ -26,37 +26,61 @@
 %br
 
 .passengers
-- bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure Time', 'Arrival Time'], types: [:bordered] do
+- bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure', 'Arrival'], types: [:bordered, :condensed] do
   - @ticket.passengers.each do |passenger|
     %tr
-    %td= @ticket.booking.trip_start_date
-    %td= passenger.full_name
-    %td= @ticket.booking.from
-    %td= @ticket.booking.from_venue
-    %td= @ticket.booking.to
-    %td= @ticket.booking.to_venue
-    %td= @ticket.booking.stop.depart
-    %td= @ticket.booking.stop.arrive
-  - @ticket.passengers.each do |passenger|
-    %tr
-    %td= @ticket.return.trip_start_date
-    %td= passenger.full_name
-    %td= @ticket.return.from
-    %td= @ticket.return.from_venue
-    %td= @ticket.return.to
-    %td= @ticket.return.to_venue
-    %td= @ticket.return.stop.depart
-    %td= @ticket.return.stop.arrive
-%br
-
-.costs.pull-left
-  %p
-  %strong Amount:
-  = number_to_currency @ticket.total, unit: 'R'
-  %p
-  %strong Discount:
-  = number_to_currency @ticket.total_discount, unit: 'R'
-%br
+      %td= @ticket.booking.trip_start_date
+      %td= passenger.full_name
+      %td= @ticket.booking.from
+      %td= @ticket.booking.from_venue
+      %td= @ticket.booking.to
+      %td= @ticket.booking.to_venue
+      %td= @ticket.booking.stop.depart_time || l(Time.zone.now, format: :long)
+      %td= @ticket.booking.stop.arrive_time || l(Time.zone.now, format: :long)
+  - if @ticket.return
+    - @ticket.passengers.each do |passenger|
+      %tr
+        %td= @ticket.return.trip_start_date
+        %td= passenger.full_name
+        %td= @ticket.return.from
+        %td= @ticket.return.from_venue
+        %td= @ticket.return.to
+        %td= @ticket.return.to_venue
+        %td= @ticket.return.stop.depart_time || l(Time.zone.now, format: :long)
+        %td= @ticket.return.stop.arrive_time || l(Time.zone.now, format: :long)
+  %tr
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+      %strong Price:
+    %td
+      %strong= number_to_currency @ticket.total_cost, unit: 'R'
+  %tr
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+      %strong Discount:
+    %td
+      %strong= number_to_currency @ticket.total_discount, unit: 'R'
+  %tr
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+    %td
+      %strong Total:
+    %td
+      %strong= number_to_currency @ticket.total, unit: 'R'
 %br
 %br
 .special-instructions.text-center

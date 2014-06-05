@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   
-  factory :seasonal_markup do
+  factory :seasonal_discount do
     user
     sequence(:id)
   end

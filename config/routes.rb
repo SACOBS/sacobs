@@ -199,7 +199,7 @@ Sacobs::Application.routes.draw do
     resources :builder, only: [:show, :update, :create],controller: 'buses/builder'
   end
 
-  resources :seasonal_markups, except: [:show, :destroy, :edit]
+  resources :seasonal_discounts, except: [:show, :destroy, :edit]
 
 
   resources :discounts, except: [:show]

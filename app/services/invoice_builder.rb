@@ -12,7 +12,6 @@ class InvoiceBuilder
   def build
     @booking.passengers.each do |p|
       build_ticket_cost(p)
-      build_markup(p)
       build_passenger_discount(p)
     end
     build_client_credit(@booking.client)
@@ -25,22 +24,24 @@ class InvoiceBuilder
       build_line_item(passenger.full_name, price, :debit)
     end
 
-  def build_markup(passenger)
-    if markup
-      description = "#{passenger.full_name} Seasonal Fee"
-      amount = calculate_markup
-      build_line_item(description, amount, :debit)
-    end
-  end
-
-
-  def build_passenger_discount(passenger)
-      passenger_discount = find_discount(passenger)
-      description = "Discount #{passenger.passenger_type.description} - #{Helpers.number_to_percentage(passenger_discount.percentage, precision: 0)}".capitalize
-      amount = calculate_discount(passenger_discount)
-      build_line_item(description, amount, :credit )
+    def build_markup(passenger)
+      if markup
+        description = "#{passenger.full_name} Seasonal Fee"
+        amount = calculate_markup
+        build_line_item(description, amount, :debit)
+      end
     end
 
+    def build_passenger_discount(passenger)
+        passenger_discount = fetch_discount_for_passenger(passenger)
+        description = "#{passenger_discount.description} - #{Helpers.number_to_percentage(passenger_discount.percentage, precision: 0)}".capitalize
+        amount = calculate_discount(passenger_discount)
+        build_line_item(description, amount, :credit )
+    end
+
+    def fetch_discount_for_passenger(passenger)
+       find_seasonal_discount(passenger.passenger_type) || find_discount(passenger.passenger_type)
+    end
 
     def build_client_credit(client)
       if @booking.client.vouchers.any?
@@ -66,7 +67,7 @@ class InvoiceBuilder
     end
 
     def markup
-      @markup ||= SeasonalMarkup.in_period(Date.today).active.take
+      @markup ||= SeasonalDiscount.in_period(Date.today).active.take
     end
 
     def calculate_markup
@@ -74,8 +75,11 @@ class InvoiceBuilder
       round_up(percentage * price)
     end
 
-    def find_discount(passenger)
-      Discount.find_by(passenger_type: passenger.passenger_type)
+    def find_seasonal_discount(passenger_type)
+      SeasonalDiscount.active_in_period(Date.today).where(passenger_type: passenger_type).take
+    end
+    def find_discount(passenger_type)
+      Discount.find_by(passenger_type: passenger_type)
     end
 
     def round_up(cost)

@@ -1,0 +1,15 @@
+.page-header
+  %h2 New Seasonal Discount
+
+#errors= errors_for @seasonal_discount
+= simple_form_for @seasonal_discount,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+  %fieldset
+    = f.association :passenger_type, include_blank: false
+    = f.input :percentage
+    = f.input :period_from, as: :date_picker
+    = f.input :period_to, as: :date_picker
+    = f.input :active, as: :boolean
+  .form-actions
+    = f.submit class: t('buttons.primary')
+    = link_to 'Cancel', seasonal_discounts_path, class: t('buttons.default')
+
