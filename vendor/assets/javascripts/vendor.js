@@ -12,6 +12,5 @@
 //= require jquery.blockui
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
-//= require highcharts/highcharts
 //= require obfuscatejs
 //= require turbolinks

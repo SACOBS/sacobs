@@ -8,9 +8,9 @@ class ConfirmBooking
   end
 
   def execute
-   Booking.transaction do
-    @booking.update!(status: :paid, price: @booking.invoice.total,user: @user)
-    @related_booking.update!(status: :paid, price: @related_booking.invoice.total ,user: @user) if @related_booking
-   end
+    Booking.transaction do
+      @booking.update!(status: :paid, price: @booking.invoice.total, user: @user)
+      @related_booking.update!(status: :paid, price: @related_booking.invoice.total , user: @user) if @related_booking
+    end
   end
 end

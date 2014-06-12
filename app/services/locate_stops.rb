@@ -7,6 +7,6 @@ class LocateStops
   end
 
   def execute
-    @trip.stops.en_route(@stop.connection.from).joins(:connection).where.not(connections: { from_id: @stop.connection.to})
+    @trip.stops.en_route(@stop.connection.from).joins(:connection).where.not(connections: { from_id: @stop.connection.to })
   end
 end

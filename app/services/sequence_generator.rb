@@ -9,9 +9,9 @@ class SequenceGenerator
   end
 
   private
-   def find_last_record
-     @model.where.not(sequence_id: nil).order(sequence_id: :desc).first
-   end
+  def find_last_record
+    @model.where.not(sequence_id: nil).order(sequence_id: :desc).first
+  end
 
   def next_id
     next_id_in_sequence.tap { |id| id.next until unique?(id) }
@@ -23,7 +23,8 @@ class SequenceGenerator
 
   def next_id_in_sequence
     start_at = 1
-    return start_at unless last_record = find_last_record
+    last_record = find_last_record
+    return start_at unless last_record
     max(last_record.send(:sequence_id) + 1, start_at)
   end
 

@@ -1,3 +1,4 @@
+# Cancels a booking
 class CancelBooking
   include Service
 

@@ -11,12 +11,11 @@ class ReserveBooking
   def execute
     Booking.transaction do
       AssignSeating.execute(@booking.quantity, @booking.stop)
-      @booking.update!(expiry_date: @expiry_date ,status: :reserved, user: @user)
+      @booking.update!(expiry_date: @expiry_date , status: :reserved, user: @user)
       if @related_booking
         AssignSeating.execute(@related_booking.quantity, @related_booking.stop)
         @related_booking.update!(expiry_date: @expiry_date, status: :reserved, user: @user)
       end
     end
   end
-
 end

@@ -13,7 +13,7 @@ class UnassignSeating
   end
 
   private
-   def affected_stops
-     LocateStops.execute(@trip, @stop)
-   end
+  def affected_stops
+    LocateStops.execute(@trip, @stop)
+  end
 end

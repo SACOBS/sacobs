@@ -115,9 +115,9 @@ gem 'unobtrusive_flash'
 # PG
 gem "pg"
 
-
-# Charts
-gem 'lazy_high_charts'
+# Charting
+gem "chartkick"
+gem 'groupdate'
 
 # Email Obfuscation
 gem 'obfuscatejs'

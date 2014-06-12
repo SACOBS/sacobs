@@ -11,6 +11,12 @@
       %li= link_to 'View', clients_path
 
     - unless current_user.clerk?
+      - drop_down_menu('Trips') do
+        %li= link_to 'New', trip_builder_index_path(trip_id: :building), method: :post
+        %li.divider
+        %li= link_to 'Current', trips_path
+        %li.divider
+        %li= link_to 'Archived', archived_trips_path
       - drop_down_menu('Manage') do
         %li= link_to 'Buses', buses_path
         %li.divider
@@ -27,13 +33,10 @@
         %li= link_to 'Payment Types', payment_types_path
         %li.divider
         %li= link_to 'Seasonal Discounts', seasonal_discounts_path
-      - drop_down_menu('Trips') do
-        %li= link_to 'New', trip_builder_index_path(trip_id: :building), method: :post
-        %li.divider
-        %li= link_to 'Current', trips_path
-        %li.divider
-        %li= link_to 'Archived', archived_trips_path
 
+
+      %li= link_to 'Admin', users_path
+      %li= link_to 'Reports', reports_path
       %li= link_to 'Settings', setting_path
 
 

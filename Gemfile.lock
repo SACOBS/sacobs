@@ -44,10 +44,10 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bootstrap_sortable_rails (1.8.0)
-    bootswatch-rails (0.5.0)
+    bootswatch-rails (3.1.1.1)
       railties (>= 3.1)
     builder (3.2.2)
-    bullet (4.9.0)
+    bullet (4.10.0)
       activesupport
       uniform_notifier (~> 1.6.0)
     capybara (2.3.0)
@@ -58,6 +58,7 @@ GEM
       xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    chartkick (1.2.4)
     cocoon (1.2.6)
     code_analyzer (0.4.5)
       sexp_processor
@@ -91,7 +92,7 @@ GEM
       mail (~> 2.2)
     enumify (0.0.7)
     erubis (2.7.0)
-    execjs (2.1.0)
+    execjs (2.2.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.4.1)
@@ -109,6 +110,8 @@ GEM
       railties (>= 3.2, < 5.0)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
+    groupdate (2.1.1)
+      activerecord (>= 3.0.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -116,7 +119,6 @@ GEM
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
-    hash-deep-merge (0.1.1)
     heroku-deflater (0.5.3)
       rack (>= 1.4.5)
     high_voltage (2.1.0)
@@ -136,14 +138,11 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.1)
-    kaminari (0.15.1)
+    kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
-    lazy_high_charts (1.5.4)
-      bundler (>= 1.0)
-      hash-deep-merge
     lol_dba (1.6.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -225,7 +224,7 @@ GEM
       polyamorous (~> 1.0.0)
     rdoc (4.1.1)
       json (~> 1.4)
-    request_store (1.0.5)
+    request_store (1.0.6)
     require_all (1.3.2)
     responders (1.1.0)
       railties (>= 3.2, < 5)
@@ -234,7 +233,7 @@ GEM
     rspec-expectations (3.0.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.0)
+    rspec-mocks (3.0.1)
       rspec-support (~> 3.0.0)
     rspec-rails (3.0.1)
       actionpack (>= 3.0)
@@ -302,7 +301,7 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uniform_notifier (1.6.1)
+    uniform_notifier (1.6.2)
     unobtrusive_flash (3.0.0)
       railties
     warden (1.2.3)
@@ -311,7 +310,7 @@ GEM
       rails (>= 3.0.7)
     wicked_pdf (0.10.2)
       rails
-    wkhtmltopdf-binary (0.9.9.1)
+    wkhtmltopdf-binary (0.9.9.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -329,6 +328,7 @@ DEPENDENCIES
   bootswatch-rails
   bullet
   capybara
+  chartkick
   cocoon
   coffee-rails (~> 4.0.0)
   dalli
@@ -343,6 +343,7 @@ DEPENDENCIES
   flatten_migrations
   font-awesome-rails
   friendly_id (~> 5.0.0)
+  groupdate
   haml-rails
   heroku-deflater
   high_voltage
@@ -351,7 +352,6 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   launchy
-  lazy_high_charts
   lol_dba
   memcachier
   multi_fetch_fragments

@@ -1,3 +1,4 @@
+# Updates the seating on the stop by the quantity passed in
 class AssignSeating
   include Service
 
@@ -8,12 +9,14 @@ class AssignSeating
   end
 
   def execute
-    affected_stops.update_all("available_seats = available_seats - #{@quantity}")
+    conditions = "available_seats = available_seats - #{@quantity}"
+    affected_stops.update_all(conditions)
     @trip.touch
   end
 
   private
-    def affected_stops
-      LocateStops.execute(@trip, @stop)
-    end
+
+  def affected_stops
+    LocateStops.execute(@trip, @stop)
+  end
 end
