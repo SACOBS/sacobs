@@ -36,30 +36,14 @@
     %td
     %td
     %td
+    %td
       %strong Price:
-    %td
       %strong= number_to_currency @ticket.total_cost, unit: 'R'
-  %tr
-    %td
-    %td
-    %td
-    %td
-    %td
-    %td
     %td
       %strong Discount:
-    %td
       %strong= number_to_currency @ticket.total_discount, unit: 'R'
-  %tr
-    %td
-    %td
-    %td
-    %td
-    %td
-    %td
     %td
       %strong Total:
-    %td
       %strong= number_to_currency @ticket.total, unit: 'R'
 .special-instructions.text-center
   %p
