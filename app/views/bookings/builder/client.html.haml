@@ -24,6 +24,7 @@
         = client.input :email, as: :email
         = client.input :notes, as: :text
       #address
+        - @booking.client.build_address unless @booking.client.address
         = client.simple_fields_for :address do |address|
           %fieldset
             %legend Address

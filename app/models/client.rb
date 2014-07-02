@@ -38,7 +38,7 @@ class Client < ActiveRecord::Base
   has_many :bookings, dependent: :destroy
   has_many :vouchers, dependent: :destroy
 
-  accepts_nested_attributes_for :address, reject_if: proc { |attributes| attributes.blank? }, allow_destroy: true
+  accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
   delegate :name, to: :bank, prefix: true, allow_nil: true
@@ -47,8 +47,6 @@ class Client < ActiveRecord::Base
 
   validates :name, :surname ,presence: true
 
-  after_initialize :init_address
-
   before_validation :set_full_name, prepend: true
 
   def age
@@ -56,12 +54,7 @@ class Client < ActiveRecord::Base
     @age ||= date_of_birth.find_age
   end
 
-
   protected
-    def init_address
-      build_address unless address.present?
-    end
-
     def set_full_name
       self.full_name = "#{self.name} #{self.surname}"  if name_changed? || surname_changed?
     end
