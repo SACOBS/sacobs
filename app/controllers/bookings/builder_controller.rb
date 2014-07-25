@@ -39,7 +39,7 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def fetch_return_stops
-      @stops = ReturnTripSearch.execute(@booking.trip, @booking.quantity, search_criteria)
+      @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_criteria)
     end
 
     def finish_wizard_path

@@ -1,9 +1,9 @@
 class ReturnTripSearch
   include Service
 
-  def initialize(trip, qty_seats, criteria)
+  def initialize(stop, qty_seats, criteria)
     @criteria = criteria.reject { |_k, v| v =~ /Select/ }
-    @trip = trip
+    @stop = stop
     @qty_seats = qty_seats
   end
 
@@ -14,6 +14,7 @@ class ReturnTripSearch
 
   private
   def return_trips
-    Trip.from_location(@trip.route.end_city).pluck(:id)
+    routes = Route.joins(:connections).where(connections: {from_id: @stop.to, to_id: @stop.from }).references(:connections)
+    Trip.valid.joins(:route).where(route: (routes)).pluck(:id)
   end
 end
