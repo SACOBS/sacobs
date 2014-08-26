@@ -30,7 +30,7 @@
 class Client < ActiveRecord::Base
   extend FriendlyId
 
-  TITLES = [:Mr, :Mrs, :Dr, :Miss, :Ms].freeze
+  TITLES = [:Mr, :Mrs, :Dr, :Miss].freeze
 
   belongs_to :user
   belongs_to :bank

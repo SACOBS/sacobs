@@ -8,10 +8,7 @@ class ClientsController < ApplicationController
 
 
   def index
-    search_query = params.fetch(:q,{})
-    search_query.merge! surname_start: params[:letter] if params[:letter]
-    puts search_query.inspect
-    @q = policy_scope(Client).search(search_query)
+    @q = policy_scope(Client).search(search_criteria)
     @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
     #fresh_when etag: CacheHelper.cache_key_for_collection(@clients)
   end
@@ -62,6 +59,12 @@ class ClientsController < ApplicationController
 
     def client_params
       ClientParameters.new(params).permit(user: current_user)
+    end
+
+    def search_criteria
+      criteria = params.fetch(:q,{})
+      criteria.merge! surname_start: params[:letter] if params[:letter]
+      criteria
     end
 
     def interpolation_options

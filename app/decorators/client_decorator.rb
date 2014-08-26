@@ -26,7 +26,7 @@ class ClientDecorator < Draper::Decorator
   end
 
   def bank
-    model.bank_name.presence || 'None'
+    model.bank_name.presence || 'Not Applicable'
   end
 
   def modifier

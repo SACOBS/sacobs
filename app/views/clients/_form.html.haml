@@ -9,7 +9,7 @@
     = f.input :surname
     = f.input :date_of_birth, as: :date_picker
     = f.input :high_risk
-    = f.association :bank, include_blank: false, prompt: 'Select a bank'
+    = f.association :bank,  include_blank: 'Not Applicable'
     = f.input :home_no, as: :tel
     = f.input :work_no, as: :tel
     = f.input :cell_no, as: :tel
