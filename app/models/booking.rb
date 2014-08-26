@@ -30,7 +30,7 @@ class Booking < ActiveRecord::Base
 
   enum :status, [:paid, :reserved, :cancelled, :in_process]
 
-  attr_accessor :expired
+  attr_accessor :expired, :charges
 
   belongs_to :user
   belongs_to :trip

@@ -30,6 +30,6 @@ class ClientDecorator < Draper::Decorator
   end
 
   def modifier
-    model.try(:user)
+    model.try(:user) || model.user.email
   end
 end

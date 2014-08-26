@@ -8,9 +8,12 @@ class ClientsController < ApplicationController
 
 
   def index
-    @q = policy_scope(Client).search(params[:q])
-    @clients = @q.result(distinct: true).includes(:address, :user).page(params[:page])
-    fresh_when etag: CacheHelper.cache_key_for_collection(@clients)
+    search_query = params.fetch(:q,{})
+    search_query.merge! surname_start: params[:letter] if params[:letter]
+    puts search_query.inspect
+    @q = policy_scope(Client).search(search_query)
+    @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
+    #fresh_when etag: CacheHelper.cache_key_for_collection(@clients)
   end
 
   def show

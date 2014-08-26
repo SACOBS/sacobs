@@ -8,7 +8,7 @@ class ReturnTripSearch
   end
 
   def execute
-    @criteria.merge!(trip_id_in: return_trips, available_seats_gteq: @qty_seats)
+    @criteria.merge!(trip_id_in: return_trips, available_seats_gteq: @qty_seats, trip_start_date_gt: @stop.trip.start_date)
     Stop.search(@criteria).result(distinct: true).valid.limit(30)
   end
 

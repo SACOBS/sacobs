@@ -1,0 +1,8 @@
+- cache CacheHelper.cache_key_for_collection(@clients) do
+
+  = paginate clients
+
+  - bootstrap_table headers:['Name', 'Surname', 'High Risk','Home Telephone', 'Work Telephone','CellPhone','Email','Last Modified','Actions'], types: [:bordered, :striped, :condensed], html_options: {id: 'clients_table',class: 'sortable'} do
+    = render partial: 'client', collection: clients, cache: true
+  %br
+  = paginate clients

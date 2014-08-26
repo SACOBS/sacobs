@@ -1,4 +1,4 @@
-%tr[client]
+%tr[client.model]
   %td= client.name
   %td= client.surname
   %td= client.high_risk
@@ -6,11 +6,11 @@
   %td= client.work_telephone
   %td= client.cellphone
   %td= client.email
-  %td= client.modifier
+  %td= client.updated_at
   %td
     = link_to 'Show', client, icon: :info, class: t('buttons.mini.info')
     = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.mini.inverse')
-    = link_to 'Destroy', client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, class: t('buttons.mini.danger')
+    = link_to 'Destroy', client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, remote: true,class: t('buttons.mini.danger')
 
 
 

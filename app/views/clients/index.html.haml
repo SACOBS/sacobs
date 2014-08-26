@@ -1,7 +1,9 @@
 .page-header
-  %h2 Clients
+  %h2
+    Clients
+    %small= current_alpha_page(params[:letter])
 .search.pull-right
-  = simple_form_for :q, url: clients_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
+  = simple_form_for :q, url: clients_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get}, remote: true do |f|
     = f.input :name_or_surname_or_email_or_cell_no_or_work_no_or_home_no_cont, placeholder: 'Search', input_html: {class: 'search-query'}
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
@@ -9,17 +11,13 @@
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
 
-- cache CacheHelper.cache_key_for_collection(@clients) do
+= alpha_pager(params[:letter])
 
-  = paginate clients
-
-  - bootstrap_table headers:['Name', 'Surname', 'High Risk','Home Telephone', 'Work Telephone','CellPhone','Email','Modified By','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-    = render partial: 'client', collection: clients, cache: true
-  %br
-  = paginate clients
+#client_listing
+  = render partial: 'client_listing'
 
 
-  = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
-  = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
+= link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
+= link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
 
 

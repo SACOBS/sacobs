@@ -1,7 +1,7 @@
 class Bookings::BuilderController < ApplicationController
   include Wicked::Wizard
 
-  steps  :details, :returns ,:client, :passengers, :billing
+  steps  :details, :returns ,:client, :passengers, :charges,:billing
 
   before_action :set_booking, only: [:index, :show, :update]
   before_action :set_attributes, only: :update
@@ -16,7 +16,6 @@ class Bookings::BuilderController < ApplicationController
       when :returns then @booking.has_return? ? fetch_return_stops : skip_step
       when :client then @booking.build_client
       when :passengers then build_passengers
-      when :billing then build_invoice
     end
     render_wizard
   end
@@ -24,6 +23,7 @@ class Bookings::BuilderController < ApplicationController
   def update
     case step
       when :details then fetch_stops unless @booking.valid?
+      when :charges then build_invoice
       when :billing then reserve_booking if @booking.valid?
     end
     render_wizard @booking

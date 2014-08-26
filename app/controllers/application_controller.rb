@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   respond_to :html,:js,:json,:pdf
 
   before_action :authenticate_user!
-  after_action :prepare_unobtrusive_flash
+  after_action :prepare_unobtrusive_flash, except: :destroy
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

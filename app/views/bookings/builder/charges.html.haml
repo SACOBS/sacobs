@@ -1,0 +1,17 @@
+.page-header
+  %h3 Charges
+  %h4 Select additional charges per passenger
+
+= simple_form_for :booking, url: wizard_path, method: :patch do |f|
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
+  = f.input :charges, collection: Charge.all, as: :check_boxes, inline_label: true, label_method: :description, label:false
+
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
+
+
