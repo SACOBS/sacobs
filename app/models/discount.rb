@@ -23,4 +23,8 @@ class Discount < ActiveRecord::Base
   def description
     "#{passenger_type.description}_discount".titleize
   end
+
+  def percentage
+    self[:percentage].to_f / 100
+  end
 end

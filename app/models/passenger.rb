@@ -23,6 +23,14 @@ class Passenger < ActiveRecord::Base
   belongs_to :booking
   belongs_to :passenger_type
 
+  delegate :description, to: :passenger_type, prefix: true
+
+  attr_accessor :charges
+
+  def charges
+    @charges ||= []
+  end
+
   def full_name
     "#{name} #{surname}"
   end

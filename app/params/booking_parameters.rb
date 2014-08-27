@@ -17,7 +17,7 @@ class BookingParameters < Struct.new(:params)
    end
 
    def passenger_attributes
-     { passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id] }
+     { passengers_attributes: [:id, :name, :surname, :cell_no, :email ,:passenger_type_id, charges: []] }
    end
 
    def invoice_attributes
