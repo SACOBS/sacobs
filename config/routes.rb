@@ -215,7 +215,7 @@ Sacobs::Application.routes.draw do
     end
   end
 
-  resources :trip_sheets, only: [:show] do
+  resources :trip_sheets, only: [:show, :index] do
     member do
       get :print
       get :download

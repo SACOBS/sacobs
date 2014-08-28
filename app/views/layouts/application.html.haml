@@ -23,9 +23,9 @@
           .content
             .unobtrusive-flash-container
             - if content_for?(:sidebar)
-              .sidebar.span2.well
+              .sidebar.span3.well
                 = yield(:sidebar)
-              .main-section.span10
+              .main-section.span8
                 = yield
             - else
               = yield

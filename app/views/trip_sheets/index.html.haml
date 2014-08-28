@@ -1,0 +1,28 @@
+- content_for :sidebar do
+  %h4 Search for trips
+  = simple_form_for :q, url: trip_sheets_path, method: :get  do |f|
+    = f.input :start_date_eq, as: :date_picker, placeholder: 'Select a date', label: 'Date of trip'
+    = f.input :route_id_in, collection: Route.all,as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route'
+
+    = f.submit 'Search', class: t('buttons.inverse')
+
+%h4 Quick Tripsheet
+.results
+  .well
+    - if trips.any?
+      - trips.each do |trip|
+        .result
+          %dl.dl-horizontal
+            %dt Name:
+            %dd= trip.name
+            %dt Route:
+            %dd= trip.route
+            %dt Date:
+            %dd= trip.start_date
+            %dt Day:
+            %dd= trip.trip_day
+            %dt Bookings:
+            %dd=trip.bookings.size
+            %dd= link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: t('buttons.mini.info'), target: '_blank'
+    - else
+      %p.lead.text-center There are currently no trips

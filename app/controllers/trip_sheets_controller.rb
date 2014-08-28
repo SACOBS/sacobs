@@ -1,5 +1,12 @@
 class TripSheetsController < ApplicationController
-  before_action :set_trip
+  before_action :set_trip, except: :index
+
+  decorates_assigned :trips
+
+  def index
+    @q = Trip.includes(:route).search(params[:q])
+    @trips = @q.result(distinct: true)
+  end
 
   def download
     html = render_to_string(template: 'trip_sheets/_trip_sheet.html.haml', layout: "pdf.html")

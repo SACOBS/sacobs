@@ -5,8 +5,10 @@ class TripsController < ApplicationController
   decorates_assigned :trip
 
   def index
-    @q = Trip.includes(:route, :bus).valid.search(params[:q])
-    @trips = @q.result(distinct: true).page(params[:page])
+    if params[:q]
+     @q = Trip.includes(:route, :bus).valid.search(params[:q])
+     @trips = @q.result(distinct: true).page(params[:page])
+    end
   end
 
   def archived
