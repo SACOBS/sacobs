@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: seasonal_discounts
+#
+#  id                :integer          not null, primary key
+#  percentage        :decimal(, )
+#  period_from       :date
+#  period_to         :date
+#  active            :boolean          default(FALSE)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  user_id           :integer
+#  passenger_type_id :integer
+#
+# Indexes
+#
+#  index_seasonal_discounts_on_user_id  (user_id)
+#
+
 require 'rails_helper'
 
 describe SeasonalDiscount, :type => :model do

@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: stops
+#
+#  id              :integer          not null, primary key
+#  connection_id   :integer
+#  trip_id         :integer
+#  arrive          :time
+#  depart          :time
+#  available_seats :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+# Indexes
+#
+#  index_stops_on_connection_id  (connection_id)
+#  index_stops_on_trip_id        (trip_id)
+#
+
 require 'rails_helper'
 
 describe Stop, :type => :model do

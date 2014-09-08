@@ -30,16 +30,17 @@ class Bookings::BuilderController < ApplicationController
   end
 
   private
-    def search_criteria
-      params[:q]||= {}
+    def search_params
+      params[:q] ||= {}
+      params[:q].delete_if {|key,value| value.blank? }
     end
 
     def fetch_stops
-      @stops = TripSearch.execute(search_criteria)
+      @stops = TripSearch.execute(search_params)
     end
 
     def fetch_return_stops
-      @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_criteria)
+      @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
     end
 
     def finish_wizard_path

@@ -26,17 +26,23 @@ class Route < ActiveRecord::Base
 
 
   belongs_to :user
-  has_many :destinations, -> { includes(:city).order(:sequence) }, dependent: :destroy, inverse_of: :route
-  has_many :connections, -> { includes(:from, :to).order(:from_id) }, dependent: :destroy, inverse_of: :route
 
-  amoeba do
-    nullify :connections_count
-    prepend name: 'Copy of'
-    enable
+  with_options dependent: :delete_all, inverse_of: :route do
+    has_many :destinations, -> { includes(:city).order(:sequence) }
+    has_many :connections, -> { includes(:from, :to).order(:from_id) }
   end
 
-  accepts_nested_attributes_for :connections,  reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true
+  amoeba do
+    enable
+    nullify :connections_count
+    prepend name: 'Copy of'
+    include_field [:connections, :destinations]
+  end
+
+  with_options  reject_if: :all_blank, allow_destroy: true do |assoc|
+   assoc.accepts_nested_attributes_for :connections
+   assoc.accepts_nested_attributes_for :destinations
+  end
 
   validates :name, :cost, :distance, presence: true, on: :update
 

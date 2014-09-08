@@ -1,6 +1,6 @@
 class TripParameters < Struct.new(:params)
   def permit(additional_attr = {})
-    params.require(:trip).permit(trip_attributes, stops_attributes).merge(additional_attr)
+    params.fetch(:trip, {}).permit(trip_attributes, stops_attributes).merge(additional_attr)
   end
 
   private

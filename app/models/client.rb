@@ -34,9 +34,12 @@ class Client < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :bank
-  has_one :address, as: :addressable, dependent: :destroy
-  has_many :bookings, dependent: :destroy
-  has_many :vouchers, dependent: :destroy
+
+  with_options dependent: :delete_all do |assoc|
+   assoc.has_one :address, as: :addressable
+   assoc.has_many :bookings
+   assoc.has_many :vouchers
+  end
 
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 

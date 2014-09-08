@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   enum :role, [:admin, :clerk]
 
-  scope :all_except,->(user){where.not(id: user)}
+  scope :all_except, ->(user){where.not(id: user)}
   has_many :bookings
 
 

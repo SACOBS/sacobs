@@ -26,7 +26,7 @@ class Connection < ActiveRecord::Base
 
   belongs_to :route, counter_cache: true, touch: true, inverse_of: :connections
   belongs_to :from, -> {includes(:city)}, class_name: :Destination
-  belongs_to :to,-> {includes(:city)} ,class_name: :Destination
+  belongs_to :to, -> {includes(:city)} ,class_name: :Destination
 
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
@@ -37,7 +37,12 @@ class Connection < ActiveRecord::Base
 
   private
    def defaults
-     { distance: 0, cost: 0, percentage: 0 }
+     { distance: 0,
+       cost: 0,
+       percentage: 0,
+       arrive: Date.today.at_beginning_of_day,
+       depart:  Date.today.noon
+     }
    end
 
   protected

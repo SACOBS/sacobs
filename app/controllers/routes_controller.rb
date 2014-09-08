@@ -24,20 +24,26 @@ class RoutesController < ApplicationController
   end
 
   def destroy
-    @route.destroy
+    Route.no_touching do
+      @route.destroy
+    end
     respond_with @route
   end
 
   def copy
     copy = @route.amoeba_dup
     copy.user = current_user
-    copy.save
+    Route.no_touching do
+     copy.save
+    end
     respond_with copy, location: routes_url
   end
   
   def reverse_copy
     reverse_copy = ReverseRouteBuilder.new(@route).build
-    reverse_copy.save
+    Route.no_touching do
+      reverse_copy.save
+    end
     respond_with reverse_copy, location: routes_url
   end
 

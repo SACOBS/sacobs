@@ -36,7 +36,6 @@ class PricingDecorator
     end
 
     def calculate_percentage_amount(percentage)
-      percentage = BigDecimal(percentage / 100)
       round_up(percentage * cost)
     end
 

@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: buses
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  capacity   :integer
+#  year       :string(255)
+#  model      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_buses_on_user_id  (user_id)
+#
+
 require 'rails_helper'
 
 describe Bus, :type => :model do

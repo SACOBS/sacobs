@@ -18,7 +18,9 @@ class Routes::BuilderController < ApplicationController
   end
 
   def update
-    @route.update(route_params)
+    Route.no_touching do
+      @route.update(route_params)
+    end
     render_wizard @route
   end
 

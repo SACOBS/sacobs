@@ -10,7 +10,6 @@ class ClientsController < ApplicationController
   def index
     @q = policy_scope(Client).search(search_criteria)
     @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
-    #fresh_when etag: CacheHelper.cache_key_for_collection(@clients)
   end
 
   def show

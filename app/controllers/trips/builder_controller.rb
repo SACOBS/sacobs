@@ -6,9 +6,12 @@ class Trips::BuilderController < ApplicationController
   steps :details, :stops
 
   def create
-    @trip = Trip.create
-    @trip.persisted?
-    redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
+    @trip = Trip.create(trip_params)
+    if request.xhr?
+      render js: "window.location.pathname = #{wizard_path(Wicked::FIRST_STEP, trip_id: @trip).to_json}"
+    else
+      redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
+    end
   end
 
   def show
@@ -16,7 +19,9 @@ class Trips::BuilderController < ApplicationController
   end
 
   def update
-    @trip.update(trip_params)
+    Trip.no_touching do
+     @trip.update(trip_params)
+    end
     render_wizard @trip
   end
 

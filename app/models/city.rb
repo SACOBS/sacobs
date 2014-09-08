@@ -26,7 +26,7 @@ class City < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :venues, dependent: :destroy
+  has_many :venues, dependent: :delete_all
   accepts_nested_attributes_for :venues, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true

@@ -11,15 +11,16 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', trips_path, class: t('buttons.mini.inverse'), icon: :times
 
-
-= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
-= link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
+.actions
+  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
+  = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 #trip_listing
   = render partial: 'trip_listing'
 
-
-= link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
-= link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
+%br
+.actions
+  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
+  = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 

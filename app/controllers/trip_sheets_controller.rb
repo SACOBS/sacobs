@@ -4,8 +4,8 @@ class TripSheetsController < ApplicationController
   decorates_assigned :trips
 
   def index
-    @q = Trip.includes(:route).search(params[:q])
-    @trips = @q.result(distinct: true)
+    @q = Trip.includes(:route, :bookings).search(params[:q])
+    @trips = @q.result(distinct: true).order(start_date: :asc)
   end
 
   def download

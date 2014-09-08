@@ -19,12 +19,14 @@
 class Bus < ActiveRecord::Base
 
   belongs_to :user
-  has_many :seats, dependent: :destroy
+  has_many :seats, dependent: :delete_all
 
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, :capacity, :year, :model, presence: true, on: :update
-  validates :capacity, numericality: { greater_than: 0 }, on: :update
+  with_options on: :update do |model|
+   model.validates :name, :capacity, :year, :model, presence: true
+   model.validates :capacity, numericality: { greater_than: 0 }
+  end
 
 
   private

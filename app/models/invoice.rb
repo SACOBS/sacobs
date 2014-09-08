@@ -16,7 +16,7 @@
 class Invoice < ActiveRecord::Base
 
   belongs_to :booking
-  has_many :line_items, dependent: :destroy
+  has_many :line_items, dependent: :delete_all
 
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
 

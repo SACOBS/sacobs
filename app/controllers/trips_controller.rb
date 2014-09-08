@@ -4,12 +4,15 @@ class TripsController < ApplicationController
   decorates_assigned :trips
   decorates_assigned :trip
 
+  def calendar
+   @trips = Trip.includes(:route, :bus).all
+  end
+
   def index
-    if params[:q]
      @q = Trip.includes(:route, :bus).valid.search(params[:q])
      @trips = @q.result(distinct: true).page(params[:page])
-    end
   end
+
 
   def archived
     @q = Trip.includes(:route, :bus).archived.search(params[:q])
@@ -17,13 +20,15 @@ class TripsController < ApplicationController
   end
 
   def show
-    fresh_when @trip, last_modified: @trip.updated_at
+    #fresh_when @trip, last_modified: @trip.updated_at
   end
 
   def copy
-    copy = @trip.amoeba_dup
-    copy.user = current_user
-    copy.save
+      copy = @trip.amoeba_dup
+      copy.user = current_user
+      Trip.no_touching do
+        copy.save
+      end
     respond_with copy, location: trips_url
   end
 
@@ -33,7 +38,9 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip.destroy
+    Trip.no_touching do
+     @trip.destroy
+    end
     respond_with(@trip)
   end
 

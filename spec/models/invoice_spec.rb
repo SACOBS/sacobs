@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: invoices
+#
+#  id           :integer          not null, primary key
+#  booking_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  billing_date :datetime
+#
+# Indexes
+#
+#  index_invoices_on_booking_id  (booking_id)
+#
+
 require 'rails_helper'
 
 describe Invoice, :type => :model do

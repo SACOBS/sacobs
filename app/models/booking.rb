@@ -16,6 +16,7 @@
 #  main_id      :integer
 #  has_return   :boolean          default(FALSE)
 #  stop_id      :integer
+#  sequence_id  :integer
 #
 # Indexes
 #
@@ -33,19 +34,27 @@ class Booking < ActiveRecord::Base
   attr_accessor :expired, :charges
 
   belongs_to :user
-  belongs_to :trip
+  belongs_to :trip, inverse_of: :bookings
   belongs_to :stop
   belongs_to :client
-  belongs_to :main, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id, touch: true
-  has_one :return_booking, ->{ where.not(status: :cancelled) } ,class_name: :Booking, foreign_key: :main_id
-  has_one :invoice, dependent: :destroy
-  has_one :payment_detail, dependent: :destroy
-  has_many :passengers, dependent: :destroy
 
-  accepts_nested_attributes_for :client, reject_if: proc { |attributes| attributes.blank? }
-  accepts_nested_attributes_for :passengers, reject_if: :all_blank
-  accepts_nested_attributes_for :invoice, reject_if: :all_blank
-  accepts_nested_attributes_for :return_booking, reject_if: :all_blank
+  with_options class_name: :Booking, foreign_key: :main_id do |assoc|
+    assoc.belongs_to :main, ->{ where.not(status: :cancelled) }
+    assoc.has_one :return_booking, ->{ where.not(status: :cancelled) }
+  end
+
+  with_options dependent: :destroy do |assoc|
+    assoc.has_one :invoice
+    assoc.has_one :payment_detail
+    assoc.has_many :passengers
+  end
+
+  with_options  reject_if: :all_blank do |assoc|
+    assoc.accepts_nested_attributes_for :client
+    assoc.accepts_nested_attributes_for :passengers
+    assoc.accepts_nested_attributes_for :invoice
+    assoc.accepts_nested_attributes_for :return_booking
+  end
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
@@ -67,7 +76,6 @@ class Booking < ActiveRecord::Base
   def is_return?
     self.main_id?
   end
-
 
   private
     def defaults
