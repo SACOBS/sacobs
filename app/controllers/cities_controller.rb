@@ -28,7 +28,7 @@ class CitiesController < ApplicationController
 
   def destroy
     @city.destroy
-    respond_with(@city)
+    respond_with @city
   end
 
 

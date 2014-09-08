@@ -38,7 +38,7 @@ class DriversController < ApplicationController
   # DELETE /drivers/1.json
   def destroy
     @driver.destroy
-    respond_with(@driver)
+    respond_with @driver
   end
 
   private

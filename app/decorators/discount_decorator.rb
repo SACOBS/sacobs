@@ -6,6 +6,6 @@ class DiscountDecorator < Draper::Decorator
   end
 
   def percentage
-    h.number_to_percentage(model.percentage, precision: 1)
+    h.number_to_percentage(model.percentage * 100, precision: 2)
   end
 end

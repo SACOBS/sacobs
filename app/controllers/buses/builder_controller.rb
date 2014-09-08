@@ -28,7 +28,7 @@ class Buses::BuilderController < ApplicationController
     end
 
     def set_bus
-      @bus =  Bus.find(params[:bus_id])
+      @bus = Bus.find(params[:bus_id])
     end
 
     def build_seats

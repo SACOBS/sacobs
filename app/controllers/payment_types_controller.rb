@@ -1,4 +1,6 @@
 class PaymentTypesController < ApplicationController
+  responders :flash, :collection
+
   before_action :set_payment_type, only: [:destroy]
 
   def index
@@ -7,7 +9,7 @@ class PaymentTypesController < ApplicationController
 
   def create
    @payment_type = PaymentType.create(payment_type_params)
-   respond_with @payment_type, location: payment_types_url
+   respond_with @payment_type
   end
 
   def destroy

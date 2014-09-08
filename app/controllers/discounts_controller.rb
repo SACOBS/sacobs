@@ -1,10 +1,13 @@
 class DiscountsController < ApplicationController
+  responders :flash, :collection
+
   before_action :set_discount, only: [:edit, :update, :destroy]
 
-  def index
-    @discounts = Discount.includes(:passenger_type).decorate
-  end
+  decorates_assigned :discounts
 
+  def index
+    @discounts = Discount.includes(:passenger_type)
+  end
 
   def new
     @discount = Discount.new
@@ -13,17 +16,17 @@ class DiscountsController < ApplicationController
 
   def create
     @discount = Discount.create(discount_params)
-    respond_with(@discount, location: discounts_url)
+    respond_with @discount
   end
 
   def update
     @discount.update(discount_params)
-    respond_with(@discount, location: discounts_url)
+    respond_with @discount
   end
 
   def destroy
     @discount.destroy
-    respond_with(@discount, location: discounts_url)
+    respond_with @discount
   end
 
   private

@@ -19,9 +19,7 @@ class Trips::BuilderController < ApplicationController
   end
 
   def update
-    Trip.no_touching do
-     @trip.update(trip_params)
-    end
+    Trip.no_touching { @trip.update(trip_params) }
     render_wizard @trip
   end
 

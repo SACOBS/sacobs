@@ -9,7 +9,6 @@
 = link_to 'Setup City', new_city_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', cities_path, class: t('buttons.default'), icon: :refresh
 
-
 = paginate @cities
 
 - bootstrap_table headers:['Name', 'Venues','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do

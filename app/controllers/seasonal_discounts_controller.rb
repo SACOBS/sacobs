@@ -1,8 +1,10 @@
 class SeasonalDiscountsController < ApplicationController
   responders :collection, :flash
 
+  decorates_assigned :seasonal_discounts
+
   def index
-    @seasonal_discounts = SeasonalDiscount.all.decorate
+    @seasonal_discounts = SeasonalDiscount.all
   end
 
   def new

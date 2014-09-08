@@ -35,8 +35,10 @@ class Client < ActiveRecord::Base
   belongs_to :user
   belongs_to :bank
 
+  has_one :address, as: :addressable, dependent: :delete
+
+
   with_options dependent: :delete_all do |assoc|
-   assoc.has_one :address, as: :addressable
    assoc.has_many :bookings
    assoc.has_many :vouchers
   end

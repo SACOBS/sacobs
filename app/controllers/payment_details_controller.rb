@@ -10,7 +10,7 @@ class PaymentDetailsController < ApplicationController
     @payment_detail = @booking.create_payment_detail(payment_details_params)
     if @payment_detail.valid?
       if @booking.is_return?
-        @booking.main.create_payment_detail(payment_details_params)  if @booking.main
+        @booking.main.create_payment_detail(payment_details_params) if @booking.main
       else
         @booking.return_booking.create_payment_detail(payment_details_params) if @booking.return_booking
       end

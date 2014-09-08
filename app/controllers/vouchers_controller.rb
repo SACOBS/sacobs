@@ -7,7 +7,7 @@ class VouchersController < ApplicationController
 
   def create
     @voucher = @client.vouchers.create(voucher_params)
-    respond_with(@client, @voucher, location: client_url(@client))
+    respond_with @client, @voucher, location: client_url(@client)
   end
 
   private

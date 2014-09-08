@@ -20,16 +20,14 @@ class TripsController < ApplicationController
   end
 
   def show
-    #fresh_when @trip, last_modified: @trip.updated_at
+    fresh_when @trip, last_modified: @trip.updated_at
   end
 
   def copy
       copy = @trip.amoeba_dup
       copy.user = current_user
-      Trip.no_touching do
-        copy.save
-      end
-    respond_with copy, location: trips_url
+      Trip.no_touching { copy.save }
+      respond_with copy, location: trips_url
   end
 
   def update
@@ -38,10 +36,8 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    Trip.no_touching do
-     @trip.destroy
-    end
-    respond_with(@trip)
+    Trip.no_touching { @trip.destroy }
+    respond_with @trip
   end
 
   private

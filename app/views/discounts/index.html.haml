@@ -6,7 +6,7 @@
 %br
 
 - bootstrap_table headers:['Passenger Type', 'Percentage', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render @discounts
+  = render discounts
 
 = link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'),icon: :plus
 
