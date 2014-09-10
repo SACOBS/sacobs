@@ -8,7 +8,7 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  amount         :decimal(8, 2)
-#  line_item_type :string(255)
+#  line_item_type :integer
 #
 # Indexes
 #
@@ -17,7 +17,7 @@
 
 class LineItem < ActiveRecord::Base
 
-  enum :line_item_type, [:debit, :credit]
+  enum line_item_type: [:debit, :credit]
 
   belongs_to :invoice
 

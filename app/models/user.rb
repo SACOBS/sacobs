@@ -17,7 +17,7 @@
 #  updated_at             :datetime
 #  name                   :string(255)
 #  surname                :string(255)
-#  role                   :string(255)
+#  role                   :integer
 #
 # Indexes
 #
@@ -31,12 +31,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum :role, [:admin, :clerk]
+  enum role: [:admin, :clerk]
 
   scope :all_except, ->(user){where.not(id: user)}
   has_many :bookings
-
-
 
   def to_s
     "#{self.name} #{self.surname}".titleize

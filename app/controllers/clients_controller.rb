@@ -8,8 +8,12 @@ class ClientsController < ApplicationController
 
 
   def index
-    @q = policy_scope(Client).search(search_criteria)
-    @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
+    if request.xhr?
+      @clients = policy_scope(Client).all
+    else
+     @q = policy_scope(Client).search(search_criteria)
+     @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
+    end
   end
 
   def show

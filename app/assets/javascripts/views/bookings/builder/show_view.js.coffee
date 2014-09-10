@@ -5,14 +5,14 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     super()
     Widgets.DateTimePicker.enable()
     Widgets.Select2.enable()
+    Widgets.TypeAhead.enable()
 
     $(document).on 'hidden', '.modal', ->
       $(this).remove()
 
     $(document).on 'click', '#new_client',(e) ->
       e.preventDefault()
-      $('.new_client_fields').fadeIn 'slow'
-      $('#new_client').hide()
+      $('.new_client_fields').fadeToggle 'slow'
 
     $(document).on 'change', '.amount', ->
       total = 0
@@ -25,6 +25,7 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     super()
     Widgets.Select2.cleanup()
     Widgets.DateTimePicker.cleanup()
+    Widgets.TypeAhead.cleanup()
 
     $(document).off 'click', '#new_client'
     $(document).off 'change', '.amount'

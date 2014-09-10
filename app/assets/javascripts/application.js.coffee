@@ -19,7 +19,6 @@
 #= require_tree .
 
 
-
 pageLoad = ->
   className = $('body').attr('data-class-name')
   window.applicationView = try
@@ -27,6 +26,8 @@ pageLoad = ->
   catch error
     new Views.ApplicationView()
   window.applicationView.render()
+
+
 
 head ->
   $ ->

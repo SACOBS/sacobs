@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605083849) do
+ActiveRecord::Schema.define(version: 20140909162434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140605083849) do
   create_table "bookings", force: true do |t|
     t.integer  "trip_id"
     t.decimal  "price"
-    t.string   "status"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quantity",     default: 0
@@ -202,7 +203,7 @@ ActiveRecord::Schema.define(version: 20140605083849) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "amount",         precision: 8, scale: 2
-    t.string   "line_item_type"
+    t.integer  "line_item_type"
   end
 
   add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
@@ -313,6 +314,11 @@ ActiveRecord::Schema.define(version: 20140605083849) do
   add_index "stops", ["connection_id"], name: "index_stops_on_connection_id", using: :btree
   add_index "stops", ["trip_id"], name: "index_stops_on_trip_id", using: :btree
 
+  create_table "temp_data", force: true do |t|
+    t.string "session_id"
+    t.hstore "data"
+  end
+
   create_table "trips", force: true do |t|
     t.string   "name"
     t.date     "start_date"
@@ -344,7 +350,7 @@ ActiveRecord::Schema.define(version: 20140605083849) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "surname"
-    t.string   "role"
+    t.integer  "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

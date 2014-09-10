@@ -1,6 +1,8 @@
 .page-header
-  %h3 Charges
-  %h4 Select additional charges per passenger
+  %h2 Booking Wizard
+  %h4= "Step #{wizard_steps.index(step)} of #{wizard_steps.size}: #{step.to_s.titleize}"
+  .progress
+    .bar{style: "width: #{((wizard_steps.index(step).to_f / wizard_steps.size.to_f) * 100).round}%;"}
 
 = simple_form_for @booking, url: wizard_path, method: :patch do |f|
   .form-actions

@@ -1,0 +1,22 @@
+.page-header
+  %h2 Booking Wizard
+  %h4= "Step #{wizard_steps.index(step)} of #{wizard_steps.size}: #{step.to_s.titleize}"
+  .progress
+    .bar{style: "width: #{((wizard_steps.index(step).to_f / wizard_steps.size.to_f) * 100).round}%;"}
+
+.trip-finder.well.well-small
+  %h5 Search
+  = simple_form_for :q, url: booking_builder_index_path(@booking, return: true), html: {class: 'form-inline'}, method: :get ,remote: true do |f|
+    = f.input :trip_date, as: :date_picker, placeholder: 'Select a date', label: false
+    = f.input :from_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select from city'
+    = f.hidden_field :from_city_id
+    = f.input :to_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select to city'
+    = f.hidden_field :to_city_id
+    = f.submit 'Search', class: t('buttons.inverse')
+
+#errors= errors_for @booking
+.returns
+  = render partial: 'bookings/builder/return_trips'
+
+
+= link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')

@@ -17,7 +17,7 @@
 #  updated_at             :datetime
 #  name                   :string(255)
 #  surname                :string(255)
-#  role                   :string(255)
+#  role                   :integer
 #
 # Indexes
 #

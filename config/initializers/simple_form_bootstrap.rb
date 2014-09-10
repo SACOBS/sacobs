@@ -4,7 +4,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.use :typeahead
+    b.optional :typeahead
     b.wrapper tag: 'div', class: 'controls' do |ba|
       ba.use :input
       ba.use :error, wrap_with: { tag: 'span', class: 'help-inline' }

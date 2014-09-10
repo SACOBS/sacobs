@@ -3,7 +3,7 @@
     - @stops.each do |stop|
       %tr
         %td
-          = simple_form_for :booking, namespace: stop.id ,url: wizard_path(:details), method: :patch ,wrapper: false, defaults: {label: false} do |f|
+          = simple_form_for :booking, namespace: stop.id ,url: wizard_path(:trip_details), method: :patch ,wrapper: false, defaults: {label: false} do |f|
             - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Available Seats', 'Pricing' ,'Qty', 'Return?'], types: [:condensed] do
               %tr
                 %td= stop.trip.name

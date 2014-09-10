@@ -4,8 +4,12 @@ class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 
   def index
-    @q = City.search(params[:q])
-    @cities = @q.result(distinct: true).page(params[:page])
+    if request.xhr?
+      @cities = City.all
+    else
+      @q = City.search(params[:q])
+      @cities = @q.result(distinct: true).page(params[:page])
+    end
   end
 
   def new

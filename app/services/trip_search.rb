@@ -16,12 +16,8 @@ class TripSearch
    def criteria_from_params
      criteria = {}
      criteria.merge!(trip_start_date_eq: @search_params[:trip_date]) if @search_params.has_key?(:trip_date)
-     criteria.merge!(connection_from_city_id_eq: fetch_city(@search_params[:from_city]).id) if @search_params.has_key?(:from_city)
-     criteria.merge!(connection_to_city_id_eq: fetch_city(@search_params[:to_city]).id) if @search_params.has_key?(:to_city)
+     criteria.merge!(connection_from_city_id_eq: @search_params[:from_city_id]) if @search_params.has_key?(:from_city_id)
+     criteria.merge!(connection_to_city_id_eq: @search_params[:to_city_id]) if @search_params.has_key?(:to_city_id)
      criteria
-   end
-
-   def fetch_city(name)
-     City.find_by(name: name)
    end
 end

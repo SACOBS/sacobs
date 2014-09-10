@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  trip_id      :integer
 #  price        :decimal(, )
-#  status       :string(255)
+#  status       :integer
 #  created_at   :datetime
 #  updated_at   :datetime
 #  quantity     :integer          default(0)
@@ -29,7 +29,7 @@
 
 class Booking < ActiveRecord::Base
 
-  enum :status, [:paid, :reserved, :cancelled, :in_process]
+  enum status: [:in_process, :reserved, :paid, :cancelled]
 
   attr_accessor :expired, :charges
 
@@ -39,8 +39,8 @@ class Booking < ActiveRecord::Base
   belongs_to :client
 
   with_options class_name: :Booking, foreign_key: :main_id do |assoc|
-    assoc.belongs_to :main, ->{ where.not(status: :cancelled) }
-    assoc.has_one :return_booking, ->{ where.not(status: :cancelled) }
+    assoc.belongs_to :main, -> { where.not("status <> ?", Booking.statuses[:cancelled])  }
+    assoc.has_one :return_booking, -> { where.not("status <> ?", Booking.statuses[:cancelled]) }
   end
 
   with_options dependent: :destroy do |assoc|
@@ -71,6 +71,7 @@ class Booking < ActiveRecord::Base
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
   scope :standby, -> { reserved.where('expiry_date <= ?', Time.zone.now) }
+  scope :not_in_process, -> { where.not("status <> ?", Booking.statuses[:in_process]) }
 
 
   def is_return?
@@ -79,7 +80,7 @@ class Booking < ActiveRecord::Base
 
   private
     def defaults
-      { status: 'in_process' }
+      { status: :in_process }
     end
 
 

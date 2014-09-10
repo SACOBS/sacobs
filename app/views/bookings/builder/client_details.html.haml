@@ -1,0 +1,31 @@
+#errors= errors_for @booking
+= simple_form_for @booking, url: wizard_path, defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
+  .search
+    %fieldset
+      %legend Search for client
+      = f.input :client, typeahead: clients_url, label: 'Find existing client', placeholder: 'Search for client', input_html: {value: ''}
+      = f.input :client_id, as: :hidden
+  .new_client_fields
+    = f.simple_fields_for :client do |client|
+      %fieldset
+        %legend Or add a new one
+        .row
+          .span3
+            = client.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title'
+            = client.input :name
+            = client.input :surname
+            = client.input :date_of_birth, as: :date_picker
+            = client.association :bank, include_blank: true,  label: 'Select a bank'
+          .span3
+            = client.input :home_no, as: :tel
+            = client.input :work_no, as: :tel
+            = client.input :cell_no, as: :tel
+            = client.input :email, as: :email
+
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+
+
+
+

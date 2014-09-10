@@ -1,11 +1,14 @@
 .page-header
-  %h3 Billing
+  %h2 Booking Wizard
+  %h4= "Step #{wizard_steps.index(step).next} of #{wizard_steps.size}: #{step.to_s.titleize}"
+  .progress
+    .bar{style: "width: #{((wizard_steps.index(step).next.to_f / wizard_steps.size.to_f) * 100).round}%;"}
+
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false} do |f|
   .form-actions
     = f.submit 'Complete', class: t('buttons.primary')
     = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
-
 
   - bootstrap_table headers:['Description','Amount'], types: [:condensed], html_options: {id: 'line_items'} do
     = f.simple_fields_for :invoice do |invoice|
@@ -21,7 +24,6 @@
             %td= rf_line_item.input :description
             %td.amount= rf_line_item.input :amount, input_html: {value: number_with_precision(rf_line_item.object.amount, precision: 2)}
             = rf_line_item.input :line_item_type, as: :hidden, value: rf_line_item.object.line_item_type
-
     %tr
       %td
         %strong Total:

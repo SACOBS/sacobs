@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  trip_id      :integer
 #  price        :decimal(, )
-#  status       :string(255)
+#  status       :integer
 #  created_at   :datetime
 #  updated_at   :datetime
 #  quantity     :integer          default(0)
