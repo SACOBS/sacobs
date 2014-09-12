@@ -1,9 +1,12 @@
 class Routes::BuilderController < ApplicationController
   include Wicked::Wizard
 
+  layout 'wizard'
+
+
   before_action :set_route, only: [:show, :update]
 
-  steps :details, :destinations ,:connections
+  steps :route_details, :destinations ,:connections
 
   def create
     @route = Route.create

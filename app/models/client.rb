@@ -54,12 +54,22 @@ class Client < ActiveRecord::Base
 
   before_validation :set_full_name, prepend: true
 
+  before_save :set_birth_date_from_id_number
+
   def age
     return unless date_of_birth
     @age ||= date_of_birth.find_age
   end
 
+  def pensioner?
+    @booking.client.id_number? && @booking.client.age >= 65
+  end
+
   protected
+    def set_birth_date_from_id_number
+     self.date_of_birth = Date.strptime(id_number[0..5], "%y%m%d") if id_number?
+    end
+
     def set_full_name
       self.full_name = "#{self.name} #{self.surname}"  if name_changed? || surname_changed?
     end

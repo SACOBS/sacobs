@@ -3,7 +3,7 @@ class Trips::BuilderController < ApplicationController
 
   before_action :set_trip, only: [:show, :update]
 
-  steps :details, :stops
+  steps :trip_details, :stops
 
   def create
     @trip = Trip.create(trip_params)

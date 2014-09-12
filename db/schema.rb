@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909162434) do
+ActiveRecord::Schema.define(version: 20140912091650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20140909162434) do
     t.date     "date_of_birth"
     t.string   "title"
     t.text     "notes"
+    t.string   "id_number"
   end
 
   add_index "clients", ["bank_id"], name: "index_clients_on_bank_id", using: :btree

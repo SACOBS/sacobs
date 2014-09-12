@@ -1,5 +1,3 @@
-.page-header
-  %h2 Route
 #errors= errors_for @route
 = simple_form_for @route, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
   .form-actions

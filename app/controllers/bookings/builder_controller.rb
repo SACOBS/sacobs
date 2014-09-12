@@ -22,7 +22,6 @@ class Bookings::BuilderController < ApplicationController
         else
           skip_step
         end
-      when :client_details 
       when :passenger_details then build_passengers
     end
     render_wizard
@@ -54,13 +53,13 @@ class Bookings::BuilderController < ApplicationController
     end
 
     def finish_wizard_path
-      bookings_url
+      dashboard_url
     end
 
     def build_passengers
       unless @booking.passengers.any?
-        default_passenger_type = PassengerType.find_by(description: :standard)
-        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname, cell_no: @booking.client.cell_no , email: @booking.client.email  ,passenger_type: default_passenger_type  }
+        @booking.client.pensioner? ? passenger_type = PassengerType.find_by(description: :pensioner) : passenger_type = PassengerType.find_by(description: :standard)
+        @booking.quantity.times { @booking.passengers.create name: @booking.client.name, surname: @booking.client.surname, cell_no: @booking.client.cell_no , email: @booking.client.email  ,passenger_type: passenger_type  }
       end
     end
 
