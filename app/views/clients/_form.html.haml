@@ -7,7 +7,7 @@
     = f.input :title, collection: Client::TITLES,include_blank: false, prompt: 'Select a title'
     = f.input :name
     = f.input :surname
-    = f.input :date_of_birth, as: :date_picker
+    = f.input :id_number
     = f.input :high_risk
     = f.association :bank,  include_blank: 'Not Applicable'
     = f.input :home_no, as: :tel

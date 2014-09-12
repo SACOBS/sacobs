@@ -14,7 +14,7 @@
             = client.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title'
             = client.input :name
             = client.input :surname
-            = client.input :date_of_birth, as: :date_picker
+            = client.input :id_number
             = client.association :bank, include_blank: true,  label: 'Select a bank'
           .span3
             = client.input :home_no, as: :tel
