@@ -3,7 +3,7 @@ class Bookings::BuilderController < ApplicationController
 
   layout 'wizard'
 
-  steps  :trip_details, :return_trip ,:client_details, :passenger_details, :passenger_charges,:billing_info
+  steps  :trip_details, :return_trip_details ,:client_details, :passenger_details, :passenger_charges,:billing_info
 
   before_action :set_booking, only: [:index, :show, :update]
   before_action :set_attributes, only: :update
@@ -15,8 +15,14 @@ class Bookings::BuilderController < ApplicationController
   def show
     case step
       when :trip_details then fetch_stops
-      when :return_trip then @booking.has_return? ? fetch_return_stops : skip_step
-      when :client_details then @booking.build_client
+      when :return_trip_details
+        if @booking.has_return?
+          @booking.build_return_booking
+          fetch_return_stops
+        else
+          skip_step
+        end
+      when :client_details 
       when :passenger_details then build_passengers
     end
     render_wizard
@@ -25,7 +31,9 @@ class Bookings::BuilderController < ApplicationController
   def update
     case step
       when :trip_details then fetch_stops unless @booking.valid?
-      when :passenger_charges then build_invoice
+      when :passenger_charges
+        set_return_associations
+        build_invoice
       when :billing_info then reserve_booking if @booking.valid?
     end
     render_wizard @booking
@@ -56,11 +64,19 @@ class Bookings::BuilderController < ApplicationController
       end
     end
 
+    def set_return_associations
+      return unless @booking.has_return?
+      return_booking = @booking.return_booking
+      return_booking.client = @booking.client
+      return_booking.passengers.clear
+      @booking.passengers.each {|p| return_booking.passengers << p.dup }
+      return_booking.save!
+    end
+
     def build_invoice
       @booking.invoice = InvoiceBuilder.new(@booking).build
       @booking.return_booking.invoice = InvoiceBuilder.new(@booking.return_booking).build if @booking.return_booking
     end
-
 
     def reserve_booking
       expiry_date = set_booking_expiry_date

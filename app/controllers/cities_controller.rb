@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
 
   def index
     if request.xhr?
-      @cities = City.all
+      @cities = City.all.uniq(:name)
     else
       @q = City.search(params[:q])
       @cities = @q.result(distinct: true).page(params[:page])

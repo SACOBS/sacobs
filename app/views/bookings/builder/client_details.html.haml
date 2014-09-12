@@ -3,7 +3,7 @@
   .search
     %fieldset
       %legend Search for client
-      = f.input :client, typeahead: clients_url, label: 'Find existing client', placeholder: 'Search for client', input_html: {value: ''}
+      = f.input :client_search, typeahead: clients_url(format: :json), label: false, placeholder: 'Search for client', input_html: {value: '', data: {target: '#booking_client_id'}}
       = f.input :client_id, as: :hidden
   .new_client_fields
     = f.simple_fields_for :client do |client|

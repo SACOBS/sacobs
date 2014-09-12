@@ -10,7 +10,11 @@ class CancelBooking
   def execute
     Booking.transaction do
       UnassignSeating.execute(@booking.quantity, @booking.stop)
-      @booking.update!(status: :cancelled, user: @user)
+      @booking.has_return = false if @booking.has_return?
+      @booking.main_id = nil if @booking.is_return?
+      @booking.status = :cancelled
+      @booking.user = @user
+      @booking.save!
     end
   end
 end

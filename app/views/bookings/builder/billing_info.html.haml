@@ -1,9 +1,3 @@
-.page-header
-  %h2 Booking Wizard
-  %h4= "Step #{wizard_steps.index(step).next} of #{wizard_steps.size}: #{step.to_s.titleize}"
-  .progress
-    .bar{style: "width: #{((wizard_steps.index(step).next.to_f / wizard_steps.size.to_f) * 100).round}%;"}
-
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false} do |f|
   .form-actions

@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
 
   def index
     if request.xhr?
-      @clients = policy_scope(Client).all
+      @clients = policy_scope(Client).all.uniq(:full_name)
     else
      @q = policy_scope(Client).search(search_criteria)
      @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])

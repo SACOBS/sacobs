@@ -6,7 +6,7 @@ class Widgets.TypeAhead
 
    $('input.typeahead').keyup ->
     if($.trim($(this).val()) == '')
-       $("#" + $(this).prop('id') + '_id').val('')
+       $(this.data('target')).val('')
 
    $('input.typeahead').typeahead
     source: (query, process) ->
@@ -22,7 +22,7 @@ class Widgets.TypeAhead
         process(objects)
 
     updater: (item) ->
-      $("#" + this.$element.prop('id') + '_id').val(this.map[item].id)
+      $(this.$element.data('target')).val(this.map[item].id)
       return item
 
   @cleanup: ->

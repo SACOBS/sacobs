@@ -38,44 +38,35 @@ class Booking < ActiveRecord::Base
   belongs_to :stop
   belongs_to :client
 
-  with_options class_name: :Booking, foreign_key: :main_id do |assoc|
-    assoc.belongs_to :main, -> { where.not("status <> ?", Booking.statuses[:cancelled])  }
-    assoc.has_one :return_booking, -> { where.not("status <> ?", Booking.statuses[:cancelled]) }
-  end
+  belongs_to :main, class_name: 'Booking', foreign_key: :main_id
+  has_one :return_booking, class_name: 'Booking', foreign_key: :main_id, dependent: :delete, autosave: true
 
-  with_options dependent: :destroy do |assoc|
-    assoc.has_one :invoice
-    assoc.has_one :payment_detail
-    assoc.has_many :passengers
-  end
+  has_many :passengers, dependent: :delete_all
 
-  with_options  reject_if: :all_blank do |assoc|
-    assoc.accepts_nested_attributes_for :client
-    assoc.accepts_nested_attributes_for :passengers
-    assoc.accepts_nested_attributes_for :invoice
-    assoc.accepts_nested_attributes_for :return_booking
-  end
+
+  has_one :invoice, dependent: :delete
+  has_one :payment_detail, dependent: :delete
+
+  accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking, reject_if: :all_blank
+  accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
 
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
 
-  before_save :init_return_booking, prepend: true
-  before_save :set_shared_booking_data
   before_save :generate_reference
   after_find :check_expiration
 
 
-  ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
-
   scope :active, -> { joins(:trip).merge(Trip.valid) }
   scope :standby, -> { reserved.where('expiry_date <= ?', Time.zone.now) }
-  scope :not_in_process, -> { where.not("status <> ?", Booking.statuses[:in_process]) }
+  scope :not_in_process, -> { where("status <> ?", Booking.statuses[:in_process]) }
 
+  ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
   def is_return?
-    self.main_id?
+    main_id?
   end
 
   private
@@ -83,23 +74,12 @@ class Booking < ActiveRecord::Base
       { status: :in_process }
     end
 
-
-  protected
     def quantity_available
       self.errors.add(:quantity,'The number of seats selected exceeds the available seating on the bus for this connection.') unless quantity <= stop.available_seats
     end
 
-    def init_return_booking
-      self.build_return_booking(quantity: self.quantity) if has_return? && !return_booking
-    end
 
-    def set_shared_booking_data
-      if return_booking
-        return_booking.client_id = client_id unless return_booking.client_id.present?
-        passengers.each {|p| return_booking.passengers << p.dup } unless return_booking.passengers.any?
-      end
-    end
-
+  protected
     def generate_reference
       if reserved?
        self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
