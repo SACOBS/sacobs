@@ -1,6 +1,8 @@
 class Trips::BuilderController < ApplicationController
   include Wicked::Wizard
 
+  layout 'wizard'
+
   before_action :set_trip, only: [:show, :update]
 
   steps :trip_details, :stops
@@ -20,7 +22,6 @@ class Trips::BuilderController < ApplicationController
 
   def update
     Trip.no_touching { @trip.update(trip_params) }
-
     render_wizard @trip
   end
 

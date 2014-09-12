@@ -69,6 +69,10 @@ class Booking < ActiveRecord::Base
     main_id?
   end
 
+  def return_booking
+    build_return_booking if has_return? && !super
+  end
+
   private
     def defaults
       { status: :in_process }

@@ -1,5 +1,3 @@
-.page-header
-  %h2 Trip
 #errors= errors_for @trip
 
 = simple_form_for @trip, url: wizard_path, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|

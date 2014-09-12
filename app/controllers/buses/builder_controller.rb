@@ -1,9 +1,11 @@
 class Buses::BuilderController < ApplicationController
   include Wicked::Wizard
 
+  layout 'wizard'
+
   before_action :set_bus, only: [:show, :update]
 
-  steps :details, :seats
+  steps :bus_details, :seats
 
   def create
     @bus = Bus.create

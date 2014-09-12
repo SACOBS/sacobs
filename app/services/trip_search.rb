@@ -11,7 +11,6 @@ class TripSearch
     Stop.search(criteria_from_params).result(distinct: true).valid.limit(30)
   end
 
-
   private
    def criteria_from_params
      criteria = {}
