@@ -60,8 +60,8 @@ class Booking < ActiveRecord::Base
 
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
-  scope :standby, -> { reserved.where('expiry_date <= ?', Time.zone.now) }
-  scope :not_in_process, -> { where("status <> ?", Booking.statuses[:in_process]) }
+  scope :standby, -> { reserved.where(arel_table[:expiry_date].lteq(Time.zone.now)) }
+  scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
 
   ransacker(:created_at_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
 
@@ -92,6 +92,6 @@ class Booking < ActiveRecord::Base
     end
 
     def check_expiration
-      self.expired = (expiry_date <= Time.zone.now) rescue false
+      expiry_date ? self.expired = (expiry_date <= Time.zone.now) : self.expired = false
     end
 end
