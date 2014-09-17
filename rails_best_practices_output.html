@@ -57,7 +57,7 @@
       to see more useful Rails Best Practices.
     </p>
     <p>
-        Found 124 warnings.
+        Found 122 warnings.
     </p>
     <table>
           <tr>
@@ -146,25 +146,16 @@
             <td class='filename'>
                 db/schema.rb
             </td>
-            <td class='line'>67</td>
+            <td class='line'>270</td>
             <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/21-always-add-db-index' target='_blank'>always add db index (charges => [user_id])</a>
-            </td>
-          </tr>
-          <tr class="AlwaysAddDbIndexReview">
-            <td class='filename'>
-                db/schema.rb
-            </td>
-            <td class='line'>221</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/21-always-add-db-index' target='_blank'>always add db index (payment_details => [payment_type_id])</a>
+              <a href='http://rails-bestpractices.com/posts/21-always-add-db-index' target='_blank'>always add db index (seasonal_discounts => [passenger_type_id])</a>
             </td>
           </tr>
           <tr class="DefaultScopeIsEvilReview">
             <td class='filename'>
                 app/models/city.rb
             </td>
-            <td class='line'>22</td>
+            <td class='line'>23</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/806-default_scope-is-evil' target='_blank'>default_scope is evil</a>
             </td>
@@ -180,63 +171,9 @@
           </tr>
           <tr class="LawOfDemeterReview">
             <td class='filename'>
-                app/mailers/ticket_mailer.rb
-            </td>
-            <td class='line'>7</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/controllers/bookings/builder_controller.rb
-            </td>
-            <td class='line'>62</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/controllers/bookings/builder_controller.rb
-            </td>
-            <td class='line'>62</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/controllers/bookings/builder_controller.rb
-            </td>
-            <td class='line'>62</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/controllers/bookings/builder_controller.rb
-            </td>
-            <td class='line'>62</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/controllers/tickets_controller.rb
-            </td>
-            <td class='line'>39</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
                 app/decorators/pricing_decorator.rb
             </td>
-            <td class='line'>10</td>
+            <td class='line'>13</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
             </td>
@@ -261,9 +198,9 @@
           </tr>
           <tr class="LawOfDemeterReview">
             <td class='filename'>
-                app/services/invoice_builder.rb
+                app/views/bookings/builder/_return_trips.html.haml
             </td>
-            <td class='line'>39</td>
+            <td class='line'>10</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
             </td>
@@ -272,14 +209,14 @@
             <td class='filename'>
                 app/views/bookings/builder/_return_trips.html.haml
             </td>
-            <td class='line'>8</td>
+            <td class='line'>11</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
             </td>
           </tr>
           <tr class="LawOfDemeterReview">
             <td class='filename'>
-                app/views/bookings/builder/_return_trips.html.haml
+                app/views/bookings/builder/_trips.html.haml
             </td>
             <td class='line'>9</td>
             <td class='message'>
@@ -290,52 +227,7 @@
             <td class='filename'>
                 app/views/bookings/builder/_trips.html.haml
             </td>
-            <td class='line'>7</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/views/bookings/builder/_trips.html.haml
-            </td>
-            <td class='line'>8</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/views/bookings/show.html.haml
-            </td>
-            <td class='line'>59</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/views/bookings/show.html.haml
-            </td>
-            <td class='line'>63</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/views/bookings/show.html.haml
-            </td>
-            <td class='line'>76</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
-            </td>
-          </tr>
-          <tr class="LawOfDemeterReview">
-            <td class='filename'>
-                app/views/bookings/show.html.haml
-            </td>
-            <td class='line'>80</td>
+            <td class='line'>10</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/15-the-law-of-demeter' target='_blank'>law of demeter</a>
             </td>
@@ -362,7 +254,7 @@
             <td class='filename'>
                 app/controllers/bookings/builder_controller.rb
             </td>
-            <td class='line'>50</td>
+            <td class='line'>59</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/7-move-model-logic-into-the-model' target='_blank'>move model logic into model (@booking use_count > 4)</a>
             </td>
@@ -371,9 +263,18 @@
             <td class='filename'>
                 app/controllers/bookings/builder_controller.rb
             </td>
-            <td class='line'>59</td>
+            <td class='line'>66</td>
             <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/7-move-model-logic-into-the-model' target='_blank'>move model logic into model (@booking use_count > 4)</a>
+              <a href='http://rails-bestpractices.com/posts/7-move-model-logic-into-the-model' target='_blank'>move model logic into model (return_booking use_count > 4)</a>
+            </td>
+          </tr>
+          <tr class="MoveModelLogicIntoModelReview">
+            <td class='filename'>
+                app/controllers/bookings_controller.rb
+            </td>
+            <td class='line'>9</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/7-move-model-logic-into-the-model' target='_blank'>move model logic into model (@bookings use_count > 4)</a>
             </td>
           </tr>
           <tr class="MoveModelLogicIntoModelReview">
@@ -398,7 +299,7 @@
             <td class='filename'>
                 app/controllers/application_controller.rb
             </td>
-            <td class='line'>27</td>
+            <td class='line'>40</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (ApplicationController#devise_parameter_sanitizer)</a>
             </td>
@@ -407,34 +308,16 @@
             <td class='filename'>
                 app/controllers/bookings/builder_controller.rb
             </td>
-            <td class='line'>38</td>
+            <td class='line'>55</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Bookings::BuilderController#finish_wizard_path)</a>
             </td>
           </tr>
           <tr class="RemoveUnusedMethodsInControllersReview">
             <td class='filename'>
-                app/controllers/bookings/builder_controller.rb
-            </td>
-            <td class='line'>80</td>
-            <td class='message'>
-              <a href='' target='_blank'>remove unused methods (Bookings::BuilderController#clean_search_params)</a>
-            </td>
-          </tr>
-          <tr class="RemoveUnusedMethodsInControllersReview">
-            <td class='filename'>
-                app/controllers/bookings_controller.rb
-            </td>
-            <td class='line'>47</td>
-            <td class='message'>
-              <a href='' target='_blank'>remove unused methods (BookingsController#unassign_seats)</a>
-            </td>
-          </tr>
-          <tr class="RemoveUnusedMethodsInControllersReview">
-            <td class='filename'>
                 app/controllers/buses/builder_controller.rb
             </td>
-            <td class='line'>26</td>
+            <td class='line'>28</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Buses::BuilderController#finish_wizard_path)</a>
             </td>
@@ -443,7 +326,7 @@
             <td class='filename'>
                 app/controllers/clients_controller.rb
             </td>
-            <td class='line'>52</td>
+            <td class='line'>73</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (ClientsController#interpolation_options)</a>
             </td>
@@ -461,7 +344,7 @@
             <td class='filename'>
                 app/controllers/routes/builder_controller.rb
             </td>
-            <td class='line'>27</td>
+            <td class='line'>30</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Routes::BuilderController#finish_wizard_path)</a>
             </td>
@@ -470,9 +353,27 @@
             <td class='filename'>
                 app/controllers/trips/builder_controller.rb
             </td>
-            <td class='line'>24</td>
+            <td class='line'>30</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Trips::BuilderController#finish_wizard_path)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/users_controller.rb
+            </td>
+            <td class='line'>19</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (UsersController#interpolation_options)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInHelpersReview">
+            <td class='filename'>
+                app/helpers/application_helper.rb
+            </td>
+            <td class='line'>54</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (ApplicationHelper#active_bookings_count)</a>
             </td>
           </tr>
           <tr class="RemoveUnusedMethodsInHelpersReview">
@@ -497,7 +398,7 @@
             <td class='filename'>
                 app/helpers/bootstrap_helper.rb
             </td>
-            <td class='line'>44</td>
+            <td class='line'>46</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (BootstrapHelper#popover)</a>
             </td>
@@ -506,7 +407,7 @@
             <td class='filename'>
                 app/helpers/bootstrap_helper.rb
             </td>
-            <td class='line'>48</td>
+            <td class='line'>50</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (BootstrapHelper#carousel)</a>
             </td>
@@ -515,7 +416,7 @@
             <td class='filename'>
                 app/helpers/bootstrap_helper.rb
             </td>
-            <td class='line'>62</td>
+            <td class='line'>64</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (BootstrapHelper#carousel_item)</a>
             </td>
@@ -524,7 +425,7 @@
             <td class='filename'>
                 app/helpers/bootstrap_helper.rb
             </td>
-            <td class='line'>70</td>
+            <td class='line'>72</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (BootstrapHelper#carousel_caption)</a>
             </td>
@@ -533,7 +434,16 @@
             <td class='filename'>
                 app/models/booking.rb
             </td>
-            <td class='line'>65</td>
+            <td class='line'>64</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (Booking#standby)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInModelsReview">
+            <td class='filename'>
+                app/models/booking.rb
+            </td>
+            <td class='line'>79</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Booking#defaults)</a>
             </td>
@@ -549,18 +459,18 @@
           </tr>
           <tr class="RemoveUnusedMethodsInModelsReview">
             <td class='filename'>
-                app/models/bus.rb
+                app/models/client.rb
             </td>
-            <td class='line'>37</td>
+            <td class='line'>64</td>
             <td class='message'>
-              <a href='' target='_blank'>remove unused methods (Bus#seating_matches_capacity)</a>
+              <a href='' target='_blank'>remove unused methods (Client#is_pensioner?)</a>
             </td>
           </tr>
           <tr class="RemoveUnusedMethodsInModelsReview">
             <td class='filename'>
                 app/models/client.rb
             </td>
-            <td class='line'>66</td>
+            <td class='line'>77</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Client#should_generate_new_friendly_id?)</a>
             </td>
@@ -569,7 +479,7 @@
             <td class='filename'>
                 app/models/connection.rb
             </td>
-            <td class='line'>37</td>
+            <td class='line'>39</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Connection#defaults)</a>
             </td>
@@ -578,7 +488,7 @@
             <td class='filename'>
                 app/models/driver.rb
             </td>
-            <td class='line'>35</td>
+            <td class='line'>34</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Driver#should_generate_new_friendly_id?)</a>
             </td>
@@ -587,7 +497,7 @@
             <td class='filename'>
                 app/models/invoice.rb
             </td>
-            <td class='line'>34</td>
+            <td class='line'>37</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Invoice#defaults)</a>
             </td>
@@ -596,9 +506,18 @@
             <td class='filename'>
                 app/models/line_item.rb
             </td>
-            <td class='line'>30</td>
+            <td class='line'>25</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (LineItem#defaults)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInModelsReview">
+            <td class='filename'>
+                app/models/passenger_type.rb
+            </td>
+            <td class='line'>16</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (PassengerType#to_label)</a>
             </td>
           </tr>
           <tr class="RemoveUnusedMethodsInModelsReview">
@@ -614,18 +533,18 @@
             <td class='filename'>
                 app/models/route.rb
             </td>
-            <td class='line'>54</td>
+            <td class='line'>60</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Route#should_generate_new_friendly_id?)</a>
             </td>
           </tr>
           <tr class="RemoveUnusedMethodsInModelsReview">
             <td class='filename'>
-                app/models/seasonal_markup.rb
+                app/models/seasonal_discount.rb
             </td>
-            <td class='line'>30</td>
+            <td class='line'>41</td>
             <td class='message'>
-              <a href='' target='_blank'>remove unused methods (SeasonalMarkup#defaults)</a>
+              <a href='' target='_blank'>remove unused methods (SeasonalDiscount#defaults)</a>
             </td>
           </tr>
           <tr class="RemoveUnusedMethodsInModelsReview">
@@ -641,7 +560,7 @@
             <td class='filename'>
                 app/models/setting.rb
             </td>
-            <td class='line'>22</td>
+            <td class='line'>21</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Setting#defaults)</a>
             </td>
@@ -650,7 +569,7 @@
             <td class='filename'>
                 app/models/stop.rb
             </td>
-            <td class='line'>35</td>
+            <td class='line'>34</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Stop#defaults)</a>
             </td>
@@ -659,9 +578,45 @@
             <td class='filename'>
                 app/models/trip.rb
             </td>
-            <td class='line'>52</td>
+            <td class='line'>53</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (Trip#complete)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInModelsReview">
+            <td class='filename'>
+                app/models/trip.rb
+            </td>
+            <td class='line'>55</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (Trip#from_location)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInModelsReview">
+            <td class='filename'>
+                app/models/trip.rb
+            </td>
+            <td class='line'>59</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Trip#defaults)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInModelsReview">
+            <td class='filename'>
+                app/models/user.rb
+            </td>
+            <td class='line'>36</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (User#all_except)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInModelsReview">
+            <td class='filename'>
+                app/models/user.rb
+            </td>
+            <td class='line'>44</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (User#defaults)</a>
             </td>
           </tr>
           <tr class="ReplaceInstanceVariableWithLocalVariableReview">
@@ -695,7 +650,7 @@
             <td class='filename'>
                 app/views/bookings/builder/_return_trips.html.haml
             </td>
-            <td class='line'>14</td>
+            <td class='line'>16</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -704,7 +659,7 @@
             <td class='filename'>
                 app/views/bookings/builder/_return_trips.html.haml
             </td>
-            <td class='line'>17</td>
+            <td class='line'>19</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -729,6 +684,24 @@
           </tr>
           <tr class="ReplaceInstanceVariableWithLocalVariableReview">
             <td class='filename'>
+                app/views/bookings/builder/_trips.html.haml
+            </td>
+            <td class='line'>16</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/bookings/builder/_trips.html.haml
+            </td>
+            <td class='line'>16</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
                 app/views/cities/_form.html.haml
             </td>
             <td class='line'>1</td>
@@ -741,6 +714,15 @@
                 app/views/cities/_form.html.haml
             </td>
             <td class='line'>2</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/clients/_client_listing.html.haml
+            </td>
+            <td class='line'>1</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -774,6 +756,15 @@
           </tr>
           <tr class="ReplaceInstanceVariableWithLocalVariableReview">
             <td class='filename'>
+                app/views/clients/_form.html.haml
+            </td>
+            <td class='line'>19</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
                 app/views/drivers/_form.html.haml
             </td>
             <td class='line'>1</td>
@@ -812,15 +803,6 @@
             <td class='filename'>
                 app/views/pricing/_pricing.html.haml
             </td>
-            <td class='line'>8</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/pricing/_pricing.html.haml
-            </td>
             <td class='line'>9</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
@@ -837,9 +819,18 @@
           </tr>
           <tr class="ReplaceInstanceVariableWithLocalVariableReview">
             <td class='filename'>
+                app/views/pricing/_pricing.html.haml
+            </td>
+            <td class='line'>15</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
                 app/views/tickets/_ticket.html.haml
             </td>
-            <td class='line'>7</td>
+            <td class='line'>4</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -857,7 +848,25 @@
             <td class='filename'>
                 app/views/tickets/_ticket.html.haml
             </td>
-            <td class='line'>13</td>
+            <td class='line'>12</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>14</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>15</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -875,7 +884,97 @@
             <td class='filename'>
                 app/views/tickets/_ticket.html.haml
             </td>
+            <td class='line'>17</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>18</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>19</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>20</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
             <td class='line'>21</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>23</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>25</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>26</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>27</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>28</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
+            </td>
+          </tr>
+          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
+            <td class='filename'>
+                app/views/tickets/_ticket.html.haml
+            </td>
+            <td class='line'>29</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -893,78 +992,6 @@
             <td class='filename'>
                 app/views/tickets/_ticket.html.haml
             </td>
-            <td class='line'>32</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>34</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>35</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>36</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>37</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>38</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>39</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>40</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
             <td class='line'>41</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
@@ -974,25 +1001,7 @@
             <td class='filename'>
                 app/views/tickets/_ticket.html.haml
             </td>
-            <td class='line'>43</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>45</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>46</td>
+            <td class='line'>44</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -1008,45 +1017,9 @@
           </tr>
           <tr class="ReplaceInstanceVariableWithLocalVariableReview">
             <td class='filename'>
-                app/views/tickets/_ticket.html.haml
+                app/views/trip_sheets/_additional_info.html.haml
             </td>
-            <td class='line'>48</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>49</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>50</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>56</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
-            </td>
-          </tr>
-          <tr class="ReplaceInstanceVariableWithLocalVariableReview">
-            <td class='filename'>
-                app/views/tickets/_ticket.html.haml
-            </td>
-            <td class='line'>59</td>
+            <td class='line'>10</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/27-replace-instance-variable-with-local-variable' target='_blank'>replace instance variable with local variable</a>
             </td>
@@ -1091,7 +1064,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>157</td>
+            <td class='line'>167</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes setting (only: [:edit, :update])</a>
             </td>
@@ -1100,16 +1073,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>159</td>
-            <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes clients (except: [:edit])</a>
-            </td>
-          </tr>
-          <tr class="RestrictAutoGeneratedRoutesReview">
-            <td class='filename'>
-                config/routes.rb
-            </td>
-            <td class='line'>165</td>
+            <td class='line'>178</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes cities (except: [:edit])</a>
             </td>
@@ -1118,7 +1082,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>169</td>
+            <td class='line'>182</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes drivers (except: [:edit])</a>
             </td>
@@ -1127,7 +1091,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>171</td>
+            <td class='line'>184</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes trips (except: [:new, :create, :edit])</a>
             </td>
@@ -1136,7 +1100,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>181</td>
+            <td class='line'>195</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes routes (except: [:new, :create, :edit])</a>
             </td>
@@ -1145,7 +1109,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>186</td>
+            <td class='line'>200</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes routes/destinations (only: [])</a>
             </td>
@@ -1154,7 +1118,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>195</td>
+            <td class='line'>209</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes buses (except: [:new, :create, :edit])</a>
             </td>
@@ -1163,7 +1127,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>202</td>
+            <td class='line'>216</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes discounts (except: [:show, :edit])</a>
             </td>
@@ -1172,7 +1136,7 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>204</td>
+            <td class='line'>218</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes charges (except: [:show, :edit])</a>
             </td>
@@ -1181,25 +1145,25 @@
             <td class='filename'>
                 config/routes.rb
             </td>
-            <td class='line'>215</td>
+            <td class='line'>229</td>
             <td class='message'>
-              <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes trip_sheets (only: [])</a>
+              <a href='http://rails-bestpractices.com/posts/86-restrict-auto-generated-routes' target='_blank'>restrict auto-generated routes trip_sheets (only: [:index])</a>
             </td>
           </tr>
           <tr class="SimplifyRenderInControllersReview">
             <td class='filename'>
                 app/controllers/errors_controller.rb
             </td>
-            <td class='line'>6</td>
+            <td class='line'>7</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/62-simplify-render-in-controllers' target='_blank'>simplify render in controllers</a>
             </td>
           </tr>
           <tr class="SimplifyRenderInViewsReview">
             <td class='filename'>
-                app/views/tickets/_ticket.html.haml
+                app/views/clients/index.html.haml
             </td>
-            <td class='line'>96</td>
+            <td class='line'>20</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/61-simplify-render-in-views' target='_blank'>simplify render in views</a>
             </td>
@@ -1208,7 +1172,7 @@
             <td class='filename'>
                 app/views/tickets/show.html.haml
             </td>
-            <td class='line'>1</td>
+            <td class='line'>6</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/61-simplify-render-in-views' target='_blank'>simplify render in views</a>
             </td>
@@ -1222,9 +1186,27 @@
               <a href='http://rails-bestpractices.com/posts/61-simplify-render-in-views' target='_blank'>simplify render in views</a>
             </td>
           </tr>
+          <tr class="SimplifyRenderInViewsReview">
+            <td class='filename'>
+                app/views/trips/index.html.haml
+            </td>
+            <td class='line'>19</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/61-simplify-render-in-views' target='_blank'>simplify render in views</a>
+            </td>
+          </tr>
           <tr class="UseMultipartAlternativeAsContentTypeOfEmailReview">
             <td class='filename'>
                 app/mailers/contact_mailer.rb
+            </td>
+            <td class='line'>4</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/41-use-multipart-alternative-as-content_type-of-email' target='_blank'>use multipart/alternative as content_type of email</a>
+            </td>
+          </tr>
+          <tr class="UseMultipartAlternativeAsContentTypeOfEmailReview">
+            <td class='filename'>
+                app/mailers/exception_mailer.rb
             </td>
             <td class='line'>4</td>
             <td class='message'>
@@ -1242,18 +1224,18 @@
           </tr>
           <tr class="RemoveTrailingWhitespaceCheck">
             <td class='filename'>
-                app/models/role.rb
+                app/controllers/routes_controller.rb
             </td>
-            <td class='line'>21</td>
+            <td class='line'>37</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/60-remove-trailing-whitespace' target='_blank'>remove trailing whitespace</a>
             </td>
           </tr>
           <tr class="RemoveTrailingWhitespaceCheck">
             <td class='filename'>
-                app/controllers/routes_controller.rb
+                app/views/pricing/index.html.haml
             </td>
-            <td class='line'>31</td>
+            <td class='line'>12</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/60-remove-trailing-whitespace' target='_blank'>remove trailing whitespace</a>
             </td>

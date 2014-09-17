@@ -4,11 +4,11 @@ class RouteDecorator < Draper::Decorator
   decorates_association :connections
 
   def start_city
-    destinations.first.city.name if destinations.any?
+    destinations.first.city_name if destinations.any?
   end
 
   def end_city
-    destinations.last.city.name if destinations.any?
+    destinations.last.city_name if destinations.any?
   end
 
   def cost

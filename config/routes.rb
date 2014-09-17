@@ -244,7 +244,9 @@ Sacobs::Application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
 
-  get 'pricing/:stop_id', to: 'pricing#show', as: :pricing
+  get 'pricing/:id', to: 'pricing#show', as: :pricing
+  get '/quick_quote', to: 'pricing#index', as: :quick_quote
+
 
   get '/dashboard', to: 'dashboard#show', as: :dashboard
 

@@ -11,3 +11,8 @@
           %p
             %strong=key.to_s.humanize
             =number_to_currency(value, unit: 'R')
+        %strong Charges
+        - @pricing.charges.each do |key, value|
+          %p
+            %strong=key.to_s.humanize
+            =number_to_currency(value, unit: 'R')

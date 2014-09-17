@@ -1,2 +1,1 @@
-$('body').append("#{j render 'pricing' }");
-$('#pricing').modal('show');
+$('.quote').html("#{j render 'pricing/quote', pricing: @pricing }");

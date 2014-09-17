@@ -1,38 +1,45 @@
 class PricingDecorator
 
-  attr_reader :discounts, :price, :seasonal_price
+  attr_reader :discount_prices, :price, :charges
 
 
-  def initialize(stop)
-    @stop = stop
+  def initialize(connection)
+    @connection = connection
     build_discounts
+    build_charges
   end
 
   def connection_name
-    @connection_name ||= @stop.connection.name
+    @connection_name ||= @connection.name
   end
 
   def cost
-    @cost ||= round_up(BigDecimal(@stop.cost))
+    puts @connection.inspect
+    @cost ||= round_up(BigDecimal(@connection.cost))
   end
 
   def price
     @price ||= calculate_price
   end
 
-  def fees
-    return 0 unless markup
-    @fees ||= calculate_percentage_amount(markup.percentage)
-  end
-
   private
     def build_discounts
-       @discounts = {}
-       PassengerType.all.each do |passenger_type|
+       @discount_prices = {}
+       passenger_types.each do |passenger_type|
          discount = find_seasonal_discount(passenger_type) || find_discount(passenger_type)
-         key = discount.description.to_sym
-         @discounts[key] = calculate_percentage_amount(discount.percentage)
+         if discount
+           key = discount.description
+           @discount_prices[key] = calculate_percentage_amount(discount.percentage)
+         end
        end
+    end
+
+    def build_charges
+      @charges = {}
+      Charge.all.each do |charge|
+          key = charge.description
+          @charges[key] = calculate_percentage_amount(charge.percentage)
+      end
     end
 
     def calculate_percentage_amount(percentage)
@@ -48,10 +55,22 @@ class PricingDecorator
     end
 
     def find_seasonal_discount(passenger_type)
-      SeasonalDiscount.active_in_period(Date.today).where(passenger_type: passenger_type).take
+      seasonal_discounts.select {|sd| sd.passenger_type == passenger_type}.first
     end
 
     def find_discount(passenger_type)
-      Discount.find_by(passenger_type: passenger_type)
+      discounts.select { |d| d.passenger_type == passenger_type }.first
+    end
+
+    def discounts
+      @discounts ||= Discount.all.to_a
+    end
+
+    def seasonal_discounts
+      @seasonal_discounts||= SeasonalDiscount.active_in_period(Date.today).to_a
+    end
+
+    def passenger_types
+      @passenger_types ||= PassengerType.all
     end
 end

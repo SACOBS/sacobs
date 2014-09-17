@@ -23,5 +23,5 @@ class Destination < ActiveRecord::Base
 
   validates :sequence, :route, :city, presence: true
 
-  delegate :name, to: :city
+  delegate :name, to: :city, prefix: true
 end

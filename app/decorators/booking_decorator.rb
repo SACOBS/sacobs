@@ -11,7 +11,7 @@ class BookingDecorator < Draper::Decorator
   end
 
   def client_name
-    model.client.full_name.capitalize if model.client
+    model.client_full_name.capitalize if model.client
   end
 
   def travel_date

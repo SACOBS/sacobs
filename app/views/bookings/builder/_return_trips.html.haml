@@ -7,10 +7,10 @@
             = f.simple_fields_for :return_booking, namespace: stop.id do |return_booking|
               - bootstrap_table headers:['Trip', 'Start Date', 'From', 'To' ,'Pricing','Available Seats' ,'Qty'], types: [:condensed] do
                 %tr
-                  %td= stop.trip.name
-                  %td= stop.trip.start_date
-                  %td= stop.from.city.name
-                  %td= stop.to.city.name
+                  %td= stop.trip_name
+                  %td= stop.trip_start_date
+                  %td= stop.from.city_name
+                  %td= stop.to.city_name
                   %td=link_to 'View Prices', pricing_path(stop_id: stop), remote: true
                   %td= stop.available_seats
                   %td= @booking.quantity

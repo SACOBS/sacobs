@@ -61,8 +61,8 @@ class Client < ActiveRecord::Base
     @age ||= date_of_birth.find_age
   end
 
-  def pensioner?
-    @booking.client.id_number? && @booking.client.age >= 65
+  def is_pensioner?
+    id_number? && age >= 65
   end
 
   protected

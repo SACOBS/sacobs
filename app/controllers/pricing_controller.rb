@@ -1,11 +1,19 @@
 class PricingController < ApplicationController
-  respond_to :js
 
+  def index
+    @connections = Connection.order(:name).select(:id, :name, :route_id, :cost)
+    @pricing = PricingDecorator.new(@connections.first)
+  end
 
   def show
-    stop =  Stop.find(params[:stop_id])
-    @pricing = PricingDecorator.new(stop)
+    @connection =  Connection.find(params[:id])
+    @pricing = PricingDecorator.new(@connection)
     respond_with @pricing
   end
 
+  private
+    def search_params
+      params[:q] ||= {}
+      params[:q].delete_if { |key, value| value.blank? }
+    end
 end

@@ -5,6 +5,6 @@ class TicketMailer < ActionMailer::Base
   def send_ticket(booking)
     @ticket = Ticket.new(booking)
     @settings = Setting.first
-    mail to: booking.client.email, subject: 'Your Ticket'
+    mail to: booking.client_email, subject: 'Your Ticket'
   end
 end
