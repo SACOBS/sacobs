@@ -100,9 +100,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
-    figaro (0.7.0)
-      bundler (~> 1.0)
-      rails (>= 3, < 5)
+    figaro (1.0.0)
+      thor (~> 0.14)
     flatten_migrations (0.0.1)
       rails (>= 3.0)
       rake
