@@ -22,8 +22,9 @@ class PassengerBillingDetail
   end
 
   def charge_items
-    @charges ||= @passenger.charges.reject(&:blank?).map do |charge_id|
-      charge = fetch_charge(charge_id)
+    return [] unless @passenger.charge_ids
+    charges =  fetch_charges(@passenger.charge_ids)
+    @charge_items ||= charges.map do |charge|
       description = "#{charge.description} charge - #{Helpers.number_to_percentage(charge.percentage * 100, precision: 0)}".capitalize
       amount = Calculations.roundup(@price * charge.percentage)
       BillingItem.new(description, amount, :debit)
@@ -35,8 +36,8 @@ class PassengerBillingDetail
   end
 
   private
-   def fetch_charge(id)
-     Charge.find(id)
+   def fetch_charges(ids)
+     Charge.find(ids)
    end
 
    def fetch_discount

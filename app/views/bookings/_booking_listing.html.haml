@@ -22,7 +22,7 @@
       = paginate reserved_bookings, param_name: :reserved_page
       - if reserved_bookings.any?
         - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-          = render partial: 'bookings/booking', collection:  reserved_bookings,cache: true
+          = render partial: 'bookings/booking', collection: reserved_bookings, cache: true
       - else
         %h3 There are currently 0 reserved bookings.
       = paginate reserved_bookings, param_name: :reserved_page

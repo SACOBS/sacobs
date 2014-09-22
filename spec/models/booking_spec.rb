@@ -8,13 +8,13 @@
 #  status       :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  quantity     :integer          default(0)
+#  quantity     :integer
 #  expiry_date  :datetime
 #  client_id    :integer
 #  user_id      :integer
 #  reference_no :string(255)
 #  main_id      :integer
-#  has_return   :boolean          default(FALSE)
+#  has_return   :boolean
 #  stop_id      :integer
 #  sequence_id  :integer
 #

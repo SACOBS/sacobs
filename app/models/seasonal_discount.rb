@@ -11,10 +11,12 @@
 #  updated_at        :datetime
 #  user_id           :integer
 #  passenger_type_id :integer
+#  name              :string(255)
 #
 # Indexes
 #
-#  index_seasonal_discounts_on_user_id  (user_id)
+#  index_seasonal_discounts_on_passenger_type_id  (passenger_type_id)
+#  index_seasonal_discounts_on_user_id            (user_id)
 #
 
 class SeasonalDiscount < ActiveRecord::Base
@@ -29,7 +31,7 @@ class SeasonalDiscount < ActiveRecord::Base
   validates_presence_of :passenger_type
 
   def description
-    "seasonal_#{passenger_type.description}_discount".titleize
+    "#{name}(seasonal_#{passenger_type.description}_discount)".titleize
   end
 
   def self.seasonal_discount

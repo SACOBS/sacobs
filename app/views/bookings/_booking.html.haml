@@ -10,8 +10,7 @@
   %td= booking.expiry_date
   %td
     = link_to 'Show', booking, icon: :info, class: t('buttons.mini.info')
-    = link_to 'Generate Ticket', ticket_path(booking),icon: :tasks, class: t('buttons.mini.default'), target: '_blank' if booking.paid?
-    = link_to 'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.mini.inverse') if booking.reserved?
-    = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.mini.warning') unless booking.cancelled?
-    = link_to 'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.mini.danger'), icon: :times if booking.cancelled?
-
+    = link_to_if(booking.paid?,'Generate Ticket', ticket_path(booking),icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
+    = link_to_if(booking.reserved?,'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.mini.inverse')){}
+    = link_to_unless(booking.cancelled?,'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.mini.warning')){}
+    = link_to_if(booking.cancelled?,'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.mini.danger'), icon: :times) {}

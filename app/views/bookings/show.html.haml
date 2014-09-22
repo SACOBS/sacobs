@@ -3,9 +3,9 @@
     %h2 Booking
   .form-actions
     = back_to bookings_path
-    = link_to 'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse') if @booking.reserved?
-    = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning') unless @booking.cancelled?
-    = link_to 'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times if @booking.cancelled?
+    = link_to_if(@booking.reserved?,'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse'))
+    = link_to_unless(@booking.cancelled?,'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning')){}
+    = link_to_if(@booking.cancelled?,'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times) {}
 
   .well
     %p
@@ -97,9 +97,9 @@
           %td= passenger.email
   .form-actions
     = back_to bookings_path
-    = link_to 'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse') if @booking.reserved?
-    = link_to 'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning') unless @booking.cancelled?
-    = link_to 'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times if @booking.cancelled?
+    = link_to_if(@booking.reserved?,'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse'))
+    = link_to_unless(@booking.cancelled?,'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning')){}
+    = link_to_if(@booking.cancelled?,'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times) {}
 
 
 

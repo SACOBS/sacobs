@@ -1,13 +1,8 @@
 %tr[seasonal_discount]
+  %td= seasonal_discount.name
   %td= seasonal_discount.passenger_type
   %td= seasonal_discount.percentage
   %td= seasonal_discount.period_from
   %td= seasonal_discount.period_to
   %td= seasonal_discount.active
-  %td
-    - if seasonal_discount.active?
-      = link_to 'Deactivate', seasonal_discount_path(seasonal_discount, seasonal_discount: {active: false}), icon: :times,  method: :patch, class: t('buttons.mini.danger')
-    - else
-      = link_to 'Activate', seasonal_discount_path(seasonal_discount, seasonal_discount: {active: true}), icon: :times,  method: :patch, class: t('buttons.mini.danger')
-
-
+  %td= seasonal_discount.activation_link

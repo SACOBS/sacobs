@@ -95,9 +95,6 @@ gem "wkhtmltopdf-binary"
 # Time Difference Calculations
 gem 'time_difference'
 
-# Enum
-#gem 'enumify'
-
 
 # Scriptures
 gem "scripture", "~> 0.1.0"
@@ -127,6 +124,8 @@ gem 'fullcalendar-rails'
 # Head Js
 gem 'headjs-rails', '~> 0.4.2'
 
+# Simple Defaults
+gem 'simple_defaults'
 
 
 group :development do

@@ -19,6 +19,7 @@
 #  date_of_birth :date
 #  title         :string(255)
 #  notes         :text
+#  id_number     :string(255)
 #
 # Indexes
 #

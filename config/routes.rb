@@ -134,7 +134,8 @@
 #          authenticated_root GET    /                                                   dashboard#show
 #                        root GET    /                                                   pages#show {:id=>"home"}
 #                        page GET    /pages/*id                                          pages#show
-#                     pricing GET    /pricing/:stop_id(.:format)                         pricing#show
+#                     pricing GET    /pricing/:id(.:format)                              pricing#show
+#                 quick_quote GET    /quick_quote(.:format)                              pricing#index
 #                   dashboard GET    /dashboard(.:format)                                dashboard#show
 #                     reports GET    /reports(.:format)                                  reports#index
 # reports_bookings_per_status GET    /reports/bookings_per_status(.:format)              reports#bookings_per_status

@@ -9,19 +9,19 @@ class BookingsController < ApplicationController
   def index
     @q = Booking.includes(:trip, :stop, :client).not_in_process.active.search(params[:q])
     @bookings = @q.result(distinct: true)
-    @reserved_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && !b.expired}).page(params[:reserved_page])
-    @standby_bookings = Kaminari.paginate_array(@bookings.select{|b| b.reserved? && b.expired}).page(params[:standby_page])
-    @paid_bookings = Kaminari.paginate_array(@bookings.select(&:paid?)).page(params[:paid_page])
-    @cancelled_bookings = Kaminari.paginate_array(@bookings.select(&:cancelled?)).page(params[:cancelled_page])
+    @reserved_bookings = paginate_collection(@bookings.open, params[:reserved_page])
+    @standby_bookings = paginate_collection(@bookings.standby, params[:standby_page])
+    @paid_bookings = paginate_collection(@bookings.paid, params[:paid_page])
+    @cancelled_bookings = paginate_collection(@bookings.cancelled, params[:cancelled_page])
   end
 
   def create
-    @booking = Booking.create(quantity: 1)
+    @booking = Booking.create
     redirect_to booking_builder_url(@booking, :trip_details)
   end
 
   def show
-    fresh_when @booking, last_modified: @booking.updated_at
+   fresh_when @booking, last_modified: @booking.updated_at
   end
 
   def destroy
@@ -42,5 +42,9 @@ class BookingsController < ApplicationController
   private
    def set_booking
     @booking = Booking.find(params[:id])
+   end
+
+   def paginate_collection(collection, page)
+     Kaminari.paginate_array(collection).page(page)
    end
 end

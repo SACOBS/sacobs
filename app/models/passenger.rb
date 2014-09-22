@@ -25,11 +25,7 @@ class Passenger < ActiveRecord::Base
 
   delegate :description, to: :passenger_type, prefix: true
 
-  attr_accessor :charges
-
-  def charges
-    @charges ||= []
-  end
+  attr_accessor :charge_ids
 
   def full_name
     "#{name} #{surname}"

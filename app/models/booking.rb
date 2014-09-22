@@ -8,13 +8,13 @@
 #  status       :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  quantity     :integer          default(0)
+#  quantity     :integer
 #  expiry_date  :datetime
 #  client_id    :integer
 #  user_id      :integer
 #  reference_no :string(255)
 #  main_id      :integer
-#  has_return   :boolean          default(FALSE)
+#  has_return   :boolean
 #  stop_id      :integer
 #  sequence_id  :integer
 #
@@ -30,8 +30,6 @@
 class Booking < ActiveRecord::Base
 
   enum status: [:in_process, :reserved, :paid, :cancelled]
-
-  attr_accessor :expired, :charges
 
   belongs_to :user
   belongs_to :trip, inverse_of: :bookings
@@ -50,6 +48,7 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking, reject_if: :all_blank
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
+  delegate :total, :total_cost, :total_discount,to: :invoice, prefix: true
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
   delegate :name, :surname, :full_name, :home_no, :cell_no, :email, :work_no, :age, :is_pensioner?, :id_number, :date_of_birth, to: :client, prefix: true
 
@@ -57,10 +56,11 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   before_save :generate_reference
-  after_find :check_expiration
+  after_find :setup_return_booking, if: :has_return?
 
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
+  scope :open, -> { reserved.where.not(arel_table[:expiry_date].lteq(Time.zone.now)) }
   scope :standby, -> { reserved.where(arel_table[:expiry_date].lteq(Time.zone.now)) }
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
 
@@ -70,14 +70,14 @@ class Booking < ActiveRecord::Base
     main_id?
   end
 
-  def return_booking
-    build_return_booking if has_return? && !super
-    super
+  def expired?
+    expiry_date? && (expiry_date <= Time.zone.now)
   end
+
 
   private
     def defaults
-      { status: :in_process }
+      { status: :in_process, price: 0, quantity: 1, has_return: false }
     end
 
     def quantity_available
@@ -86,14 +86,14 @@ class Booking < ActiveRecord::Base
 
 
   protected
-    def generate_reference
-      if reserved?
-       self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id.present?
-       self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{"%03d" % sequence_id}" unless reference_no.present?
-      end
+    def setup_return_booking
+      build_return_booking unless return_booking.present?
     end
 
-    def check_expiration
-      expiry_date ? self.expired = (expiry_date <= Time.zone.now) : self.expired = false
+    def generate_reference
+      if reserved?
+       self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id?
+       self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{"%03d" % sequence_id}" unless reference_no?
+      end
     end
 end

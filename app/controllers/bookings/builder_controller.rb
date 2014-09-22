@@ -14,11 +14,14 @@ class Bookings::BuilderController < ApplicationController
 
   def show
     case step
-      when :trip_details then fetch_stops
-      when :return_trip_details then  @booking.has_return? ? fetch_return_stops : skip_step
-      when :client_details then @booking.build_client
-      when :passenger_details then build_passengers
-      when :billing_infor then build_invoice
+      when :trip_details then
+        fetch_stops
+      when :return_trip_details then
+        @booking.has_return? ? fetch_return_stops : skip_step
+      when :client_details then
+        @booking.build_client
+      when :passenger_details then
+        build_passengers
     end
     render_wizard
   end
@@ -76,13 +79,9 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def reserve_booking
-    expiry_date = set_booking_expiry_date
-    ReserveBooking.execute(@booking, current_user, expiry_date)
+    ReserveBooking.execute(@booking, current_user)
   end
 
-  def set_booking_expiry_date
-    Time.zone.now.advance(hours: settings.booking_expiry_period)
-  end
 
   def set_booking
     @booking = Booking.find(params[:booking_id])
@@ -95,6 +94,4 @@ class Bookings::BuilderController < ApplicationController
   def booking_params
     BookingParameters.new(params).permit(user: current_user)
   end
-
-
 end

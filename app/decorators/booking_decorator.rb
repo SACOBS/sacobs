@@ -48,7 +48,7 @@ class BookingDecorator < Draper::Decorator
   end
 
   def price
-    h.number_to_currency(model.invoice.total, unit: 'R')
+    h.number_to_currency(model.invoice_total, unit: 'R')
   end
 
   def payment_date
@@ -75,9 +75,5 @@ class BookingDecorator < Draper::Decorator
      else
        ''
    end
-  end
-
-  def expired?
-    expiry_date <= Time.zone.now && reserved?
   end
 end

@@ -28,6 +28,8 @@ class Stop < ActiveRecord::Base
 
  delegate :name, :from, :to, :cost, to: :connection
 
+ delegate :name,:start_date, to: :trip, prefix: true
+
  before_save :check_seats
 
  private

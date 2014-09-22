@@ -5,6 +5,6 @@ class SeasonalDiscountParameters < Struct.new(:params)
 
   private
   def seasonal_markup_attributes
-    [ :passenger_type_id, :percentage, :period_from, :period_to, :active ]
+    [:name, :passenger_type_id, :percentage, :period_from, :period_to, :active ]
   end
 end

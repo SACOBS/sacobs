@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140915113448) do
+ActiveRecord::Schema.define(version: 20140922070813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20140915113448) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity",     default: 0
+    t.integer  "quantity"
     t.datetime "expiry_date"
     t.integer  "client_id"
     t.integer  "user_id"
     t.string   "reference_no"
     t.integer  "main_id"
-    t.boolean  "has_return",   default: false
+    t.boolean  "has_return"
     t.integer  "stop_id"
     t.integer  "sequence_id"
   end
@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(version: 20140915113448) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "passenger_type_id"
+    t.string   "name"
   end
 
   add_index "seasonal_discounts", ["passenger_type_id"], name: "index_seasonal_discounts_on_passenger_type_id", using: :btree

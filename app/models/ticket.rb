@@ -14,23 +14,23 @@ attr_reader :booking, :return ,:client
 
   def total
     total = 0
-    total += @booking.invoice.total
-    total += @return.invoice.total if @return
+    total += @booking.invoice_total
+    total += @return.invoice_total if @return
     total
   end
 
   def total_cost
     total = 0
-    total += @booking.invoice.total_cost
-    total += @return.invoice.total_cost if @return
+    total += @booking.invoice_total_cost
+    total += @return.invoice_total_cost if @return
     total
   end
 
 
   def total_discount
     total = 0
-    total += @booking.invoice.total_discount
-    total += @return.invoice.total_discount if @return
+    total += @booking.invoice_total_discount
+    total += @return.invoice_total_discount if @return
     total
   end
 end
