@@ -213,10 +213,11 @@ Sacobs::Application.routes.draw do
 
   resources :seasonal_discounts, except: [:show, :destroy, :edit]
 
-
   resources :discounts, except: [:show]
 
   resources :charges, except: [:show]
+
+  resources :notes, only: [:index, :create, :new]
 
 
   resources :tickets, only: [:show] do
@@ -239,15 +240,12 @@ Sacobs::Application.routes.draw do
   authenticated :user do
     root to: 'dashboard#show', as: :authenticated_root
   end
-
   root to: 'pages#show', id: 'home'
 
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
-
   get 'pricing/:id', to: 'pricing#show', as: :pricing
   get '/quick_quote', to: 'pricing#index', as: :quick_quote
-
 
   get '/dashboard', to: 'dashboard#show', as: :dashboard
 

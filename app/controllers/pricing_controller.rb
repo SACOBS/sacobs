@@ -3,6 +3,7 @@ class PricingController < ApplicationController
   def index
     @connections = Connection.order(:name).select(:id, :name, :route_id, :cost)
     @pricing = PricingDecorator.new(@connections.first)
+    render layout: 'with_sidebar'
   end
 
   def show

@@ -6,6 +6,7 @@ class TripSheetsController < ApplicationController
   def index
     @q = Trip.includes(:route, :bookings).search(params[:q])
     @trips = @q.result(distinct: true).order(start_date: :asc)
+    render layout: 'with_sidebar'
   end
 
   def download

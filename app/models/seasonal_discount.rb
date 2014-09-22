@@ -25,6 +25,7 @@ class SeasonalDiscount < ActiveRecord::Base
   belongs_to :passenger_type
 
   scope :active, -> { where(active: true) }
+  scope :applicable, ->{ where(arel_table[:period_from].gteq(Time.zone.now)) }
   scope :active_in_period, -> (date) { where(seasonal_discount[:period_from].lteq(date).and(seasonal_discount[:period_to].gteq(date))).merge(active) }
 
 

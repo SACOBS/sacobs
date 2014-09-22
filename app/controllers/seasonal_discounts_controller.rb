@@ -4,7 +4,7 @@ class SeasonalDiscountsController < ApplicationController
   decorates_assigned :seasonal_discounts
 
   def index
-    @seasonal_discounts = SeasonalDiscount.all
+    @seasonal_discounts = SeasonalDiscount.applicable
   end
 
   def new
@@ -18,7 +18,6 @@ class SeasonalDiscountsController < ApplicationController
 
   def update
     @seasonal_discount = SeasonalDiscount.find(params[:id])
-    puts seasonal_discount_params.inspect
     @seasonal_discount.update!(seasonal_discount_params)
     respond_with @seasonal_discount
   end

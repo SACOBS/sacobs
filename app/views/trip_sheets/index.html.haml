@@ -1,10 +1,9 @@
-- content_for :sidebar do
-  %h4 Search for trips
-  = simple_form_for :q, url: trip_sheets_path, method: :get  do |f|
-    = f.input :start_date_eq, as: :date_picker, placeholder: 'Select a date', label: 'Date of trip'
-    = f.input :route_id_in, collection: Route.all,as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route'
+%h4 Search for trips
+= simple_form_for :q, url: trip_sheets_path, method: :get  do |f|
+  = f.input :start_date_eq, as: :date_picker, placeholder: 'Select a date', label: 'Date of trip'
+  = f.input :route_id_in, collection: Route.all,as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route'
 
-    = f.submit 'Search', class: t('buttons.inverse')
+  = f.submit 'Search', class: t('buttons.inverse')
 
 %h4 Quick Tripsheet
 .results

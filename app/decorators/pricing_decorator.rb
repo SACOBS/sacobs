@@ -14,7 +14,6 @@ class PricingDecorator
   end
 
   def cost
-    puts @connection.inspect
     @cost ||= round_up(BigDecimal(@connection.cost))
   end
 

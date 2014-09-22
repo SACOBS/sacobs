@@ -21,7 +21,10 @@
         .container-fluid
           .content
             .unobtrusive-flash-container
-              = yield
+              .sidebar.span3.well
+                = yield(:sidebar)
+              .main-section.span9
+                = yield
       #push
     %footer.navbar.navbar-fixed-bottom.navbar-inverse
       %nav.navbar-inner

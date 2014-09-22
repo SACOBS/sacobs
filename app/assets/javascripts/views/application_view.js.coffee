@@ -5,6 +5,9 @@ class Views.ApplicationView
       Widgets.Select2.enable()
     $('[rel~="tooltip"]').tooltip();
 
+    $(document).on 'hidden', '.modal', ->
+      $(this).remove()
+
   cleanup: ->
     $(document).off 'cocoon:after-insert'
     $('[rel~="tooltip"]').off()
