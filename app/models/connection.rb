@@ -34,6 +34,9 @@ class Connection < ActiveRecord::Base
   before_save :set_name
   before_create :set_percentage
 
+  delegate :city_id, :city_name, :city, to: :from, prefix: true
+  delegate :city_id, :city_name, :city, to: :to, prefix: true
+
 
   private
    def defaults

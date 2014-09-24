@@ -12,10 +12,10 @@
 = link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh
 
 
-= paginate trips
+= paginate @trips
 - bootstrap_table headers:['Name', 'Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render partial: 'archived_trip', collection: trips, as: :trip,cache: true
-= paginate trips
+  = render partial: 'archived_trip', collection: @trips, as: :trip,cache: true
+= paginate @trips
 
 
 = link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh

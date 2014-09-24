@@ -53,7 +53,7 @@ class PassengerBillingDetail
     end
 
     def total_charges
-      charge_items.reduce(0) {|sum, c| sum += c.amount}
+      charge_items.sum(&:amount)
     end
 
     def total_cost

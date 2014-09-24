@@ -1,9 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
-  decorates_assigned :trips
-  decorates_assigned :trip
-
   def calendar
    @trips = Trip.includes(:route, :bus).all
   end

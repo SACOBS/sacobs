@@ -1,7 +1,5 @@
 class RoutesController < ApplicationController
   before_action :set_route, only: [:copy, :reverse_copy ,:show, :edit, :update,:destroy]
-  decorates_assigned :routes
-  decorates_assigned :route
 
   def index
     @q = Route.search(params[:q])

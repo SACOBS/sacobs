@@ -1,109 +1,105 @@
-- cache booking do
+- cache @decorated_booking.model do
   .page-header
     %h2 Booking
-  .form-actions
-    = back_to bookings_path
-    = link_to_if(@booking.reserved?,'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse'))
-    = link_to_unless(@booking.cancelled?,'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning')){}
-    = link_to_if(@booking.cancelled?,'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times) {}
-
+    .actions
+      = back_to bookings_path
+      = @decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
+      = @decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
+      = @decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
   .well
     %p
       %strong Reference No:
       %br
-      = booking.reference
+      = @decorated_booking.reference_no
     %p
       %strong Trip:
       %br
-      = booking.trip_name
+      = @decorated_booking.trip_name
     %p
       %strong Travel Date:
       %br
-      = booking.travel_date
+      = @decorated_booking.trip_start_date
     %p
       %strong From:
       %br
-      = booking.from
+      = @decorated_booking.from_city
     %p
       %strong To:
       %br
-      =  booking.to
+      = @decorated_booking.to_city
     %p
       %strong Status:
       %br
-      = booking.status
+      = @decorated_booking.status
     %p
       %strong Price:
       %br
-      = booking.price
+      = @decorated_booking.price
 
   .well
     %h3 Payment Detail
     %p
       %strong Payment Type:
       %br
-      = booking.payment_type
+      = @decorated_booking.payment_type_description
     %p
       %strong Payment Date:
       %br
-      = booking.payment_date
+      = @decorated_booking.payment_date
 
     %p
       %strong Customer Payment Reference (Proof of payment reference from customer):
       %br
-      =  booking.payment_reference
+      =  @decorated_booking.reference
 
   .well
     %h3 Client
     %p
       %strong Full Name:
       %br
-      = booking.client_name
+      = @decorated_booking.client_name
     %p
       %strong Email:
       %br
-      = booking.client_email
+      = @decorated_booking.client_email
     %p
       %strong Date Of Birth:
       %br
-      = booking.client_date_of_birth
+      = @decorated_booking.client_date_of_birth
     %p
       %strong Age:
       %br
-      = booking.client_age
+      = @decorated_booking.client_age
 
     %p
       %strong CellPhone:
       %br
-      = booking.client.cellphone
+      = @decorated_booking.client_cell_no
     %p
       %strong Home Telephone:
       %br
-      = booking.client.home_telephone
+      = @decorated_booking.client_home_no
     %p
       %strong Work Telephone:
       %br
-      = booking.client.work_telephone
+      = @decorated_booking.client_work_no
 
   .well
     %h3 Passengers
     - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
-      - booking.passengers.each do |passenger|
+      - @decorated_booking.passengers.each do |passenger|
+        - passenger_presenter = PassengerPresenter.new(passenger, self)
         %tr
-          %td= passenger.name
-          %td= passenger.surname
-          %td= passenger.passenger_type
-          %td= passenger.cellphone
-          %td= passenger.email
-  .form-actions
+          %td= passenger_presenter.name
+          %td= passenger_presenter.surname
+          %td= passenger_presenter.passenger_type
+          %td= passenger_presenter.cellphone
+          %td= passenger_presenter.email
+  .actions
     = back_to bookings_path
-    = link_to_if(@booking.reserved?,'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.inverse'))
-    = link_to_unless(@booking.cancelled?,'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.warning')){}
-    = link_to_if(@booking.cancelled?,'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.danger'), icon: :times) {}
-
-
-
-
+    = @decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
+    = @decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
+    = @decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
 
 
 

@@ -1,16 +1,17 @@
 %tr
   %td= link_to booking.client_name, contact_details_client_path(booking.client), remote: true
-  %td= booking.travel_date
+  %td= booking.trip_start_date
   %td= booking.quantity
-  %td= booking.from
-  %td= booking.to
+  %td= booking.from_city
+  %td= booking.to_city
   %td= booking.status
-  %td= booking.booking_date
+  %td= booking.created_at
   %td= booking.expires_in
   %td= booking.expiry_date
   %td
-    = link_to 'Show', booking, icon: :info, class: t('buttons.mini.info')
-    = link_to_if(booking.paid?,'Generate Ticket', ticket_path(booking),icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
-    = link_to_if(booking.reserved?,'Confirm', confirm_booking_path(booking), method: :patch, icon: :money, class: t('buttons.mini.inverse')){}
-    = link_to_unless(booking.cancelled?,'Cancel', cancel_booking_path(booking), method: :patch, icon: :warning, class: t('buttons.mini.warning')){}
-    = link_to_if(booking.cancelled?,'Destroy', booking, method: :delete, data: { confirm: t('messages.confirm', resource: :booking) }, class: t('buttons.mini.danger'), icon: :times) {}
+    = booking.show_link(icon: :info, class: t('buttons.mini.info'))
+    = booking.ticket_link(icon: :tasks, class: t('buttons.mini.default') )
+    = booking.confirmation_link(icon: :money, class: t('buttons.mini.inverse'))
+    = booking.cancellation_link(icon: :warning,class: t('buttons.mini.warning'))
+    = booking.destroy_link(icon: :times, class: t('buttons.mini.danger'))
+

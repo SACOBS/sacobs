@@ -1,18 +1,8 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
-  decorates_assigned :reserved_bookings
-  decorates_assigned :standby_bookings
-  decorates_assigned :paid_bookings
-  decorates_assigned :cancelled_bookings
-  decorates_assigned :booking
 
   def index
-    @q = Booking.includes(:trip, :stop, :client).not_in_process.active.search(params[:q])
-    @bookings = @q.result(distinct: true)
-    @reserved_bookings = paginate_collection(@bookings.open, params[:reserved_page])
-    @standby_bookings = paginate_collection(@bookings.standby, params[:standby_page])
-    @paid_bookings = paginate_collection(@bookings.paid, params[:paid_page])
-    @cancelled_bookings = paginate_collection(@bookings.cancelled, params[:cancelled_page])
+    @booking_dashboard = BookingDashboard.new(params, view_context)
   end
 
   def create
@@ -21,6 +11,7 @@ class BookingsController < ApplicationController
   end
 
   def show
+   @decorated_booking = BookingDecorator.decorate(@booking, view_context)
    fresh_when @booking, last_modified: @booking.updated_at
   end
 
@@ -42,9 +33,5 @@ class BookingsController < ApplicationController
   private
    def set_booking
     @booking = Booking.find(params[:id])
-   end
-
-   def paginate_collection(collection, page)
-     Kaminari.paginate_array(collection).page(page)
    end
 end

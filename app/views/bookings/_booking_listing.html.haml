@@ -3,50 +3,50 @@
     %li.active
       %a{href: '#reserved', data: {toggle: :tab} }
         Reserved
-        %span.badge.badge-info #{reserved_bookings.total_count}
+        %span.badge.badge-info #{@booking_dashboard.reserved.total_count}
     %li
       %a{href: '#standby',  data: {toggle: :tab}}
         Standby
-        %span.badge.badge-warning #{standby_bookings.total_count}
+        %span.badge.badge-warning #{@booking_dashboard.standby.total_count}
     %li
       %a{href: '#paid',  data: {toggle: :tab}}
         Paid
-        %span.badge.badge-success #{paid_bookings.total_count}
+        %span.badge.badge-success #{@booking_dashboard.paid.total_count}
     %li
       %a{href: '#cancelled',  data: {toggle: :tab}}
         Cancelled
-        %span.badge.badge-important #{cancelled_bookings.total_count}
+        %span.badge.badge-important #{@booking_dashboard.cancelled.total_count}
 
   .tab-content
     .tab-pane.active{id: :reserved}
-      = paginate reserved_bookings, param_name: :reserved_page
-      - if reserved_bookings.any?
+      = paginate @booking_dashboard.reserved, param_name: :reserved_page
+      - if @booking_dashboard.reserved.any?
         - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-          = render partial: 'bookings/booking', collection: reserved_bookings, cache: true
+          = render partial: 'bookings/booking', collection: @booking_dashboard.reserved, cache: true
       - else
         %h3 There are currently 0 reserved bookings.
-      = paginate reserved_bookings, param_name: :reserved_page
+      = paginate @booking_dashboard.reserved, param_name: :reserved_page
     .tab-pane{id: :standby}
-      = paginate standby_bookings, param_name: :standby_page
-      - if standby_bookings.any?
+      = paginate @booking_dashboard.standby, param_name: :standby_page
+      - if @booking_dashboard.standby.any?
         - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-          = render partial: 'bookings/booking', collection:  standby_bookings, cache: true
+          = render partial: 'bookings/booking', collection:  @booking_dashboard.standby, cache: true
       - else
         %h3 There are currently 0 standby bookings.
-      = paginate standby_bookings, param_name: :standby_page
+      = paginate @booking_dashboard.standby, param_name: :standby_page
     .tab-pane{id: :paid}
-      = paginate paid_bookings, param_name: :paid_page
-      - if paid_bookings.any?
+      = paginate @booking_dashboard.paid, param_name: :paid_page
+      - if @booking_dashboard.paid.any?
         - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-          = render partial: 'bookings/booking', collection:  paid_bookings, cache: true
+          = render partial: 'bookings/booking', collection:  @booking_dashboard.paid, cache: true
       - else
         %h3 There are currently 0 paid bookings.
-      = paginate paid_bookings, param_name: :paid_page
+      = paginate @booking_dashboard.paid, param_name: :paid_page
     .tab-pane{id: :cancelled}
-      = paginate cancelled_bookings, param_name: :cancelled_page
-      - if cancelled_bookings.any?
+      = paginate @booking_dashboard.cancelled, param_name: :cancelled_page
+      - if @booking_dashboard.cancelled.any?
         - bootstrap_table headers:['Client','Trip Date','Qty','From','To','Status','Booking Date', 'Expires In' ,'Expiry Date' ,'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-          = render partial: 'bookings/booking', collection:  cancelled_bookings, cache: true
+          = render partial: 'bookings/booking', collection:  @booking_dashboard.cancelled, cache: true
       - else
         %h3 There are currently 0 cancelled bookings.
-      = paginate cancelled_bookings, param_name: :cancelled_page
+      = paginate @booking_dashboard.cancelled, param_name: :cancelled_page

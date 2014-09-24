@@ -120,6 +120,9 @@
 #                      charge PATCH  /charges/:id(.:format)                              charges#update
 #                             PUT    /charges/:id(.:format)                              charges#update
 #                             DELETE /charges/:id(.:format)                              charges#destroy
+#                       notes GET    /notes(.:format)                                    notes#index
+#                             POST   /notes(.:format)                                    notes#create
+#                    new_note GET    /notes/new(.:format)                                notes#new
 #                print_ticket GET    /tickets/:id/print(.:format)                        tickets#print
 #                email_ticket POST   /tickets/:id/email(.:format)                        tickets#email
 #             download_ticket GET    /tickets/:id/download(.:format)                     tickets#download

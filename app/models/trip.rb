@@ -42,6 +42,7 @@ class Trip < ActiveRecord::Base
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
   delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
+  delegate :name, to: :route, prefix: true
 
   validates :name, :start_date, :end_date, :route, :bus, presence: true, on: :update
 

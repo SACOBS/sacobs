@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   before_action :set_booking
 
   def download
-    @ticket = Ticket.new(@booking)
+    @ticket = Ticket.new(@booking, view_context)
     pdf = generate_pdf
     send_data(pdf,
               filename: generate_file_name,
@@ -10,11 +10,11 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.new(@booking)
+    @ticket = Ticket.new(@booking, view_context)
   end
 
   def print
-    @ticket = Ticket.new(@booking)
+    @ticket = Ticket.new(@booking, view_context)
     respond_to do |format|
       format.pdf do
         render pdf: generate_file_name,

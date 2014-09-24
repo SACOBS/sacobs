@@ -3,8 +3,6 @@ class ChargesController < ApplicationController
 
   before_action :set_charge, only: [:edit, :update, :destroy]
 
-  decorates_assigned :charges
-
   def index
     @charges = Charge.all
   end

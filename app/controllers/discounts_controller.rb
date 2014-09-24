@@ -3,8 +3,6 @@ class DiscountsController < ApplicationController
 
   before_action :set_discount, only: [:edit, :update, :destroy]
 
-  decorates_assigned :discounts
-
   def index
     @discounts = Discount.includes(:passenger_type)
   end

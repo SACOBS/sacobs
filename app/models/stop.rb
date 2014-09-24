@@ -26,7 +26,7 @@ class Stop < ActiveRecord::Base
  scope :en_route, -> (destination) { joins(:trip,connection: [:to,:route]).where('destinations.sequence > ?', destination.sequence).readonly(false)}
  scope :valid, -> { joins(:trip).merge(Trip.valid) }
 
- delegate :name, :from, :to, :cost, to: :connection
+ delegate :name ,:from_city, :to_city, :from_city_id, :from_city_name, :to_city_id,:to_city_name, :cost, to: :connection
 
  delegate :name,:start_date, to: :trip, prefix: true
 

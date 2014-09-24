@@ -26,19 +26,17 @@ class SeasonalDiscount < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
   scope :applicable, ->{ where(arel_table[:period_from].gteq(Time.zone.now)) }
-  scope :active_in_period, -> (date) { where(seasonal_discount[:period_from].lteq(date).and(seasonal_discount[:period_to].gteq(date))).merge(active) }
+  scope :active_in_period, -> (date) { where(arel_table[:period_from].lteq(date).and(arel_table[:period_to].gteq(date))).merge(active) }
 
 
   validates_presence_of :passenger_type
 
+  delegate :description, to: :passenger_type, prefix: true
+
   def description
-    "#{name}(seasonal_#{passenger_type.description}_discount)".titleize
+    "#{name}(seasonal_#{passenger_type_description}_discount)".titleize
   end
 
-  def self.seasonal_discount
-    self.arel_table
-  end
-  private_class_method :seasonal_discount
 
   private
    def defaults

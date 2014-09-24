@@ -1,6 +1,7 @@
+- stop_presenter = StopPresenter.new(stop, self)
 %tr
-  %td= stop.from
-  %td= stop.to
-  %td= stop.depart_time
-  %td= stop.arrive_time
-  %td= stop.available_seats
+  %td= stop_presenter.from_city_name
+  %td= stop_presenter.to_city_name
+  %td= stop_presenter.depart_time
+  %td= stop_presenter.arrive_time
+  %td= stop_presenter.available_seats

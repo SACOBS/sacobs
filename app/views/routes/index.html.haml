@@ -10,10 +10,10 @@
 = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
 = link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh
 
-= paginate routes
+= paginate @routes
 - bootstrap_table headers:['Description','Start City', 'End City','Cost', 'Distance','Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render partial: 'route', collection: routes, cache: true
-= paginate routes
+  = render partial: 'route', collection: @routes, cache: true
+= paginate @routes
 
 
 = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')

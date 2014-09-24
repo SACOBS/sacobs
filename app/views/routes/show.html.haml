@@ -1,38 +1,38 @@
-- cache route do
+- cache @route do
+  - route_presenter = RoutePresenter.new(@route, self)
   .page-header
     %h2 Route
-
-  .form-actions
-    = back_to routes_path
-    = link_to 'Edit', edit_route_path(route), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
+    .actions
+      = back_to routes_path
+      = link_to 'Edit', edit_route_path(@route), icon: :edit, class: t('buttons.info')
+      = link_to 'Destroy', @route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
 
   .well
     %p
       %strong Start City:
       %br
-      = route.start_city
+      = route_presenter.start_city
     %p
       %strong End City:
       %br
-      = route.end_city
+      = route_presenter.end_city
     %p
       %strong Cost:
       %br
-      = route.cost
+      = route_presenter.cost
     %p
       %strong Distance:
       %br
-      = route.distance
+      = route_presenter.distance
   .well
     %p
       %strong Connections:
       - bootstrap_table headers:['From', 'To','Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
-        = render partial: 'connections/connection', collection: route.connections, cache: true
-  .form-actions
+        = render partial: 'connections/connection', collection: @route.connections, cache: true
+  .actions
     = back_to routes_path
-    = link_to 'Edit', edit_route_path(route), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
+    = link_to 'Edit', edit_route_path(@route), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', @route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
 
 
 

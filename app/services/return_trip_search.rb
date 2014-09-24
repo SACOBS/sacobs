@@ -14,8 +14,8 @@ class ReturnTripSearch
 
   private
     def init_search_params
-      @search_params.merge!(from_city_id: @stop.to.city_id) unless @search_params.has_key?(:from_city_id)
-      @search_params.merge!(to_city_id: @stop.from.city_id) unless @search_params.has_key?(:to_city_id)
+      @search_params.merge!(from_city_id: @stop.to_city_id) unless @search_params.has_key?(:from_city_id)
+      @search_params.merge!(to_city_id: @stop.from_city_id) unless @search_params.has_key?(:to_city_id)
     end
 
     def criteria

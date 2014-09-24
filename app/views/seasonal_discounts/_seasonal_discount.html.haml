@@ -1,8 +1,9 @@
+- seasonal_discount_presenter = SeasonalDiscountPresenter.new(seasonal_discount, self)
 %tr[seasonal_discount]
-  %td= seasonal_discount.name
-  %td= seasonal_discount.passenger_type
-  %td= seasonal_discount.percentage
-  %td= seasonal_discount.period_from
-  %td= seasonal_discount.period_to
-  %td= seasonal_discount.active
-  %td= seasonal_discount.activation_link
+  %td= seasonal_discount_presenter.name
+  %td= seasonal_discount_presenter.passenger_type
+  %td= seasonal_discount_presenter.percentage
+  %td= seasonal_discount_presenter.period_from
+  %td= seasonal_discount_presenter.period_to
+  %td= seasonal_discount_presenter.active
+  %td= seasonal_discount_presenter.activation_link

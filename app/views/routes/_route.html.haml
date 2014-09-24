@@ -1,11 +1,12 @@
 - cache route do
-  %tr[route]
-    %td= link_to route.name, route
-    %td= route.start_city
-    %td= route.end_city
-    %td= route.cost
-    %td= route.distance
-    %td= route.connections_count
+  - route_presenter = RoutePresenter.new(route, self)
+  %tr[@route]
+    %td= link_to route_presenter.name, route
+    %td= route_presenter.start_city
+    %td= route_presenter.end_city
+    %td= route_presenter.cost
+    %td= route_presenter.distance
+    %td= route_presenter.connections_count
     %td
       = link_to 'Add Destination', edit_route_destinations_path(route), icon: :plus, class: t('buttons.mini.primary'), data: {toggle: "tooltip", title:"Click here to add a new destination (eg East London) to the route."}, rel: 'tooltip'
       = link_to 'Copy', copy_route_path(route), icon: :copy ,class: t('buttons.mini.warning'), method: :post, data: {toggle: "tooltip", title:"Click here to create a copy of this route."}, rel: 'tooltip'

@@ -1,33 +1,33 @@
 .details
   %p.pull-left
     %strong Reference No:
-    = @ticket.booking.reference_no
+    = @ticket.reference_no
   %p.pull-right
     %strong Today's Date:
-    = l Time.zone.now, format: :long
+    = @ticket.ticket_date
 .passengers
 - bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure', 'Arrival'], types: [:bordered, :condensed] do
   - @ticket.passengers.each do |passenger|
     %tr
       %td= @ticket.booking.trip_start_date
       %td= passenger.full_name
-      %td= @ticket.booking.from
-      %td= @ticket.booking.from_venue
-      %td= @ticket.booking.to
-      %td= @ticket.booking.to_venue
-      %td= @ticket.booking.stop.depart_time || l(Time.zone.now, format: :long)
-      %td= @ticket.booking.stop.arrive_time || l(Time.zone.now, format: :long)
-  - if @ticket.return
-    - @ticket.passengers.each do |passenger|
+      %td= @ticket.from_city
+      %td= @ticket.from_venue
+      %td= @ticket.to_city
+      %td= @ticket.to_venue
+      %td= @ticket.depart_time
+      %td= @ticket.arrive_time
+  - if @ticket.return_booking
+    - @ticket.passengers.each do |return_passenger|
       %tr
-        %td= @ticket.return.trip_start_date
-        %td= passenger.full_name
-        %td= @ticket.return.from
-        %td= @ticket.return.from_venue
-        %td= @ticket.return.to
-        %td= @ticket.return.to_venue
-        %td= @ticket.return.stop.depart_time || l(Time.zone.now, format: :long)
-        %td= @ticket.return.stop.arrive_time || l(Time.zone.now, format: :long)
+        %td= @ticket.return_booking.trip_start_date
+        %td= return_passenger.full_name
+        %td= @ticket.return_from_city
+        %td= @ticket.return_from_venue
+        %td= @ticket.return_to_city
+        %td= @ticket.return_to_venue
+        %td= @ticket.return_depart_time
+        %td= @ticket.return_arrive_time
   %tr
     %td
     %td
@@ -38,17 +38,17 @@
     %td
     %td
       %strong Price:
-      %strong= number_to_currency @ticket.total_cost, unit: 'R'
+      %strong= @ticket.price
     %td
       %strong Discount:
-      %strong= number_to_currency @ticket.total_discount, unit: 'R'
+      %strong= @ticket.discount
     %td
       %strong Total:
-      %strong= number_to_currency @ticket.total, unit: 'R'
+      %strong= @ticket.nett
 .special-instructions.text-center
   %p
-    %em= simple_format(settings.ticket_instructions)
+    %em= @ticket.instructions
 .scripture.text-center
   %p
   %strong Thought for today
-  %em= simple_format(ticket_scripture)
+  %em= @ticket.scripture

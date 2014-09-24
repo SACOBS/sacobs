@@ -1,4 +1,4 @@
-class PricingDecorator
+class PricingPresenter
 
   attr_reader :discount_prices, :price, :charges
 
@@ -14,7 +14,7 @@ class PricingDecorator
   end
 
   def cost
-    @cost ||= round_up(BigDecimal(@connection.cost))
+    @cost ||= round_up(@connection.cost)
   end
 
   def price

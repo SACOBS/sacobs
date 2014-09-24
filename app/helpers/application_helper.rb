@@ -32,13 +32,8 @@ module ApplicationHelper
     @cities ||= City.select(:id, :name)
   end
 
-
   def route_cities(route)
     @route_cities ||= route.destinations.map(&:city)
-  end
-
-  def ticket_scripture
-   ScriptureService.new.fetch || settings.default_scripture
   end
 
   def invoice_total(booking)
@@ -53,5 +48,9 @@ module ApplicationHelper
 
   def active_bookings_count
     @active_bookings_count ||= Booking.not_in_process.active.count
+  end
+
+  def decimal_to_percentage(value)
+    number_to_percentage(value * 100, precision: 2)
   end
 end

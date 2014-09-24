@@ -54,11 +54,10 @@ class Client < ActiveRecord::Base
   validates :name, :surname ,presence: true
 
   before_validation :set_full_name, prepend: true
-
   before_save :set_birth_date_from_id_number
 
   def age
-    return unless date_of_birth
+    return unless date_of_birth?
     @age ||= date_of_birth.find_age
   end
 

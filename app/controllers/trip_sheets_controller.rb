@@ -1,8 +1,6 @@
 class TripSheetsController < ApplicationController
   before_action :set_trip, except: :index
 
-  decorates_assigned :trips
-
   def index
     @q = Trip.includes(:route, :bookings).search(params[:q])
     @trips = @q.result(distinct: true).order(start_date: :asc)
