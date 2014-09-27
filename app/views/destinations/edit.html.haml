@@ -4,7 +4,7 @@
   .span5
     %ol
       - @route.destinations.each do |d|
-        %li= d.name
+        %li= d.city_name
 
     = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
       = f.submit 'Save', class: t('buttons.primary')

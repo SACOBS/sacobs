@@ -1,17 +1,17 @@
-%tr
-  %td= link_to booking.client_name, contact_details_client_path(booking.client), remote: true
-  %td= booking.trip_start_date
-  %td= booking.quantity
-  %td= booking.from_city
-  %td= booking.to_city
-  %td= booking.status
-  %td= booking.created_at
-  %td= booking.expires_in
-  %td= booking.expiry_date
-  %td
-    = booking.show_link(icon: :info, class: t('buttons.mini.info'))
-    = booking.ticket_link(icon: :tasks, class: t('buttons.mini.default') )
-    = booking.confirmation_link(icon: :money, class: t('buttons.mini.inverse'))
-    = booking.cancellation_link(icon: :warning,class: t('buttons.mini.warning'))
-    = booking.destroy_link(icon: :times, class: t('buttons.mini.danger'))
+- BookingDecorator.decorate(booking, self) do |decorated_booking|
+  %tr
+    %td= link_to decorated_booking.client_name, contact_details_client_path(decorated_booking.client), remote: true
+    %td= decorated_booking.trip_start_date
+    %td= decorated_booking.quantity
+    %td= decorated_booking.from_city
+    %td= decorated_booking.to_city
+    %td= decorated_booking.created_at
+    %td= decorated_booking.expires_in
+    %td= decorated_booking.expiry_date
+    %td
+      = decorated_booking.show_link(icon: :info, class: t('buttons.mini.info'))
+      = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.mini.default') )
+      = decorated_booking.confirmation_link(icon: :money, class: t('buttons.mini.inverse'))
+      = decorated_booking.cancellation_link(icon: :warning,class: t('buttons.mini.warning'))
+      = decorated_booking.destroy_link(icon: :times, class: t('buttons.mini.danger'))
 

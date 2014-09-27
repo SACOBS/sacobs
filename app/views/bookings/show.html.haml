@@ -1,105 +1,105 @@
-- cache @decorated_booking.model do
-  .page-header
-    %h2 Booking
+- cache @booking do
+  - BookingDecorator.decorate(@booking, self) do |decorated_booking|
+    .page-header
+      %h2 Booking
+      .actions
+        = back_to bookings_path
+        = decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
+        = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
+        = decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
+    .well
+      %p
+        %strong Reference No:
+        %br
+        = decorated_booking.reference_no
+      %p
+        %strong Trip:
+        %br
+        = decorated_booking.trip_name
+      %p
+        %strong Travel Date:
+        %br
+        = decorated_booking.trip_start_date
+      %p
+        %strong From:
+        %br
+        = decorated_booking.from_city
+      %p
+        %strong To:
+        %br
+        = decorated_booking.to_city
+      %p
+        %strong Status:
+        %br
+        = decorated_booking.status
+      %p
+        %strong Price:
+        %br
+        = decorated_booking.price
+
+    .well
+      %h3 Payment Detail
+      %p
+        %strong Payment Type:
+        %br
+        = decorated_booking.payment_type_description
+      %p
+        %strong Payment Date:
+        %br
+        = decorated_booking.payment_date
+
+      %p
+        %strong Customer Payment Reference (Proof of payment reference from customer):
+        %br
+        = decorated_booking.reference
+
+    .well
+      %h3 Client
+      %p
+        %strong Full Name:
+        %br
+        = decorated_booking.client.full_name
+      %p
+        %strong Email:
+        %br
+        = decorated_booking.client.email
+      %p
+        %strong Date Of Birth:
+        %br
+        = decorated_booking.client.date_of_birth
+      %p
+        %strong Age:
+        %br
+        = decorated_booking.client.age
+
+      %p
+        %strong CellPhone:
+        %br
+        = decorated_booking.client.cellphone
+      %p
+        %strong Home Telephone:
+        %br
+        = decorated_booking.client.home_telephone
+      %p
+        %strong Work Telephone:
+        %br
+        = decorated_booking.client.work_telephone
+
+    .well
+      %h3 Passengers
+      - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
+        - decorated_booking.passengers.each do |passenger|
+          %tr
+            %td= passenger.name
+            %td= passenger.surname
+            %td= passenger.passenger_type_description
+            %td= passenger.cellphone
+            %td= passenger.email
     .actions
       = back_to bookings_path
-      = @decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
-      = @decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
-      = @decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
-  .well
-    %p
-      %strong Reference No:
-      %br
-      = @decorated_booking.reference_no
-    %p
-      %strong Trip:
-      %br
-      = @decorated_booking.trip_name
-    %p
-      %strong Travel Date:
-      %br
-      = @decorated_booking.trip_start_date
-    %p
-      %strong From:
-      %br
-      = @decorated_booking.from_city
-    %p
-      %strong To:
-      %br
-      = @decorated_booking.to_city
-    %p
-      %strong Status:
-      %br
-      = @decorated_booking.status
-    %p
-      %strong Price:
-      %br
-      = @decorated_booking.price
-
-  .well
-    %h3 Payment Detail
-    %p
-      %strong Payment Type:
-      %br
-      = @decorated_booking.payment_type_description
-    %p
-      %strong Payment Date:
-      %br
-      = @decorated_booking.payment_date
-
-    %p
-      %strong Customer Payment Reference (Proof of payment reference from customer):
-      %br
-      =  @decorated_booking.reference
-
-  .well
-    %h3 Client
-    %p
-      %strong Full Name:
-      %br
-      = @decorated_booking.client_name
-    %p
-      %strong Email:
-      %br
-      = @decorated_booking.client_email
-    %p
-      %strong Date Of Birth:
-      %br
-      = @decorated_booking.client_date_of_birth
-    %p
-      %strong Age:
-      %br
-      = @decorated_booking.client_age
-
-    %p
-      %strong CellPhone:
-      %br
-      = @decorated_booking.client_cell_no
-    %p
-      %strong Home Telephone:
-      %br
-      = @decorated_booking.client_home_no
-    %p
-      %strong Work Telephone:
-      %br
-      = @decorated_booking.client_work_no
-
-  .well
-    %h3 Passengers
-    - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
-      - @decorated_booking.passengers.each do |passenger|
-        - passenger_presenter = PassengerPresenter.new(passenger, self)
-        %tr
-          %td= passenger_presenter.name
-          %td= passenger_presenter.surname
-          %td= passenger_presenter.passenger_type
-          %td= passenger_presenter.cellphone
-          %td= passenger_presenter.email
-  .actions
-    = back_to bookings_path
-    = @decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
-    = @decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
-    = @decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
+      = decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
+      = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
+      = decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
 
 
 

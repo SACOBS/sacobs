@@ -36,7 +36,7 @@ class Route < ActiveRecord::Base
     enable
     nullify :connections_count
     prepend name: 'Copy of'
-    include_field [:connections, :destinations]
+    clone [:connections, :destinations]
   end
 
   with_options  reject_if: :all_blank, allow_destroy: true do |assoc|

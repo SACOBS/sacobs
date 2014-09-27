@@ -1,10 +1,10 @@
 - cache connection do
-  - connection_presenter = ConnectionPresenter.new(connection, self)
-  %tr
-    %td= connection_presenter.from_city
-    %td= connection_presenter.to_city
-    %td= connection_presenter.distance
-    %td= connection_presenter.percentage
-    %td= connection_presenter.cost
-    %td= connection_presenter.depart_time
-    %td= connection_presenter.arrive_time
+  - ConnectionDecorator.decorate(connection, self) do |decorated_connection|
+    %tr
+      %td= decorated_connection.from_city
+      %td= decorated_connection.to_city
+      %td= decorated_connection.distance
+      %td= decorated_connection.percentage
+      %td= decorated_connection.cost
+      %td= decorated_connection.depart_time
+      %td= decorated_connection.arrive_time

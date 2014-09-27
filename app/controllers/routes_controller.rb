@@ -29,7 +29,7 @@ class RoutesController < ApplicationController
   def copy
     copy = @route.amoeba_dup
     copy.user = current_user
-    Route.no_touching { copy.save }
+    Route.no_touching { copy.save! }
     respond_with copy, location: routes_url
   end
   

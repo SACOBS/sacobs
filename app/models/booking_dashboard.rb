@@ -1,29 +1,31 @@
 class BookingDashboard
 
   attr_reader :standby, :cancelled, :paid, :reserved, :bookings
-  def initialize(params, view_context)
+  def initialize(bookings, params)
+    @bookings = bookings
     @params = params
-    @view_context = view_context
-  end
-
-  def bookings
-   @bookings ||= Booking.includes(:trip, :stop, :client).not_in_process.active.search(@params[:q]).result.distinct(true)
   end
 
   def reserved
-    @reserved ||= BookingsDecorator.new(bookings.open.page(@params[:reserved_page]), @view_context)
+    @reserved ||= paginate_array(bookings.select(&:open?), @params[:reserved_page])
   end
 
   def standby
-    @standby ||= BookingsDecorator.new(bookings.standby.page(@params[:standby_page]), @view_context)
+    @standby ||= paginate_array(bookings.select(&:standby?), @params[:standby_page])
   end
 
   def paid
-    @paid ||= BookingsDecorator.new(bookings.paid.page(@params[:paid_page]), @view_context)
+    @paid ||= paginate_array(bookings.select(&:paid?),@params[:paid_page])
   end
 
   def cancelled
-    @cancelled ||= BookingsDecorator.new(bookings.cancelled.page(@params[:cancelled_page]), @view_context)
+    @cancelled ||= paginate_array(bookings.select(&:cancelled?), @params[:cancelled_page])
   end
+
+  private
+   def paginate_array(array, page)
+     Kaminari.paginate_array(array).page(page)
+   end
+
 end
 

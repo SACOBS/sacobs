@@ -25,6 +25,6 @@ class ClientDecorator < BaseDecorator
   end
 
   def bank
-    client.bank_name.presence || 'Not Applicable'
+    bank_name.presence || 'Not Applicable'
   end
 end

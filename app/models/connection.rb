@@ -50,7 +50,7 @@ class Connection < ActiveRecord::Base
 
   protected
     def set_name
-      self.name = "#{self.from.name} to #{self.to.name}"
+      self.name = "#{from_city_name} to #{to_city_name}"
     end
 
     def set_percentage

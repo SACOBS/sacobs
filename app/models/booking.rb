@@ -72,6 +72,14 @@ class Booking < ActiveRecord::Base
     main_id?
   end
 
+  def open?
+    reserved? && !expired?
+  end
+
+  def standby?
+    reserved? && expired?
+  end
+
   def expired?
     expiry_date? && (expiry_date <= Time.zone.now)
   end

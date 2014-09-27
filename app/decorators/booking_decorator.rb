@@ -1,7 +1,14 @@
 class BookingDecorator < BaseDecorator
+   def passengers
+     @passengers ||= model.passengers.map {|passenger| PassengerDecorator.decorate(passenger, @view_context)}
+   end
+
+   def client
+    @client ||= ClientDecorator.decorate(model.client, @view_context)
+   end
 
    def expires_in
-     helpers.distance_of_time_in_words_to_now(expiry_date)
+     helpers.time_ago_in_words(expiry_date)
    end
 
    def price
@@ -26,6 +33,10 @@ class BookingDecorator < BaseDecorator
 
    def show_link(options={})
      helpers.link_to 'Show', model, options
+   end
+
+   def copy_link(options={})
+
    end
 
    def ticket_link(options={})

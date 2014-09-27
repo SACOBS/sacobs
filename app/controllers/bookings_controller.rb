@@ -2,7 +2,8 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    @booking_dashboard = BookingDashboard.new(params, view_context)
+    bookings = Booking.includes(:trip, :stop, :client).not_in_process.search(params[:q]).result.distinct(true)
+    @booking_dashboard = BookingDashboard.new(bookings, params)
   end
 
   def create
@@ -11,7 +12,6 @@ class BookingsController < ApplicationController
   end
 
   def show
-   @decorated_booking = BookingDecorator.decorate(@booking, view_context)
    fresh_when @booking, last_modified: @booking.updated_at
   end
 

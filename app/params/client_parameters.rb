@@ -5,7 +5,7 @@ class ClientParameters < Struct.new(:params)
 
   private
    def client_attributes
-    [ :title, :name, :surname, :date_of_birth,:high_risk , :cell_no, :home_no, :work_no, :email, :bank_id, :notes ]
+    [ :title, :name, :surname, :date_of_birth,:high_risk , :cell_no, :home_no, :work_no, :email, :bank_id, :notes, :id_number ]
    end
 
    def address_attributes

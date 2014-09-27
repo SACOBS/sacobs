@@ -1,40 +1,37 @@
 - cache @route do
-  - route_presenter = RoutePresenter.new(@route, self)
-  .page-header
-    %h2 Route
+  -  RouteDecorator.decorate(@route, self) do |decorated_route|
+    .page-header
+      %h2 Route
+      .actions
+        = back_to routes_path
+        = decorated_route.edit_link(icon: :edit, class: t('buttons.info'))
+        = decorated_route.destroy_link(icon: :times, class: t('buttons.danger'))
+
+    .well
+      %p
+        %strong Start City:
+        %br
+        = decorated_route.start_city
+      %p
+        %strong End City:
+        %br
+        = decorated_route.end_city
+      %p
+        %strong Cost:
+        %br
+        = decorated_route.cost
+      %p
+        %strong Distance:
+        %br
+        = decorated_route.distance
+    .well
+      %p
+        %strong Connections:
+        - bootstrap_table headers:['From', 'To','Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
+          = render partial: 'connections/connection', collection: @route.connections, cache: true
     .actions
       = back_to routes_path
-      = link_to 'Edit', edit_route_path(@route), icon: :edit, class: t('buttons.info')
-      = link_to 'Destroy', @route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
-
-  .well
-    %p
-      %strong Start City:
-      %br
-      = route_presenter.start_city
-    %p
-      %strong End City:
-      %br
-      = route_presenter.end_city
-    %p
-      %strong Cost:
-      %br
-      = route_presenter.cost
-    %p
-      %strong Distance:
-      %br
-      = route_presenter.distance
-  .well
-    %p
-      %strong Connections:
-      - bootstrap_table headers:['From', 'To','Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
-        = render partial: 'connections/connection', collection: @route.connections, cache: true
-  .actions
-    = back_to routes_path
-    = link_to 'Edit', edit_route_path(@route), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', @route , method: :delete, data: { confirm: t('messages.confirm', resource: :route) }, icon: :times, class: t('buttons.danger')
-
-
-
+      = decorated_route.edit_link(icon: :edit, class: t('buttons.info'))
+      = decorated_route.destroy_link(icon: :times, class: t('buttons.danger'))
 
 
