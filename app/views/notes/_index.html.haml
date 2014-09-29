@@ -3,8 +3,9 @@
     %button.close{aria_hidden: "true", data: {dismiss: "modal"}, type: "button"} ×
     %h4#notesLabel Notes
     .modal-body
-      = render 'notes/form' if current_user.admin?
+      .note_form
+        = render 'notes/form', note: @new_note if current_user.admin?
       .well
         %ul.notes
           - @notes.each do |note|
-            %li=note.content
+            %li[note]=link_to_if(current_user.admin?, note.content, edit_note_path(note), remote: true)

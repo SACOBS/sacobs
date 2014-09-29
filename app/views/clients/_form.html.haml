@@ -16,7 +16,7 @@
     = f.input :email, as: :email
     = f.input :notes, as: :text
   #address
-    = f.simple_fields_for @client.build_address do |address|
+    = f.simple_fields_for :address do |address|
       = render 'clients/address_fields', f: address
   .form-actions
     = f.submit class: t('buttons.primary')

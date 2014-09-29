@@ -8,6 +8,15 @@ class NotesController < ApplicationController
     @note = Note.create(note_params)
   end
 
+  def edit
+    @note = Note.find(params[:id])
+  end
+
+  def update
+    @note = Note.find(params[:id])
+    @note.update(note_params)
+  end
+
   private
    def note_params
      params.fetch(:note, {}).permit(:context, :content)

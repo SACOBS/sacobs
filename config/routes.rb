@@ -220,7 +220,7 @@ Sacobs::Application.routes.draw do
 
   resources :charges, except: [:show]
 
-  resources :notes, only: [:index, :create, :new]
+  resources :notes, except: [:show]
 
 
   resources :tickets, only: [:show] do
