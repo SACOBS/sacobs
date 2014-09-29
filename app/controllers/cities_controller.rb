@@ -7,8 +7,8 @@ class CitiesController < ApplicationController
     if request.xhr?
       @cities = City.all.uniq(:name).order(:name)
     else
-      @q = City.search(params[:q]).order(:name)
-      @cities = @q.result(distinct: true).page(params[:page])
+      @q = City.search(params[:q])
+      @cities = @q.result(distinct: true).order(:name).page(params[:page])
     end
   end
 
