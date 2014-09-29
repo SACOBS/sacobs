@@ -11,7 +11,7 @@
                 %td= stop.from_city_name
                 %td= stop.to_city_name
                 %td= stop.available_seats
-                -#%td=link_to 'View Prices', pricing_path(stop_id: stop), remote: true
+                %td=link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
                 %td= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, value: 1, class: 'input-mini'}
                 %td= f.input :has_return, as: :boolean, input_html: {class: 'input-mini', checked: @booking.stop == stop && @booking.has_return }
                 %td

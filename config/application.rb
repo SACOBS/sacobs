@@ -35,7 +35,6 @@ module Sacobs
     I18n.enforce_available_locales = true
 
 
-
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,
