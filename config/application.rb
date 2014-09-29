@@ -29,6 +29,8 @@ module Sacobs
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w(pdf.css)
+    config.assets.precompile += %w(head.js)
+
 
     I18n.enforce_available_locales = true
 
