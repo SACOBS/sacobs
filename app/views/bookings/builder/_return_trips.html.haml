@@ -11,7 +11,7 @@
                   %td= stop.trip_start_date
                   %td= stop.from_city_name
                   %td= stop.to_city_name
-                  %td=link_to 'View Prices', pricing_path(stop.connection), remote: true
+                  %td=link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
                   %td= stop.available_seats
                   %td= @booking.quantity
                   %td
