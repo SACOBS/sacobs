@@ -1,21 +1,22 @@
 #client_contact_detail.modal.hide.fade{aria_hidden:  'true', aria_labelledby: 'clientContactDetailLabel', role: "dialog", tabindex: "-1"}
   .modal-header
     %button.close{aria_hidden: "true", data: {dismiss: "modal"}, type: "button"} ×
-    %h3#clientContactDetailLabel= @decorated_client.full_name
-    .modal-body
-      %p
-        %strong Home Telephone No:
-        %br
-        = @decorated_client.home_telephone
-      %p
-        %strong Work Telephone No:
-        %br
-        = @decorated_client.work_telephone
-      %p
-        %strong Cellphone No:
-        %br
-        = @decorated_client.cellphone
-      %p
-        %strong Email:
-        %br
-        = @decorated_client.email
+    - ClientDecorator.decorate(@client, self) do |decorated_client|
+      %h3#clientContactDetailLabel= decorated_client.full_name
+      .modal-body
+        %p
+          %strong Home Telephone No:
+          %br
+          = decorated_client.home_telephone
+        %p
+          %strong Work Telephone No:
+          %br
+          = decorated_client.work_telephone
+        %p
+          %strong Cellphone No:
+          %br
+          = decorated_client.cellphone
+        %p
+          %strong Email:
+          %br
+          = decorated_client.email

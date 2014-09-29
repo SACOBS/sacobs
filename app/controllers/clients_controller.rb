@@ -9,19 +9,17 @@ class ClientsController < ApplicationController
       @clients = policy_scope(Client).all.uniq(:full_name)
     else
      @q = policy_scope(Client).search(search_criteria)
-     @decorated_clients = ClientsDecorator.new (@q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])), view_context
+     @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
     end
   end
 
   def show
     authorize @client
-    @decorated_client = ClientDecorator.decorate(@client, view_context)
     fresh_when @client, last_modified: @client.updated_at
   end
 
   def contact_details
     authorize @client, :show?
-    @decorated_client = ClientDecorator.decorate(@client, view_context)
     fresh_when @client, last_modified: @client.updated_at
   end
 

@@ -1,81 +1,82 @@
-- cache @decorated_client.model do
-  .page-header
-    %h3= @decorated_client.full_name
+- cache @client do
+  - ClientDecorator.decorate(@client, self) do |decorated_client|
+    .page-header
+      %h3= decorated_client.full_name
+      .actions
+        = back_to clients_path
+        = decorated_client.edit_link(icon: :edit, class: t('buttons.inverse'))
+        = decorated_client.destroy_link(icon: :times, class: t('buttons.danger'))
+
+    .well
+      %p
+        %strong Title:
+        %br
+        = decorated_client.title
+      %p
+        %strong Name:
+        %br
+        = decorated_client.name
+      %p
+        %strong Surname:
+        %br
+        = decorated_client.surname
+      %p
+        %strong Age:
+        %br
+        = decorated_client.age
+      %p
+        %strong Date Of Birth:
+        %br
+        = decorated_client.date_of_birth
+      %p
+        %strong Bank:
+        %br
+        = decorated_client.bank
+      %p
+        %strong High Risk:
+        %br
+        = decorated_client.high_risk
+      %p
+        %strong Home Telephone No:
+        %br
+        = decorated_client.home_telephone
+      %p
+        %strong Work Telephone No:
+        %br
+        = decorated_client.work_telephone
+      %p
+        %strong Cellphone No:
+        %br
+        = decorated_client.cellphone
+      %p
+        %strong Email:
+        %br
+        = decorated_client.email
+      %p
+        %strong Notes:
+        %br
+        = decorated_client.notes
+      %p
+        %strong Address:
+        %address
+          = decorated_client.street_address1
+          %br
+          = decorated_client.street_address2
+          %br
+          = decorated_client.city
+          %br
+          = decorated_client.postal_code
+    .well
+      %p
+        %strong Credit Vouchers:
+        - bootstrap_table headers:['Reference', 'Amount',], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+          - decorated_client.vouchers.each do |voucher|
+            %tr
+              %td= voucher.ref_no
+              %td= number_to_currency(voucher.amount, unit: 'R')
+        = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.warning')
+
     .actions
       = back_to clients_path
-      = link_to 'Edit', edit_client_path(@client), icon: :edit, class: t('buttons.inverse')
-      = link_to 'Destroy', @client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, class: t('buttons.danger')
-
-  .well
-    %p
-      %strong Title:
-      %br
-      = @decorated_client.title
-    %p
-      %strong Name:
-      %br
-      = @decorated_client.name
-    %p
-      %strong Surname:
-      %br
-      = @decorated_client.surname
-    %p
-      %strong Age:
-      %br
-      = @decorated_client.age
-    %p
-      %strong Date Of Birth:
-      %br
-      = @decorated_client.date_of_birth
-    %p
-      %strong Bank:
-      %br
-      = @decorated_client.bank
-    %p
-      %strong High Risk:
-      %br
-      = @decorated_client.high_risk
-    %p
-      %strong Home Telephone No:
-      %br
-      = @decorated_client.home_telephone
-    %p
-      %strong Work Telephone No:
-      %br
-      = @decorated_client.work_telephone
-    %p
-      %strong Cellphone No:
-      %br
-      = @decorated_client.cellphone
-    %p
-      %strong Email:
-      %br
-      = @decorated_client.email
-    %p
-      %strong Notes:
-      %br
-      = @decorated_client.notes
-    %p
-      %strong Address:
-      %address
-        = @decorated_client.street_address1
-        %br
-        = @decorated_client.street_address2
-        %br
-        = @decorated_client.city
-        %br
-        = @decorated_client.postal_code
-  .well
-    %p
-      %strong Credit Vouchers:
-      - bootstrap_table headers:['Reference', 'Amount',], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-        - @decorated_client.vouchers.each do |voucher|
-          %tr
-            %td= voucher.ref_no
-            %td= number_to_currency(voucher.amount, unit: 'R')
-      = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.warning')
-
-  .actions
-    = back_to clients_path
-    = link_to 'Edit', edit_client_path(@client), icon: :edit, class: t('buttons.inverse')
-    = link_to 'Destroy', @client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, class: t('buttons.danger')
+      = decorated_client.edit_link(icon: :edit, class: t('buttons.inverse'))
+      = decorated_client.destroy_link(icon: :times, class: t('buttons.danger'))

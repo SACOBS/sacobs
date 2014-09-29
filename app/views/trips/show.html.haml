@@ -1,51 +1,49 @@
 - cache @trip do
-  - trip_presenter = TripPresenter.new(@trip, self)
-  .page-header
-    %h1 Trip
+  - TripDecorator.decorate(@trip, self)  do |decorated_trip|
+    .page-header
+      %h1 Trip
+      .actions
+        = back_to trips_path
+        = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
+
+    .well
+      %p
+        %strong Name:
+        %br
+        = decorated_trip.name
+      %p
+        %strong Start Date:
+        %br
+        = decorated_trip.start_date
+      %p
+        %strong End Date:
+        %br
+        = decorated_trip.end_date
+      %p
+        %strong Route
+        %br
+        = decorated_trip.route_name
+      %p
+        %strong Notes
+        %br
+        = decorated_trip.notes
+      %p
+        %strong Bus
+        %br
+        = decorated_trip.bus_name
+      %p
+        %strong Drivers:
+        %ul
+          = list_of(decorated_trip.drivers) do |driver|
+            = driver.full_name
+    .well
+      %p
+        %strong Stops:
+        - bootstrap_table headers:['From', 'To','Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+          = render partial: 'stops/stop', collection: decorated_trip.stops, cache: true
     .actions
       = back_to trips_path
-      = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
-      = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
-
-  .well
-    %p
-      %strong Name:
-      %br
-      = trip_presenter.name
-    %p
-      %strong Start Date:
-      %br
-      = trip_presenter.start_date
-    %p
-      %strong End Date:
-      %br
-      = trip_presenter.end_date
-    %p
-      %strong Route
-      %br
-      =  trip_presenter.route_name
-    %p
-      %strong Notes
-      %br
-      = trip_presenter.notes
-    %p
-      %strong Bus
-      %br
-      = trip_presenter.bus_name
-    %p
-      %strong Drivers:
-      %ul
-        = list_of(@trip.drivers) do |driver|
-          = driver.full_name
-  .well
-    %p
-      %strong Stops:
-      - bootstrap_table headers:['From', 'To','Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-        = render partial: 'stops/stop', collection: @trip.stops, cache: true
-  .actions
-    = back_to trips_path
-    = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
-    = link_to 'Destroy', trip_path(@trip), method: :delete, data: { confirm: t('messages.confirm', resource: :trip) },icon: :times ,class: t('buttons.danger')
+      = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
 
 
 

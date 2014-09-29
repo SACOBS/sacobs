@@ -1,16 +1,17 @@
-%tr[client]
-  %td= client.name
-  %td= client.surname
-  %td= client.high_risk
-  %td= client.home_telephone
-  %td= client.work_telephone
-  %td= client.cellphone
-  %td= client.email
-  %td= client.updated_at
-  %td
-    = link_to 'Show', client, icon: :info, class: t('buttons.mini.info')
-    = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.mini.inverse')
-    = link_to 'Destroy', client, icon: :times, data: { confirm: t('messages.confirm', resource: :client)}, method: :delete, remote: true,class: t('buttons.mini.danger')
+- ClientDecorator.decorate(client, self) do |decorated_client|
+  %tr[client]
+    %td= decorated_client.name
+    %td= decorated_client.surname
+    %td= decorated_client.high_risk
+    %td= decorated_client.home_telephone
+    %td= decorated_client.work_telephone
+    %td= decorated_client.cellphone
+    %td= decorated_client.email
+    %td= decorated_client.updated_at
+    %td
+      = decorated_client.show_link(icon: :info, class: t('buttons.mini.info'))
+      = decorated_client.edit_link(icon: :edit, class: t('buttons.mini.inverse'))
+      = decorated_client.destroy_link(icon: :times, remote: true, class: t('buttons.mini.danger'))
 
 
 

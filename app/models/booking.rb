@@ -32,7 +32,7 @@ class Booking < ActiveRecord::Base
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
   belongs_to :user
-  belongs_to :trip, inverse_of: :bookings
+  belongs_to :trip
   belongs_to :stop
   belongs_to :client
 

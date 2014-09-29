@@ -1,9 +1,9 @@
-- seasonal_discount_presenter = SeasonalDiscountPresenter.new(seasonal_discount, self)
-%tr[seasonal_discount]
-  %td= seasonal_discount_presenter.name
-  %td= seasonal_discount_presenter.passenger_type
-  %td= seasonal_discount_presenter.percentage
-  %td= seasonal_discount_presenter.period_from
-  %td= seasonal_discount_presenter.period_to
-  %td= seasonal_discount_presenter.active
-  %td= seasonal_discount_presenter.activation_link
+-  SeasonalDiscountDecorator.decorate(seasonal_discount, self) do  |decorated_seasonal_discount|
+  %tr[seasonal_discount]
+    %td= decorated_seasonal_discount.name
+    %td= decorated_seasonal_discount.passenger_type
+    %td= decorated_seasonal_discount.percentage
+    %td= decorated_seasonal_discount.period_from
+    %td= decorated_seasonal_discount.period_to
+    %td= decorated_seasonal_discount.active
+    %td= decorated_seasonal_discount.activation_link(icon: :times, class: t('buttons.mini.danger'))

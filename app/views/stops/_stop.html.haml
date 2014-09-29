@@ -1,7 +1,7 @@
-- stop_presenter = StopPresenter.new(stop, self)
-%tr
-  %td= stop_presenter.from_city_name
-  %td= stop_presenter.to_city_name
-  %td= stop_presenter.depart_time
-  %td= stop_presenter.arrive_time
-  %td= stop_presenter.available_seats
+-  StopDecorator.decorate(stop, self) do |decorated_stop|
+  %tr
+    %td= decorated_stop.from_city_name
+    %td= decorated_stop.to_city_name
+    %td= decorated_stop.depart_time
+    %td= decorated_stop.arrive_time
+    %td= decorated_stop.available_seats

@@ -26,7 +26,7 @@ class Trip < ActiveRecord::Base
   belongs_to :bus
   belongs_to :route
 
-  with_options dependent: :delete_all, inverse_of: :trip do |assoc|
+  with_options dependent: :delete_all do |assoc|
    assoc.has_many :stops
    assoc.has_many :bookings
   end
@@ -42,7 +42,7 @@ class Trip < ActiveRecord::Base
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
   delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
-  delegate :name, to: :route, prefix: true
+  delegate :name, to: :route, prefix: true, allow_nil: true
 
   validates :name, :start_date, :end_date, :route, :bus, presence: true, on: :update
 
