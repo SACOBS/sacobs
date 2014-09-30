@@ -26,17 +26,16 @@ class Trip < ActiveRecord::Base
   belongs_to :bus
   belongs_to :route
 
+  has_and_belongs_to_many :drivers
+
   with_options dependent: :delete_all do |assoc|
    assoc.has_many :stops
    assoc.has_many :bookings
   end
 
-  has_and_belongs_to_many :drivers, before_add: :touch_parent, before_remove: :touch_parent
-
   amoeba do
     enable
     prepend name: 'Copy of'
-    clone [:stops]
   end
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
@@ -62,10 +61,6 @@ class Trip < ActiveRecord::Base
    end
 
   protected
-   def touch_parent(driver)
-     self.touch
-   end
-
    def generate_stops
      self.stops.clear
      self.route.connections.each { |connection| self.stops.build(connection: connection, available_seats: self.bus_capacity, depart: connection.depart, arrive: connection.arrive) }
