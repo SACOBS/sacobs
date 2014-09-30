@@ -2,6 +2,6 @@
   %h2 Users
 
 - bootstrap_table headers:['Name', 'Email','Role', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render @users
+  = render @users, cache: true
 
 = link_to 'Refresh', users_path, class: t('buttons.default'), icon: :refresh

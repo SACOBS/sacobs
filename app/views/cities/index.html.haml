@@ -12,7 +12,7 @@
 = paginate @cities
 
 - bootstrap_table headers:['Name', 'Venues','Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render @cities
+  = render @cities, cache: true
 
 = paginate @cities
 

@@ -11,7 +11,7 @@
 = link_to 'Refresh', drivers_path, class: t('buttons.default'), icon: :refresh
 
 - bootstrap_table headers:['Name', 'Surname', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render @drivers
+  = render @drivers, cache: true
 
 = link_to 'Setup Driver', new_driver_path, class: t('buttons.primary'),icon: :plus
 = link_to 'Refresh', drivers_path, class: t('buttons.default'), icon: :refresh
