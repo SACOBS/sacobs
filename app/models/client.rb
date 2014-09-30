@@ -57,7 +57,7 @@ class Client < ActiveRecord::Base
   before_save :set_birth_date_from_id_number
 
   def address
-    self.address ||= build_address
+    address ||= build_address
   end
 
   def age
