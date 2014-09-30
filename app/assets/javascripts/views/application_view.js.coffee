@@ -1,7 +1,7 @@
 window.Views ||= {}
 class Views.ApplicationView
   render: ->
-    $.bootstrapSortable(applyLast)
+    $.bootstrapSortable(applyLast=true)
     $(document).on 'cocoon:after-insert', ->
       Widgets.Select2.enable()
     $('[rel~="tooltip"]').tooltip();

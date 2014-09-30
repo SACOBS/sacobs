@@ -1,11 +1,11 @@
-- trip_presenter = TripPresenter.new(trip, self)
-%tr
-  %td=link_to trip_presenter.name, trip_path(trip)
-  %td= trip_presenter.start_date
-  %td= trip_presenter.end_date
-  %td= trip_presenter.route_name
-  %td= trip_presenter.bus_name
-  %td= trip_presenter.created_at
-  %td
-    = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road ,class: t('buttons.mini.default'), target: '_blank'
-    = link_to 'Show', trip, icon: :info, class: t('buttons.mini.info')
+- TripDecorator.decorate(trip, self) do |decorated_trip|
+  %tr
+    %td=link_to decorated_trip.name, trip_path(trip)
+    %td= decorated_trip.start_date
+    %td= decorated_trip.end_date
+    %td= decorated_trip.route_name
+    %td= decorated_trip.bus_name
+    %td= decorated_trip.created_at
+    %td
+      = decorated_trip.generate_tripsheet_link(icon: :road ,class: t('buttons.mini.default'))
+      = decorated_trip.show_link(icon: :info, class: t('buttons.mini.info'))
