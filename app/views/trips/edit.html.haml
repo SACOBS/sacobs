@@ -20,8 +20,8 @@
         = f.input :name
         = f.input :start_date, as: :date_picker
         = f.input :end_date, as: :date_picker
-        = f.association :route, include_blank: false, prompt: 'Select Route', disabled: true
-        = f.association :bus, include_blank: false, prompt: 'Select Bus', input_html: {rel: 'autocomplete'}
+        = f.association :route, as: :radio_buttons, item_wrapper_class: 'inline'
+        = f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline'
         = f.association :drivers, as: :check_boxes
         = f.input :notes, as: :text
     #stops.tab-pane
