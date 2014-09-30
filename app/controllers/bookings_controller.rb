@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    bookings = Booking.includes(:trip, :stop, :client).not_in_process.search(params[:q]).result.distinct(true)
+    bookings = Booking.includes(:trip, :stop, :client).not_in_process.active.search(params[:q]).result.distinct(true)
     @booking_dashboard = BookingDashboard.new(bookings, params)
   end
 
