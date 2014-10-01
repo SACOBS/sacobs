@@ -41,7 +41,6 @@ class Booking < ActiveRecord::Base
 
   has_many :passengers, dependent: :delete_all
 
-
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
 
