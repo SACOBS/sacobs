@@ -18,7 +18,7 @@
 
 require 'rails_helper'
 
-describe Destination, :type => :model do
+describe Destination, type: :model do
 
   it { is_expected.to belong_to(:city) }
   it { is_expected.to belong_to(:route) }

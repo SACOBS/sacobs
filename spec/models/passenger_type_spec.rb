@@ -10,7 +10,7 @@
 
 require 'rails_helper'
 
-describe PassengerType, :type => :model do
+describe PassengerType, type: :model do
   it { is_expected.to validate_presence_of(:description) }
 
   describe 'callbacks' do

@@ -10,7 +10,7 @@ class ReserveBooking
   def execute
     Booking.transaction do
       AssignSeating.execute(@booking.quantity, @booking.stop)
-      @booking.update!(expiry_date: expiry_date , status: :reserved, user: @user)
+      @booking.update!(expiry_date: expiry_date, status: :reserved, user: @user)
       if @related_booking
         AssignSeating.execute(@related_booking.quantity, @related_booking.stop)
         @related_booking.update!(expiry_date: expiry_date, status: :reserved, user: @user)
@@ -19,6 +19,7 @@ class ReserveBooking
   end
 
   private
+
   def expiry_date
     Time.zone.now.advance(hours: settings.booking_expiry_period)
   end
@@ -26,5 +27,4 @@ class ReserveBooking
   def settings
     @settings ||= Setting.first
   end
-
 end

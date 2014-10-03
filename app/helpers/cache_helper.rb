@@ -1,6 +1,5 @@
 module CacheHelper
-
-  def self.cache_key_for_collection(collection, suffix='')
+  def self.cache_key_for_collection(collection, _suffix = '')
     ids = collection.pluck(:id).join('-')
     count = collection.model.count
     max_updated_at = collection.model.pluck(:updated_at).max

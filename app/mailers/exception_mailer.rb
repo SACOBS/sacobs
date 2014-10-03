@@ -1,5 +1,5 @@
 class ExceptionMailer < ActionMailer::Base
-  default from: "exceptions@sacobs.herokuapp.com"
+  default from: 'exceptions@sacobs.herokuapp.com'
 
   def notify(exception)
     @exception = exception

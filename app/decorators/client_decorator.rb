@@ -1,5 +1,4 @@
 class ClientDecorator < BaseDecorator
-
   def high_risk
     high_risk? ? 'Yes' : 'No'
   end
@@ -28,17 +27,16 @@ class ClientDecorator < BaseDecorator
     bank_name.presence || 'Not Applicable'
   end
 
-
-  def show_link(options={})
+  def show_link(options = {})
     helpers.link_to 'Show', model, options
   end
 
-  def edit_link(options={})
+  def edit_link(options = {})
     helpers.link_to 'Edit', helpers.edit_client_path(model), options
   end
 
-  def destroy_link(options={})
-    options.merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :client)})
+  def destroy_link(options = {})
+    options.merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :client) })
     helpers.link_to 'Destroy', model, options
   end
 end

@@ -8,4 +8,4 @@
 #  updated_at  :datetime
 #
 
-class PaymentType < ActiveRecord::Base;end
+class PaymentType < ActiveRecord::Base; end

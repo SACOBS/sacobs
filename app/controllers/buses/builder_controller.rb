@@ -25,19 +25,20 @@ class Buses::BuilderController < ApplicationController
   end
 
   private
-    def finish_wizard_path
-      buses_url
-    end
 
-    def set_bus
-      @bus = Bus.find(params[:bus_id])
-    end
+  def finish_wizard_path
+    buses_url
+  end
 
-    def build_seats
-      (@bus.capacity - @bus.seats.size).times { @bus.seats.build }
-    end
+  def set_bus
+    @bus = Bus.find(params[:bus_id])
+  end
 
-    def bus_params
-      BusParameters.new(params).permit(user: current_user)
-    end
+  def build_seats
+    (@bus.capacity - @bus.seats.size).times { @bus.seats.build }
+  end
+
+  def bus_params
+    BusParameters.new(params).permit(user: current_user)
+  end
 end

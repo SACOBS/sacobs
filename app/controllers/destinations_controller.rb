@@ -1,12 +1,12 @@
 class DestinationsController < ApplicationController
   before_action :set_route
 
-  def edit;end
+  def edit; end
 
   def update
     @route.transaction do
       city = City.find(destination_params[:city])
-      raise 'Destination already exists' if @route.destinations.exists?(city: city)
+      fail 'Destination already exists' if @route.destinations.exists?(city: city)
       preceding_destination = @route.destinations.find_by(city_id: destination_params[:preceding_city])
       DestinationSequencer.new(@route, city, preceding_destination).resequence
       @route.reload
@@ -20,11 +20,12 @@ class DestinationsController < ApplicationController
   end
 
   private
-   def set_route
-     @route = Route.friendly.find(params[:route_id])
-   end
 
-   def destination_params
-     params.require(:destination).permit(:city, :preceding_city)
-   end
+  def set_route
+    @route = Route.friendly.find(params[:route_id])
+  end
+
+  def destination_params
+    params.require(:destination).permit(:city, :preceding_city)
+  end
 end

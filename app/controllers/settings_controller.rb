@@ -1,8 +1,7 @@
 class SettingsController < ApplicationController
-
   before_action :set_setting
 
-  def edit;end
+  def edit; end
 
   def update
     @setting.update(setting_params)
@@ -10,11 +9,12 @@ class SettingsController < ApplicationController
   end
 
   private
-    def set_setting
-      @setting = Setting.first_or_create
-    end
 
-    def setting_params
-      SettingParameters.new(params).permit
-    end
+  def set_setting
+    @setting = Setting.first_or_create
+  end
+
+  def setting_params
+    SettingParameters.new(params).permit
+  end
 end

@@ -40,9 +40,10 @@ class Bookings::BuilderController < ApplicationController
   end
 
   private
+
   def search_params
     params[:q] ||= {}
-    params[:q].delete_if { |key, value| value.blank? }
+    params[:q].delete_if { |_key, value| value.blank? }
   end
 
   def fetch_stops
@@ -81,7 +82,6 @@ class Bookings::BuilderController < ApplicationController
   def reserve_booking
     ReserveBooking.execute(@booking, current_user)
   end
-
 
   def set_booking
     @booking = Booking.find(params[:booking_id])

@@ -1,5 +1,4 @@
 class PaymentDetailsController < ApplicationController
-
   before_action :set_booking
 
   def new
@@ -19,18 +18,17 @@ class PaymentDetailsController < ApplicationController
   end
 
   private
-   def set_booking
-     @booking = Booking.find(params[:booking_id])
-   end
 
-   def find_payment_type
-     return unless @booking.client.bank
-     PaymentType.find_by(description: @booking.client.bank_name)
-   end
+  def set_booking
+    @booking = Booking.find(params[:booking_id])
+  end
 
-   def payment_details_params
-     PaymentDetailParameters.new(params).permit(user: current_user)
-   end
+  def find_payment_type
+    return unless @booking.client.bank
+    PaymentType.find_by(description: @booking.client.bank_name)
+  end
 
-
+  def payment_details_params
+    PaymentDetailParameters.new(params).permit(user: current_user)
+  end
 end

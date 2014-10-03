@@ -4,7 +4,8 @@ class VoucherParameters < Struct.new(:params)
   end
 
   private
-   def voucher_attributes
+
+  def voucher_attributes
     [:amount]
-   end
+  end
 end

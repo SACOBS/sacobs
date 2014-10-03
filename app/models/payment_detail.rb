@@ -17,7 +17,6 @@
 #
 
 class PaymentDetail < ActiveRecord::Base
-
   belongs_to :payment_type
   belongs_to :booking, touch: true
   belongs_to :user
@@ -27,7 +26,8 @@ class PaymentDetail < ActiveRecord::Base
   delegate :description, to: :payment_type, prefix: true
 
   private
-   def defaults
-     { payment_date: Time.zone.now }
-   end
+
+  def defaults
+    { payment_date: Time.zone.now }
+  end
 end

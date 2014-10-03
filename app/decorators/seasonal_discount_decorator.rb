@@ -15,13 +15,12 @@ class SeasonalDiscountDecorator < BaseDecorator
     active? ? 'Yes' : 'No'
   end
 
-  def activation_link(options={})
+  def activation_link(options = {})
     options.merge!(method: :patch)
     if active?
-      helpers.link_to 'Deactivate', helpers.seasonal_discount_path(model, seasonal_discount: {active: false}), options
+      helpers.link_to 'Deactivate', helpers.seasonal_discount_path(model, seasonal_discount: { active: false }), options
     else
-      helpers.link_to 'Activate', helpers.seasonal_discount_path(model, seasonal_discount: {active: true}), options
+      helpers.link_to 'Activate', helpers.seasonal_discount_path(model, seasonal_discount: { active: true }), options
     end
   end
-
 end

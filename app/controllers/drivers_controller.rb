@@ -1,14 +1,12 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
 
-
   # GET /drivers
   # GET /drivers.json
   def index
     @q = Driver.search(params[:q])
     @drivers = @q.result(distinct: true)
   end
-
 
   # GET /drivers/new
   def new
@@ -18,7 +16,6 @@ class DriversController < ApplicationController
   def show
     fresh_when @driver, last_modified: @driver.updated_at
   end
-
 
   # POST /drivers
   # POST /drivers.json
@@ -42,15 +39,16 @@ class DriversController < ApplicationController
   end
 
   private
-    def set_driver
-      @driver = Driver.friendly.find(params[:id])
-    end
 
-    def driver_params
-      DriverParameters.new(params).permit(user: current_user)
-    end
+  def set_driver
+    @driver = Driver.friendly.find(params[:id])
+  end
 
-    def interpolation_options
-      { resource_name: @driver.full_name }
-    end
+  def driver_params
+    DriverParameters.new(params).permit(user: current_user)
+  end
+
+  def interpolation_options
+    { resource_name: @driver.full_name }
+  end
 end

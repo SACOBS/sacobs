@@ -44,7 +44,6 @@ describe Booking, type: :model do
 
     it { is_expected.to have_many(:passengers).dependent(:destroy) }
 
-
     it { is_expected.to accept_nested_attributes_for(:client) }
     it { is_expected.to accept_nested_attributes_for(:passengers) }
     it { is_expected.to accept_nested_attributes_for(:invoice) }
@@ -53,7 +52,6 @@ describe Booking, type: :model do
     it { is_expected.to delegate_method(:trip_name).to(:trip).as(:name) }
     it { is_expected.to delegate_method(:trip_start_date).to(:trip).as(:start_date) }
     it { is_expected.to delegate_method(:trip_end_date).to(:trip).as(:end_date) }
-
 
   end
 
@@ -86,19 +84,19 @@ describe Booking, type: :model do
     end
 
     describe '#set_shared_booking_data' do
-        it 'sets the client and passengers for the return booking' do
-          booking = build(:booking, passengers: build_list(:passenger, 2))
-          return_booking = build(:booking, client: nil)
-          booking.return_booking = return_booking
-          booking.send(:set_shared_booking_data)
-          expect(return_booking.client).to eql(booking.client)
-          expect(return_booking.passengers.size).to eql(booking.passengers.size)
-        end
+      it 'sets the client and passengers for the return booking' do
+        booking = build(:booking, passengers: build_list(:passenger, 2))
+        return_booking = build(:booking, client: nil)
+        booking.return_booking = return_booking
+        booking.send(:set_shared_booking_data)
+        expect(return_booking.client).to eql(booking.client)
+        expect(return_booking.passengers.size).to eql(booking.passengers.size)
+      end
     end
 
     describe '#generate_reference' do
       describe 'sets the sequence_id and reference_no for a reserved booking' do
-        let(:booking){ build_stubbed(:booking, reference_no: nil, sequence_id: nil) }
+        let(:booking) { build_stubbed(:booking, reference_no: nil, sequence_id: nil) }
 
         context 'booking is reserved' do
           it 'sets the sequence_id and reference_no' do
@@ -122,7 +120,7 @@ describe Booking, type: :model do
 
     describe '#check_expiration' do
       describe 'sets the expired flag based on the expiry date' do
-        let(:booking){ build_stubbed(:booking) }
+        let(:booking) { build_stubbed(:booking) }
 
         context 'booking is expired' do
           it 'sets expired flag to true' do
@@ -147,7 +145,7 @@ describe Booking, type: :model do
     it { is_expected.to validate_numericality_of(:quantity).is_greater_than(0) }
 
     describe 'quantity does not exceed available seating' do
-      let(:stop){ build_stubbed(:stop, available_seats: 10)  }
+      let(:stop) { build_stubbed(:stop, available_seats: 10)  }
       subject(:booking) { build_stubbed(:booking, stop: stop) }
 
       context 'valid quantity' do
@@ -163,6 +161,5 @@ describe Booking, type: :model do
       end
     end
   end
-
 
 end

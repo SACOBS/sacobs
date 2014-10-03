@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: [:copy, :reverse_copy ,:show, :edit, :update,:destroy]
+  before_action :set_route, only: [:copy, :reverse_copy, :show, :edit, :update, :destroy]
 
   def index
     @q = Route.search(params[:q])
@@ -11,13 +11,13 @@ class RoutesController < ApplicationController
   end
 
   def update
-      @route.transaction do
-        Route.no_touching do
-          @route.update(route_params)
-          @route.connections.each(&:save!)
-        end
-        @route.touch
+    @route.transaction do
+      Route.no_touching do
+        @route.update(route_params)
+        @route.connections.each(&:save!)
       end
+      @route.touch
+    end
     respond_with @route
   end
 
@@ -32,7 +32,7 @@ class RoutesController < ApplicationController
     Route.no_touching { copy.save! }
     respond_with copy, location: routes_url
   end
-  
+
   def reverse_copy
     reverse_copy = ReverseRouteBuilder.new(@route).build
     Route.no_touching { reverse_copy.save }
@@ -40,11 +40,12 @@ class RoutesController < ApplicationController
   end
 
   private
-    def set_route
-      @route = Route.friendly.find(params[:id])
-    end
 
-    def route_params
-      RouteParameters.new(params).permit(user: current_user)
-    end
+  def set_route
+    @route = Route.friendly.find(params[:id])
+  end
+
+  def route_params
+    RouteParameters.new(params).permit(user: current_user)
+  end
 end

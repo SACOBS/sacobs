@@ -38,10 +38,9 @@ class Client < ActiveRecord::Base
 
   has_one :address, as: :addressable, dependent: :delete
 
-
   with_options dependent: :delete_all do |assoc|
-   assoc.has_many :bookings
-   assoc.has_many :vouchers
+    assoc.has_many :bookings
+    assoc.has_many :vouchers
   end
 
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
@@ -51,7 +50,7 @@ class Client < ActiveRecord::Base
 
   friendly_id :full_name, use: :slugged
 
-  validates :name, :surname ,presence: true
+  validates :name, :surname, presence: true
 
   before_validation :set_full_name, prepend: true
   before_save :set_birth_date_from_id_number
@@ -70,15 +69,16 @@ class Client < ActiveRecord::Base
   end
 
   protected
-    def set_birth_date_from_id_number
-     self.date_of_birth = Date.strptime(id_number[0..5], "%y%m%d") if id_number?
-    end
 
-    def set_full_name
-      self.full_name = "#{self.name} #{self.surname}"  if name_changed? || surname_changed?
-    end
+  def set_birth_date_from_id_number
+    self.date_of_birth = Date.strptime(id_number[0..5], '%y%m%d') if id_number?
+  end
 
-    def should_generate_new_friendly_id?
-     full_name_changed?
-    end
+  def set_full_name
+    self.full_name = "#{name} #{surname}"  if name_changed? || surname_changed?
+  end
+
+  def should_generate_new_friendly_id?
+    full_name_changed?
+  end
 end

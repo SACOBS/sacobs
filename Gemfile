@@ -24,7 +24,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-
 # Frontend
 gem 'haml-rails'
 gem 'bootstrap-sass', '~> 2.3.2.2'
@@ -35,28 +34,24 @@ gem 'bootstrap_sortable_rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'kaminari'
 
-
-#Forms
-gem "simple_form", "~> 3.0.0"
+# Forms
+gem 'simple_form', '~> 3.0.0'
 gem 'select2-rails'
 
-
-#Authentication
+# Authentication
 gem 'devise'
 
-#Authorization
+# Authorization
 gem 'pundit'
 
-
-#Static Pages
+# Static Pages
 gem 'high_voltage'
 
-#Flash Responders
+# Flash Responders
 gem 'responders'
 
-
 # Env variables
-gem "figaro"
+gem 'figaro'
 
 # Email
 gem 'premailer-rails'
@@ -66,7 +61,7 @@ gem 'nokogiri'
 gem 'font-awesome-rails'
 
 # Nested Forms
-gem "cocoon"
+gem 'cocoon'
 
 # Friendly Id
 gem 'friendly_id', '~> 5.0.0'
@@ -82,35 +77,33 @@ gem 'wicked'
 # Copying Records
 gem 'amoeba'
 
-
 # Search
 gem 'ransack'
 
 # PDF
 gem 'wicked_pdf'
-gem "wkhtmltopdf-binary"
+gem 'wkhtmltopdf-binary'
 
 # Time Difference Calculations
 gem 'time_difference'
 
-
 # Scriptures
-gem "scripture", "~> 0.1.0"
+gem 'scripture', '~> 0.1.0'
 
 # Background Processing
 gem 'sucker_punch', '~> 1.0'
 
 # Calculate Age
-gem "adroit-age"
+gem 'adroit-age'
 
 # Flash
 gem 'unobtrusive_flash'
 
 # PG
-gem "pg"
+gem 'pg'
 
 # Charting
-gem "chartkick"
+gem 'chartkick'
 gem 'groupdate'
 
 # Email Obfuscation
@@ -125,14 +118,13 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
-
 group :development do
-  gem "better_errors"
+  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate'
   gem 'quiet_assets'
-  gem "bullet"
-  gem "lol_dba"
+  gem 'bullet'
+  gem 'lol_dba'
   gem 'rails_best_practices'
   gem 'spring'
   gem 'flatten_migrations'
@@ -140,38 +132,33 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
-  gem "factory_girl_rails"
+  gem 'factory_girl_rails'
   gem 'rails_db_info'
-  gem "faker"
+  gem 'faker'
   gem 'spring-commands-rspec'
 end
 
 group :test do
   # Test suites
-  gem "capybara"
-  gem "launchy"
-
+  gem 'capybara'
+  gem 'launchy'
 
   # Factories
-  gem "database_cleaner", "~> 1.2.0"
+  gem 'database_cleaner', '~> 1.2.0'
   gem 'stepford'
 
   # Matchers
-  gem "shoulda-matchers"
-  gem "shoulda-callback-matchers"
+  gem 'shoulda-matchers'
+  gem 'shoulda-callback-matchers'
   gem 'email_spec'
 end
 
-
 group :production do
-  gem "puma"
+  gem 'puma'
   gem 'rails_12factor'
   gem 'heroku-deflater'
 end
 
-
-
 group :doc do
   gem 'sdoc', require: false
 end
-

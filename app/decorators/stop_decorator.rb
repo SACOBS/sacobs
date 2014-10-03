@@ -8,7 +8,8 @@ class StopDecorator < BaseDecorator
   end
 
   private
+
   def format_time(time)
-    time.strftime("%H:%M%p")
+    time.strftime('%H:%M%p')
   end
 end

@@ -1,5 +1,4 @@
 class PricingController < ApplicationController
-
   def index
     @connections = Connection.order(:name).select(:id, :name, :route_id, :cost)
     @pricing = PricingPresenter.new(@connections.first)
@@ -11,10 +10,4 @@ class PricingController < ApplicationController
     @pricing = PricingPresenter.new(@connection)
     respond_with @pricing
   end
-
-  private
-    def search_params
-      params[:q] ||= {}
-      params[:q].delete_if { |key, value| value.blank? }
-    end
 end

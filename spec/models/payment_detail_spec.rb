@@ -18,7 +18,7 @@
 
 require 'rails_helper'
 
-describe PaymentDetail, :type => :model do
+describe PaymentDetail, type: :model do
   it { is_expected.to belong_to(:payment_type) }
   it { is_expected.to belong_to(:booking).touch(true) }
   it { is_expected.to belong_to(:user) }

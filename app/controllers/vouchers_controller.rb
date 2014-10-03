@@ -11,11 +11,12 @@ class VouchersController < ApplicationController
   end
 
   private
-   def set_client
-     @client = Client.friendly.find(params[:client_id])
-   end
 
-   def voucher_params
-     VoucherParameters.new(params).permit(user: current_user)
-   end
+  def set_client
+    @client = Client.friendly.find(params[:client_id])
+  end
+
+  def voucher_params
+    VoucherParameters.new(params).permit(user: current_user)
+  end
 end

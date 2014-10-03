@@ -1,6 +1,5 @@
 class Ticket
-
-attr_reader :booking, :return_booking ,:client
+  attr_reader :booking, :return_booking, :client
 
   def initialize(booking, view_context)
     @booking = booking.main ? booking.main : booking
@@ -42,19 +41,19 @@ attr_reader :booking, :return_booking ,:client
   end
 
   def depart_time
-    booking.stop.depart || @view_context.l(Time.zone.now, format: :long)
+    booking.depart || @view_context.l(Time.zone.now, format: :long)
   end
 
   def arrive_time
-    booking.stop.arrive || @view_context.l(Time.zone.now, format: :long)
+    booking.arrive || @view_context.l(Time.zone.now, format: :long)
   end
 
   def return_depart_time
-    return_booking.stop.depart || @view_context.l(Time.zone.now, format: :long)
+    return_booking.depart || @view_context.l(Time.zone.now, format: :long)
   end
 
   def return_arrive_time
-    return_booking.stop.arrive || @view_context.l(Time.zone.now, format: :long)
+    return_booking.arrive || @view_context.l(Time.zone.now, format: :long)
   end
 
   def return_from_city
@@ -89,15 +88,15 @@ attr_reader :booking, :return_booking ,:client
     @view_context.number_to_currency total, unit: 'R'
   end
 
-
   private
-   def settings
-     @settings ||= Setting.first
-   end
 
-   def scripture_service
-     @scripture_service ||= ScriptureService.new
-   end
+  def settings
+    @settings ||= Setting.first
+  end
+
+  def scripture_service
+    @scripture_service ||= ScriptureService.new
+  end
 
   def total
     total = 0
@@ -113,12 +112,10 @@ attr_reader :booking, :return_booking ,:client
     total
   end
 
-
   def total_discount
     total = 0
     total += @booking.invoice_total_discount
     total += @return.invoice_total_discount if @return
     total
   end
-
 end

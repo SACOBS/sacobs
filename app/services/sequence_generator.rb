@@ -9,6 +9,7 @@ class SequenceGenerator
   end
 
   private
+
   def find_last_record
     @model.where.not(sequence_id: nil).order(sequence_id: :desc).first
   end

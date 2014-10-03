@@ -4,6 +4,7 @@ class ContactParameters < Struct.new(:params)
   end
 
   private
+
   def contact_attributes
     [:name, :email, :message, :nickname]
   end

@@ -21,7 +21,6 @@
 #
 
 class Trip < ActiveRecord::Base
-
   belongs_to :user
   belongs_to :bus
   belongs_to :route
@@ -29,8 +28,8 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :drivers
 
   with_options dependent: :delete_all do |assoc|
-   assoc.has_many :stops
-   assoc.has_many :bookings
+    assoc.has_many :stops
+    assoc.has_many :bookings
   end
 
   amoeba do
@@ -47,22 +46,23 @@ class Trip < ActiveRecord::Base
 
   before_update :generate_stops, if: :route_id_changed?
 
-  ransacker(:start_date, type: :date) { |parent| Arel::Nodes::SqlLiteral.new "date(trips.start_date)" }
+  ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
   scope :valid, -> { where(arel_table[:start_date].gteq(Date.today)) }
-  scope :complete, -> { where.not(arel_table[:route_id].eq(nil))}
+  scope :complete, -> { where.not(arel_table[:route_id].eq(nil)) }
   scope :archived, -> { where(arel_table[:start_date].lteq(Date.today)) }
-  scope :from_location, -> (location) { joins(route: :destinations).where(destinations: { city_id: location, sequence: 1 } ) }
-
+  scope :from_location, -> (location) { joins(route: :destinations).where(destinations: { city_id: location, sequence: 1 }) }
 
   private
-   def defaults
-     { start_date: Date.today, end_date: (self.start_date || Date.tomorrow) }
-   end
+
+  def defaults
+    { start_date: Date.today, end_date: (start_date || Date.tomorrow) }
+  end
 
   protected
-   def generate_stops
-     self.stops.clear
-     self.route.connections.each { |connection| self.stops.build(connection: connection, available_seats: self.bus_capacity, depart: connection.depart, arrive: connection.arrive) }
-   end
+
+  def generate_stops
+    stops.clear
+    route.connections.each { |connection| stops.build(connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive) }
+  end
  end

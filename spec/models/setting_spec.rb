@@ -16,5 +16,5 @@
 
 require 'rails_helper'
 
-describe Setting, :type => :model do
+describe Setting, type: :model do
 end

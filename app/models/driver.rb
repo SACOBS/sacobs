@@ -27,12 +27,12 @@ class Driver < ActiveRecord::Base
   validates :name, :surname, presence: true
 
   def full_name
-   "#{name} #{surname}"
+    "#{name} #{surname}"
   end
 
- private
+  private
+
   def should_generate_new_friendly_id?
     name_changed? || surname_changed?
   end
-
 end

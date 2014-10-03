@@ -2,10 +2,8 @@ require 'rails_helper'
 
 describe ReserveBooking do
   let(:user) { create(:user) }
-  let(:booking){ create(:booking, status: :in_process) }
-  let(:return_booking){ create(:booking, status: :in_process) }
-
-
+  let(:booking) { create(:booking, status: :in_process) }
+  let(:return_booking) { create(:booking, status: :in_process) }
 
   it 'marks the booking as reserved' do
     allow_any_instance_of(AssignSeating).to receive(:execute).and_return(nil)

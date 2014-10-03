@@ -30,7 +30,7 @@
 
 require 'rails_helper'
 
-describe Client, :type => :model do
+describe Client, type: :model do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to belong_to(:bank) }
   it { is_expected.to have_one(:address).dependent(:destroy) }
@@ -38,7 +38,6 @@ describe Client, :type => :model do
   it { is_expected.to have_many(:vouchers).dependent(:destroy) }
 
   it { is_expected.to accept_nested_attributes_for(:address).allow_destroy(true) }
-
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:surname) }
@@ -56,11 +55,11 @@ describe Client, :type => :model do
     it { is_expected.to callback(:set_full_name).before(:validation) }
 
     describe '#init_address' do
-        it 'builds a new address' do
-          client = build_stubbed(:client, address: nil)
-          client.send(:init_address)
-          expect(client.address).to be_new_record
-        end
+      it 'builds a new address' do
+        client = build_stubbed(:client, address: nil)
+        client.send(:init_address)
+        expect(client.address).to be_new_record
+      end
     end
 
     describe '#set_full_name' do
@@ -71,7 +70,6 @@ describe Client, :type => :model do
       end
     end
   end
-
 
   describe 'instance methods' do
     describe '#age' do

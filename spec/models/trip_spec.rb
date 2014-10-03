@@ -22,7 +22,7 @@
 
 require 'rails_helper'
 
-describe Trip, :type => :model do
+describe Trip, type: :model do
 
   it { is_expected.to belong_to(:user) }
   it { is_expected.to belong_to(:bus) }
@@ -45,7 +45,6 @@ describe Trip, :type => :model do
     it { is_expected.to validate_presence_of(:route) }
     it { is_expected.to validate_presence_of(:bus) }
 
-
   end
 
   describe 'callbacks' do
@@ -64,10 +63,10 @@ describe Trip, :type => :model do
   describe 'class methods' do
     describe '.valid' do
       it 'returns active trips' do
-          valid_trip = create(:trip, start_date: Date.tomorrow)
-          invalid_trip = create(:trip, start_date: Date.yesterday)
-          result = Trip.valid
-          expect(result).to eq [valid_trip]
+        valid_trip = create(:trip, start_date: Date.tomorrow)
+        invalid_trip = create(:trip, start_date: Date.yesterday)
+        result = Trip.valid
+        expect(result).to eq [valid_trip]
       end
     end
 

@@ -4,9 +4,8 @@ class ChargeParameters < Struct.new(:params)
   end
 
   private
+
   def charge_attributes
-    [ :percentage, :description ]
+    [:percentage, :description]
   end
-
-
 end

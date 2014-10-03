@@ -10,8 +10,8 @@ class SeasonalDiscountsController < ApplicationController
   end
 
   def create
-   @seasonal_discount = SeasonalDiscount.create(seasonal_discount_params)
-   respond_with @seasonal_discount
+    @seasonal_discount = SeasonalDiscount.create(seasonal_discount_params)
+    respond_with @seasonal_discount
   end
 
   def update
@@ -20,9 +20,9 @@ class SeasonalDiscountsController < ApplicationController
     respond_with @seasonal_discount
   end
 
-
   private
-   def seasonal_discount_params
-     SeasonalDiscountParameters.new(params).permit(user: current_user)
-   end
+
+  def seasonal_discount_params
+    SeasonalDiscountParameters.new(params).permit(user: current_user)
+  end
 end

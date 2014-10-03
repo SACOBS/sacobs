@@ -17,7 +17,6 @@
 #
 
 class Destination < ActiveRecord::Base
-
   belongs_to :city
   belongs_to :route, inverse_of: :destinations
 

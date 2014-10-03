@@ -22,6 +22,4 @@ class Charge < ActiveRecord::Base
   def percentage
     self[:percentage].to_f / 100
   end
-
-
 end

@@ -1,8 +1,7 @@
 Sacobs::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { :host => 'sacobs.herokuapp.com' }
-
+  config.action_mailer.default_url_options = { host: 'sacobs.herokuapp.com' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -68,20 +67,17 @@ Sacobs::Application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-
   config.action_mailer.smtp_settings = {
-      address: ENV["MANDRILL_ADDRESS"],
-      port: ENV["MANDRILL_PORT"],
-      domain: "sacobs.herokuapp.com",
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name:ENV["MANDRILL_USER_NAME"],
-      password: ENV["MANDRILL_PASSWORD"]
+    address: ENV['MANDRILL_ADDRESS'],
+    port: ENV['MANDRILL_PORT'],
+    domain: 'sacobs.herokuapp.com',
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    user_name: ENV['MANDRILL_USER_NAME'],
+    password: ENV['MANDRILL_PASSWORD']
   }
 
-
   config.assets.precompile += %w( vendor.js )
-
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).

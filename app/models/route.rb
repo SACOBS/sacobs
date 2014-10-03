@@ -24,7 +24,6 @@ class Route < ActiveRecord::Base
 
   friendly_id :name, use: :slugged
 
-
   belongs_to :user
 
   with_options dependent: :delete_all, inverse_of: :route do
@@ -39,9 +38,9 @@ class Route < ActiveRecord::Base
     clone [:connections, :destinations]
   end
 
-  with_options  reject_if: :all_blank, allow_destroy: true do |assoc|
-   assoc.accepts_nested_attributes_for :connections
-   assoc.accepts_nested_attributes_for :destinations
+  with_options reject_if: :all_blank, allow_destroy: true do |assoc|
+    assoc.accepts_nested_attributes_for :connections
+    assoc.accepts_nested_attributes_for :destinations
   end
 
   validates :name, :cost, :distance, presence: true, on: :update
@@ -49,22 +48,22 @@ class Route < ActiveRecord::Base
   before_save :set_connection_costs, if: :cost_changed?
 
   def start_city
-    self.destinations.first.city unless self.destinations.empty?
+    destinations.first.city unless destinations.empty?
   end
 
   def end_city
-    self.destinations.last.city unless self.destinations.empty?
+    destinations.last.city unless destinations.empty?
   end
 
   private
-   def should_generate_new_friendly_id?
-     name_changed?
-   end
 
-   def set_connection_costs
-     connections.each do |c|
-       c.cost = ((self.cost * (c.percentage / 100)) / 5.0).ceil * 5
-     end
-   end
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
 
+  def set_connection_costs
+    connections.each do |c|
+      c.cost = ((cost * (c.percentage / 100)) / 5.0).ceil * 5
+    end
+  end
 end

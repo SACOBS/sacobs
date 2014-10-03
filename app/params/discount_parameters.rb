@@ -4,11 +4,12 @@ class DiscountParameters < Struct.new(:params)
   end
 
   private
-   def discount_attributes
-    [ :percentage ]
-   end
 
-   def passenger_type_attributes
-     [ passenger_type_attributes: [:description] ]
-   end
+  def discount_attributes
+    [:percentage]
+  end
+
+  def passenger_type_attributes
+    [passenger_type_attributes: [:description]]
+  end
 end

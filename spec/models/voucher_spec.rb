@@ -19,7 +19,7 @@
 
 require 'rails_helper'
 
-describe Voucher, :type => :model do
+describe Voucher, type: :model do
 
   it { is_expected.to belong_to(:client).touch(true) }
   it { is_expected.to belong_to(:user) }
@@ -35,6 +35,5 @@ describe Voucher, :type => :model do
       end
     end
   end
-
 
 end

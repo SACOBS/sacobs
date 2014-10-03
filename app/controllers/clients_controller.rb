@@ -3,13 +3,12 @@ class ClientsController < ApplicationController
   after_action :verify_policy_scoped, only: :index
   after_action :verify_authorized, except: :index
 
-
   def index
     if request.xhr?
       @clients = policy_scope(Client).all.uniq(:full_name)
     else
-     @q = policy_scope(Client).search(search_criteria)
-     @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
+      @q = policy_scope(Client).search(search_criteria)
+      @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
     end
   end
 
@@ -53,21 +52,22 @@ class ClientsController < ApplicationController
   end
 
   private
-    def set_client
-      @client = Client.friendly.find(params[:id])
-    end
 
-    def client_params
-      ClientParameters.new(params).permit(user: current_user)
-    end
+  def set_client
+    @client = Client.friendly.find(params[:id])
+  end
 
-    def search_criteria
-      criteria = params.fetch(:q,{})
-      criteria.merge! surname_start: params[:letter] if params[:letter]
-      criteria
-    end
+  def client_params
+    ClientParameters.new(params).permit(user: current_user)
+  end
 
-    def interpolation_options
-      { resource_name: @client.full_name }
-    end
+  def search_criteria
+    criteria = params.fetch(:q, {})
+    criteria.merge! surname_start: params[:letter] if params[:letter]
+    criteria
+  end
+
+  def interpolation_options
+    { resource_name: @client.full_name }
+  end
 end

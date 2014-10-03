@@ -20,7 +20,7 @@ class TicketsController < ApplicationController
         render pdf: generate_file_name,
                template: 'tickets/_ticket.html.haml',
                disposition: :inline,
-               layout: "pdf.html"
+               layout: 'pdf.html'
       end
     end
   end
@@ -31,15 +31,16 @@ class TicketsController < ApplicationController
   end
 
   private
-   def set_booking
-     @booking = Booking.find(params[:id])
-   end
 
-   def generate_file_name
-     "#{@booking.trip_name}_#{@booking.client_name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
-   end
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
 
-   def generate_pdf
-     WickedPdf.new.pdf_from_string(render_to_string(template: 'tickets/_ticket.html.haml', layout: "pdf.html"))
-   end
+  def generate_file_name
+    "#{@booking.trip_name}_#{@booking.client_name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
+  end
+
+  def generate_pdf
+    WickedPdf.new.pdf_from_string(render_to_string(template: 'tickets/_ticket.html.haml', layout: 'pdf.html'))
+  end
 end

@@ -12,6 +12,7 @@ class ReverseRouteBuilder
   end
 
   private
+
   def build_reverse_route
     @reverse_route = @route.dup.tap do |route|
       route.name = "Reverse of #{@route.name}"

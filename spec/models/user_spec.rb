@@ -27,7 +27,7 @@
 
 require 'rails_helper'
 
-describe User, :type => :model do
+describe User, type: :model do
 
   describe 'class methods' do
     describe '.all_except' do

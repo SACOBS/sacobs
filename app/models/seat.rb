@@ -15,14 +15,14 @@
 #
 
 class Seat < ActiveRecord::Base
-
   belongs_to :bus, touch: true
 
   validates :row, :number, presence: true
   validates :number, numericality: true
 
   private
-    def defaults
-      { row: 'A-Z', number: 0 }
-    end
+
+  def defaults
+    { row: 'A-Z', number: 0 }
+  end
 end

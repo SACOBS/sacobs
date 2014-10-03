@@ -3,10 +3,9 @@ class Routes::BuilderController < ApplicationController
 
   layout 'wizard'
 
-
   before_action :set_route, only: [:show, :update]
 
-  steps :route_details, :destinations ,:connections
+  steps :route_details, :destinations, :connections
 
   def create
     @route = Route.create
@@ -25,21 +24,21 @@ class Routes::BuilderController < ApplicationController
     render_wizard @route
   end
 
-
   private
-    def finish_wizard_path
-      routes_url
-    end
 
-    def set_route
-      @route = Route.friendly.find(params[:route_id])
-    end
+  def finish_wizard_path
+    routes_url
+  end
 
-    def build_connections
-      ConnectionBuilder.new(@route).tap {|builder| builder.build }
-    end
+  def set_route
+    @route = Route.friendly.find(params[:route_id])
+  end
 
-    def route_params
-      RouteParameters.new(params).permit(user: current_user)
-    end
+  def build_connections
+    ConnectionBuilder.new(@route).tap(&:build)
+  end
+
+  def route_params
+    RouteParameters.new(params).permit(user: current_user)
+  end
 end

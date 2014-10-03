@@ -15,9 +15,8 @@
 #
 
 class Setting < ActiveRecord::Base
-
-
   private
+
    def defaults
      { booking_expiry_period: 25 }
    end

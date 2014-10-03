@@ -24,7 +24,7 @@
 
 require 'rails_helper'
 
-describe Connection, :type => :model do
+describe Connection, type: :model do
 
   it { is_expected.to belong_to(:route).touch(true).counter_cache(true) }
   it { is_expected.to belong_to(:from).class_name(:Destination) }
@@ -37,7 +37,6 @@ describe Connection, :type => :model do
   it { is_expected.to validate_presence_of(:percentage) }
   it { is_expected.to validate_numericality_of(:cost) }
   it { is_expected.to validate_numericality_of(:percentage) }
-
 
   describe 'callbacks' do
     it { is_expected.to callback(:set_name).before(:save) }
@@ -61,7 +60,5 @@ describe Connection, :type => :model do
       end
     end
   end
-
-
 
 end

@@ -36,27 +36,28 @@ class PassengerBillingDetail
   end
 
   private
-   def fetch_charges(ids)
-     Charge.find(ids)
-   end
 
-   def fetch_discount
-       find_seasonal_discount || find_discount
-   end
+  def fetch_charges(ids)
+    Charge.find(ids)
+  end
 
-    def find_seasonal_discount
-      SeasonalDiscount.active_in_period(Date.today).where(passenger_type: @passenger.passenger_type).take
-    end
+  def fetch_discount
+    find_seasonal_discount || find_discount
+  end
 
-    def find_discount
-      Discount.find_by(passenger_type: @passenger.passenger_type)
-    end
+  def find_seasonal_discount
+    SeasonalDiscount.active_in_period(Date.today).where(passenger_type: @passenger.passenger_type).take
+  end
 
-    def total_charges
-      charge_items.sum(&:amount)
-    end
+  def find_discount
+    Discount.find_by(passenger_type: @passenger.passenger_type)
+  end
 
-    def total_cost
-      Calculations.roundup(@price + total_charges)
-    end
+  def total_charges
+    charge_items.sum(&:amount)
+  end
+
+  def total_cost
+    Calculations.roundup(@price + total_charges)
+  end
 end

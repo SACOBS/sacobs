@@ -26,7 +26,8 @@ class Voucher < ActiveRecord::Base
   before_create :generate_reference_no
 
   protected
-   def generate_reference_no
-     self.ref_no = SecureRandom.hex(4)
-   end
+
+  def generate_reference_no
+    self.ref_no = SecureRandom.hex(4)
+  end
 end

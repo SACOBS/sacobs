@@ -2,7 +2,7 @@ module Calculations
   module_function
 
   def percentage(value)
-   BigDecimal(value / 100)
+    BigDecimal(value / 100)
   end
 
   def roundup(amount)

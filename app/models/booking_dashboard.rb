@@ -1,5 +1,4 @@
 class BookingDashboard
-
   attr_reader :standby, :cancelled, :paid, :reserved, :bookings
   def initialize(bookings, params)
     @bookings = bookings
@@ -15,7 +14,7 @@ class BookingDashboard
   end
 
   def paid
-    @paid ||= paginate_array(bookings.select(&:paid?),@params[:paid_page])
+    @paid ||= paginate_array(bookings.select(&:paid?), @params[:paid_page])
   end
 
   def cancelled
@@ -23,9 +22,8 @@ class BookingDashboard
   end
 
   private
-   def paginate_array(array, page)
-     Kaminari.paginate_array(array).page(page)
-   end
 
+  def paginate_array(array, page)
+    Kaminari.paginate_array(array).page(page)
+  end
 end
-

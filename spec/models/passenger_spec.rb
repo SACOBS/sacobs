@@ -20,7 +20,7 @@
 
 require 'rails_helper'
 
-describe Passenger, :type => :model do
+describe Passenger, type: :model do
 
   it { is_expected.to belong_to(:booking) }
   it { is_expected.to belong_to(:passenger_type) }

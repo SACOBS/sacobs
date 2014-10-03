@@ -127,7 +127,6 @@ SimpleForm.setup do |config|
 
   config.wrapper_mappings = { date_time_picker: :append, date_picker: :append, distance: :append, cost: :prepend, percentage: :append }
 
-
   # Default priority for time_zone inputs.
   # config.time_zone_priority = nil
 

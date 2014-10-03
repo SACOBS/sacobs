@@ -4,13 +4,12 @@ class BusParameters < Struct.new(:params)
   end
 
   private
-   def bus_attributes
-    [ :name, :capacity, :year, :model ]
-   end
 
-   def seats_attributes
-     { seats_attributes: [:id, :_destroy, :row, :number] }
-   end
+  def bus_attributes
+    [:name, :capacity, :year, :model]
+  end
 
-
+  def seats_attributes
+    { seats_attributes: [:id, :_destroy, :row, :number] }
+  end
 end

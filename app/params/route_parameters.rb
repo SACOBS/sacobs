@@ -4,8 +4,9 @@ class RouteParameters < Struct.new(:params)
   end
 
   private
+
   def route_attributes
-    [ :name, :cost, :distance ]
+    [:name, :cost, :distance]
   end
 
   def connections_attributes

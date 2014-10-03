@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   self.responder = ApplicationResponder
-  respond_to :html,:js,:json,:pdf
+  respond_to :html, :js, :json, :pdf
 
   before_action :authenticate_user!
   after_action :prepare_unobtrusive_flash, except: :destroy
@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   layout :has_layout?
 
   etag { current_user.try :id }
-
 
   def js_class_name
     action = case action_name
@@ -32,12 +31,14 @@ class ApplicationController < ActionController::Base
   helper_method :settings
 
   private
-    def has_layout?
-     false if request.xhr?
-    end
+
+  def has_layout?
+    false if request.xhr?
+  end
 
   protected
-    def devise_parameter_sanitizer
-      UserSanitizer.new(User, :user, params)
-    end
+
+  def devise_parameter_sanitizer
+    UserSanitizer.new(User, :user, params)
+  end
 end

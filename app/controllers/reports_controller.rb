@@ -1,13 +1,12 @@
 class ReportsController < ApplicationController
-
-  def index;end
+  def index; end
 
   def bookings_per_status
-   render json: Booking.group(:status).count
+    render json: Booking.group(:status).count
   end
 
   def bookings_per_user
-   render json: Booking.joins(:user).group('users.name').count
+    render json: Booking.joins(:user).group('users.name').count
   end
 
   def income_per_month

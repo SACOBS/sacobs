@@ -25,17 +25,17 @@ class Trips::BuilderController < ApplicationController
     render_wizard @trip
   end
 
-
   private
-    def finish_wizard_path
-      trips_url
-    end
 
-    def set_trip
-      @trip =  Trip.find(params[:trip_id])
-    end
+  def finish_wizard_path
+    trips_url
+  end
 
-    def trip_params
-      TripParameters.new(params).permit(user: current_user)
-    end
+  def set_trip
+    @trip =  Trip.find(params[:trip_id])
+  end
+
+  def trip_params
+    TripParameters.new(params).permit(user: current_user)
+  end
 end

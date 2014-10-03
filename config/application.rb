@@ -20,10 +20,9 @@ module Sacobs
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
 
     config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
-
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -31,9 +30,7 @@ module Sacobs
     config.assets.precompile += %w(pdf.css)
     config.assets.precompile += %w(head.js)
 
-
     I18n.enforce_available_locales = true
-
 
     config.generators do |g|
       g.test_framework :rspec,
@@ -44,7 +41,7 @@ module Sacobs
                        decorator_specs: false,
                        controller_specs: true,
                        request_specs: true
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
       g.assets = false
       g.helper = false
     end

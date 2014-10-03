@@ -16,15 +16,15 @@
 #
 
 class LineItem < ActiveRecord::Base
-
   enum line_item_type: [:debit, :credit]
 
   belongs_to :invoice
 
   private
-    def defaults
-     {
-        amount: 0
-     }
-    end
+
+  def defaults
+    {
+      amount:  0
+    }
+  end
 end

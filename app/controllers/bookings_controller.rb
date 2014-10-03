@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-   fresh_when @booking, last_modified: @booking.updated_at
+    fresh_when @booking, last_modified: @booking.updated_at
   end
 
   def destroy
@@ -31,7 +31,8 @@ class BookingsController < ApplicationController
   end
 
   private
-   def set_booking
+
+  def set_booking
     @booking = Booking.find(params[:id])
-   end
+  end
 end

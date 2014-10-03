@@ -156,7 +156,6 @@
 
 Sacobs::Application.routes.draw do
 
-
   devise_for :users
 
   resources :bookings, only: [:create, :show, :index, :destroy] do
@@ -185,33 +184,33 @@ Sacobs::Application.routes.draw do
 
   resources :drivers
 
-  resources :trips, only: [:index, :show, :edit, :update ,:destroy] do
+  resources :trips, only: [:index, :show, :edit, :update, :destroy] do
     member do
-     post :copy
+      post :copy
     end
     collection do
       get :archived
       get :calendar
     end
-    resources :builder, only: [:show, :update, :create],controller: 'trips/builder'
+    resources :builder, only: [:show, :update, :create], controller: 'trips/builder'
   end
 
-  resources :routes, only: [:index, :edit, :update ,:show, :destroy] do
-   member do
-     post :copy
-     post :reverse_copy
-   end
-   resources :destinations, only: [:none] do
-     collection do
-       get :edit
-       patch :update
-     end
-   end
-   resources :builder, only: [:show, :update, :create],controller: 'routes/builder'
+  resources :routes, only: [:index, :edit, :update, :show, :destroy] do
+    member do
+      post :copy
+      post :reverse_copy
+    end
+    resources :destinations, only: [:none] do
+      collection do
+        get :edit
+        patch :update
+      end
+    end
+    resources :builder, only: [:show, :update, :create], controller: 'routes/builder'
   end
 
-  resources :buses, only: [:index, :show, :edit, :update,:destroy] do
-    resources :builder, only: [:show, :update, :create],controller: 'buses/builder'
+  resources :buses, only: [:index, :show, :edit, :update, :destroy] do
+    resources :builder, only: [:show, :update, :create], controller: 'buses/builder'
   end
 
   resources :seasonal_discounts, except: [:show, :destroy, :edit]
@@ -221,7 +220,6 @@ Sacobs::Application.routes.draw do
   resources :charges, except: [:show]
 
   resources :notes, except: [:show]
-
 
   resources :tickets, only: [:show] do
     member do
@@ -245,7 +243,7 @@ Sacobs::Application.routes.draw do
   end
   root to: 'pages#show', id: 'home'
 
-  get "/pages/*id" => 'pages#show', as: :page, format: false
+  get '/pages/*id' => 'pages#show', as: :page, format: false
 
   get 'pricing/:id', to: 'pricing#show', as: :pricing
   get '/quick_quote', to: 'pricing#index', as: :quick_quote
@@ -258,8 +256,6 @@ Sacobs::Application.routes.draw do
   get '/reports/income_per_month', to: 'reports#income_per_month'
   get '/reports/bookings_per_user', to: 'reports#bookings_per_user'
 
-
-
-  match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
+  match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
 
 end

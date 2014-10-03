@@ -20,7 +20,7 @@
 
 require 'rails_helper'
 
-describe Route, :type => :model do
+describe Route, type: :model do
 
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:destinations).order(:sequence).dependent(:destroy) }
@@ -29,14 +29,12 @@ describe Route, :type => :model do
   it { is_expected.to accept_nested_attributes_for(:connections).allow_destroy(true) }
   it { is_expected.to accept_nested_attributes_for(:destinations).allow_destroy(true) }
 
-
   describe 'validations' do
     subject(:route) { create(:route) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:cost) }
     it { is_expected.to validate_presence_of(:distance) }
   end
-
 
   describe 'callbacks' do
     it { is_expected.to callback(:set_connection_costs).before(:save).if(:cost_changed?) }
@@ -54,7 +52,7 @@ describe Route, :type => :model do
   describe 'instance methods' do
     let(:start_destination) { build_stubbed(:destination, sequence: 1) }
     let(:end_destination) { build_stubbed(:destination, sequence: 2) }
-    let(:route) { build_stubbed(:route, destinations: [start_destination, end_destination])}
+    let(:route) { build_stubbed(:route, destinations: [start_destination, end_destination]) }
 
     describe '#start_city' do
       it 'returns the start city' do

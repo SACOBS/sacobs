@@ -7,7 +7,6 @@ class ChargesController < ApplicationController
     @charges = Charge.all
   end
 
-
   def new
     @charge = Charge.new
   end
@@ -28,11 +27,12 @@ class ChargesController < ApplicationController
   end
 
   private
+
   def set_charge
     @charge = Charge.find(params[:id])
   end
 
   def charge_params
-   ChargeParameters.new(params).permit(user: current_user)
+    ChargeParameters.new(params).permit(user: current_user)
   end
 end

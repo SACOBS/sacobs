@@ -1,5 +1,4 @@
 class ClientPolicy < ApplicationPolicy
-
   def show?
     true
   end

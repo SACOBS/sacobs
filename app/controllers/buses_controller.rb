@@ -1,5 +1,5 @@
 class BusesController < ApplicationController
-  before_action :set_bus, only: [:edit ,:show, :destroy, :update]
+  before_action :set_bus, only: [:edit, :show, :destroy, :update]
 
   def index
     @q = Bus.search(params[:q])
@@ -21,11 +21,12 @@ class BusesController < ApplicationController
   end
 
   private
-   def set_bus
-    @bus = Bus.find(params[:id])
-   end
 
-   def bus_params
-     BusParameters.new(params).permit(user: current_user)
-   end
+  def set_bus
+    @bus = Bus.find(params[:id])
+  end
+
+  def bus_params
+    BusParameters.new(params).permit(user: current_user)
+  end
 end

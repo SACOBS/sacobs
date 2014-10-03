@@ -35,13 +35,13 @@ class CitiesController < ApplicationController
     respond_with @city
   end
 
-
   private
-    def set_city
-      @city = City.friendly.find(params[:id])
-    end
 
-    def city_params
-      CityParameters.new(params).permit(user: current_user)
-    end
+  def set_city
+    @city = City.friendly.find(params[:id])
+  end
+
+  def city_params
+    CityParameters.new(params).permit(user: current_user)
+  end
 end

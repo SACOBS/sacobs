@@ -19,7 +19,6 @@
 #
 
 class Passenger < ActiveRecord::Base
-
   belongs_to :booking
   belongs_to :passenger_type
 
@@ -30,5 +29,4 @@ class Passenger < ActiveRecord::Base
   def full_name
     "#{name} #{surname}"
   end
-
 end

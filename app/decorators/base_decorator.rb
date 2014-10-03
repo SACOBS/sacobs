@@ -1,7 +1,6 @@
 require 'delegate'
 
 class BaseDecorator < SimpleDelegator
-
   class << self
     alias_method :decorate, :new
   end
@@ -17,7 +16,8 @@ class BaseDecorator < SimpleDelegator
   end
 
   private
-   def helpers
-     @view_context
-   end
+
+  def helpers
+    @view_context
+  end
 end

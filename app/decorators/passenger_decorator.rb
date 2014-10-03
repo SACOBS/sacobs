@@ -1,6 +1,4 @@
 class PassengerDecorator < BaseDecorator
-
-
   def passenger_type_description
     model.passenger_type_description.capitalize
   end

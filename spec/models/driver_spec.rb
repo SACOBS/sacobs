@@ -18,7 +18,7 @@
 
 require 'rails_helper'
 
-describe Driver, :type => :model do
+describe Driver, type: :model do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_and_belong_to_many(:trips) }
 
@@ -33,7 +33,5 @@ describe Driver, :type => :model do
       end
     end
   end
-
-
 
 end

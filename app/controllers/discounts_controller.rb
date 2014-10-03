@@ -28,11 +28,12 @@ class DiscountsController < ApplicationController
   end
 
   private
-    def set_discount
-     @discount = Discount.find(params[:id])
-    end
 
-    def discount_params
-      DiscountParameters.new(params).permit(user: current_user)
-    end
+  def set_discount
+    @discount = Discount.find(params[:id])
+  end
+
+  def discount_params
+    DiscountParameters.new(params).permit(user: current_user)
+  end
 end

@@ -289,7 +289,7 @@ GEM
     time_difference (0.3.2)
       activesupport
     timers (1.1.0)
-    turbolinks (2.3.0)
+    turbolinks (2.4.0)
       coffee-rails
     twitter-bootstrap-rails-confirm (1.0.3)
     tzinfo (1.2.2)

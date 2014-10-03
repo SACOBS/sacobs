@@ -4,11 +4,12 @@ class CityParameters < Struct.new(:params)
   end
 
   private
-   def city_attributes
-     [ :name ]
-   end
 
-   def venues_attributes
-     { venues_attributes: [:id, :name, :_destroy] }
-   end
+  def city_attributes
+    [:name]
+  end
+
+  def venues_attributes
+    { venues_attributes: [:id, :name, :_destroy] }
+  end
 end

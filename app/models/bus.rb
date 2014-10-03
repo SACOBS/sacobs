@@ -17,20 +17,19 @@
 #
 
 class Bus < ActiveRecord::Base
-
   belongs_to :user
   has_many :seats, dependent: :delete_all
 
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
   with_options on: :update do |model|
-   model.validates :name, :capacity, :year, :model, presence: true
-   model.validates :capacity, numericality: { greater_than: 0 }
+    model.validates :name, :capacity, :year, :model, presence: true
+    model.validates :capacity, numericality: { greater_than: 0 }
   end
 
-
   private
-   def defaults
-     { name: 'Bus', capacity: 0, year: 1, model: 'bus'}
-   end
+
+  def defaults
+    { name: 'Bus', capacity: 0, year: 1, model: 'bus' }
+  end
 end

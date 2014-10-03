@@ -1,6 +1,6 @@
 module Responders
   module PDFResponder
-    def initialize(controller, resources, options={})
+    def initialize(controller, resources, options = {})
       super
       @file_name = options.delete(:file_name)
     end
@@ -10,6 +10,7 @@ module Responders
     end
 
     protected
+
     def file_name
       (@file_name ||= "#{Time.zone.now.to_i}").gsub(' ', '_')
     end

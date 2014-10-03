@@ -14,7 +14,6 @@
 #
 
 class Invoice < ActiveRecord::Base
-
   belongs_to :booking
   has_many :line_items, dependent: :delete_all
 
@@ -32,10 +31,9 @@ class Invoice < ActiveRecord::Base
     line_items.credit.sum(:amount)
   end
 
-
   private
+
   def defaults
     { billing_date: Time.zone.now }
   end
-
 end
