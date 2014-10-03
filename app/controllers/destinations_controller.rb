@@ -1,22 +1,14 @@
 class DestinationsController < ApplicationController
   before_action :set_route
 
-  def edit; end
-
   def update
-    @route.transaction do
-      city = City.find(destination_params[:city])
-      fail 'Destination already exists' if @route.destinations.exists?(city: city)
-      preceding_destination = @route.destinations.find_by(city_id: destination_params[:preceding_city])
-      DestinationSequencer.new(@route, city, preceding_destination).resequence
-      @route.reload
-      ConnectionBuilder.new(@route).build
-      @route.save
+    if @route.destinations.exists?(city: new_destination)
+      flash[:alert] = 'Destination already exists'
+      render :edit
+    else
+      create_new_destination
+      redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
     end
-    redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
-  rescue => e
-    flash[:alert] = e.message
-    render :edit
   end
 
   private
@@ -27,5 +19,30 @@ class DestinationsController < ApplicationController
 
   def destination_params
     params.require(:destination).permit(:city, :preceding_city)
+  end
+
+  def create_new_destination
+    @route.transaction do
+      resequence_destinations
+      @route.reload
+      build_connection
+      @route.save
+    end
+  end
+
+  def new_destination
+    City.find(destination_params[:city])
+  end
+
+  def preceding_destination
+    @route.destinations.find_by(city_id: destination_params[:preceding_city])
+  end
+
+  def resequence_destinations
+    DestinationSequencer.new(@route, new_destination, preceding_destination).resequence
+  end
+
+  def build_connection
+    ConnectionBuilder.new(@route).build
   end
 end

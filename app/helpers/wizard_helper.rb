@@ -2,14 +2,24 @@ module WizardHelper
   def wizard_progress(current_step, wizard_steps)
     current_step_number = wizard_steps.index(current_step).next
     total_steps = wizard_steps.size
-    percentage_complete = (current_step_number.to_f / total_steps.to_f * 100).round
+    percentage_complete = completion_percentage(current_step_number, total_steps)
     content_tag :div, class: 'wizard_progress' do
-      concat content_tag(:h2, "#{controller_path.split('/').first.singularize.titleize} Wizard")
+      concat content_tag(:h2, "#{wizard_name} Wizard")
       concat content_tag(:h4, "Step #{current_step_number} of #{total_steps}")
       concat (content_tag :div, nil, class: 'progress' do
         concat content_tag(:div, nil, class: 'bar', style:  "width: #{percentage_complete}%;")
       end)
       concat content_tag(:h3, step.to_s.titleize)
     end
+  end
+
+  private
+
+  def completion_percentage(step, total_steps)
+    (step.to_f / total_steps.to_f * 100).round
+  end
+
+  def wizard_name
+    controller_path.split('/').first.singularize.titleize
   end
 end

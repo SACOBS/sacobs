@@ -3,7 +3,12 @@ class Bookings::BuilderController < ApplicationController
 
   layout 'wizard'
 
-  steps :trip_details, :return_trip_details, :client_details, :passenger_details, :passenger_charges, :billing_info
+  steps :trip_details,
+        :return_trip_details,
+        :client_details,
+        :passenger_details,
+        :passenger_charges,
+        :billing_info
 
   before_action :set_booking, only: [:index, :show, :update]
   before_action :set_attributes, only: :update
@@ -60,8 +65,18 @@ class Bookings::BuilderController < ApplicationController
 
   def build_passengers
     unless @booking.passengers.any?
-      @booking.client_is_pensioner? ? passenger_type = PassengerType.find_by(description: :pensioner) : passenger_type = PassengerType.find_by(description: :standard)
-      @booking.quantity.times { @booking.passengers.create name: @booking.client_name, surname: @booking.client_surname, cell_no: @booking.client_cell_no, email: @booking.client_email, passenger_type: passenger_type }
+      if @booking.client_is_pensioner?
+        passenger_type = PassengerType.find_by(description: :pensioner)
+      else
+        passenger_type = PassengerType.find_by(description: :standard)
+      end
+      @booking.quantity.times do
+        @booking.passengers.create(name: @booking.client_name,
+                                   surname: @booking.client_surname,
+                                   cell_no: @booking.client_cell_no,
+                                   email: @booking.client_email,
+                                   passenger_type: passenger_type)
+      end
     end
   end
 
@@ -70,7 +85,7 @@ class Bookings::BuilderController < ApplicationController
     return_booking = @booking.return_booking
     return_booking.client = @booking.client
     return_booking.passengers.clear
-    @booking.passengers.each { |p| return_booking.passengers << p.dup }
+    @booking.passengers.each { |passenger| return_booking.passengers << passenger.dup }
     return_booking.save!
   end
 

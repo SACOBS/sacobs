@@ -20,16 +20,10 @@ class ConnectionDecorator < BaseDecorator
   end
 
   def arrive_time
-    format_time(model.arrive) if model.arrive?
+    model.arrive.strftime('%H:%M%p') if model.arrive?
   end
 
   def depart_time
-    format_time(model.depart) if model.depart?
-  end
-
-  private
-
-  def format_time(time)
-    time.strftime('%H:%M%p')
+    model.depart.strftime('%H:%M%p') if model.depart?
   end
 end
