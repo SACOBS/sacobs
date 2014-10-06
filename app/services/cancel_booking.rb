@@ -10,11 +10,8 @@ class CancelBooking
   def execute
     Booking.transaction do
       UnassignSeating.execute(@booking.quantity, @booking.stop)
-      @booking.has_return = false if @booking.has_return?
-      @booking.main_id = nil if @booking.is_return?
-      @booking.status = :cancelled
       @booking.user = @user
-      @booking.save!
+      raise ActiveRecord::Rollback unless @booking.cancel
     end
   end
 end

@@ -18,11 +18,10 @@
 #
 
 class Stop < ActiveRecord::Base
-  belongs_to :trip, touch: true, inverse_of: :stops
+  belongs_to :trip, touch: true
   belongs_to :connection, -> { includes(:from, :to) }
   has_many :bookings
 
-  scope :en_route, -> (destination) { joins(:trip, connection: [:to, :route]).where('destinations.sequence > ?', destination.sequence).readonly(false) }
   scope :valid, -> { joins(:trip).merge(Trip.valid) }
 
   delegate :name, :from_city, :to_city, :from_city_id, :from_city_name, :to_city_id, :to_city_name, :cost, to: :connection

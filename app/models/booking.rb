@@ -66,6 +66,19 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
+  def confirm
+    self.price = invoice_total
+    self.status = :paid
+    save
+  end
+
+  def cancel
+    self.has_return = false
+    self.main_id = nil
+    self.status = :cancelled
+    save
+  end
+
   def is_return?
     main_id?
   end
@@ -95,7 +108,7 @@ class Booking < ActiveRecord::Base
   protected
 
   def setup_return_booking
-    build_return_booking unless return_booking.present?
+    build_return_booking unless return_booking.present? && has_return?
   end
 
   def generate_reference

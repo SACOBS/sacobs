@@ -118,6 +118,7 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -15,6 +15,6 @@ class UnassignSeating
   private
 
   def affected_stops
-    LocateStops.execute(@trip, @stop)
+    StopsEnRoute.new(@trip, @stop).stops
   end
 end

@@ -15,17 +15,11 @@ module ApplicationHelper
     if model && model.errors.any?
       content_tag(:div, class: 'error_explanation well well small') do
         concat (content_tag(:div, "#{pluralize(model.errors.count, 'error')} prevented this record from being saved:", class: 'alert alert-error'))
-        concat ( content_tag(:ul) do
-          model.errors.full_messages.map do |msg|
-            content_tag(:li, msg)
-          end.join.html_safe
+        concat (content_tag :ul do
+          model.errors.full_messages.map {|msg| content_tag(:li, msg)}.join.html_safe
         end)
       end
     end
-  end
-
-  def clients
-    @clients ||= Client.select(:id, :full_name, :high_risk)
   end
 
   def cities
@@ -36,19 +30,10 @@ module ApplicationHelper
     @route_cities ||= route.destinations.map(&:city)
   end
 
-  def invoice_total(booking)
-    total = booking.invoice_total
-    return_total = booking.return_booking.invoice_total if booking.return_booking
-    total += (return_total || 0)
-  end
-
   def current_trips_count
     @current_trips_count ||= Trip.valid.count
   end
 
-  def active_bookings_count
-    @active_bookings_count ||= Booking.not_in_process.active.count
-  end
 
   def decimal_to_percentage(value)
     number_to_percentage(value * 100, precision: 2)

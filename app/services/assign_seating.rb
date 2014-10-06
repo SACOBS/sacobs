@@ -9,14 +9,13 @@ class AssignSeating
   end
 
   def execute
-    conditions = "available_seats = available_seats - #{@quantity}"
-    affected_stops.update_all(conditions)
+    affected_stops.update_all("available_seats = available_seats - #{@quantity}")
     @trip.touch
   end
 
   private
 
   def affected_stops
-    LocateStops.execute(@trip, @stop)
+    StopsEnRoute.new(@trip, @stop).stops
   end
 end
