@@ -43,7 +43,7 @@ class Booking < ActiveRecord::Base
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
 
-  accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking, reject_if: :all_blank
+  accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :arrive, :depart, to: :stop
@@ -93,6 +93,17 @@ class Booking < ActiveRecord::Base
 
   def expired?
     expiry_date? && (expiry_date <= Time.zone.now)
+  end
+
+  def client
+    super || build_client
+  end
+
+  def client_attributes=(attributes)
+    self.client = Client.find(attributes['id']) if attributes['id'].present?
+    self.client.assign_attributes(attributes)
+    self.client.user = user
+    self.client.save
   end
 
   private

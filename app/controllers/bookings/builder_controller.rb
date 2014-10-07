@@ -23,8 +23,6 @@ class Bookings::BuilderController < ApplicationController
         fetch_stops
       when :return_trip_details then
         @booking.has_return? ? fetch_return_stops : skip_step
-      when :client_details then
-        @booking.build_client
       when :passenger_details then
         build_passengers
     end

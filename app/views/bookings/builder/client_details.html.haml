@@ -3,8 +3,7 @@
   .search
     %fieldset
       %legend Search for client
-      = f.input :client_search, typeahead: clients_url(format: :json), label: false, placeholder: 'Search for client', input_html: {value: '', data: {target: '#booking_client_id'}}
-      = f.input :client_id, as: :hidden
+      = f.input :client_search, typeahead: clients_url(format: :json), label: false, placeholder: 'Search for client', input_html: {value: '', data: {target: '#booking_client_attributes_id', populate: '.new_client_fields'}}
   .new_client_fields
     = f.simple_fields_for :client do |client|
       %fieldset
@@ -21,6 +20,7 @@
             = client.input :work_no, as: :tel
             = client.input :cell_no, as: :tel
             = client.input :email, as: :email
+        = client.input :id, as: :hidden
 
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
