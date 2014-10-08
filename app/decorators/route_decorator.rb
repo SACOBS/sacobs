@@ -1,10 +1,12 @@
 class RouteDecorator < BaseDecorator
   def start_city
-    model.destinations.first.city_name
+    return 'None' unless destinations.any?
+    destinations.first.city_name
   end
 
   def end_city
-    model.destinations.last.city_name
+    return 'None' unless destinations.any?
+    destinations.last.city_name
   end
 
   def cost

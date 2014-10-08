@@ -24,7 +24,7 @@ class Bookings::BuilderController < ApplicationController
       when :return_trip_details then
         @booking.has_return? ? fetch_return_stops : skip_step
       when :passenger_details then
-        build_passengers
+        create_passengers
     end
     render_wizard
   end
@@ -34,10 +34,10 @@ class Bookings::BuilderController < ApplicationController
       when :trip_details then
         fetch_stops unless @booking.valid?
       when :passenger_charges
-        set_return_associations
+        @booking.sync_return_booking
         build_invoice
       when :billing_info then
-        reserve_booking if @booking.valid?
+        reserve_booking
     end
     render_wizard @booking
   end
@@ -61,30 +61,19 @@ class Bookings::BuilderController < ApplicationController
     dashboard_url
   end
 
-  def build_passengers
-    unless @booking.passengers.any?
-      if @booking.client_is_pensioner?
-        passenger_type = PassengerType.find_by(description: :pensioner)
-      else
-        passenger_type = PassengerType.find_by(description: :standard)
-      end
-      @booking.quantity.times do
-        @booking.passengers.create(name: @booking.client_name,
-                                   surname: @booking.client_surname,
-                                   cell_no: @booking.client_cell_no,
-                                   email: @booking.client_email,
-                                   passenger_type: passenger_type)
-      end
-    end
+  def create_passengers
+    @booking.passengers.clear
+    @booking.quantity.times { @booking.passengers.build(passenger_type: get_passenger_type) }
+    @booking.save
   end
 
-  def set_return_associations
-    return unless @booking.has_return?
-    return_booking = @booking.return_booking
-    return_booking.client = @booking.client
-    return_booking.passengers.clear
-    @booking.passengers.each { |passenger| return_booking.passengers << passenger.dup }
-    return_booking.save!
+  def get_passenger_type
+    if @booking.client_is_pensioner?
+      passenger_type = PassengerType.find_by(description: :pensioner)
+    else
+      passenger_type = PassengerType.find_by(description: :standard)
+    end
+    passenger_type
   end
 
   def build_invoice

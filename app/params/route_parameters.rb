@@ -1,6 +1,6 @@
 class RouteParameters < Struct.new(:params)
   def permit(additional_attr = {})
-    params.require(:route).permit(route_attributes, connections_attributes, destinations_attributes).merge(additional_attr)
+    params.fetch(:route, {}).permit(route_attributes, connections_attributes, destinations_attributes).merge(additional_attr)
   end
 
   private
