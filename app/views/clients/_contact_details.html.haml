@@ -1,7 +1,7 @@
 .modal.hide.fade#client_contact_detail{ aria_hidden:  'true', aria_labelledby: 'clientContactDetailLabel', role: 'dialog', tabindex: '-1' }
   .modal-header
     %button.close{ aria_hidden: 'true', data: { dismiss: 'modal' }, type: 'button' } ×
-    - ClientDecorator.decorate(@client, self) do |decorated_client|
+    - ClientDecorator.decorate(client, self) do |decorated_client|
       %h3#clientContactDetailLabel= decorated_client.full_name
       .modal-body
         %p

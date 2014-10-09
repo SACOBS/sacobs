@@ -10,7 +10,7 @@
 
 #errors= errors_for @booking
 .returns
-  = render partial: 'bookings/builder/return_trips'
+  = render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
 
 
 = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')

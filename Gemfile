@@ -118,8 +118,7 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
-# Attributes
-gem 'virtus'
+
 
 group :development do
   gem 'better_errors'

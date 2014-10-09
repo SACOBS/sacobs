@@ -6,15 +6,8 @@ class PaymentDetailsController < ApplicationController
   end
 
   def create
-    @payment_detail = @booking.create_payment_detail(payment_details_params)
-    if @payment_detail.valid?
-      if @booking.is_return?
-        @booking.main.create_payment_detail(payment_details_params) if @booking.main
-      else
-        @booking.return_booking.create_payment_detail(payment_details_params) if @booking.return_booking
-      end
-    end
-    respond_with @payment_detail, location: bookings_url
+    @booking.create_payment_details(payment_details_params)
+    respond_with @booking.payment_detail, location: bookings_url
   end
 
   private

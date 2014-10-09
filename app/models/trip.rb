@@ -49,9 +49,7 @@ class Trip < ActiveRecord::Base
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
   scope :valid, -> { where(arel_table[:start_date].gteq(Date.today)) }
-  scope :complete, -> { where.not(arel_table[:route_id].eq(nil)) }
   scope :archived, -> { where(arel_table[:start_date].lteq(Date.today)) }
-  scope :from_location, -> (location) { joins(route: :destinations).where(destinations: { city_id: location, sequence: 1 }) }
 
   private
 

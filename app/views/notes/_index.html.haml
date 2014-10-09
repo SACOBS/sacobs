@@ -4,8 +4,8 @@
     %h4#notesLabel Notes
     .modal-body
       .note_form
-        = render 'notes/form', note: @new_note if current_user.admin?
+        = render 'notes/form', note: new_note if current_user.admin?
       .well
         %ul.notes
-          - @notes.each do |note|
+          - notes.each do |note|
             %li{ class: dom_class(note), id: dom_id(note) }= link_to_if(current_user.admin?, note.content, edit_note_path(note), remote: true)

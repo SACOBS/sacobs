@@ -3,26 +3,26 @@
     %li.active
       %a{ href: '#reserved', data: { toggle: :tab } }
         Reserved
-        %span.badge.badge-info= @booking_dashboard.reserved.total_count
+        %span.badge.badge-info= booking_dashboard.reserved.total_count
     %li
       %a{ href: '#standby',  data: { toggle: :tab } }
         Standby
-        %span.badge.badge-warning= @booking_dashboard.standby.total_count
+        %span.badge.badge-warning= booking_dashboard.standby.total_count
     %li
       %a{ href: '#paid',  data: { toggle: :tab } }
         Paid
-        %span.badge.badge-success= @booking_dashboard.paid.total_count
+        %span.badge.badge-success= booking_dashboard.paid.total_count
     %li
       %a{ href: '#cancelled',  data: { toggle: :tab } }
         Cancelled
-        %span.badge.badge-important= @booking_dashboard.cancelled.total_count
+        %span.badge.badge-important= booking_dashboard.cancelled.total_count
 
   .tab-content
     .tab-pane.active#reserved
-      = render 'bookings', bookings: @booking_dashboard.reserved, type: :reserved
+      = render 'bookings', bookings: booking_dashboard.reserved, type: :reserved
     .tab-pane#standby
-      = render 'bookings', bookings: @booking_dashboard.standby, type: :standby
+      = render 'bookings', bookings: booking_dashboard.standby, type: :standby
     .tab-pane#paid
-      = render 'bookings', bookings: @booking_dashboard.paid, type: :paid
+      = render 'bookings', bookings: booking_dashboard.paid, type: :paid
     .tab-pane#cancelled
-      = render 'bookings', bookings: @booking_dashboard.cancelled, type: :cancelled
+      = render 'bookings', bookings: booking_dashboard.cancelled, type: :cancelled

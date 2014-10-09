@@ -3,7 +3,7 @@
   = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info')
   = link_to 'Email', email_ticket_path(@booking), method: :post, class: t('buttons.inverse')
 
-= render partial: 'ticket'
+= render partial: 'ticket', ticket: @ticket
 
 %br
 %br

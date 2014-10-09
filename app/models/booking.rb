@@ -50,6 +50,8 @@ class Booking < ActiveRecord::Base
     end
   end
 
+
+
   accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
@@ -67,8 +69,6 @@ class Booking < ActiveRecord::Base
   after_find :setup_return_booking, if: :has_return?
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
-  scope :open, -> { reserved.where.not(arel_table[:expiry_date].lteq(Time.zone.now)) }
-  scope :standby, -> { reserved.where(arel_table[:expiry_date].lteq(Time.zone.now)) }
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
@@ -84,6 +84,15 @@ class Booking < ActiveRecord::Base
     self.main_id = nil
     self.status = :cancelled
     save
+  end
+
+  def create_payment_details(attributes)
+    create_payment_detail(attributes)
+    if is_return?
+      main.create_payment_detail(attributes)
+    else
+      return_booking.create_payment_detail(attributes)
+    end
   end
 
   def sync_return_booking

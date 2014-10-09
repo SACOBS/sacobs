@@ -3,7 +3,7 @@
   = link_to 'Download', download_trip_sheet_path(@trip), class: t('buttons.info')
 
 
-= render 'trip_sheets/trip_sheet'
+= render 'trip_sheets/trip_sheet', trip: @trip
 
 
 .actions.text-center

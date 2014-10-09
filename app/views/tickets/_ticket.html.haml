@@ -1,33 +1,33 @@
 .details
   %p.pull-left
     %strong Reference No:
-    = @ticket.reference_no
+    = ticket.reference_no
   %p.pull-right
     %strong Today's Date:
-    = @ticket.ticket_date
+    = ticket.ticket_date
 .passengers
 - bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
-  - @ticket.passengers.each do |passenger|
+  - ticket.passengers.each do |passenger|
     %tr
-      %td= @ticket.booking.trip_start_date
+      %td= ticket.booking.trip_start_date
       %td= passenger.full_name
-      %td= @ticket.from_city
-      %td= @ticket.from_venue
-      %td= @ticket.to_city
-      %td= @ticket.to_venue
-      %td= @ticket.depart_time
-      %td= @ticket.arrive_time
-  - if @ticket.return_booking
-    - @ticket.passengers.each do |return_passenger|
+      %td= ticket.from_city
+      %td= ticket.from_venue
+      %td= ticket.to_city
+      %td= ticket.to_venue
+      %td= ticket.depart_time
+      %td= ticket.arrive_time
+  - if ticket.return_booking
+    - ticket.passengers.each do |return_passenger|
       %tr
-        %td= @ticket.return_booking.trip_start_date
+        %td= ticket.return_booking.trip_start_date
         %td= return_passenger.full_name
-        %td= @ticket.return_from_city
-        %td= @ticket.return_from_venue
-        %td= @ticket.return_to_city
-        %td= @ticket.return_to_venue
-        %td= @ticket.return_depart_time
-        %td= @ticket.return_arrive_time
+        %td= ticket.return_from_city
+        %td= ticket.return_from_venue
+        %td= ticket.return_to_city
+        %td= ticket.return_to_venue
+        %td= ticket.return_depart_time
+        %td= ticket.return_arrive_time
   %tr
     %td
     %td
@@ -38,17 +38,17 @@
     %td
     %td
       %strong Price:
-      %strong= @ticket.price
+      %strong= ticket.price
     %td
       %strong Discount:
-      %strong= @ticket.discount
+      %strong= ticket.discount
     %td
       %strong Total:
-      %strong= @ticket.nett
+      %strong= ticket.nett
 .special-instructions.text-center
   %p
-    %em= @ticket.instructions
+    %em= ticket.instructions
 .scripture.text-center
   %p
   %strong Thought for today
-  %em= @ticket.scripture
+  %em= ticket.scripture

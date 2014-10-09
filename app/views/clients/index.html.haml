@@ -17,7 +17,7 @@
 = alpha_pager(params[:letter])
 
 #client_listing
-  = render partial: 'client_listing'
+  = render partial: 'client_listing', locals: { clients: @clients }
 
 
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus

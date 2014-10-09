@@ -4,14 +4,14 @@
   %h5.pull-right
     %strong
       = l(Time.zone.now)
-  %h2 TRIP SHEET FOR #{@trip.name}
+  %h2 TRIP SHEET FOR #{trip.name}
 %p.pull-left
   %strong Drivers:
-  = list_of (@trip.drivers.map(&:name)) do |driver_name|
+  = list_of (trip.drivers.map(&:name)) do |driver_name|
     = driver_name
 %p.pull-right
   %strong Bus:
-  = @trip.bus_name
+  = trip.bus_name
 %br
 
 %hr
@@ -22,7 +22,7 @@
 %hr
 
 - bootstrap_table headers: ['Clients', 'From', 'To', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do
-  - @trip.bookings.each do |booking|
+  - trip.bookings.each do |booking|
     - booking.passengers.each do |passenger|
       %tr
         %td= passenger.full_name
@@ -34,4 +34,4 @@
 %br
 %br
 #brake
-= render partial: 'additional_info'
+= render partial: 'additional_info', trip: trip

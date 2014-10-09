@@ -1,9 +1,9 @@
-- if @stops.any?
+- if stops.any?
   - bootstrap_table types: [:condensed] do
-    - @stops.each do |stop|
+    - stops.each do |stop|
       %tr
         %td
-          = simple_form_for :booking, namespace: stop.id, url: wizard_path(:trip_details), method: :patch, wrapper: false, defaults: { label: false } do |f|
+          = simple_form_for booking, namespace: stop.id, url: wizard_path(:trip_details), method: :patch, wrapper: false, defaults: { label: false } do |f|
             - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Available Seats', 'Pricing', 'Qty', 'Return?'], types: [:condensed] do
               %tr
                 %td= stop.trip_name
@@ -13,7 +13,7 @@
                 %td= stop.available_seats
                 %td= link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
                 %td= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, value: 1, class: 'input-mini' }
-                %td= f.input :has_return, as: :boolean, input_html: { class: 'input-mini', checked: @booking.stop == stop && @booking.has_return }
+                %td= f.input :has_return, as: :boolean, input_html: { class: 'input-mini', checked: booking.stop == stop && booking.has_return }
                 %td
                   = token_tag
                   = f.hidden_field :trip_id, value: stop.trip_id

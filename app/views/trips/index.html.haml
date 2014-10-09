@@ -16,7 +16,7 @@
   = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 #trip_listing
-  = render partial: 'trip_listing'
+  = render partial: 'trip_listing', locals: { trips: @trips }
 
 %br
 .actions
