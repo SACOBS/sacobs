@@ -3,7 +3,7 @@ class Widgets.TypeAhead
   @enable: ->
    $('input.typeahead').each ->
     $(this).prop('autocomplete', 'off')
-    $(this).prop('name','')
+    $(this).prop('name', '')
 
    $('input.typeahead').keyup ->
     if($.trim($(this).val()) == '')

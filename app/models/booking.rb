@@ -33,7 +33,7 @@ class Booking < ActiveRecord::Base
   belongs_to :user
   belongs_to :trip
   belongs_to :stop
-  belongs_to :client
+  belongs_to :client, autosave: false
   belongs_to :main, class_name: 'Booking', foreign_key: :main_id
 
   has_one :return_booking, class_name: 'Booking', foreign_key: :main_id, dependent: :delete, autosave: true
@@ -50,7 +50,7 @@ class Booking < ActiveRecord::Base
     end
   end
 
-  accepts_nested_attributes_for :passengers, :invoice, :return_booking
+  accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :arrive, :depart, to: :stop
@@ -72,7 +72,6 @@ class Booking < ActiveRecord::Base
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
-
 
   def confirm
     self.price = invoice_total
@@ -115,8 +114,14 @@ class Booking < ActiveRecord::Base
     super || build_client
   end
 
-  private
+  def client_attributes=(attributes)
+    self.client = Client.find(attributes['id']) if attributes['id'].present?
+    self.client.assign_attributes(attributes)
+    self.client.user = user
+    self.client.save
+  end
 
+  private
   def defaults
     { status: :in_process, price: 0, quantity: 1, has_return: false }
   end

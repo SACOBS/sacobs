@@ -24,8 +24,6 @@ module Bookings
         fetch_stops
       when :return_trip_details then
         @booking.has_return? ? fetch_return_stops : skip_step
-      when :client_details then
-        @booking_form = BookingForm.new(@booking)
       when :passenger_details then
         create_passengers
       end
@@ -36,10 +34,6 @@ module Bookings
       case step
       when :trip_details then
         fetch_stops unless @booking.valid?
-      when :client_details then
-        @booking_form = BookingForm.new(@booking)
-        @booking_form.sync
-        @booking_form.save
       when :passenger_charges
         @booking.sync_return_booking
         build_invoice
@@ -99,7 +93,7 @@ module Bookings
     end
 
     def set_attributes
-      # @booking.assign_attributes(booking_params)
+       @booking.assign_attributes(booking_params)
     end
 
     def booking_params

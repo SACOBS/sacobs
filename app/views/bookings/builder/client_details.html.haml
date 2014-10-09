@@ -1,5 +1,5 @@
 #errors= errors_for @booking
-= simple_form_for @booking_form, url: wizard_path(:client_details), defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @booking,  url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal', method: :patch } do |f|
   .search
     %fieldset
       %legend Search for client
