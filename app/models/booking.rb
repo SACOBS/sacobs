@@ -41,7 +41,7 @@ class Booking < ActiveRecord::Base
   has_one :payment_detail, dependent: :delete
 
   has_many :passengers, dependent: :delete_all do
-    def build(attributes={}, &block)
+    def build(attributes = {}, &block)
       attributes.merge! name: proxy_association.owner.client_name,
                         surname: proxy_association.owner.client_surname,
                         cell_no: proxy_association.owner.client_cell_no,
@@ -50,9 +50,7 @@ class Booking < ActiveRecord::Base
     end
   end
 
-
-
-  accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking
+  accepts_nested_attributes_for :passengers, :invoice, :return_booking
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :arrive, :depart, to: :stop
@@ -88,13 +86,12 @@ class Booking < ActiveRecord::Base
     save
   end
 
-
   def sync_return_booking
     return unless has_return?
-    self.return_booking.client = client
-    self.return_booking.passengers.clear
-    passengers.each { |passenger| self.return_booking.passengers << passenger.dup }
-    self.return_booking.save!
+    return_booking.client = client
+    return_booking.passengers.clear
+    passengers.each { |passenger| return_booking.passengers << passenger.dup }
+    return_booking.save!
   end
 
   def is_return?
@@ -115,13 +112,6 @@ class Booking < ActiveRecord::Base
 
   def client
     super || build_client
-  end
-
-  def client_attributes=(attributes)
-    self.client = Client.find(attributes['id']) if attributes['id'].present?
-    self.client.assign_attributes(attributes)
-    self.client.user = user
-    self.client.save
   end
 
   private

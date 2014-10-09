@@ -11,15 +11,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  layout :has_layout?
+  layout :layout?
 
   etag { current_user.try :id }
 
   def js_class_name
     action = case action_name
-               when 'create' then 'New'
-               when 'update' then 'Edit'
-               else action_name
+             when 'create' then 'New'
+             when 'update' then 'Edit'
+             else action_name
              end.camelize
     "Views.#{self.class.name.gsub('::', '.').gsub(/Controller$/, '')}.#{action}View"
   end
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def has_layout?
+  def layout?
     false if request.xhr?
   end
 

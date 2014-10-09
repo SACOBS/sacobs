@@ -1,44 +1,46 @@
-class Routes::BuilderController < ApplicationController
-  include Wicked::Wizard
+module Routes
+  class BuilderController < ApplicationController
+    include Wicked::Wizard
 
-  layout 'wizard'
+    layout 'wizard'
 
-  before_action :set_route, only: [:show, :update]
+    before_action :set_route, only: [:show, :update]
 
-  steps :route_details, :destinations, :connections
+    steps :route_details, :destinations, :connections
 
-  def create
-    @route = Route.create
-    redirect_to wizard_path(steps.first, route_id: @route)
-  end
-
-  def show
-    case step
-      when :connections then build_connections
+    def create
+      @route = Route.create
+      redirect_to wizard_path(steps.first, route_id: @route)
     end
-    render_wizard
-  end
 
-  def update
-    Route.no_touching { @route.update(route_params) }
-    render_wizard @route
-  end
+    def show
+      case step
+        when :connections then build_connections
+      end
+      render_wizard
+    end
 
-  private
+    def update
+      Route.no_touching { @route.update(route_params) }
+      render_wizard @route
+    end
 
-  def finish_wizard_path
-    routes_url
-  end
+    private
 
-  def set_route
-    @route = Route.friendly.find(params[:route_id])
-  end
+    def finish_wizard_path
+      routes_url
+    end
 
-  def build_connections
-    ConnectionBuilder.new(@route).tap(&:build)
-  end
+    def set_route
+      @route = Route.friendly.find(params[:route_id])
+    end
 
-  def route_params
-    RouteParameters.new(params).permit(user: current_user)
+    def build_connections
+      ConnectionBuilder.new(@route).tap(&:build)
+    end
+
+    def route_params
+      RouteParameters.new(params).permit(user: current_user)
+    end
   end
 end

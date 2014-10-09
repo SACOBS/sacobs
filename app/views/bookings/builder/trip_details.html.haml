@@ -1,9 +1,9 @@
 .trip-finder.well.well-small
   %h5 Search
-  = simple_form_for :q, url: booking_builder_index_path(@booking, return: false), html: {class: 'form-inline'}, method: :get ,remote: true do |f|
-    = f.input :from_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select from city', input_html: {data: {target: '#q_from_city_id'}}
+  = simple_form_for :q, url: booking_builder_index_path(@booking, return: false), html: { class: 'form-inline' }, method: :get, remote: true do |f|
+    = f.input :from_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select from city', input_html: { data: { target: '#q_from_city_id' } }
     = f.hidden_field :from_city_id
-    = f.input :to_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select to city', input_html: {data: {target: '#q_to_city_id'}}
+    = f.input :to_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select to city', input_html: { data: { target: '#q_to_city_id' } }
     = f.hidden_field :to_city_id
     = f.input :trip_date, as: :date_picker, placeholder: 'Select a date', label: false
     = f.submit 'Search', class: t('buttons.inverse')
@@ -12,4 +12,4 @@
 .trips
   = render partial: 'bookings/builder/trips'
 
-= link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+= link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')

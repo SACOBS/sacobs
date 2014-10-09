@@ -118,6 +118,8 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
+# Form Objects
+gem 'reform'
 
 group :development do
   gem 'better_errors'
@@ -129,6 +131,8 @@ group :development do
   gem 'rails_best_practices'
   gem 'spring'
   gem 'flatten_migrations'
+  gem 'rubocop', require: false
+  gem 'haml-lint', require: false
 end
 
 group :development, :test do

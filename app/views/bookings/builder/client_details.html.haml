@@ -1,5 +1,5 @@
 #errors= errors_for @booking
-= simple_form_for @booking, url: wizard_path, defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
+= simple_form_for @booking_form, url: wizard_path(:client_details), defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
   .search
     %fieldset
       %legend Search for client
@@ -14,7 +14,7 @@
             = client.input :name
             = client.input :surname
             = client.input :id_number
-            = client.association :bank, include_blank: true,  label: 'Select a bank'
+            = client.input :bank_id, include_blank: true, label: 'Select a bank', collection: Bank.all
           .span3
             = client.input :home_no, as: :tel
             = client.input :work_no, as: :tel

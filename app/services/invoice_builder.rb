@@ -21,10 +21,9 @@ class InvoiceBuilder
   end
 
   def build_client_credit(client)
-    if @booking.client.vouchers.any?
-      build_line_item('Client Credit', client.vouchers.sum(:amount), :credit)
-      @booking.client.vouchers.update_all(active: :false)
-    end
+    return unless @booking.client.vouchers.any?
+    build_line_item('Client Credit', client.vouchers.sum(:amount), :credit)
+    @booking.client.vouchers.update_all(active: :false)
   end
 
   def build_line_item(description, amount, type)

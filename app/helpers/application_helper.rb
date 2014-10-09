@@ -16,7 +16,7 @@ module ApplicationHelper
       content_tag(:div, class: 'error_explanation well well small') do
         concat (content_tag(:div, "#{pluralize(model.errors.count, 'error')} prevented this record from being saved:", class: 'alert alert-error'))
         concat (content_tag :ul do
-          model.errors.full_messages.map {|msg| content_tag(:li, msg)}.join.html_safe
+          model.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
         end)
       end
     end
@@ -33,7 +33,6 @@ module ApplicationHelper
   def current_trips_count
     @current_trips_count ||= Trip.valid.count
   end
-
 
   def decimal_to_percentage(value)
     number_to_percentage(value * 100, precision: 2)

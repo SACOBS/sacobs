@@ -87,7 +87,7 @@
 
     .well
       %h3 Passengers
-      - bootstrap_table headers:['Name','Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: {id: 'passengers'} do
+      - bootstrap_table headers: ['Name', 'Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: { id: 'passengers' } do
         - decorated_booking.passengers.each do |passenger|
           %tr
             %td= passenger.name

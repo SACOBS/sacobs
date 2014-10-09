@@ -35,7 +35,8 @@ class BookingDecorator < BaseDecorator
     helpers.link_to 'Show', model, options
   end
 
-  def copy_link(_options = {})
+  def client_contact_details_link(options = {})
+    helpers.link_to client_name, helpers.contact_details_client_path(client), options
   end
 
   def ticket_link(options = {})

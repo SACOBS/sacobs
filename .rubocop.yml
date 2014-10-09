@@ -1,0 +1,14 @@
+inherit_from: .rubocop_todo.yml
+AllCops:
+  RunRailsCops: true
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - 'db/**/*'
+    - 'spec/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+Metrics/LineLength:
+  Enabled: false
+
