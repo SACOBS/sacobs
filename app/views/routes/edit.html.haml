@@ -3,34 +3,34 @@
 
 #errors= errors_for @route
 
-%ul#Tabbed.nav.nav-tabs
+%ul.nav.nav-tabs#Tabbed
   %li.active
-    %a{href: "#details"} Details
+    %a{ href: '#details' } Details
   %li
-    %a{href: "#connections"} Connections
+    %a{ href: '#connections' } Connections
 
 
-= simple_form_for @route, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+= simple_form_for @route, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Back', routes_path, class: t('buttons.info')
 
   .tab-content
-    #details.tab-pane.active
+    .tab-pane.active#details
       %fieldset
         = f.input :name
         = f.input :cost, as: :cost
         = f.input :distance, as: :distance
-    #connections.tab-pane
+    .tab-pane#connections
       %fieldset
-        - bootstrap_table headers:['From', 'To','Percentage','Cost','Distance', 'Depart Time', 'Arrive Time' ,''], types: [:bordered, :condensed], html_options: {id: 'connections', class: 'sortable'} do
+        - bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:bordered, :condensed], html_options: { id: 'connections', class: 'sortable' } do
           = f.simple_fields_for :connections, wrapper: false do |connection|
             %tr
               %td= connection.object.from_city_name
               %td= connection.object.to_city_name
-              %td= connection.input_field :percentage, as: :percentage, label: false,class: 'input-small calc'
-              %td= connection.input_field :cost, as: :cost, label: false,class: 'input-small'
-              %td= connection.input_field :distance, as: :distance, label: false,class: 'input-small'
+              %td= connection.input_field :percentage, as: :percentage, label: false, class: 'input-small calc'
+              %td= connection.input_field :cost, as: :cost, label: false, class: 'input-small'
+              %td= connection.input_field :distance, as: :distance, label: false, class: 'input-small'
               %td= connection.input_field :depart, as: :time_picker, label: false, class: 'input-small'
               %td= connection.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
 

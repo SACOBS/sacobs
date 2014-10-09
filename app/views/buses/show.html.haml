@@ -25,7 +25,7 @@
   .well
     %p
       %strong Seats:
-      - bootstrap_table headers:['Row', 'Number',], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+      - bootstrap_table headers: %w(Row Number), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
         - @bus.seats.each do |seat|
           %tr
             %td= seat.row

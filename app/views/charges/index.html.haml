@@ -1,11 +1,11 @@
 .page-header
   %h2 Charges
 
-= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'),icon: :plus
+= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'), icon: :plus
 
-- bootstrap_table headers:['Description', 'Percentage', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
+- bootstrap_table headers: %w(Description Percentage Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
   = render @charges, cache: true
 
-= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'),icon: :plus
+= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'), icon: :plus
 
 

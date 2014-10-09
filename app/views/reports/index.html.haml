@@ -10,7 +10,7 @@
   = column_chart reports_income_per_month_path, stacked: true
 
 %bookings_per_user
-  %h4="Bookings per user for #{Time.zone.now.strftime('%B')}"
+  %h4 Bookings per user for #{Time.zone.now.strftime('%B')}
   = bar_chart reports_bookings_per_user_path
 
 

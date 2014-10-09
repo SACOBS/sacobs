@@ -4,11 +4,11 @@
     = simple_form_for :q do |f|
       = f.input :route, collection: Route.all, as: :radio_buttons, item_wrapper_class: 'inline', label: 'Select a route'
     %h5 Connections
-    %input{type: "text", required: true, placeholder: 'Search Connections', id: 'connection-search'}/
+    %input{type: 'text', required: true, placeholder: 'Search Connections', id: 'connection-search'}/
     .connections
-      %ul{id: 'connections-list', class:'unstyled'}
+      %ul.unstyled#connections-list
         - @connections.each do |connection|
-          %li[connection]{data: {route: connection.route_id}}=link_to connection.name, pricing_path(connection), remote: true
+          %li{class: dom_class(connection), id: dom_id(connection), data: { route: connection.route_id } }= link_to connection.name, pricing_path(connection), remote: true
 .quote
   = render 'pricing/quote', pricing: @pricing
 

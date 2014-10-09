@@ -1,5 +1,5 @@
 - if user_signed_in?
-  = link_to "Home", dashboard_path, class: 'brand'
+  = link_to 'Home', dashboard_path, class: 'brand'
   %ul.nav.pull-left
     - drop_down_menu('Bookings') do
       %li= link_to 'New', bookings_path, method: :post
@@ -9,7 +9,7 @@
       %li= link_to 'New', new_client_path
       %li.divider
       %li= link_to 'View', clients_path
-    %li= link_to 'Quick Tripsheet', trip_sheets_path
+    %li= link_to 'Quick Trip Sheet', trip_sheets_path
     %li= link_to 'Quick Quote', quick_quote_path
 
     - unless current_user.clerk?
@@ -22,7 +22,7 @@
       - drop_down_menu('Manage') do
         %li= link_to 'Buses', buses_path
         %li.divider
-        %li= link_to 'Cities',cities_path
+        %li= link_to 'Cities', cities_path
         %li.divider
         %li= link_to 'Charges', charges_path
         %li.divider
@@ -38,7 +38,7 @@
 
       %li= link_to 'Admin', users_path
       %li= link_to 'Reports', reports_path
-      %li= link_to 'Notes', notes_path(context: controller_path.gsub('/','')), remote: true
+      %li= link_to 'Notes', notes_path(context: controller_path.gsub('/', '')), remote: true
       %li= link_to 'Settings', setting_path
 
 
@@ -47,11 +47,11 @@
     %li.divider-vertical
     - drop_down_menu('Account') do
       %li= link_to 'Edit account', edit_user_registration_path
-      %li{class: 'divider'}
+      %li.divider
       %li= link_to 'Logout', destroy_user_session_path, method: :delete
     %li.divider-vertical
 - else
-  = link_to "Home", root_path, class: 'brand'
+  = link_to 'Home', root_path, class: 'brand'
   %ul.nav
     %li= link_to 'Login', new_user_session_path
     %li= link_to 'Sign up', new_user_registration_path

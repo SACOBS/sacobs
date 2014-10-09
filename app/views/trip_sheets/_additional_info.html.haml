@@ -9,7 +9,7 @@
 %p
   %strong= @trip.notes
 
-- bootstrap_table headers:['Drivers', 'From','Time','O/Reading', 'To', 'Time'], types: [:bordered] do
+- bootstrap_table headers: %w(Drivers From Time O/Reading To Time), types: [:bordered] do
   - 5.times do
     %tr
       %td
@@ -19,7 +19,7 @@
       %td
       %td
 
-- bootstrap_table headers:[], types: [:bordered, :condensed] do
+- bootstrap_table headers: [], types: [:bordered, :condensed] do
   %tr
     %td cash
     %td
@@ -36,7 +36,7 @@
     %td difference
     %td
 
-- bootstrap_table headers:['Trip remarks'], types: [:bordered, :condensed] do
+- bootstrap_table headers: ['Trip remarks'], types: [:bordered, :condensed] do
   %tr
     %td Diesel
   %tr
@@ -62,7 +62,7 @@
     %td PE
     %td
 
-- bootstrap_table headers:['Items on checklist to report pm'], types: [:bordered, :condensed] do
+- bootstrap_table headers: ['Items on checklist to report pm'], types: [:bordered, :condensed] do
   %tr
     %td
     %td

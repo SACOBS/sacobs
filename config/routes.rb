@@ -135,7 +135,7 @@
 #                        user PATCH  /users/:id(.:format)                                users#update
 #                             PUT    /users/:id(.:format)                                users#update
 #          authenticated_root GET    /                                                   dashboard#show
-#                        root GET    /                                                   pages#show {:id=>"home"}
+#                        root GET    /                                                   pages#show {id:"home"}
 #                        page GET    /pages/*id                                          pages#show
 #                     pricing GET    /pricing/:id(.:format)                              pricing#show
 #                 quick_quote GET    /quick_quote(.:format)                              pricing#index
@@ -144,7 +144,7 @@
 # reports_bookings_per_status GET    /reports/bookings_per_status(.:format)              reports#bookings_per_status
 #    reports_income_per_month GET    /reports/income_per_month(.:format)                 reports#income_per_month
 #   reports_bookings_per_user GET    /reports/bookings_per_user(.:format)                reports#bookings_per_user
-#                                    (/errors)/:status(.:format)                         errors#show {:status=>/\d{3}/}
+#                                    (/errors)/:status(.:format)                         errors#show {status:/\d{3}/}
 #               rails_db_info        /rails/info/db                                      RailsDbInfo::Engine
 #
 # Routes for RailsDbInfo::Engine:

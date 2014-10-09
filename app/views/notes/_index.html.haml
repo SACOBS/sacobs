@@ -1,6 +1,6 @@
-#notes.modal.hide.fade{aria_hidden:  'true', aria_labelledby: 'notesLabel', role: "dialog", tabindex: "-1"}
+.modal.hide.fade#notes{ aria_hidden:  'true', aria_labelledby: 'notesLabel', role: 'dialog', tabindex: '-1' }
   .modal-header
-    %button.close{aria_hidden: "true", data: {dismiss: "modal"}, type: "button"} ×
+    %button.close{ aria_hidden: 'true', data: { dismiss: 'modal' }, type: 'button' } ×
     %h4#notesLabel Notes
     .modal-body
       .note_form
@@ -8,4 +8,4 @@
       .well
         %ul.notes
           - @notes.each do |note|
-            %li[note]=link_to_if(current_user.admin?, note.content, edit_note_path(note), remote: true)
+            %li{ class: dom_class(note), id: dom_id(note) }= link_to_if(current_user.admin?, note.content, edit_note_path(note), remote: true)

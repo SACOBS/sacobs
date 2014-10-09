@@ -1,5 +1,5 @@
 #errors= errors_for @bus
-= simple_form_for @bus, url: wizard_path,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+= simple_form_for @bus, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
     = f.input :name
     = f.input :capacity
@@ -7,4 +7,4 @@
     = f.input :model
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', bus_path(@bus), method: :delete ,class: t('buttons.danger')
+    = link_to 'Cancel', bus_path(@bus), method: :delete, class: t('buttons.danger')

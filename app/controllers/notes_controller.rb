@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   def index
     @notes = Note.where(context: params[:context])
-    @new_note = Note.new(context: params[:context]) if current_user.admin?
+    @new_note = @notes.new if current_user.admin?
   end
 
   def create

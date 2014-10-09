@@ -58,7 +58,7 @@ class Booking < ActiveRecord::Base
   delegate :from_city, :to_city, :from_city_name, :to_city_name, to: :stop
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
-  delegate :name, :surname, :full_name, :home_no, :cell_no, :email, :work_no, :age, :is_pensioner?, :id_number, :date_of_birth, to: :client, prefix: true
+  delegate :name, :surname, :full_name, :home_no, :cell_no, :email, :work_no, :age, :is_pensioner?, :bank_name,:id_number, :date_of_birth, to: :client, prefix: true
 
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
@@ -72,6 +72,7 @@ class Booking < ActiveRecord::Base
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
+
 
   def confirm
     self.price = invoice_total

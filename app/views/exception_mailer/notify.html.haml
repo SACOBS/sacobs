@@ -1,8 +1,8 @@
 %h3 Exception
-%p=@exception.class.to_s
+%p= @exception.class.to_s
 
 %h3 Message
-=simple_format(@exception.message)
+= simple_format(@exception.message)
 
 %h3 Backtrace
 = simple_format(@exception.backtrace)

@@ -1,19 +1,18 @@
 .page-header
-  %h2 #{@pricing.connection_name}
+  %h2= @pricing.connection_name
 .well
   %p
     %strong Ticket Price:
     = number_to_currency @pricing.price, unit: 'R'
-
 .span12
   .row
     .span5.well
       %h5 Discounts
       - @pricing.discount_prices.each do |key, value|
         %ul
-          %li="#{key.to_s.humanize}: #{number_to_currency(value, unit: 'R')}"
+          %li #{key.to_s.humanize}: #{number_to_currency(value, unit: 'R')}
     .span5.well
       %h5 Charges
       - @pricing.charges.each do |key, value|
         %ul
-          %li="#{key.to_s.humanize}: #{number_to_currency(value, unit: 'R')}"
+          %li #{key.to_s.humanize}: #{number_to_currency(value, unit: 'R')}

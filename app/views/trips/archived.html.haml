@@ -2,19 +2,16 @@
   %h2 Trip Archives
 
 .search.pull-right
-  = simple_form_for :q, url: archived_trips_path, defaults: { required: false, label: false }, html: {class: 'form-inline',method: :get} do |f|
-    = f.input :name_cont, placeholder: 'Search', input_html: {class: 'search-query'}
+  = simple_form_for :q, url: archived_trips_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f|
+    = f.input :name_cont, placeholder: 'Search', input_html: { class: 'search-query' }
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', archived_trips_path, class: t('buttons.mini.inverse'), icon: :times
 
-
-
 = link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh
 
-
 = paginate @trips
-- bootstrap_table headers:['Name', 'Start Date','End Date','Route','Bus','Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: {class: 'sortable'} do
-  = render partial: 'archived_trip', collection: @trips, as: :trip,cache: true
+- bootstrap_table headers: ['Name', 'Start Date', 'End Date', 'Route', 'Bus', 'Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+  = render partial: 'archived_trip', collection: @trips, as: :trip, cache: true
 = paginate @trips
 
 

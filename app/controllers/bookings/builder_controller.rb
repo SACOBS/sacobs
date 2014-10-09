@@ -20,32 +20,31 @@ module Bookings
 
     def show
       case step
-        when :trip_details then
-          fetch_stops
-        when :return_trip_details then
-          @booking.has_return? ? fetch_return_stops : skip_step
-        when :client_details then
-          @booking_form = BookingForm.new(@booking)
-        when :passenger_details then
-          create_passengers
+      when :trip_details then
+        fetch_stops
+      when :return_trip_details then
+        @booking.has_return? ? fetch_return_stops : skip_step
+      when :client_details then
+        @booking_form = BookingForm.new(@booking)
+      when :passenger_details then
+        create_passengers
       end
       render_wizard
     end
 
     def update
       case step
-        when :trip_details then
-          fetch_stops unless @booking.valid?
-        when :client_details then
-          @booking_form = BookingForm.new(@booking)
-          @booking_form.sync
-          @booking_form.save
-
-        when :passenger_charges
-          @booking.sync_return_booking
-          build_invoice
-        when :billing_info then
-          reserve_booking
+      when :trip_details then
+        fetch_stops unless @booking.valid?
+      when :client_details then
+        @booking_form = BookingForm.new(@booking)
+        @booking_form.sync
+        @booking_form.save
+      when :passenger_charges
+        @booking.sync_return_booking
+        build_invoice
+      when :billing_info then
+        reserve_booking
       end
       render_wizard @booking
     end
@@ -70,8 +69,9 @@ module Bookings
     end
 
     def create_passengers
-      @booking.passengers.clear
-      @booking.quantity.times { @booking.passengers.build(passenger_type: get_passenger_type) }
+      passengers = @booking.passengers
+      passengers.clear
+      @booking.quantity.times { passengers.build(passenger_type: get_passenger_type) }
       @booking.save
     end
 
@@ -85,8 +85,9 @@ module Bookings
     end
 
     def build_invoice
+      return_booking = @booking.return_booking
       @booking.invoice = InvoiceBuilder.execute(@booking)
-      @booking.return_booking.invoice = InvoiceBuilder.execute(@booking.return_booking) if @booking.return_booking
+      return_booking.invoice = InvoiceBuilder.execute(return_booking) if return_booking
     end
 
     def reserve_booking

@@ -3,19 +3,19 @@
 
 #errors= errors_for @trip
 
-%ul#Tabbed.nav.nav-tabs
+%ul.nav.nav-tabs#Tabbed
   %li.active
-    %a{href: "#details"} Details
+    %a{ href: '#details'} Details
   %li
-    %a{href: "#stops"} Stops
+    %a{ href: '#stops' } Stops
 
 
-= simple_form_for @trip, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+= simple_form_for @trip, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Back', trips_path, class: t('buttons.info')
   .tab-content
-    #details.tab-pane.active
+    .tab-pane.active#details
       %fieldset
         = f.input :name
         = f.input :start_date, as: :date_picker
@@ -24,9 +24,9 @@
         = f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline'
         = f.association :drivers, as: :check_boxes
         = f.input :notes, as: :text
-    #stops.tab-pane
+    .tab-pane#stops
       %fieldset
-        - bootstrap_table headers:['From', 'To','Arrive', 'Depart'], types: [:bordered, :condensed], html_options: {id: 'stops'} do
+        - bootstrap_table headers: %w(From To Arrive Depart), types: [:bordered, :condensed], html_options: { id: 'stops' } do
           = f.simple_fields_for :stops, wrapper: false do |stop|
             %tr
               %td= stop.object.from_city_name

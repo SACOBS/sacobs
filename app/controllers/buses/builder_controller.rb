@@ -36,7 +36,8 @@ module Buses
     end
 
     def build_seats
-      (@bus.capacity - @bus.seats.size).times { @bus.seats.build }
+      seats = @bus.seats
+      (@bus.capacity - seats.size).times { seats.build }
     end
 
     def bus_params

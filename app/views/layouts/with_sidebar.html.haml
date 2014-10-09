@@ -1,23 +1,23 @@
 !!!
 %html
   %head
-    %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1"}
-    %title= content_for?(:title) ? yield(:title) : "Sacobs"
-    %meta{content: content_for?(:description) ? yield(:description) : "Sacobs", name: "description"}
-    %meta{content: content_for?(:keywords) ? yield(:keywords) : "Sacobs", name: "keywords"}
-    = stylesheet_link_tag :application, media: "all",  "data-turbolinks-track" => true
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
+    %title= content_for?(:title) ? yield(:title) : 'Sacobs'
+    %meta{ content: content_for?(:description) ? yield(:description) : 'Sacobs', name: 'description' }
+    %meta{ content: content_for?(:keywords) ? yield(:keywords) : 'Sacobs', name: 'keywords' }
+    = stylesheet_link_tag :application, media: 'all',  'data-turbolinks-track' => true
     = javascript_include_tag 'head'
     = headjs_include_tag 'vendor', 'application'
-    = headjs_include_tag "//www.google.com/jsapi", "chartkick"
+    = headjs_include_tag '//www.google.com/jsapi', 'chartkick'
     = csrf_meta_tags
     = yield(:head)
-  %body{data: {action: action_name, controller: controller_path, class_name: js_class_name}}
+  %body{ data: { action: action_name, controller: controller_path, class_name: js_class_name } }
     #wrap
       %header.navbar.navbar-fixed-top.navbar-inverse
         %nav.navbar-inner
           .container-fluid
             = render 'layouts/navigation'
-      #main{role: :main}
+      #main{ role: :main }
         .container-fluid
           .content
             .unobtrusive-flash-container

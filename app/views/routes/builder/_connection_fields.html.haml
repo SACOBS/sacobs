@@ -1,9 +1,9 @@
 %tr.nested-fields
-  %td= f.association :from, label: false, label_method: :city_name,include_blank: false, prompt: 'Select From Destination', input_html: {rel: 'autocomplete'}
-  %td= f.association :to, label_method: :city_name,label: false, include_blank: false,  prompt: 'Select To Destination', input_html: {rel: 'autocomplete'}
-  %td= f.input_field :percentage, as: :percentage, label: false,class: 'input-small calc'
-  %td= f.input_field :cost, as: :cost, label: false,class: 'input-small'
-  %td= f.input_field :distance, as: :distance, label: false,class: 'input-small'
+  %td= f.association :from, label: false, label_method: :city_name, include_blank: false, prompt: 'Select From Destination', input_html: { rel: 'autocomplete' }
+  %td= f.association :to, label_method: :city_name, label: false, include_blank: false, prompt: 'Select To Destination', input_html: { rel: 'autocomplete' }
+  %td= f.input_field :percentage, as: :percentage, label: false, class: 'input-small calc'
+  %td= f.input_field :cost, as: :cost, label: false, class: 'input-small'
+  %td= f.input_field :distance, as: :distance, label: false, class: 'input-small'
   %td= f.input_field :depart, as: :time_picker, label: false, class: 'input-small'
   %td= f.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
-  %td= link_to_remove_association "Remove", f, class: t('buttons.mini.danger')
+  %td= link_to_remove_association 'Remove', f, class: t('buttons.mini.danger')

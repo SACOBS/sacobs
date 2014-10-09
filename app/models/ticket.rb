@@ -1,6 +1,8 @@
 class Ticket
   attr_reader :booking, :return_booking, :client
 
+  delegate :reference_no, :passengers, to: :booking
+
   def initialize(booking, view_context)
     @booking = booking.main ? booking.main : booking
     @return_booking = @booking.return_booking if @booking.return_booking
@@ -14,10 +16,6 @@ class Ticket
 
   def scripture
     @view_context.simple_format(scripture_service.fetch || settings.default_scripture)
-  end
-
-  def reference_no
-    booking.reference_no
   end
 
   def ticket_date
@@ -72,10 +70,6 @@ class Ticket
     return_booking.to_city_name
   end
 
-  def passengers
-    @passengers ||= booking.passengers
-  end
-
   def price
     @view_context.number_to_currency total_cost, unit: 'R'
   end
@@ -100,22 +94,22 @@ class Ticket
 
   def total
     total = 0
-    total += @booking.invoice_total
-    total += @return.invoice_total if @return
+    total += booking.invoice_total
+    total += return_booking.invoice_total if @return
     total
   end
 
   def total_cost
     total = 0
-    total += @booking.invoice_total_cost
-    total += @return.invoice_total_cost if @return
+    total += booking.invoice_total_cost
+    total += return_booking.invoice_total_cost if @return
     total
   end
 
   def total_discount
     total = 0
-    total += @booking.invoice_total_discount
-    total += @return.invoice_total_discount if @return
+    total += booking.invoice_total_discount
+    total += return_booking.invoice_total_discount if @return
     total
   end
 end

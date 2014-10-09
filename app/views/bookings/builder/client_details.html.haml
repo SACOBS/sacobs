@@ -1,9 +1,9 @@
 #errors= errors_for @booking
-= simple_form_for @booking_form, url: wizard_path(:client_details), defaults: {error: false}, html: {class: 'form-horizontal'} do |f|
+= simple_form_for @booking_form, url: wizard_path(:client_details), defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .search
     %fieldset
       %legend Search for client
-      = f.input :client_search, typeahead: clients_url(format: :json), label: false, placeholder: 'Search for client', input_html: {value: '', data: {target: '#booking_client_attributes_id', populate: '.new_client_fields'}}
+      = f.input :client_search, typeahead: clients_url(format: :json), label: false, placeholder: 'Search for client', input_html: { value: '', data: { target: '#booking_client_attributes_id', populate: '.new_client_fields' } }
   .new_client_fields
     = f.simple_fields_for :client do |client|
       %fieldset
@@ -24,7 +24,7 @@
 
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', booking_path(@booking), method: :delete ,class: t('buttons.danger')
+    = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
 
 
 

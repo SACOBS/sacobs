@@ -1,5 +1,5 @@
 - RouteDecorator.new(route, self) do |decorated_route|
-  %tr[route]
+  %tr{ class: dom_class(route), id: dom_id(route) }
     %td= link_to decorated_route.name, route
     %td= decorated_route.start_city
     %td= decorated_route.end_city
@@ -9,7 +9,7 @@
     %td
       = decorated_route.add_destination_link(icon: :plus, class: t('buttons.mini.primary'))
       = decorated_route.copy_link(icon: :copy, class: t('buttons.mini.warning'))
-      = decorated_route.reverse_copy_link(icon: :copy ,class: t('buttons.mini.warning'))
+      = decorated_route.reverse_copy_link(icon: :copy, class: t('buttons.mini.warning'))
       = decorated_route.show_link(icon: :info, class: t('buttons.mini.info'))
       = decorated_route.edit_link(icon: :edit,  class: t('buttons.mini.inverse'))
       = decorated_route.destroy_link(icon: :times, class: t('buttons.mini.danger'))

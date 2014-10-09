@@ -1,5 +1,5 @@
 - ClientDecorator.decorate(client, self) do |decorated_client|
-  %tr[client]
+  %tr{ class: dom_class(client), id: dom_id(client) }
     %td= decorated_client.name
     %td= decorated_client.surname
     %td= decorated_client.high_risk

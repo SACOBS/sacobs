@@ -1,7 +1,7 @@
 .page-header
   %h2 Edit Setting
 #errors= errors_for @setting
-= simple_form_for @setting,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+= simple_form_for @setting,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', root_path, class: t('buttons.default')

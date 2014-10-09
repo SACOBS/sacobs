@@ -26,7 +26,7 @@
 %br
 
 .passengers
-- bootstrap_table headers:['Date', 'Name' ,'From', 'Terminal', 'To' , 'Terminal', 'Departure', 'Arrival'], types: [:bordered, :condensed] do
+- bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
   - @ticket.passengers.each do |passenger|
     %tr
       %td= @ticket.booking.trip_start_date

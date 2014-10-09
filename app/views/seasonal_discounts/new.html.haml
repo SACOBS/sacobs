@@ -2,7 +2,7 @@
   %h2 New Priority Pricing
 
 #errors= errors_for @seasonal_discount
-= simple_form_for @seasonal_discount,  defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+= simple_form_for @seasonal_discount,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
     = f.input :name
     = f.association :passenger_type, include_blank: false

@@ -1,15 +1,15 @@
 #errors= errors_for @client
-= simple_form_for @client, defaults: {error: false} ,html: {class: 'form-horizontal'} do |f|
+= simple_form_for @client, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', clients_path, class: t('buttons.default')
   %fieldset
-    = f.input :title, collection: Client::TITLES,include_blank: false, prompt: 'Select a title'
+    = f.input :title, collection: Client::TITLES, include_blank: false, prompt: 'Select a title'
     = f.input :name
     = f.input :surname
     = f.input :id_number
     = f.input :high_risk
-    = f.association :bank,  include_blank: 'Not Applicable'
+    = f.association :bank, include_blank: 'Not Applicable'
     = f.input :home_no, as: :tel
     = f.input :work_no, as: :tel
     = f.input :cell_no, as: :tel

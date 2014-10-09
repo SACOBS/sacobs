@@ -5,9 +5,9 @@ class ClientsController < ApplicationController
 
   def index
     if request.xhr?
-      @clients = policy_scope(Client).all.uniq(:full_name)
+      @clients = client_scope.all.uniq(:full_name)
     else
-      @q = policy_scope(Client).search(search_criteria)
+      @q = client_scope.search(search_criteria)
       @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
     end
   end
@@ -53,6 +53,10 @@ class ClientsController < ApplicationController
 
   private
 
+  def client_scope
+    policy_scope(Client)
+  end
+
   def set_client
     @client = Client.friendly.find(params[:id])
   end
@@ -62,8 +66,9 @@ class ClientsController < ApplicationController
   end
 
   def search_criteria
+    letter = params[:letter]
     criteria = params.fetch(:q, {})
-    criteria.merge! surname_start: params[:letter] if params[:letter]
+    criteria.merge! surname_start: letter if letter
     criteria
   end
 

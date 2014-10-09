@@ -3,8 +3,8 @@
 .row.span10
   .span5
     %ol
-      - @route.destinations.each do |d|
-        %li= d.city_name
+      = list_of(@route.destinations.map(&:city_name)) do |city_name|
+        %li= city_name
 
     = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
       = f.submit 'Save', class: t('buttons.primary')

@@ -1,5 +1,5 @@
 -  SeasonalDiscountDecorator.decorate(seasonal_discount, self) do  |decorated_seasonal_discount|
-  %tr[seasonal_discount]
+  %tr{ class: dom_class(seasonal_discount), id: dom_id(seasonal_discount) }
     %td= decorated_seasonal_discount.name
     %td= decorated_seasonal_discount.passenger_type
     %td= decorated_seasonal_discount.percentage

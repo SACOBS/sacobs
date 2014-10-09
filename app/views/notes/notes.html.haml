@@ -1,10 +1,10 @@
-#notes.modal.hide.fade{aria_hidden:  'true', aria_labelledby: 'notesLabel', role: "dialog", tabindex: "-1"}
+.modal.hide.fade#notes{ aria_hidden:  'true', aria_labelledby: 'notesLabel', role: 'dialog', tabindex: '-1' }
   .modal-header
-    %button.close{aria_hidden: "true", data: {dismiss: "modal"}, type: "button"} ×
+    %button.close{ aria_hidden: 'true', data: { dismiss: 'modal' }, type: 'button' } ×
     %h4#notesLabel Notes
     .modal-body
       .well.well-small
         = render 'notes/form' if current_user.admin?
         %ul
-          - @notes.each do |note|
-            %li=note.text
+          = list_of (@notes.map(&:content)) do |content|
+            %li= content
