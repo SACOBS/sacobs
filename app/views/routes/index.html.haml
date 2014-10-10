@@ -11,7 +11,7 @@
 = link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh
 
 = paginate @routes
-- bootstrap_table headers: %w(Description Start City End City Cost Distance Connections Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+- bootstrap_table headers: ['Description', 'Start City', 'End City', 'Cost', 'Distance', 'Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
   = render partial: 'route', collection: @routes, cache: true
 = paginate @routes
 

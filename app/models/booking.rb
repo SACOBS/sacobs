@@ -50,8 +50,6 @@ class Booking < ActiveRecord::Base
     end
   end
 
-
-
   accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
@@ -60,7 +58,7 @@ class Booking < ActiveRecord::Base
   delegate :from_city, :to_city, :from_city_name, :to_city_name, to: :stop
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
-  delegate :name, :surname, :full_name, :home_no, :cell_no, :email, :work_no, :age, :is_pensioner?, :bank_name,:id_number, :date_of_birth, to: :client, prefix: true
+  delegate :name, :surname, :full_name, :home_no, :cell_no, :email, :work_no, :age, :is_pensioner?, :bank_name, :id_number, :date_of_birth, to: :client, prefix: true
 
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
@@ -125,12 +123,13 @@ class Booking < ActiveRecord::Base
 
   def client_attributes=(attributes)
     self.client = Client.find(attributes['id']) if attributes['id'].present?
-    self.client.assign_attributes(attributes)
-    self.client.user = user
-    self.client.save
+    client.assign_attributes(attributes)
+    client.user = user
+    client.save
   end
 
   private
+
   def defaults
     { status: :in_process, price: 0, quantity: 1, has_return: false }
   end

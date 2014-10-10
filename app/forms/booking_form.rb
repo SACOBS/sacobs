@@ -5,8 +5,7 @@ class BookingForm
 
   attr_accessor :client, :user
 
-
-  def initialize(booking, attributes={})
+  def initialize(booking, attributes = {})
     @booking = booking
     @client = booking.client
     super(attributes)
@@ -17,7 +16,6 @@ class BookingForm
   end
 
   def client_attributes=(attributes)
-
     if attributes['id'].present?
       @client = Client.find(attributes['id'])
     else
@@ -36,10 +34,11 @@ class BookingForm
   end
 
   private
-   def persist!
-     puts client.inspect
-     client.save!
-     @booking.client = client
-     @booking.save!
-   end
+
+  def persist!
+    puts client.inspect
+    client.save!
+    @booking.client = client
+    @booking.save!
+  end
 end

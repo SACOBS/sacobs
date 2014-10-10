@@ -6,7 +6,7 @@
 %br
 %br
 
-- bootstrap_table headers: %w(Name Passenger Type Percentage Period From Period To Active Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+- bootstrap_table headers: ['Name', 'Passenger Type', 'Percentage', 'Period From', 'Period To', 'Active', 'Actions'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
   = render @seasonal_discounts, cache: true
 
 = link_to 'Setup Priority  Pricing', new_seasonal_discount_path, class: t('buttons.primary'), icon: :plus

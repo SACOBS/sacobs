@@ -1,15 +1,13 @@
 module LayoutRequired
- extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
- included do
-   layout :layout_required?
- end
+  included do
+    layout :layout_required?
+  end
 
+  private
 
-
- private
-   def layout_required?
-     false if request.xhr?
-   end
-
+  def layout_required?
+    false if request.xhr?
+  end
 end

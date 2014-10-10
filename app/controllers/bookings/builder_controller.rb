@@ -93,7 +93,7 @@ module Bookings
     end
 
     def set_attributes
-       @booking.assign_attributes(booking_params)
+      @booking.assign_attributes(booking_params)
     end
 
     def booking_params

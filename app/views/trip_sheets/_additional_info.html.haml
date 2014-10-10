@@ -1,11 +1,11 @@
 %p
-  %strong= trip.notes
+  %strong= trip_sheet_presenter.notes
 %p
-  %strong= settings.trip_sheet_note1
+  %strong= trip_sheet_presenter.trip_sheet_note1
 %p
-  %strong= settings.trip_sheet_note2
+  %strong= trip_sheet_presenter.trip_sheet_note2
 %p
-  %strong= settings.trip_sheet_note3
+  %strong= trip_sheet_presenter.trip_sheet_note3
 
 
 - bootstrap_table headers: %w(Drivers From Time O/Reading To Time), types: [:bordered] do
@@ -70,6 +70,6 @@
     %td
     %td
 %p
-  %strong= settings.trip_sheet_note4
+  %strong= trip_sheet_presenter.trip_sheet_note4
 %p.pull-right
   PTO

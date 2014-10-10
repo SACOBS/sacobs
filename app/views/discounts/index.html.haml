@@ -5,7 +5,7 @@
 %br
 %br
 
-- bootstrap_table headers: %w(Passenger Type Percentage Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+- bootstrap_table headers: %w(Passenger Percentage Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
   = render @discounts, cache: true
 
 = link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus

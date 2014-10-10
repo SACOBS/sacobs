@@ -39,8 +39,8 @@ module ApplicationHelper
   end
 
   def invoice_total(booking)
-        total = booking.invoice_total
-        return_total = booking.return_booking.invoice_total if booking.return_booking
-        total += (return_total || 0)
+    total = booking.invoice_total
+    return_total = booking.return_booking.invoice_total if booking.return_booking
+    total += (return_total || 0)
   end
 end
