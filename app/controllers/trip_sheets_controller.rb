@@ -7,6 +7,13 @@ class TripSheetsController < ApplicationController
     render layout: 'with_sidebar'
   end
 
+  def edit;end
+
+  def update
+    @trip.update(params.require(:trip).permit(:notes))
+    respond_with @trip, location: trip_sheet_url(@trip), action: :edit
+  end
+
   def download
     html = render_to_string(template: 'trip_sheets/_trip_sheet.html.haml', layout: 'pdf.html')
     pdf = WickedPdf.new.pdf_from_string(html)
@@ -25,12 +32,11 @@ class TripSheetsController < ApplicationController
   end
 
   private
+    def set_trip
+      @trip = Trip.find(params[:id])
+    end
 
-  def set_trip
-    @trip = Trip.find(params[:id])
-  end
-
-  def generate_file_name
-    "#{@trip.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
-  end
+    def generate_file_name
+      "#{@trip.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
+    end
 end

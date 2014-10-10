@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
 
   def index
     bookings = Booking.includes(:trip, :stop, :client).not_in_process.active.search(params[:q]).result.distinct(true)
-    @booking_dashboard = BookingDashboard.new(bookings, params)
+    @booking_presenter = BookingPresenter.new(bookings, params)
   end
 
   def create

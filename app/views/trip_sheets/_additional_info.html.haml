@@ -1,13 +1,12 @@
 %p
+  %strong= trip.notes
+%p
   %strong= settings.trip_sheet_note1
 %p
   %strong= settings.trip_sheet_note2
 %p
   %strong= settings.trip_sheet_note3
 
-
-%p
-  %strong= trip.notes
 
 - bootstrap_table headers: %w(Drivers From Time O/Reading To Time), types: [:bordered] do
   - 5.times do

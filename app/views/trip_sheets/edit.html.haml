@@ -1,0 +1,10 @@
+.page-header
+  %h2 TripSheet Notes
+  %h4 Add additional notes for the trip sheet here
+
+= simple_form_for @trip, url: trip_sheet_path do |f|
+  = f.input :notes, label: false, as: :text, input_html: { class: 'input-xxlarge', rows: 20, style: 'width: 100%;' }
+  = f.submit 'Save Notes', class: t('buttons.primary')
+
+
+

@@ -123,6 +123,10 @@
 #                       notes GET    /notes(.:format)                                    notes#index
 #                             POST   /notes(.:format)                                    notes#create
 #                    new_note GET    /notes/new(.:format)                                notes#new
+#                   edit_note GET    /notes/:id/edit(.:format)                           notes#edit
+#                        note PATCH  /notes/:id(.:format)                                notes#update
+#                             PUT    /notes/:id(.:format)                                notes#update
+#                             DELETE /notes/:id(.:format)                                notes#destroy
 #                print_ticket GET    /tickets/:id/print(.:format)                        tickets#print
 #                email_ticket POST   /tickets/:id/email(.:format)                        tickets#email
 #             download_ticket GET    /tickets/:id/download(.:format)                     tickets#download
@@ -135,7 +139,7 @@
 #                        user PATCH  /users/:id(.:format)                                users#update
 #                             PUT    /users/:id(.:format)                                users#update
 #          authenticated_root GET    /                                                   dashboard#show
-#                        root GET    /                                                   pages#show {id:"home"}
+#                        root GET    /                                                   pages#show {:id=>"home"}
 #                        page GET    /pages/*id                                          pages#show
 #                     pricing GET    /pricing/:id(.:format)                              pricing#show
 #                 quick_quote GET    /quick_quote(.:format)                              pricing#index
@@ -144,7 +148,7 @@
 # reports_bookings_per_status GET    /reports/bookings_per_status(.:format)              reports#bookings_per_status
 #    reports_income_per_month GET    /reports/income_per_month(.:format)                 reports#income_per_month
 #   reports_bookings_per_user GET    /reports/bookings_per_user(.:format)                reports#bookings_per_user
-#                                    (/errors)/:status(.:format)                         errors#show {status:/\d{3}/}
+#                                    (/errors)/:status(.:format)                         errors#show {:status=>/\d{3}/}
 #               rails_db_info        /rails/info/db                                      RailsDbInfo::Engine
 #
 # Routes for RailsDbInfo::Engine:
@@ -229,7 +233,7 @@ Sacobs::Application.routes.draw do
     end
   end
 
-  resources :trip_sheets, only: [:show, :index] do
+  resources :trip_sheets, only: [:show, :edit, :update, :index] do
     member do
       get :print
       get :download

@@ -1,4 +1,4 @@
-class BookingDashboard
+class BookingPresenter
   attr_reader :standby, :cancelled, :paid, :reserved, :bookings
   def initialize(bookings, params)
     @bookings = bookings
