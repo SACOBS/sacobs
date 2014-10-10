@@ -33,7 +33,7 @@ class Booking < ActiveRecord::Base
   belongs_to :user
   belongs_to :trip
   belongs_to :stop
-  belongs_to :client, autosave: false
+  belongs_to :client
   belongs_to :main, class_name: 'Booking', foreign_key: :main_id
 
   has_one :return_booking, class_name: 'Booking', foreign_key: :main_id, dependent: :delete, autosave: true
@@ -64,6 +64,7 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   before_save :generate_reference
+  before_save :save_client
   after_find :setup_return_booking, if: :has_return?
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
@@ -121,13 +122,6 @@ class Booking < ActiveRecord::Base
     super || build_client
   end
 
-  def client_attributes=(attributes)
-    self.client = Client.find(attributes['id']) if attributes['id'].present?
-    client.assign_attributes(attributes)
-    client.user = user
-    client.save
-  end
-
   private
 
   def defaults
@@ -139,6 +133,10 @@ class Booking < ActiveRecord::Base
   end
 
   protected
+
+  def save_client
+    client.save if client.present? && !client.new_record?
+  end
 
   def setup_return_booking
     build_return_booking unless return_booking.present? && has_return?

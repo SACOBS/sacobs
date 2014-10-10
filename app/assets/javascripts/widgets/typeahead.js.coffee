@@ -31,7 +31,10 @@ class Widgets.TypeAhead
            $(input).val(value.toString()) if value
 
 
-      $(this.$element.data('target')).val(this.map[item].id)
+      item_id = this.map[item].id
+      targets = this.$element.data('targets').split(',')
+      $.each targets, (index, value) ->
+        $(value).val(item_id)
       return item
 
   @cleanup: ->
