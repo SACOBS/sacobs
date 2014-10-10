@@ -3,7 +3,7 @@
 
 .search.pull-right
   = simple_form_for :q, url: archived_trips_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f|
-    = f.input :name_cont, placeholder: 'Search', input_html: { class: 'search-query' }
+    = f.input :name_cont, as: :search_box
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', archived_trips_path, class: t('buttons.mini.inverse'), icon: :times
 
