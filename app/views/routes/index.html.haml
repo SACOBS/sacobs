@@ -1,20 +1,10 @@
 .page-header
   %h2 Routes
+  = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
+  = link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh
 
-.search.pull-right
-  = simple_form_for :q, url: routes_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f|
-    = f.input :name_cont, as: :search_box
-    = f.submit 'Search', class: t('buttons.mini.warning')
-    = link_to 'Clear', routes_path, class: t('buttons.mini.inverse'), icon: :times
-
-= link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
-= link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh
-
-= paginate @routes
 - bootstrap_table headers: ['Description', 'Start City', 'End City', 'Cost', 'Distance', 'Connections', 'Actions'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
-  = render partial: 'route', collection: @routes, cache: true
-= paginate @routes
-
+  = render @routes, cache: true
 
 = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
 = link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh

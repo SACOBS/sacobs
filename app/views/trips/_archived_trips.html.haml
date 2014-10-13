@@ -1,0 +1,4 @@
+= paginate archived_trips
+- bootstrap_table headers: ['Name', 'Start Date', 'End Date', 'Route', 'Bus', 'Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+  = render partial: 'archived_trip', collection: archived_trips, as: :trip, cache: true
+= paginate archived_trips

@@ -2,8 +2,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: [:copy, :reverse_copy, :show, :edit, :update, :destroy]
 
   def index
-    @q = Route.search(params[:q])
-    @routes = @q.result(distinct: true).page(params[:page])
+    @routes = route_scope
   end
 
   def show
@@ -40,6 +39,10 @@ class RoutesController < ApplicationController
   end
 
   private
+
+  def route_scope
+    @route_scope ||= Route.all
+  end
 
   def set_route
     @route = Route.friendly.find(params[:id])

@@ -2,7 +2,7 @@ window.Views.Clients ||= {}
 class Views.Clients.IndexView extends Views.ApplicationView
   render: ->
     super()
-    $('#client_search').on 'ajax:success',  (evt, data, status, xhr) ->
+    $(document).on 'ajax:success', '#client_search', (evt, data, status, xhr) ->
       $('#clients').html(data)
 
   cleanup: ->

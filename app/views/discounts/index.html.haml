@@ -1,9 +1,6 @@
 .page-header
   %h2 Discounts
-
-= link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus
-%br
-%br
+  = link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus
 
 - bootstrap_table headers: %w(Passenger Percentage Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
   = render @discounts, cache: true

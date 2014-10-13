@@ -2,17 +2,27 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
   def calendar
-    @trips = Trip.includes(:route, :bus).all
+    @trips = trip_scope
   end
 
   def index
-    @q = Trip.includes(:route, :bus).valid.search(params[:q])
-    @trips = @q.result(distinct: true).page(params[:page])
+    @trips = trip_scope.page(params[:page])
+  end
+
+  def search
+    results = trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
+    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
+    render partial: 'trips', locals: { trips: results }
   end
 
   def archived
-    @q = Trip.includes(:route, :bus).archived.search(params[:q])
-    @trips = @q.result(distinct: true).page(params[:page])
+    @archived_trips = archived_trip_scope.page(params[:page])
+  end
+
+  def search_archived
+    results = archived_trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
+    flash[:notice] = "#{view_context.pluralize(results.size,'Result')} found"
+    render partial: 'archived_trips', locals: { archived_trips: results }
   end
 
   def show
@@ -37,6 +47,14 @@ class TripsController < ApplicationController
   end
 
   private
+
+  def trip_scope
+    @trip_scope ||= Trip.includes(:route, :bus).valid
+  end
+
+  def archived_trip_scope
+    @archived_trip_scope ||= Trip.includes(:route, :bus).archived
+  end
 
   def set_trip
     @trip = Trip.includes(stops: :connection).find(params[:id])

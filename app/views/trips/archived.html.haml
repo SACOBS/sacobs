@@ -1,19 +1,17 @@
 .page-header
   %h2 Trip Archives
+  = link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh
+
 
 .search.pull-right
-  = simple_form_for :q, url: archived_trips_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f|
+  = simple_form_for :q, url: search_archived_trips_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } }, remote: true do |f|
+    = f.input :start_date_eq, as: :date_picker, placeholder: 'Search trip dates'
     = f.input :name_cont, as: :search_box
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', archived_trips_path, class: t('buttons.mini.inverse'), icon: :times
 
-= link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh
-
-= paginate @trips
-- bootstrap_table headers: ['Name', 'Start Date', 'End Date', 'Route', 'Bus', 'Created At', 'Actions'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
-  = render partial: 'archived_trip', collection: @trips, as: :trip, cache: true
-= paginate @trips
-
+#archived_trips
+  = render partial: 'archived_trips', locals: { archived_trips: @archived_trips }
 
 = link_to 'Refresh', archived_trips_path, class: t('buttons.default'), icon: :refresh
 

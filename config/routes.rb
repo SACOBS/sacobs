@@ -213,8 +213,9 @@ Sacobs::Application.routes.draw do
       post :copy
     end
     collection do
+      get :search
       get :archived
-      get :calendar
+      get :search_archived
     end
     resources :builder, only: [:show, :update, :create], controller: 'trips/builder'
   end
@@ -224,6 +225,7 @@ Sacobs::Application.routes.draw do
       post :copy
       post :reverse_copy
     end
+
     resources :destinations, only: [:none] do
       collection do
         get :edit
