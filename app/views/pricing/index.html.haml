@@ -8,7 +8,7 @@
     .connections
       %ul.unstyled#connections-list
         - @connections.each do |connection|
-          %li{class: dom_class(connection), id: dom_id(connection), data: { route: connection.route_id } }= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: { type: :html },remote: true
+          %li{class: dom_class(connection), id: dom_id(connection), data: { route: connection.route_id } }= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: { type: :html }, remote: true
 .quote
   = render 'pricing/quote', pricing: @pricing
 

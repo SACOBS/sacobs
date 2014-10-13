@@ -1,4 +1,4 @@
-= simple_form_for note, id: 'new_note', remote: true do  |f|
+= simple_form_for note, html: { data: { type: :html, note: "##{dom_id(note)}" } }, remote: true do  |f|
   = f.input :content, as: :text, placeholder: 'Add notes here', label: false, input_html: { class: 'input-xlarge', rows: 5 }
   = f.hidden_field :context
   = f.submit class: t('buttons.mini.primary')

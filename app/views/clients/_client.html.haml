@@ -11,7 +11,7 @@
     %td
       = decorated_client.show_link(icon: :info, class: t('buttons.mini.info'))
       = decorated_client.edit_link(icon: :edit, class: t('buttons.mini.inverse'))
-      = decorated_client.destroy_link(icon: :times, remote: true, class: t('buttons.mini.danger'))
+      = decorated_client.destroy_link(icon: :times, remote: true, class: t('buttons.mini.danger'), id: 'delete_client', data: { type: :json })
 
 
 

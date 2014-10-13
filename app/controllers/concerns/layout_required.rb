@@ -8,6 +8,6 @@ module LayoutRequired
   private
 
   def layout_required?
-   false if request.xhr?
+    false if request.xhr?
   end
 end

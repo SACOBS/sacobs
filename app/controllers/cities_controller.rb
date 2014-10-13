@@ -8,8 +8,8 @@ class CitiesController < ApplicationController
   end
 
   def search
-   @cities = city_scope.search(params[:q]).result(distinct: true).page(params[:page])
-   render partial: 'cities', locals: { cities: @cities }
+    @cities = city_scope.search(params[:q]).result(distinct: true).page(params[:page])
+    render partial: 'cities', locals: { cities: @cities }
   end
 
   def new
@@ -38,7 +38,7 @@ class CitiesController < ApplicationController
   private
 
   def city_scope
-   @city_scope ||= City.all
+    @city_scope ||= City.all
   end
 
   def set_city

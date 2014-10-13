@@ -38,7 +38,7 @@
 
       %li= link_to 'Admin', users_path
       %li= link_to 'Reports', reports_path
-      %li= link_to 'Notes', notes_path(context: controller_path.gsub('/', '')), remote: true
+      %li= link_to 'Notes', notes_path(context: controller_path.gsub('/', '')), remote: true, data: { type: :html }, id: 'view_notes'
       %li= link_to 'Settings', setting_path
 
 

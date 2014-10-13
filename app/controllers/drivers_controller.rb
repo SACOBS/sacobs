@@ -1,9 +1,8 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
 
-
   def index
-   @drivers = driver_scope
+    @drivers = driver_scope
   end
 
   def search

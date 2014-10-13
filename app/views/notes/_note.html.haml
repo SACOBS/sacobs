@@ -1,0 +1,1 @@
+%li{ class: dom_class(note), id: dom_id(note) }= link_to_if(current_user.admin?, note.content, edit_note_path(note), remote: true, id: 'edit_note_link', data: { type: :html })

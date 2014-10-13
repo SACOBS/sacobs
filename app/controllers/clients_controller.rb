@@ -10,7 +10,7 @@ class ClientsController < ApplicationController
   def search
     results = client_scope.search(params[:q]).result.order(updated_at: :desc).page(params[:page])
     flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
-    render partial: 'clients/client_listing', locals: { clients: results }
+    render partial: 'clients/clients', locals: { clients: results }
   end
 
   def show

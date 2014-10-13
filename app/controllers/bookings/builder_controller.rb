@@ -15,13 +15,13 @@ module Bookings
     before_action :set_attributes, only: :update
 
     def index
-     if @booking.has_return?
-       fetch_return_stops
-       render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
-     else
-       fetch_stops
-       render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
-     end
+      if @booking.has_return?
+        fetch_return_stops
+        render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
+      else
+        fetch_stops
+        render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+      end
     end
 
     def show

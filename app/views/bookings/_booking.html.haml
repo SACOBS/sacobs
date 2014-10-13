@@ -1,6 +1,6 @@
 - BookingDecorator.decorate(booking, self) do |decorated_booking|
   %tr
-    %td= decorated_booking.client_contact_details_link(remote: true)
+    %td= decorated_booking.client.show_link(text: decorated_booking.client.full_name, target: '_blank')
     %td= decorated_booking.trip_start_date
     %td= decorated_booking.quantity
     %td= decorated_booking.from_city

@@ -35,10 +35,6 @@ class BookingDecorator < BaseDecorator
     helpers.link_to 'Show', model, options
   end
 
-  def client_contact_details_link(options = {})
-    helpers.link_to client_name, helpers.contact_details_client_path(client), options
-  end
-
   def ticket_link(options = {})
     options.merge!(target: '_blank')
     helpers.link_to('Generate Ticket', helpers.ticket_path(model), options) if paid?

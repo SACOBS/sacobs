@@ -3,8 +3,8 @@
     %button.close{ aria_hidden: 'true', data: { dismiss: 'modal' }, type: 'button' } ×
     %h4#notesLabel Notes
     .modal-body
-      .well.well-small
-        = render 'notes/form' if current_user.admin?
-        %ul
-          = list_of (@notes.map(&:content)) do |content|
-            %li= content
+      .note_form
+        = render 'notes/form', note: new_note  if current_user.admin?
+      .well
+        %ul.notes
+          = render notes, cache: true

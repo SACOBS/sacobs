@@ -1,6 +1,7 @@
 .page-header
-  %h2
-    Bookings
+  %h2 Bookings
+  = link_to 'Make Booking', bookings_path, method: :post, icon: :plus, class: t('buttons.primary')
+  = link_to 'Refresh', bookings_path, class: t('buttons.default'), icon: :refresh
 
 .search.pull-right
   = simple_form_for :q, url: search_bookings_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'booking_search', data: { type: :html } }, remote: true do |f|
@@ -9,10 +10,6 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', bookings_path, class: t('buttons.mini.inverse'), icon: :times
 
-= link_to 'Make Booking', bookings_path, method: :post, icon: :plus, class: t('buttons.primary')
-= link_to 'Refresh', bookings_path, class: t('buttons.default'), icon: :refresh
-%br
-%br
 #bookings
   = render partial: 'booking_listing', locals: { booking_presenter: @booking_presenter }
 

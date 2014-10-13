@@ -28,15 +28,18 @@ class ClientDecorator < BaseDecorator
   end
 
   def show_link(options = {})
-    helpers.link_to 'Show', model, options
+    text = options.fetch(:text, 'Show')
+    helpers.link_to text, model, options
   end
 
   def edit_link(options = {})
-    helpers.link_to 'Edit', helpers.edit_client_path(model), options
+    text = options.fetch(:text, 'Edit')
+    helpers.link_to text, helpers.edit_client_path(model), options
   end
 
   def destroy_link(options = {})
-    options.merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :client) })
-    helpers.link_to 'Destroy', model, options
+    text = options.fetch(:text, 'Destroy')
+    options.deep_merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :client) })
+    helpers.link_to text, model, options
   end
 end
