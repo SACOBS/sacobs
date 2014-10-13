@@ -8,7 +8,7 @@ module BootstrapHelper
     html_options[:class] = table_classes(options[:types])  <<  html_options[:class].split
     haml_tag :table, html_options do
       table_headers(options[:headers])
-      haml_tag :tbody do
+      haml_tag :tbody, class: 'page' do
         yield if block_given?
       end
     end
