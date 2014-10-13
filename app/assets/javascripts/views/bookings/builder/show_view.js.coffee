@@ -7,6 +7,13 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     Widgets.Select2.enable()
     Widgets.TypeAhead.enable()
 
+    $(document).on 'ajax:success', '#trip_search', (evt, data, status, xhr) ->
+      $('.trips').html(data)
+
+
+    $(document).on 'ajax:success', '#return_trip_search', (evt, data, status, xhr) ->
+      $('.returns').html(data)
+
     $(document).on 'hidden', '.modal', ->
       $(this).remove()
 

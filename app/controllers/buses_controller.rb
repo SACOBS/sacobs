@@ -17,7 +17,7 @@ class BusesController < ApplicationController
 
   def destroy
     @bus.destroy
-    respond_with(@bus)
+    respond_with @bus
   end
 
   private

@@ -1,15 +1,16 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:contact_details, :show, :edit, :update, :destroy]
-  after_action :verify_policy_scoped, only: :index
-  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: [:index, :search]
+  after_action :verify_authorized, except: [:index, :search]
 
   def index
-    if request.xhr?
-      @clients = client_scope.all.uniq(:full_name)
-    else
-      @q = client_scope.search(search_criteria)
-      @clients = @q.result.includes(:address, :user).order(updated_at: :desc).page(params[:page])
-    end
+    @clients = client_scope.surname_starts_with(params[:letter]).page(params[:page])
+  end
+
+  def search
+    results = client_scope.search(params[:q]).result.order(updated_at: :desc).page(params[:page])
+    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
+    render partial: 'clients/client_listing', locals: { clients: results }
   end
 
   def show
@@ -63,13 +64,6 @@ class ClientsController < ApplicationController
 
   def client_params
     ClientParameters.new(params).permit(user: current_user)
-  end
-
-  def search_criteria
-    letter = params[:letter]
-    criteria = params.fetch(:q, {})
-    criteria.merge! surname_start: letter if letter
-    criteria
   end
 
   def interpolation_options

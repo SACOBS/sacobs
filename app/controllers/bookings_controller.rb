@@ -2,8 +2,15 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    bookings = Booking.includes(:trip, :stop, :client).not_in_process.active.search(params[:q]).result.distinct(true)
+    bookings = booking_scope.all
     @booking_presenter = BookingPresenter.new(bookings, params)
+  end
+
+  def search
+    results = booking_scope.search(params[:q]).result.distinct(true)
+    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
+    @booking_presenter = BookingPresenter.new(results, params)
+    render partial: 'bookings/booking_listing', locals: { booking_presenter: @booking_presenter }
   end
 
   def create
@@ -31,6 +38,10 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def booking_scope
+    @booking_scope ||= Booking.includes(:trip, :stop, :client).not_in_process.active
+  end
 
   def set_booking
     @booking = Booking.find(params[:id])

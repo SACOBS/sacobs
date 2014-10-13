@@ -16,6 +16,7 @@
 #                             PATCH  /users(.:format)                                    devise/registrations#update
 #                             PUT    /users(.:format)                                    devise/registrations#update
 #                             DELETE /users(.:format)                                    devise/registrations#destroy
+#             search_bookings GET    /bookings/search(.:format)                          bookings#search
 #             confirm_booking PATCH  /bookings/:id/confirm(.:format)                     bookings#confirm
 #              cancel_booking PATCH  /bookings/:id/cancel(.:format)                      bookings#cancel
 #       booking_builder_index GET    /bookings/:booking_id/builder(.:format)             bookings/builder#index
@@ -32,6 +33,7 @@
 #                     setting GET    /setting(.:format)                                  settings#show
 #                             PATCH  /setting(.:format)                                  settings#update
 #                             PUT    /setting(.:format)                                  settings#update
+#              search_clients GET    /clients/search(.:format)                           clients#search
 #      contact_details_client GET    /clients/:id/contact_details(.:format)              clients#contact_details
 #             client_vouchers POST   /clients/:client_id/vouchers(.:format)              vouchers#create
 #          new_client_voucher GET    /clients/:client_id/vouchers/new(.:format)          vouchers#new
@@ -46,6 +48,7 @@
 #               payment_types GET    /payment_types(.:format)                            payment_types#index
 #                             POST   /payment_types(.:format)                            payment_types#create
 #                payment_type DELETE /payment_types/:id(.:format)                        payment_types#destroy
+#               search_cities GET    /cities/search(.:format)                            cities#search
 #                      cities GET    /cities(.:format)                                   cities#index
 #                             POST   /cities(.:format)                                   cities#create
 #                    new_city GET    /cities/new(.:format)                               cities#new
@@ -134,7 +137,10 @@
 #            print_trip_sheet GET    /trip_sheets/:id/print(.:format)                    trip_sheets#print
 #         download_trip_sheet GET    /trip_sheets/:id/download(.:format)                 trip_sheets#download
 #                 trip_sheets GET    /trip_sheets(.:format)                              trip_sheets#index
+#             edit_trip_sheet GET    /trip_sheets/:id/edit(.:format)                     trip_sheets#edit
 #                  trip_sheet GET    /trip_sheets/:id(.:format)                          trip_sheets#show
+#                             PATCH  /trip_sheets/:id(.:format)                          trip_sheets#update
+#                             PUT    /trip_sheets/:id(.:format)                          trip_sheets#update
 #                       users GET    /users(.:format)                                    users#index
 #                        user PATCH  /users/:id(.:format)                                users#update
 #                             PUT    /users/:id(.:format)                                users#update
@@ -163,6 +169,9 @@ Sacobs::Application.routes.draw do
   devise_for :users
 
   resources :bookings, only: [:create, :show, :index, :destroy] do
+    collection do
+      get :search
+    end
     member do
       patch :confirm
       patch :cancel
@@ -174,6 +183,9 @@ Sacobs::Application.routes.draw do
   resource :setting, only: [:show, :edit, :update]
 
   resources :clients do
+    collection do
+      get :search
+    end
     member do
       get :contact_details
     end
@@ -182,11 +194,19 @@ Sacobs::Application.routes.draw do
 
   resources :payment_types, only: [:index, :create, :destroy]
 
-  resources :cities
+  resources :cities do
+    collection do
+      get :search
+    end
+  end
 
   resource :contacts, only: [:new, :create]
 
-  resources :drivers
+  resources :drivers do
+    collection do
+      get :search
+    end
+  end
 
   resources :trips, only: [:index, :show, :edit, :update, :destroy] do
     member do

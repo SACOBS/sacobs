@@ -14,9 +14,7 @@ module Buses
     end
 
     def show
-      case step
-        when :seats then build_seats
-      end
+      build_seats if step == :seats
       render_wizard
     end
 
@@ -36,8 +34,8 @@ module Buses
     end
 
     def build_seats
-      seats = @bus.seats
-      (@bus.capacity - seats.size).times { seats.build }
+      @bus.seats.clear
+      @bus.capacity.times { seats.build }
     end
 
     def bus_params

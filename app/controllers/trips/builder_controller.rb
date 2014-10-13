@@ -10,10 +10,9 @@ module Trips
 
     def create
       @trip = Trip.create(trip_params)
-      if request.xhr?
-        render js: "window.location.pathname = #{wizard_path(Wicked::FIRST_STEP, trip_id: @trip).to_json}"
-      else
-        redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
+      respond_to do |format|
+        format.html { wizard_path(Wicked::FIRST_STEP, trip_id: @trip) }
+        format.js { render js: "window.location.pathname = #{wizard_path(Wicked::FIRST_STEP, trip_id: @trip).to_json}" }
       end
     end
 

@@ -15,7 +15,13 @@ module Bookings
     before_action :set_attributes, only: :update
 
     def index
-      (params[:return] == 'false') ? fetch_stops : fetch_return_stops
+     if @booking.has_return?
+       fetch_return_stops
+       render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
+     else
+       fetch_stops
+       render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+     end
     end
 
     def show
@@ -33,7 +39,7 @@ module Bookings
     def update
       case step
       when :trip_details then
-        fetch_stops unless @booking.valid?
+        fetch_stops
       when :passenger_charges
         @booking.sync_return_booking
         build_invoice
@@ -51,11 +57,11 @@ module Bookings
     end
 
     def fetch_stops
-      @stops = TripSearch.execute(search_params)
+      @stops ||= TripSearch.execute(search_params)
     end
 
     def fetch_return_stops
-      @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
+      @stops ||= ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
     end
 
     def finish_wizard_path

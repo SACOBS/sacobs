@@ -1,14 +1,16 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
 
-  # GET /drivers
-  # GET /drivers.json
+
   def index
-    @q = Driver.search(params[:q])
-    @drivers = @q.result(distinct: true)
+   @drivers = driver_scope
   end
 
-  # GET /drivers/new
+  def search
+    @drivers = driver_scope.search(params[:q]).result(distinct: true)
+    render partial: 'driver', collection: @drivers, cache: true
+  end
+
   def new
     @driver = Driver.new
   end
@@ -17,28 +19,26 @@ class DriversController < ApplicationController
     fresh_when @driver, last_modified: @driver.updated_at
   end
 
-  # POST /drivers
-  # POST /drivers.json
   def create
     @driver = Driver.create(driver_params)
     respond_with @driver
   end
 
-  # PATCH/PUT /drivers/1
-  # PATCH/PUT /drivers/1.json
   def update
     @driver.update(driver_params)
     respond_with @driver
   end
 
-  # DELETE /drivers/1
-  # DELETE /drivers/1.json
   def destroy
     @driver.destroy
     respond_with @driver
   end
 
   private
+
+  def driver_scope
+    @driver_scope ||= Driver.all
+  end
 
   def set_driver
     @driver = Driver.friendly.find(params[:id])

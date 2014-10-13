@@ -1,7 +1,7 @@
 .page-header
   %h2 Cities
 .search.pull-right
-  = simple_form_for :q, url: cities_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f|
+  = simple_form_for :q, url: search_cities_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'city_search', method: :get, data: { type: :html } }, remote: true do |f|
     = f.input :name_cont, as: :search_box
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', cities_path, class: t('buttons.mini.inverse'), icon: :times
@@ -9,12 +9,8 @@
 = link_to 'Setup City', new_city_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', cities_path, class: t('buttons.default'), icon: :refresh
 
-= paginate @cities
-
-- bootstrap_table headers: %w(Name Venues Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
-  = render @cities, cache: true
-
-= paginate @cities
+#cities
+  = render partial: 'cities', locals: { cities: @cities }
 
 
 = link_to 'Setup City', new_city_path, class: t('buttons.primary'), icon: :plus

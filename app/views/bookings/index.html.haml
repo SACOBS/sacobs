@@ -3,7 +3,7 @@
     Bookings
 
 .search.pull-right
-  = simple_form_for :q, url: bookings_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get }, remote: true do |f|
+  = simple_form_for :q, url: search_bookings_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'booking_search', data: { type: :html } }, remote: true do |f|
     = f.input :created_at_date_eq, as: :date_picker, placeholder: 'Search booking dates'
     = f.input :reference_no_or_trip_name_or_client_full_name_cont, as: :search_box
     = f.submit 'Search', class: t('buttons.mini.warning')
@@ -14,7 +14,7 @@
 %br
 %br
 #bookings
-  = render partial: 'bookings/booking_listing', locals: { booking_presenter: @booking_presenter }
+  = render partial: 'booking_listing', locals: { booking_presenter: @booking_presenter }
 
 
 %br

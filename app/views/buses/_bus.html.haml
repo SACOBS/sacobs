@@ -6,4 +6,4 @@
   %td
     = link_to 'Show', bus, icon: :info, class: t('buttons.mini.info')
     = link_to 'Edit', edit_bus_path(bus), icon: :edit, class: t('buttons.mini.inverse')
-    = link_to 'Delete', bus, icon: :times, data: { confirm: t('messages.confirm', resource: :bus) }, method: :delete, remote: true, class: t('buttons.mini.danger')
+    = link_to 'Delete', bus, icon: :times, data: { confirm: t('messages.confirm', resource: :bus), type: :json }, method: :delete, remote: true, class: t('buttons.mini.danger'), id: 'delete_bus'

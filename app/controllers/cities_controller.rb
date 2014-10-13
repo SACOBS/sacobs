@@ -4,12 +4,12 @@ class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 
   def index
-    if request.xhr?
-      @cities = City.all.uniq(:name).order(:name)
-    else
-      @q = City.search(params[:q])
-      @cities = @q.result(distinct: true).order(:name).page(params[:page])
-    end
+    @cities = city_scope.page(params[:page])
+  end
+
+  def search
+   @cities = city_scope.search(params[:q]).result(distinct: true).page(params[:page])
+   render partial: 'cities', locals: { cities: @cities }
   end
 
   def new
@@ -36,6 +36,10 @@ class CitiesController < ApplicationController
   end
 
   private
+
+  def city_scope
+   @city_scope ||= City.all
+  end
 
   def set_city
     @city = City.friendly.find(params[:id])

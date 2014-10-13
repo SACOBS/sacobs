@@ -55,6 +55,9 @@ class Client < ActiveRecord::Base
   before_validation :set_full_name, prepend: true
   before_save :set_birth_date_from_id_number
 
+  default_scope { order(updated_at: :desc) }
+  scope :surname_starts_with, ->(letter) { where(self.arel_table[:surname].matches("#{letter}%")) }
+
   def address
     address ||= build_address
   end

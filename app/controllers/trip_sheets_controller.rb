@@ -3,7 +3,7 @@ class TripSheetsController < ApplicationController
   before_action :set_trip_sheet_presenter, except: [:index, :edit, :update]
 
   def index
-    @q = Trip.includes(:route).search(params[:q])
+    @q = Trip.includes(:route, :bookings).search(params[:q])
     @trips = @q.result(distinct: true).order(start_date: :asc)
     render layout: 'with_sidebar'
   end

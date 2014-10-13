@@ -36,9 +36,11 @@ head ->
     $(document).ajaxStart($.blockUI).ajaxStop $.unblockUI
     $(document).on 'page:load', pageLoad
     $(document).on 'page:before-change', ->
+      localStorage.clear()
       window.applicationView.cleanup()
       true
     $(document).on 'page:restore', ->
+      localStorage.clear()
       window.applicationView.cleanup()
       pageLoad()
       true

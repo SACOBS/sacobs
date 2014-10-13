@@ -14,9 +14,7 @@ module Routes
     end
 
     def show
-      case step
-        when :connections then build_connections
-      end
+      build_connections if step == :connections
       render_wizard
     end
 
@@ -36,7 +34,7 @@ module Routes
     end
 
     def build_connections
-      ConnectionBuilder.new(@route).tap(&:build)
+      ConnectionBuilder.new(@route).build
     end
 
     def route_params
