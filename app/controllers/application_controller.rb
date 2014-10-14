@@ -14,9 +14,11 @@ class ApplicationController < ActionController::Base
   before_action :set_notes
   after_action :prepare_unobtrusive_flash, except: :destroy
 
-
-
   etag { current_user.try :id }
+
+  def current_user
+    super || NullUser.new
+  end
 
   private
 

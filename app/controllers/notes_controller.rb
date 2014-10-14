@@ -28,6 +28,7 @@ class NotesController < ApplicationController
   end
 
   private
+
   def note_params
     params.fetch(:note, {}).permit(:context, :content)
   end
