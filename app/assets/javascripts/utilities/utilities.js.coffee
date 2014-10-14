@@ -5,5 +5,16 @@ window.Utilities.updateCollectionValues = (collection, value) ->
     $(item).val(value)
 
 
-window.Utilities.hello = ->
-  alert 'hello'
+$.fn.clearForm = ->
+  @each ->
+    type = @type
+    tag = @tagName.toLowerCase()
+    return $(":input", this).clearForm()  if tag is "form"
+    if type is "text" or type is "password" or tag is "textarea"
+      @value = ""
+    else if type is "checkbox" or type is "radio"
+      @checked = false
+    else @selectedIndex = -1  if tag is "select"
+    return
+
+

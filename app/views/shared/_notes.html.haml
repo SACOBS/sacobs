@@ -1,0 +1,5 @@
+.hero-unit#notes
+  %h4 Notes
+  .note_form
+    = render 'notes/form', note: @notes.new if current_user.admin?
+  = render @notes, cache: true

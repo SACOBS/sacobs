@@ -14,9 +14,6 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     $(document).on 'ajax:success', '#return_trip_search', (evt, data, status, xhr) ->
       $('.returns').html(data)
 
-    $(document).on 'hidden', '.modal', ->
-      $(this).remove()
-
     $(document).on 'click', '#new_client',(e) ->
       e.preventDefault()
       $('.new_client_fields').fadeToggle 'slow'
@@ -36,5 +33,4 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
 
     $(document).off 'click', '#new_client'
     $(document).off 'change', '.amount'
-    $(document).off 'hidden', '.modal'
 

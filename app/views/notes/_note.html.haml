@@ -1,1 +1,4 @@
-%li{ class: dom_class(note), id: dom_id(note) }= link_to_if(current_user.admin?, note.content, edit_note_path(note), remote: true, id: 'edit_note_link', data: { type: :html })
+%div.well.well-small{ class: dom_class(note), id: dom_id(note) }
+    %blockquote=note.content
+    = link_to_if(current_user.admin?, 'Edit', edit_note_path(note), remote: true, data: { type: :html }, id: 'edit_note'){}
+    = link_to 'Destroy', note, method: :delete

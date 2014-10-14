@@ -11,9 +11,19 @@ class ApplicationController < ActionController::Base
   respond_to :html, :js, :json, :pdf
 
   before_action :authenticate_user!
+  before_action :set_notes
   after_action :prepare_unobtrusive_flash, except: :destroy
 
+
+
   etag { current_user.try :id }
+
+  private
+
+  def set_notes
+    context = controller_path.gsub('/', '')
+    @notes = Note.where(context: context)
+  end
 
   protected
 
