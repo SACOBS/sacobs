@@ -1,4 +1,9 @@
 %tr.nested-fields
-  %td= f.association :city, label: false, collection: cities, include_blank: false, prompt: 'Select City', input_html: { rel: 'autocomplete' }
-  %td= f.input :sequence, label: false
+  %td
+    = f.input :city, typeahead: cities_url(format: :json), label: false ,placeholder: 'Select city', input_html: { value: f.object.city , data: { targets: "#route_destinations_attributes_#{f.index}_city_id" } }
+    = f.hidden_field :city_id
+  %td= f.input :sequence, label: false, input_html: { class: 'input-mini' }
   %td= link_to_remove_association 'Remove', f, class: t('buttons.mini.danger')
+
+
+

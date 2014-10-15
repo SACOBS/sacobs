@@ -1,7 +1,7 @@
 .page-header
   %h2 Payment Types
 
-- bootstrap_table headers: %w(Description Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+- bootstrap_table headers: %w(Description Actions), types: %i(bordered condensed), html_options: { class: 'sortable' } do
   - @payment_types.each do |payment_type|
     %tr{ class: dom_class(payment_type), id: dom_id(payment_type) }
       %td= payment_type.description

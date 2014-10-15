@@ -1,30 +1,29 @@
-#errors= errors_for @route
-= simple_form_for @route, defaults: { error: false }, url: wizard_path do |f|
-  .form-actions
-    = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', route_path(@route), method: :delete, class: t('buttons.danger')
+.row.span12
+  .span6
+    #errors= errors_for @route
+    = simple_form_for @route, defaults: { error: false }, url: wizard_path do |f|
+      %fieldset
+        - bootstrap_table headers: ['City', 'Order', ''], types: %i(bordered condensed), html_options: { id: 'destinations' } do
+          = f.simple_fields_for :destinations, wrapper: false do |destination|
+            = render 'routes/builder/destination_fields', f: destination
+        .links
+          = link_to_add_association 'Add Destination', f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' }
+      .form-actions
+        = f.submit 'Next', class: t('buttons.primary')
+        = link_to 'Cancel', route_path(@route), method: :delete, class: t('buttons.danger')
 
-  %fieldset
-    - bootstrap_table headers: ['City', 'Order', ''], types: [:bordered, :condensed], html_options: { id: 'destinations' } do
-      = f.simple_fields_for :destinations, wrapper: false do |destination|
-        = render 'routes/builder/destination_fields', f: destination
-    .links
-      = link_to_add_association 'Add Destination', f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' }
-  .form-actions
-    = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', route_path(@route), method: :delete, class: t('buttons.danger')
-
-.well
-  %h5 Instructions
-  %ol
-    %li
-      Add all the destinations(cities) that the bus will travel through on the route.
-    %li
-      Set the destination(city) order in the order the buses will travel along the route. For example on a route from East London to PE, East London will be 1 and Port Alfred will be 2 and so on.
-  %p
-    %b NB
-    %br
-    %em
-      Please note the connections on the next step in the wizard are generated from these destinations and the order they are in, so make 100% sure you are happy before moving onto the connections.
+  .span4
+    .well
+      %h5 Instructions
+      %ol
+        %li
+          Add all the destinations(cities) that the bus will travel through on the route.
+        %li
+          Set the destination(city) order in the order the buses will travel along the route. For example on a route from East London to PE, East London will be 1 and Port Alfred will be 2 and so on.
+      %p
+        %b NB
+        %br
+        %em
+          Please note the connections on the next step in the wizard are generated from these destinations and the order they are in, so make 100% sure you are happy before moving onto the connections.
 
 

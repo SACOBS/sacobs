@@ -39,7 +39,7 @@
     .well
       %p
         %strong Stops:
-        - bootstrap_table headers: ['From', 'To', 'Depart Time', 'Arrival Time', 'Available Seats'], types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+        - bootstrap_table headers: ['From', 'To', 'Depart Time', 'Arrival Time', 'Available Seats'], types: %i(bordered condensed), html_options: { class: 'sortable' } do
           = render partial: 'stops/stop', collection: decorated_trip.stops, cache: true
     .actions
       = back_to trips_path

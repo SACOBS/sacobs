@@ -42,5 +42,10 @@ th, td {
 }
 
 #notes {
-  background-color: white;
+  display: none;
+  margin-top: 10px;
+  background-color: whitesmoke;
+  textarea{
+    width: 99%;
+  }
 }

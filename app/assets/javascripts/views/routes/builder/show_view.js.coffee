@@ -5,9 +5,15 @@ class Views.Routes.Builder.ShowView extends Views.ApplicationView
     super()
     Widgets.DateTimePicker.enable()
     Widgets.Calculator.enable()
+    Widgets.TypeAhead.enable()
+
+    $(document).on 'cocoon:after-insert', ->
+      Widgets.TypeAhead.enable()
   cleanup: ->
     super()
     Widgets.DateTimePicker.cleanup()
     Widgets.Calculator.cleanup()
+    Widgets.TypeAhead.cleanup()
+    $(document).off 'cocoon:after-insert'
 
 

@@ -1,6 +1,6 @@
 = paginate cities
 
-- bootstrap_table headers: %w(Name Venues Actions), types: [:bordered, :striped, :condensed], html_options: { class: 'sortable' } do
+- bootstrap_table headers: %w(Name Venues Actions), types: %i(bordered condensed), html_options: { class: 'sortable' } do
   = render cities, cache: true
 
 = paginate cities
