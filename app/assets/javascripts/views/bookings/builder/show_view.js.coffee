@@ -4,7 +4,6 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
   render: ->
     super()
     Widgets.DateTimePicker.enable()
-    Widgets.Select2.enable()
     Widgets.TypeAhead.enable()
 
     $(document).on 'ajax:success', '#trip_search', (evt, data, status, xhr) ->
@@ -27,7 +26,6 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
       $('.total').html("<strong> R" + total.toFixed(2) + "</strong>")
   cleanup: ->
     super()
-    Widgets.Select2.cleanup()
     Widgets.DateTimePicker.cleanup()
     Widgets.TypeAhead.cleanup()
 

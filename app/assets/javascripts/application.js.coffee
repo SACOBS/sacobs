@@ -10,7 +10,6 @@
 #= require bootstrap-sortable
 #= require bootstrap-datetimepicker
 #= require cocoon
-#= require select2
 #= require unobtrusive_flash
 #= require unobtrusive_flash_bootstrap
 #= require obfuscatejs

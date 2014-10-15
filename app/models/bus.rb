@@ -27,9 +27,13 @@ class Bus < ActiveRecord::Base
     model.validates :capacity, numericality: { greater_than: 0 }
   end
 
-  private
-
-  def defaults
-    { name: 'Bus', capacity: 0, year: 1, model: 'bus' }
+  def build_seats
+    seats.clear
+    capacity.times { seats.build }
   end
+
+  private
+    def defaults
+      { name: 'Bus', capacity: 0, year: 1, model: 'bus' }
+    end
 end

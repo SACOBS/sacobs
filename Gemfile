@@ -36,7 +36,6 @@ gem 'kaminari'
 
 # Forms
 gem 'simple_form', '~> 3.0.0'
-gem 'select2-rails'
 
 # Authentication
 gem 'devise'
