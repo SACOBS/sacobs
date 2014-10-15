@@ -1,33 +1,37 @@
 .page-header
   %h2 Edit Destinations
-.row.span10
-  .span5
-    %ol
-      = list_of(@route.destinations.map(&:city_name)) do |city_name|
-        %li= city_name
-
-    = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
-      = f.submit 'Save', class: t('buttons.primary')
-      = link_to 'Back', routes_path, class: t('buttons.info')
-      = f.input :city, collection: cities, prompt: 'Select a city'
-      = f.input :preceding_city, collection: route_cities(@route), include_blank: 'None'
-      = f.submit 'Save', class: t('buttons.primary')
-      = link_to 'Back', routes_path, class: t('buttons.info')
+.row.span12
   .span5
     .well
-      %h3 Instructions
+      %h4 Instructions
       %ol
         %li
-          Select the city you want to add to the route from the City dropdown.
+          Select the city you want to add to the route from the City input.
         %li
-          Select the city that comes before it on the route from the preceding city dropdown. For example, If Port Alfred is selected then East London will be the preceding city.
+          Select the city that comes before it on the route from the preceding city input. For example, If Port Alfred is selected then East London will be the preceding city.
         %li
-          If the city being added is going to be the starting city on the route, please select  None as the preceding city. For example
+          If the city being added is going to be the starting city on the route.
+          %strong Please leave the preceding city field blank.
       %p
         %b NB
         %br
         %em
           Please note that connections are generated based on the city selected and for all the cities coming before it.
-          Thus it is important to choose the correct preceding city (None if the new city is the start of the route) as a number of connections could be created that are incorrect.
+          Thus it is important to choose the correct preceding city (Blank if the new city is the start of the route) as a number of connections could be created that are incorrect.
 
 
+
+  .span2
+    %h4 Current Destinations
+    %ol
+      - @route.destinations.map(&:city_name).each do |city_name|
+        %li= city_name
+  .span3
+    %h4 Add Destination
+    = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
+      = f.input :city, typeahead: cities_url(format: :json), label: 'New city to be added:', placeholder: 'New City', input_html: { data: { targets: "#destination_city_id" } }
+      = f.hidden_field :city_id
+      = f.input :preceding_city, typeahead: cities_url(format: :json), placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: "#destination_preceding_city_id" } }
+      = f.hidden_field :preceding_city_id
+      = f.submit 'Save', class: t('buttons.primary')
+      = link_to 'Back', routes_path, class: t('buttons.info')

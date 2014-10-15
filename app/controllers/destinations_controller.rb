@@ -18,7 +18,7 @@ class DestinationsController < ApplicationController
   end
 
   def destination_params
-    params.require(:destination).permit(:city, :preceding_city)
+    params.require(:destination).permit(:city_id, :preceding_city_id)
   end
 
   def create_new_destination
@@ -31,11 +31,11 @@ class DestinationsController < ApplicationController
   end
 
   def new_destination
-    City.find(destination_params[:city])
+    City.find(destination_params[:city_id])
   end
 
   def preceding_destination
-    @route.destinations.find_by(city_id: destination_params[:preceding_city])
+    @route.destinations.find_by(city_id: destination_params[:preceding_city_id])
   end
 
   def resequence_destinations
