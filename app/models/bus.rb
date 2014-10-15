@@ -33,7 +33,8 @@ class Bus < ActiveRecord::Base
   end
 
   private
-    def defaults
-      { name: 'Bus', capacity: 0, year: 1, model: 'bus' }
-    end
+
+  def defaults
+    { name: 'Bus', capacity: 0, year: 1, model: 'bus' }
+  end
 end

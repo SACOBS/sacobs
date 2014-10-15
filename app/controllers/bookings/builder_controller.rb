@@ -26,25 +26,25 @@ module Bookings
 
     def show
       case step
-      when :trip_details then
-        fetch_stops
-      when :return_trip_details then
-        @booking.has_return? ? fetch_return_stops : skip_step
-      when :passenger_details then
-        create_passengers
+        when :trip_details then
+          fetch_stops
+        when :return_trip_details then
+          @booking.has_return? ? fetch_return_stops : skip_step
+        when :passenger_details then
+          create_passengers
       end
       render_wizard
     end
 
     def update
       case step
-      when :trip_details then
-        fetch_stops
-      when :passenger_charges
-        @booking.sync_return_booking
-        build_invoice
-      when :billing_info then
-        reserve_booking
+        when :trip_details then
+          fetch_stops
+        when :passenger_charges
+          @booking.sync_return_booking
+          build_invoice
+        when :billing_info then
+          reserve_booking
       end
       render_wizard @booking
     end
@@ -103,7 +103,58 @@ module Bookings
     end
 
     def booking_params
-      BookingParameters.new(params).permit(user: current_user)
+      params.fetch(:booking, {}).permit(:trip_id,
+                                        :price,
+                                        :status,
+                                        :quantity,
+                                        :client_id,
+                                        :has_return,
+                                        :stop_id,
+                                        :id,
+                                        client_attributes: [:id,
+                                                            :_destroy,
+                                                            :title,
+                                                            :name,
+                                                            :surname,
+                                                            :date_of_birth,
+                                                            :high_risk,
+                                                            :cell_no,
+                                                            :home_no,
+                                                            :work_no,
+                                                            :email,
+                                                            :bank_id,
+                                                            :id_number,
+                                                            :notes,
+                                                            address_attributes: [:id,
+                                                                                 :street_address1,
+                                                                                 :street_address2,
+                                                                                 :city,
+                                                                                 :postal_code,
+                                                                                 :_destroy]],
+                                        passengers_attributes: [:id,
+                                                                :name,
+                                                                :surname,
+                                                                :cell_no,
+                                                                :email,
+                                                                :passenger_type_id,
+                                                                charge_ids: []],
+                                        invoice_attributes: [:id,
+                                                             :billing_date,
+                                                             line_items_attributes: [:id,
+                                                                                     :description,
+                                                                                     :amount,
+                                                                                     :line_item_type]],
+                                        return_booking_attributes: [:stop_id,
+                                                                    :quantity,
+                                                                    :trip_id,
+                                                                    :id, invoice_attributes: [:id,
+                                                                                              :billing_date,
+                                                                                              line_items_attributes: [:id,
+                                                                                                                      :description,
+                                                                                                                      :amount,
+                                                                                                                      :line_item_type]]]
+
+      )
     end
   end
 end

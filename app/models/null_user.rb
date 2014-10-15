@@ -1,9 +1,13 @@
 class NullUser
+  def admin?
+    false
+end
 
-def admin?; false ;end
+  def clerk?
+    false
+  end
 
-def clerk?; false ;end
-
-def !; true end
-
+  def !
+    true
+  end
 end

@@ -6,7 +6,9 @@ class VouchersController < ApplicationController
   end
 
   def create
-    @voucher = @client.vouchers.create(voucher_params)
+    @voucher = @client.vouchers.build(voucher_params)
+    @voucher.user = current_user
+    @voucher.save
     respond_with @client, @voucher, location: client_url(@client)
   end
 
@@ -17,6 +19,6 @@ class VouchersController < ApplicationController
   end
 
   def voucher_params
-    VoucherParameters.new(params).permit(user: current_user)
+    params.fetch(:voucher, {}).permit(:amount)
   end
 end

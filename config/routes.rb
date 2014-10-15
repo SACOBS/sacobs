@@ -186,9 +186,6 @@ Sacobs::Application.routes.draw do
     collection do
       get :search
     end
-    member do
-      get :contact_details
-    end
     resources :vouchers, only: [:new, :create]
   end
 

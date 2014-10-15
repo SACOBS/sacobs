@@ -19,11 +19,13 @@ class DriversController < ApplicationController
   end
 
   def create
-    @driver = Driver.create(driver_params)
+    @driver = Driver.new(driver_params)
+    @driver.user = current_user
     respond_with @driver
   end
 
   def update
+    @driver.user = current_user
     @driver.update(driver_params)
     respond_with @driver
   end
@@ -44,7 +46,7 @@ class DriversController < ApplicationController
   end
 
   def driver_params
-    DriverParameters.new(params).permit(user: current_user)
+    params.fetch(:driver, {}).permit(:name, :surname)
   end
 
   def interpolation_options

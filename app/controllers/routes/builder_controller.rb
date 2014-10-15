@@ -19,7 +19,9 @@ module Routes
     end
 
     def update
+      @route.user = current_user
       Route.no_touching { @route.update(route_params) }
+      @route.touch
       render_wizard @route
     end
 
@@ -38,7 +40,10 @@ module Routes
     end
 
     def route_params
-      RouteParameters.new(params).permit(user: current_user)
+      params.fetch(:route, {}).permit(:name, :cost, :distance,
+                                      destinations_attributes: [:city_id, :sequence,  :_destroy],
+                                      connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
+      )
     end
   end
 end

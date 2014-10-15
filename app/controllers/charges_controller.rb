@@ -12,11 +12,13 @@ class ChargesController < ApplicationController
   end
 
   def create
+    @charge.user = current_user
     @charge = Charge.create(charge_params)
     respond_with @charge
   end
 
   def update
+    @charge.user = current_user
     @charge.update(charge_params)
     respond_with @charge
   end
@@ -33,6 +35,6 @@ class ChargesController < ApplicationController
   end
 
   def charge_params
-    ChargeParameters.new(params).permit(user: current_user)
+    params.fetch(:charge, {}).permit(:percentage, :description)
   end
 end

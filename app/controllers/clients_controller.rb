@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:contact_details, :show, :edit, :update, :destroy]
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, only: [:index, :search]
   after_action :verify_authorized, except: [:index, :search]
 
@@ -18,19 +18,14 @@ class ClientsController < ApplicationController
     fresh_when @client, last_modified: @client.updated_at
   end
 
-  def contact_details
-    authorize @client, :show?
-    fresh_when @client, last_modified: @client.updated_at
-  end
-
   def new
-    @client = Client.new
-    @client.build_address
+    @client = Client.new_with_address
     authorize @client
   end
 
   def create
     @client = Client.new(client_params)
+    @client.user = current_user
     authorize @client
     @client.save
     respond_with @client
@@ -42,6 +37,7 @@ class ClientsController < ApplicationController
 
   def update
     authorize @client
+    @client.user = current_user
     @client.update(client_params)
     respond_with @client
   end
@@ -63,7 +59,25 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    ClientParameters.new(params).permit(user: current_user)
+    params.fetch(:client, {}).permit(:title,
+                                     :name,
+                                     :surname,
+                                     :date_of_birth,
+                                     :high_risk,
+                                     :cell_no,
+                                     :home_no,
+                                     :work_no,
+                                     :email,
+                                     :bank_id,
+                                     :notes,
+                                     :id_number,
+                                     address_attributes: [:id,
+                                                          :street_address1,
+                                                          :street_address2,
+                                                          :city,
+                                                          :postal_code,
+                                                          :_destroy]
+    )
   end
 
   def interpolation_options

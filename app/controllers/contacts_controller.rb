@@ -20,6 +20,10 @@ class ContactsController < ApplicationController
   private
 
   def contact_params
-    ContactParameters.new(params).permit
+    params.fetch(:contact, {}).permit(:name,
+                                      :email,
+                                      :message,
+                                      :nickname
+    )
   end
 end

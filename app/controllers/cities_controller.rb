@@ -21,11 +21,13 @@ class CitiesController < ApplicationController
   end
 
   def create
+    @city.user = current_user
     @city = City.create(city_params)
     respond_with @city
   end
 
   def update
+    @city.user = current_user
     @city.update(city_params)
     respond_with @city
   end
@@ -46,6 +48,8 @@ class CitiesController < ApplicationController
   end
 
   def city_params
-    CityParameters.new(params).permit(user: current_user)
+    params.fetch(:city, {}).permit(:name,
+                                   venues_attributes: [:id, :name, :_destroy]
+    )
   end
 end

@@ -20,7 +20,7 @@ class PaymentTypesController < ApplicationController
   private
 
   def payment_type_params
-    params.require(:payment_type).permit(:description)
+    params.fetch(:payment_type, {}).permit(:description)
   end
 
   def set_payment_type

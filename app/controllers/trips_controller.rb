@@ -61,6 +61,19 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    TripParameters.new(params).permit(user: current_user)
+    params.fetch(:trip, {}).permit(:name,
+                                   :start_date,
+                                   :end_date,
+                                   :route_id,
+                                   :bus_id,
+                                   :notes,
+                                   driver_ids: [],
+                                   stops_attributes: [:id,
+                                                      :arrive,
+                                                      :depart,
+                                                      :_destroy,
+                                                      :connection_id,
+                                                      :available_seats]
+    )
   end
 end

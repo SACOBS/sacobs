@@ -58,8 +58,10 @@ class Client < ActiveRecord::Base
   default_scope { order(updated_at: :desc) }
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
-  def address
-    address ||= build_address
+  def self.new_with_address
+    client = Client.new
+    client.build_address
+    client
   end
 
   def age

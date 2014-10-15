@@ -22,6 +22,10 @@ class PaymentDetailsController < ApplicationController
   end
 
   def payment_details_params
-    PaymentDetailParameters.new(params).permit(user: current_user)
+    params.fetch(:payment_detail, {}).permit(:booking_id,
+                                             :payment_date,
+                                             :payment_type_id,
+                                             :reference
+    )
   end
 end

@@ -44,10 +44,7 @@ module Buses
                                     :capacity,
                                     :year,
                                     :model,
-                                    seats_attributes: [:id,
-                                                       :_destroy,
-                                                       :row,
-                                                       :number]
+                                    seats_attributes: [:id, :_destroy, :row, :number]
       )
     end
   end

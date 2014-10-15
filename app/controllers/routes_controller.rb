@@ -10,18 +10,13 @@ class RoutesController < ApplicationController
   end
 
   def update
-    @route.transaction do
-      Route.no_touching do
-        @route.update(route_params)
-        @route.connections.each(&:save!)
-      end
-      @route.touch
-    end
+    @route.user = current_user
+    @route.update(route_params)
     respond_with @route
   end
 
   def destroy
-    Route.no_touching { @route.destroy }
+    @route.destroy
     respond_with @route
   end
 
@@ -49,6 +44,9 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    RouteParameters.new(params).permit(user: current_user)
+    params.fetch(:route, {}).permit(:name, :cost, :distance,
+                                    destinations_attributes: [:city_id, :sequence, :_destroy],
+                                    connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
+    )
   end
 end

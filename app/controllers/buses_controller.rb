@@ -11,6 +11,7 @@ class BusesController < ApplicationController
   end
 
   def update
+    @bus.user = current_user
     @bus.update(bus_params)
     respond_with @bus
   end
@@ -27,6 +28,13 @@ class BusesController < ApplicationController
   end
 
   def bus_params
-    BusParameters.new(params).permit(user: current_user)
+    def bus_params
+      params.fetch(:bus, {}).permit(:name,
+                                    :capacity,
+                                    :year,
+                                    :model,
+                                    seats_attributes: [:id, :_destroy, :row, :number]
+      )
+    end
   end
 end
