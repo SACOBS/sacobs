@@ -8,11 +8,11 @@ class BookingDecorator < BaseDecorator
   end
 
   def expires_in
-    helpers.time_ago_in_words(expiry_date)
+    helpers.distance_of_time_in_words(Time.zone.today, expiry_date)
   end
 
   def price
-    helpers.number_to_currency(invoice_total, unit: 'R')
+    helpers.number_to_currency(invoice_total)
   end
 
   def status

@@ -52,7 +52,7 @@ class Client < ActiveRecord::Base
 
   validates :name, :surname, presence: true
 
-  before_validation :set_full_name, prepend: true
+  before_save :normalize_names
   before_save :set_birth_date_from_id_number
 
   default_scope { order(updated_at: :desc) }
@@ -76,11 +76,17 @@ class Client < ActiveRecord::Base
   protected
 
   def set_birth_date_from_id_number
-    self.date_of_birth = Date.strptime(id_number[0..5], '%y%m%d') if id_number?
+    return unless id_number?
+    date = Date.strptime(id_number[0..5], '%y%m%d')
+    date = date - 100.years if date > Time.zone.today
+    self.date_of_birth = date
+
   end
 
-  def set_full_name
-    self.full_name = "#{name} #{surname}"  if name_changed? || surname_changed?
+  def normalize_names
+    self.name = name.squish.upcase
+    self.surname = surname.squish.upcase
+    self.full_name = "#{name} #{surname}".squish
   end
 
   def should_generate_new_friendly_id?
