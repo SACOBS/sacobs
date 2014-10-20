@@ -33,7 +33,7 @@ class TripSheetsController < ApplicationController
   private
 
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = Trip.includes(bookings: { stop: { connection: [:from, :to] } }).order('destinations.sequence asc, tos_connections.sequence asc').find(params[:id])
   end
 
   def set_trip_sheet_presenter

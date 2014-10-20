@@ -1,3 +1,4 @@
+
 # == Schema Information
 #
 # Table name: connections
@@ -39,7 +40,8 @@ class Connection < ActiveRecord::Base
   private
 
   def defaults
-    { distance: 0,
+    {
+      distance: 0,
       cost: 0,
       percentage: 0,
       arrive: Date.today.at_beginning_of_day,
