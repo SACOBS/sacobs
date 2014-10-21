@@ -10,10 +10,7 @@ module Trips
 
     def create
       @trip = Trip.create(trip_params)
-      respond_to do |format|
-        format.html { wizard_path(Wicked::FIRST_STEP, trip_id: @trip) }
-        format.js { render js: "window.location.pathname = #{wizard_path(Wicked::FIRST_STEP, trip_id: @trip).to_json}" }
-      end
+      redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
     end
 
     def show

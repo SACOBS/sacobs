@@ -1,13 +1,14 @@
 - BookingDecorator.decorate(booking, self) do |decorated_booking|
   %tr
+    %td= decorated_booking.expiry_date
     %td= decorated_booking.client.show_link(text: decorated_booking.client.full_name, target: '_blank')
-    %td= decorated_booking.trip_start_date
+    %td= decorated_booking.client.home_telephone
+    %td= decorated_booking.client.cellphone
+    %td= decorated_booking.client.work_telephone
+    %td= decorated_booking.trip_date
     %td= decorated_booking.quantity
     %td= decorated_booking.from_city
     %td= decorated_booking.to_city
-    %td= decorated_booking.created_at
-    %td= decorated_booking.expires_in
-    %td= decorated_booking.expiry_date
     %td
       = decorated_booking.show_link(icon: :info, class: t('buttons.mini.info'))
       = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.mini.default'))

@@ -1,6 +1,6 @@
 = paginate bookings, param_name: "#{type}_page"
 - if bookings.any?
-  - bootstrap_table headers: ['Client', 'Trip Date', 'Qty', 'From', 'To', 'Booking Date', 'Expires In', 'Expiry Date', 'Actions'],
+  - bootstrap_table headers: ['Expires', 'Client Name', 'Home No', 'Cell No', 'Work No', 'Trip Date', 'Qty', 'From', 'To', 'Actions'],
                     types: %i(bordered condensed), html_options: { class: 'sortable' } do
     = render bookings, cache: true
 - else

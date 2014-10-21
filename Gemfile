@@ -117,24 +117,24 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
+# Interactors (Service Objects)
+gem "interactor-rails", "~> 2.0"
+
 group :development do
+  gem 'rails_apps_testing'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate'
   gem 'quiet_assets'
-  gem 'bullet'
-  gem 'lol_dba'
   gem 'rails_best_practices'
   gem 'spring'
-  gem 'flatten_migrations'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'rails_db_info'
   gem 'faker'
   gem 'spring-commands-rspec'
 end
@@ -143,10 +143,11 @@ group :test do
   # Test suites
   gem 'capybara'
   gem 'launchy'
+  gem 'selenium-webdriver'
+
 
   # Factories
   gem 'database_cleaner', '~> 1.2.0'
-  gem 'stepford'
 
   # Matchers
   gem 'shoulda-matchers'

@@ -7,16 +7,20 @@ class BookingDecorator < BaseDecorator
     @client ||= ClientDecorator.decorate(model.client, @view_context)
   end
 
-  def expires_in
-    helpers.distance_of_time_in_words(Time.zone.today, expiry_date)
-  end
-
   def price
     helpers.number_to_currency(invoice_total)
   end
 
   def status
     model.status.capitalize
+  end
+
+  def trip_date
+    helpers.l(trip_start_date, format: :long)
+  end
+
+  def expiry_date
+    helpers.l(model.expiry_date,format: :short)
   end
 
   def reference_no

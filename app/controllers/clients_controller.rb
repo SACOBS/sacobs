@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
+
   after_action :verify_policy_scoped, only: [:index, :search]
   after_action :verify_authorized, except: [:index, :search]
 
@@ -8,42 +9,42 @@ class ClientsController < ApplicationController
   end
 
   def search
-    results = client_scope.search(params[:q]).result.order(updated_at: :desc).page(params[:page])
+    results = client_scope.search(params[:q]).result.page(params[:page])
     flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
     render partial: 'clients/clients', locals: { clients: results }
   end
 
   def show
-    authorize @client
+    authorize :client
     fresh_when @client, last_modified: @client.updated_at
   end
 
   def new
+    authorize :client
     @client = Client.new_with_address
-    authorize @client
   end
 
   def create
+    authorize :client
     @client = Client.new(client_params)
     @client.user = current_user
-    authorize @client
     @client.save
     respond_with @client
   end
 
   def edit
-    authorize @client
+    authorize :client
   end
 
   def update
-    authorize @client
+    authorize :client
     @client.user = current_user
     @client.update(client_params)
     respond_with @client
   end
 
   def destroy
-    authorize @client
+    authorize :client
     @client.destroy
     respond_with @client
   end
@@ -55,7 +56,7 @@ class ClientsController < ApplicationController
   end
 
   def set_client
-    @client = Client.friendly.find(params[:id])
+    @client = client_scope.friendly.find(params[:id])
   end
 
   def client_params

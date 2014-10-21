@@ -31,15 +31,6 @@ Sacobs::Application.configure do
     password: ENV['GMAIL_PASSWORD']
   }
 
-  config.after_initialize do
-    Bullet.enable = false
-    Bullet.alert = false
-    Bullet.bullet_logger = true
-    Bullet.console = true
-    Bullet.rails_logger = true
-    Bullet.add_footer = true
-  end
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

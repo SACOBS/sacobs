@@ -14,4 +14,6 @@
 
 class Note < ActiveRecord::Base
   default_scope { order(id: :desc) }
+
+  scope :for_context, ->(context){ where(context: context) }
 end

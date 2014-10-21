@@ -70,6 +70,10 @@ class Ticket
     return_booking.to_city_name
   end
 
+  def status
+    booking.status.to_s.upcase
+  end
+
   def price
     @view_context.number_to_currency total_cost, unit: 'R'
   end

@@ -53,9 +53,6 @@ GEM
     bootswatch-rails (0.5.0)
       railties (>= 3.1)
     builder (3.2.2)
-    bullet (4.14.0)
-      activesupport (>= 3.0.0)
-      uniform_notifier (>= 1.6.0)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -65,6 +62,8 @@ GEM
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chartkick (1.3.2)
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
     cocoon (1.2.6)
     code_analyzer (0.4.5)
       sexp_processor
@@ -102,11 +101,9 @@ GEM
       railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
+    ffi (1.9.6)
     figaro (1.0.0)
       thor (~> 0.14)
-    flatten_migrations (0.0.1)
-      rails (>= 3.0)
-      rake
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     friendly_id (5.0.4)
@@ -136,6 +133,10 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.11)
+    interactor (3.1.0)
+    interactor-rails (2.0.1)
+      interactor (~> 3.0)
+      rails (>= 3, < 5)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -150,10 +151,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
-    lol_dba (1.6.4)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      railties (>= 3.0)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     memcachier (0.0.2)
@@ -205,6 +202,7 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_apps_testing (0.3.12)
     rails_best_practices (1.15.4)
       activesupport
       awesome_print
@@ -215,8 +213,6 @@ GEM
       json
       require_all
       ruby-progressbar
-    rails_db_info (0.1.9)
-      rails (>= 3.1.0)
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
     railties (4.1.6)
@@ -260,6 +256,7 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.6.0)
+    rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -272,6 +269,11 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (2.43.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     sexp_processor (4.4.4)
     shoulda-callback-matchers (1.1.1)
       activesupport (>= 3)
@@ -296,9 +298,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    stepford (0.15.1)
-      rails
-      thor
     sucker_punch (1.2.1)
       celluloid (~> 0.15.2)
     sysexits (1.2.0)
@@ -316,11 +315,11 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uniform_notifier (1.6.2)
     unobtrusive_flash (3.1.0)
       railties
     warden (1.2.3)
       rack (>= 1.0)
+    websocket (1.2.1)
     wicked (1.1.0)
       rails (>= 3.0.7)
     wicked_pdf (0.11.0)
@@ -342,7 +341,6 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.2.2)
   bootstrap_sortable_rails
   bootswatch-rails (~> 0.5.0)
-  bullet
   capybara
   chartkick
   cocoon
@@ -354,7 +352,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro
-  flatten_migrations
   font-awesome-rails
   friendly_id (~> 5.0.0)
   fullcalendar-rails
@@ -364,12 +361,12 @@ DEPENDENCIES
   headjs-rails (~> 0.4.2)
   heroku-deflater
   high_voltage
+  interactor-rails (~> 2.0)
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
   kaminari
   launchy
-  lol_dba
   memcachier
   multi_fetch_fragments
   nokogiri
@@ -382,22 +379,22 @@ DEPENDENCIES
   quiet_assets
   rails (~> 4.1.6)
   rails_12factor
+  rails_apps_testing
   rails_best_practices
-  rails_db_info
   ransack
   responders
-  rspec-rails (~> 3.0.0)
+  rspec-rails
   rubocop
   sass-rails (~> 4.0.0)
   scripture (~> 0.1.0)
   sdoc
+  selenium-webdriver
   shoulda-callback-matchers
   shoulda-matchers
   simple_defaults
   simple_form (~> 3.0.0)
   spring
   spring-commands-rspec
-  stepford
   sucker_punch (~> 1.0)
   time_difference
   turbolinks

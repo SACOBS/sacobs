@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def set_notes
     context = controller_path.gsub('/', '')
-    @notes = Note.where(context: context)
+    @notes = Note.for_context(context)
   end
 
   protected

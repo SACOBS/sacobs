@@ -7,7 +7,7 @@
   %fieldset
     = f.association :payment_type, label_method: :description, include_blank: false, prompt: 'Select a payment type'
     = f.input :payment_date, as: :date_time_picker
-    = f.input :reference, label: 'Client Payment Reference', hint: 'Bank reference for client payment.'
+    = f.input :reference, label: 'Client Payment Reference', hint: 'Put the reference from the bank for the client payment.'
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', bookings_path, class: t('buttons.default')

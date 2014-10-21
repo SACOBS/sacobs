@@ -34,7 +34,7 @@ class Booking < ActiveRecord::Base
   belongs_to :trip
   belongs_to :stop
   belongs_to :client
-  belongs_to :main, class_name: 'Booking', foreign_key: :main_id
+  belongs_to :main, class_name: 'Booking'
 
   has_one :return_booking, class_name: 'Booking', foreign_key: :main_id, dependent: :delete, autosave: true
   has_one :invoice, dependent: :delete
@@ -50,7 +50,7 @@ class Booking < ActiveRecord::Base
     end
   end
 
-  accepts_nested_attributes_for :client, :passengers, :invoice, :return_booking
+  accepts_nested_attributes_for :client, :passengers, :invoice
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :arrive, :depart, :from_city, :to_city, :from_city_name, :to_city_name, to: :stop

@@ -11,7 +11,7 @@ class CancelBooking
     Booking.transaction do
       UnassignSeating.execute(@booking.quantity, @booking.stop)
       @booking.user = @user
-      fail ActiveRecord::Rollback unless @booking.cancel
+      raise ActiveRecord::Rollback unless @booking.cancel
     end
   end
 end
