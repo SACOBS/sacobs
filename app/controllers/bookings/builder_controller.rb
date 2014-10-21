@@ -65,7 +65,7 @@ module Bookings
     end
 
     def finish_wizard_path
-      dashboard_url
+      booking_path(@booking)
     end
 
     def create_passengers

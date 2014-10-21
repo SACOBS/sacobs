@@ -7,6 +7,10 @@ class BookingDecorator < BaseDecorator
     @client ||= ClientDecorator.decorate(model.client, @view_context)
   end
 
+  def return_booking
+    @return_booking ||= BookingDecorator.decorate(model.return_booking, @view_context)
+  end
+
   def price
     helpers.number_to_currency(invoice_total)
   end
@@ -35,13 +39,17 @@ class BookingDecorator < BaseDecorator
     stop.to_city_name
   end
 
+  def payment_date
+    helpers.l(payment_detail_payment_date, format: :long)
+  end
+
   def show_link(options = {})
     helpers.link_to 'Show', model, options
   end
 
   def ticket_link(options = {})
     options.merge!(target: '_blank')
-    helpers.link_to('Generate Ticket', helpers.ticket_path(model), options) if paid?
+    helpers.link_to('Generate Ticket', helpers.ticket_path(model), options) if paid? || reserved?
   end
 
   def cancellation_link(options = {})

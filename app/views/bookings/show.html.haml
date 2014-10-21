@@ -4,90 +4,38 @@
       %h2 Booking
       .actions
         = back_to bookings_path
+        = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.default'))
         = decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
         = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
         = decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
     .well
-      %p
-        %strong Reference No:
-        %br
-        = decorated_booking.reference_no
-      %p
-        %strong Trip:
-        %br
-        = decorated_booking.trip_name
-      %p
-        %strong Travel Date:
-        %br
-        = decorated_booking.trip_start_date
-      %p
-        %strong From:
-        %br
-        = decorated_booking.from_city
-      %p
-        %strong To:
-        %br
-        = decorated_booking.to_city
-      %p
-        %strong Status:
-        %br
-        = decorated_booking.status
-      %p
-        %strong Price:
-        %br
-        = decorated_booking.price
-
+      %h4 Client information
+      - bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No'], types: [:condensed] do
+        %tr
+          %td= decorated_booking.client.full_name
+          %td= decorated_booking.client.home_telephone
+          %td= decorated_booking.client.cellphone
+          %td= decorated_booking.client.work_telephone
+      - if decorated_booking.payment_detail
+        %h5 Payment Detail
+        - bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do
+          %tr
+            %td= decorated_booking.payment_date
+            %td= decorated_booking.payment_detail_reference
+            %td= decorated_booking.payment_detail_payment_type_description
     .well
-      %h3 Payment Detail
-      %p
-        %strong Payment Type:
-        %br
-        = decorated_booking.payment_type_description
-      %p
-        %strong Payment Date:
-        %br
-        = decorated_booking.payment_date
-
-      %p
-        %strong Customer Payment Reference (Proof of payment reference from customer):
-        %br
-        = decorated_booking.reference
-
-    .well
-      %h3 Client
-      %p
-        %strong Full Name:
-        %br
-        = decorated_booking.client.full_name
-      %p
-        %strong Email:
-        %br
-        = decorated_booking.client.email
-      %p
-        %strong Date Of Birth:
-        %br
-        = decorated_booking.client.date_of_birth
-      %p
-        %strong Age:
-        %br
-        = decorated_booking.client.age
-
-      %p
-        %strong CellPhone:
-        %br
-        = decorated_booking.client.cellphone
-      %p
-        %strong Home Telephone:
-        %br
-        = decorated_booking.client.home_telephone
-      %p
-        %strong Work Telephone:
-        %br
-        = decorated_booking.client.work_telephone
-
-    .well
-      %h3 Passengers
-      - bootstrap_table headers: ['Name', 'Surname', 'Type', 'Cell No', 'Email'], types: [:bordered, :condensed], html_options: { id: 'passengers' } do
+      %h4 Booking information
+      - bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
+        %tr
+          %td= decorated_booking.status
+          %td= decorated_booking.reference_no
+          %td= decorated_booking.trip_name
+          %td= decorated_booking.trip_start_date
+          %td= decorated_booking.from_city
+          %td= decorated_booking.to_city
+          %td= decorated_booking.price
+      %h5 Passengers
+      - bootstrap_table headers: ['Name', 'Surname', 'Type', 'Cell No', 'Email'], types: [:condensed], html_options: { id: 'passengers' } do
         - decorated_booking.passengers.each do |passenger|
           %tr
             %td= passenger.name
@@ -95,8 +43,30 @@
             %td= passenger.passenger_type_description
             %td= passenger.cellphone
             %td= passenger.email
+    - if decorated_booking.has_return?
+      .well
+        %h4 Return information
+        - bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
+          %tr
+            %td= decorated_booking.return_booking.status
+            %td= decorated_booking.return_booking.reference_no
+            %td= decorated_booking.return_booking.trip_name
+            %td= decorated_booking.return_booking.trip_start_date
+            %td= decorated_booking.return_booking.from_city
+            %td= decorated_booking.return_booking.to_city
+            %td= decorated_booking.return_booking.price
+        %h5 Passengers
+        - bootstrap_table headers: ['Name', 'Surname', 'Type', 'Cell No', 'Email'], types: [:condensed], html_options: { id: 'passengers' } do
+          - decorated_booking.return_booking.passengers.each do |passenger|
+            %tr
+              %td= passenger.name
+              %td= passenger.surname
+              %td= passenger.passenger_type_description
+              %td= passenger.cellphone
+              %td= passenger.email
     .actions
       = back_to bookings_path
+      = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.default'))
       = decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
       = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
       = decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
