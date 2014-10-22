@@ -42,6 +42,6 @@ class RouteDecorator < BaseDecorator
 
   def destroy_link(options = {})
     options.merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :route) })
-    helpers.link_to_unless(model.connections.any? ,'Destroy', model, options){}
+    helpers.link_to_unless(model.connections.any?, 'Destroy', model, options) {}
   end
 end

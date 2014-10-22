@@ -33,8 +33,9 @@ class Passenger < ActiveRecord::Base
   end
 
   protected
-   def normalize_names
-     self.name = name.squish.upcase
-     self.surname = surname.squish.upcase
-   end
+
+  def normalize_names
+    self.name = name.squish.upcase
+    self.surname = surname.squish.upcase
+  end
 end

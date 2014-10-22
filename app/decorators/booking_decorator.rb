@@ -13,8 +13,8 @@ class BookingDecorator < BaseDecorator
   end
 
   def main
-   return unless model.main
-   @main ||= BookingDecorator.decorate(model.main, @view_context)
+    return unless model.main
+    @main ||= BookingDecorator.decorate(model.main, @view_context)
   end
 
   def price
@@ -30,7 +30,7 @@ class BookingDecorator < BaseDecorator
   end
 
   def expiry_date
-    helpers.l(model.expiry_date,format: :short)
+    helpers.l(model.expiry_date, format: :short)
   end
 
   def reference_no

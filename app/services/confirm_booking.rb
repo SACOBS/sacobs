@@ -9,7 +9,7 @@ class ConfirmBooking
 
   def execute
     Booking.transaction do
-      raise ActiveRecord::Rollback unless confirm_booking && confirm_related_booking
+      fail ActiveRecord::Rollback unless confirm_booking && confirm_related_booking
     end
   end
 

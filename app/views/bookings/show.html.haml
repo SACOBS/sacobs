@@ -1,21 +1,19 @@
 - cache @booking do
   - BookingDecorator.decorate(@booking, self) do |decorated_booking|
-    .page-header
-      %h2 Booking
-      .actions
-        = back_to bookings_path
-        = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.default'))
-        = decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
-        = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
-        = decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
+    .page-header.text-center
+      %h2 Booking Details
+      .actions.text-center
+        = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.large.default'))
+        = decorated_booking.confirmation_link(icon: :money, class: t('buttons.large.inverse'))
     .well
       %h4 Client information
-      - bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No'], types: [:condensed] do
+      - bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do
         %tr
           %td= decorated_booking.client.full_name
           %td= decorated_booking.client.home_telephone
           %td= decorated_booking.client.cellphone
           %td= decorated_booking.client.work_telephone
+          %td= decorated_booking.client.email
       - if decorated_booking.payment_detail
         %h5 Payment Detail
         - bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do
@@ -24,48 +22,14 @@
             %td= decorated_booking.payment_detail_reference
             %td= decorated_booking.payment_detail_payment_type_description
       %h4 Booking information
-      - bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
-        %tr
-          %td= decorated_booking.status
-          %td= decorated_booking.reference_no
-          %td= decorated_booking.trip_name
-          %td= decorated_booking.trip_date
-          %td= decorated_booking.from_city
-          %td= decorated_booking.to_city
-          %td= decorated_booking.price
-      %h5 Passengers
-      - bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
-        - decorated_booking.passengers.each do |passenger|
-          %tr
-            %td= passenger.full_name
-            %td= passenger.passenger_type_description
-            %td= passenger.cellphone
-            %td= passenger.email
-      - if decorated_booking.return_booking
-        %h4 Return information
-        - bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
-          %tr
-            %td= decorated_booking.return_booking.status
-            %td= decorated_booking.return_booking.reference_no
-            %td= decorated_booking.return_booking.trip_name
-            %td= decorated_booking.return_booking.trip_date
-            %td= decorated_booking.return_booking.from_city
-            %td= decorated_booking.return_booking.to_city
-            %td= decorated_booking.return_booking.price
-        %h5 Passengers
-        - bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
-          - decorated_booking.return_booking.passengers.each do |passenger|
-            %tr
-              %td= passenger.full_name
-              %td= passenger.passenger_type_description
-              %td= passenger.cellphone
-              %td= passenger.email
-    .actions
-      = back_to bookings_path
-      = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.default'))
-      = decorated_booking.confirmation_link(icon: :money, class: t('buttons.inverse'))
-      = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.warning'))
-      = decorated_booking.destroy_link(icon: :times, class: t('buttons.danger'))
+      = render partial: 'booking_detail', locals: { booking: decorated_booking }
+      = render partial: 'booking_detail', locals: { booking: decorated_booking.return_booking } if decorated_booking.return_booking
+      = render partial: 'booking_detail', locals: { booking: decorated_booking.main } if decorated_booking.main
+      %h4 Passengers
+      = render partial: 'bookings/passengers', locals: { passengers: decorated_booking.passengers }
+    .actions.text-center
+      = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.large.default'))
+      = decorated_booking.confirmation_link(icon: :money, class: t('buttons.large.inverse'))
 
 
 

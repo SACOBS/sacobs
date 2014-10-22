@@ -1,0 +1,7 @@
+- bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
+  - passengers.each do |passenger|
+    %tr
+      %td= passenger.full_name
+      %td= passenger.passenger_type_description
+      %td= passenger.cellphone
+      %td= passenger.email

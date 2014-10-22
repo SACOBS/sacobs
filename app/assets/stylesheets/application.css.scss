@@ -13,7 +13,6 @@
  *= require bootstrap-sortable
  *= require font-awesome
  *= require cities
- *= require fullcalendar
  *= require bootstrap_and_overrides
  *= require jquery.calculator
  */
@@ -29,6 +28,10 @@
 
 th, td {
   overflow: hidden;
+}
+
+td{
+  background-color: lightcyan;
 }
 
 /* Form errors */

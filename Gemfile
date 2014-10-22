@@ -108,17 +108,11 @@ gem 'groupdate'
 # Email Obfuscation
 gem 'obfuscatejs'
 
-# Calendar
-gem 'fullcalendar-rails'
-
 # Head Js
 gem 'headjs-rails', '~> 0.4.2'
 
 # Simple Defaults
 gem 'simple_defaults'
-
-# Interactors (Service Objects)
-gem "interactor-rails", "~> 2.0"
 
 group :development do
   gem 'rails_apps_testing'
