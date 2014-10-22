@@ -1,7 +1,12 @@
 class NullUser
+
+  def id
+    0
+  end
+
   def admin?
     false
-end
+  end
 
   def clerk?
     false

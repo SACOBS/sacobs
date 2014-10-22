@@ -13,7 +13,6 @@
 #= require unobtrusive_flash
 #= require unobtrusive_flash_bootstrap
 #= require obfuscatejs
-#= require fullcalendar
 #= require turbolinks
 #= require_tree .
 
