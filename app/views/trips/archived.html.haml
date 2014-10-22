@@ -9,7 +9,6 @@
     = f.input :name_cont, as: :search_box
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', archived_trips_path, class: t('buttons.mini.inverse'), icon: :times
-
 #archived_trips
   = render partial: 'archived_trips', locals: { archived_trips: @archived_trips }
 

@@ -20,6 +20,12 @@ class TripDecorator < BaseDecorator
     helpers.link_to 'Copy', helpers.copy_trip_path(model), options
   end
 
+
+  def destroy_link(options = {})
+    options.merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :trip) })
+    helpers.link_to_unless(model.bookings.any? ,'Destroy', model, options){}
+  end
+
   def generate_tripsheet_link(options = {})
     options.merge!(target: '_blank')
     helpers.link_to 'Generate TripSheet', helpers.edit_trip_sheet_path(model), options

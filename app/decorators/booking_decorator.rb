@@ -8,7 +8,13 @@ class BookingDecorator < BaseDecorator
   end
 
   def return_booking
+    return unless model.return_booking
     @return_booking ||= BookingDecorator.decorate(model.return_booking, @view_context)
+  end
+
+  def main
+   return unless model.main
+   @main ||= BookingDecorator.decorate(model.main, @view_context)
   end
 
   def price
@@ -16,7 +22,7 @@ class BookingDecorator < BaseDecorator
   end
 
   def status
-    model.status.capitalize
+    model.status.upcase
   end
 
   def trip_date

@@ -26,7 +26,15 @@ class Passenger < ActiveRecord::Base
 
   attr_accessor :charge_ids
 
+  before_save :normalize_names
+
   def full_name
     "#{name} #{surname}"
   end
+
+  protected
+   def normalize_names
+     self.name = name.squish.upcase
+     self.surname = surname.squish.upcase
+   end
 end
