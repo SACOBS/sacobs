@@ -65,7 +65,7 @@ class BookingDecorator < BaseDecorator
 
   def confirmation_link(options = {})
     options.merge!(method: :patch)
-    helpers.link_to('Confirm', helpers.confirm_booking_path(model), options) if reserved?
+    helpers.link_to_if(reserved?, 'Confirm', helpers.confirm_booking_path(model), options){}
   end
 
   def destroy_link(options = {})

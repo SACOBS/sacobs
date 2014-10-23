@@ -86,11 +86,18 @@ class Booking < ActiveRecord::Base
 
   def create_payment_details(attributes)
     create_payment_detail(attributes)
+
     if is_return?
       main.create_payment_detail(attributes)
+      main.status = :paid
+      main.save
     else
       return_booking.create_payment_detail(attributes) if has_return?
+      return_booking.status = :paid
+      return_booking.save
     end
+    self.status = :paid
+    save
   end
 
   def sync_return_booking

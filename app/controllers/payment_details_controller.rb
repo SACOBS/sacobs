@@ -7,7 +7,7 @@ class PaymentDetailsController < ApplicationController
 
   def create
     @booking.create_payment_details(payment_details_params)
-    respond_with @booking.payment_detail, location: bookings_url
+    respond_with @booking.payment_detail, location: booking_url(@booking)
   end
 
   private
