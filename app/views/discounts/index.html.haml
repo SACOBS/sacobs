@@ -2,7 +2,7 @@
   %h2 Discounts
   = link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus
 
-- bootstrap_table headers: %w(Passenger Percentage Actions), types: %i(bordered condensed), html_options: { class: 'sortable' } do
+- bootstrap_table headers: %w(Actions Passenger Percentage), types: %i(hover condensed), html_options: { class: 'sortable' } do
   = render @discounts, cache: true
 
 = link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus

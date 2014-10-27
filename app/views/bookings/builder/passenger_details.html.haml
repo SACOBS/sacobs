@@ -1,7 +1,7 @@
 #errors= errors_for @booking
 = simple_form_for @booking, defaults: { error: false, label: false }, url: wizard_path do |f|
   %fieldset
-    - bootstrap_table headers: ['Name', 'Surname', 'Cell No', 'Email', 'Type'], types: [:bordered, :condensed], html_options: { id: 'passengers' } do
+    - bootstrap_table headers: ['Name', 'Surname', 'Cell No', 'Email', 'Type'], types: [:hover, :condensed], html_options: { id: 'passengers' } do
       = f.simple_fields_for :passengers, wrapper: false do |passenger|
         %tr
           %td= passenger.input :name

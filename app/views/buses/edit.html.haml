@@ -21,7 +21,7 @@
         = f.input :model
     .tab-pane#seating
       %fieldset
-        - bootstrap_table headers: ['Row', 'Number', ''], types: [:bordered, :condensed], html_options: { id: 'seats' } do
+        - bootstrap_table headers: ['Row', 'Number', ''], types: [:hover, :condensed], html_options: { id: 'seats' } do
           = f.simple_fields_for :seats, wrapper: false do |seat|
             %tr
               %td= seat.input :row, label: false, class: 'input-small'

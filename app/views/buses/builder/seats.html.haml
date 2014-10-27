@@ -1,7 +1,7 @@
 #errors= errors_for @bus
 = simple_form_for @bus, defaults: { error: false }, url: wizard_path do |f|
   %fieldset
-    - bootstrap_table headers: ['Row', 'Number', ''], types: [:bordered, :condensed], html_options: { id: 'seats' } do
+    - bootstrap_table headers: ['Row', 'Number', ''], types: [:hover, :condensed], html_options: { id: 'seats' } do
       = f.simple_fields_for :seats, wrapper: false do |seat|
         = render 'seat_fields', f: seat
     .links

@@ -27,7 +27,7 @@
     .well
       %p
         %strong Connections:
-        - bootstrap_table headers: ['From', 'To', 'Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:bordered, :condensed], html_options: { id: 'connections', class: 'sortable' } do
+        - bootstrap_table headers: ['From', 'To', 'Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
           = render partial: 'connections/connection', collection: @route.connections, cache: true
     .actions
       = back_to routes_path

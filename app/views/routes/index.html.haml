@@ -3,5 +3,5 @@
   = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
   = link_to 'Refresh', routes_path, class: t('buttons.default'), icon: :refresh
 
-- bootstrap_table headers: ['Description', 'Start City', 'End City', 'Cost', 'Distance', 'Connections', 'Actions'], types: %i(bordered condensed), html_options: { class: 'sortable' } do
+- bootstrap_table headers: ['Actions', 'Description', 'Start City', 'End City', 'Cost', 'Distance', 'Connections'], types: %i(hover condensed), html_options: { class: 'sortable' } do
   = render @routes, cache: true

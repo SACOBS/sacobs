@@ -1,7 +1,7 @@
 %tr{ class: dom_class(city), id: dom_id(city) }
-  %td= link_to city.name, city
-  %td= city.venues.size
   %td
     = link_to 'View', city, icon: :info, class: t('buttons.mini.info')
     = link_to 'Edit', edit_city_path(city), icon: :edit, class: t('buttons.mini.inverse')
     = link_to 'Destroy', city, icon: :times, data: { confirm: t('messages.confirm', resource: :city) }, method: :delete, class: t('buttons.mini.danger')
+  %td= link_to city.name, city
+  %td= city.venues.size

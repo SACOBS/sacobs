@@ -17,10 +17,10 @@ module Bookings
     def index
       if @booking.has_return?
         fetch_return_stops
-        render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
+        render partial: 'bookings/builder/return_trips', locals: {booking: @booking, stops: @stops}
       else
         fetch_stops
-        render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+        render partial: 'bookings/builder/trips', locals: {booking: @booking, stops: @stops}
       end
     end
 
@@ -73,6 +73,7 @@ module Bookings
       passengers.clear
       @booking.quantity.times { passengers.build(passenger_type: get_passenger_type) }
       @booking.save
+      puts @booking.passengers.reload
     end
 
     def get_passenger_type

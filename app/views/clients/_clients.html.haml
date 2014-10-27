@@ -1,5 +1,5 @@
 - cache CacheHelper.cache_key_for_collection(clients) do
-  - bootstrap_table headers: ['Name', 'Surname', 'High Risk', 'Home Telephone', 'Work Telephone', 'CellPhone', 'Email', 'Last Modified', 'Actions'], types: %i(bordered condensed), html_options: { class: 'sortable' } do
+  - bootstrap_table headers: ['Actions','Name', 'Surname', 'High Risk', 'Home Telephone', 'Work Telephone', 'CellPhone', 'Email', 'Last Modified'], types: %i(hover condensed), html_options: { class: 'sortable' } do
     = render partial: 'client', collection: clients, cache: true
   %br
   = paginate clients, params: { letter: params[:letter] }

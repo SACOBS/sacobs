@@ -70,7 +70,7 @@ class Client < ActiveRecord::Base
   end
 
   def is_pensioner?
-    id_number? && age >= 65
+    age && age >= 65
   end
 
   protected

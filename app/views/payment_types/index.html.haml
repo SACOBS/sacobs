@@ -1,11 +1,11 @@
 .page-header
   %h2 Payment Types
 
-- bootstrap_table headers: %w(Description Actions), types: %i(bordered condensed), html_options: { class: 'sortable' } do
+- bootstrap_table headers: %w(Actions Description), types: %i(hover condensed), html_options: { class: 'sortable' } do
   - @payment_types.each do |payment_type|
     %tr{ class: dom_class(payment_type), id: dom_id(payment_type) }
-      %td= payment_type.description
       %td= link_to 'Destroy', payment_type, icon: :times, data: { confirm: t('messages.confirm', resource: :payment_type) }, method: :delete, class: t('buttons.mini.danger')
+      %td= payment_type.description
 
 %h6 New Payment Type
 = simple_form_for :payment_type, url: payment_types_path, method: :post do |f|

@@ -1,9 +1,6 @@
 %tr{ class: dom_class(discount), id: dom_id(discount) }
-  %td= discount.description.titleize
-  %td= decimal_to_percentage(discount.percentage)
   %td
     = link_to 'Edit', edit_discount_path(discount), icon: :edit, class: t('buttons.mini.inverse')
     = link_to 'Destroy', discount, icon: :times, data: { confirm: t('messages.confirm', resource: :discount) }, method: :delete, class: t('buttons.mini.danger')
-
-
-
+  %td= discount.description.titleize
+  %td= decimal_to_percentage(discount.percentage)

@@ -69,7 +69,7 @@
     .well
       %p
         %strong Credit Vouchers:
-        - bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed), html_options: { class: 'sortable' } do
+        - bootstrap_table headers: %w(Reference Amount), types: %i(hover condensed), html_options: { class: 'sortable' } do
           - decorated_client.vouchers.each do |voucher|
             %tr
               %td= voucher.ref_no

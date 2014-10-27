@@ -1,6 +1,6 @@
 = paginate trips
 
-- bootstrap_table headers: ['Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus', 'Created At', 'Actions'], types: %i(bordered condensed), html_options: { class: 'sortable' } do
+- bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed), html_options: { class: 'sortable' } do
   = render trips, cache: true
 
 = paginate trips

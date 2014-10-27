@@ -1,9 +1,9 @@
 -  SeasonalDiscountDecorator.decorate(seasonal_discount, self) do  |decorated_seasonal_discount|
   %tr{ class: dom_class(seasonal_discount), id: dom_id(seasonal_discount) }
+    %td= decorated_seasonal_discount.activation_link(icon: :times, class: t('buttons.mini.danger'))
     %td= decorated_seasonal_discount.name
     %td= decorated_seasonal_discount.passenger_type
     %td= decorated_seasonal_discount.percentage
     %td= decorated_seasonal_discount.period_from
     %td= decorated_seasonal_discount.period_to
     %td= decorated_seasonal_discount.active
-    %td= decorated_seasonal_discount.activation_link(icon: :times, class: t('buttons.mini.danger'))
