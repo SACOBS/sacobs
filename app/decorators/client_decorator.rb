@@ -18,10 +18,15 @@ class ClientDecorator < BaseDecorator
     helpers.number_to_phone(cell_no, area_code: true)
   end
 
+  def contact_numbers
+    [helpers.number_to_phone(cell_no, area_code: true), helpers.number_to_phone(work_no, area_code: true), helpers.number_to_phone(home_no, area_code: true)].compact.reject(&:empty?).join(', ')
+  end
+
   def email
     return 'N/A' unless email?
     helpers.mail_to(model.email)
   end
+
 
   def bank
     bank_name.presence || 'Not Applicable'

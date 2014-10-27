@@ -38,5 +38,6 @@ class Stop < ActiveRecord::Base
 
   def check_seats
     self.available_seats = 0 if available_seats < 0
+    self.available_seats = trip.bus_capacity if available_seats > trip.bus_capacity
   end
 end

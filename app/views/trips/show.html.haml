@@ -5,42 +5,44 @@
       .actions
         = back_to trips_path
         = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
+    - content_for :sidebar do
+      - bootstrap_table headers: %w(Stop Ocp Cap), types: %i(hover condensed), html_options: { class: 'sortable' } do
+        = render partial: 'stops/stop', collection: decorated_trip.stops, cache: true
 
     .well
-      %p
-        %strong Name:
-        %br
-        = decorated_trip.name
-      %p
-        %strong Start Date:
-        %br
-        = decorated_trip.start_date
-      %p
-        %strong End Date:
-        %br
-        = decorated_trip.end_date
-      %p
-        %strong Route
-        %br
-        = decorated_trip.route_name
-      %p
-        %strong Notes
-        %br
-        = decorated_trip.notes
-      %p
-        %strong Bus
-        %br
-        = decorated_trip.bus_name
-      %p
-        %strong Drivers:
-        %ul
-          = list_of(decorated_trip.drivers) do |driver|
-            = driver.full_name
-    .well
-      %p
-        %strong Stops:
-        - bootstrap_table headers: ['From', 'To', 'Depart Time', 'Arrival Time', 'Available Seats'], types: %i(hover condensed), html_options: { class: 'sortable' } do
-          = render partial: 'stops/stop', collection: decorated_trip.stops, cache: true
+      %h4 Details
+      - bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do
+        %tr
+          %td= decorated_trip.name
+          %td= decorated_trip.start_date
+          %td= decorated_trip.route_name
+          %td= decorated_trip.bus_name
+          %td= decorated_trip.drivers.map(&:full_name).join(',')
+      %h4 Bookings
+      - bootstrap_table headers: ['Status', 'Expires', 'Client Name','From', 'To', 'Qty', 'Telephone'],
+                          types: %i(hover condensed), html_options: { class: 'sortable' } do
+        - decorated_trip.bookings.each do |booking|
+          - decorated_booking = BookingDecorator.decorate(booking, self)
+          - unless decorated_booking.cancelled?
+            %tr
+              %td= decorated_booking.status
+              %td= decorated_booking.expiry_date
+              %td= decorated_booking.client.full_name
+              %td= decorated_booking.from_city
+              %td= decorated_booking.to_city
+              %td= decorated_booking.quantity
+              %td= decorated_booking.client.contact_numbers
+            %tr
+          - else
+            %tr
+              %td= decorated_booking.status
+              %td= decorated_booking.expiry_date
+              %td= decorated_booking.client.full_name
+              %td= decorated_booking.from_city
+              %td= decorated_booking.to_city
+              %td= decorated_booking.quantity
+              %td= decorated_booking.client.contact_numbers
+
     .actions
       = back_to trips_path
       = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))

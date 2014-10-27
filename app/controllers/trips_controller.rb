@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
+  layout 'with_sidebar', only: :show
 
   def calendar
     @trips = trip_scope
@@ -26,7 +27,7 @@ class TripsController < ApplicationController
   end
 
   def show
-    fresh_when @trip, last_modified: @trip.updated_at
+   # fresh_when @trip, last_modified: @trip.updated_at
   end
 
   def copy
@@ -57,7 +58,7 @@ class TripsController < ApplicationController
   end
 
   def set_trip
-    @trip = Trip.includes(stops: :connection).find(params[:id])
+   @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
   end
 
   def trip_params

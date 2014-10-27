@@ -1,7 +1,5 @@
 -  StopDecorator.decorate(stop, self) do |decorated_stop|
   %tr
-    %td= decorated_stop.from_city_name
-    %td= decorated_stop.to_city_name
-    %td= decorated_stop.depart_time
-    %td= decorated_stop.arrive_time
+    %td= "#{decorated_stop.from_city_name} to #{decorated_stop.to_city_name}"
     %td= decorated_stop.available_seats
+    %td= @trip.bus.capacity

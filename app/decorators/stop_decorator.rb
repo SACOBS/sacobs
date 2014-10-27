@@ -7,6 +7,10 @@ class StopDecorator < BaseDecorator
     format_time(depart)
   end
 
+  def occupied
+    trip.bus_capacity - available_seats
+  end
+
   private
 
   def format_time(time)
