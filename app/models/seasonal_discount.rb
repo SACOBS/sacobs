@@ -24,7 +24,7 @@ class SeasonalDiscount < ActiveRecord::Base
   belongs_to :passenger_type
 
   scope :active, -> { where(active: true) }
-  scope :applicable, -> { where(arel_table[:period_from].gteq(Time.zone.now)) }
+  scope :applicable, -> { where(arel_table[:period_from].gteq(Time.zone.today)) }
   scope :active_in_period, -> (date) { where(arel_table[:period_from].lteq(date).and(arel_table[:period_to].gteq(date))).merge(active) }
 
   validates :passenger_type, presence: true
@@ -38,6 +38,6 @@ class SeasonalDiscount < ActiveRecord::Base
   private
 
   def defaults
-    { percentage: 0, period_from: Date.today, period_to: Date.tomorrow, active: true }
+    {percentage: 0, period_from: Date.today, period_to: Date.tomorrow, active: true}
   end
 end

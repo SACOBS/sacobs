@@ -7,7 +7,7 @@
             - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Available Seats', 'Pricing', 'Qty', 'Return?'], types: [:condensed] do
               %tr
                 %td= stop.trip_name
-                %td= stop.trip_start_date
+                %td= l(stop.trip_start_date, format: :long)
                 %td= stop.from_city_name
                 %td= stop.to_city_name
                 %td= stop.available_seats

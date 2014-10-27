@@ -12,6 +12,7 @@ class SeasonalDiscountsController < ApplicationController
   def create
     @seasonal_discount = SeasonalDiscount.new(seasonal_discount_params)
     @seasonal_discount.user = current_user
+    @seasonal_discount.save
     respond_with @seasonal_discount
   end
 
