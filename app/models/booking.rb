@@ -71,19 +71,6 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
-  def confirm
-    self.price = invoice_total
-    self.status = :paid
-    save
-  end
-
-  def cancel
-    self.has_return = false
-    self.main_id = nil
-    self.status = :cancelled
-    save
-  end
-
   def sync_return_booking
     return unless has_return?
     return_booking.client = client

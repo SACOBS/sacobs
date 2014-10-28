@@ -2,27 +2,18 @@ class ConfirmBooking
   include Service
 
   def initialize(booking, user)
-    @booking = booking
-    @related_booking = booking.main || booking.return_booking
+    @bookings = [booking, booking.main, booking.return_booking]
     @user = user
   end
 
   def execute
     Booking.transaction do
-      fail ActiveRecord::Rollback unless confirm_booking && confirm_related_booking
+      @bookings.each do |booking|
+        booking.user = @user
+        booking.price = booking.invoice_total
+        booking.status = :paid
+        save!
+      end
     end
-  end
-
-  private
-
-  def confirm_booking
-    @booking.user = @user
-    @booking.confirm
-  end
-
-  def confirm_related_booking
-    return true unless @related_booking
-    @related_booking.user = @user
-    @related_booking.confirm
   end
 end

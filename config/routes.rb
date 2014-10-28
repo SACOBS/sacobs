@@ -173,7 +173,6 @@ Sacobs::Application.routes.draw do
       get :search
     end
     member do
-      patch :confirm
       patch :cancel
     end
     resources :builder, only: [:index, :show, :update], controller: 'bookings/builder'

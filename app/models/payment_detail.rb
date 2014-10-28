@@ -18,7 +18,7 @@
 
 class PaymentDetail < ActiveRecord::Base
   belongs_to :payment_type
-  belongs_to :booking, touch: true
+  belongs_to :booking
   belongs_to :user
 
   validates :payment_type, presence: true
