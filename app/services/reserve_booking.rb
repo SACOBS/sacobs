@@ -2,18 +2,15 @@ class ReserveBooking
   include Service
 
   def initialize(booking, user)
-    @booking = booking
-    @related_booking = booking.main || booking.return_booking
+    @bookings = [booking, booking.main, booking.return_booking].compact
     @user = user
   end
 
   def execute
     Booking.transaction do
-      AssignSeating.execute(@booking.quantity, @booking.stop)
-      @booking.update!(expiry_date: expiry_date, status: :reserved, user: @user)
-      if @related_booking
-        AssignSeating.execute(@related_booking.quantity, @related_booking.stop)
-        @related_booking.update!(expiry_date: expiry_date, status: :reserved, user: @user)
+      @bookings.each do |booking|
+        AssignSeating.execute(booking.quantity, booking.stop)
+        booking.update!(expiry_date: expiry_date, status: :reserved, user: @user)
       end
     end
   end
