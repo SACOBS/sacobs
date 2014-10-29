@@ -1,0 +1,18 @@
+- @bookings.each do |booking|
+  .well.well-small.booking{id: dom_id(booking)}
+    .pull-left
+      = l(Time.zone.today, format: :long)
+    %br
+    .text-center
+      %p #{booking.client.title} #{booking.client_full_name}
+    .info
+      %p= booking.payment_detail_payment_type_description
+      - [booking.main, booking, booking.return_booking].compact.each do |b|
+        - bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do
+          - BookingDecorator.decorate(b, self) do |decorated_b|
+            %tr
+              %td= decorated_b.status
+              %td= decorated_b.reference_no
+              %td #{decorated_b.quantity} x #{decorated_b.stop.name}
+              %td= decorated_b.trip_date
+              %td= decorated_b.price

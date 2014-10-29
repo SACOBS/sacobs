@@ -17,7 +17,7 @@
 #                             PUT    /users(.:format)                                    devise/registrations#update
 #                             DELETE /users(.:format)                                    devise/registrations#destroy
 #             search_bookings GET    /bookings/search(.:format)                          bookings#search
-#             confirm_booking PATCH  /bookings/:id/confirm(.:format)                     bookings#confirm
+#              daily_bookings GET    /bookings/daily(.:format)                           bookings#daily
 #              cancel_booking PATCH  /bookings/:id/cancel(.:format)                      bookings#cancel
 #       booking_builder_index GET    /bookings/:booking_id/builder(.:format)             bookings/builder#index
 #             booking_builder GET    /bookings/:booking_id/builder/:id(.:format)         bookings/builder#show
@@ -34,7 +34,6 @@
 #                             PATCH  /setting(.:format)                                  settings#update
 #                             PUT    /setting(.:format)                                  settings#update
 #              search_clients GET    /clients/search(.:format)                           clients#search
-#      contact_details_client GET    /clients/:id/contact_details(.:format)              clients#contact_details
 #             client_vouchers POST   /clients/:client_id/vouchers(.:format)              vouchers#create
 #          new_client_voucher GET    /clients/:client_id/vouchers/new(.:format)          vouchers#new
 #                     clients GET    /clients(.:format)                                  clients#index
@@ -59,6 +58,7 @@
 #                             DELETE /cities/:id(.:format)                               cities#destroy
 #                    contacts POST   /contacts(.:format)                                 contacts#create
 #                new_contacts GET    /contacts/new(.:format)                             contacts#new
+#              search_drivers GET    /drivers/search(.:format)                           drivers#search
 #                     drivers GET    /drivers(.:format)                                  drivers#index
 #                             POST   /drivers(.:format)                                  drivers#create
 #                  new_driver GET    /drivers/new(.:format)                              drivers#new
@@ -68,8 +68,9 @@
 #                             PUT    /drivers/:id(.:format)                              drivers#update
 #                             DELETE /drivers/:id(.:format)                              drivers#destroy
 #                   copy_trip POST   /trips/:id/copy(.:format)                           trips#copy
+#                search_trips GET    /trips/search(.:format)                             trips#search
 #              archived_trips GET    /trips/archived(.:format)                           trips#archived
-#              calendar_trips GET    /trips/calendar(.:format)                           trips#calendar
+#       search_archived_trips GET    /trips/search_archived(.:format)                    trips#search_archived
 #          trip_builder_index POST   /trips/:trip_id/builder(.:format)                   trips/builder#create
 #                trip_builder GET    /trips/:trip_id/builder/:id(.:format)               trips/builder#show
 #                             PATCH  /trips/:trip_id/builder/:id(.:format)               trips/builder#update
@@ -155,13 +156,6 @@
 #    reports_income_per_month GET    /reports/income_per_month(.:format)                 reports#income_per_month
 #   reports_bookings_per_user GET    /reports/bookings_per_user(.:format)                reports#bookings_per_user
 #                                    (/errors)/:status(.:format)                         errors#show {:status=>/\d{3}/}
-#               rails_db_info        /rails/info/db                                      RailsDbInfo::Engine
-#
-# Routes for RailsDbInfo::Engine:
-#          root GET  /                                   rails_db_info/tables#index
-# table_entries GET  /tables/:table_id/entries(.:format) rails_db_info/tables#entries
-#        tables GET  /tables(.:format)                   rails_db_info/tables#index
-#         table GET  /tables/:id(.:format)               rails_db_info/tables#show
 #
 
 Sacobs::Application.routes.draw do
@@ -171,6 +165,8 @@ Sacobs::Application.routes.draw do
   resources :bookings, only: [:create, :show, :index, :destroy] do
     collection do
       get :search
+      get :daily
+      get :print_daily
     end
     member do
       patch :cancel

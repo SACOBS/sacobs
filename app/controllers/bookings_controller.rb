@@ -6,6 +6,18 @@ class BookingsController < ApplicationController
     @booking_presenter = BookingPresenter.new(bookings, params)
   end
 
+  def daily
+    @bookings = booking_scope.for_today
+  end
+
+  def print_daily
+    @bookings = booking_scope.for_today
+    render pdf: "daily_bookings_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
+           disposition: :inline,
+           template: 'bookings/_daily_bookings.html.haml',
+           layout: 'pdf.html'
+  end
+
   def search
     results = booking_scope.search(params[:q]).result.distinct(true)
     flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
