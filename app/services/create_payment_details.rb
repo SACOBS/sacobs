@@ -1,5 +1,4 @@
 class CreatePaymentDetails
-
   def initialize(booking, attributes)
     @bookings = [booking, booking.main, booking.return_booking].compact
     @payment_detail_attributes = attributes
@@ -16,9 +15,3 @@ class CreatePaymentDetails
     end
   end
 end
-
-
-
-
-
-

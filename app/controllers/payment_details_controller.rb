@@ -39,6 +39,4 @@ class PaymentDetailsController < ApplicationController
                                              :reference
     )
   end
-
-
 end

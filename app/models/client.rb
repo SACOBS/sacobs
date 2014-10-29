@@ -78,7 +78,7 @@ class Client < ActiveRecord::Base
   def set_birth_date_from_id_number
     return unless id_number?
     date = Date.strptime(id_number[0..5], '%y%m%d')
-    date = date - 100.years if date > Time.zone.today
+    date -= 100.years if date > Time.zone.today
     self.date_of_birth = date
   end
 

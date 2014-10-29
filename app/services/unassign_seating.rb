@@ -8,8 +8,12 @@ class UnassignSeating
   end
 
   def execute
-    affected_stops.update_all("available_seats = available_seats + #{@quantity}")
-    @trip.touch
+    Stop.transaction do
+      affected_stops.each do |stop|
+        stop.available_seats += @quantity
+        stop.save!
+      end
+    end
   end
 
   private

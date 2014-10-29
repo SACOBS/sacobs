@@ -24,12 +24,12 @@ class TripDecorator < BaseDecorator
   end
 
   def copy_link(options = {})
-    options.merge!(method: :post, data: {toggle: 'tooltip', title: 'Click here to create a copy of this trip.'}, rel: 'tooltip')
+    options.merge!(method: :post, data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip')
     helpers.link_to 'Copy', helpers.copy_trip_path(model), options
   end
 
   def destroy_link(options = {})
-    options.merge!(method: :delete, data: {confirm: helpers.t('messages.confirm', resource: :trip)})
+    options.merge!(method: :delete, data: { confirm: helpers.t('messages.confirm', resource: :trip) })
     helpers.link_to_unless(model.bookings.any?, 'Destroy', model, options) {}
   end
 

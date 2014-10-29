@@ -27,7 +27,6 @@ class ClientDecorator < BaseDecorator
     helpers.mail_to(model.email)
   end
 
-
   def bank
     bank_name.presence || 'Not Applicable'
   end

@@ -38,6 +38,6 @@ class SeasonalDiscount < ActiveRecord::Base
   private
 
   def defaults
-    {percentage: 0, period_from: Date.today, period_to: Date.tomorrow, active: true}
+    { percentage: 0, period_from: Date.today, period_to: Date.tomorrow, active: true }
   end
 end

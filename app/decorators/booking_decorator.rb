@@ -64,7 +64,7 @@ class BookingDecorator < BaseDecorator
   end
 
   def confirmation_link(options = {})
-    helpers.link_to_if(reserved?, 'Confirm', helpers.new_booking_payment_detail_url(model), options){}
+    helpers.link_to_if(reserved?, 'Confirm', helpers.new_booking_payment_detail_url(model), options) {}
   end
 
   def destroy_link(options = {})
