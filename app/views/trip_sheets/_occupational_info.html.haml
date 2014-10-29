@@ -1,0 +1,9 @@
+%h5 Occupational Info
+- bootstrap_table headers: %w(From To Ocp Cap), types: %i(condensed), html_options: { class: 'sortable' } do
+  - trip_sheet_presenter.stops.each do |stop|
+    - StopDecorator.decorate(stop, self) do |decorated_stop|
+      %tr
+        %td= decorated_stop.from_city_name
+        %td= decorated_stop.to_city_name
+        %td= decorated_stop.occupied
+        %td= trip_sheet_presenter.bus_capacity
