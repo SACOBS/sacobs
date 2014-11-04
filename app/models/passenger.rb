@@ -33,6 +33,9 @@ class Passenger < ActiveRecord::Base
   end
 
   protected
+  def defaults
+    { passenger_type: PassengerType.find_by(description: :standard)}
+  end
 
   def normalize_names
     self.name = name.squish.upcase

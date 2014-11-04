@@ -38,8 +38,6 @@ module Bookings
 
     def update
       case step
-        when :trip_details then
-          fetch_stops
         when :passenger_charges
           @booking.sync_return_booking
           build_invoice
@@ -69,19 +67,7 @@ module Bookings
     end
 
     def create_passengers
-      passengers = @booking.passengers
-      passengers.clear
-      @booking.quantity.times { passengers.build(passenger_type: get_passenger_type) }
-      @booking.save
-    end
-
-    def get_passenger_type
-      if @booking.client_is_pensioner?
-        passenger_type = PassengerType.find_by(description: :pensioner)
-      else
-        passenger_type = PassengerType.find_by(description: :standard)
-      end
-      passenger_type
+      PassengerCreator.execute(@booking)
     end
 
     def build_invoice

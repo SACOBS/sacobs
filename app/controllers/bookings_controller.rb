@@ -40,7 +40,8 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    CancelBooking.execute(@booking, current_user)
+    @booking.user = current_user
+    CancelBooking.execute(@booking)
     redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
   end
 

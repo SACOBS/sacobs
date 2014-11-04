@@ -7,9 +7,13 @@ class DestinationSequencer
   end
 
   def resequence
-    destinations = @route.destinations.reject { |d| d.sequence <= @preceding.sequence }
-    destinations.each { |d| d.increment(:sequence) }
-    destinations << @route.destinations.build(city: @city, sequence: @preceding.sequence.next)
-    destinations.each(&:save!)
+    ActiveRecord::Base.transaction do
+      destinations = @route.destinations.reject { |d| d.sequence <= @preceding.sequence }
+      destinations.each { |d| d.increment(:sequence) }
+      destinations << @route.destinations.build(city: @city, sequence: @preceding.sequence.next)
+      destinations.each(&:save!)
+    end
+  rescue StandardError => error
+    Rails.logger.error error.inspect
   end
 end

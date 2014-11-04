@@ -13,7 +13,7 @@ class ReverseRouteBuilder
 
   private
 
-  def build_reverse_route
+  def build_reverse_route!
     @reverse_route = @route.dup.tap do |route|
       route.name = "Reverse of #{@route.name}"
       route.connections_count = 0
@@ -21,7 +21,7 @@ class ReverseRouteBuilder
     @reverse_route.save!
   end
 
-  def build_reverse_connections
+  def build_reverse_connections!
     @route.connections.each do |c|
       reverse_connection = c.dup
       reverse_connection.to_id =  @reverse_route.destinations.find_by(city: c.from.city).id
@@ -30,7 +30,7 @@ class ReverseRouteBuilder
     end
   end
 
-  def build_reverse_destinations
+  def build_reverse_destinations!
     sequence = 1
     @route.destinations.reverse.each do |d|
       reverse_destination = d.dup

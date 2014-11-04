@@ -13,5 +13,8 @@ class CreatePaymentDetails
         booking.save!
       end
     end
+  rescue StandardError => error
+    Rails.logger.error error.inspect
+    nil
   end
 end

@@ -2,17 +2,18 @@
 class CancelBooking
   include Service
 
-  def initialize(booking, user)
+  def initialize(booking)
     @booking = booking
-    @user = user
   end
 
   def execute
     Booking.transaction do
       UnassignSeating.execute(@booking.quantity, @booking.stop)
-      @booking.user = @user
       @booking.status = :cancelled
       @booking.save!
     end
+  rescue StandardError => error
+    Rails.logger.error error.inspect
+    nil
   end
 end
