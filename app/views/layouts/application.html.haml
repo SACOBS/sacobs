@@ -10,6 +10,10 @@
     = headjs_include_tag 'vendor', 'application'
     = headjs_include_tag '//www.google.com/jsapi', 'chartkick'
     = csrf_meta_tags
+    = favicon_link_tag 'apple-touch-icon-ipad-76x76-precomposed.png', rel: 'apple-touch-icon', type: 'image/png'
+    = favicon_link_tag 'apple-touch-icon-ipad-retina-152x152-precomposed.png', rel: 'apple-touch-icon', type: 'image/png'
+    = favicon_link_tag 'apple-touch-icon-iphone-60x60-precomposed.png', rel: 'apple-touch-icon', type: 'image/png'
+    = favicon_link_tag 'apple-touch-icon-iphone-retina-120x120-precomposed.png', rel: 'apple-touch-icon', type: 'image/png'
     = yield(:head)
   %body{ data: { action: action_name, controller: controller_path, class_name: js_class_name } }
     #wrap
