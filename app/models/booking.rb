@@ -100,8 +100,11 @@ class Booking < ActiveRecord::Base
     super || build_client
   end
 
-  private
+  def client_attributes=(attributes)
+    self.client = Client.where(name: attributes['name'].upcase, surname: attributes['surname'].upcase).first_or_initialize
+  end
 
+  private
   def defaults
     { status: :in_process, price: 0, quantity: 1, has_return: false }
   end
