@@ -33,9 +33,9 @@ class Widgets.TypeAhead
 
           process(objects)
 
-    matcher: (item) ->
-      condition = this.query.trim()
-      return (item.substr(0, condition.length).toLowerCase() == condition.toLowerCase())
+#    matcher: (item) ->
+#      condition = this.query.trim()
+#      return (item.substr(0, condition.length).toLowerCase() == condition.toLowerCase())
 
 
 

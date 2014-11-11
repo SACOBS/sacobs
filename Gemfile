@@ -31,6 +31,7 @@ gem 'normalize-rails'
 gem 'bootswatch-rails', '~> 0.5.0'
 gem 'twitter-bootstrap-rails-confirm'
 gem 'bootstrap_sortable_rails'
+gem 'momentjs-rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'kaminari'
 

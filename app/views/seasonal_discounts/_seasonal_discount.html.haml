@@ -4,6 +4,6 @@
     %td= decorated_seasonal_discount.name
     %td= decorated_seasonal_discount.passenger_type
     %td= decorated_seasonal_discount.percentage
-    %td= decorated_seasonal_discount.period_from
-    %td= decorated_seasonal_discount.period_to
+    %td{data: { dateformat: "ll"}}= decorated_seasonal_discount.period_from
+    %td{data: { dateformat: "ll"}}= decorated_seasonal_discount.period_to
     %td= decorated_seasonal_discount.active

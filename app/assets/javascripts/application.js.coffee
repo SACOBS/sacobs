@@ -5,6 +5,7 @@
 #= require jquery.calculator
 #= require jquery.blockui
 #= require jsurl
+#= require moment
 #= require twitter/bootstrap/rails/confirm
 #= require bootstrap
 #= require bootstrap-sortable
