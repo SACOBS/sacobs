@@ -11,6 +11,7 @@
 #  passenger_type_id :integer
 #  cell_no           :string(255)
 #  email             :string(255)
+#  charges           :integer          default([]), is an Array
 #
 # Indexes
 #

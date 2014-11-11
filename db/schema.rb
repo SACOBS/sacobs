@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009131006) do
+ActiveRecord::Schema.define(version: 20141111141709) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
     t.string   "street_address1"
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 20141009131006) do
     t.integer  "passenger_type_id"
     t.string   "cell_no"
     t.string   "email"
+    t.integer  "charges",           default: [], array: true
   end
 
   add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id", using: :btree

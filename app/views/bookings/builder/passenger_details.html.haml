@@ -11,5 +11,6 @@
           %td= passenger.association :passenger_type, include_blank: false
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
+    = link_to 'Back', previous_wizard_path, class: t('buttons.inverse')
     = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
 

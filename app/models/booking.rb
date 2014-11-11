@@ -102,6 +102,7 @@ class Booking < ActiveRecord::Base
 
   def client_attributes=(attributes)
     self.client = Client.where(name: attributes['name'].upcase, surname: attributes['surname'].upcase).first_or_initialize
+    super
   end
 
   private

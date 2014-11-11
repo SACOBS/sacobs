@@ -123,7 +123,7 @@ module Bookings
                                                                 :cell_no,
                                                                 :email,
                                                                 :passenger_type_id,
-                                                                charge_ids: []],
+                                                                charges: []],
                                         invoice_attributes: [:id,
                                                              :billing_date,
                                                              line_items_attributes: [:id,

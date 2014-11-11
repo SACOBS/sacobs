@@ -9,7 +9,6 @@ class AssignSeating
   end
 
   def execute
-    affected_stops.all?
     Stop.transaction do
       affected_stops.each do |stop|
         stop.available_seats = calculate_available_seating(stop.available_seats)

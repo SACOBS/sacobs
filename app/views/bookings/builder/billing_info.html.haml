@@ -2,6 +2,7 @@
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false } do |f|
   .form-actions
     = f.submit 'Complete', class: t('buttons.primary')
+    = link_to 'Back', previous_wizard_path, class: t('buttons.inverse')
     = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
 
   - bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do
@@ -25,5 +26,6 @@
         %strong= number_to_currency(invoice_total(@booking), unit: 'R')
   .form-actions
     = f.submit 'Complete', class: t('buttons.primary')
+    = link_to 'Back', previous_wizard_path, class: t('buttons.inverse')
     = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
 
