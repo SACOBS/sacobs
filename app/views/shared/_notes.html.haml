@@ -1,5 +1,0 @@
-.well#notes
-  %h4 Notes
-  = render @notes, cache: true
-  .note_form
-    = render 'notes/form', note: @notes.new if current_user.admin?
