@@ -117,6 +117,7 @@ gem 'simple_defaults'
 
 # Cells
 gem 'cells'
+gem 'apotomo'
 
 group :development do
   gem 'rails_apps_testing'

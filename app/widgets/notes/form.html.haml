@@ -1,6 +1,4 @@
-= simple_form_for note do |f|
+= simple_form_for note, url: url_for_event(:submit, note_id: note), remote: true do |f|
   = f.input :content, as: :text, placeholder: 'Add notes here', label: false, input_html: {  rows: 3 }
   = f.hidden_field :context
   = f.submit 'Save Note', class: t('buttons.mini.primary')
-
-

@@ -1,12 +1,13 @@
-- cache @trip do
-  - TripDecorator.decorate(@trip, self)  do |decorated_trip|
-    .page-header
-      %h1 Trip
-      .actions
-        = back_to trips_path
-        = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
-    - content_for :sidebar do
-      = render_cell :occupancy, :show, trip:  @trip
+- TripDecorator.decorate(@trip, self)  do |decorated_trip|
+  .page-header
+    %h1 Trip
+    .actions
+      = back_to trips_path
+      = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
+  - content_for :sidebar do
+    = render_cell :occupancy, :show, trip:  @trip
+
+  - cache @trip do
 
     .well
       %h4 Details
@@ -42,9 +43,9 @@
               %td= decorated_booking.quantity
               %td= decorated_booking.client.contact_numbers
 
-    .actions
-      = back_to trips_path
-      = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
+  .actions
+    = back_to trips_path
+    = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
 
 
 

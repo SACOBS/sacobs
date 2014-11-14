@@ -11,21 +11,23 @@ class ApplicationController < ActionController::Base
   respond_to :html, :js, :json, :pdf
 
   before_action :authenticate_user!
-  before_action :set_notes
   after_action :prepare_unobtrusive_flash, except: :destroy
 
   etag { current_user.try :id }
+
+  has_widgets do |root|
+    root << widget(:notes, 'contextual_notes', :display, user: current_user, notes: notes)
+  end
 
   def current_user
     super || NullUser.new
   end
 
-  private
-
-  def set_notes
+  def notes
     context = controller_path.gsub('/', '')
-    @notes = Note.for_context(context)
+    Note.for_context(context).all
   end
+
 
   protected
 
