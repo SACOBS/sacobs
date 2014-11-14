@@ -115,6 +115,9 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
+# Cells
+gem 'cells'
+
 group :development do
   gem 'rails_apps_testing'
   gem 'better_errors'

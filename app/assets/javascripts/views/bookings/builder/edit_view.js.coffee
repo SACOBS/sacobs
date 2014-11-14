@@ -8,14 +8,13 @@ class Views.Bookings.Builder.EditView extends Views.ApplicationView
 
     $(document).on 'ajax:success', '#trip_search', (evt, data, status, xhr) ->
       $('.trips').html(data)
+      return
 
 
     $(document).on 'ajax:success', '#return_trip_search', (evt, data, status, xhr) ->
       $('.returns').html(data)
+      return
 
-    $(document).on 'click', '#new_client',(e) ->
-      e.preventDefault()
-      $('.new_client_fields').fadeToggle 'slow'
 
     $(document).on 'change', '.amount', ->
       total = 0

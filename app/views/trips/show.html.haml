@@ -6,13 +6,7 @@
         = back_to trips_path
         = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
     - content_for :sidebar do
-      - bootstrap_table headers: %w(From To Ocp Cap), types: %i(hover condensed), html_options: { class: 'sortable' } do
-        - OccupancyGraph.execute(@trip).each do |item|
-          %tr
-            %td= item.from
-            %td= item.occupied
-            %td= decorated_trip.bus_capacity
-            %td= item.to
+      = render_cell :occupancy, :show, trip:  @trip
 
     .well
       %h4 Details

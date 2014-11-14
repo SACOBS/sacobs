@@ -1,0 +1,15 @@
+%table.table.table-condensed.table-hover.table-bordered.sortable
+  %thead
+    %tr
+      %th From
+      %th Ocp
+      %th Cap
+      %th To
+
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.from
+        %td= item.occupied
+        %td= @capacity
+        %td= item.to

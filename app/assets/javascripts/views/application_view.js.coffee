@@ -13,6 +13,7 @@ class Views.ApplicationView
 
   cleanup: ->
     $(document).off 'ajax:success', '#edit_note'
+    $(document).off 'click', '#show_notes', ->
     $('[rel~="tooltip"]').off()
 
 

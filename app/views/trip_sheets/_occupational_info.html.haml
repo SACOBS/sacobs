@@ -1,8 +1,2 @@
 %h5 Occupational Info
-- bootstrap_table headers: %w(From Ocp Cap To), types: %i(condensed), html_options: { class: 'sortable' } do
-  - OccupancyGraph.execute(@trip).each do |item|
-    %tr
-      %td= item.from
-      %td= item.occupied
-      %td= @trip.bus_capacity
-      %td= item.to
+= render_cell :occupancy, :show, trip:  @trip
