@@ -24,14 +24,14 @@
       %h4 Booking information
       - [decorated_booking, decorated_booking.return_booking, decorated_booking.main].compact.each do |booking|
         - bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
-        %tr
-          %td= booking.status
-          %td= booking.reference_no
-          %td= booking.trip_name
-          %td= booking.trip_date
-          %td= booking.from_city
-          %td= booking.to_city
-          %td= booking.price
+          %tr
+            %td= booking.status
+            %td= booking.reference_no
+            %td= booking.trip_name
+            %td= booking.trip_date
+            %td= booking.from_city
+            %td= booking.to_city
+            %td= booking.price
       %h4 Passengers
       - bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
         - decorated_booking.passengers.each do |passenger|
@@ -43,13 +43,3 @@
     .actions.text-center
       = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.large.default'))
       = decorated_booking.confirmation_link(icon: :money, class: t('buttons.large.inverse'))
-
-
-
-
-
-
-
-
-
-

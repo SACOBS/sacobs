@@ -1,5 +1,4 @@
 class OccupancyCell < Cell::Rails
-
   cache :show do |options|
     [options[:trip].updated_at, options[:trip].bookings.size]
   end
@@ -10,7 +9,4 @@ class OccupancyCell < Cell::Rails
     @items = OccupancyGraph.execute(trip)
     render
   end
-
-
-
 end

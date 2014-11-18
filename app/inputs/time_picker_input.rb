@@ -6,9 +6,9 @@ class TimePickerInput < SimpleForm::Inputs::Base
     input_html_options[:data] =  { format: 'hh:mm PP' }
     template.content_tag(:div, class: 'input-append timepicker') do
       @builder.text_field(attribute_name, input_html_options) +
-          template.content_tag(:span, class: 'add-on') do
-            template.content_tag(:i, nil, data: { time_icon: 'icon-time', date_icon: 'icon-calendar' })
-          end
+        template.content_tag(:span, class: 'add-on') do
+          template.content_tag(:i, nil, data: { time_icon: 'icon-time', date_icon: 'icon-calendar' })
+        end
     end
   end
 end

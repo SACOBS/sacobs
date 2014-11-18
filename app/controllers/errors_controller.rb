@@ -10,6 +10,7 @@
     end
 
     private
+
     def set_exception
       @exception = env['action_dispatch.exception']
     end

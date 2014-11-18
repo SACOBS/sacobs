@@ -22,9 +22,7 @@ class PassengerBillingDetail
   end
 
   def charge_items
-    return [] unless @passenger.charges
-    charges =  fetch_charges(@passenger.charges)
-    @charge_items ||= charges.map do |charge|
+    @charge_items ||= @passenger.charges.map do |charge|
       description = "#{charge.description} charge - #{Helpers.number_to_percentage(charge.percentage * 100, precision: 0)}".capitalize
       amount = Calculations.roundup(@price * charge.percentage)
       BillingItem.new(description, amount, :debit)
@@ -37,21 +35,16 @@ class PassengerBillingDetail
 
   private
 
-  def fetch_charges(ids)
-    Charge.find(ids)
-  end
+
 
   def fetch_discount
-    find_seasonal_discount || find_discount
+    find_seasonal_discount || @passenger.discount
   end
 
   def find_seasonal_discount
     SeasonalDiscount.active_in_period(Date.today).where(passenger_type: @passenger.passenger_type).take
   end
 
-  def find_discount
-    Discount.find_by(passenger_type: @passenger.passenger_type)
-  end
 
   def total_charges
     charge_items.sum(&:amount)

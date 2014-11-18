@@ -3,8 +3,6 @@ class NotesWidget < Apotomo::Widget
   responds_to_event :edit
   responds_to_event :destroy
 
-
-
   def display
     @notes = options[:notes]
     @user = options[:user]
@@ -13,7 +11,7 @@ class NotesWidget < Apotomo::Widget
   end
 
   def form(note)
-    render locals: {note: note}
+    render locals: { note: note }
   end
 
   def submit(event)
@@ -27,7 +25,7 @@ class NotesWidget < Apotomo::Widget
 
   def edit(event)
     note = Note.find(event[:note_id])
-    replace '.note-form', text: render({state: :form}, note)
+    replace '.note-form', text: render({ state: :form }, note)
   end
 
   def destroy(event)
@@ -35,5 +33,4 @@ class NotesWidget < Apotomo::Widget
     note.destroy
     update '#notes', state: :display
   end
-
 end

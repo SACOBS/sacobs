@@ -106,6 +106,7 @@ class Booking < ActiveRecord::Base
   end
 
   private
+
   def defaults
     { status: :in_process, price: 0, quantity: 1, has_return: false }
   end

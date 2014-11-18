@@ -12,6 +12,7 @@ class PassengerCreator
   end
 
   private
+
   def build_passengers
     passenger_type ||= get_passenger_type
     @booking.quantity.times {  @booking.passengers.build(passenger_type: passenger_type) }
@@ -22,7 +23,6 @@ class PassengerCreator
   end
 
   def get_passenger_type
-     PassengerType.find_by(description: :pensioner) if @booking.client_is_pensioner?
+    PassengerType.find_by(description: :pensioner) if @booking.client_is_pensioner?
   end
-
 end

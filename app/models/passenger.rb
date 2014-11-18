@@ -25,17 +25,24 @@ class Passenger < ActiveRecord::Base
 
   delegate :description, to: :passenger_type, prefix: true
 
-  attr_accessor :charge_ids
-
   before_save :normalize_names
 
   def full_name
     "#{name} #{surname}"
   end
 
+  def charges
+    Charge.find(self[:charges])
+  end
+
+  def discount
+    Discount.find_by(passenger_type: passenger_type)
+  end
+
   protected
+
   def defaults
-    { passenger_type: PassengerType.find_by(description: :standard)}
+    { passenger_type: PassengerType.find_by(description: :standard) }
   end
 
   def normalize_names

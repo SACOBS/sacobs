@@ -7,7 +7,7 @@
     %p.lead #{p.object.full_name} (#{p.object.passenger_type_description.titleize})
     - Charge.all.each do |c|
       = label_tag 'charge', c.description, class: 'checkbox' do
-        = check_box_tag "booking[passengers_attributes][#{p.options[:child_index]}]charges[]", c.id, p.object.charges.include?(c.id), id: dom_id(c)
+        = check_box_tag "booking[passengers_attributes][#{p.options[:child_index]}]charges[]", c.id, p.object.charges.include?(c), id: dom_id(c)
         = c.description
     %hr
   .form-actions

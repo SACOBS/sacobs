@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
     Note.for_context(context).all
   end
 
-
   protected
 
   def devise_parameter_sanitizer
