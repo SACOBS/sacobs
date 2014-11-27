@@ -1,3 +1,5 @@
+= content_for (:title) do
+  #{@trip.name} #{l @trip.start_date, format: :long}
 - TripDecorator.decorate(@trip, self)  do |decorated_trip|
   .page-header
     %h1 Trip
@@ -21,7 +23,7 @@
       %h4 Bookings
       - bootstrap_table headers: ['Status', 'Expires', 'Client Name','From', 'To', 'Qty', 'Telephone'],
                           types: %i(hover condensed), html_options: { class: 'sortable' } do
-        - decorated_trip.bookings.each do |booking|
+        - decorated_trip.bookings.not_in_process.each do |booking|
           - decorated_booking = BookingDecorator.decorate(booking, self)
           - unless decorated_booking.cancelled?
             %tr

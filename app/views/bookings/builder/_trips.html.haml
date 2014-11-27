@@ -6,7 +6,7 @@
           = simple_form_for booking, namespace: stop.id, url: wizard_path(:trip_details), method: :patch, wrapper: false, defaults: { label: false } do |f|
             - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Available Seats', 'Pricing', 'Qty', 'Return?'], types: [:condensed] do
               %tr
-                %td= stop.trip_name
+                %td= link_to stop.trip_name, trip_path(stop.trip), target: '_blank'
                 %td= l(stop.trip_start_date, format: :long)
                 %td= stop.from_city_name
                 %td= stop.to_city_name
