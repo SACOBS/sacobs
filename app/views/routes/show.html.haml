@@ -1,3 +1,6 @@
+= content_for(:title) do
+  #{@route.name}
+
 - cache @route do
   -  RouteDecorator.decorate(@route, self) do |decorated_route|
     .page-header

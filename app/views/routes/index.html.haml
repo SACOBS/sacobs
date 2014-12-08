@@ -1,3 +1,5 @@
+= content_for(:title) do
+  Routes
 .page-header
   %h2 Routes
   = link_to 'Setup Route', route_builder_index_path(route_id: :building), method: :post, icon: :plus, class: t('buttons.primary')

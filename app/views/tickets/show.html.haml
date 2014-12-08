@@ -1,3 +1,5 @@
+= content_for(:title) do
+  Ticket #{@booking.reference_no}
 .actions.text-center
   = link_to 'Print', print_ticket_path(@booking, format: :pdf), class: t('buttons.primary')
   = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info')

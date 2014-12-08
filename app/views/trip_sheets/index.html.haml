@@ -1,3 +1,5 @@
+= content_for(:title) do
+  Quick Trip Sheet
 - content_for :sidebar do
   %h4 Search for trips
   = simple_form_for :q, url: trip_sheets_path, method: :get  do |f|
