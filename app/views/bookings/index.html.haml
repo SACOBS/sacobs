@@ -1,3 +1,6 @@
+= content_for (:title) do
+  Bookings
+
 .page-header
   %h2 Bookings
   = link_to 'Make Booking', bookings_path, method: :post, icon: :plus, class: t('buttons.primary')

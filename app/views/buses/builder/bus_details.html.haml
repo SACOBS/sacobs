@@ -1,3 +1,6 @@
+= content_for(:title) do
+  Bus Wizard - Details
+
 #errors= errors_for @bus
 = simple_form_for @bus, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset

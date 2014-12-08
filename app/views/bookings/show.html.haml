@@ -1,3 +1,6 @@
+= content_for (:title) do
+  #{@booking.reference_no}
+
 - cache @booking do
   - BookingDecorator.decorate(@booking, self) do |decorated_booking|
     .page-header.text-center

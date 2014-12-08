@@ -1,3 +1,6 @@
+= content_for (:title) do
+  Booking Wizard - Billing information
+
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false } do |f|
   .form-actions

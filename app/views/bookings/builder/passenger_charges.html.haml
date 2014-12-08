@@ -1,3 +1,6 @@
+= content_for (:title) do
+  Booking Wizard - Passenger charges
+
 = simple_form_for @booking, url: wizard_path, method: :patch do |f|
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')

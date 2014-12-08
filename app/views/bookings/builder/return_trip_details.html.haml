@@ -1,3 +1,6 @@
+= content_for (:title) do
+  Booking Wizard - Choose return trip
+
 .trip-finder.well.well-small
   %h5 Search
   = simple_form_for :q, url: booking_builder_index_path(@booking), html: { class: 'form-inline', id: 'return_trip_search', data: { type: :html } }, method: :get, remote: true do |f|

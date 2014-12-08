@@ -1,3 +1,6 @@
+= content_for (:title) do
+  Booking Wizard - Passenger details
+
 #errors= errors_for @booking
 = simple_form_for @booking, defaults: { error: false, label: false }, url: wizard_path do |f|
   %fieldset

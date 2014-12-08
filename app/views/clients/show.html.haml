@@ -1,3 +1,5 @@
+= content_for(:title) do
+  #{@client.full_name}
 - cache @client do
   - ClientDecorator.decorate(@client, self) do |decorated_client|
     .page-header
