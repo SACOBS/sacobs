@@ -35,8 +35,6 @@ class PassengerBillingDetail
 
   private
 
-
-
   def fetch_discount
     find_seasonal_discount || @passenger.discount
   end
@@ -44,7 +42,6 @@ class PassengerBillingDetail
   def find_seasonal_discount
     SeasonalDiscount.active_in_period(Date.today).where(passenger_type: @passenger.passenger_type).take
   end
-
 
   def total_charges
     charge_items.sum(&:amount)

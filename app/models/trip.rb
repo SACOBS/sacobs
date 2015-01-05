@@ -59,6 +59,7 @@ class Trip < ActiveRecord::Base
   end
 
   protected
+
   def set_name
     self.name = route.name.trim
   end
