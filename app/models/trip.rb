@@ -42,7 +42,7 @@ class Trip < ActiveRecord::Base
   delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
   delegate :name, to: :route, prefix: true, allow_nil: true
 
-  validates :name, :start_date, :end_date, :route, :bus, presence: true, on: :update
+  validates  :start_date, :end_date, :route, :bus, presence: true, on: :update
 
   before_save :set_name, if: :route_id_changed?
   before_update :generate_stops, if: :route_id_changed?
@@ -61,7 +61,7 @@ class Trip < ActiveRecord::Base
   protected
 
   def set_name
-    self.name = route_name.try(:squish)
+    self.name = route_name.try(:squish) unless name.present?
   end
 
   def generate_stops
