@@ -9,12 +9,15 @@ class UnassignSeating
   end
 
   def execute
-    Stop.transaction do
-      affected_stops.each do |stop|
-        stop.available_seats = calculate_available_seating(stop.available_seats)
-        stop.save!
+    Trip.no_touching do
+      Stop.transaction do
+        affected_stops.each do |stop|
+          stop.available_seats = calculate_available_seating(stop.available_seats)
+          stop.save!
+        end
       end
     end
+    @trip.touch
   end
 
   private

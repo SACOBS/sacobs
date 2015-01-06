@@ -69,6 +69,7 @@ class Booking < ActiveRecord::Base
   scope :active, -> { joins(:trip).merge(Trip.valid) }
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
   scope :for_today, -> { where(created_at: Time.now.midnight..Time.now.end_of_day) }
+  scope :travelling, -> { where(arel_table[:status].eq(statuses[:reserved]).or(arel_table[:status].eq(statuses[:paid]))) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 

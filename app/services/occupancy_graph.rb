@@ -34,7 +34,7 @@ class OccupancyGraph
   end
 
   def bookings
-    @bookings ||= @trip.bookings.not_in_process
+    @bookings ||= @trip.bookings.travelling
   end
 
   def getting_on_at(destination)
