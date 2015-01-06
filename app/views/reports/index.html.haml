@@ -1,17 +1,32 @@
 .page-header
   %h1 Reports
 
-%bookings_per_status
-  %h4 Booking per Status
-  = pie_chart reports_bookings_per_status_path
+.search-criteria.well
+  %h5 Search
+  = simple_form_for :q, url: reports_path, method: :get do |f|
+    = f.input :stop_from_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select from city', input_html: { data: { targets: '#q_stop_connection_from_city_id_eq' } }
+    = f.hidden_field :stop_connection_from_city_id_eq
+    = f.input :stop_to_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_stop_connection_to_city_id_eq' } }
+    = f.hidden_field :stop_connection_to_city_id_eq
+    = f.input :created_at_date_gteq, as: :date_picker, placeholder: 'Period From', label: false
+    = f.input :created_at_date_lteq, as: :date_picker, placeholder: 'Period To', label: false
+    .well.well-small
+      %h5 Status
+      - Booking.statuses.each do |key, value|
+        = label_tag 'status', key, class: 'checkbox inline' do
+          = check_box_tag "q[status_eq_any][]", value
+          = key.titlecase
+    .well.well-small
+      %h5 Passenger Type
+      - PassengerType.all.each do |passenger_type|
+        = label_tag 'status', passenger_type.description, class: 'checkbox inline' do
+          = check_box_tag "q[passengers_passenger_type_id_eq][]", passenger_type.id
+          = passenger_type.description.titlecase
 
-%income_per_month
-  %h4 Total Income per Month
-  = column_chart reports_income_per_month_path, stacked: true
 
-%bookings_per_user
-  %h4 Bookings per user for #{Time.zone.now.strftime('%B')}
-  = bar_chart reports_bookings_per_user_path
+    = f.submit 'Search', class: t('buttons.inverse')
 
+.results
+  = @results.first
 
 
