@@ -61,7 +61,7 @@ class Trip < ActiveRecord::Base
   protected
 
   def set_name
-    self.name = route.name.trim
+    self.name = route_name.squish
   end
 
   def generate_stops
