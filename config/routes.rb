@@ -269,6 +269,7 @@ Sacobs::Application.routes.draw do
   get '/dashboard', to: 'dashboard#show', as: :dashboard
 
   get '/reports', to: 'reports#index', as: :reports
+  post '/reports', to: 'reports#search', as: :generate_reports
 
   get '/reports/bookings_per_status', to: 'reports#bookings_per_status'
   get '/reports/income_per_month', to: 'reports#income_per_month'

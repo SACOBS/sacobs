@@ -38,6 +38,10 @@ module Bookings
 
     def update
       case step
+        when :trip_details
+          fetch_stops
+        when :return_trip_details
+          fetch_return_stops
         when :passenger_charges
           @booking.sync_return_booking
           build_invoice

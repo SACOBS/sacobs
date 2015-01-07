@@ -1,9 +1,9 @@
 .page-header
-  %h1 Reports
+  %h2 Reports
 
 .search-criteria.well
   %h5 Search
-  = simple_form_for :q, url: reports_path, method: :get do |f|
+  = simple_form_for :q, url: generate_reports_path do |f|
     = f.input :stop_from_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select from city', input_html: { data: { targets: '#q_stop_connection_from_city_id_eq' } }
     = f.hidden_field :stop_connection_from_city_id_eq
     = f.input :stop_to_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_stop_connection_to_city_id_eq' } }
@@ -27,6 +27,6 @@
     = f.submit 'Search', class: t('buttons.inverse')
 
 .results
-  = @results.first
+  = @results.present?
 
 

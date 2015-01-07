@@ -1,6 +1,10 @@
 class ReportsController < ApplicationController
   def index
-      @results = Booking.search(params[:q]).result.distinct(true)
+  end
+
+  def search
+    @results = Booking.search(params[:q]).result.distinct(true)
+    render :index
   end
 
   def bookings_per_status
