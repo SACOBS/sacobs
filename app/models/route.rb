@@ -26,10 +26,8 @@ class Route < ActiveRecord::Base
 
   belongs_to :user
 
-  with_options dependent: :delete_all, inverse_of: :route do
-    has_many :destinations, -> { includes(:city).order(:sequence) }
-    has_many :connections, -> { includes(:from, :to).order(:from_id) }
-  end
+  has_many :destinations, dependent: :destroy
+  has_many :connections, -> { includes(:from, :to).order(:from_id) }, dependent: :delete_all
 
   amoeba do
     enable

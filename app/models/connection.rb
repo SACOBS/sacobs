@@ -25,13 +25,14 @@
 
 class Connection < ActiveRecord::Base
   belongs_to :route, inverse_of: :connections
-  belongs_to :from, -> { includes(:city) }, class_name: :Destination
-  belongs_to :to, -> { includes(:city) }, class_name: :Destination
+  belongs_to :from, class_name: :Destination
+  belongs_to :to, class_name: :Destination
 
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
   before_save :set_percentage, if: :cost_changed?
+  before_create :set_name
 
   delegate :city_id, :city_name, :city, to: :from, prefix: true, allow_nil: true
   delegate :city_id, :city_name, :city, to: :to, prefix: true,  allow_nil: true
@@ -49,6 +50,10 @@ class Connection < ActiveRecord::Base
   end
 
   protected
+  def set_name
+   self.name =  "#{from.city_name} to #{to.city_name}" unless name.present?
+  end
+
   def set_percentage
     self.percentage = ((cost / route.cost) * 100).round
   end

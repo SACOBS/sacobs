@@ -2,22 +2,25 @@
 class ConnectionBuilder
   def initialize(route)
     @route = route
-    @destinations = route.destinations.to_a
+    @destinations = route.destinations.order(:sequence)
   end
 
   def build
     Route.transaction do
       @destinations.each { |destination| generate_connections(destination) }
+      @route.save
     end
   end
 
   private
 
   def generate_connections(current)
-    available_destinations = @destinations.dup.tap { |ad| ad.shift(current.sequence) }
+    available_destinations = @destinations.to_a.dup.tap { |ad| ad.shift(current.sequence) }
     available_destinations.each do |destination|
-      @route.connections.includes(:from, :to).find_or_create_by(from_id: current.id, to_id: destination.id) do |connection|
-        connection.name = "#{current.city_name} to #{destination.city_name}"
+      unless @route.connections.exists?(from_id: current.id, to_id: destination.id)
+        @route.connections.build(from_id: current.id, to_id: destination.id) do |connection|
+          connection.name = "#{current.city_name} to #{destination.city_name}"
+        end
       end
     end
   end

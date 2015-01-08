@@ -22,12 +22,10 @@
           Please note that connections are generated based on the city selected and for all the cities coming before it.
           Thus it is important to choose the correct preceding city (Blank if the new city is the start of the route) as a number of connections could be created that are incorrect.
 
-
-
   .span2
     %h4 Current Destinations
     %ol
-      - @route.destinations.map(&:city_name).each do |city_name|
+      - @route.destinations.order(:sequence).map(&:city_name).each do |city_name|
         %li= city_name
   .span3
     %h4 Add Destination
