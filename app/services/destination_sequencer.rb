@@ -12,7 +12,5 @@ class DestinationSequencer
       @route.destinations.build(city: @city, sequence: @preceding.sequence.next)
       @route.save
     end
-  rescue StandardError => error
-    Rails.logger.error error.inspect
   end
 end
