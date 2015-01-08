@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111141709) do
+ActiveRecord::Schema.define(version: 20150108112252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -257,14 +257,13 @@ ActiveRecord::Schema.define(version: 20141111141709) do
   end
 
   create_table "routes", force: true do |t|
-    t.decimal  "cost",              precision: 8, scale: 2
+    t.decimal  "cost",       precision: 8, scale: 2
     t.integer  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
     t.string   "slug"
     t.integer  "user_id"
-    t.integer  "connections_count",                         default: 0
   end
 
   add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true, using: :btree

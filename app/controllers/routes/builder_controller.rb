@@ -21,7 +21,6 @@ module Routes
     def update
       @route.user = current_user
       Route.no_touching { @route.update(route_params) }
-      @route.touch
       render_wizard @route
     end
 

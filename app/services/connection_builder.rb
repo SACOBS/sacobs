@@ -6,7 +6,9 @@ class ConnectionBuilder
   end
 
   def build
-    @destinations.each { |destination| generate_connections(destination) }
+    Route.transaction do
+      @destinations.each { |destination| generate_connections(destination) }
+    end
   end
 
   private
@@ -14,7 +16,9 @@ class ConnectionBuilder
   def generate_connections(current)
     available_destinations = @destinations.dup.tap { |ad| ad.shift(current.sequence) }
     available_destinations.each do |destination|
-      @route.connections.find_or_initialize_by(from_id: current.id, to_id: destination.id)
+      @route.connections.includes(:from, :to).find_or_create_by(from_id: current.id, to_id: destination.id) do |connection|
+        connection.name = "#{current.city_name} to #{destination.city_name}"
+      end
     end
   end
 end

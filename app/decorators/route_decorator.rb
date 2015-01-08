@@ -13,6 +13,10 @@ class RouteDecorator < BaseDecorator
     @view_context.number_to_currency(model.cost, unit: 'R')
   end
 
+  def connections_count
+    model.connections.size
+  end
+
   def distance
     @view_context.number_to_human(model.distance, units: :distance)
   end

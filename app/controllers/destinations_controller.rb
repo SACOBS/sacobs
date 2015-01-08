@@ -14,7 +14,7 @@ class DestinationsController < ApplicationController
   private
 
   def set_route
-    @route = Route.friendly.find(params[:route_id])
+    @route = Route.includes(destinations: :city).friendly.find(params[:route_id])
   end
 
   def destination_params

@@ -33,7 +33,6 @@ class Route < ActiveRecord::Base
 
   amoeba do
     enable
-    nullify :connections_count
     prepend name: 'Copy of'
     clone [:connections, :destinations]
   end
@@ -46,6 +45,9 @@ class Route < ActiveRecord::Base
   validates :name, :cost, :distance, presence: true, on: :update
 
   before_save :set_connection_costs, if: :cost_changed?
+  after_update do
+    self.touch
+  end
 
   def start_city
     destinations.first.city unless destinations.empty?

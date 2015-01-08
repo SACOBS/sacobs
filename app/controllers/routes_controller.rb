@@ -2,7 +2,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: [:copy, :reverse_copy, :show, :edit, :update, :destroy]
 
   def index
-    @routes = route_scope
+    @routes = route_scope.includes(destinations: :city, connections: [:from, :to])
   end
 
   def show
@@ -10,7 +10,6 @@ class RoutesController < ApplicationController
   end
 
   def update
-    @route.user = current_user
     @route.update(route_params)
     respond_with @route
   end
@@ -23,13 +22,14 @@ class RoutesController < ApplicationController
   def copy
     copy = @route.amoeba_dup
     copy.user = current_user
-    Route.no_touching { copy.save! }
+    copy.save!
     respond_with copy, location: routes_url
   end
 
   def reverse_copy
     reverse_copy = ReverseRouteBuilder.new(@route).build
-    Route.no_touching { reverse_copy.save }
+    reverse_copy.user = current_user
+    reverse_copy.save!
     respond_with reverse_copy, location: routes_url
   end
 
@@ -47,6 +47,6 @@ class RoutesController < ApplicationController
     params.fetch(:route, {}).permit(:name, :cost, :distance,
                                     destinations_attributes: [:city_id, :sequence, :_destroy],
                                     connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
-    )
+    ).merge(user: current_user)
   end
 end
