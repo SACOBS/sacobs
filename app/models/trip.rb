@@ -65,7 +65,6 @@ class Trip < ActiveRecord::Base
   end
 
   def generate_stops
-    stops.clear
-    route.connections.each { |connection| stops.build(connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive) }
+    stops.clear and stops.import(route.connections.map {|connection| Stop.new(connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive) })
   end
  end

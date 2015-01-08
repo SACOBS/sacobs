@@ -2,12 +2,12 @@
 class TripSearch
   include Service
 
-  def initialize(search_params={})
+  def initialize(search_params)
     @search_params = search_params
   end
 
   def execute
-    Stop.includes(:trip, connection: {to: :city, from: :city}).search(criteria_from_params).result(distinct: true).valid.limit(30)
+    Stop.includes(:trip, connection: [from: :city, to: :city]).search(criteria_from_params).result(distinct: true).valid.limit(30)
   end
 
   private

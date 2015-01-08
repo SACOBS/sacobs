@@ -11,22 +11,13 @@ class AssignSeating
   def execute
     Trip.no_touching do
       Stop.transaction do
-        affected_stops.each do |stop|
-          stop.available_seats = calculate_available_seating(stop.available_seats)
-          stop.save!
-        end
+        affected_stops.update_all("available_seats = available_seats - #{@quantity}")
       end
     end
     @trip.touch
   end
 
   private
-
-  def calculate_available_seating(current)
-    number_seats = current - @quantity
-    number_seats = 0 if number_seats < 0
-    number_seats
-  end
 
   def affected_stops
     @affected_stops ||= StopsEnRoute.new(@trip, @stop).stops

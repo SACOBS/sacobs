@@ -119,6 +119,9 @@ gem 'simple_defaults'
 gem 'cells'
 gem 'apotomo'
 
+
+gem 'activerecord-import'
+
 group :development do
   gem 'rails_apps_testing'
   gem 'better_errors'
