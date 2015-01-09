@@ -10,5 +10,5 @@ class Views.Buses.IndexView extends Views.ApplicationView
 
   cleanup: ->
     super()
-    $('#delete_bus').off 'ajax:success'
+    $('.bus').off 'ajax:success'
 

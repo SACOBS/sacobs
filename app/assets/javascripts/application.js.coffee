@@ -6,10 +6,10 @@
 #= require jquery.blockui
 #= require jsurl
 #= require moment
-#= require twitter/bootstrap/rails/confirm
 #= require bootstrap
 #= require bootstrap-sortable
 #= require bootstrap-datetimepicker
+#= require twitter/bootstrap/rails/confirm
 #= require cocoon
 #= require unobtrusive_flash
 #= require unobtrusive_flash_bootstrap

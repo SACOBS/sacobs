@@ -6,29 +6,27 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     Widgets.DateTimePicker.enable()
     Widgets.TypeAhead.enable()
 
-    $(document).on 'ajax:success', '#trip_search', (evt, data, status, xhr) ->
+
+    $('#trip_search').on 'ajax:success', (evt, data, status, xhr) ->
       $('.trips').html(data)
 
-
-    $(document).on 'ajax:success', '#return_trip_search', (evt, data, status, xhr) ->
+    $('#return_trip_search').on 'ajax:success', (evt, data, status, xhr) ->
       $('.returns').html(data)
 
-    $(document).on 'click', '#new_client',(e) ->
-      e.preventDefault()
-      $('.new_client_fields').fadeToggle 'slow'
 
-    $(document).on 'change', '.amount', ->
+    $('.amount').on 'change', ->
       total = 0
       $('#line_items tr.line_item').each ->
         value = Number($(this).find('td.amount input').val())
         value = value * -1 if $(this).data('type') == 'credit'
         total += value if (!isNaN(value))
       $('.total').html("<strong> R" + total.toFixed(2) + "</strong>")
+
   cleanup: ->
     super()
     Widgets.DateTimePicker.cleanup()
     Widgets.TypeAhead.cleanup()
-
-    $(document).off 'click', '#new_client'
-    $(document).off 'change', '.amount'
+    $('#trip_search').off 'ajax:success'
+    $('#return_trip_search').off 'ajax:success'
+    $('.amount').off 'change'
 

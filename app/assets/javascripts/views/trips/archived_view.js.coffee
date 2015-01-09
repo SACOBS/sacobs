@@ -9,4 +9,4 @@ class Views.Trips.ArchivedView extends Views.ApplicationView
   cleanup: ->
     super()
     Widgets.DateTimePicker.cleanup()
-    $('#archive_trip_search').off 'ajax:success'
+    $('#archived_trip_search').off 'ajax:success'

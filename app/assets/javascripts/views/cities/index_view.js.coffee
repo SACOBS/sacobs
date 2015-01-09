@@ -2,7 +2,7 @@ window.Views.Cities ||= {}
 class Views.Cities.IndexView extends Views.ApplicationView
   render: ->
     super()
-    $(document).on 'ajax:success', '#city_search', (evt, data, status, xhr) ->
+    $('#city_search').on 'ajax:success',  (evt, data, status, xhr) ->
       $('#cities').html(data)
 
   cleanup: ->

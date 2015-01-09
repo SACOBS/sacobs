@@ -23,7 +23,7 @@ class Views.Pricing.IndexView extends Views.ApplicationView
      else
        $('#connections-list li').hide
 
-    $(document).on 'ajax:success', '#show_pricing', (evt, data, status, xhr) ->
+    $('#show_pricing').on 'ajax:success',  (evt, data, status, xhr) ->
       $('.quote').html(data)
 
 
@@ -31,4 +31,5 @@ class Views.Pricing.IndexView extends Views.ApplicationView
    super()
    $("input[type='radio']").off
    $('#connection-search').off
+   $('#show_pricing').off 'ajax:success'
 
