@@ -9,12 +9,10 @@ class AssignSeating
   end
 
   def execute
-    Trip.no_touching do
-      Stop.transaction do
-        affected_stops.update_all("available_seats = available_seats - #{@quantity}")
+      ActiveRecord::Base.transaction do
+        affected_stops.update_all("available_seats = available_seats - #{@quantity}, updated_at = now()")
+        @trip.touch
       end
-    end
-    @trip.touch
   end
 
   private
