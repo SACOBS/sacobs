@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Sacobs::Application.config.secret_key_base = '6206f2dc3e6a0e313e2b585e9ec8531cb194550bed6584910e4ef2e8595df5ca0c119be373d069ac5ab40b51798c393a9d635ca3d9d26f09be254d0bb1466f1c'
+Sacobs::Application.config.secret_key_base = ENV['SECRET_TOKEN']

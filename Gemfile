@@ -25,6 +25,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Frontend
+gem 'haml', '~> 4.1.0.beta.1'
 gem 'haml-rails'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
@@ -119,8 +120,8 @@ gem 'simple_defaults'
 gem 'cells'
 gem 'apotomo'
 
-
 gem 'activerecord-import'
+
 
 group :development do
   gem 'rails_apps_testing'

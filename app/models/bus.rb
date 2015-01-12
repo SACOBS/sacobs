@@ -17,6 +17,7 @@
 #
 
 class Bus < ActiveRecord::Base
+
   belongs_to :user
   has_many :seats, dependent: :delete_all
 
