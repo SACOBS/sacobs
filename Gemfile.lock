@@ -122,7 +122,7 @@ GEM
       activesupport (>= 3)
     haml (4.1.0.beta.1)
       tilt
-    haml-lint (0.10.0)
+    haml-lint (0.11.0)
       haml (~> 4.0)
       rubocop (>= 0.25.0)
       sysexits (~> 1.1)
@@ -172,7 +172,7 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
-    momentjs-rails (2.8.3)
+    momentjs-rails (2.9.0)
       railties (>= 3.1)
     multi_fetch_fragments (0.0.17)
     multi_json (1.10.1)

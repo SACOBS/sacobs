@@ -9,17 +9,15 @@
 #
 
 class PassengerType < ActiveRecord::Base
+  default_scope -> { order(description: :asc) }
+
   validates :description, presence: true
 
-  before_create :format_description
+  before_create do
+    self.description.try(:downcase!)
+  end
 
   def to_label
     description.titleize
-  end
-
-  protected
-
-  def format_description
-    description.downcase!
   end
 end

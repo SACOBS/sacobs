@@ -31,7 +31,9 @@
 class Client < ActiveRecord::Base
   extend FriendlyId
 
-  TITLES = [:Mr, :Mrs, :Dr, :Miss].freeze
+  default_scope -> { order(updated_at: :desc) }
+
+  TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
 
   belongs_to :user
   belongs_to :bank
@@ -55,7 +57,6 @@ class Client < ActiveRecord::Base
   before_save :normalize_names
   before_save :set_birth_date_from_id_number
 
-  default_scope { order(updated_at: :desc) }
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
   def self.new_with_address

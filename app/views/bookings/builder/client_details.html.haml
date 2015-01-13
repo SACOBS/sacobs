@@ -20,9 +20,9 @@
             = client.input :id_number
             = client.input :bank_id, include_blank: true, label: 'Select a bank', collection: Bank.all
           .span3
+            = client.input :cell_no, as: :tel
             = client.input :home_no, as: :tel
             = client.input :work_no, as: :tel
-            = client.input :cell_no, as: :tel
             = client.input :email, as: :email
         = client.input :id, as: :hidden
 

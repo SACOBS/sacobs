@@ -27,6 +27,10 @@
     = f.submit 'Search', class: t('buttons.inverse')
 
 .results
-  = @results.present?
-
-
+  %h3 Results
+  - if @results
+    = @results.sort.each do |month, bookings|
+      %h4=h month.strftime("%B %Y")
+      %ul
+        = list_of bookings.to_a do |booking|
+          = booking.id

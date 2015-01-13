@@ -19,6 +19,8 @@
 class City < ActiveRecord::Base
   extend FriendlyId
 
+  default_scope -> { order(name: :asc) }
+
   friendly_id :name, use: :slugged
 
   belongs_to :user
@@ -28,7 +30,7 @@ class City < ActiveRecord::Base
 
   validates :name, presence: true
 
-  default_scope { order(:name) }
+
 
   def to_s
     name
