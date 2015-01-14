@@ -1,25 +1,27 @@
 - if stops.any?
-  - bootstrap_table types: [:condensed] do
-    - stops.each do |stop|
-      %tr
-        %td
-          = simple_form_for booking, namespace: stop.id, url: wizard_path(:return_trip_details), method: :patch, wrapper: false, defaults: { label: false } do |f|
-            = f.simple_fields_for :return_booking, namespace: stop.id do |return_booking|
-              - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Pricing', 'Available Seats', 'Qty'], types: [:condensed] do
-                %tr
-                  %td= stop.trip_name
-                  %td= l(stop.trip_start_date, format: :long)
-                  %td= stop.from_city_name
-                  %td= stop.to_city_name
-                  %td= link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
-                  %td= stop.available_seats
-                  %td= booking.quantity
-                  %td
-                    = token_tag
-                    = return_booking.hidden_field :quantity, value: booking.quantity
-                    = return_booking.hidden_field :trip_id, value: stop.trip.id
-                    = return_booking.hidden_field :stop_id, value: stop.id
-                    = f.submit 'Book Return', class: t('buttons.primary')
+  - stops.group_by {|s| s.trip_start_date.beginning_of_month }.sort.each do |month, stops_for_month|
+    %h4= month.strftime('%B')
+    - bootstrap_table types: [:condensed] do
+      - stops_for_month.each do |stop|
+        %tr
+          %td
+            = simple_form_for booking, namespace: stop.id, url: wizard_path(:return_trip_details), method: :patch, wrapper: false, defaults: { label: false } do |f|
+              = f.simple_fields_for :return_booking, namespace: stop.id do |return_booking|
+                - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Pricing', 'Available Seats', 'Qty'], types: [:condensed] do
+                  %tr
+                    %td= stop.trip_name
+                    %td= l(stop.trip_start_date, format: :long)
+                    %td= stop.from_city_name
+                    %td= stop.to_city_name
+                    %td= link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
+                    %td= stop.available_seats
+                    %td= booking.quantity
+                    %td
+                      = token_tag
+                      = return_booking.hidden_field :quantity, value: booking.quantity
+                      = return_booking.hidden_field :trip_id, value: stop.trip.id
+                      = return_booking.hidden_field :stop_id, value: stop.id
+                      = f.submit 'Book Return', class: t('buttons.primary')
 - else
   .hero-unit.text-center
     %h3 There are no trips available. To add a new trip please press the button below.

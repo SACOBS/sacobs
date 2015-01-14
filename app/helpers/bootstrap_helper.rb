@@ -19,13 +19,14 @@ module BootstrapHelper
   end
 
   def table_headers(headers)
-    haml_tag :thead do
-      if headers && headers.any?
-        haml_tag :tr do
-          headers.each { |h| haml_tag :th, h }
-        end
+    if headers && headers.any?
+      haml_tag :thead do
+          haml_tag :tr do
+            headers.each { |h| haml_tag :th, h }
+          end
       end
     end
+
   end
 
   def drop_down_menu(name)

@@ -86,7 +86,7 @@ class Client < ActiveRecord::Base
   def normalize_names
     self.name = name.squish.upcase
     self.surname = surname.squish.upcase
-    self.full_name = "#{name} #{surname}".squish
+    self.full_name = "#{name} #{surname}"
   end
 
   def should_generate_new_friendly_id?
