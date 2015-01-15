@@ -23,7 +23,7 @@
           %tr
             %td= decorated_booking.payment_date
             %td= decorated_booking.payment_detail_reference
-            %td= decorated_booking.payment_detail_payment_type_description
+            %td= decorated_booking.payment_detail_payment_type
       %h4 Booking information
       - [decorated_booking, decorated_booking.return_booking, decorated_booking.main].compact.each do |booking|
         - bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do

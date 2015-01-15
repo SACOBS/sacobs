@@ -2,28 +2,25 @@
 #
 # Table name: payment_details
 #
-#  id              :integer          not null, primary key
-#  payment_date    :datetime
-#  booking_id      :integer
-#  reference       :string(255)
-#  user_id         :integer
-#  payment_type_id :integer
+#  id           :integer          not null, primary key
+#  payment_date :datetime
+#  booking_id   :integer
+#  reference    :string(255)
+#  user_id      :integer
+#  payment_type :string(255)
 #
 # Indexes
 #
-#  index_payment_details_on_booking_id       (booking_id)
-#  index_payment_details_on_payment_type_id  (payment_type_id)
-#  index_payment_details_on_user_id          (user_id)
+#  index_payment_details_on_booking_id  (booking_id)
+#  index_payment_details_on_user_id     (user_id)
 #
 
 class PaymentDetail < ActiveRecord::Base
-  belongs_to :payment_type
+  PAYMENT_TYPES = [:ABSA, :StandardBank, :Nedbank, :Capitec, :FNB, :POB, :Cash, :Cheque, :Investec].freeze
+
   belongs_to :booking
-  belongs_to :user
 
-  validates :payment_type, presence: true
-
-  delegate :description, to: :payment_type, prefix: true
+  validates :booking, :payment_type, presence: true
 
   private
 

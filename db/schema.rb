@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108112252) do
+ActiveRecord::Schema.define(version: 20150115094026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -243,18 +243,11 @@ ActiveRecord::Schema.define(version: 20150108112252) do
     t.integer  "booking_id"
     t.string   "reference"
     t.integer  "user_id"
-    t.integer  "payment_type_id"
+    t.string   "payment_type"
   end
 
   add_index "payment_details", ["booking_id"], name: "index_payment_details_on_booking_id", using: :btree
-  add_index "payment_details", ["payment_type_id"], name: "index_payment_details_on_payment_type_id", using: :btree
   add_index "payment_details", ["user_id"], name: "index_payment_details_on_user_id", using: :btree
-
-  create_table "payment_types", force: true do |t|
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "routes", force: true do |t|
     t.decimal  "cost",       precision: 8, scale: 2
