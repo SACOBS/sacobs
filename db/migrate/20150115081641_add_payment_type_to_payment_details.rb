@@ -5,6 +5,9 @@ class AddPaymentTypeToPaymentDetails < ActiveRecord::Migration
   def change
     add_column :payment_details, :payment_type, :string
 
-    PaymentDetail.all.each { |pd| pd.update!(payment_type: PaymentType.find(pd.payment_type_id).description)}
+    PaymentDetail.all.each do  |pd|
+      pd.payment_type = PaymentType.find(pd.payment_type_id).description)
+      pd.save(false)
+    end
   end
 end
