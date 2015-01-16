@@ -111,6 +111,7 @@ class Booking < ActiveRecord::Base
   end
 
   protected
+
   def setup_return_booking
     build_return_booking unless return_booking.present? && has_return?
   end

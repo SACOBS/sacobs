@@ -8,13 +8,14 @@ class UnassignSeating
   end
 
   def execute
-      ActiveRecord::Base.transaction do
-        affected_stops.update_all("available_seats = available_seats + #{@quantity}, updated_at = now()")
-        @trip.touch
-      end
+    ActiveRecord::Base.transaction do
+      affected_stops.update_all("available_seats = available_seats + #{@quantity}, updated_at = now()")
+      @trip.touch
+    end
   end
 
   private
+
   def affected_stops
     StopsEnRoute.new(@trip, @stop).stops
   end

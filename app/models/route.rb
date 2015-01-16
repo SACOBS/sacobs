@@ -43,7 +43,7 @@ class Route < ActiveRecord::Base
 
   before_save :set_connection_costs, if: :cost_changed?
   after_update do
-    self.touch
+    touch
   end
 
   def start_city

@@ -42,7 +42,7 @@ class Trip < ActiveRecord::Base
   delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
   delegate :name, to: :route, prefix: true, allow_nil: true
 
-  validates  :start_date, :end_date, :route, :bus, presence: true, on: :update
+  validates :start_date, :end_date, :route, :bus, presence: true, on: :update
 
   before_save :set_name, if: :route_id_changed?
   before_update :generate_stops, if: :route_id_changed?
@@ -65,6 +65,6 @@ class Trip < ActiveRecord::Base
   end
 
   def generate_stops
-    stops.clear and stops.import(route.connections.map {|connection| Stop.new(connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive) })
+    stops.clear && stops.import(route.connections.map { |connection| Stop.new(connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive) })
   end
  end

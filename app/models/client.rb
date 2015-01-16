@@ -30,11 +30,10 @@
 class Client < ActiveRecord::Base
   extend FriendlyId
 
-  default_scope -> { order(updated_at: :desc) }
+  default_scope { order(updated_at: :desc) }
 
   TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
   BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec].freeze
-
 
   belongs_to :user
 
@@ -52,7 +51,7 @@ class Client < ActiveRecord::Base
   friendly_id :full_name, use: :slugged
 
   validates :name, :surname, presence: true
-  validates :surname, uniqueness: {scope: :name, message: 'and name already exists'}
+  validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
 
   before_validation :upcase_names
   before_save :normalize_names
@@ -67,8 +66,8 @@ class Client < ActiveRecord::Base
   end
 
   def age
-    return unless date_of_birth?
-    @age ||= date_of_birth.find_age
+    return unless date_of_birth.present?
+    @age ||= calculate_age
   end
 
   def is_pensioner?
@@ -76,6 +75,12 @@ class Client < ActiveRecord::Base
   end
 
   protected
+
+  def calculate_age
+    now = Time.now.utc.to_date
+    years = now.year - date_of_birth.year
+    years - (date_of_birth.years_since(years) > now ? 1 : 0)
+  end
 
   def set_birth_date_from_id_number
     return unless id_number?
@@ -85,8 +90,8 @@ class Client < ActiveRecord::Base
   end
 
   def upcase_names
-    self.name.try(:squish!).try(:upcase!)
-    self.surname.try(:squish!).try(:upcase!)
+    name.try(:squish!).try(:upcase!)
+    surname.try(:squish!).try(:upcase!)
   end
 
   def normalize_names
