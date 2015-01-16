@@ -52,7 +52,9 @@ class Client < ActiveRecord::Base
   friendly_id :full_name, use: :slugged
 
   validates :name, :surname, presence: true
+  validates :surname, uniqueness: {scope: :name, message: 'and name already exists'}
 
+  before_validation :upcase_names
   before_save :normalize_names
   before_save :set_birth_date_from_id_number
 
@@ -82,9 +84,12 @@ class Client < ActiveRecord::Base
     self.date_of_birth = date
   end
 
+  def upcase_names
+    self.name.try(:squish!).try(:upcase!)
+    self.surname.try(:squish!).try(:upcase!)
+  end
+
   def normalize_names
-    self.name = name.squish.upcase
-    self.surname = surname.squish.upcase
     self.full_name = "#{name} #{surname}"
   end
 

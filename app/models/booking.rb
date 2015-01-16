@@ -63,7 +63,6 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   before_save :generate_reference
-  before_save :save_client
   after_find :setup_return_booking, if: :has_return?
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
@@ -101,11 +100,6 @@ class Booking < ActiveRecord::Base
     super || build_client
   end
 
-  def client_attributes=(attributes)
-    self.client = Client.where(name: attributes['name'].upcase, surname: attributes['surname'].upcase).first_or_initialize
-    super
-  end
-
   private
 
   def defaults
@@ -117,11 +111,6 @@ class Booking < ActiveRecord::Base
   end
 
   protected
-
-  def save_client
-    client.save if client.present? && !client.new_record?
-  end
-
   def setup_return_booking
     build_return_booking unless return_booking.present? && has_return?
   end
