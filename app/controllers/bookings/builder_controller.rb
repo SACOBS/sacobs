@@ -112,7 +112,7 @@ module Bookings
                                                             :home_no,
                                                             :work_no,
                                                             :email,
-                                                            :bank_id,
+                                                            :bank,
                                                             :id_number,
                                                             :notes,
                                                             address_attributes: [:id,

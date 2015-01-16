@@ -9,7 +9,7 @@
     = f.input :surname
     = f.input :id_number
     = f.input :high_risk
-    = f.association :bank, include_blank: 'Not Applicable'
+    = f.input :bank, collection: Client::BANKS, include_blank: 'Not Applicable'
     = f.input :home_no, as: :tel
     = f.input :work_no, as: :tel
     = f.input :cell_no, as: :tel

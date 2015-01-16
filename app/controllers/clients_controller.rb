@@ -69,7 +69,7 @@ class ClientsController < ApplicationController
                                      :home_no,
                                      :work_no,
                                      :email,
-                                     :bank_id,
+                                     :bank,
                                      :notes,
                                      :id_number,
                                      address_attributes: [:id,

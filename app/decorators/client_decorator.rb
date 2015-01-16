@@ -28,7 +28,7 @@ class ClientDecorator < BaseDecorator
   end
 
   def bank
-    bank_name.presence || 'Not Applicable'
+    model.bank.presence || 'Not Applicable'
   end
 
   def show_link(options = {})

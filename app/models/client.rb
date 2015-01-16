@@ -14,16 +14,15 @@
 #  user_id       :integer
 #  full_name     :string(255)
 #  high_risk     :boolean          default(FALSE)
-#  bank_id       :integer
 #  work_no       :string(255)
 #  date_of_birth :date
 #  title         :string(255)
 #  notes         :text
 #  id_number     :string(255)
+#  bank          :string(255)
 #
 # Indexes
 #
-#  index_clients_on_bank_id  (bank_id)
 #  index_clients_on_slug     (slug) UNIQUE
 #  index_clients_on_user_id  (user_id)
 #
@@ -49,7 +48,6 @@ class Client < ActiveRecord::Base
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
-  delegate :name, to: :bank, prefix: true, allow_nil: true
 
   friendly_id :full_name, use: :slugged
 
