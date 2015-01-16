@@ -4,6 +4,6 @@ class AddBankToClients < ActiveRecord::Migration
 
   def change
     add_column :clients, :bank, :string
-    Client.all.each {|client| client.update(bank: Bank.find(bank.id).name)}
+    Client.all.each {|client| client.update!(bank: Bank.find(bank.id).name)}
   end
 end
