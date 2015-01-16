@@ -34,9 +34,10 @@ class Client < ActiveRecord::Base
   default_scope -> { order(updated_at: :desc) }
 
   TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
+  BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec].freeze
+
 
   belongs_to :user
-  belongs_to :bank
 
   has_one :address, as: :addressable, dependent: :delete
 

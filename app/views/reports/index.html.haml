@@ -20,7 +20,7 @@
       %h5 Passenger Type
       - PassengerType.all.each do |passenger_type|
         = label_tag 'status', passenger_type.description, class: 'checkbox inline' do
-          = check_box_tag "q[passengers_passenger_type_id_eq][]", passenger_type.id
+          = check_box_tag "q[passengers_passenger_type_id_eq_any][]", passenger_type.id
           = passenger_type.description.titlecase
 
 

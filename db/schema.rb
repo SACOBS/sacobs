@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115094026) do
+ActiveRecord::Schema.define(version: 20150115125339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20150115094026) do
     t.string   "title"
     t.text     "notes"
     t.string   "id_number"
+    t.string   "bank"
   end
 
   add_index "clients", ["bank_id"], name: "index_clients_on_bank_id", using: :btree
