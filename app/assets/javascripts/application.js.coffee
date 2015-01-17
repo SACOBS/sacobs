@@ -6,7 +6,6 @@
 #= require nprogress
 #= require nprogress-ajax
 #= require nprogress-turbolinks
-#= require jsurl
 #= require moment
 #= require bootstrap
 #= require bootstrap-sortable
