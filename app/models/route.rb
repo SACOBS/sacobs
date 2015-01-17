@@ -18,10 +18,8 @@
 #
 
 class Route < ActiveRecord::Base
-  include AttributesEmpty
-  extend FriendlyId
 
-  friendly_id :name, use: :slugged
+  to_param :name
 
   belongs_to :user
 
@@ -55,10 +53,6 @@ class Route < ActiveRecord::Base
   end
 
   private
-
-  def should_generate_new_friendly_id?
-    name_changed?
-  end
 
   def set_connection_costs
     connections.each do |c|

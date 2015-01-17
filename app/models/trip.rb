@@ -21,6 +21,8 @@
 #
 
 class Trip < ActiveRecord::Base
+  to_param :name
+
   belongs_to :user
   belongs_to :bus
   belongs_to :route

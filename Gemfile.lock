@@ -115,8 +115,6 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
-    friendly_id (5.0.5)
-      activerecord (>= 4.0.0)
     groupdate (2.4.0)
       activesupport (>= 3)
     haml (4.1.0.beta.1)
@@ -372,7 +370,6 @@ DEPENDENCIES
   faker
   figaro
   font-awesome-rails
-  friendly_id (~> 5.0.0)
   groupdate
   haml (~> 4.1.0.beta.1)
   haml-lint

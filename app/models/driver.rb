@@ -17,22 +17,18 @@
 #
 
 class Driver < ActiveRecord::Base
-  extend FriendlyId
+
+  attr_reader :full_name
+
+  to_param :full_name
 
   belongs_to :user
   has_and_belongs_to_many :trips
 
-  friendly_id :full_name, use: :slugged
-
   validates :name, :surname, presence: true
 
+
   def full_name
-    "#{name} #{surname}"
-  end
-
-  private
-
-  def should_generate_new_friendly_id?
-    name_changed? || surname_changed?
+   @full_name ||= "#{name} #{surname}".squish
   end
 end

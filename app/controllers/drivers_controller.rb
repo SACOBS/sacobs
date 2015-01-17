@@ -40,7 +40,7 @@ class DriversController < ApplicationController
   end
 
   def set_driver
-    @driver = Driver.friendly.find(params[:id])
+    @driver = Driver.find(params[:id])
   end
 
   def driver_params

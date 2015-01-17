@@ -44,7 +44,7 @@ class CitiesController < ApplicationController
   end
 
   def set_city
-    @city = City.friendly.find(params[:id])
+    @city = City.find(params[:id])
   end
 
   def city_params

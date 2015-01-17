@@ -21,7 +21,7 @@ class ClientsController < ApplicationController
 
   def new
     authorize :client
-    @client = Client.new_with_address
+    @client = Client.new {|client| client.build_address }
   end
 
   def create
@@ -56,7 +56,7 @@ class ClientsController < ApplicationController
   end
 
   def set_client
-    @client = client_scope.friendly.find(params[:id])
+    @client = client_scope.find(params[:id])
   end
 
   def client_params

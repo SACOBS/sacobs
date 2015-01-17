@@ -64,9 +64,6 @@ gem 'font-awesome-rails'
 # Nested Forms
 gem 'cocoon'
 
-# Friendly Id
-gem 'friendly_id', '~> 5.0.0'
-
 # Caching
 gem 'dalli'
 gem 'memcachier'

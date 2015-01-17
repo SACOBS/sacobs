@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116120311) do
+ActiveRecord::Schema.define(version: 20150117070124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -81,14 +81,12 @@ ActiveRecord::Schema.define(version: 20150116120311) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
-    t.string   "slug"
     t.integer  "user_id"
     t.integer  "venues_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "cities", ["slug"], name: "index_cities_on_slug", unique: true, using: :btree
   add_index "cities", ["user_id"], name: "index_cities_on_user_id", using: :btree
 
   create_table "clients", force: true do |t|
@@ -99,9 +97,7 @@ ActiveRecord::Schema.define(version: 20150116120311) do
     t.string   "home_no"
     t.string   "cell_no"
     t.string   "email"
-    t.string   "slug"
     t.integer  "user_id"
-    t.string   "full_name"
     t.boolean  "high_risk",     default: false
     t.string   "work_no"
     t.date     "date_of_birth"
@@ -112,7 +108,6 @@ ActiveRecord::Schema.define(version: 20150116120311) do
   end
 
   add_index "clients", ["name", "surname"], name: "index_clients_on_name_and_surname", unique: true, using: :btree
-  add_index "clients", ["slug"], name: "index_clients_on_slug", unique: true, using: :btree
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "connections", force: true do |t|
@@ -161,11 +156,9 @@ ActiveRecord::Schema.define(version: 20150116120311) do
     t.string   "surname"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug"
     t.integer  "user_id"
   end
 
-  add_index "drivers", ["slug"], name: "index_drivers_on_slug", unique: true, using: :btree
   add_index "drivers", ["user_id"], name: "index_drivers_on_user_id", using: :btree
 
   create_table "drivers_trips", force: true do |t|
@@ -175,19 +168,6 @@ ActiveRecord::Schema.define(version: 20150116120311) do
 
   add_index "drivers_trips", ["driver_id", "trip_id"], name: "index_drivers_trips_on_driver_id_and_trip_id", using: :btree
   add_index "drivers_trips", ["trip_id", "driver_id"], name: "index_drivers_trips_on_trip_id_and_driver_id", using: :btree
-
-  create_table "friendly_id_slugs", force: true do |t|
-    t.string   "slug",                      null: false
-    t.integer  "sluggable_id",              null: false
-    t.string   "sluggable_type", limit: 50
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "invoices", force: true do |t|
     t.integer  "booking_id"
@@ -255,11 +235,9 @@ ActiveRecord::Schema.define(version: 20150116120311) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.string   "slug"
     t.integer  "user_id"
   end
 
-  add_index "routes", ["slug"], name: "index_routes_on_slug", unique: true, using: :btree
   add_index "routes", ["user_id"], name: "index_routes_on_user_id", using: :btree
 
   create_table "scriptures", force: true do |t|

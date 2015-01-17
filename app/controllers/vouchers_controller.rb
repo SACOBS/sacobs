@@ -15,7 +15,7 @@ class VouchersController < ApplicationController
   private
 
   def set_client
-    @client = Client.friendly.find(params[:client_id])
+    @client = Client.find(params[:client_id])
   end
 
   def voucher_params

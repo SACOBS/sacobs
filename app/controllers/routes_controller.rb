@@ -40,7 +40,7 @@ class RoutesController < ApplicationController
   end
 
   def set_route
-    @route = Route.friendly.find(params[:id])
+    @route = Route.find(params[:id])
   end
 
   def route_params

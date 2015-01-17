@@ -31,7 +31,7 @@ module Routes
     end
 
     def set_route
-      @route = Route.friendly.find(params[:route_id])
+      @route = Route.find(params[:route_id])
     end
 
     def build_connections

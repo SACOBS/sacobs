@@ -28,77 +28,54 @@
 #
 
 class Client < ActiveRecord::Base
-  extend FriendlyId
-
-  default_scope { order(updated_at: :desc) }
-
+  PENSIONER_AGE = 65
   TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
   BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec].freeze
 
-  belongs_to :user
+  attr_reader :age, :full_name
+
+  to_param :full_name
 
   has_one :address, as: :addressable, dependent: :delete
-
-  with_options dependent: :delete_all do |assoc|
-    assoc.has_many :bookings
-    assoc.has_many :vouchers
-  end
-
-  accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
+  has_many :bookings, dependent: :delete_all
+  has_many :vouchers, dependent: :delete_all
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
 
-  friendly_id :full_name, use: :slugged
+  accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :surname, presence: true
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
 
   before_validation :upcase_names
-  before_save :normalize_names
-  before_save :set_birth_date_from_id_number
+  before_save :set_birth_date
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
-  def self.new_with_address
-    client = Client.new
-    client.build_address
-    client
-  end
 
   def age
-    return unless date_of_birth.present?
-    @age ||= calculate_age
+    @age ||= ((Date.today - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
   end
 
   def is_pensioner?
-    age && age >= 65
+   age >= PENSIONER_AGE
+  end
+
+  def full_name
+   @full_name ||= "#{name} #{surname}"
   end
 
   protected
 
-  def calculate_age
-    now = Time.now.utc.to_date
-    years = now.year - date_of_birth.year
-    years - (date_of_birth.years_since(years) > now ? 1 : 0)
-  end
-
-  def set_birth_date_from_id_number
-    return unless id_number?
+  def set_birth_date
+    return unless id_number.present?
     date = Date.strptime(id_number[0..5], '%y%m%d')
-    date -= 100.years if date > Time.zone.today
+    date.prev_year(100) if date > Date.today
     self.date_of_birth = date
   end
 
   def upcase_names
     name.try(:squish!).try(:upcase!)
     surname.try(:squish!).try(:upcase!)
-  end
-
-  def normalize_names
-    self.full_name = "#{name} #{surname}"
-  end
-
-  def should_generate_new_friendly_id?
-    full_name_changed?
   end
 end
