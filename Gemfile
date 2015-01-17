@@ -82,7 +82,6 @@ gem 'ransack'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
-
 # Scriptures
 gem 'scripture', '~> 0.1.0'
 
@@ -95,10 +94,6 @@ gem 'unobtrusive_flash'
 
 # PG
 gem 'pg'
-
-# Charting
-gem 'chartkick'
-gem 'groupdate'
 
 # Email Obfuscation
 gem 'obfuscatejs'

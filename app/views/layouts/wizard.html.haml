@@ -8,7 +8,6 @@
     = stylesheet_link_tag :application, media: 'all',  'data-turbolinks-track' => true
     = javascript_include_tag 'head'
     = headjs_include_tag 'vendor', 'application'
-    = headjs_include_tag '//www.google.com/jsapi', 'chartkick'
     = csrf_meta_tags
     = yield(:head)
   %body{ data: { action: action_name, controller: controller_path, class_name: js_class_name } }

@@ -32,6 +32,7 @@ class Route < ActiveRecord::Base
     clone [:connections, :destinations]
   end
 
+
   with_options reject_if: :all_blank, allow_destroy: true do |assoc|
     assoc.accepts_nested_attributes_for :connections
     assoc.accepts_nested_attributes_for :destinations
@@ -40,8 +41,13 @@ class Route < ActiveRecord::Base
   validates :name, :cost, :distance, presence: true, on: :update
 
   before_save :set_connection_costs, if: :cost_changed?
-  after_update do
-    touch
+  after_update { touch }
+
+  def copy
+    dup.tap do |copy|
+      copy.destinations << destinations.map(&:dup)
+      copy.connections << connections.map(&:dup)
+    end
   end
 
   def start_city
