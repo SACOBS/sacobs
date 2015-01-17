@@ -3,7 +3,9 @@
 #= require jquery_ujs
 #= require jquery.plugin
 #= require jquery.calculator
-#= require jquery.blockui
+#= require nprogress
+#= require nprogress-ajax
+#= require nprogress-turbolinks
 #= require jsurl
 #= require moment
 #= require bootstrap
@@ -30,9 +32,9 @@ pageLoad = ->
 
 head ->
   $ ->
+    Turbolinks.enableTransitionCache();
     $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs'
     pageLoad()
-    $(document).ajaxStart($.blockUI).ajaxStop $.unblockUI
     $(document).on 'page:load', pageLoad
     $(document).on 'page:before-change', ->
       localStorage.clear()
@@ -43,8 +45,6 @@ head ->
       window.applicationView.cleanup()
       pageLoad()
       true
-    $(document).on "page:fetch",  $.blockUI
-    $(document).on "page:receive", $.unblockUI
 
 
 

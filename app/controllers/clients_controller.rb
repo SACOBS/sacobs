@@ -9,6 +9,7 @@ class ClientsController < ApplicationController
   end
 
   def search
+    sleep 5
     results = client_scope.search(params[:q]).result.page(params[:page])
     flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
     render partial: 'clients/clients', locals: { clients: results }

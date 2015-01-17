@@ -1,9 +1,18 @@
+
+
+
+
 @import "bootswatch/cerulean/variables";
 
 @import "bootstrap";
 body { padding-top: 60px; }
 @import 'bootstrap-responsive';
 @import 'bootstrap-datetimepicker';
+
+$nprogress-color: red;
+$nprogress-height: 5px;
+@import "nprogress";
+@import "nprogress-bootstrap";
 
 @import "bootswatch/cerulean/bootswatch";
 

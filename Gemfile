@@ -35,6 +35,8 @@ gem 'bootstrap_sortable_rails'
 gem 'momentjs-rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'kaminari'
+gem 'nprogress-rails'
+
 
 # Forms
 gem 'simple_form', '~> 3.0.0'
