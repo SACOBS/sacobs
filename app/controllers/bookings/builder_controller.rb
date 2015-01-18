@@ -22,7 +22,6 @@ module Bookings
         fetch_stops
         render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
       end
-      sleep 5
     end
 
     def show

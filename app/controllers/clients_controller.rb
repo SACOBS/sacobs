@@ -9,7 +9,6 @@ class ClientsController < ApplicationController
   end
 
   def search
-    sleep 5
     results = client_scope.search(params[:q]).result.page(params[:page])
     flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
     render partial: 'clients/clients', locals: { clients: results }
@@ -27,9 +26,7 @@ class ClientsController < ApplicationController
 
   def create
     authorize :client
-    @client = Client.new(client_params)
-    @client.user = current_user
-    @client.save
+    @client = Client.create(client_params)
     respond_with @client
   end
 
@@ -39,7 +36,6 @@ class ClientsController < ApplicationController
 
   def update
     authorize :client
-    @client.user = current_user
     @client.update(client_params)
     respond_with @client
   end
@@ -79,7 +75,7 @@ class ClientsController < ApplicationController
                                                           :city,
                                                           :postal_code,
                                                           :_destroy]
-    )
+    ).merge(user_id: current_user.id)
   end
 
   def interpolation_options
