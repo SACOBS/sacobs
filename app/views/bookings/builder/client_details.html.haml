@@ -24,6 +24,7 @@
             = client.input :home_no, as: :tel
             = client.input :work_no, as: :tel
             = client.input :email, as: :email
+        = client.hidden_field :user_id, value: current_user.id
         = client.input :id, as: :hidden
 
   .form-actions

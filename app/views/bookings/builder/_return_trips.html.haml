@@ -21,6 +21,7 @@
                       = return_booking.hidden_field :quantity, value: booking.quantity
                       = return_booking.hidden_field :trip_id, value: stop.trip.id
                       = return_booking.hidden_field :stop_id, value: stop.id
+                      = return_booking.hidden_field :user_id, value: current_user.id
                       = f.submit 'Book Return', class: t('buttons.primary')
 - else
   .hero-unit.text-center

@@ -58,6 +58,7 @@ class Client < ActiveRecord::Base
   end
 
   def is_pensioner?
+   return unless age.present?
    age >= PENSIONER_AGE
   end
 
