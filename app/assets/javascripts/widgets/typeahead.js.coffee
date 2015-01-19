@@ -9,52 +9,42 @@ class Widgets.TypeAhead
     if($.trim($(this).val()) == '')
       targets = $(this).data('targets').split(',')
       Utilities.updateCollectionValues(targets, '')
+      if $(this).data().hasOwnProperty('populate')
+        $(this).closest('form')[0].reset()
 
 
    $('input.typeahead').typeahead
-    source: (query, process) ->
-      $this = this
-      url = $this.$element.data('source')
-      objects = []
-      map = {}
-
-      if localStorage && localStorage.getItem(url)
-        objects = JSON.parse(localStorage.getItem(url))
+      source: (query, process) ->
+        data = $(this.$element.data('source'))
+        objects = $.map(data, (item) -> return JSON.stringify(item) )
         process(objects)
         return
-      else
-        return $.getJSON url, (data) ->
-          $.each data, (i, object) ->
-            map[object.name] = object
-            objects.push(object.name)
 
-          localStorage.setItem(url, JSON.stringify(objects))
-          localStorage.setItem($this.$element.id, JSON.stringify(map))
+      highlighter: (item) ->
+        return JSON.parse(item)[this.$element.data('filter').toString()]
 
-          process(objects)
+      matcher: (item) ->
+       return JSON.parse(item).name.toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) != -1;
 
-#    matcher: (item) ->
-#      condition = this.query.trim()
-#      return (item.substr(0, condition.length).toLowerCase() == condition.toLowerCase())
+      updater: (item) ->
+        object = JSON.parse(item)
 
+        if this.$element.data().hasOwnProperty('populate')
+          field_container = this.$element.data('populate').toString()
+          $.each object,( key, value ) ->
+             unless key == 'id'
+               input = $(field_container).find('[name*=' + key + ']')
+               if value
+                $(input).val(value.toString())
+               else
+                $(input).val('')
 
+        item_id = object.id
+        targets = this.$element.data('targets').split(',')
+        $.each targets, (index, value) ->
+          $(value).val(item_id)
+        return JSON.parse(item)[this.$element.data('filter').toString()]
 
-    updater: (item) ->
-      map = JSON.parse(localStorage.getItem(this.$element.id))
-
-      if this.$element.data().hasOwnProperty('populate')
-        field_container = this.$element.data('populate').toString()
-        $.getJSON map[item].url, (data) ->
-          $.each data,( key, value ) ->
-           input = $(field_container).find('[name*=' + key + ']')
-           $(input).val(value.toString()) if value
-
-
-      item_id = map[item].id
-      targets = this.$element.data('targets').split(',')
-      $.each targets, (index, value) ->
-        $(value).val(item_id)
-      return item
 
   @cleanup: ->
     $('input.typeahead').off()

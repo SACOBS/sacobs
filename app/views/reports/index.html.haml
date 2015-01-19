@@ -4,9 +4,9 @@
 .search-criteria.well
   %h5 Search
   = simple_form_for :q, url: generate_reports_path do |f|
-    = f.input :stop_from_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select from city', input_html: { data: { targets: '#q_stop_connection_from_city_id_eq' } }
+    = f.input :stop_from_city, typeahead: cities, label: false, placeholder: 'Select from city', input_html: { data: { targets: '#q_stop_connection_from_city_id_eq', filter: :name } }
     = f.hidden_field :stop_connection_from_city_id_eq
-    = f.input :stop_to_city, typeahead: cities_url(format: :json), label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_stop_connection_to_city_id_eq' } }
+    = f.input :stop_to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_stop_connection_to_city_id_eq', filter: :name } }
     = f.hidden_field :stop_connection_to_city_id_eq
     = f.input :created_at_date_gteq, as: :date_picker, placeholder: 'Period From', label: false
     = f.input :created_at_date_lteq, as: :date_picker, placeholder: 'Period To', label: false

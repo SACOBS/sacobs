@@ -6,7 +6,7 @@
   .search
     %fieldset
       %legend Search for client
-      = f.input :client_search, typeahead: clients_url(format: :json), label: false, placeholder: 'Search for client', input_html: { value: '', data: { targets: '#booking_client_attributes_id, #booking_client_id', populate: '.new_client_fields' } }
+      = f.input :client_search, typeahead: clients, label: false, placeholder: 'Search for client', input_html: { value: '', data: { targets: '#booking_client_attributes_id, #booking_client_id', populate: '.new_client_fields', filter: :full_name } }
       = f.input :client_id, as: :hidden
   .new_client_fields
     = f.simple_fields_for :client do |client|

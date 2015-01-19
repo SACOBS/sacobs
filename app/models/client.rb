@@ -69,7 +69,7 @@ class Client < ActiveRecord::Base
   protected
 
   def set_birth_date
-    return unless id_number.present?
+    return unless id_number.present? && id_number.size > 5
     date = Date.strptime(id_number[0..5], '%y%m%d')
     date.prev_year(100) if date > Date.today
     self.date_of_birth = date

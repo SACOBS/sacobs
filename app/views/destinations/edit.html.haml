@@ -30,9 +30,9 @@
   .span3
     %h4 Add Destination
     = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
-      = f.input :city, typeahead: cities_url(format: :json), label: 'New city to be added:', placeholder: 'New City', input_html: { data: { targets: "#destination_city_id" } }
+      = f.input :city, typeahead: cities, label: 'New city to be added:', placeholder: 'New City', input_html: { data: { targets: "#destination_city_id", filter: :name } }
       = f.hidden_field :city_id
-      = f.input :preceding_city, typeahead: cities_url(format: :json), placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: "#destination_preceding_city_id" } }
+      = f.input :preceding_city, typeahead: cities, placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: "#destination_preceding_city_id", filter: :name } }
       = f.hidden_field :preceding_city_id
       = f.submit 'Save', class: t('buttons.primary')
       = link_to 'Back', routes_path, class: t('buttons.info')

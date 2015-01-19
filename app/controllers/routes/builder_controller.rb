@@ -24,6 +24,11 @@ module Routes
       render_wizard @route
     end
 
+    def cities
+      @cities ||= City.all.to_json(only: [:id, :name])
+    end
+    helper_method :cities
+
     private
 
     def finish_wizard_path
