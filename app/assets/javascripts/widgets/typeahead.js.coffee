@@ -24,7 +24,7 @@ class Widgets.TypeAhead
         return JSON.parse(item)[this.$element.data('filter').toString()]
 
       matcher: (item) ->
-       return JSON.parse(item).name.toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) != -1;
+       return JSON.parse(item)[this.$element.data('filter').toString()].toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) != -1;
 
       updater: (item) ->
         object = JSON.parse(item)
