@@ -47,7 +47,7 @@ class Client < ActiveRecord::Base
   validates :name, :surname, presence: true
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
 
-  before_validation :upcase_names
+  before_validation :normalize
   before_save :set_birth_date
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
@@ -75,8 +75,9 @@ class Client < ActiveRecord::Base
     self.date_of_birth = date
   end
 
-  def upcase_names
+  def normalize
     name.try(:squish!).try(:upcase!)
     surname.try(:squish!).try(:upcase!)
+    email.try(:squish!).try(:downcase!)
   end
 end

@@ -1,5 +1,5 @@
 - BookingDecorator.decorate(booking, self) do |decorated_booking|
-  %tr
+  = content_tag(:tr, class: decorated_booking.standby? ? 'warning' : nil) do
     %td
       = decorated_booking.show_link(icon: :info, class: t('buttons.mini.info'))
       = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.mini.default'))
