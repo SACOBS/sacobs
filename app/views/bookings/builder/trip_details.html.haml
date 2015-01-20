@@ -4,7 +4,7 @@
 .trip-finder.well.well-small
   %h5 Search
   = simple_form_for :q, url: booking_builder_index_path(@booking), html: { class: 'form-inline', id: 'trip_search' }, method: :get, remote: true do |f|
-    = f.input :from_city, typeahead: cities, label: false, placeholder: 'Select from city', input_html: { data: { targets: '#q_from_city_id', filter: :name } }
+    = f.input :from_city, typeahead: cities, label: false, autofocus: true, placeholder: 'Select from city', input_html: { data: { targets: '#q_from_city_id', filter: :name } }
     = f.hidden_field :from_city_id
     = f.input :to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_to_city_id', filter: :name } }
     = f.hidden_field :to_city_id

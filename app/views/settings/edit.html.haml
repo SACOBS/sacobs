@@ -9,7 +9,7 @@
     = link_to 'Cancel', root_path, class: t('buttons.default')
 
   %fieldset
-    = f.input :booking_expiry_period
+    = f.input :booking_expiry_period, autofocus: true
     = f.input :ticket_instructions, as: :text
     = f.input :default_scripture, as: :text
     = f.input :trip_sheet_note1, as: :text

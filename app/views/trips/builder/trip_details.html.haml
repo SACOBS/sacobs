@@ -7,7 +7,7 @@
     = f.submit 'Next', class: t('buttons.primary')
     = link_to 'Cancel', trip_path(@trip), method: :delete, class: t('buttons.danger')
   %fieldset
-    = f.input :name
+    = f.input :name, autofocus: true
     = f.input :start_date, as: :date_picker
     = f.input :end_date, as: :date_picker
     = f.association :route, as: :radio_buttons, item_wrapper_class: 'inline'

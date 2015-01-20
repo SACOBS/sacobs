@@ -20,7 +20,7 @@
   .tab-content
     .tab-pane.active#details
       %fieldset
-        = f.input :name
+        = f.input :name, autofocus: true
         = f.input :start_date, as: :date_picker
         = f.input :end_date, as: :date_picker
         = f.association :route, as: :radio_buttons, item_wrapper_class: 'inline'

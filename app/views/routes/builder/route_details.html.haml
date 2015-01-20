@@ -3,7 +3,7 @@
 #errors= errors_for @route
 = simple_form_for @route, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
-    = f.input :name
+    = f.input :name, autofocus: true
     = f.input :cost, as: :cost
     = f.input :distance, as: :distance
   .form-actions

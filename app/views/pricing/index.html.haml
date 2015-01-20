@@ -4,7 +4,7 @@
   %h3 Quick Quote
   .connection-finder
     = simple_form_for :q do |f|
-      = f.input :route, collection: Route.all, as: :radio_buttons, item_wrapper_class: 'inline', label: 'Select a route'
+      = f.input :route, collection: Route.all, as: :radio_buttons, item_wrapper_class: 'inline', label: 'Select a route', autofocus: true
     %h5 Connections
     %input{type: 'text', required: true, placeholder: 'Search Connections', id: 'connection-search'}/
     .connections

@@ -1,7 +1,7 @@
 #errors= errors_for driver
 = simple_form_for driver, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
-    = f.input :name
+    = f.input :name, autofocus: true
     = f.input :surname
   .form-actions
     = f.submit class: t('buttons.primary')

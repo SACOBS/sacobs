@@ -9,7 +9,7 @@
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', charges_path, class: t('buttons.default')
   %fieldset
-    = f.input :description
+    = f.input :description, autofocus: true
     = f.input :percentage
   .form-actions
     = f.submit class: t('buttons.primary')

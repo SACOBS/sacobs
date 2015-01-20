@@ -18,7 +18,7 @@
   .tab-content
     .tab-pane.active#details
       %fieldset
-        = f.input :name
+        = f.input :name, autofocus: true
         = f.input :capacity, disabled: true
         = f.input :year
         = f.input :model

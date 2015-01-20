@@ -20,7 +20,7 @@
   .tab-content
     .tab-pane.active#details
       %fieldset
-        = f.input :name
+        = f.input :name, autofocus: true
         = f.input :cost, as: :cost
         = f.input :distance, as: :distance
     .tab-pane#connections

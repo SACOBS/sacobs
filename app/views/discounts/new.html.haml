@@ -7,7 +7,7 @@
 = simple_form_for @discount,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
     = f.simple_fields_for :passenger_type do |p|
-      = p.input :description
+      = p.input :description, autofocus: true
     = f.input :percentage
   .form-actions
     = f.submit class: t('buttons.primary')

@@ -4,7 +4,7 @@
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', clients_path, class: t('buttons.default')
   %fieldset
-    = f.input :title, collection: Client::TITLES, include_blank: false, prompt: 'Select a title'
+    = f.input :title, collection: Client::TITLES, include_blank: false, prompt: 'Select a title', autofocus: true
     = f.input :name
     = f.input :surname
     = f.input :id_number
