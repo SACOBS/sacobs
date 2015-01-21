@@ -52,7 +52,7 @@ class Connection < ActiveRecord::Base
   protected
 
   def set_name
-    self.name =  "#{from.city_name} to #{to.city_name}" unless name.present?
+    self.name =  "#{from.city_name} to #{to.city_name}"
   end
 
   def set_percentage

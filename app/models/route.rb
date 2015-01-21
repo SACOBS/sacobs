@@ -8,12 +8,10 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  name       :string(255)
-#  slug       :string(255)
 #  user_id    :integer
 #
 # Indexes
 #
-#  index_routes_on_slug     (slug) UNIQUE
 #  index_routes_on_user_id  (user_id)
 #
 
@@ -26,13 +24,6 @@ class Route < ActiveRecord::Base
   has_many :destinations, dependent: :destroy
   has_many :connections, -> { includes(:from, :to).order(:from_id) }, dependent: :delete_all
 
-  amoeba do
-    enable
-    prepend name: 'Copy of'
-    clone [:connections, :destinations]
-  end
-
-
   with_options reject_if: :all_blank, allow_destroy: true do |assoc|
     assoc.accepts_nested_attributes_for :connections
     assoc.accepts_nested_attributes_for :destinations
@@ -44,10 +35,31 @@ class Route < ActiveRecord::Base
   after_update { touch }
 
   def copy
-    dup.tap do |copy|
-      copy.destinations << destinations.map(&:dup)
-      copy.connections << connections.map(&:dup)
+    copy = dup
+    copy.name = "Copy of #{name}"
+    copy.destinations = destinations.map(&:dup)
+    connections.map(&:dup).each do |connection|
+      from = copy.destinations.select {|d| d.city == connection.from_city }.first
+      to = copy.destinations.select {|d| d.city == connection.to_city }.first
+      connection.from = from
+      connection.to = to
+      copy.connections << connection
     end
+    copy
+  end
+
+  def reverse_copy
+    reverse_copy = dup
+    reverse_copy.name = "Reverse of #{name}"
+    reverse_copy.destinations << destinations.map(&:dup).reverse.each_with_index { |d, index | d.sequence = index.next }
+    connections.map(&:dup).each do |connection|
+      from = reverse_copy.destinations.select {|d| d.city == connection.to_city }.first
+      to = reverse_copy.destinations.select {|d| d.city == connection.from_city }.first
+      connection.from = from
+      connection.from = to
+      reverse_copy.connections << connection
+    end
+    reverse_copy
   end
 
   def start_city

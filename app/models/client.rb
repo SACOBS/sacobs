@@ -10,9 +10,7 @@
 #  home_no       :string(255)
 #  cell_no       :string(255)
 #  email         :string(255)
-#  slug          :string(255)
 #  user_id       :integer
-#  full_name     :string(255)
 #  high_risk     :boolean          default(FALSE)
 #  work_no       :string(255)
 #  date_of_birth :date
@@ -23,8 +21,8 @@
 #
 # Indexes
 #
-#  index_clients_on_slug     (slug) UNIQUE
-#  index_clients_on_user_id  (user_id)
+#  index_clients_on_name_and_surname  (name,surname) UNIQUE
+#  index_clients_on_user_id           (user_id)
 #
 
 class Client < ActiveRecord::Base

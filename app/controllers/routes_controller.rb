@@ -20,17 +20,23 @@ class RoutesController < ApplicationController
   end
 
   def copy
-    copy = @route.amoeba_dup
-    copy.user = current_user
-    copy.save!
-    respond_with copy, location: routes_url
+    copy = @route.copy
+    copy.user_id = current_user.id
+    if copy.save
+     redirect_to copy, notice: 'Route was successfully copied.'
+    else
+     redirect_to routes_url, alert: 'Route could not be copied.'
+    end
   end
 
   def reverse_copy
-    reverse_copy = ReverseRouteBuilder.new(@route).build
-    reverse_copy.user = current_user
-    reverse_copy.save!
-    respond_with reverse_copy, location: routes_url
+    reverse_copy = @route.reverse_copy
+    reverse_copy.user_id = current_user.id
+    if reverse_copy.save
+      redirect_to reverse_copy, notice: 'Route was successfully reverse copied.'
+    else
+      redirect_to routes_url, alert: 'Route could not be reverse copied.'
+    end
   end
 
   private
