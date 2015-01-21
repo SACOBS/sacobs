@@ -74,9 +74,6 @@ gem 'multi_fetch_fragments'
 # Wizard
 gem 'wicked'
 
-# Copying Records
-gem 'amoeba'
-
 # Search
 gem 'ransack'
 

@@ -34,10 +34,6 @@ class Trip < ActiveRecord::Base
     assoc.has_many :bookings
   end
 
-  amoeba do
-    enable
-    prepend name: 'Copy of'
-  end
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
@@ -53,6 +49,14 @@ class Trip < ActiveRecord::Base
 
   scope :valid, -> { where(arel_table[:start_date].gteq(Date.today)) }
   scope :archived, -> { where(arel_table[:start_date].lteq(Date.today)) }
+
+  def copy
+    copy = dup
+    copy.name = "Copy of #{name}"
+    copy.drivers = drivers.map(&:dup)
+    copy.stops = stops.map(&:dup)
+    copy
+  end
 
   private
 

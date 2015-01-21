@@ -27,14 +27,17 @@ class TripsController < ApplicationController
   end
 
   def show
-    # fresh_when @trip, last_modified: @trip.updated_at
+    fresh_when @trip, last_modified: @trip.updated_at
   end
 
   def copy
-    copy = @trip.amoeba_dup
+    copy = @trip.copy
     copy.user = current_user
-    Trip.no_touching { copy.save }
-    respond_with copy, location: trips_url
+    if copy.save
+      redirect_to copy, notice: 'Trip was successfully copied.'
+    else
+      redirect_to trips_url, alert: 'Trip could not be copied.'
+    end
   end
 
   def update

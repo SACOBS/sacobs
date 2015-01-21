@@ -9,7 +9,7 @@ class OccupancyGraph
     graph = []
     occupancy = 0
     from_destinations.each_with_index do |destination, index|
-      occupancy += calculate_occupancy(destination)
+      occupancy += calculate_occupancy(destination) if @trip.bookings.any?
       graph << OccupancyItem.new(destination.city_name, to_destinations[index].city_name, occupancy)
     end
     graph

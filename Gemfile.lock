@@ -30,8 +30,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    amoeba (3.0.0)
-      activerecord (>= 3.2.6)
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -346,7 +344,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
-  amoeba
   annotate
   apotomo
   better_errors
