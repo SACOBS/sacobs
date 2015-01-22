@@ -8,7 +8,7 @@ class CancelBooking
 
   def execute
     Booking.transaction do
-      UnassignSeating.execute(@booking.quantity, @booking.stop)
+      @booking.trip.unassign_seats(@booking.stop, @booking.quantity)
       @booking.status = :cancelled
       @booking.save!
     end

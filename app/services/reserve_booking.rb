@@ -9,7 +9,7 @@ class ReserveBooking
   def execute
     Booking.transaction do
       @bookings.each do |booking|
-        AssignSeating.execute(booking.quantity, booking.stop)
+        booking.trip.assign_seats(booking.stop, booking.quantity)
         booking.update!(expiry_date: expiry_date, status: :reserved, user: @user)
       end
     end
