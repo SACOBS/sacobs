@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1.6'
@@ -103,9 +103,6 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
-# Cells
-gem 'cells'
-gem 'apotomo'
 
 group :development do
   gem 'rails_apps_testing'

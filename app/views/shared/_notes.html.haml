@@ -1,0 +1,7 @@
+#notes.well.well-small
+  %h5 Notes
+  %ul.notes-list
+    = render notes
+  - if current_user.admin?
+    .note-form
+      = render 'notes/form'

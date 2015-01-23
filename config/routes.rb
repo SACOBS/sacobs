@@ -160,6 +160,10 @@
 
 Sacobs::Application.routes.draw do
 
+  get 'notes/create'
+
+  get 'notes/destroy'
+
   devise_for :users
 
   resources :bookings, only: [:create, :show, :index, :destroy] do

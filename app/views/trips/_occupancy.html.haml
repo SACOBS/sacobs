@@ -7,9 +7,9 @@
       %th To
 
   %tbody
-    - @items.each do |item|
+    - items.each do |item|
       %tr
         %td= item.from
         %td= item.occupied
-        %td= @capacity
+        %td= capacity
         %td= item.to

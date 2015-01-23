@@ -15,18 +15,21 @@ class ApplicationController < ActionController::Base
 
   etag { current_user.try :id }
 
-  has_widgets do |root|
-    root << widget(:notes, 'contextual_notes', :display, user: current_user, notes: notes)
-  end
 
   def current_user
     super || NullUser.new
   end
 
+
+  def context
+    controller_path.gsub('/', '')
+  end
+  helper_method :context
+
   def notes
-    context = controller_path.gsub('/', '')
     Note.for_context(context).all
   end
+  helper_method :notes
 
   protected
 

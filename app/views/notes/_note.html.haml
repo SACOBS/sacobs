@@ -1,0 +1,4 @@
+%li[note]
+  = note.content
+  = link_to_if(current_user.admin?, ' ', note, icon: :times ,method: :delete, remote: true){}
+

@@ -7,7 +7,7 @@
       = back_to trips_path
       = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
   - content_for :sidebar do
-    = render_cell :occupancy, :show, trip:  @trip
+    = display_occupancy(@trip)
 
   - cache @trip do
 
