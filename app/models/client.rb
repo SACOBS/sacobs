@@ -35,7 +35,7 @@ class Client < ActiveRecord::Base
   to_param :full_name
 
   has_one :address, as: :addressable, dependent: :delete
-  has_many :bookings, dependent: :delete_all
+  has_many :bookings
   has_many :vouchers, dependent: :delete_all
 
   delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true

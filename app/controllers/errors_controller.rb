@@ -20,7 +20,7 @@
       exception_name = @exception.class.to_s
       message = @exception.message
       backtrace = ActionDispatch::ExceptionWrapper.new(env, @exception).application_trace.join("\n")
-      ExceptionNotifyJob.new.async.perform(exception_name, message, backtrace)
+      ExceptionMailer.notify(exception_name, message, backtrace).deliver_later
     end
 
     def internal_server_error?

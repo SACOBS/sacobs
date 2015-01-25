@@ -9,4 +9,6 @@ class Contact
   validates :email, format: { with: VALID_EMAIL_REGEX }
   validates :message, length: { maximum: 300 }
   validates :nickname, absence: true
+
+
 end

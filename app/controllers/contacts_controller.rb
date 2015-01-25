@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     if @contact.valid?
-      ContactMailJob.new.async.perform(@contact)
+      ContactMailer.contact_us(@contact.name, @contact.email, @contact.message).deliver_later
       flash[:notice] = 'Thank you for your message. We will get back to you as soon as possible.'
       redirect_to root_path
     else

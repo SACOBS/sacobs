@@ -106,8 +106,7 @@ gem 'simple_defaults'
 
 group :development do
   gem 'rails_apps_testing'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'web-console', '~> 2.0'
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rails_best_practices'
