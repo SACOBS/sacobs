@@ -19,16 +19,11 @@ module Buses
     end
 
     def update
-      save
+      @bus.update(bus_params)
       render_wizard @bus
     end
 
     private
-
-    def save
-      Bus.no_touching { @bus.update(bus_params) }
-      @bus.touch
-    end
 
     def finish_wizard_path
       buses_url

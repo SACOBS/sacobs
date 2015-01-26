@@ -22,6 +22,8 @@
             .unobtrusive-flash-container
             .page-header
               = wizard_progress(step, wizard_steps)
+              - if content_for?(:actions)
+                = yield(:actions)
             = yield
       #push
     %footer.navbar.navbar-fixed-bottom.navbar-inverse

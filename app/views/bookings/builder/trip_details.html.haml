@@ -1,5 +1,8 @@
 = content_for (:title) do
   Booking Wizard - Choose trip
+= content_for (:actions) do
+  = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
+
 
 .trip-finder.well.well-small
   %h5 Search
@@ -15,4 +18,3 @@
 .trips
   = render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
 
-= link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')

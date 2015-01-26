@@ -1,8 +1,15 @@
 = content_for (:title) do
   Booking Wizard - Choose client
 
+= content_for (:actions) do
+  = link_to_if(@booking.has_return?,'Back', previous_wizard_path, class: t('buttons.inverse')){}
+  = link_to_unless(@booking.has_return?,'Back', wizard_path(:trip_details), class: t('buttons.inverse')){}
+  = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
+
 #errors= errors_for @booking
 = simple_form_for @booking,  url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal', method: :patch } do |f|
+  .form-actions
+    = f.submit 'Next', class: t('buttons.primary')
   .search
     %fieldset
       %legend Search for client
@@ -13,25 +20,22 @@
       %fieldset
         %legend Or add a new one
         .row
-          .span3
+          .span4
             = client.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title'
             = client.input :name
             = client.input :surname
+          .span4
             = client.input :id_number
             = client.input :bank, include_blank: true, label: 'Select a bank', collection: Client::BANKS
-          .span3
             = client.input :cell_no, as: :tel
+          .span4
             = client.input :home_no, as: :tel
             = client.input :work_no, as: :tel
             = client.input :email, as: :email
         = client.hidden_field :user_id, value: current_user.id
         = client.input :id, as: :hidden
 
-  .form-actions
-    = f.submit 'Next', class: t('buttons.primary')
-    = link_to_if(@booking.has_return?,'Back', previous_wizard_path, class: t('buttons.inverse')){}
-    = link_to_unless(@booking.has_return?,'Back', wizard_path(:trip_details), class: t('buttons.inverse')){}
-    = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
+
 
 
 
