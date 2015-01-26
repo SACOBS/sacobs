@@ -26,7 +26,6 @@ module Buses
     private
 
     def save
-      @bus.user = current_user
       Bus.no_touching { @bus.update(bus_params) }
       @bus.touch
     end
@@ -45,7 +44,7 @@ module Buses
                                     :year,
                                     :model,
                                     seats_attributes: [:id, :_destroy, :row, :number]
-      )
+      ).merge(user_id: current_user.id)
     end
   end
 end
