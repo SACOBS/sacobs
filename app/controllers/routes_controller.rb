@@ -2,7 +2,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: [:copy, :reverse_copy, :show, :edit, :update, :destroy]
 
   def index
-    @routes = route_scope.includes(destinations: :city, connections: [:from, :to])
+    @routes = route_scope
   end
 
   def show
@@ -22,7 +22,7 @@ class RoutesController < ApplicationController
   def copy
     copy = @route.copy
     copy.user_id = current_user.id
-    if copy.save
+    if copy.save!
      redirect_to copy, notice: 'Route was successfully copied.'
     else
      redirect_to routes_url, alert: 'Route could not be copied.'

@@ -24,7 +24,7 @@
 #
 
 class Connection < ActiveRecord::Base
-  belongs_to :route, inverse_of: :connections
+  belongs_to :route
   belongs_to :from, class_name: :Destination
   belongs_to :to, class_name: :Destination
 

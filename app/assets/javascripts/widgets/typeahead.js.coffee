@@ -39,6 +39,7 @@ class Widgets.TypeAhead
                else
                 $(input).val('')
 
+
         item_id = object.id
         targets = this.$element.data('targets').split(',')
         $.each targets, (index, value) ->

@@ -6,4 +6,8 @@
   %td= f.input_field :distance, as: :distance, label: false, class: 'input-small'
   %td= f.input_field :depart, as: :time_picker, label: false, class: 'input-small'
   %td= f.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
-  %td= link_to_remove_association 'Remove', f, class: t('buttons.mini.danger')
+  %td
+    = f.hidden_field :from_id
+    = f.hidden_field :to_id
+    = link_to_remove_association 'Remove', f, class: t('buttons.mini.danger')
+

@@ -1,5 +1,5 @@
 class NullDestination
   def sequence
-    0
+    1
   end
 end

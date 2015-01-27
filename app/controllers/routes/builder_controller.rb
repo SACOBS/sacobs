@@ -14,12 +14,10 @@ module Routes
     end
 
     def show
-      build_connections if step == :connections
       render_wizard
     end
 
     def update
-      @route.user = current_user
       @route.update(route_params)
       render_wizard @route
     end
@@ -39,15 +37,11 @@ module Routes
       @route = Route.find(params[:route_id])
     end
 
-    def build_connections
-      ConnectionBuilder.new(@route).build
-    end
-
     def route_params
       params.fetch(:route, {}).permit(:name, :cost, :distance,
                                       destinations_attributes: [:city_id, :sequence,  :_destroy],
                                       connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
-      )
+      ).merge(user_id: current_user.id)
     end
   end
 end
