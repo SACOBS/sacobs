@@ -46,7 +46,7 @@ module Bookings
           @booking.sync_return_booking
           build_invoice
         when :billing_info then
-          reserve_booking
+          @booking.reserve
       end
       render_wizard @booking
     end
@@ -88,10 +88,6 @@ module Bookings
       return_booking = @booking.return_booking
       @booking.invoice = InvoiceBuilder.execute(@booking)
       return_booking.invoice = InvoiceBuilder.execute(return_booking) if return_booking
-    end
-
-    def reserve_booking
-      ReserveBooking.execute(@booking, current_user)
     end
 
     def set_booking

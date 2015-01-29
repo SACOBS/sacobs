@@ -6,7 +6,7 @@
 #  percentage        :decimal(, )
 #  period_from       :date
 #  period_to         :date
-#  active            :boolean          default(FALSE)
+#  active            :boolean          default("false")
 #  created_at        :datetime
 #  updated_at        :datetime
 #  user_id           :integer

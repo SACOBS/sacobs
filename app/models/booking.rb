@@ -63,6 +63,7 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   before_save :generate_reference
+  before_save :set_expiry_date
   after_find :setup_return_booking, if: :has_return?
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
@@ -100,6 +101,24 @@ class Booking < ActiveRecord::Base
     super || build_client
   end
 
+  def reserve
+    transaction do
+      trip.assign_seats(stop, quantity)
+      reserved!
+      if return_booking.present?
+        return_booking.user = user
+        return_booking.reserve
+      end
+    end
+  end
+
+  def cancel
+    transaction do
+      trip.unassign_seats(stop, quantity)
+      cancelled!
+    end
+  end
+
   private
 
   def defaults
@@ -111,6 +130,9 @@ class Booking < ActiveRecord::Base
   end
 
   protected
+  def set_expiry_date
+   self.expiry_date =  Time.zone.now.advance(hours: Setting.first.booking_expiry_period)
+  end
 
   def setup_return_booking
     build_return_booking unless return_booking.present? && has_return?
@@ -118,7 +140,7 @@ class Booking < ActiveRecord::Base
 
   def generate_reference
     if reserved?
-      self.sequence_id = SequenceGenerator.new(self).execute unless sequence_id?
+      self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
       self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{'%03d' % sequence_id}" unless reference_no?
     end
   end

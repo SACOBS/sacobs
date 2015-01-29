@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125062055) do
+ActiveRecord::Schema.define(version: 20150129125409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150125062055) do
     t.integer  "main_id"
     t.boolean  "has_return"
     t.integer  "stop_id"
-    t.integer  "sequence_id"
+    t.integer  "sequence_id",              default: "nextval('sequence_id_seq'::regclass)"
   end
 
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id", using: :btree
@@ -228,6 +228,14 @@ ActiveRecord::Schema.define(version: 20150125062055) do
 
   add_index "payment_details", ["booking_id"], name: "index_payment_details_on_booking_id", using: :btree
   add_index "payment_details", ["user_id"], name: "index_payment_details_on_user_id", using: :btree
+
+  create_table "reports", force: :cascade do |t|
+    t.string   "name",                    null: false
+    t.hstore   "criteria",   default: {}, null: false
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "routes", force: :cascade do |t|
     t.decimal  "cost",                   precision: 8, scale: 2

@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  ref_no     :string(255)
 #  amount     :decimal(, )
-#  active     :boolean          default(TRUE)
+#  active     :boolean          default("true")
 #  client_id  :integer
 #  created_at :datetime
 #  updated_at :datetime

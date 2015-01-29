@@ -166,6 +166,8 @@ Sacobs::Application.routes.draw do
 
   devise_for :users
 
+  resources :reports
+
   resources :bookings, only: [:create, :show, :index, :destroy] do
     collection do
       get :search
@@ -269,10 +271,6 @@ Sacobs::Application.routes.draw do
   get '/quick_quote', to: 'pricing#index', as: :quick_quote
 
   get '/dashboard', to: 'dashboard#show', as: :dashboard
-
-  get '/reports', to: 'reports#index', as: :reports
-  post '/reports', to: 'reports#search', as: :generate_reports
-
 
   match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
 

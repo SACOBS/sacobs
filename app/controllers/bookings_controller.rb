@@ -41,8 +41,12 @@ class BookingsController < ApplicationController
 
   def cancel
     @booking.user = current_user
-    CancelBooking.execute(@booking)
-    redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
+    @booking.cancel
+    if @booking.cancelled?
+      redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
+    else
+      redirect_to bookings_url, alert: 'Booking could not be cancelled.'
+    end
   end
 
   private
