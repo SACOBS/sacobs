@@ -21,7 +21,7 @@ class Route < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :destinations, dependent: :destroy, before_add: :reorder_sequences, after_add: :create_connections
+  has_many :destinations, dependent: :destroy, before_add: :reorder_sequences
   has_many :connections, dependent: :destroy
 
   accepts_nested_attributes_for :connections, reject_if: :all_blank, allow_destroy: true
@@ -30,6 +30,7 @@ class Route < ActiveRecord::Base
   validates :name, :cost, :distance, presence: true, on: :update
 
   before_save :set_connection_costs, if: :cost_changed?
+  after_save :create_connections
   after_update { touch }
 
   def copy
@@ -74,12 +75,13 @@ class Route < ActiveRecord::Base
     save
   end
 
-  def create_connections(destination)
-    if destination.persisted?
+  def create_connections
      destinations.each do |from|
-       destinations.drop(from.sequence).each { |to| connections.find_or_create_by(from: from, to: to) }
+       destinations.drop(from.sequence).each do |to|
+         next if from == to
+         connections.find_or_create_by(from: from, to: to)
+       end
      end
-    end
   end
 
   def set_connection_costs

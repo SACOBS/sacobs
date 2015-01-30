@@ -3,6 +3,7 @@ class DestinationsController < ApplicationController
 
   def update
     destination = @route.destinations.create(city: city, sequence: sequence)
+    @route.save
     if destination.persisted?
       redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
     else

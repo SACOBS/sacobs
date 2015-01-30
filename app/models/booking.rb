@@ -53,7 +53,7 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :client, :passengers, :invoice
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
-  delegate :arrive, :depart, :from_city, :to_city, :from_city_name, :to_city_name, to: :stop
+  delegate :arrive, :depart, :from_city, :to_city, :from_city_name, :to_city_name, to: :stop, allow_nil: true
   delegate :payment_type, :payment_date, :reference, to: :payment_detail, prefix: true, allow_nil: true
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
   delegate :name, :start_date, :end_date, to: :trip, prefix: true
@@ -63,6 +63,7 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   before_save :generate_reference
+  before_save :setup_passengers, if: :client_id_changed?
   before_save :set_expiry_date
   after_find :setup_return_booking, if: :has_return?
 
@@ -81,10 +82,6 @@ class Booking < ActiveRecord::Base
     return_booking.save!
   end
 
-  def is_return?
-    main_id?
-  end
-
   def open?
     reserved? && !expired?
   end
@@ -94,7 +91,7 @@ class Booking < ActiveRecord::Base
   end
 
   def expired?
-    expiry_date? && (expiry_date <= Time.zone.now)
+    expiry_date? && (expiry_date <= Time.current)
   end
 
   def client
@@ -121,6 +118,12 @@ class Booking < ActiveRecord::Base
 
   private
 
+  def setup_passengers
+    passengers.clear
+    passenger_type =  PassengerType.find_by(description: :pensioner) if client_is_pensioner?
+    quantity.times { passengers.build(passenger_type: passenger_type) }
+  end
+
   def defaults
     { status: :in_process, price: 0, quantity: 1, has_return: false }
   end
@@ -131,7 +134,7 @@ class Booking < ActiveRecord::Base
 
   protected
   def set_expiry_date
-   self.expiry_date =  Time.zone.now.advance(hours: Setting.first.booking_expiry_period)
+   self.expiry_date =  Time.current.advance(hours: Setting.first.booking_expiry_period)
   end
 
   def setup_return_booking

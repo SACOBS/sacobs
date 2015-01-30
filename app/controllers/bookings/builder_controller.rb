@@ -30,8 +30,6 @@ module Bookings
           fetch_stops
         when :return_trip_details then
           @booking.has_return? ? fetch_return_stops : skip_step
-        when :passenger_details then
-          create_passengers
       end
       render_wizard
     end
@@ -80,9 +78,6 @@ module Bookings
       booking_path(@booking)
     end
 
-    def create_passengers
-      PassengerCreator.execute(@booking)
-    end
 
     def build_invoice
       return_booking = @booking.return_booking

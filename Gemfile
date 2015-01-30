@@ -103,7 +103,6 @@ gem 'headjs-rails', '~> 0.4.2'
 # Simple Defaults
 gem 'simple_defaults'
 
-
 group :development do
   gem 'rails_apps_testing'
   gem 'web-console', '~> 2.0'
