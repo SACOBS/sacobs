@@ -21,7 +21,7 @@ class Route < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :destinations, dependent: :destroy, before_add: :reorder_sequences
+  has_many :destinations, dependent: :destroy, before_add: :reorder_sequences, inverse_of: :route
   has_many :connections, dependent: :destroy
 
   accepts_nested_attributes_for :connections, reject_if: :all_blank, allow_destroy: true

@@ -20,7 +20,7 @@ class Destination < ActiveRecord::Base
   default_scope { order(sequence: :asc) }
 
   belongs_to :city, required: true
-  belongs_to :route, required: true
+  belongs_to :route, required: true, inverse_of: :destinations
 
   validates :sequence, presence: true
   validates :city, uniqueness: { scope: :route, message: 'already exists for this route.' }

@@ -2,9 +2,8 @@ class DestinationsController < ApplicationController
   before_action :set_route
 
   def update
-    destination = @route.destinations.create(city: city, sequence: sequence)
-    @route.save
-    if destination.persisted?
+    @route.destinations.build(city: city, sequence: sequence)
+    if @route.save
       redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
     else
       flash[:alert] = destination.errors.full_messages.join(',')
