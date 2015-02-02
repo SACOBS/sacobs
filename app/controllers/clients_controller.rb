@@ -21,7 +21,7 @@ class ClientsController < ApplicationController
 
   def new
     authorize :client
-    @client = Client.new {|client| client.build_address }
+    @client = Client.new(&:build_address)
   end
 
   def create

@@ -16,13 +16,17 @@
 #
 
 class Route < ActiveRecord::Base
-
   to_param :name
 
   belongs_to :user
 
-  has_many :destinations, dependent: :destroy, before_add: :reorder_sequences, inverse_of: :route
-  has_many :connections, dependent: :destroy
+  has_many :destinations, dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
+    def beyond(sequence)
+      where('sequence > ?', sequence)
+    end
+  end
+
+  has_many :connections, dependent: :destroy, inverse_of: :route
 
   accepts_nested_attributes_for :connections, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true
@@ -30,19 +34,17 @@ class Route < ActiveRecord::Base
   validates :name, :cost, :distance, presence: true, on: :update
 
   before_save :set_connection_costs, if: :cost_changed?
-  after_save :create_connections
+  after_save :build_connections, if: Proc.new { |route| route.destinations.any? {|d| d.previous_changes.any? } }
   after_update { touch }
 
   def copy
     copy = dup
     copy.name = "Copy of #{name}"
-    copy.destinations = destinations.map(&:dup)
-    connections.map(&:dup).each do |connection|
-      from = copy.destinations.select {|d| d.city == connection.from_city }.first
-      to = copy.destinations.select {|d| d.city == connection.to_city }.first
-      connection.from = from
-      connection.to = to
-      copy.connections << connection
+    destinations.map {|d| copy.destinations.build(city: d.city, sequence: d.sequence )}
+    connections.each do |original|
+      from = copy.destinations.select { |d| d.city == original.from_city }.first
+      to = copy.destinations.select { |d| d.city == original.to_city }.first
+      copy.connections.build(from: from, to: to)
     end
     copy
   end
@@ -50,13 +52,11 @@ class Route < ActiveRecord::Base
   def reverse_copy
     reverse_copy = dup
     reverse_copy.name = "Reverse of #{name}"
-    reverse_copy.destinations << destinations.map(&:dup).reverse.each_with_index { |d, index | d.sequence = index.next }
-    connections.map(&:dup).each do |connection|
-      from = reverse_copy.destinations.select {|d| d.city == connection.to_city }.first
-      to = reverse_copy.destinations.select {|d| d.city == connection.from_city }.first
-      connection.from = from
-      connection.from = to
-      reverse_copy.connections << connection
+    destinations.reverse.map.with_index(1) { |original, index| reverse_copy.destinations.build(city: original.city, sequence: index)}
+    connections.reverse.each do |original|
+      from = reverse_copy.destinations.select { |d| d.city == original.to_city }.first
+      to = reverse_copy.destinations.select { |d| d.city == original.from_city }.first
+      reverse_copy.connections.build(from: from, to: to)
     end
     reverse_copy
   end
@@ -70,21 +70,20 @@ class Route < ActiveRecord::Base
   end
 
   private
-  def reorder_sequences(destination)
-    destinations.where('sequence > ?', destination.sequence.pred).each { |shifting| shifting.increment!(:sequence) } if destinations.exists?(sequence: destination.sequence)
-    save
-  end
-
-  def create_connections
-     destinations.each do |from|
-       destinations.drop(from.sequence).each do |to|
-         next if from == to
-         connections.find_or_create_by(from: from, to: to)
-       end
-     end
+  def reorder_destinations(destination)
+    if destinations.exists?(sequence: destination.sequence)
+      destinations.beyond(destination.sequence.pred).each { |shifting| shifting.increment!(:sequence) }
+    end
   end
 
   def set_connection_costs
     connections.each { |c| c.cost = ((cost * (c.percentage / 100)) / 5.0).ceil * 5 }
   end
+
+  def build_connections
+    destinations.each do |from|
+      destinations.drop(from.sequence).each { |to| connections.where(from: from, to: to).first_or_create }
+    end
+  end
+
 end

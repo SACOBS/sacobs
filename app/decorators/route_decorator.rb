@@ -1,14 +1,4 @@
 class RouteDecorator < BaseDecorator
-  def start_city
-    return 'None' unless destinations.any?
-    destinations.first.city_name
-  end
-
-  def end_city
-    return 'None' unless destinations.any?
-    destinations.last.city_name
-  end
-
   def cost
     @view_context.number_to_currency(model.cost, unit: 'R')
   end

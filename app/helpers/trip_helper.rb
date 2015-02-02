@@ -1,7 +1,6 @@
 module TripHelper
   class OccupancyItem < Struct.new(:from, :to, :occupied); end
 
-
   def display_occupancy(trip)
     items = []
     occupancy = 0
@@ -9,7 +8,7 @@ module TripHelper
       occupancy += calculate_occupancy(destination) if @trip.bookings.any?
       items << OccupancyItem.new(destination.city_name, to_destinations[index].city_name, occupancy)
     end
-    render  partial: 'trips/occupancy', locals: { capacity: trip.bus_capacity, items: items}
+    render partial: 'trips/occupancy', locals: { capacity: trip.bus_capacity, items: items }
   end
 
   private

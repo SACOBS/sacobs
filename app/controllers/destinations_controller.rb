@@ -28,7 +28,7 @@ class DestinationsController < ApplicationController
   end
 
   def city
-     City.find_by(id: destination_params[:city_id])
+    City.find_by(id: destination_params[:city_id])
   end
 
   def preceding_destination
@@ -36,7 +36,7 @@ class DestinationsController < ApplicationController
   end
 
   def sequence
-     (preceding_destination.try(:sequence) || 0).next
+    (preceding_destination.try(:sequence) || 0).next
   end
 
   def destination_params

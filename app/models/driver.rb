@@ -15,7 +15,6 @@
 #
 
 class Driver < ActiveRecord::Base
-
   attr_reader :full_name
 
   to_param :full_name
@@ -25,8 +24,7 @@ class Driver < ActiveRecord::Base
 
   validates :name, :surname, presence: true
 
-
   def full_name
-   @full_name ||= "#{name} #{surname}".squish
+    @full_name ||= "#{name} #{surname}".squish
   end
 end

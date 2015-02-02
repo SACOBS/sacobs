@@ -15,19 +15,20 @@ module Bookings
     before_action :set_attributes, only: :update
 
     def index
-      if @booking.has_return?
-        fetch_return_stops
-        render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
-      else
-        fetch_stops
-        render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+      if request.xhr?
+        if @booking.has_return?
+          fetch_return_stops
+          render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
+        else
+          fetch_stops
+          render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+        end
       end
     end
 
     def show
       case step
         when :trip_details then
-          fetch_stops
         when :return_trip_details then
           @booking.has_return? ? fetch_return_stops : skip_step
       end
@@ -48,7 +49,6 @@ module Bookings
       end
       render_wizard @booking
     end
-
 
     def cities
       @cities ||= City.all.to_json(only: [:id, :name])
@@ -78,7 +78,6 @@ module Bookings
       booking_path(@booking)
     end
 
-
     def build_invoice
       return_booking = @booking.return_booking
       @booking.invoice = InvoiceBuilder.execute(@booking)
@@ -96,9 +95,8 @@ module Bookings
     def booking_params
       client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :user_id, address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]] }
       passengers_attributes = { passengers_attributes: [:id, :name, :surname, :cell_no, :email, :passenger_type_id, charges: []] }
-      invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]]}
+      invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
       return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :user_id, :id, invoice_attributes] }
-
 
       params.fetch(:booking, {}).permit(:trip_id, :status,
                                         :quantity, :client_id,

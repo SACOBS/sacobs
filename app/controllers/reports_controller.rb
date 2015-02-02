@@ -8,7 +8,6 @@ class ReportsController < ApplicationController
   end
 
   def create
-
   end
 
   def search

@@ -50,18 +50,17 @@ class Client < ActiveRecord::Base
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
-
   def age
     @age ||= ((Date.today - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
   end
 
   def is_pensioner?
-   return unless age.present?
-   age >= PENSIONER_AGE
+    return unless age.present?
+    age >= PENSIONER_AGE
   end
 
   def full_name
-   @full_name ||= "#{name} #{surname}"
+    @full_name ||= "#{name} #{surname}"
   end
 
   protected

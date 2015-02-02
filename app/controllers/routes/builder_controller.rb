@@ -18,7 +18,7 @@ module Routes
     end
 
     def update
-      @route.update(route_params)
+      @route.update!(route_params)
       render_wizard @route
     end
 

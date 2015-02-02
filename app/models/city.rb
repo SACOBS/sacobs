@@ -15,7 +15,6 @@
 #
 
 class City < ActiveRecord::Base
-
   default_scope { order(name: :asc) }
 
   to_param :name

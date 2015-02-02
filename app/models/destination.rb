@@ -22,6 +22,9 @@ class Destination < ActiveRecord::Base
   belongs_to :city, required: true
   belongs_to :route, required: true, inverse_of: :destinations
 
+  has_many :connections, inverse_of: :from
+  has_many :connections, inverse_of: :to
+
   validates :sequence, presence: true
   validates :city, uniqueness: { scope: :route, message: 'already exists for this route.' }
 

@@ -133,8 +133,9 @@ class Booking < ActiveRecord::Base
   end
 
   protected
+
   def set_expiry_date
-   self.expiry_date =  Time.current.advance(hours: Setting.first.booking_expiry_period)
+    self.expiry_date =  Time.current.advance(hours: Setting.first.booking_expiry_period)
   end
 
   def setup_return_booking

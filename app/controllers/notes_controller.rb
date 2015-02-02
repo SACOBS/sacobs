@@ -1,6 +1,4 @@
 class NotesController < ApplicationController
-
-
   def create
     @note = Note.create(note_params)
   end
@@ -11,6 +9,7 @@ class NotesController < ApplicationController
   end
 
   private
+
   def note_params
     params.fetch(:note, {}).permit(:context, :content)
   end

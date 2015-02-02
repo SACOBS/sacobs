@@ -24,9 +24,9 @@
 #
 
 class Connection < ActiveRecord::Base
-  belongs_to :route
-  belongs_to :from, class_name: :Destination
-  belongs_to :to, class_name: :Destination
+  belongs_to :route, inverse_of: :connections
+  belongs_to :from, class_name: :Destination, inverse_of: :connections
+  belongs_to :to, class_name: :Destination, inverse_of: :connections
 
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
@@ -52,7 +52,7 @@ class Connection < ActiveRecord::Base
   protected
 
   def set_name
-    self.name =  "#{from.city_name} to #{to.city_name}"
+    self.name = "#{from.city_name} to #{to.city_name}"
   end
 
   def set_percentage

@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: [:copy, :reverse_copy, :show, :edit, :update, :destroy]
+  before_action :set_route, except: [:index]
 
   def index
     @routes = route_scope
@@ -22,10 +22,10 @@ class RoutesController < ApplicationController
   def copy
     copy = @route.copy
     copy.user_id = current_user.id
-    if copy.save!
-     redirect_to copy, notice: 'Route was successfully copied.'
+    if copy.save
+      redirect_to copy, notice: 'Route was successfully copied.'
     else
-     redirect_to routes_url, alert: 'Route could not be copied.'
+      redirect_to routes_url, alert: 'Route could not be copied.'
     end
   end
 
@@ -51,7 +51,7 @@ class RoutesController < ApplicationController
 
   def route_params
     params.fetch(:route, {}).permit(:name, :cost, :distance,
-                                    destinations_attributes: [:city_id, :sequence, :_destroy],
+                                    destinations_attributes: [:city_id, :sequence, :_destroy, :id],
                                     connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
     ).merge(user: current_user)
   end

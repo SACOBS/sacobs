@@ -34,7 +34,6 @@ class Trip < ActiveRecord::Base
     assoc.has_many :bookings
   end
 
-
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
   delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
@@ -59,17 +58,17 @@ class Trip < ActiveRecord::Base
   end
 
   def assign_seats(stop, qty)
-      transaction do
-        stops.affected(stop).each {|s| s.decrement!(:available_seats, qty) }
-        touch
-      end
+    transaction do
+      stops.affected(stop).each { |s| s.decrement!(:available_seats, qty) }
+      touch
+    end
   end
 
   def unassign_seats(stop, qty)
-      transaction do
-        stops.affected(stop).each {|s| s.increment!(:available_seats, qty) }
-        touch
-      end
+    transaction do
+      stops.affected(stop).each { |s| s.increment!(:available_seats, qty) }
+      touch
+    end
   end
 
   private
@@ -87,7 +86,7 @@ class Trip < ActiveRecord::Base
   def generate_stops
     transaction do
       stops.clear
-      stops.create(route.connections.map {|connection| {connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive} })
+      stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive } })
     end
   end
  end
