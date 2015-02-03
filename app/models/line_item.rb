@@ -16,6 +16,8 @@
 #
 
 class LineItem < ActiveRecord::Base
+  default_scope { order(:id) }
+
   enum line_item_type: [:debit, :credit]
 
   belongs_to :invoice

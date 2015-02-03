@@ -4,6 +4,9 @@ module Bookings
 
     layout 'wizard'
 
+    before_action :set_booking, only: [:index, :show, :update]
+
+
     steps :trip_details,
           :return_trip_details,
           :client_details,
@@ -11,43 +14,27 @@ module Bookings
           :passenger_charges,
           :billing_info
 
-    before_action :set_booking, only: [:index, :show, :update]
-    before_action :set_attributes, only: :update
-
     def index
-      if request.xhr?
-        if @booking.has_return?
-          fetch_return_stops
+        if params[:return] == 'true'
+          @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
           render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
         else
-          fetch_stops
+          @stops = TripSearch.execute(search_params)
           render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
         end
       end
-    end
 
     def show
       case step
-        when :trip_details then
-        when :return_trip_details then
-          @booking.has_return? ? fetch_return_stops : skip_step
+        when :return_trip_details then skip_step unless @booking.has_return?
       end
       render_wizard
     end
 
     def update
-      case step
-        when :trip_details
-          fetch_stops
-        when :return_trip_details
-          fetch_return_stops
-        when :passenger_charges
-          @booking.sync_return_booking
-          build_invoice
-        when :billing_info then
-          @booking.reserve
-      end
-      render_wizard @booking
+      @booking_wizard = Booking::Wizard.new(@booking, booking_params)
+      @booking_wizard.process(step)
+      render_wizard @booking_wizard
     end
 
     def cities
@@ -61,35 +48,16 @@ module Bookings
     helper_method :clients
 
     private
-
     def search_params
       params.fetch(:q, {}).delete_if { |_key, value| value.blank? }
-    end
-
-    def fetch_stops
-      @stops ||= TripSearch.execute(search_params)
-    end
-
-    def fetch_return_stops
-      @stops ||= ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
-    end
-
-    def finish_wizard_path
-      booking_path(@booking)
-    end
-
-    def build_invoice
-      return_booking = @booking.return_booking
-      @booking.invoice = InvoiceBuilder.execute(@booking)
-      return_booking.invoice = InvoiceBuilder.execute(return_booking) if return_booking
     end
 
     def set_booking
       @booking = Booking.find(params[:booking_id])
     end
 
-    def set_attributes
-      @booking.assign_attributes(booking_params)
+    def finish_wizard_path
+      booking_path(@booking)
     end
 
     def booking_params

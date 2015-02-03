@@ -40,15 +40,7 @@ class Booking < ActiveRecord::Base
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
 
-  has_many :passengers, dependent: :delete_all do
-    def build(attributes = {}, &block)
-      attributes.merge! name: proxy_association.owner.client_name,
-                        surname: proxy_association.owner.client_surname,
-                        cell_no: proxy_association.owner.client_cell_no,
-                        email: proxy_association.owner.client_email
-      super(attributes, &block)
-    end
-  end
+  has_many :passengers, dependent: :delete_all
 
   accepts_nested_attributes_for :client, :passengers, :invoice
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
@@ -62,10 +54,8 @@ class Booking < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
 
-  before_save :generate_reference
-  before_save :setup_passengers, if: :client_id_changed?
-  before_save :set_expiry_date
-  after_find :setup_return_booking, if: :has_return?
+  after_initialize :set_defaults, if: :new_record?
+
 
   scope :active, -> { joins(:trip).merge(Trip.valid) }
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
@@ -73,14 +63,6 @@ class Booking < ActiveRecord::Base
   scope :travelling, -> { where(arel_table[:status].eq(statuses[:reserved]).or(arel_table[:status].eq(statuses[:paid]))) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
-
-  def sync_return_booking
-    return unless has_return?
-    return_booking.client = client
-    return_booking.passengers.clear
-    passengers.each { |passenger| return_booking.passengers << passenger.dup }
-    return_booking.save!
-  end
 
   def open?
     reserved? && !expired?
@@ -94,18 +76,10 @@ class Booking < ActiveRecord::Base
     expiry_date? && (expiry_date <= Time.current)
   end
 
-  def client
-    super || build_client
-  end
-
   def reserve
     transaction do
       trip.assign_seats(stop, quantity)
       reserved!
-      if return_booking.present?
-        return_booking.user = user
-        return_booking.reserve
-      end
     end
   end
 
@@ -116,36 +90,23 @@ class Booking < ActiveRecord::Base
     end
   end
 
-  private
-
-  def setup_passengers
-    passengers.clear
-    passenger_type =  PassengerType.find_by(description: :pensioner) if client_is_pensioner?
-    quantity.times { passengers.build(passenger_type: passenger_type) }
+  def client
+    super || build_client
   end
 
-  def defaults
-    { status: :in_process, price: 0, quantity: 1, has_return: false }
+
+  private
+  def set_defaults
+    self.status = :in_process
+    self.price = 0
+    self.quantity = 1
+    self.has_return = false
+    self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
+    self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{'%03d' % sequence_id}"
+    self.expiry_date = Time.current.advance(hours: Setting.first.booking_expiry_period)
   end
 
   def quantity_available
     errors.add(:quantity, 'The number of seats selected exceeds the available seating on the bus for this connection.') unless quantity <= stop.available_seats
-  end
-
-  protected
-
-  def set_expiry_date
-    self.expiry_date =  Time.current.advance(hours: Setting.first.booking_expiry_period)
-  end
-
-  def setup_return_booking
-    build_return_booking unless return_booking.present? && has_return?
-  end
-
-  def generate_reference
-    if reserved?
-      self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
-      self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{'%03d' % sequence_id}" unless reference_no?
-    end
   end
 end

@@ -13,8 +13,6 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     if $('#return_trip_search').length
       $('#return_trip_search').submit()
 
-
-
     $('#trip_search').on 'ajax:success', (evt, data, status, xhr) ->
       $('.trips').html(data)
 
