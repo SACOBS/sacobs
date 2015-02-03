@@ -3,13 +3,14 @@
 .page-header
   %h2 Edit Setting
 #errors= errors_for @setting
-= simple_form_for @setting,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @setting, url: setting_url(format: :html), defaults: { error: false }, method: :patch , html: { class: 'form-horizontal' } do |f|
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', root_path, class: t('buttons.default')
 
   %fieldset
     = f.input :booking_expiry_period, autofocus: true
+    = f.input :email, as: :email
     = f.input :ticket_instructions, as: :text
     = f.input :default_scripture, as: :text
     = f.input :trip_sheet_note1, as: :text

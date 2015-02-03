@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129125409) do
+ActiveRecord::Schema.define(version: 20150203082141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 20150129125409) do
     t.string   "trip_sheet_note2",      limit: 255
     t.string   "trip_sheet_note3",      limit: 255
     t.string   "trip_sheet_note4",      limit: 255
+    t.string   "email"
   end
 
   create_table "stops", force: :cascade do |t|

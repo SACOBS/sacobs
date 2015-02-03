@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
 
   etag { current_user.try :id }
 
-  def current_user
-    super || NullUser.new
-  end
-
   def context
     controller_path.gsub('/', '')
   end

@@ -25,7 +25,7 @@
           .content
             .unobtrusive-flash-container
               = yield
-              = render 'shared/notes'
+              = render 'shared/notes' if user_signed_in?
 
       #push
     %footer.navbar.navbar-fixed-bottom.navbar-inverse

@@ -12,6 +12,7 @@
 #  trip_sheet_note2      :string(255)
 #  trip_sheet_note3      :string(255)
 #  trip_sheet_note4      :string(255)
+#  email                 :string
 #
 
 class Setting < ActiveRecord::Base

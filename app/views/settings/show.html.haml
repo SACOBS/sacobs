@@ -12,6 +12,9 @@
     %strong Booking Expiry Period:
     #{@setting.booking_expiry_period} hours
   %p
+    %strong Email:
+    = @setting.email
+  %p
     %strong Ticket Instructions:
     = simple_format(@setting.ticket_instructions)
   %p

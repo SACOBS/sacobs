@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
 
   def update
     @setting.update(setting_params)
-    respond_with @setting, location: setting_url
+    redirect_to setting_url
   end
 
   private
@@ -16,6 +16,7 @@ class SettingsController < ApplicationController
 
   def setting_params
     params.fetch(:setting, {}).permit(:booking_expiry_period,
+                                      :email,
                                       :ticket_instructions,
                                       :default_scripture,
                                       :trip_sheet_note1,
