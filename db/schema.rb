@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203082141) do
+ActiveRecord::Schema.define(version: 20150203130302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -231,10 +231,10 @@ ActiveRecord::Schema.define(version: 20150203082141) do
 
   create_table "reports", force: :cascade do |t|
     t.string   "name",                    null: false
-    t.hstore   "criteria",   default: {}, null: false
     t.integer  "user_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.json     "criteria",   default: {}, null: false
   end
 
   create_table "routes", force: :cascade do |t|

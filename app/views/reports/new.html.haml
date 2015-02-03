@@ -6,22 +6,12 @@
   = simple_form_for @report do |f|
     = f.input :name
     = f.simple_fields_for :criteria do |c|
-      = c.input :stop_from_city, typeahead: cities, label: false, placeholder: 'Select from city', input_html: { data: { targets: '#c_stop_connection_from_city_id_eq', filter: :name } }
+      = c.input :stop_from_city, typeahead: cities, label: false, placeholder: 'Select from city', input_html: { data: { targets: '#report_criteria_stop_connection_from_city_id_eq', filter: :name } }
       = c.hidden_field :stop_connection_from_city_id_eq
-      = c.input :stop_to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#c_stop_connection_to_city_id_eq', filter: :name } }
+      = c.input :stop_to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#report_criteria_stop_connection_to_city_id_eq', filter: :name } }
       = c.hidden_field :stop_connection_to_city_id_eq
-      .well.well-small
-        %h5 Status
-        - Booking.statuses.each do |key, value|
-          = label_tag 'status', key, class: 'checkbox inline' do
-            = check_box_tag "criteria[status_eq_any][]", value
-            = key.titlecase
-      .well.well-small
-        %h5 Passenger Type
-        - PassengerType.all.each do |passenger_type|
-          = label_tag 'status', passenger_type.description, class: 'checkbox inline' do
-            = check_box_tag "criteria[passengers_passenger_type_id_eq_any][]", passenger_type.id
-            = passenger_type.description.titlecase
+      = c.input :status_eq_any, label: 'Statuses', item_wrapper_class: 'inline', collection: Booking.statuses, as: :check_boxes, include_hidden: false
+      = c.input :passengers_passenger_type_id_eq_any, label: 'Passenger Types', item_wrapper_class: 'inline', collection: PassengerType.all, as: :check_boxes,  include_hidden: false
 
 
     = f.submit 'Save', class: t('buttons.inverse')
