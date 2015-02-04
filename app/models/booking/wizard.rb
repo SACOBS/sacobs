@@ -1,10 +1,9 @@
 class Booking::Wizard
-
   module Helpers
     extend ActionView::Helpers::NumberHelper
   end
 
-  def initialize(booking, params={})
+  def initialize(booking, params = {})
     @booking = booking
     @booking.assign_attributes(params)
   end
@@ -22,7 +21,7 @@ class Booking::Wizard
         when :billing_info
           reserve_bookings
       end
-     raise ActiveRecord::Rollback unless @booking.save
+      fail ActiveRecord::Rollback unless @booking.save
     end
   end
 
@@ -50,7 +49,6 @@ class Booking::Wizard
     end
   end
 
-
   def build_invoices
     [@booking, @booking.return_booking].compact.each do |booking|
       price = booking.stop.cost
@@ -69,7 +67,7 @@ class Booking::Wizard
           invoice.line_items.debit.create(description: description, amount: amount)
         end
 
-        #Discount
+        # Discount
         discount = SeasonalDiscount.active_in_period(Date.today).where(passenger_type: passenger.passenger_type).take || passenger.discount
         description = "#{discount.description} discount - #{Helpers.number_to_percentage(discount.percentage * 100, precision: 0)}".capitalize
         amount = Calculations.roundup((price + total_charges) * discount.percentage)

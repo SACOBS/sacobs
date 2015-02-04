@@ -6,7 +6,6 @@ module Bookings
 
     before_action :set_booking, only: [:index, :show, :update]
 
-
     steps :trip_details,
           :return_trip_details,
           :client_details,
@@ -15,13 +14,13 @@ module Bookings
           :billing_info
 
     def index
-        if params[:return] == 'true'
-          @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
-          render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
-        else
-          @stops = TripSearch.execute(search_params)
-          render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
-        end
+      if params[:return] == 'true'
+        @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
+        render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
+      else
+        @stops = TripSearch.execute(search_params)
+        render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+      end
       end
 
     def show
@@ -48,6 +47,7 @@ module Bookings
     helper_method :clients
 
     private
+
     def search_params
       params.fetch(:q, {}).delete_if { |_key, value| value.blank? }
     end

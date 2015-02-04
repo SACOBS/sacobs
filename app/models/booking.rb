@@ -56,7 +56,6 @@ class Booking < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
 
-
   scope :active, -> { joins(:trip).merge(Trip.valid) }
   scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
   scope :for_today, -> { where(created_at: Time.now.midnight..Time.now.end_of_day) }
@@ -94,8 +93,8 @@ class Booking < ActiveRecord::Base
     super || build_client
   end
 
-
   private
+
   def set_defaults
     self.status = :in_process
     self.price = 0
