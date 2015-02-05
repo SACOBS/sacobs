@@ -27,6 +27,7 @@
 
 class Client < ActiveRecord::Base
   PENSIONER_AGE = 65
+
   TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
   BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec].freeze
 
@@ -44,9 +45,9 @@ class Client < ActiveRecord::Base
 
   validates :name, :surname, presence: true
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
+  validates :date_of_birth, presence: { message: 'obtained from id number is not a valid date, please check the id number field.' }, if: proc { |client| client.id_number.present? }
 
-  before_validation :normalize
-  before_save :set_birth_date
+  before_validation :normalize, :set_birth_date
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
@@ -65,11 +66,13 @@ class Client < ActiveRecord::Base
 
   protected
 
+  # Ugly but input is not guaranteed to be valid most of the time
   def set_birth_date
-    return unless id_number.present? && id_number.size > 5
-    date = Date.strptime(id_number[0..5], '%y%m%d')
-    date.prev_year(100) if date > Date.today
-    self.date_of_birth = date
+    date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
+    if date
+      date = date.prev_year(100) if date > Date.today
+      self.date_of_birth = date
+    end
   end
 
   def normalize

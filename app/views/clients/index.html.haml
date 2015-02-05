@@ -4,7 +4,13 @@
   %h2
     Clients
     %small= current_alpha_page(params[:letter])
-  = page_entries_info @clients
+  %p
+  Page #{content_tag(:strong, @clients.current_page)} of #{content_tag(:strong, @clients.total_pages)}
+  %p= page_entries_info @clients
+  = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
+  = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
+  = paginate @clients, params: { letter: params[:letter] }
+
 
 
 .search.pull-right
@@ -13,8 +19,6 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
-= link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
-= link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
 
 = alpha_pager(params[:letter])
 

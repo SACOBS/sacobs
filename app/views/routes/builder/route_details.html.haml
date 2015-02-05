@@ -4,7 +4,7 @@
 = simple_form_for @route, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
     = f.input :name, autofocus: true
-    = f.input :cost, as: :cost
+    = f.input :cost, as: :cost, label: 'Master Rate'
     = f.input :distance, as: :distance
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')

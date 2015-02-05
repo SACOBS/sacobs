@@ -21,7 +21,7 @@
     .tab-pane.active#details
       %fieldset
         = f.input :name, autofocus: true
-        = f.input :cost, as: :cost
+        = f.input :cost, as: :cost, label: 'Master Rate'
         = f.input :distance, as: :distance
     .tab-pane#connections
       %fieldset
