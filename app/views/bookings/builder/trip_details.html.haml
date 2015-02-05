@@ -11,7 +11,7 @@
     = f.hidden_field :from_city_id
     = f.input :to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_to_city_id', filter: :name } }
     = f.hidden_field :to_city_id
-    = f.input :trip_date, as: :date_picker, placeholder: 'Select a date', label: false
+    = f.input :trip_date, as: :date, use_short_month: true, order: [:day, :month, :year], label: false
     = f.submit 'Search', class: t('buttons.inverse')
 #errors= errors_for @booking
 

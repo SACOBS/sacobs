@@ -5,6 +5,14 @@
     Trips
     %br
     %small Total: #{current_trips_count}
+  %p
+    Page #{content_tag(:strong, @trips.current_page)} of #{content_tag(:strong, @trips.total_pages)}
+  %p= page_entries_info @trips
+  = paginate @trips
+  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
+  = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
+
+
 
 .search.pull-right
   = simple_form_for :q, url: search_trips_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'trip_search', method: :get, data: { type: :html } }, remote: true do |f|
@@ -13,9 +21,6 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', trips_path, class: t('buttons.mini.inverse'), icon: :times
 
-.actions
-  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
-  = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 #trips
   = render partial: 'trips', locals: { trips: @trips }
