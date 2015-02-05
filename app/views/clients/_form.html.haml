@@ -4,20 +4,23 @@
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', clients_path, class: t('buttons.default')
   %fieldset
-    = f.input :title, collection: Client::TITLES, include_blank: false, prompt: 'Select a title', autofocus: true
-    = f.input :name
-    = f.input :surname
-    = f.input :id_number
-    = f.input :high_risk
-    = f.input :bank, collection: Client::BANKS, include_blank: 'Not Applicable'
-    = f.input :home_no, as: :tel
-    = f.input :work_no, as: :tel
-    = f.input :cell_no, as: :tel
-    = f.input :email, as: :email
-    = f.input :notes, as: :text
-  #address
-    = f.simple_fields_for :address do |address|
-      = render 'clients/address_fields', f: address
+    .row
+      .span4
+        = f.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title'
+        = f.input :name
+        = f.input :surname
+        = f.input :id_number
+        = f.input :bank, include_blank: true, label: 'Select a bank', collection: Client::BANKS
+        = f.input :high_risk
+      .span4
+        = f.input :cell_no, as: :tel
+        = f.input :home_no, as: :tel
+        = f.input :work_no, as: :tel
+        = f.input :email, as: :email
+        = f.input :notes, as: :text
+      .span4
+        = f.simple_fields_for :address do |address|
+          = render 'clients/address_fields', f: address
   .form-actions
     = f.submit class: t('buttons.primary')
     = link_to 'Cancel', clients_path, class: t('buttons.default')
