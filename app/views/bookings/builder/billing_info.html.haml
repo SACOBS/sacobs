@@ -9,7 +9,7 @@
 #errors= errors_for @booking
 = simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false } do |f|
   .form-actions
-    = f.submit 'Complete', class: t('buttons.primary'), autofocus: true
+    = f.submit 'Complete (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n'
 
   - bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do
     = f.simple_fields_for :invoice do |invoice|
