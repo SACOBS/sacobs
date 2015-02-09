@@ -4,15 +4,33 @@
   %h2 New Priority Pricing
 
 #errors= errors_for @seasonal_discount
-= simple_form_for @seasonal_discount,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
-  %fieldset
-    = f.input :name, autofocus: true
-    = f.association :passenger_type, include_blank: false
-    = f.input :percentage
-    = f.input :period_from, as: :date_picker
-    = f.input :period_to, as: :date_picker
-    = f.input :active, as: :boolean
-  .form-actions
-    = f.submit class: t('buttons.primary')
-    = link_to 'Cancel', seasonal_discounts_path, class: t('buttons.default')
+.row
+  .span6.pull-right
+    .calculator.well.well-small
+      %h4 Discount calculator
+      .discounted-price
+        %label{for: 'discounted-price'} New Price
+        %input#discounted-price{type: :text, value: 0}
+      .original-price
+        %label{for: 'original-price'} Original Price
+        %input#original-price{type: :text, value: 0}
+      .results
+        %p#difference
+          %strong Difference:
+          %span 0
+        %p#percentage
+          %strong Percentage:
+          %span 0
+  .span6.pull-left
+    = simple_form_for @seasonal_discount,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
+      %fieldset
+        = f.input :name, autofocus: true
+        = f.association :passenger_type, include_blank: false
+        = f.input :percentage
+        = f.input :period_from, as: :date_picker
+        = f.input :period_to, as: :date_picker
+        = f.input :active, as: :boolean
+      .form-actions
+        = f.submit class: t('buttons.primary')
+        = link_to 'Cancel', seasonal_discounts_path, class: t('buttons.default')
 
