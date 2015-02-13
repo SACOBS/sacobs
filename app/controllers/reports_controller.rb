@@ -12,6 +12,11 @@ class ReportsController < ApplicationController
     respond_with @report, location: reports_url
   end
 
+  def show
+    @report = Report.find(params[:id])
+    @results = Booking.not_in_process.search(@report.criteria).result
+  end
+
   def search
     @results = Booking.search(params[:q]).result.distinct(true).group_by { |r| r.created_at.beginning_of_month }
     render :index

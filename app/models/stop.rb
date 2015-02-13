@@ -19,7 +19,7 @@
 
 class Stop < ActiveRecord::Base
   belongs_to :trip
-  belongs_to :connection, -> { includes(:from, :to) }
+  belongs_to :connection, -> { includes(from: :city, to: :city) }
   has_many :bookings
 
   scope :valid, -> { joins(:trip).merge(Trip.valid) }

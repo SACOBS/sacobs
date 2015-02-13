@@ -1,0 +1,25 @@
+.page-header
+  %h2= @report.name
+  .actions
+    = back_to reports_path
+    = link_to 'Edit', edit_report_path(@report), icon: :edit, class: t('buttons.inverse')
+    = link_to 'Destroy', @report, icon: :times, class: t('buttons.danger')
+
+.well.well-small
+  %h4 Results Summary
+  %p Items: #{@results.size}
+  %p Total Amount: #{number_to_currency(@results.map(&:invoice_total).compact.reduce(&:+))}
+
+.results
+  - @results.group_by {|result| result.updated_at.beginning_of_month }.sort.each do |month, results_per_month|
+    %h4= month.strftime('%B')
+    - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Available Seats', 'Pricing', 'Qty', 'Return?'], types: [:condensed] do
+      - results_per_month.group_by(&:client_name).each do |client_name ,result|
+        - result.each do |r|
+          %tr
+            %td= r.trip_name
+            %td= r.trip_start_date
+            %td= r.status.upcase
+            %td= r.client_full_name
+
+
