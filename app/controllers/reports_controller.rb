@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :set_report, except: [:index, :new, :create]
+
   def index
     @reports = Report.all
   end
@@ -12,15 +14,25 @@ class ReportsController < ApplicationController
     respond_with @report, location: reports_url
   end
 
+  def edit
+  end
+
+  def update
+    @report.update(report_params)
+    respond_with @report
+  end
+
   def show
-    @report = Report.find(params[:id])
     @results = Booking.not_in_process.search(@report.criteria).result
   end
 
-  def search
-    @results = Booking.search(params[:q]).result.distinct(true).group_by { |r| r.created_at.beginning_of_month }
-    render :index
+  def destroy
+    @report.destroy
+    respond_with @report
   end
+
+
+
 
   def cities
     @cities ||= City.all.to_json(only: [:id, :name])
@@ -28,6 +40,10 @@ class ReportsController < ApplicationController
   helper_method :cities
 
   private
+
+  def set_report
+    @report = Report.find(params[:id])
+  end
 
   def report_params
     params.fetch(:report, {}).permit(:name, criteria: [:stop_connection_from_city_id_eq, :stop_connection_to_city_id_eq, status_eq_any: [], passengers_passenger_type_id_eq_any: []])

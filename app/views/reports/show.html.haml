@@ -3,7 +3,7 @@
   .actions
     = back_to reports_path
     = link_to 'Edit', edit_report_path(@report), icon: :edit, class: t('buttons.inverse')
-    = link_to 'Destroy', @report, icon: :times, class: t('buttons.danger')
+    = link_to 'Destroy', @report, icon: :times, class: t('buttons.danger'), method: :delete
 
 .well.well-small
   %h4 Results Summary
