@@ -141,7 +141,7 @@ end
 group :production do
   gem 'puma'
   gem 'rails_12factor'
-  gem 'htmlcompressor'
+  gem 'heroku-deflater'
 end
 
 group :doc do
