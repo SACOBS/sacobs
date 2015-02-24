@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  criteria   :json             default("{}"), not null
+#  period     :integer          default("3")
 #
 
 FactoryGirl.define do

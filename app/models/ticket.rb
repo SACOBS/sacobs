@@ -39,19 +39,19 @@ class Ticket
   end
 
   def depart_time
-    booking.depart.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
+    booking.depart.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
   end
 
   def arrive_time
-    booking.arrive.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
+    booking.arrive.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
   end
 
   def return_depart_time
-    return_booking.depart.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
+    return_booking.depart.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
   end
 
   def return_arrive_time
-    return_booking.arrive.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
+    return_booking.arrive.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
   end
 
   def return_from_city

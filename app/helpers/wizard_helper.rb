@@ -6,15 +6,15 @@ module WizardHelper
     progress_div(current_step_number, total_steps, percentage_complete)
   end
 
-
   private
+
   def progress_div(current_step_number, total_steps, percentage_complete)
     content_tag :div, class: 'wizard_progress' do
       concat content_tag(:h2, "#{wizard_name} Wizard")
       concat content_tag(:h4, "Step #{current_step_number} of #{total_steps}")
       concat (content_tag :div, nil, class: 'progress' do
-               concat content_tag(:div, nil, class: 'bar', style:  "width: #{percentage_complete}%;")
-             end)
+        concat content_tag(:div, nil, class: 'bar', style:  "width: #{percentage_complete}%;")
+      end)
       concat content_tag(:h3, step.to_s.titleize)
     end
   end

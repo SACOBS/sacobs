@@ -11,6 +11,7 @@ class TripSearch
   end
 
   private
+
   def criteria_from_params
     criteria = {}
     criteria.merge!(available_seats_gt: 0)

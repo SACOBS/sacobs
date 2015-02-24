@@ -49,9 +49,9 @@ module Bookings
     private
 
     def search_params
-      params[:q][:trip_date] = Date.civil(params[:q].delete("trip_date(1i)").to_i,
-                                          params[:q].delete("trip_date(2i)").to_i,
-                                          params[:q].delete("trip_date(3i)").to_i) rescue nil
+      params[:q][:trip_date] = Date.civil(params[:q].delete('trip_date(1i)').to_i,
+                                          params[:q].delete('trip_date(2i)').to_i,
+                                          params[:q].delete('trip_date(3i)').to_i) rescue nil
       params.fetch(:q, {}).delete_if { |_key, value| value.blank? }
     end
 

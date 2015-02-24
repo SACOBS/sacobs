@@ -6,8 +6,8 @@ class ExceptionMailer < ActionMailer::Base
     @message = message
     @backtrace = backtrace
     mail(
-        to: 'support@searleconsulting.co.za',
-        subject: 'Sacobs Error'
+      to: 'support@searleconsulting.co.za',
+      subject: 'Sacobs Error'
     )
   end
 end

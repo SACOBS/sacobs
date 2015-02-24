@@ -5,6 +5,7 @@
   %h5 Search
   = simple_form_for @report do |f|
     = f.input :name
+    = f.input :period, collection: [3, 6, 9, 12], include_blank: false, label_method: lambda { |period| "#{period} Months" }
     = f.simple_fields_for :criteria do |c|
       = c.input :stop_from_city, typeahead: cities, label: false, placeholder: 'Select from city', input_html: { data: { targets: '#report_criteria_stop_connection_from_city_id_eq', filter: :name } }
       = c.hidden_field :stop_connection_from_city_id_eq
@@ -12,6 +13,5 @@
       = c.hidden_field :stop_connection_to_city_id_eq
       = c.input :status_eq_any, label: 'Statuses', item_wrapper_class: 'inline', collection: Booking.statuses.except(:in_process), as: :check_boxes, include_hidden: false
       = c.input :passengers_passenger_type_id_eq_any, label: 'Passenger Types', item_wrapper_class: 'inline', collection: PassengerType.all, as: :check_boxes,  include_hidden: false
-
 
     = f.submit 'Save', class: t('buttons.inverse')
