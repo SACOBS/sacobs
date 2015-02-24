@@ -166,13 +166,18 @@ Sacobs::Application.routes.draw do
 
   devise_for :users
 
-  resources :reports
+  resources :reports do
+    member do
+      get :print, defaults: { format: :pdf }
+      get :download
+    end
+  end
 
   resources :bookings, only: [:create, :show, :index, :destroy] do
     collection do
       get :search
       get :daily
-      get :print_daily
+      get :print_daily, defaults: { format: :pdf }
     end
     member do
       patch :cancel
@@ -245,7 +250,7 @@ Sacobs::Application.routes.draw do
 
   resources :tickets, only: [:show] do
     member do
-      get :print
+      get :print, defaults: { format: :pdf }
       post :email
       get :download
     end
@@ -253,7 +258,7 @@ Sacobs::Application.routes.draw do
 
   resources :trip_sheets, only: [:show, :edit, :update, :index] do
     member do
-      get :print
+      get :print, defaults: { format: :pdf }
       get :download
     end
   end

@@ -39,19 +39,19 @@ class Ticket
   end
 
   def depart_time
-    booking.depart || @view_context.l(Time.zone.now, format: :long)
+    booking.depart.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
   end
 
   def arrive_time
-    booking.arrive || @view_context.l(Time.zone.now, format: :long)
+    booking.arrive.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
   end
 
   def return_depart_time
-    return_booking.depart || @view_context.l(Time.zone.now, format: :long)
+    return_booking.depart.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
   end
 
   def return_arrive_time
-    return_booking.arrive || @view_context.l(Time.zone.now, format: :long)
+    return_booking.arrive.try(:strftime, "%I:%M %P") || Time.now.strftime("%I:%M %P")
   end
 
   def return_from_city

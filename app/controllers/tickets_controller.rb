@@ -20,7 +20,8 @@ class TicketsController < ApplicationController
         render pdf: generate_file_name,
                template: 'tickets/_ticket.html.haml',
                disposition: :inline,
-               layout: 'pdf.html'
+               layout: 'pdf.html',
+               locals: { ticket: @ticket }
       end
     end
   end

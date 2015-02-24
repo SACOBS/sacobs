@@ -19,6 +19,8 @@
       %td= ticket.to_venue
       %td= ticket.depart_time
       %td= ticket.arrive_time
+      %td
+      %td
   - if ticket.return_booking
     - ticket.passengers.each do |return_passenger|
       %tr
@@ -30,6 +32,8 @@
         %td= ticket.return_to_venue
         %td= ticket.return_depart_time
         %td= ticket.return_arrive_time
+        %td
+        %td
   %tr
     %td
     %td

@@ -1,12 +1,12 @@
 = content_for (:title) do
   Daily Bookings
 
-.text-center= link_to 'Print', print_daily_bookings_path(format: :pdf), class: t('buttons.primary')
+.text-center= link_to 'Print', print_daily_bookings_path, class: t('buttons.primary')
 %br
 
 = render partial: 'daily_bookings'
 
 
-.text-center= link_to 'Print', print_daily_bookings_path(format: :pdf), class: t('buttons.primary')
+.text-center= link_to 'Print', print_daily_bookings_path, class: t('buttons.primary')
 
 

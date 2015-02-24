@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, except: [:index, :new, :create]
+  before_action :set_results, except: [:index, :new, :create]
 
   def index
     @reports = Report.all
@@ -26,13 +27,28 @@ class ReportsController < ApplicationController
     @results = Booking.not_in_process.search(@report.criteria).result
   end
 
+  def download
+    pdf = WickedPdf.new.pdf_from_string(render_to_string(template: 'reports/_results.html.haml', layout: 'pdf.html'))
+    send_data(pdf,
+              filename: "#{@report.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
+              disposition: :attachment)
+  end
+
+  def print
+    respond_to do |format|
+      format.pdf do
+        render pdf: "#{@report.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
+               template: 'reports/_results.html.haml',
+               disposition: :inline,
+               layout: 'pdf.html'
+      end
+    end
+  end
+
   def destroy
     @report.destroy
     respond_with @report
   end
-
-
-
 
   def cities
     @cities ||= City.all.to_json(only: [:id, :name])
@@ -43,6 +59,10 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = Report.find(params[:id])
+  end
+
+  def set_results
+    @results = Booking.not_in_process.search(@report.criteria).result
   end
 
   def report_params

@@ -1,7 +1,7 @@
 = content_for(:title) do
   ="Trip sheet #{@trip.name}_#{@trip.start_date}"
 .actions.text-center
-  = link_to 'Print', print_trip_sheet_path(@trip, format: :pdf), class: t('buttons.primary')
+  = link_to 'Print', print_trip_sheet_path(@trip), class: t('buttons.primary')
   = link_to 'Download', download_trip_sheet_path(@trip), class: t('buttons.info')
 
 
@@ -9,5 +9,5 @@
 
 
 .actions.text-center
-  = link_to 'Print', print_trip_sheet_path(@trip, format: :pdf), class: t('buttons.primary')
+  = link_to 'Print', print_trip_sheet_path(@trip), class: t('buttons.primary')
   = link_to 'Download', download_trip_sheet_path(@trip), class: t('buttons.info')
