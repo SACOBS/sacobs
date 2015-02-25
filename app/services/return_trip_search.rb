@@ -15,6 +15,7 @@ class ReturnTripSearch
   private
 
   def init_search_params
+    @search_params.merge!(trip_start_date_gteq: @stop.trip_start_date) unless @search_params.key?(:trip_date)
     @search_params.merge!(from_city_id: @stop.to_city_id) unless @search_params.key?(:from_city_id)
     @search_params.merge!(to_city_id: @stop.from_city_id) unless @search_params.key?(:to_city_id)
   end
