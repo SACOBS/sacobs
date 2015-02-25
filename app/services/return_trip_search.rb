@@ -9,7 +9,7 @@ class ReturnTripSearch
   end
 
   def execute
-    Stop.includes(:trip, connection: [from: :city, to: :city]).search(criteria).result(distinct: true).valid.limit(30)
+    Stop.includes(:trip, connection: [from: :city, to: :city]).search(criteria).result(distinct: true).limit(30)
   end
 
   private
