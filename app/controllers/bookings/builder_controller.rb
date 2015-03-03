@@ -15,10 +15,10 @@ module Bookings
 
     def index
       if params[:return] == 'true'
-        @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
+        @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params).order('trips.start_date ASC')
         render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
       else
-        @stops = TripSearch.execute(search_params)
+        @stops = TripSearch.execute(search_params).order('trips.start_date ASC')
         render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
       end
       end
