@@ -7,7 +7,7 @@ class TripSearch
   end
 
   def execute
-    Stop.includes(:trip, connection: [from: :city, to: :city]).search(criteria_from_params).result(distinct: true).limit(30)
+    Stop.includes(:trip, connection: [from: :city, to: :city]).search(criteria_from_params).result(distinct: true).order('trips.start_date ASC').limit(30)
   end
 
   private
