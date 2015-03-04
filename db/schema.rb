@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304082301) do
+ActiveRecord::Schema.define(version: 20150304094000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -235,7 +235,6 @@ ActiveRecord::Schema.define(version: 20150304082301) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.json     "criteria",    default: {}, null: false
-    t.integer  "period",      default: 3
     t.date     "period_from"
     t.date     "period_to"
   end
