@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @results = Booking.not_in_process.search(@report.criteria).result
+    @results = Booking.not_in_process.where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
   end
 
   def download
@@ -66,6 +66,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.fetch(:report, {}).permit(:name, :period, criteria: [:stop_connection_from_city_id_eq, :stop_connection_to_city_id_eq, status_eq_any: [], passengers_passenger_type_id_eq_any: []])
+    params.fetch(:report, {}).permit(:name, :period_from, :period_to, criteria: [:stop_connection_from_city_id_eq, :stop_connection_to_city_id_eq, status_eq_any: [], passengers_passenger_type_id_eq_any: []])
   end
 end
