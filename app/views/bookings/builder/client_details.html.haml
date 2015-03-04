@@ -16,27 +16,29 @@
       = f.input :client_search, typeahead: clients, label: false, autofocus: true, placeholder: 'Search for client', input_html: { value: '', data: { targets: '#booking_client_attributes_id, #booking_client_id', populate: '.new_client_fields', filter: :full_name } }
       = f.input :client_id, as: :hidden
   .new_client_fields
-    = f.simple_fields_for :client do |client|
+    = f.simple_fields_for :client, defaults: {label: false} do |client|
       %fieldset
         %legend Or add a new one
         .row
           .span4
-            = client.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title'
-            = client.input :name
-            = client.input :surname
+            = client.input :title, collection: Client::TITLES, include_blank: true, prompt: 'Select a title'
+            = client.input :name, placeholder: 'Name'
+            = client.input :surname, placeholder: 'Surname'
+            = client.simple_fields_for :address do |address|
+              = address.input :city, placeholder: 'City'
+            = client.input :id_number, placeholder: 'Id Number'
           .span4
-            = client.input :id_number
-            = client.input :bank, include_blank: true, label: 'Select a bank', collection: Client::BANKS
-            = client.input :cell_no, as: :tel
+            = client.input :bank, include_blank: true, prompt: 'Select a bank', collection: Client::BANKS
+            = client.input :high_risk, label: false, inline_label: true
+            = client.input :cell_no, as: :tel, placeholder: 'Cell No'
+            = client.input :home_no, as: :tel, placeholder: 'Home No'
+            = client.input :work_no, as: :tel, placeholder: 'Work No'
+            = client.input :email, as: :email, placeholder: 'Email'
           .span4
-            = client.input :home_no, as: :tel
-            = client.input :work_no, as: :tel
-            = client.input :email, as: :email
+            = client.simple_fields_for :address do |address|
+              = address.input :street_address1, placeholder: 'Street Address 1'
+              = address.input :street_address2, placeholder: 'Street Address 2'
+              = address.input :postal_code, placeholder: 'Postal Code'
+            = client.input :notes, placeholder: 'Notes'
         = client.hidden_field :user_id, value: current_user.id
         = client.input :id, as: :hidden
-
-
-
-
-
-
