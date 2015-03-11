@@ -11,11 +11,6 @@ class DestinationsController < ApplicationController
     end
   end
 
-  def cities
-    @cities ||= City.all.to_json(only: [:id, :name])
-  end
-  helper_method :cities
-
   def destinations
     @destinations ||= @route.destinations.to_json(only: [:id], methods: :city_name)
   end

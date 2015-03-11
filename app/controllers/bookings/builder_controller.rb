@@ -36,16 +36,6 @@ module Bookings
       render_wizard @booking_wizard
     end
 
-    def cities
-      @cities ||= City.all.to_json(only: [:id, :name])
-    end
-    helper_method :cities
-
-    def clients
-      @clients ||= Client.all.to_json(except: [:created_at, :updated_at], methods: :full_name)
-    end
-    helper_method :clients
-
     private
 
     def search_params

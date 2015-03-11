@@ -50,11 +50,6 @@ class ReportsController < ApplicationController
     respond_with @report
   end
 
-  def cities
-    @cities ||= City.all.to_json(only: [:id, :name])
-  end
-  helper_method :cities
-
   private
 
   def set_report
