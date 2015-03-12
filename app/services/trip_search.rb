@@ -12,7 +12,7 @@ class TripSearch
 
   private
 
-  def criteria_from_params
+  def criteria
     criteria = {}
     criteria.merge!(available_seats_gt: 0)
     criteria.merge!(trip_start_date_gteq: trip_date) if @search_params.key?(:trip_date)

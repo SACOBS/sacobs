@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @results = Booking.not_in_process.where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
+    @results = Booking.processed.where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
   end
 
   def download
@@ -57,7 +57,7 @@ class ReportsController < ApplicationController
   end
 
   def set_results
-    @results = Booking.not_in_process.search(@report.criteria).result.where(created_at: @report.period.months.ago.beginning_of_month..Date.today.end_of_month)
+    @results = Booking.processed.search(@report.criteria).result.where(created_at: @report.period.months.ago.beginning_of_month..Date.today.end_of_month)
   end
 
   def report_params

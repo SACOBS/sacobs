@@ -21,6 +21,8 @@
 #
 
 class Trip < ActiveRecord::Base
+  include Archivable
+
   to_param :name
 
   belongs_to :user
@@ -45,9 +47,6 @@ class Trip < ActiveRecord::Base
   after_update :generate_stops, if: :route_id_changed?
 
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
-
-  scope :valid, -> { where(arel_table[:start_date].gteq(Date.today)) }
-  scope :archived, -> { where(arel_table[:start_date].lteq(Date.today)) }
 
   def copy
     copy = dup

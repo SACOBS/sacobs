@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    bookings = booking_scope.all
+    bookings = booking_scope.includes(:trip).all
     @booking_presenter = BookingPresenter.new(bookings, params)
   end
 
@@ -52,7 +52,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_scope
-    @booking_scope ||= Booking.includes(:trip, :stop, :client).not_in_process.active
+    @booking_scope ||= Booking.processed
   end
 
   def set_booking

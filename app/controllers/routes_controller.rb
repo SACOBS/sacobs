@@ -2,7 +2,8 @@ class RoutesController < ApplicationController
   before_action :set_route, except: [:index]
 
   def index
-    @routes = route_scope
+    @routes = route_scope.all
+    fresh_when @routes, last_modified: @routes.maximum(:updated_at)
   end
 
   def show

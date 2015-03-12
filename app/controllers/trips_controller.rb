@@ -2,12 +2,9 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
   layout 'with_sidebar', only: :show
 
-  def calendar
-    @trips = trip_scope
-  end
-
   def index
     @trips = trip_scope.page(params[:page])
+    fresh_when @trips, last_modified: @trips.maximum(:updated_at)
   end
 
   def search
@@ -53,7 +50,7 @@ class TripsController < ApplicationController
   private
 
   def trip_scope
-    @trip_scope ||= Trip.includes(:route, :bus).valid
+    @trip_scope ||= Trip.includes(:route, :bus)
   end
 
   def archived_trip_scope

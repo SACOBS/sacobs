@@ -1,7 +1,7 @@
 class BookingPresenter
   attr_reader :standby, :cancelled, :paid, :reserved, :bookings
   def initialize(bookings, params)
-    @bookings = bookings
+    @bookings = bookings.to_a
     @params = params
   end
 

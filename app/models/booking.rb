@@ -28,6 +28,8 @@
 #
 
 class Booking < ActiveRecord::Base
+  include Archivable
+
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
   belongs_to :user
@@ -56,8 +58,7 @@ class Booking < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
 
-  scope :active, -> { joins(:trip).merge(Trip.valid) }
-  scope :not_in_process, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
+  scope :processed, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
   scope :for_today, -> { where(created_at: Time.now.midnight..Time.now.end_of_day) }
   scope :travelling, -> { where(arel_table[:status].eq(statuses[:reserved]).or(arel_table[:status].eq(statuses[:paid]))) }
 

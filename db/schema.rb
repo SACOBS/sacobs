@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304094000) do
+ActiveRecord::Schema.define(version: 20150312131459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20150304094000) do
     t.boolean  "has_return"
     t.integer  "stop_id"
     t.integer  "sequence_id",              default: "nextval('sequence_id_seq'::regclass)"
+    t.boolean  "archived",                 default: false
+    t.datetime "archived_at"
   end
 
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id", using: :btree
@@ -313,7 +315,7 @@ ActiveRecord::Schema.define(version: 20150304094000) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",        limit: 255
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "route_id"
@@ -322,6 +324,8 @@ ActiveRecord::Schema.define(version: 20150304094000) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.text     "notes"
+    t.boolean  "archived",                default: false
+    t.datetime "archived_at"
   end
 
   add_index "trips", ["bus_id"], name: "index_trips_on_bus_id", using: :btree

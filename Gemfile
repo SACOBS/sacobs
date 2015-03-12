@@ -112,7 +112,6 @@ group :development do
   gem 'spring'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
-  gem 'rack-mini-profiler'
 end
 
 group :development, :test do
