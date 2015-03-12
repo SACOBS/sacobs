@@ -59,14 +59,14 @@ class Trip < ActiveRecord::Base
 
   def assign_seats(stop, qty)
     transaction do
-      stops.affected(stop).each { |s| s.decrement!(:available_seats, qty) }
+      stops.affected(stop).update_all(['available_seats = available_seats - ?', qty])
       touch
     end
   end
 
   def unassign_seats(stop, qty)
     transaction do
-      stops.affected(stop).each { |s| s.increment!(:available_seats, qty) }
+      stops.affected(stop).update_all(['available_seats = available_seats + ?', qty])
       touch
     end
   end
