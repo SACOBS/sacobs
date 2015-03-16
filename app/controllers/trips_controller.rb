@@ -12,16 +12,6 @@ class TripsController < ApplicationController
     render partial: 'trips', locals: { trips: results }
   end
 
-  def archived
-    @archived_trips = archived_trip_scope.page(params[:page])
-  end
-
-  def search_archived
-    results = archived_trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
-    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
-    render partial: 'archived_trips', locals: { archived_trips: results }
-  end
-
   def show
     fresh_when @trip, last_modified: @trip.updated_at
   end
@@ -50,10 +40,6 @@ class TripsController < ApplicationController
 
   def trip_scope
     @trip_scope ||= Trip.includes(:route, :bus)
-  end
-
-  def archived_trip_scope
-    @archived_trip_scope ||= Trip.includes(:route, :bus).archived
   end
 
   def set_trip

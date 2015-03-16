@@ -209,14 +209,20 @@ Sacobs::Application.routes.draw do
     end
   end
 
+  namespace :trips do
+    resources :archives, only: [:index, :show] do
+      collection do
+        get :search
+      end
+    end
+  end
+
   resources :trips, only: [:index, :show, :edit, :update, :destroy] do
     member do
       post :copy
     end
     collection do
       get :search
-      get :archived
-      get :search_archived
     end
     resources :builder, only: [:show, :update, :create], controller: 'trips/builder'
   end
