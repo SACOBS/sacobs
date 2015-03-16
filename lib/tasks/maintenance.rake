@@ -8,11 +8,15 @@ namespace :maintenance do
   end
 
   task archive_trips: :environment do
-    trips = Trip.where.not(id: Trip.valid)
+    trips = Trip.where('start_date < ?', Date.current)
     trips.find_each do |trip|
         Trip.transaction do
-          trip.bookings.each(&:archive!)
-          trip.archive!
+          if trip.valid?
+            trip.bookings.each(&:archive!)
+            trip.archive!
+          else
+            trip.destroy!
+          end
         end
     end
   end

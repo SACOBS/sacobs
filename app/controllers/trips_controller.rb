@@ -4,7 +4,6 @@ class TripsController < ApplicationController
 
   def index
     @trips = trip_scope.page(params[:page])
-    fresh_when @trips, last_modified: @trips.maximum(:updated_at)
   end
 
   def search
@@ -58,7 +57,7 @@ class TripsController < ApplicationController
   end
 
   def set_trip
-    @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    @trip = Trip.unscoped.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
   end
 
   def trip_params

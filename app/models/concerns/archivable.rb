@@ -10,6 +10,6 @@ module Archivable
   def archive!
     self.archived = true
     self.archived_at = Time.current
-    save!
+    save!(validate: false)
   end
 end

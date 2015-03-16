@@ -22,16 +22,12 @@ module ApplicationHelper
     end
   end
 
-  def cities
-    @cities ||= City.select(:id, :name)
-  end
-
   def route_cities(route)
     @route_cities ||= route.destinations.map(&:city)
   end
 
   def current_trips_count
-    @current_trips_count ||= Trip.valid.count
+    @current_trips_count ||= Trip.count
   end
 
   def decimal_to_percentage(value)

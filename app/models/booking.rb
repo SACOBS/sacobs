@@ -33,7 +33,7 @@ class Booking < ActiveRecord::Base
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
   belongs_to :user
-  belongs_to :trip
+  belongs_to :trip, counter_cache: true
   belongs_to :stop
   belongs_to :client
   belongs_to :main, class_name: 'Booking', foreign_key: :main_id

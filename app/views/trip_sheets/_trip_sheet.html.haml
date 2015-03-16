@@ -7,8 +7,10 @@
   %h2 TRIP SHEET FOR #{@trip_sheet_presenter.trip_name}
 %p.pull-left
   %strong Drivers:
-  = list_of (@trip_sheet_presenter.drivers_names) do |name|
-    = name
+  %br
+  %ul.unstyled
+    = list_of (@trip_sheet_presenter.drivers_names) do |name|
+      = name
 %p.pull-right
   %strong Bus:
   = @trip_sheet_presenter.bus_name
@@ -20,7 +22,6 @@
 %h4.text-center
   Bookings and Reservations
 %hr
-
 - bootstrap_table headers: ['Clients', 'From', 'To', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do
   - @trip_sheet_presenter.bookings.each do |booking|
     - booking.passengers.each do |passenger|

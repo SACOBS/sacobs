@@ -33,7 +33,9 @@ class TripSheetsController < ApplicationController
   private
 
   def set_trip
-    @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    Trip.unscoped do
+       @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    end
   end
 
   def set_trip_sheet_presenter

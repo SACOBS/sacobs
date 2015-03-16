@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312131459) do
+ActiveRecord::Schema.define(version: 20150313125921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 20150312131459) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name",           limit: 255
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "route_id"
@@ -324,8 +324,9 @@ ActiveRecord::Schema.define(version: 20150312131459) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.text     "notes"
-    t.boolean  "archived",                default: false
+    t.boolean  "archived",                   default: false
     t.datetime "archived_at"
+    t.integer  "bookings_count",             default: 0
   end
 
   add_index "trips", ["bus_id"], name: "index_trips_on_bus_id", using: :btree
@@ -375,5 +376,4 @@ ActiveRecord::Schema.define(version: 20150312131459) do
   add_index "vouchers", ["client_id"], name: "index_vouchers_on_client_id", using: :btree
   add_index "vouchers", ["user_id"], name: "index_vouchers_on_user_id", using: :btree
 
-  add_foreign_key "bookings", "clients", on_delete: :cascade
 end
