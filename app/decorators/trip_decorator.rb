@@ -35,6 +35,6 @@ class TripDecorator < BaseDecorator
 
   def generate_tripsheet_link(options = {})
     options.merge!(target: '_blank')
-    helpers.link_to 'Generate TripSheet', helpers.edit_trip_sheet_path(model), options
+    helpers.link_to 'Generate TripSheet', helpers.trip_sheet_path(model), options
   end
 end
