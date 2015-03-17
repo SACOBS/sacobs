@@ -1,7 +1,6 @@
 class Trips::ArchivesController < ApplicationController
   layout 'with_sidebar', only: :show
 
-
   def index
     @trips = trip_scope.includes(:route, :bus).page(params[:page])
   end

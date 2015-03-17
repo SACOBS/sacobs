@@ -52,8 +52,7 @@ class Booking::Wizard
   def build_invoices
     [@booking, @booking.return_booking].compact.each do |booking|
       price = booking.stop.cost
-      invoice = booking.build_invoice
-      invoice.save
+      invoice = booking.create_invoice
       booking.passengers.each do |passenger|
         # Ticket price
         invoice.line_items.debit.create(description: "#{passenger.full_name} ticket", amount: price)
@@ -83,7 +82,6 @@ class Booking::Wizard
   end
 
   def reserve_bookings
-    @booking.reserve
-    @booking.return_booking.reserve if @booking.has_return?
+    [@booking, @booking.return_booking].compact.each(&:reserve)
   end
 end

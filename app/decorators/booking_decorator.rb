@@ -26,7 +26,7 @@ class BookingDecorator < BaseDecorator
   end
 
   def trip_date
-    helpers.l(trip_start_date, format: :long)
+    helpers.l(trip_start_date, format: :long) if trip_start_date.present?
   end
 
   def expiry_date
@@ -50,7 +50,11 @@ class BookingDecorator < BaseDecorator
   end
 
   def show_link(options = {})
-    helpers.link_to 'Show', model, options
+    if archived?
+      helpers.link_to 'Show', helpers.bookings_archive_path(model), options
+    else
+      helpers.link_to 'Show', model, options
+    end
   end
 
   def ticket_link(options = {})

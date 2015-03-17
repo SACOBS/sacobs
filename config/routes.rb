@@ -173,6 +173,14 @@ Sacobs::Application.routes.draw do
     end
   end
 
+  namespace :bookings do
+    resources :archives, only: [:index, :show] do
+      collection do
+        get :search
+      end
+    end
+  end
+
   resources :bookings, only: [:create, :show, :index, :destroy] do
     collection do
       get :search

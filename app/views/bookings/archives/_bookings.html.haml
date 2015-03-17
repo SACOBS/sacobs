@@ -1,0 +1,7 @@
+= paginate bookings, param_name: "#{type}_page"
+- if bookings.any?
+  - bootstrap_table headers: ['Actions', 'Expires', 'Client Name', 'Home No', 'Cell No', 'Work No', 'Trip Date', 'Qty', 'From', 'To'],
+                    types: %i(hover condensed), html_options: { class: 'sortable' } do
+    = render partial: 'bookings/archives/booking', collection: bookings, cache: true
+- else
+  %h3 There are currently 0 #{type} bookings.

@@ -7,6 +7,8 @@
       %li= link_to 'New', bookings_path, method: :post
       %li.divider
       %li= link_to 'View', bookings_path
+      %li.divider
+      %li= link_to 'Archived', bookings_archives_path
     - drop_down_menu('Clients') do
       %li= link_to 'New', new_client_path
       %li.divider
