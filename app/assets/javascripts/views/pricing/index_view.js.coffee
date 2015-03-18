@@ -8,22 +8,31 @@ class Views.Pricing.IndexView extends Views.ApplicationView
          parseInt($(this).data('route')) == route_id
       ).show()
 
-    $('#connection-search').on 'keyup click input', ->
-     if this.value.length > 0
-      if $("input[type='radio']").is(":checked")
-        $('#connections-list li').hide().filter( ->
-          parseInt($(this).data('route')) == parseInt($("input[type='radio']:checked").val())
-        ).filter( ->
+
+    filter_connections =
+       Utilities.debounce((->
+        if $("input[type='radio']").is(":checked")
+          $('#connections-list li').hide().filter( ->
+            parseInt($(this).data('route')) == parseInt($("input[type='radio']:checked").val())
+          ).filter( ->
             $(this).text().toLowerCase().indexOf($('#connection-search').val().toLowerCase()) != -1
           ).show()
-      else
-        $('#connections-list li').hide().filter( ->
-             $(this).text().toLowerCase().indexOf($('#connection-search').val().toLowerCase()) != -1
-         ).show()
+        else
+          $('#connections-list li').hide().filter( ->
+            $(this).text().toLowerCase().indexOf($('#connection-search').val().toLowerCase()) != -1
+          ).show()),250)
+
+
+
+
+
+    $('#connection-search').on 'keyup click input', ->
+     if this.value.length > 0
+       filter_connections()
      else
        $('#connections-list li').hide
 
-    $('#show_pricing').on 'ajax:success',  (evt, data, status, xhr) ->
+    $(document).on 'ajax:success', '#show_pricing' ,(evt, data, status, xhr) ->
       $('.quote').html(data)
 
 

@@ -3,7 +3,7 @@
     = link_to 'Edit', edit_charge_path(charge), icon: :edit, class: t('buttons.mini.inverse')
     = link_to 'Destroy', charge, icon: :times, data: { confirm: t('messages.confirm', resource: :charge) }, method: :delete, class: t('buttons.mini.danger')
   %td= charge.description
-  %td= decimal_to_percentage(charge.percentage)
+  %td= number_to_percentage(charge.percentage, precision: 0)
 
 
 

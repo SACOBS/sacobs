@@ -1,8 +1,4 @@
 class Booking::Wizard
-  module Helpers
-    extend ActionView::Helpers::NumberHelper
-  end
-
   def initialize(booking, params = {})
     @booking = booking
     @booking.assign_attributes(params)
@@ -60,16 +56,16 @@ class Booking::Wizard
         # Additional Charges
         total_charges = 0
         passenger.charges.each do |charge|
-          description = "#{charge.description} charge - #{Helpers.number_to_percentage(charge.percentage * 100, precision: 0)}".capitalize
-          amount = Calculations.roundup(price * charge.percentage)
+          description = "#{charge.description} charge - #{charge.percentage.round}%".capitalize
+          amount = Calculations.roundup(price * (charge.percentage.to_f / 100))
           total_charges += amount
           invoice.line_items.debit.create(description: description, amount: amount)
         end
 
         # Discount
         discount = SeasonalDiscount.active_in_period(Date.today).where(passenger_type: passenger.passenger_type).take || passenger.discount
-        description = "#{discount.description} discount - #{Helpers.number_to_percentage(discount.percentage * 100, precision: 0)}".capitalize
-        amount = Calculations.roundup((price + total_charges) * discount.percentage)
+        description = "#{discount.description} discount - #{discount.percentage.round}%".capitalize
+        amount = ((price + total_charges) * (discount.percentage.to_f / 100)).round
         invoice.line_items.credit.create(description: description, amount: amount)
       end
     end

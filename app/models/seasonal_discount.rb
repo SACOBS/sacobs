@@ -35,10 +35,6 @@ class SeasonalDiscount < ActiveRecord::Base
     "#{name}(seasonal_#{passenger_type_description}_discount)".titleize
   end
 
-  def percentage
-    self[:percentage].to_f / 100
-  end
-
   private
 
   def defaults

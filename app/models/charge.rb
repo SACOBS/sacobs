@@ -18,8 +18,4 @@ class Charge < ActiveRecord::Base
   belongs_to :user
 
   validates :description, :percentage, presence: true
-
-  def percentage
-    self[:percentage].to_f / 100
-  end
 end

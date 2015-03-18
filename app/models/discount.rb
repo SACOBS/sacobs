@@ -21,8 +21,4 @@ class Discount < ActiveRecord::Base
   accepts_nested_attributes_for :passenger_type, reject_if: :all_blank, allow_destroy: true
 
   delegate :description, to: :passenger_type
-
-  def percentage
-    self[:percentage].to_f / 100
-  end
 end
