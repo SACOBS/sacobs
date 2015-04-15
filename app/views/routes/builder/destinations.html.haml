@@ -5,7 +5,7 @@
     #errors= errors_for @route
     = simple_form_for @route, defaults: { error: false }, url: wizard_path do |f|
       %fieldset
-        - bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { id: 'destinations' } do
+        = bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { id: 'destinations' } do
           = f.simple_fields_for :destinations, wrapper: false do |destination|
             = render 'routes/builder/destination_fields', f: destination
         .links

@@ -1,12 +1,12 @@
 - if stops.any?
   - stops.group_by {|s| s.trip_start_date.beginning_of_month }.sort.each do |month, stops_for_month|
     %h4= month.strftime('%B')
-    - bootstrap_table types: [:condensed] do
+    = bootstrap_table types: [:condensed] do
       - stops_for_month.each do |stop|
         %tr
           %td
             = simple_form_for booking, namespace: stop.id, url: wizard_path(:trip_details), method: :patch, wrapper: false, defaults: { label: false } do |f|
-              - bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Available Seats', 'Pricing', 'Qty', 'Return?'], types: [:condensed] do
+              = bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Available Seats', 'Pricing', 'Qty', 'Return?'], types: [:condensed] do
                 %tr
                   %td= link_to stop.trip_name, trip_path(stop.trip_id), target: '_blank'
                   %td= l(stop.trip_start_date, format: :long)

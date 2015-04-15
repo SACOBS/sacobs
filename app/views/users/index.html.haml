@@ -3,7 +3,7 @@
 .page-header
   %h2 Users
 
-- bootstrap_table headers: %w(Actions Name Email Role), types: %i(hover condensed), html_options: { class: 'sortable' } do
+= bootstrap_table headers: %w(Actions Name Email Role), types: %i(hover condensed), html_options: { class: 'sortable' } do
   = render @users, cache: true
 
 = link_to 'Refresh', users_path, class: t('buttons.default'), icon: :refresh

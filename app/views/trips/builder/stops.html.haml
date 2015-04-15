@@ -7,7 +7,7 @@
     = link_to 'Cancel', trip_path(@trip), method: :delete, class: t('buttons.danger')
 
   %fieldset
-    - bootstrap_table headers: %w(From To Arrive Depart), types: [:hover, :condensed], html_options: { id: 'stops' } do
+    = bootstrap_table headers: %w(From To Arrive Depart), types: [:hover, :condensed], html_options: { id: 'stops' } do
       = f.simple_fields_for :stops, wrapper: false do |stop|
         = render 'trips/builder/stop_fields', f: stop
   .form-actions

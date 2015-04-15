@@ -29,7 +29,7 @@
         = f.input :notes, as: :text
     .tab-pane#stops
       %fieldset
-        - bootstrap_table headers: %w(From To Arrive Depart), types: [:hover, :condensed], html_options: { id: 'stops' } do
+        = bootstrap_table headers: %w(From To Arrive Depart), types: [:hover, :condensed], html_options: { id: 'stops' } do
           = f.simple_fields_for :stops, wrapper: false do |stop|
             %tr
               %td= stop.object.from_city_name

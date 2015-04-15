@@ -3,14 +3,12 @@ module BootstrapHelper
 
   def bootstrap_table(*args)
     options = args.extract_options!
-    html_options = options.fetch(:html_options) { Hash.new }
+    html_options = options.fetch(:html_options, {})
     html_options[:class] ||= []
     html_options[:class] = table_classes(options[:types])  <<  html_options[:class].split
-    haml_tag :table, html_options do
-      table_headers(options[:headers])
-      haml_tag :tbody, class: 'page' do
-        yield if block_given?
-      end
+    content_tag :table, html_options do
+      concat(table_headers(options[:headers]))
+      concat(content_tag(:tbody, class: 'page') { yield if block_given? })
     end
   end
 
@@ -19,24 +17,26 @@ module BootstrapHelper
   end
 
   def table_headers(headers)
-    if headers && headers.any?
-      haml_tag :thead do
-        haml_tag :tr do
-          headers.each { |h| haml_tag :th, h }
-        end
+    if headers.present?
+      content_tag(:thead) do
+        concat(content_tag(:tr) do
+          headers.each { |h| concat(content_tag(:th, h)) }
+        end)
       end
     end
   end
 
   def drop_down_menu(name)
-    haml_tag :li, class: 'dropdown' do
-      haml_tag :a, class: 'dropdown-toggle', href: '#', data: { toggle: 'dropdown' } do
-        haml_concat name
-        haml_tag :b, class: 'caret'
-      end
-      haml_tag :ul, class: 'dropdown-menu' do
-        yield if block_given?
-      end
+    content_tag(:li, class: 'dropdown') do
+      concat(drop_down_toggle(name))
+      concat(content_tag(:ul, class: 'dropdown-menu') { yield if block_given? })
+    end
+  end
+
+  def drop_down_toggle(text)
+    content_tag(:a, class: 'dropdown-toggle', href: '#', data: { toggle: 'dropdown' }) do
+     concat(text)
+     concat(content_tag(:b, nil ,class: 'caret'))
     end
   end
 end

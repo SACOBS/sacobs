@@ -11,7 +11,7 @@
   .form-actions
     = f.submit 'Complete (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n'
 
-  - bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do
+  = bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do
     = f.simple_fields_for :invoice do |invoice|
       = invoice.simple_fields_for :line_items, wrapper: false do |line_item|
         %tr{ class: dom_class(line_item.object), id: dom_id(line_item.object), data: { type: line_item.object.line_item_type } }

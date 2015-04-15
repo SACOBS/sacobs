@@ -10,7 +10,7 @@
     = f.submit 'Search', class: t('buttons.mini.warning')
     = link_to 'Clear', drivers_path, class: t('buttons.mini.inverse'), icon: :times
 
-- bootstrap_table headers: %w(Actions Name Surname), types: %i(hover condensed), html_options: { class: 'sortable', id: 'drivers' } do
+= bootstrap_table headers: %w(Actions Name Surname), types: %i(hover condensed), html_options: { class: 'sortable', id: 'drivers' } do
   = render @drivers, cache: true
 
 = link_to 'Setup Driver', new_driver_path, class: t('buttons.primary'), icon: :plus

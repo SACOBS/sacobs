@@ -8,7 +8,7 @@
     .info
       %p= booking.payment_detail_payment_type
       - [booking.main, booking, booking.return_booking].compact.each do |b|
-        - bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do
+        = bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do
           - BookingDecorator.decorate(b, self) do |decorated_b|
             %tr
               %td= decorated_b.status

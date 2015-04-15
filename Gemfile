@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.1'
@@ -25,8 +25,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Frontend
-gem 'haml', '~> 4.1.0.beta.1'
-gem 'haml-rails'
+gem 'hamlit'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
 gem 'bootswatch-rails', '~> 0.5.0'
@@ -109,33 +108,11 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rails_best_practices'
-  gem 'spring'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
 end
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'spring-commands-rspec'
-end
 
-group :test do
-  # Test suites
-  gem 'capybara'
-  gem 'launchy'
-  gem 'selenium-webdriver'
-
-
-  # Factories
-  gem 'database_cleaner', '~> 1.2.0'
-
-  # Matchers
-  gem 'shoulda-matchers'
-  gem 'shoulda-callback-matchers'
-  gem 'email_spec'
-end
 
 group :production do
   gem 'puma'

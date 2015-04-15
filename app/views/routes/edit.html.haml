@@ -25,7 +25,7 @@
         = f.input :distance, as: :distance
     .tab-pane#connections
       %fieldset
-        - bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
+        = bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
           = f.simple_fields_for :connections, wrapper: false do |connection|
             %tr
               %td= connection.object.from_city_name

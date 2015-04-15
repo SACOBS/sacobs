@@ -12,7 +12,7 @@
 = link_to 'Setup Bus', bus_builder_index_path(bus_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
 = link_to 'Refresh', buses_path, class: t('buttons.default'), icon: :refresh
 
-- bootstrap_table headers: %w(Actions Name Year Model Capacity), types: %i(hover condensed), html_options: { class: 'sortable' } do
+= bootstrap_table headers: %w(Actions Name Year Model Capacity), types: %i(hover condensed), html_options: { class: 'sortable' } do
   = render @buses, cache: true
 
 = link_to 'Setup Bus', bus_builder_index_path(bus_id: :building), method: :post, icon: :plus, class: t('buttons.primary')
