@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    bookings = booking_scope.includes(:trip, :client).all
+    bookings = booking_scope.includes(:trip, :client, stop: { connection: [:from,:to ] }).all
     @booking_presenter = BookingPresenter.new(bookings, params)
   end
 

@@ -2,7 +2,7 @@ class Trips::ArchivesController < ApplicationController
   layout 'with_sidebar', only: :show
 
   def index
-    @trips = trip_scope.includes(:route, :bus).page(params[:page])
+    @trips = trip_scope.page(params[:page])
   end
 
   def show
@@ -10,13 +10,13 @@ class Trips::ArchivesController < ApplicationController
   end
 
   def search
-    results = @trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
-    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
-    render partial: 'trips', locals: { archived_trips: results }
+    results = trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
+    flash[:notice] = "#{view_context.pluralize(results.total_count, 'Result')} found"
+    render partial: 'trips/archives/trips', locals: { trips: results }
   end
 
   private
   def trip_scope
-    @trip_scope ||= Trip.archived
+    @trip_scope ||= Trip.archived.includes(:route, :bus, :bookings)
   end
 end

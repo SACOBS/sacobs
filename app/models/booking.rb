@@ -33,8 +33,8 @@ class Booking < ActiveRecord::Base
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
   belongs_to :user
-  belongs_to :trip, counter_cache: true
-  belongs_to :stop
+  belongs_to :trip ,counter_cache: true
+  belongs_to :stop, -> { includes(:connection) }
   belongs_to :client
   belongs_to :main, class_name: 'Booking', foreign_key: :main_id
 
@@ -57,7 +57,6 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   after_initialize :set_defaults, if: :new_record?
-
 
   scope :processed, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
   scope :for_today, -> { where(created_at: Time.now.midnight..Time.now.end_of_day) }
@@ -93,6 +92,10 @@ class Booking < ActiveRecord::Base
 
   def client
     super || build_client
+  end
+
+  def trip
+    Trip.unscoped { super }
   end
 
   private

@@ -1,14 +1,12 @@
 class Bookings::ArchivesController < ApplicationController
   def index
-    bookings = booking_scope.includes(:trip, :client).all
-    @booking_presenter = BookingPresenter.new(bookings, params)
+    @bookings = booking_scope.page(params[:page])
   end
 
   def search
-    results = booking_scope.search(params[:q]).result.distinct(true)
-    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
-    @booking_presenter = BookingPresenter.new(results, params)
-    render partial: 'bookings/booking_listing', locals: { booking_presenter: @booking_presenter }
+    results = booking_scope.search(params[:q]).result.page(params[:page])
+    flash[:notice] = "#{view_context.pluralize(results.total_count, 'Result')} found"
+    render partial: 'bookings/archives/bookings', locals: { bookings: results }
   end
 
   def show
@@ -17,7 +15,7 @@ class Bookings::ArchivesController < ApplicationController
 
   private
   def booking_scope
-    @booking_scope ||= Booking.processed.archived
+    @booking_scope ||= Booking.processed.archived.includes(:client, :stop)
   end
 
 end
