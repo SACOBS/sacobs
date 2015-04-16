@@ -2,35 +2,18 @@ window.Views.Pricing ||= {}
 class Views.Pricing.IndexView extends Views.ApplicationView
   render: ->
     super()
+
+    $connections = $('#connections-list').find('li')
+
     $("input[type='radio']").on "change", ->
-      route_id  = parseInt(this.value)
-      $('#connections-list li').hide().filter( ->
-         parseInt($(this).data('route')) == route_id
-      ).show()
+      $connections.detach().filter('[data-route=' + parseInt(this.value) + ']').appendTo('#connections-list')
 
 
-    filter_connections =
-       Utilities.debounce((->
-        if $("input[type='radio']").is(":checked")
-          $('#connections-list li').hide().filter( ->
-            parseInt($(this).data('route')) == parseInt($("input[type='radio']:checked").val())
-          ).filter( ->
-            $(this).text().toLowerCase().indexOf($('#connection-search').val().toLowerCase()) != -1
-          ).show()
-        else
-          $('#connections-list li').hide().filter( ->
-            $(this).text().toLowerCase().indexOf($('#connection-search').val().toLowerCase()) != -1
-          ).show()),250)
-
-
-
-
-
-    $('#connection-search').on 'keyup click input', ->
-     if this.value.length > 0
-       filter_connections()
-     else
-       $('#connections-list li').hide
+    $('#connection-search').on 'keyup', ->
+         search_term = this.value.toLowerCase()
+         $connections.hide().filter(->
+                       $(this).text().toLowerCase().indexOf(search_term) != -1
+                     ).show()
 
     $(document).on 'ajax:success', '#show_pricing' ,(evt, data, status, xhr) ->
       $('.quote').html(data)

@@ -5,12 +5,12 @@
   = link_to 'Refresh', trips_archives_path, class: t('buttons.default'), icon: :refresh
 
 
-.search.pull-right
-  = simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } }, remote: true do |f|
-    = f.input :start_date_eq, as: :date_picker, placeholder: 'Search trip dates'
-    = f.input :name_cont, as: :search_box
-    = f.submit 'Search', class: t('buttons.mini.warning')
-    = link_to 'Clear', trips_archives_path, class: t('buttons.mini.inverse'), icon: :times
+  .search.pull-right
+    = simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } }, remote: true do |f|
+      = f.input :start_date_eq, as: :date_picker, placeholder: 'Search trip dates'
+      = f.input :name_cont, as: :search_box
+      = f.submit 'Search', class: t('buttons.mini.warning')
+      = link_to 'Clear', trips_archives_path, class: t('buttons.mini.inverse'), icon: :times
 #archived_trips
   = render partial: 'trips', locals: { trips: @trips }
 

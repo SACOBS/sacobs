@@ -6,19 +6,15 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
     Widgets.DateTimePicker.enable()
     Widgets.TypeAhead.enable()
 
-
-    if $('#trip_search').length
-      $('#trip_search').submit()
-
-    if $('#return_trip_search').length
-      $('#return_trip_search').submit()
-
-    $('#trip_search').on 'ajax:success', (evt, data, status, xhr) ->
+    $trip_search = $('#trip_search')
+    $trip_search.submit() if $trip_search.length
+    $trip_search.on 'ajax:success', (evt, data, status, xhr) ->
       $('.trips').html(data)
 
-    $('#return_trip_search').on 'ajax:success', (evt, data, status, xhr) ->
+    $return_trip_search = $('#return_trip_search')
+    $return_trip_search.submit() if $return_trip_search.length
+    $return_trip_search.on 'ajax:success', (evt, data, status, xhr) ->
       $('.returns').html(data)
-
 
     $('.amount').on 'change', ->
       total = 0

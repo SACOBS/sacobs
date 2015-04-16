@@ -6,8 +6,8 @@ class Views.Clients.IndexView extends Views.ApplicationView
       $('#clients').html(data)
 
     $('.client').on 'ajax:success', '#delete_client' ,(evt, data, status, xhr) ->
-      row = $(this).closest('tr')
-      row.children('td').animate({ padding: 0 }).wrapInner('<div />').children().slideUp ->
+      $row = $(this).closest('tr')
+      $row.children('td').animate({ padding: 0 }).wrapInner('<div />').children().slideUp ->
         $(this).remove()
   cleanup: ->
     super()
