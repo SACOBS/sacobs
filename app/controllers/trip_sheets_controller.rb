@@ -14,35 +14,27 @@ class TripSheetsController < ApplicationController
   end
 
   def download
-    html = render_to_string(template: 'trip_sheets/_trip_sheet.html.haml', layout: 'pdf.html')
-    pdf = WickedPdf.new.pdf_from_string(html)
-    send_data(pdf, filename: generate_file_name, disposition: :attachment)
+    render_pdf(disposition: :attachment)
   end
 
   def print
-    respond_with @trip do |format|
-      format.pdf do
-        render pdf: generate_file_name,
-               disposition: :inline,
-               template: 'trip_sheets/_trip_sheet.html.haml',
-               layout: 'pdf.html'
-      end
-    end
+    render_pdf
   end
 
   private
+  def render_pdf(disposition: :inline)
+    render pdf: @trip.to_file_name,
+           template: 'trip_sheets/_trip_sheet.html.haml',
+           disposition: disposition,
+           layout: 'pdf.html',
+  end
 
   def set_trip
-    Trip.unscoped do
-       @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
-    end
+    @trip = Trip.unscoped { Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id]) }
   end
 
   def set_trip_sheet_presenter
     @trip_sheet_presenter = TripsheetPresenter.new(@trip, view_context)
   end
 
-  def generate_file_name
-    "#{@trip.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
-  end
 end

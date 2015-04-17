@@ -28,21 +28,11 @@ class ReportsController < ApplicationController
   end
 
   def download
-    pdf = WickedPdf.new.pdf_from_string(render_to_string(template: 'reports/_results.html.haml', layout: 'pdf.html'))
-    send_data(pdf,
-              filename: "#{@report.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
-              disposition: :attachment)
+    render_pdf(disposition: :attachment)
   end
 
   def print
-    respond_to do |format|
-      format.pdf do
-        render pdf: "#{@report.name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
-               template: 'reports/_results.html.haml',
-               disposition: :inline,
-               layout: 'pdf.html'
-      end
-    end
+    render_pdf
   end
 
   def destroy
@@ -51,13 +41,19 @@ class ReportsController < ApplicationController
   end
 
   private
+  def render_pdf(disposition: :inline)
+    render pdf: @report.to_file_name,
+           template: 'reports/_results.html.haml',
+           disposition: disposition,
+           layout: 'pdf.html',
+  end
 
   def set_report
     @report = Report.find(params[:id])
   end
 
   def set_results
-    @results = Booking.processed.search(@report.criteria).result.where(created_at: @report.period.months.ago.beginning_of_month..Date.today.end_of_month)
+    @results = Booking.unscoped { Booking.all }.processed.where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
   end
 
   def report_params

@@ -70,6 +70,10 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def to_file_name
+    "#{name}_#{Time.current.to_i}".gsub(' ', '_').downcase
+  end
+
   private
 
   def defaults

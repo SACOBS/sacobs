@@ -27,6 +27,10 @@ class Report < ActiveRecord::Base
     @to_city ||= City.where(id: criteria['stop_connection_to_city_id_eq']).pluck(:name)
   end
 
+  def to_file_name
+    "#{name}_#{Time.current.to_i}".gsub(' ', '_').downcase
+  end
+
   private
   def adjust_period_from
     self.period_from = period_from.beginning_of_month

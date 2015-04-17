@@ -86,6 +86,11 @@ class Ticket
     @view_context.number_to_currency total, unit: 'R'
   end
 
+  def to_file_name
+    "#{@booking.trip_name}_#{@booking.client_name}_#{Time.zone.now.to_i}".gsub(' ', '_').downcase
+  end
+
+
   private
 
   def settings

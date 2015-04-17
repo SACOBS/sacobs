@@ -1,8 +1,8 @@
 = content_for(:title) do
   Ticket #{@booking.reference_no}
 .actions.text-center
-  = link_to 'Print', print_ticket_path(@booking), class: t('buttons.primary')
-  = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info')
+  = link_to 'Print', print_ticket_path(@booking), class: t('buttons.primary'), target: '_blank'
+  = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info'), data: { no_turbolink: true }
   = link_to 'Email', email_ticket_path(@booking), method: :post, class: t('buttons.inverse')
 
 = render partial: 'ticket', locals: { ticket: @ticket }
@@ -10,8 +10,8 @@
 %br
 %br
 .actions.text-center
-  = link_to 'Print', print_ticket_path(@booking), class: t('buttons.primary')
-  = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info')
+  = link_to 'Print', print_ticket_path(@booking), class: t('buttons.primary'), target: '_blank'
+  = link_to 'Download', download_ticket_path(@booking), class: t('buttons.info'), data: { no_turbolink: true }
   = link_to 'Email', email_ticket_path(@booking), method: :post, class: t('buttons.inverse')
 
 

@@ -11,7 +11,7 @@ namespace :maintenance do
     trips = Trip.where('start_date < ?', Date.current)
     trips.find_each do |trip|
         Trip.transaction do
-          if trip.valid?
+          if trip.valid? && trip.bookings.any?
             trip.bookings.each(&:archive!)
             trip.archive!
           else

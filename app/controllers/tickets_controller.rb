@@ -3,10 +3,7 @@ class TicketsController < ApplicationController
 
   def download
     @ticket = Ticket.new(@booking, view_context)
-    pdf = generate_pdf
-    send_data(pdf,
-              filename: generate_file_name,
-              disposition: :attachment)
+    render_pdf(disposition: :attachment)
   end
 
   def show
@@ -15,15 +12,7 @@ class TicketsController < ApplicationController
 
   def print
     @ticket = Ticket.new(@booking, view_context)
-    respond_to do |format|
-      format.pdf do
-        render pdf: generate_file_name,
-               template: 'tickets/_ticket.html.haml',
-               disposition: :inline,
-               layout: 'pdf.html',
-               locals: { ticket: @ticket }
-      end
-    end
+    render_pdf
   end
 
   def email
@@ -33,15 +22,15 @@ class TicketsController < ApplicationController
 
   private
 
+  def render_pdf(disposition: :inline)
+    render pdf: "#{@ticket.to_file_name}",
+           template: 'tickets/_ticket.html.haml',
+           disposition: disposition,
+           layout: 'pdf.html',
+           locals: { ticket: @ticket }
+  end
+
   def set_booking
-    @booking = Booking.find(params[:id])
-  end
-
-  def generate_file_name
-    "#{@booking.trip_name}_#{@booking.client_name}_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase
-  end
-
-  def generate_pdf
-    WickedPdf.new.pdf_from_string(render_to_string(template: 'tickets/_ticket.html.haml', layout: 'pdf.html'))
+    @booking = Booking.unscoped { Booking.find(params[:id]) }
   end
 end

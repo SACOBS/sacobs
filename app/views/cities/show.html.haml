@@ -11,8 +11,8 @@
     %strong Venues:
     - if @city.venues.any?
       %ul
-        = list_of(@city.venues) do |v|
-          = v.name
+        - @city.venues do |v|
+          %li= v.name
     - else
       %br
       None

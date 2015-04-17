@@ -9,8 +9,8 @@
   %strong Drivers:
   %br
   %ul.unstyled
-    = list_of (@trip_sheet_presenter.drivers_names) do |name|
-      = name
+    - @trip_sheet_presenter.drivers_names do |name|
+      %li= name
 %p.pull-right
   %strong Bus:
   = @trip_sheet_presenter.bus_name
