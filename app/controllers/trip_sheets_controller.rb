@@ -26,7 +26,7 @@ class TripSheetsController < ApplicationController
     render pdf: @trip.to_file_name,
            template: 'trip_sheets/_trip_sheet.html.haml',
            disposition: disposition,
-           layout: 'pdf.html',
+           layout: 'pdf.html'
   end
 
   def set_trip
