@@ -10,12 +10,12 @@ class Bookings::ArchivesController < ApplicationController
   end
 
   def show
-    @booking = booking_scope.find(params[:id])
+    @booking = Booking.archived.find(params[:id])
   end
 
   private
   def booking_scope
-    @booking_scope ||= Booking.processed.archived.includes(:client, :stop)
+    @booking_scope ||= Booking.archived.processed.includes(:stop, :client)
   end
 
 end

@@ -2,16 +2,16 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
 
   def index
-    bookings = booking_scope.includes(:trip, :client, stop: { connection: [:from,:to ] }).all
+    bookings = booking_scope.all
     @booking_presenter = BookingPresenter.new(bookings, params)
   end
 
   def daily
-    @bookings = booking_scope.for_today
+    @bookings = Booking.includes(:main, :return_booking).processed.for_today
   end
 
   def print_daily
-    @bookings = booking_scope.for_today
+    @bookings =  Booking.includes(:main, :return_booking).processed.for_today
     render pdf: "daily_bookings_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
            disposition: :inline,
            template: 'bookings/_daily_bookings.html.haml',
@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    fresh_when @booking, last_modified: @booking.updated_at
+   fresh_when @booking, last_modified: @booking.updated_at
   end
 
   def destroy
@@ -52,10 +52,10 @@ class BookingsController < ApplicationController
   private
 
   def booking_scope
-    @booking_scope ||= Booking.processed
+    @booking_scope ||= Booking.processed.includes(:stop, :client, :trip)
   end
 
   def set_booking
-    @booking = Booking.find(params[:id])
+    @booking = booking_scope.find(params[:id])
   end
 end

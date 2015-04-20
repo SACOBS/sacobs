@@ -110,6 +110,7 @@ group :development do
   gem 'rails_best_practices'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
+  gem 'bullet'
 end
 
 

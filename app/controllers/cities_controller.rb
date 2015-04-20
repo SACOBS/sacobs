@@ -44,7 +44,7 @@ class CitiesController < ApplicationController
   end
 
   def set_city
-    @city = City.find(params[:id])
+    @city = City.includes(:venues).find(params[:id])
   end
 
   def city_params

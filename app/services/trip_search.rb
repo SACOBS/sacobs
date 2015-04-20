@@ -7,7 +7,7 @@ class TripSearch
   end
 
   def execute
-    Stop.includes(:trip, connection: [from: :city, to: :city]).search(criteria).result.limit(30)
+    Stop.search(criteria).result.limit(30)
   end
 
   private

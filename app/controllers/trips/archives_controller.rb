@@ -17,6 +17,6 @@ class Trips::ArchivesController < ApplicationController
 
   private
   def trip_scope
-    @trip_scope ||= Trip.archived.includes(:route, :bus, :bookings)
+    @trip_scope ||= Trip.archived
   end
 end

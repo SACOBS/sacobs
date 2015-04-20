@@ -39,11 +39,12 @@ class TripsController < ApplicationController
   private
 
   def trip_scope
-    @trip_scope ||= Trip.includes(:route, :bus)
+    @trip_scope ||= Trip.includes(:bus, :route, :bookings)
   end
 
   def set_trip
-    @trip = Trip.unscoped.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    #@trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    @trip = Trip.includes(:stops).find(params[:id])
   end
 
   def trip_params

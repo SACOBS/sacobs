@@ -19,7 +19,7 @@
 
 class Stop < ActiveRecord::Base
   belongs_to :trip
-  belongs_to :connection, -> { includes(from: :city, to: :city) }
+  belongs_to :connection, -> { includes(:from, :to)}
   has_many :bookings
 
   scope :affected,  -> (stop) { includes(:trip).joins(connection: :to).where('connections.from_id != ? and destinations.sequence > ?', stop.connection.to, stop.connection.from.sequence) }

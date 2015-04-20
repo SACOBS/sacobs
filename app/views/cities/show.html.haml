@@ -11,7 +11,7 @@
     %strong Venues:
     - if @city.venues.any?
       %ul
-        - @city.venues do |v|
+        - @city.venues.each do |v|
           %li= v.name
     - else
       %br

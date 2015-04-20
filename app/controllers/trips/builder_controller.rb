@@ -29,7 +29,7 @@ module Trips
     end
 
     def set_trip
-      @trip = Trip.includes(stops: [connection: [from: :city, to: :city]]).find(params[:trip_id])
+      @trip = Trip.find(params[:trip_id])
     end
 
     def trip_params
