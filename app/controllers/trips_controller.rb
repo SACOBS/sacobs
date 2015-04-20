@@ -43,8 +43,7 @@ class TripsController < ApplicationController
   end
 
   def set_trip
-    #@trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
-    @trip = Trip.includes(:stops).find(params[:id])
+    @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
   end
 
   def trip_params

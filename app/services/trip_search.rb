@@ -7,7 +7,7 @@ class TripSearch
   end
 
   def execute
-    Stop.search(criteria).result.limit(30)
+    Stop.includes(:trip, :connection).search(criteria).result.limit(30)
   end
 
   private
