@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
   after_action :verify_authorized, except: [:index, :search]
 
   def index
-    @clients = client_scope.surname_starts_with(params[:letter]).page(params[:page])
+    @clients = client_scope.surname_starts_with(params[:letter]).order(:surname).page(params[:page])
   end
 
   def search

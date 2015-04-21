@@ -56,6 +56,6 @@ class BookingsController < ApplicationController
   end
 
   def set_booking
-    @booking = booking_scope.find(params[:id])
+    @booking = Booking.find(params[:id])
   end
 end
