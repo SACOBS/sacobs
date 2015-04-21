@@ -6,12 +6,12 @@
       = decorated_booking.confirmation_link(icon: :money, class: t('buttons.mini.inverse'))
       = decorated_booking.cancellation_link(icon: :warning, class: t('buttons.mini.warning'))
       = decorated_booking.destroy_link(icon: :times, class: t('buttons.mini.danger'))
-    %td{data: { dateformat: "DD MMM H:mm"}}= decorated_booking.expiry_date
+    %td{ data: { dateformat: 'DD MMM H:mm' } }= decorated_booking.expiry_date
     %td= decorated_booking.client.show_link(text: decorated_booking.client.full_name, target: '_blank')
     %td= decorated_booking.client.home_telephone
     %td= decorated_booking.client.cellphone
     %td= decorated_booking.client.work_telephone
-    %td{data: { dateformat: "ll"}}= decorated_booking.trip_date
+    %td{ data: { dateformat: 'll' } }= decorated_booking.trip_date
     %td= decorated_booking.quantity
     %td= decorated_booking.from_city
     %td= decorated_booking.to_city

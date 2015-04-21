@@ -1,4 +1,4 @@
-= content_for(:title) do
+= content_for :title do
   New Priority Pricing
 .page-header
   %h2 New Priority Pricing
@@ -9,11 +9,11 @@
     .calculator.well.well-small
       %h4 Discount calculator
       .discounted-price
-        %label{for: 'discounted-price'} New Price
-        %input#discounted-price{type: :text, value: 0}
+        %label{ for: 'discounted-price' } New Price
+        %input#discounted-price{ type: :text, value: 0 }
       .original-price
-        %label{for: 'original-price'} Original Price
-        %input#original-price{type: :text, value: 0}
+        %label{ for: 'original-price' } Original Price
+        %input#original-price{ type: :text, value: 0 }
       .results
         %p#difference
           %strong Difference:

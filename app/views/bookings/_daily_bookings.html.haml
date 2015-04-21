@@ -1,7 +1,7 @@
 - @bookings.each do |booking|
-  .well.well-small.booking{id: dom_id(booking)}
+  .well.well-small.booking{ id: dom_id(booking) }
     .pull-left
-      = l(Time.zone.today, format: :long)
+      = l(Date.current, format: :long)
     %br
     .text-center
       %p #{booking.client.title} #{booking.client_full_name}
@@ -14,5 +14,5 @@
               %td= decorated_b.status
               %td= decorated_b.reference_no
               %td #{decorated_b.quantity} x #{decorated_b.stop.name}
-              %td{data: { dateformat: "ll"}}= decorated_b.trip_date
+              %td{ data: { dateformat: 'll' } }= decorated_b.trip_date
               %td= decorated_b.price

@@ -22,6 +22,7 @@ class TripSheetsController < ApplicationController
   end
 
   private
+
   def render_pdf(disposition: :inline)
     render pdf: @trip.to_file_name,
            template: 'trip_sheets/_trip_sheet.html.haml',
@@ -36,5 +37,4 @@ class TripSheetsController < ApplicationController
   def set_trip_sheet_presenter
     @trip_sheet_presenter = TripsheetPresenter.new(@trip, view_context)
   end
-
 end

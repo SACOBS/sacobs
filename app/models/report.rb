@@ -13,7 +13,6 @@
 #
 
 class Report < ActiveRecord::Base
-
   validates :name, presence: true
 
   before_save :adjust_period_from, if: :period_from?
@@ -32,6 +31,7 @@ class Report < ActiveRecord::Base
   end
 
   private
+
   def adjust_period_from
     self.period_from = period_from.beginning_of_month
   end
@@ -39,6 +39,4 @@ class Report < ActiveRecord::Base
   def adjust_period_to
     self.period_to = period_to.end_of_month
   end
-
-
 end

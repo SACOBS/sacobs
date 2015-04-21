@@ -1,8 +1,8 @@
 - if user_signed_in?
   = link_to 'Home', dashboard_path, class: 'brand'
   %ul.nav.pull-left
-    %li=link_to 'New (B)ooking', bookings_path, method: :post, accesskey: 'b',target: '_blank'
-    %li=link_to 'New (C)lient', new_client_path, accesskey: 'c', target: '_blank'
+    %li= link_to 'New (B)ooking', bookings_path, method: :post, accesskey: 'b', target: '_blank'
+    %li= link_to 'New (C)lient', new_client_path, accesskey: 'c', target: '_blank'
     = drop_down_menu('Bookings') do
       %li= link_to 'New', bookings_path, method: :post
       %li.divider

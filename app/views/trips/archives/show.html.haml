@@ -9,7 +9,6 @@
     = display_occupancy(@trip)
 
   - cache @trip do
-
     .well
       %h4 Details
       = bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do
@@ -20,7 +19,7 @@
           %td= decorated_trip.bus_name
           %td= decorated_trip.drivers.map(&:full_name).join(',')
       %h4 Bookings
-      = bootstrap_table headers: ['Status', 'Client Name','From', 'To', 'Qty', 'Telephone'],
+      = bootstrap_table headers: ['Status', 'Client Name', 'From', 'To', 'Qty', 'Telephone'],
                           types: %i(hover condensed), html_options: { class: 'sortable' } do
         - decorated_trip.bookings.processed.each do |booking|
           - decorated_booking = BookingDecorator.decorate(booking, self)

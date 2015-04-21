@@ -23,6 +23,6 @@ class SettingsController < ApplicationController
                                       :trip_sheet_note2,
                                       :trip_sheet_note3,
                                       :trip_sheet_note4
-    )
+                                     )
   end
 end

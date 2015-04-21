@@ -12,6 +12,7 @@ module LookupsHelper
   end
 
   private
+
   def lookup_cache_key(model)
     "#{model.pluralize}/#{model.classify.constantize.count}/#{model.classify.constantize.maximum(:updated_at).to_i}"
   end

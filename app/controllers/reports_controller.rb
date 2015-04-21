@@ -41,6 +41,7 @@ class ReportsController < ApplicationController
   end
 
   private
+
   def render_pdf(disposition: :inline)
     render pdf: @report.to_file_name, template: 'reports/_results.html.haml', disposition: disposition, layout: 'pdf.html'
   end

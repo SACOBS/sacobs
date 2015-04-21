@@ -36,7 +36,7 @@ module Routes
       params.fetch(:route, {}).permit(:name, :cost, :distance,
                                       destinations_attributes: [:city_id, :sequence,  :_destroy],
                                       connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
-      ).merge(user_id: current_user.id)
+                                     ).merge(user_id: current_user.id)
     end
   end
 end

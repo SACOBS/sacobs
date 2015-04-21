@@ -50,6 +50,6 @@ class CitiesController < ApplicationController
   def city_params
     params.fetch(:city, {}).permit(:name,
                                    venues_attributes: [:id, :name, :_destroy]
-    )
+                                  )
   end
 end

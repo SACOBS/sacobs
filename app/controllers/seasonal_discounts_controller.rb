@@ -32,6 +32,6 @@ class SeasonalDiscountsController < ApplicationController
                                                 :period_from,
                                                 :period_to,
                                                 :active
-    )
+                                               )
   end
 end

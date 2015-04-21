@@ -8,9 +8,9 @@
 
 %ul.nav.nav-tabs#Tabbed
   %li.active
-    %a{href: '#details'} Details
+    %a{ href: '#details' } Details
   %li
-    %a{href: '#seating'} Seating
+    %a{ href: '#seating' } Seating
 
 = simple_form_for @bus, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .form-actions

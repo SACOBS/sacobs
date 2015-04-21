@@ -75,7 +75,7 @@ class ClientsController < ApplicationController
                                                           :city,
                                                           :postal_code,
                                                           :_destroy]
-    ).merge(user_id: current_user.id)
+                                    ).merge(user_id: current_user.id)
   end
 
   def interpolation_options

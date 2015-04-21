@@ -1,4 +1,4 @@
 - cache note do
-  %li{id: dom_id(note), class: dom_class(note)}
+  %li{ id: dom_id(note), class: dom_class(note) }
     = note.content
-    = link_to_if(current_user.admin?, '', note, icon: :times ,method: :delete, remote: true) {}
+    = link_to_if(current_user.admin?, '', note, icon: :times, method: :delete, remote: true) {}

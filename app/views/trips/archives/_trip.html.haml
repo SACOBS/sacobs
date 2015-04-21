@@ -4,7 +4,7 @@
       = decorated_trip.generate_tripsheet_link(icon: :road, class: t('buttons.mini.default'))
       = decorated_trip.show_link(icon: :info, class: t('buttons.mini.info'))
     %td= link_to decorated_trip.name, trip_path(trip)
-    %td{data: { dateformat: "ll"}}= decorated_trip.start_date
-    %td{data: { dateformat: "ll"}}= decorated_trip.end_date
+    %td{ data: { dateformat: 'll' } }= decorated_trip.start_date
+    %td{ data: { dateformat: 'll' } }= decorated_trip.end_date
     %td= decorated_trip.route_name
     %td= decorated_trip.bus_name

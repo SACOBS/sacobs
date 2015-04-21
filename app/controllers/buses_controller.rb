@@ -32,6 +32,6 @@ class BusesController < ApplicationController
                                   :year,
                                   :model,
                                   seats_attributes: [:id, :_destroy, :row, :number]
-    ).merge(user_id: current_user.id)
+                                 ).merge(user_id: current_user.id)
   end
 end

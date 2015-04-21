@@ -21,11 +21,12 @@ module Bookings
         @stops = TripSearch.execute(search_params).order('trips.start_date ASC')
         render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
       end
-      end
+    end
 
     def show
       case step
-        when :return_trip_details then skip_step unless @booking.has_return?
+        when :return_trip_details then
+          skip_step unless @booking.has_return?
       end
       render_wizard
     end
@@ -64,7 +65,7 @@ module Bookings
                                         :has_return, :stop_id,
                                         client_attributes, passengers_attributes,
                                         invoice_attributes, return_booking_attributes
-      )
+                                       )
     end
   end
 end

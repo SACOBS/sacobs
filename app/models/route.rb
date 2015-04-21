@@ -42,8 +42,8 @@ class Route < ActiveRecord::Base
     copy.name = "Copy of #{name}"
     destinations.map { |d| copy.destinations.build(city: d.city, sequence: d.sequence) }
     connections.each do |original|
-      from = copy.destinations.select { |d| d.city == original.from_city }.first
-      to = copy.destinations.select { |d| d.city == original.to_city }.first
+      from = copy.destinations.find { |d| d.city == original.from_city }
+      to = copy.destinations.find { |d| d.city == original.to_city }
       copy.connections.build(from: from, to: to)
     end
     copy
@@ -53,9 +53,9 @@ class Route < ActiveRecord::Base
     reverse_copy = dup
     reverse_copy.name = "Reverse of #{name}"
     destinations.reverse.map.with_index(1) { |original, index| reverse_copy.destinations.build(city: original.city, sequence: index) }
-    connections.reverse.each do |original|
-      from = reverse_copy.destinations.select { |d| d.city == original.to_city }.first
-      to = reverse_copy.destinations.select { |d| d.city == original.from_city }.first
+    connections.reverse_each do |original|
+      from = reverse_copy.destinations.find { |d| d.city == original.to_city }
+      to = reverse_copy.destinations.find { |d| d.city == original.from_city }
       reverse_copy.connections.build(from: from, to: to)
     end
     reverse_copy

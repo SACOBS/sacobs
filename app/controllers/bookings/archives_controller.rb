@@ -14,8 +14,8 @@ class Bookings::ArchivesController < ApplicationController
   end
 
   private
+
   def booking_scope
     @booking_scope ||= Booking.archived.processed.includes(:stop, :client)
   end
-
 end

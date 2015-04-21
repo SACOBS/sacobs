@@ -46,7 +46,7 @@ module Trips
                                                         :_destroy,
                                                         :connection_id,
                                                         :available_seats]
-      )
+                                    )
     end
   end
 end

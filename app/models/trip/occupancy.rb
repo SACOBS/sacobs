@@ -16,6 +16,7 @@ class Trip::Occupancy
   end
 
   private
+
   attr_reader :trip
 
   def calculate_occupancy(destination)

@@ -5,6 +5,7 @@ module TripHelper
   end
 
   private
+
   def calculate_statistics(trip)
     key = cache_key(trip)
     Rails.cache.fetch(key) do

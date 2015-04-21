@@ -25,8 +25,8 @@
 
 class Connection < ActiveRecord::Base
   belongs_to :route, inverse_of: :connections
-  belongs_to :from, -> { includes(:city) } ,class_name: :Destination, inverse_of: :connections
-  belongs_to :to, -> { includes(:city) } ,class_name: :Destination, inverse_of: :connections
+  belongs_to :from, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
+  belongs_to :to, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
 
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true

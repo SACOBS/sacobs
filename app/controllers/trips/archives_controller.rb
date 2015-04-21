@@ -16,6 +16,7 @@ class Trips::ArchivesController < ApplicationController
   end
 
   private
+
   def trip_scope
     @trip_scope ||= Trip.archived
   end

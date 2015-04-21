@@ -54,6 +54,6 @@ class RoutesController < ApplicationController
     params.fetch(:route, {}).permit(:name, :cost, :distance,
                                     destinations_attributes: [:city_id, :sequence, :_destroy, :id],
                                     connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
-    ).merge(user: current_user)
+                                   ).merge(user: current_user)
   end
 end

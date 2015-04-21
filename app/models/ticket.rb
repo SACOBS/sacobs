@@ -90,7 +90,6 @@ class Ticket
     "#{@booking.trip_name}_#{@booking.client_name}_#{Time.zone.now.to_i}".gsub(' ', '_').downcase
   end
 
-
   private
 
   def settings

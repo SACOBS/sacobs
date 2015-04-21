@@ -53,11 +53,11 @@ class PricingPresenter
   end
 
   def find_seasonal_discount(passenger_type)
-    seasonal_discounts.select { |sd| sd.passenger_type == passenger_type }.first
+    seasonal_discounts.find { |sd| sd.passenger_type == passenger_type }
   end
 
   def find_discount(passenger_type)
-    discounts.select { |d| d.passenger_type == passenger_type }.first
+    discounts.find { |d| d.passenger_type == passenger_type }
   end
 
   def discounts

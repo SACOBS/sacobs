@@ -22,6 +22,6 @@ class TripSearch
   end
 
   def trip_date
-    @search_params[:trip_date] >= Date.today ? @search_params[:trip_date] : Date.today
+    @search_params[:trip_date] >= Date.current ? @search_params[:trip_date] : Date.current
   end
 end

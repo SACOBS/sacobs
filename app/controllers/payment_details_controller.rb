@@ -32,6 +32,6 @@ class PaymentDetailsController < ApplicationController
                                              :payment_date,
                                              :payment_type,
                                              :reference
-    ).merge(user_id: current_user.id)
+                                            ).merge(user_id: current_user.id)
   end
 end

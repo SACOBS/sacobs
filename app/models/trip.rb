@@ -33,7 +33,7 @@ class Trip < ActiveRecord::Base
 
   with_options dependent: :delete_all do |assoc|
     assoc.has_many :stops
-    assoc.has_many :bookings, ->{ unscope(where: :archived) }
+    assoc.has_many :bookings, -> { unscope(where: :archived) }
   end
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
