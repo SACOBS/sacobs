@@ -16,7 +16,7 @@ class TicketsController < ApplicationController
   end
 
   def email
-    TickerMailer.send_ticket(@booking).deliver_later
+    TicketMailer.send_ticket(@booking).deliver_later
     respond_with @booking, location: ticket_url(@booking), notice: 'Ticket has been emailed successfully'
   end
 
