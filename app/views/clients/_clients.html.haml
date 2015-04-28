@@ -1,4 +1,9 @@
-- cache CacheHelper.cache_key_for_collection(clients) do
-  = bootstrap_table headers: ['Actions', 'Name', 'Surname', 'High Risk', 'Home Telephone', 'Work Telephone', 'CellPhone', 'Email'], types: %i(hover condensed), html_options: { class: 'sortable' } do
-    = render partial: 'client', collection: clients, cache: true
-  %br
+.information.page-header
+  %h4 Page #{content_tag(:strong, clients.current_page)} of #{content_tag(:strong, clients.total_pages)} for #{current_alpha_page(params[:letter])}
+  %p= page_entries_info clients
+
+= paginate clients, remote: true
+.clients
+  - clients.in_groups_of(3, false) do |group|
+    .row-fluid
+      = render group, cache: true

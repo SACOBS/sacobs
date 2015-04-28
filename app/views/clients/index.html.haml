@@ -3,28 +3,25 @@
 .page-header
   %h2
     Clients
-    %small= current_alpha_page(params[:letter])
-  %p
-  %h4 Page #{content_tag(:strong, @clients.current_page)} of #{content_tag(:strong, @clients.total_pages)} for #{current_alpha_page(params[:letter])}
-  %p= page_entries_info @clients
+    %small=Client.count
   = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
   = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
-
   .search.pull-right
-    = simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search', data: { type: :html } }, remote: true do |f|
-      = f.input :name_or_surname_or_email_or_cell_no_or_work_no_or_home_no_cont, as: :search_box
+    = simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search'}, remote: true do |f|
+      = f.input :full_name_cont, as: :search_box
       = f.submit 'Search', class: t('buttons.mini.warning')
       = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
-= alpha_pager(params[:letter])
-= paginate @clients, params: { letter: params[:letter] }
+.results
 
-#clients= render partial: 'clients', locals: { clients: @clients }
-
-= alpha_pager(params[:letter])
-= paginate @clients, params: { letter: params[:letter] }
-
-
+.tabbable.tabs-left#listing
+  %ul.nav.nav-tabs#directory
+    - ('A'..'Z').each do |letter|
+      %li
+        %a{data: {target: "##{letter}", toggle: :tab}}= letter
+  .tab-content.span10
+    - ('A'..'Z').each do |letter|
+      .tab-pane{id: "#{letter}"}
 
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh

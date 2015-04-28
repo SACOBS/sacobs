@@ -49,6 +49,10 @@ class Client < ActiveRecord::Base
 
   before_validation :normalize, :set_birth_date
 
+  ransacker :full_name do |parent|
+    Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
+  end
+
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
   def address

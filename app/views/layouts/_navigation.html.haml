@@ -3,17 +3,8 @@
   %ul.nav.pull-left
     %li= link_to 'New (B)ooking', bookings_path, method: :post, accesskey: 'b', target: '_blank'
     %li= link_to 'New (C)lient', new_client_path, accesskey: 'c', target: '_blank'
-    = drop_down_menu('Bookings') do
-      %li= link_to 'New', bookings_path, method: :post
-      %li.divider
-      %li= link_to 'View', bookings_path
-      %li.divider
-      %li= link_to 'Archived', bookings_archives_path
-    = drop_down_menu('Clients') do
-      %li= link_to 'New', new_client_path
-      %li.divider
-      %li= link_to 'View', clients_path
-
+    %li= link_to 'Bookings', bookings_path
+    %li= link_to 'Clients', clients_path
 
     - unless current_user.clerk?
       %li= link_to 'New (T)rip', trip_builder_index_path(trip_id: :building), method: :post, accesskey: 't', target: '_blank'

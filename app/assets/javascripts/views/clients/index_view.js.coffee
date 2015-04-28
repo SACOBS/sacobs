@@ -2,14 +2,26 @@ window.Views.Clients ||= {}
 class Views.Clients.IndexView extends Views.ApplicationView
   render: ->
     super()
-    $( '#client_search').on 'ajax:success',  (evt, data, status, xhr) ->
-      $('#clients').html(data)
+    $('a[data-toggle="tab"]').on 'show', (e) ->
+      $tab = $(e.target)
+      $tab_pane = $($tab.data('target'))
+      if !$.trim( $tab_pane.html() ).length
+        $tab_pane.html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x"></i></div>')
+        $.ajax(
+          method: "GET",
+          url: "\clients",
+          data: { letter: $tab.text() }
+          dataType: 'script'
+        )
 
-    $('.client').on 'ajax:success', '#delete_client' ,(evt, data, status, xhr) ->
-      $row = $(this).closest('tr')
-      $row.children('td').animate({ padding: 0 }).wrapInner('<div />').children().slideUp ->
-        $(this).remove()
+
+    $('#directory a:first').tab('show');
+
+    $(document).on 'ajax:success', '#delete_client' ,(evt, data, status, xhr) ->
+      $client = $(this).closest('.client')
+      $client.fadeOut 'slow', ->
+        $client.remove()
+
   cleanup: ->
     super()
-    $('#client_search').off 'ajax:success'
     $('.client').off 'ajax:success', '#delete_client'
