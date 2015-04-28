@@ -160,9 +160,8 @@
 
 Sacobs::Application.routes.draw do
 
-  get 'notes/create'
 
-  get 'notes/destroy'
+  resources :admin, only: [:index]
 
   devise_for :users
 

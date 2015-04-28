@@ -26,7 +26,14 @@ class City < ActiveRecord::Base
 
   validates :name, presence: true
 
+  before_save :format_name
+
   def to_s
     name
+  end
+
+  protected
+  def format_name
+    self.name = name.squish.upcase
   end
 end

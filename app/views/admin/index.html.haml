@@ -1,0 +1,16 @@
+.hero-unit
+  %h1.text-center Admin
+  %hr
+  .row
+    .span4
+      = link_to 'Buses', buses_path, class: "#{t('buttons.large.primary')} btn-block", icon: :cog
+      = link_to 'Cities', cities_path, class: "#{t('buttons.large.primary')} btn-block", icon: :cog
+      = link_to 'Routes', routes_path, class: "#{t('buttons.large.primary')} btn-block", icon: :cog
+    .span4
+      = link_to 'Discount', discounts_path, class: "#{t('buttons.large.info')} btn-block", icon: :cog
+      = link_to 'Charges', charges_path, class: "#{t('buttons.large.info')} btn-block", icon: :cog
+      = link_to 'Priority Pricing', seasonal_discounts_path, class: "#{t('buttons.large.info')} btn-block", icon: :cog
+    .span4
+      = link_to 'Drivers', drivers_path, class: "#{t('buttons.large.warning')} btn-block", icon: :cog
+      = link_to 'Users', users_path, class: "#{t('buttons.large.warning')} btn-block", icon: :cog
+      = link_to 'Settings', setting_path, class: "#{t('buttons.large.warning')} btn-block", icon: :cog
