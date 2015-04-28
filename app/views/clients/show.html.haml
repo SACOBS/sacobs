@@ -9,9 +9,9 @@
         = decorated_client.edit_link(icon: :edit, class: t('buttons.inverse'))
         = decorated_client.destroy_link(icon: :times, class: t('buttons.danger'))
 
-    .row-fluid
-      .span6
-        %h5 Details
+    .row-fluid.well.well-small
+      .span4
+        %h4 Details
         %p>
           %strong Title:
           = decorated_client.title
@@ -35,8 +35,9 @@
           = decorated_client.high_risk
         %p>
           %strong Notes:
-          = decorated_client.notes.presence || 'None'
-        %h5 Contact Info
+          = simple_format(decorated_client.notes.presence || 'None')
+      .span4
+        %h4 Contact Info
         %p>
           %strong Home Telephone No:
           = decorated_client.home_telephone
@@ -49,12 +50,47 @@
         %p>
           %strong Email:
           = decorated_client.email
-        %h5 Address Info
-        %address
-          %strong= decorated_client.street_address1.strip.presence || "N/A"
-          %br
-          %strong= decorated_client.street_address2.strip.presence || "N/A"
-          %br
-          %strong= decorated_client.city.presence || "N/A"
-          %br
-          %strong=decorated_client.postal_code.presence || "N/A"
+      .span4
+        %h4 Address Info
+        %p>
+          %strong Street Address 1:
+          = decorated_client.street_address1.strip.presence || "N/A"
+        %p>
+          %strong Street Address 2:
+          = decorated_client.street_address2.strip.presence || "N/A"
+        %p>
+          %strong City:
+          = decorated_client.city.presence || "N/A"
+        %p>
+          %strong Postal Code:
+          = decorated_client.postal_code.presence || "N/A"
+    .row-fluid
+
+      .client-vouchers.well.well-small.span6
+        %h4 Credit Vouchers
+        - if decorated_client.vouchers.any?
+          = bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed) do
+            - decorated_client.vouchers.each do |voucher|
+              %tr
+                %td=voucher.ref_no
+                %td=number_to_currency(voucher.amount, unit: 'R')
+        - else
+          %h5  This client has no vouchers
+        = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.mini.warning')
+      .client-bookings.well.well-small.span6
+        %h4 Recent Bookings
+        - if @client.bookings.recent.any?
+          = bootstrap_table headers: %w(Status TripDate From To Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do
+            - @client.bookings.recent.each do |booking|
+              %tr
+                %td
+                  %span.label.label-important= booking.status.upcase
+                %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long)
+                %td= booking.from_city_name
+                %td= booking.to_city_name
+                %td
+                  %span.badge.badge-info= booking.quantity
+        - else
+          %h5  This client has no bookings
+
+
