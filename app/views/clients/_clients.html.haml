@@ -1,5 +1,5 @@
 .information.page-header
-  %h4 Page #{content_tag(:strong, clients.current_page)} of #{content_tag(:strong, clients.total_pages)} for #{current_alpha_page(params[:letter])}
+  %h4 Page #{content_tag(:strong, clients.current_page)} of #{content_tag(:strong, clients.total_pages)} for #{params[:letter]}
   %p= page_entries_info clients
 
 = paginate clients, remote: true

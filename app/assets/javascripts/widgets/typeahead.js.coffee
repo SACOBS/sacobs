@@ -14,6 +14,7 @@ class Widgets.TypeAhead
 
 
    $('input.typeahead').typeahead
+      items: 20
       source: (query, process) ->
         data = $(this.$element.data('source'))
         objects = $.map(data, (item) -> return JSON.stringify(item) )

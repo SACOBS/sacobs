@@ -2,46 +2,45 @@
   #{@booking.reference_no}
 
 - cache @booking do
-  - BookingDecorator.decorate(@booking, self) do |decorated_booking|
-    .page-header.text-center
-      %h2 Booking Details
-      .actions.text-center
-        = back_to bookings_archives_path
-    .well
-      %h4 Client information
-      = bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do
-        %tr
-          %td= decorated_booking.client.full_name
-          %td= decorated_booking.client.home_telephone
-          %td= decorated_booking.client.cellphone
-          %td= decorated_booking.client.work_telephone
-          %td= decorated_booking.client.email
-      - if decorated_booking.payment_detail
-        %h5 Payment Detail
-        = bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do
-          %tr
-            %td= decorated_booking.payment_date
-            %td= decorated_booking.payment_detail_reference
-            %td= decorated_booking.payment_detail_payment_type
-      %h4 Booking information
-      - [decorated_booking, decorated_booking.return_booking, decorated_booking.main].compact.each do |booking|
-        = bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
-          %tr
-            %td= booking.status
-            %td= booking.reference_no
-            %td= booking.trip_name
-            %td= booking.trip_date
-            %td= booking.from_city
-            %td= booking.to_city
-            %td= booking.price
-      %h4 Passengers
-      = bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
-        - decorated_booking.passengers.each do |passenger|
-          %tr
-            %td= passenger.full_name
-            %td= passenger.passenger_type_description
-            %td= passenger.cellphone
-            %td= passenger.email
+  .page-header.text-center
+    %h2 Booking Details
     .actions.text-center
       = back_to bookings_archives_path
+  .well
+    %h4 Client information
+    = bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do
+      %tr
+        %td= @booking.client.full_name
+        %td= number_to_phone(@booking.client.home_no, area_code: true).presence || 'N/A'
+        %td= number_to_phone(@booking.client.cell_no, area_code: true).presence || 'N/A'
+        %td= number_to_phone(@booking.client.work_no, area_code: true).presence || 'N/A'
+        %td= @booking.client.email.present? ? mail_to(@booking.client.email) : 'N/A'
+    - if @booking.payment_detail.present?
+      %h5 Payment Detail
+      = bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do
+        %tr
+          %td= l(@booking.payment_detail_payment_date, format: :long)
+          %td= @booking.payment_detail_reference
+          %td= @booking.payment_detail_payment_type
+    %h4 Booking information
+    - [@booking, @booking.return_booking, @booking.main].compact.each do |booking|
+      = bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
+        %tr
+          %td= status_label_for(booking)
+          %td= booking.reference_no
+          %td= booking.trip_name
+          %td= l(booking.trip_start_date, format: :long) if booking.trip_start_date.present?
+          %td= booking.from_city_name
+          %td= booking.to_city_name
+          %td= number_to_currency(booking.invoice_total)
+    %h4 Passengers
+    = bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
+      - @booking.passengers.each do |passenger|
+        %tr
+          %td= passenger.full_name
+          %td= passenger.passenger_type_description.capitalize
+          %td= number_to_phone(passenger.cell_no, area_code: true)
+          %td= mail_to(passenger.email) if passenger.email.present?
+  .actions.text-center
+    = back_to bookings_archives_path
 

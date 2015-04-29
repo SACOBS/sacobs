@@ -8,19 +8,19 @@
 = bootstrap_table headers: ['Actions', 'Description', 'Start City', 'End City', 'Master Rate', 'Distance', 'Connections'], types: %i(hover condensed), html_options: { class: 'sortable' } do
   - @routes.each do |route|
     - cache route do
-      - RouteDecorator.new(route, self) do |decorated_route|
-        %tr{ class: dom_class(route), id: dom_id(route) }
-          %td
-            = decorated_route.add_destination_link(icon: :plus, class: t('buttons.mini.primary'))
-            = decorated_route.copy_link(icon: :copy, class: t('buttons.mini.warning'))
-            = decorated_route.reverse_copy_link(icon: :copy, class: t('buttons.mini.warning'))
-            = decorated_route.show_link(icon: :info, class: t('buttons.mini.info'))
-            = decorated_route.edit_link(icon: :edit,  class: t('buttons.mini.inverse'))
-            = decorated_route.destroy_link(icon: :times, class: t('buttons.mini.danger'))
-          %td= link_to decorated_route.name, route
-          %td= decorated_route.start_city
-          %td= decorated_route.end_city
-          %td= decorated_route.cost
-          %td= decorated_route.distance
-          %td= decorated_route.connections_count
+      %tr
+        %td
+          = link_to 'Add Destination', edit_route_destinations_path(route), icon: :plus, class: t('buttons.mini.primary'),  data: { toggle: 'tooltip', title: 'Click here to add a new destination (eg East London) to the route.' }, rel: 'tooltip'
+          = link_to 'Copy', copy_route_path(route), method: :post, icon: :copy, class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route.' }, rel: 'tooltip'
+          = link_to 'Reverse Copy', reverse_copy_route_path(route), method: :post, icon: :copy, class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route in reverse(eg EL to PE will be copied as PE to EL).' }, rel: 'tooltip'
+          = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
+          = link_to 'Edit', edit_route_path(route), icon: :edit,  class: t('buttons.mini.inverse')
+          =link_to_unless(route.connections.any?, 'Destroy', route, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this route?' }) {}
+        %td= link_to route.name, route
+        %td= route.start_city
+        %td= route.end_city
+        %td= number_to_currency(route.cost, unit: 'R')
+        %td= number_to_human(route.distance, units: :distance)
+        %td= route.connections.size
+
 

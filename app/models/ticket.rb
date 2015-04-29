@@ -71,7 +71,7 @@ class Ticket
   end
 
   def status
-    booking.status.to_s.upcase
+    booking.status
   end
 
   def price

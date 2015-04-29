@@ -1,16 +1,15 @@
-- BookingDecorator.decorate(booking, self) do |decorated_booking|
-  = content_tag(:tr) do
-    %td
-      = decorated_booking.show_link(icon: :info, class: t('buttons.mini.info'))
-      = decorated_booking.ticket_link(icon: :tasks, class: t('buttons.mini.default'))
-    %td= decorated_booking.status
-    %td= decorated_booking.client.show_link(text: decorated_booking.client.full_name, target: '_blank')
-    %td= decorated_booking.client.home_telephone
-    %td= decorated_booking.client.cellphone
-    %td= decorated_booking.client.work_telephone
-    %td{ data: { dateformat: 'll' } }= decorated_booking.trip_date
-    %td= decorated_booking.quantity
-    %td= decorated_booking.from_city
-    %td= decorated_booking.to_city
+%tr
+  %td
+    = link_to 'Show', bookings_archive_path(booking), icon: :info, class: t('buttons.mini.info')
+    = link_to_if(booking.paid? || booking.reserved?, 'Generate Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
+  %td= status_label_for(booking)
+  %td= link_to booking.client.full_name, booking.client, target: '_blank'
+  %td= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A'
+  %td= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A'
+  %td= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A'
+  %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long) if booking.trip_start_date.present?
+  %td= booking.quantity
+  %td= booking.from_city_name
+  %td= booking.to_city_name
 
 

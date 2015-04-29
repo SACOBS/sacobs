@@ -1,9 +1,8 @@
-- ConnectionDecorator.decorate(connection, self) do |decorated_connection|
-  %tr
-    %td= decorated_connection.from_city
-    %td= decorated_connection.to_city
-    %td= decorated_connection.distance
-    %td= decorated_connection.percentage
-    %td= decorated_connection.cost
-    %td= decorated_connection.depart_time
-    %td= decorated_connection.arrive_time
+%tr
+  %td= connection.from_city_name
+  %td= connection.to_city_name
+  %td= number_to_human(connection.distance, units: :distance)
+  %td= number_to_percentage(connection.percentage, precision: 0)
+  %td= number_to_currency(connection.cost, unit: 'R')
+  %td= connection.depart.try(:strftime, '%H:%M%p')
+  %td= connection.arrive.try(:strftime, '%H:%M%p')

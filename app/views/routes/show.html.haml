@@ -2,39 +2,39 @@
   #{@route.name}
 
 - cache @route do
-  -  RouteDecorator.decorate(@route, self) do |decorated_route|
-    .page-header
-      %h2 Route
-      .actions
-        = back_to routes_path
-        = decorated_route.edit_link(icon: :edit, class: t('buttons.info'))
-        = decorated_route.destroy_link(icon: :times, class: t('buttons.danger'))
-
-    .well
-      %p
-        %strong Start City:
-        %br
-        = decorated_route.start_city
-      %p
-        %strong End City:
-        %br
-        = decorated_route.end_city
-      %p
-        %strong Master Rate:
-        %br
-        = decorated_route.cost
-      %p
-        %strong Distance:
-        %br
-        = decorated_route.distance
-    .well
-      %p
-        %strong Connections:
-        = bootstrap_table headers: ['From', 'To', 'Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
-          = render partial: 'connections/connection', collection: @route.connections, cache: true
+  .page-header
+    %h2 Route
     .actions
       = back_to routes_path
-      = decorated_route.edit_link(icon: :edit, class: t('buttons.info'))
-      = decorated_route.destroy_link(icon: :times, class: t('buttons.danger'))
+      = link_to 'Edit', edit_route_path(@route), icon: :edit,  class: t('buttons.inverse')
+      = link_to_unless(@route.connections.any?, 'Destroy', @route, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this route?' }) {}
+
+
+  .well
+    %p
+      %strong Start City:
+      %br
+      = @route.start_city
+    %p
+      %strong End City:
+      %br
+      = @route.end_city
+    %p
+      %strong Master Rate:
+      %br
+      = number_to_currency(@route.cost)
+    %p
+      %strong Distance:
+      %br
+      = number_to_human(@route.distance, units: :distance)
+  .well
+    %p
+      %strong Connections:
+      = bootstrap_table headers: ['From', 'To', 'Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
+        = render partial: 'connections/connection', collection: @route.connections, cache: true
+  .actions
+    = back_to routes_path
+    = link_to 'Edit', edit_route_path(@route), icon: :edit,  class: t('buttons.inverse')
+    = link_to_unless(@route.connections.any?, 'Destroy', @route, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this route?' }) {}
 
 

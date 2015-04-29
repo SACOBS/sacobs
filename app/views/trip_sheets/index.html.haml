@@ -13,19 +13,19 @@
   .well
     - if @trips.any?
       - @trips.each do |trip|
-        - TripDecorator.decorate(trip, self) do  |decorated_trip|
-          .result
-            %dl.dl-horizontal
-              %dt Name:
-              %dd= decorated_trip.name
-              %dt Route:
-              %dd= decorated_trip.route_name
-              %dt Date:
-              %dd= decorated_trip.start_date
-              %dt Day:
-              %dd= decorated_trip.trip_day
-              %dt Bookings:
-              %dd= decorated_trip.bookings_count
-              %dd= decorated_trip.generate_tripsheet_link(icon: :road, class: t('buttons.mini.info'))
+        .result
+          %dl.dl-horizontal
+            %dt Name:
+            %dd= trip.name
+            %dt Route:
+            %dd= trip.route_name
+            %dt Date:
+            %dd= l(trip.start_date, format: :long)
+            %dt Day:
+            %dd= trip.start_date.strftime('%A')
+            %dt Bookings:
+            %dd= trip.bookings.size
+            %dd= link_to 'Generate TripSheet', trip_sheet_path(trip), target: '_blank', icon: :road, class: t('buttons.mini.info')
+
     - else
       %p.lead.text-center There are currently no trips

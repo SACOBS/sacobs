@@ -1,9 +1,12 @@
--  SeasonalDiscountDecorator.decorate(seasonal_discount, self) do  |decorated_seasonal_discount|
-  %tr{ class: dom_class(seasonal_discount), id: dom_id(seasonal_discount) }
-    %td= decorated_seasonal_discount.activation_link(icon: :times, class: t('buttons.mini.danger'))
-    %td= decorated_seasonal_discount.name
-    %td= decorated_seasonal_discount.passenger_type
-    %td= decorated_seasonal_discount.percentage
-    %td{ data: { dateformat: 'll' } }= decorated_seasonal_discount.period_from
-    %td{ data: { dateformat: 'll' } }= decorated_seasonal_discount.period_to
-    %td= decorated_seasonal_discount.active
+%tr
+  %td
+    = link_to_if(seasonal_discount.active?, 'Deactivate', seasonal_discount_path(seasonal_discount, seasonal_discount: { active: false }), method: :patch,  icon: :times, class: t('buttons.mini.danger')) {}
+    = link_to_unless(seasonal_discount.active?, 'Activate', seasonal_discount_path(seasonal_discount, seasonal_discount: { active: true }), method: :patch, icon: :times, class: t('buttons.mini.danger')){}
+  %td= seasonal_discount.name
+  %td= seasonal_discount.passenger_type_description.titleize
+  %td= number_to_percentage(seasonal_discount.percentage, precision: 2)
+  %td{ data: { dateformat: 'll' } }= l(seasonal_discount.period_from, format: :long)
+  %td{ data: { dateformat: 'll' } }= l(seasonal_discount.period_to, format: :long)
+  %td= seasonal_discount.active? ? 'Yes' : 'No'
+
+

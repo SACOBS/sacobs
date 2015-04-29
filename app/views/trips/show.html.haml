@@ -1,40 +1,42 @@
 = content_for (:title) do
   #{@trip.name} #{l @trip.start_date, format: :long}
-- TripDecorator.decorate(@trip, self)  do |decorated_trip|
-  .page-header
-    %h1 Trip
-    .actions
-      = back_to trips_path
-      = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
-  - content_for :sidebar do
-    = display_occupancy(@trip)
-
-  - cache @trip do
-
-    .well
-      %h4 Details
-      = bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do
-        %tr
-          %td= decorated_trip.name
-          %td= decorated_trip.start_date
-          %td= decorated_trip.route_name
-          %td= decorated_trip.bus_name
-          %td= decorated_trip.drivers.map(&:full_name).join(',')
-      %h4 Bookings
-      = bootstrap_table headers: ['Status', 'Client Name', 'From', 'To', 'Qty', 'Telephone'],
-                          types: %i(hover condensed), html_options: { class: 'sortable' } do
-        - decorated_trip.bookings.processed.each do |booking|
-          - decorated_booking = BookingDecorator.decorate(booking, self)
-          %tr
-            %td= decorated_booking.status
-            %td= decorated_booking.client.full_name
-            %td= decorated_booking.from_city
-            %td= decorated_booking.to_city
-            %td= decorated_booking.quantity
-            %td= decorated_booking.client.contact_numbers
+.page-header
+  %h1 Trip
   .actions
     = back_to trips_path
-    = decorated_trip.edit_link(icon: :edit, class: t('buttons.info'))
+    = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
+    = link_to_unless(@trip.bookings.any?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm:'Are you sure you want to destroy this trip?'  }) {}
+
+- content_for :sidebar do
+  = display_occupancy(@trip)
+
+- cache @trip do
+  .well
+    %h4 Details
+    = bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do
+      %tr
+        %td= @trip.name
+        %td= l(@trip.start_date, format: :long)
+        %td= @trip.route_name
+        %td= @trip.bus_name
+        %td= @trip.drivers.map(&:full_name).join(',')
+    %h4 Bookings
+    = bootstrap_table headers: ['Status', 'Client Name', 'From', 'To', 'Qty', 'Telephone'],
+                        types: %i(hover condensed), html_options: { class: 'sortable' } do
+      - @trip.bookings.processed.each do |booking|
+        %tr
+          %td= status_label_for(booking)
+          %td= booking.client.full_name
+          %td= booking.from_city_name
+          %td= booking.to_city_name
+          %td= booking.quantity
+          %td= contact_numbers_for(booking.client)
+.actions
+  = back_to trips_path
+  = link_to 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')
+  = link_to_unless(@trip.bookings.any?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }) {}
+
+
 
 
 

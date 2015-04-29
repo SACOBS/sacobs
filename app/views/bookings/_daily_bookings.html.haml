@@ -1,5 +1,5 @@
 - @bookings.each do |booking|
-  .well.well-small.booking{ id: dom_id(booking) }
+  .well.well-small.booking
     .pull-left
       = l(Date.current, format: :long)
     %br
@@ -9,10 +9,9 @@
       %p= booking.payment_detail_payment_type
       - [booking.main, booking, booking.return_booking].compact.each do |b|
         = bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do
-          - BookingDecorator.decorate(b, self) do |decorated_b|
-            %tr
-              %td= decorated_b.status
-              %td= decorated_b.reference_no
-              %td #{decorated_b.quantity} x #{decorated_b.stop.name}
-              %td{ data: { dateformat: 'll' } }= decorated_b.trip_date
-              %td= decorated_b.price
+          %tr
+            %td= status_label_for(b)
+            %td= b.reference_no
+            %td #{b.quantity} x #{b.stop.name}
+            %td{ data: { dateformat: 'll' } }= l(b.trip_start_date, format: :long) if b.trip_start_date.present?
+            %td= number_to_currency(b.invoice_total)

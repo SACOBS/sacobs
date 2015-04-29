@@ -12,7 +12,7 @@
         %tr
           %td= result.trip_name
           %td= l result.trip_start_date, format: :long
-          %td= result.status.upcase
+          %td= status_label_for(result)
           %td= result.client_full_name
           %td= result.from_city_name
           %td= result.to_city_name

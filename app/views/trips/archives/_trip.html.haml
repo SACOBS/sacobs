@@ -1,10 +1,9 @@
-- ArchivedTripDecorator.decorate(trip, self) do |decorated_trip|
-  %tr
-    %td
-      = decorated_trip.generate_tripsheet_link(icon: :road, class: t('buttons.mini.default'))
-      = decorated_trip.show_link(icon: :info, class: t('buttons.mini.info'))
-    %td= link_to decorated_trip.name, trip_path(trip)
-    %td{ data: { dateformat: 'll' } }= decorated_trip.start_date
-    %td{ data: { dateformat: 'll' } }= decorated_trip.end_date
-    %td= decorated_trip.route_name
-    %td= decorated_trip.bus_name
+%tr
+  %td
+    = link_to 'Generate TripSheet', trip_sheet_path(trip),icon: :road, class: t('buttons.mini.default'), target: '_blank'
+    = link_to 'Show', trips_archive_path(trip), icon: :info, class: t('buttons.mini.info')
+  %td= link_to trip.name, trip
+  %td{ data: { dateformat: 'll' } }= l(trip.start_date, format: :long)
+  %td{ data: { dateformat: 'll' } }= l(trip.end_date, format: :long)
+  %td= trip.route_name
+  %td= trip.bus_name

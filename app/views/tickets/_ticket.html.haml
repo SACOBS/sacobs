@@ -3,7 +3,7 @@
     %strong Reference No:
     = ticket.reference_no
     %strong Status:
-    = ticket.status
+    = status_label_for(ticket)
   %p.pull-right
     %strong Today's Date:
     = ticket.ticket_date
