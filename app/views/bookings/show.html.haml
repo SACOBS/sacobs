@@ -8,40 +8,20 @@
       = link_to_if(@booking.paid? || @booking.reserved?, 'Generate Ticket', ticket_path(@booking), icon: :tasks, class: t('buttons.large.default'), target: '_blank'){}
       = link_to_if(@booking.reserved?, 'Confirm', new_booking_payment_detail_url(@booking), icon: :money, class: t('buttons.large.inverse')) {}
   .well
-    %h4 Client information
-    = bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do
-      %tr
-        %td= @booking.client.full_name
-        %td= number_to_phone(@booking.client.home_no, area_code: true).presence || 'N/A'
-        %td= number_to_phone(@booking.client.cell_no, area_code: true).presence || 'N/A'
-        %td= number_to_phone(@booking.client.work_no, area_code: true).presence || 'N/A'
-        %td= @booking.client.email.present? ? mail_to(@booking.client.email) : 'N/A'
-    - if @booking.payment_detail.present?
-      %h5 Payment Detail
-      = bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do
-        %tr
-          %td= l(@booking.payment_detail_payment_date, format: :long)
-          %td= @booking.payment_detail_reference
-          %td= @booking.payment_detail_payment_type
-    %h4 Booking information
-    - [@booking, @booking.return_booking, @booking.main].compact.each do |booking|
-      = bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
-        %tr
-          %td= status_label_for(booking)
-          %td= booking.reference_no
-          %td= booking.trip_name
-          %td= l(booking.trip_start_date, format: :long) if booking.trip_start_date.present?
-          %td= booking.from_city_name
-          %td= booking.to_city_name
-          %td= number_to_currency(booking.invoice_total)
-    %h4 Passengers
-    = bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do
-      - @booking.passengers.each do |passenger|
-        %tr
-          %td= passenger.full_name
-          %td= passenger.passenger_type_description.capitalize
-          %td= number_to_phone(passenger.cell_no, area_code: true)
-          %td= mail_to(passenger.email) if passenger.email.present?
+    .client-information
+      %h4 Client information
+      = render 'bookings/shared/client_info', client: @booking.client
+    .payment_detail
+      - if @booking.payment_detail.present?
+        %h4 Payment Detail
+        = render 'bookings/shared/payment_details', payment_detail: @booking.payment_detail
+    .details
+      %h4 Booking information
+      - [@booking, @booking.return_booking, @booking.main].compact.each do |booking|
+        = render 'bookings/shared/details', booking: booking
+    .passengers
+      %h4 Passengers
+      = render 'bookings/shared/passengers', passengers: @booking.passengers
   .actions.text-center
     = link_to_if(@booking.paid? || @booking.reserved?, 'Generate Ticket', ticket_path(@booking), icon: :tasks, class: t('buttons.large.default'), target: '_blank'){}
     = link_to_if(@booking.reserved?, 'Confirm', new_booking_payment_detail_url(@booking), icon: :money, class: t('buttons.large.inverse')) {}

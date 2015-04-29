@@ -86,8 +86,7 @@
               %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long)
               %td= booking.from_city_name
               %td= booking.to_city_name
-              %td
-                %span.badge.badge-info= booking.quantity
+              %td= badge_for(booking.quantity)
       - else
         %h5  This client has no bookings
 

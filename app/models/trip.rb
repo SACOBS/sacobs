@@ -48,6 +48,8 @@ class Trip < ActiveRecord::Base
 
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
+  scope :ordered_by_stops,  -> { includes(stops: { connection: [from: :city, to: :city] }).order('destinations.sequence desc, tos_connections.sequence desc')}
+
   def copy
     copy = dup
     copy.name = "Copy of #{name}"

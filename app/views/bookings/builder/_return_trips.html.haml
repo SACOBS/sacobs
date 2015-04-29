@@ -15,8 +15,7 @@
                     %td= stop.to_city_name
                     %td= link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
                     %td= stop.available_seats
-                    %td
-                      %span.badge.badge-info= booking.quantity
+                    %td= badge_for(booking.quantity)
                     %td
                       = token_tag
                       = return_booking.hidden_field :quantity, value: booking.quantity

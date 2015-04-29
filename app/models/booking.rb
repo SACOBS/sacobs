@@ -48,7 +48,6 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   delegate :arrive, :depart, :from_city, :to_city, :from_city_name, :to_city_name, to: :stop, allow_nil: true
-  delegate :payment_type, :payment_date, :reference, to: :payment_detail, prefix: true, allow_nil: true
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true, allow_nil: true
   delegate :name, :start_date, :end_date, to: :trip, prefix: true, allow_nil: true
   delegate :name, :surname, :full_name, :home_no, :cell_no, :email, :work_no, :age, :is_pensioner?, :bank, :id_number, :date_of_birth, to: :client, prefix: true

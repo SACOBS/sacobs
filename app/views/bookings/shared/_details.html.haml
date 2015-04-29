@@ -1,0 +1,9 @@
+= bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'From', 'To', 'Price'], types: [:condensed] do
+  %tr
+    %td= status_label_for(booking)
+    %td= booking.reference_no
+    %td= booking.trip_name
+    %td= l(booking.trip_start_date, format: :long) if booking.trip_start_date.present?
+    %td= booking.from_city_name
+    %td= booking.to_city_name
+    %td= number_to_currency(booking.invoice_total)

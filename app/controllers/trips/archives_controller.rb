@@ -6,7 +6,7 @@ class Trips::ArchivesController < ApplicationController
   end
 
   def show
-    @trip = trip_scope.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    @trip = trip_scope.ordered_by_stops.find(params[:id])
   end
 
   def search

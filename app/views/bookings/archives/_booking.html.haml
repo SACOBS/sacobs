@@ -8,8 +8,7 @@
   %td= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A'
   %td= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A'
   %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long) if booking.trip_start_date.present?
-  %td
-    %span.badge.badge-info= booking.quantity
+  %td= badge_for(booking.quantity)
   %td= booking.from_city_name
   %td= booking.to_city_name
 

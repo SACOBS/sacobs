@@ -3,7 +3,7 @@ class TripsController < ApplicationController
   layout 'with_sidebar', only: :show
 
   def index
-    @trips = trip_scope.page(params[:page])
+    @trips = trip_scope.includes(:bus, :route, :bookings).page(params[:page])
   end
 
   def search
@@ -39,11 +39,11 @@ class TripsController < ApplicationController
   private
 
   def trip_scope
-    @trip_scope ||= Trip.includes(:bus, :route, :bookings)
+    @trip_scope ||= Trip.all
   end
 
   def set_trip
-    @trip = Trip.includes(stops: { connection: [:from, :to] }).order('destinations.sequence desc, tos_connections.sequence desc').find(params[:id])
+    @trip = trip_scope.ordered_by_stops.find(params[:id])
   end
 
   def trip_params

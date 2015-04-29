@@ -4,9 +4,9 @@
       = l(Date.current, format: :long)
     %br
     .text-center
-      %p #{booking.client.title} #{booking.client_full_name}
+      %p #{booking.client.title.upcase} #{booking.client_full_name}
     .info
-      %p= booking.payment_detail_payment_type
+      %p= content_tag :strong, booking.payment_detail.payment_type if booking.payment_detail.present?
       - [booking.main, booking, booking.return_booking].compact.each do |b|
         = bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do
           %tr

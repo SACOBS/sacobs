@@ -1,0 +1,7 @@
+= bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do
+  %tr
+    %td= trip.name
+    %td= l(trip.start_date, format: :long)
+    %td= trip.route_name
+    %td= trip.bus_name
+    %td= trip.drivers.map(&:full_name).join(',')

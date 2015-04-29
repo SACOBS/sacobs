@@ -16,6 +16,5 @@
           %td= result.client_full_name
           %td= result.from_city_name
           %td= result.to_city_name
-          %td
-            %span.badge.badge-info= result.quantity
+          %td= badge_for(result.quantity)
           %td= number_to_currency result.invoice_total
