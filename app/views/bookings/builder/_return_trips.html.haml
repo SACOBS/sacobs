@@ -1,6 +1,6 @@
 - if stops.any?
   - stops.group_by { |s| s.trip_start_date.beginning_of_month }.sort.each do |month, stops_for_month|
-    %h4= month.strftime('%B')
+    %h4= l(month, format: :month)
     = bootstrap_table types: [:condensed] do
       - stops_for_month.each do |stop|
         %tr
@@ -15,7 +15,8 @@
                     %td= stop.to_city_name
                     %td= link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
                     %td= stop.available_seats
-                    %td= booking.quantity
+                    %td
+                      %span.badge.badge-info= booking.quantity
                     %td
                       = token_tag
                       = return_booking.hidden_field :quantity, value: booking.quantity

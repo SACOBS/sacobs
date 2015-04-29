@@ -24,7 +24,6 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @results = Booking.processed.where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
   end
 
   def download

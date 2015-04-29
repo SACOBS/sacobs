@@ -26,7 +26,8 @@
           %td= booking.client.full_name
           %td= booking.from_city_name
           %td= booking.to_city_name
-          %td= booking.quantity
+          %td
+            %span.badge.badge-info= booking.quantity
           %td= contact_numbers_for(booking.client)
 .actions
   = back_to trips_archives_path

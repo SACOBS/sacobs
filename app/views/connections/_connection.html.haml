@@ -4,5 +4,5 @@
   %td= number_to_human(connection.distance, units: :distance)
   %td= number_to_percentage(connection.percentage, precision: 0)
   %td= number_to_currency(connection.cost, unit: 'R')
-  %td= connection.depart.try(:strftime, '%H:%M%p')
-  %td= connection.arrive.try(:strftime, '%H:%M%p')
+  %td= l(connection.depart, format: :short)
+  %td= l(connection.arrive, format: :short)

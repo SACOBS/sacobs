@@ -42,9 +42,11 @@ en:
     - Friday
     - Saturday
     formats:
-      default: ! '%Y-%m-%d'
+      default: ! '%d/%m/%Y'
       long: ! '%b %d, %Y'
       short: ! '%b %d'
+      day: ! '%A'
+      month: ! '%B'
     month_names:
     -
     - January
@@ -209,7 +211,8 @@ en:
   time:
     am: am
     formats:
-      default: ! '%a, %d %b %Y %H:%M:%S %z'
+      default: ! '%d/%m/%Y %H:%M:%S %p'
       long: ! '%B %d, %Y %H:%M'
-      short: ! '%d %b %H:%M'
+      short: ! '%H:%M%p'
+
     pm: pm

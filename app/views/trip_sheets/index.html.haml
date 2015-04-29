@@ -22,7 +22,7 @@
             %dt Date:
             %dd= l(trip.start_date, format: :long)
             %dt Day:
-            %dd= trip.start_date.strftime('%A')
+            %dd= l(trip.start_date, format: :day)
             %dt Bookings:
             %dd= trip.bookings.size
             %dd= link_to 'Generate TripSheet', trip_sheet_path(trip), target: '_blank', icon: :road, class: t('buttons.mini.info')
