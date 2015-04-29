@@ -4,7 +4,7 @@
       = l(Date.current, format: :long)
     %br
     .text-center
-      %p #{booking.client.title.upcase} #{booking.client_full_name}
+      %p #{booking.client.title.upcase} #{booking.client.full_name}
     .info
       %p= content_tag :strong, booking.payment_detail.payment_type if booking.payment_detail.present?
       - [booking.main, booking, booking.return_booking].compact.each do |b|
@@ -13,5 +13,5 @@
             %td= status_label_for(b)
             %td= b.reference_no
             %td #{b.quantity} x #{b.stop.name}
-            %td{ data: { dateformat: 'll' } }= l(b.trip_start_date, format: :long) if b.trip_start_date.present?
-            %td= number_to_currency(b.invoice_total)
+            %td{ data: { dateformat: 'll' } }= l(b.trip.start_date, format: :long) if b.trip.start_date.present?
+            %td= number_to_currency(b.invoice.total)

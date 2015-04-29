@@ -1,6 +1,6 @@
 %tr
-  %td= connection.from_city_name
-  %td= connection.to_city_name
+  %td= connection.from.city.name
+  %td= connection.to.city.name
   %td= number_to_human(connection.distance, units: :distance)
   %td= number_to_percentage(connection.percentage, precision: 0)
   %td= number_to_currency(connection.cost, unit: 'R')

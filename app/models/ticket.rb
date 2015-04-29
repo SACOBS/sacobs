@@ -23,27 +23,27 @@ class Ticket
   end
 
   def from_city
-    booking.from_city_name
+    booking.stop.connection.from.city.name
   end
 
   def from_venue
-    booking.from_city.venues.first.name
+    booking.stop.connection.from.city.venues.first.name
   end
 
   def to_venue
-    booking.to_city.venues.first.name
+    booking.stop.connection.to.city.venues.first.name
   end
 
   def to_city
-    booking.to_city_name
+    booking.stop.connection.to.city.name
   end
 
   def depart_time
-    booking.depart.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
+    booking.stop.connection.depart.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
   end
 
   def arrive_time
-    booking.arrive.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
+    booking.stop.connection.arrive.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
   end
 
   def return_depart_time
@@ -101,23 +101,14 @@ class Ticket
   end
 
   def total
-    total = 0
-    total += booking.invoice_total
-    total += return_booking.invoice_total if @return
-    total
+    @total ||= [booking, booking.return_booking].compact.map { |b| b.invoice.total }.sum
   end
 
   def total_cost
-    total = 0
-    total += booking.invoice_total_cost
-    total += return_booking.invoice_total_cost if @return
-    total
+    @total_cost ||= [booking, booking.return_booking].compact.map { |b| b.invoice.total_cost }.sum
   end
 
   def total_discount
-    total = 0
-    total += booking.invoice_total_discount
-    total += return_booking.invoice_total_discount if @return
-    total
+    @total_discount ||= [booking, booking.return_booking].compact.map { |b| b.invoice.total_discount }.sum
   end
 end

@@ -2,6 +2,6 @@
   - passengers.each do |passenger|
     %tr
       %td= passenger.full_name
-      %td= passenger.passenger_type_description.capitalize
+      %td= passenger.passenger_type.description.capitalize
       %td= number_to_phone(passenger.cell_no, area_code: true)
       %td= mail_to(passenger.email) if passenger.email.present?

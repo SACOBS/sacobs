@@ -32,8 +32,8 @@
         = bootstrap_table headers: %w(From To Arrive Depart), types: [:hover, :condensed], html_options: { id: 'stops' } do
           = f.simple_fields_for :stops, wrapper: false do |stop|
             %tr
-              %td= stop.object.from_city_name
-              %td= stop.object.to_city_name
+              %td= stop.object.connection.from.city.name
+              %td= stop.object.connection.to.city.name
               %td= stop.input :depart, as: :time_picker, label: false
               %td= stop.input :arrive, as: :time_picker, label: false
   .form-actions

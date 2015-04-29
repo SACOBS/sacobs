@@ -23,8 +23,6 @@ class Passenger < ActiveRecord::Base
   belongs_to :booking
   belongs_to :passenger_type
 
-  delegate :description, to: :passenger_type, prefix: true
-
   before_save :normalize_names
 
   def full_name

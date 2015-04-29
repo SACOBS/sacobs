@@ -54,16 +54,16 @@
       %h4 Address Info
       %p>
         %strong Street Address 1:
-        = @client.street_address1.presence || 'N/A'
+        = @client.address.street_address1.presence || 'N/A'
       %p>
         %strong Street Address 2:
-        = @client.street_address2.presence || 'N/A'
+        = @client.address.street_address2.presence || 'N/A'
       %p>
         %strong City:
-        = @client.city.presence || 'N/A'
+        = @client.address.city.presence || 'N/A'
       %p>
         %strong Postal Code:
-        = @client.postal_code.presence || 'N/A'
+        = @client.address.postal_code.presence || 'N/A'
   .row-fluid
     .client-vouchers.well.well-small.span6
       %h4 Credit Vouchers
@@ -83,9 +83,9 @@
           - @client.bookings.recent.each do |booking|
             %tr
               %td=status_label_for(booking)
-              %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long)
-              %td= booking.from_city_name
-              %td= booking.to_city_name
+              %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
+              %td= booking.stop.connection.from.city.name
+              %td= booking.stop.connection.to.city.name
               %td= badge_for(booking.quantity)
       - else
         %h5  This client has no bookings

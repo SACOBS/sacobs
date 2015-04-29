@@ -29,10 +29,8 @@ class SeasonalDiscount < ActiveRecord::Base
 
   validates :name, :passenger_type, presence: true
 
-  delegate :description, to: :passenger_type, prefix: true
-
   def description
-    "#{name}(seasonal_#{passenger_type_description}_discount)".titleize
+    @description ||= "#{name}(seasonal_#{passenger_type.description}_discount)".titleize
   end
 
   private

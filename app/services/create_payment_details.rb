@@ -8,7 +8,7 @@ class CreatePaymentDetails
     Booking.transaction do
       @bookings.each do |booking|
         booking.create_payment_detail!(@payment_detail_attributes)
-        booking.price = booking.invoice_total
+        booking.price = booking.invoice.total
         booking.status = :paid
         booking.save!
       end

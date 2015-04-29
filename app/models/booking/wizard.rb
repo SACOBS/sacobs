@@ -38,16 +38,16 @@ class Booking::Wizard
   def build_passengers
     @booking.passengers.clear
     @booking.quantity.times do
-      @booking.passengers.build(name: @booking.client_name,
-                                surname: @booking.client_surname,
-                                cell_no: @booking.client_cell_no,
-                                email: @booking.client_email)
+      @booking.passengers.build(name: @booking.client.name,
+                                surname: @booking.client.surname,
+                                cell_no: @booking.client.cell_no,
+                                email: @booking.client.email)
     end
   end
 
   def build_invoices
     [@booking, @booking.return_booking].compact.each do |booking|
-      price = booking.stop.cost
+      price = booking.stop.connection.cost
       invoice = booking.create_invoice
       booking.passengers.each do |passenger|
         # Ticket price
@@ -64,7 +64,7 @@ class Booking::Wizard
 
         # Discount
         discount = SeasonalDiscount.active_in_period(Date.today).find_by(passenger_type: passenger.passenger_type) || passenger.discount
-        description = "#{discount.description} discount - #{discount.percentage.round}%".capitalize
+        description = "#{discount.passenger_type.description} discount - #{discount.percentage.round}%".capitalize
         amount = ((price + total_charges) * (discount.percentage.to_f / 100)).round
         invoice.line_items.credit.create(description: description, amount: amount)
       end

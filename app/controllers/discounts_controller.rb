@@ -34,7 +34,7 @@ class DiscountsController < ApplicationController
   end
 
   def discount_params
-    DiscountParameters.fetch(:discount, {}).permit(:percentage,
+    params.fetch(:discount, {}).permit(:percentage,
                                                    passenger_type_attributes: [:description]
                                                   )
   end

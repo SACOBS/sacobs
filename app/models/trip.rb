@@ -38,9 +38,6 @@ class Trip < ActiveRecord::Base
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
-  delegate :name, :capacity, to: :bus, prefix: true, allow_nil: true
-  delegate :name, to: :route, prefix: true, allow_nil: true
-
   validates :start_date, :end_date, :route, :bus, presence: true, on: :update
 
   before_save :set_name
@@ -85,13 +82,13 @@ class Trip < ActiveRecord::Base
   protected
 
   def set_name
-    self.name = route_name.try(:squish) unless name.present?
+    self.name = route.try(:name) unless name.present?
   end
 
   def generate_stops
     transaction do
       stops.clear
-      stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus_capacity, depart: connection.depart, arrive: connection.arrive } })
+      stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
     end
   end
  end

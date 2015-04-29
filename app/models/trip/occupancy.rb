@@ -10,7 +10,7 @@ class Trip::Occupancy
     occupancy = 0
     from_destinations.each_with_index do |destination, index|
       occupancy += calculate_occupancy(destination) if trip.bookings.any?
-      items << Item.new(destination.city_name, to_destinations[index].city_name, occupancy)
+      items << Item.new(destination.city.name, to_destinations[index].city.name, occupancy)
     end
     items
   end

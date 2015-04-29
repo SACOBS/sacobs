@@ -13,7 +13,7 @@ class TripsController < ApplicationController
   end
 
   def show
-    fresh_when @trip, last_modified: @trip.updated_at
+    #fresh_when @trip, last_modified: @trip.updated_at
   end
 
   def copy

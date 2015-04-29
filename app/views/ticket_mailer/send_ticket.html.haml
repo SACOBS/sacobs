@@ -29,18 +29,18 @@
 = bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
   - @ticket.passengers.each do |passenger|
     %tr
-      %td= @ticket.booking.trip_start_date
+      %td= @ticket.booking.trip.start_date
       %td= passenger.full_name
       %td= @ticket.booking.from
       %td= @ticket.booking.from_venue
       %td= @ticket.booking.to
       %td= @ticket.booking.to_venue
-      %td= @ticket.booking.stop.depart || l(Time.zone.now, format: :long)
-      %td= @ticket.booking.stop.arrive || l(Time.zone.now, format: :long)
+      %td= @ticket.booking.depart || l(Time.zone.now, format: :long)
+      %td= @ticket.booking.arrive || l(Time.zone.now, format: :long)
   - if @ticket.return
     - @ticket.passengers.each do |passenger|
       %tr
-        %td= @ticket.return.trip_start_date
+        %td= @ticket.return.trip.start_date
         %td= passenger.full_name
         %td= @ticket.return.from
         %td= @ticket.return.from_venue

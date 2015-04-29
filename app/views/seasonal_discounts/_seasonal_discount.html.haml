@@ -3,7 +3,7 @@
     = link_to_if(seasonal_discount.active?, 'Deactivate', seasonal_discount_path(seasonal_discount, seasonal_discount: { active: false }), method: :patch,  icon: :times, class: t('buttons.mini.danger')) {}
     = link_to_unless(seasonal_discount.active?, 'Activate', seasonal_discount_path(seasonal_discount, seasonal_discount: { active: true }), method: :patch, icon: :times, class: t('buttons.mini.danger')){}
   %td= seasonal_discount.name
-  %td= seasonal_discount.passenger_type_description.titleize
+  %td= seasonal_discount.passenger_type.description.titleize
   %td= number_to_percentage(seasonal_discount.percentage, precision: 2)
   %td{ data: { dateformat: 'll' } }= l(seasonal_discount.period_from, format: :long)
   %td{ data: { dateformat: 'll' } }= l(seasonal_discount.period_to, format: :long)

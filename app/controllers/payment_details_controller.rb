@@ -9,7 +9,7 @@ class PaymentDetailsController < ApplicationController
     @payment_detail = @booking.build_payment_detail(payment_details_params)
     if valid?(@payment_detail)
       CreatePaymentDetails.new(@booking, payment_details_params).call
-      redirect_to booking_url(@booking)
+      redirect_to booking_url(@booking), notice: 'Booking has been successfully confirmed.'
     else
       render :new
     end

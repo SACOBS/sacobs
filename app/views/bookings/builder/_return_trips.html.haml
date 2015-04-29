@@ -10,9 +10,9 @@
                 = bootstrap_table headers: ['Trip', 'Start Date', 'From', 'To', 'Pricing', 'Available Seats', 'Qty'], types: [:condensed] do
                   %tr
                     %td= stop.trip_name
-                    %td= l(stop.trip_start_date, format: :long)
-                    %td= stop.from_city_name
-                    %td= stop.to_city_name
+                    %td= l(stop.trip.start_date, format: :long)
+                    %td= stop.from.city.name
+                    %td= stop.to.city.name
                     %td= link_to 'View Prices', pricing_path(stop.connection), target: '_blank'
                     %td= stop.available_seats
                     %td= badge_for(booking.quantity)

@@ -2,5 +2,5 @@
   %td
     = link_to 'Edit', edit_discount_path(discount), icon: :edit, class: t('buttons.mini.inverse')
     = link_to 'Destroy', discount, icon: :times, data: { confirm: t('messages.confirm', resource: :discount) }, method: :delete, class: t('buttons.mini.danger')
-  %td= discount.description.titleize
+  %td= discount.passenger_type.description.capitalize
   %td= number_to_percentage(discount.percentage, precision: 0)

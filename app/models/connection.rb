@@ -34,8 +34,6 @@ class Connection < ActiveRecord::Base
   before_save :set_percentage, if: :cost_changed?
   before_create :set_name
 
-  delegate :city_id, :city_name, :city, to: :from, prefix: true, allow_nil: true
-  delegate :city_id, :city_name, :city, to: :to, prefix: true,  allow_nil: true
 
   private
 
@@ -52,7 +50,7 @@ class Connection < ActiveRecord::Base
   protected
 
   def set_name
-    self.name = "#{from.city_name} to #{to.city_name}"
+    self.name = "#{from.city.name} to #{to.city.name}"
   end
 
   def set_percentage

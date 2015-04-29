@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :cancel, :confirm, :destroy]
+  before_action :set_booking, only: [:show, :cancel, :destroy]
 
   def index
     bookings = booking_scope.all
@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
   end
 
   def daily
-    @bookings = Booking.includes(:main, :return_booking).processed.for_today
+    @bookings = Booking.includes(:stop, :trip, :client, :invoice).processed.for_today
   end
 
   def print_daily
@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    fresh_when @booking, last_modified: @booking.updated_at
+    #fresh_when @booking, last_modified: @booking.updated_at
   end
 
   def destroy

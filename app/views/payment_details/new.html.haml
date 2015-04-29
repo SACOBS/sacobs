@@ -9,7 +9,7 @@
 = simple_form_for [@booking, @payment_detail], defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
     = f.input :reference, label: 'Client Payment Reference', hint: 'Put the reference from the bank for the client payment.', autofocus: true
-    = f.input :payment_type, collection: PaymentDetail::PAYMENT_TYPES.sort, include_blank: false, prompt: 'Select a payment type', selected: @booking.client_bank
+    = f.input :payment_type, collection: PaymentDetail::PAYMENT_TYPES.sort, include_blank: false, prompt: 'Select a payment type', selected: @booking.client.bank
     = f.input :payment_date, as: :date_time_picker
   .form-actions
     = f.submit class: t('buttons.primary')

@@ -25,14 +25,14 @@
   .span2
     %h4 Current Destinations
     %ol
-      - @route.destinations.order(:sequence).map(&:city_name).each do |city_name|
+      - @route.destinations.order(:sequence).map {|destination| destination.city.name}.each do |city_name|
         %li= city_name
   .span3
     %h4 Add Destination
     = simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f|
       = f.input :city, typeahead: cities, label: 'New city to be added:', placeholder: 'New City', input_html: { data: { targets: '#destination_city_id', filter: :name } }, autofocus: true
       = f.hidden_field :city_id
-      = f.input :preceding, typeahead: destinations, placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: '#destination_preceding_id', filter: :city_name } }
+      = f.input :preceding, typeahead: destinations, placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: '#destination_preceding_id', filter: :name } }
       = f.hidden_field :preceding_id
       = f.submit 'Save', class: t('buttons.primary')
       = link_to 'Back', routes_path, class: t('buttons.info')

@@ -39,8 +39,6 @@ class Client < ActiveRecord::Base
   has_many :bookings
   has_many :vouchers, dependent: :delete_all
 
-  delegate :street_address1, :street_address2, :city, :postal_code, to: :address, prefix: false, allow_nil: true
-
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :surname, presence: true

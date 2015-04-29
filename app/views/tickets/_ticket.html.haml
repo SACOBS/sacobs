@@ -11,7 +11,7 @@
 = bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
   - ticket.passengers.each do |passenger|
     %tr
-      %td= ticket.booking.trip_start_date
+      %td= ticket.booking.trip.start_date
       %td= passenger.full_name
       %td= ticket.from_city
       %td= ticket.from_venue
