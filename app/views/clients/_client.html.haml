@@ -20,7 +20,7 @@
             %strong= number_to_phone(client.cell_no, area_code: true).presence || 'N/A'
             %br
             %abbr.initialism{title: 'Email'} E:
-            = client.email.present? ? mail_to(@client.email) : 'N/A'
+            = client.email.present? ? mail_to(client.email) : 'N/A'
 
 
         .pull-right
