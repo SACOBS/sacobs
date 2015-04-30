@@ -27,8 +27,8 @@
     - booking.passengers.each do |passenger|
       %tr
         %td= passenger.full_name
-        %td= booking.stop.connection.from.city.name
-        %td= booking.stop.connection.to.city.name
+        %td= booking.stop.connection.from_city_name
+        %td= booking.stop.connection.to_city_name
         %td 1
         %td= passenger.cell_no
 

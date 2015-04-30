@@ -4,6 +4,6 @@
     %td= booking.reference_no
     %td= booking.trip.name
     %td= l(booking.trip.start_date, format: :long) if booking.trip.start_date.present?
-    %td= booking.stop.connection.from.city.name
-    %td= booking.stop.connection.to.city.name
+    %td= booking.stop.from_city_name
+    %td= booking.stop.to_city_name
     %td= number_to_currency(booking.invoice.total)

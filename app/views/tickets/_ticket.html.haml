@@ -9,29 +9,17 @@
     = ticket.ticket_date
 .passengers
 = bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
-  - ticket.passengers.each do |passenger|
-    %tr
-      %td= ticket.booking.trip.start_date
-      %td= passenger.full_name
-      %td= ticket.from_city
-      %td= ticket.from_venue
-      %td= ticket.to_city
-      %td= ticket.to_venue
-      %td= ticket.depart_time
-      %td= ticket.arrive_time
-      %td
-      %td
-  - if ticket.return_booking
-    - ticket.passengers.each do |return_passenger|
+  - [ticket.booking, ticket.return_booking].compact.each do |booking|
+    - ticket.passengers.each do |passenger|
       %tr
-        %td= ticket.return_booking.trip_start_date
-        %td= return_passenger.full_name
-        %td= ticket.return_from_city
-        %td= ticket.return_from_venue
-        %td= ticket.return_to_city
-        %td= ticket.return_to_venue
-        %td= ticket.return_depart_time
-        %td= ticket.return_arrive_time
+        %td= booking.trip.start_date
+        %td= passenger.full_name
+        %td= booking.stop.from_city_name
+        %td= booking.stop.connection.from.city.venues.first.name
+        %td= booking.stop.connection.to_city_name
+        %td= booking.stop.connection.to.city.venues.first.name
+        %td= l(booking.stop.connection.depart, format: :short)
+        %td= l(booking.stop.connection.arrive, format: :short)
         %td
         %td
   %tr

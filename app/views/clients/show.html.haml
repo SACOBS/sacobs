@@ -84,8 +84,8 @@
             %tr
               %td=status_label_for(booking)
               %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
-              %td= booking.stop.connection.from.city.name
-              %td= booking.stop.connection.to.city.name
+              %td= booking.stop.from_city_name
+              %td= booking.stop.to_city_name
               %td= badge_for(booking.quantity)
       - else
         %h5  This client has no bookings

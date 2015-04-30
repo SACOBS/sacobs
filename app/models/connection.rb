@@ -34,6 +34,9 @@ class Connection < ActiveRecord::Base
   before_save :set_percentage, if: :cost_changed?
   before_create :set_name
 
+  delegate :city_name, to: :from, prefix: true
+  delegate :city_name, to: :to, prefix: true
+
 
   private
 

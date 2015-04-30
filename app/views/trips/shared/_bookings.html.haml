@@ -4,7 +4,7 @@
     %tr
       %td= status_label_for(booking)
       %td= booking.client.full_name
-      %td= booking.stop.connection.from.city.name
-      %td= booking.stop.connection.to.city.name
+      %td= booking.stop.from_city_name
+      %td= booking.stop.to_city_name
       %td= badge_for(booking.quantity)
       %td= contact_numbers_for(booking.client)

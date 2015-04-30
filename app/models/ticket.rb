@@ -5,7 +5,7 @@ class Ticket
 
   def initialize(booking, view_context)
     @booking = booking.main ? booking.main : booking
-    @return_booking = @booking.return_booking if @booking.return_booking
+    @return_booking = @booking.return_booking
     @client = @booking.client
     @view_context = view_context
   end
@@ -39,11 +39,11 @@ class Ticket
   end
 
   def depart_time
-    booking.stop.connection.depart.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
+    @view_context.l(booking.stop.connection.arrive, format: :short) if booking.stop.connection.arrive.present?
   end
 
   def arrive_time
-    booking.stop.connection.arrive.try(:strftime, '%I:%M %P') || Time.now.strftime('%I:%M %P')
+    @view_context.l(booking.stop.connection.arrive, format: :short) if booking.stop.connection.arrive.present?
   end
 
   def return_depart_time
