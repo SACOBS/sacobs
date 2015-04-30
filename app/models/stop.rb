@@ -19,7 +19,7 @@
 
 class Stop < ActiveRecord::Base
   belongs_to :trip
-  belongs_to :connection
+  belongs_to :connection, -> { includes(from: :city, to: :city) }
   has_many :bookings
 
   delegate :from_city_name, :to_city_name, to: :connection

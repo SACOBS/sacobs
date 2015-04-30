@@ -34,12 +34,12 @@ class Booking < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :trip, counter_cache: true
-  belongs_to :stop
+  belongs_to :stop,  -> { includes(:connection) }
   belongs_to :client
   belongs_to :main, class_name: 'Booking', foreign_key: :main_id
 
   has_one :return_booking, class_name: 'Booking', foreign_key: :main_id
-  has_one :invoice, dependent: :delete
+  has_one :invoice ,dependent: :delete
   has_one :payment_detail, dependent: :delete
 
   has_many :passengers, -> { includes(:passenger_type) }, dependent: :delete_all
