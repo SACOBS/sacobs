@@ -3,11 +3,11 @@ class TripsController < ApplicationController
   layout 'with_sidebar', only: :show
 
   def index
-    @trips = trip_scope.includes(:bus, :route, :bookings).page(params[:page])
+    @trips = Trip.all.includes(:bus, :route, :bookings).page(params[:page])
   end
 
   def search
-    results = trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
+    results = Trip.search(params[:q]).result(distinct: true).page(params[:page])
     flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
     render partial: 'trips', locals: { trips: results }
   end
@@ -38,12 +38,8 @@ class TripsController < ApplicationController
 
   private
 
-  def trip_scope
-    @trip_scope ||= Trip.all
-  end
-
   def set_trip
-    @trip = trip_scope.ordered_by_stops.find(params[:id])
+    @trip = Trip.find(params[:id])
   end
 
   def trip_params

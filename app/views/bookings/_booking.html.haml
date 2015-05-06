@@ -5,7 +5,7 @@
     = link_to_if(booking.reserved?, 'Confirm', new_booking_payment_detail_url(booking), icon: :money, class: t('buttons.mini.inverse')) {}
     = link_to_unless(booking.cancelled?, 'Cancel', cancel_booking_path(booking), icon: :warning, class: t('buttons.mini.warning'), method: :patch){}
     = link_to_if(booking.cancelled?, 'Destroy', booking, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you wish to destroy this booking?'}){}
-  %td{ data: { dateformat: 'DD MMM H:mm' } }= l(booking.expiry_date, format: :long)
+  %td{ data: { dateformat: 'DD MMM H:mm' } }= local_time_ago(booking.expiry_date)
   %td= link_to booking.client.full_name, booking.client, target: '_blank'
   %td= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A'
   %td= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A'

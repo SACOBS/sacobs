@@ -33,6 +33,7 @@ class City < ActiveRecord::Base
   end
 
   protected
+
   def format_name
     self.name = name.squish.upcase
   end

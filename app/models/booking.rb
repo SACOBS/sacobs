@@ -33,13 +33,13 @@ class Booking < ActiveRecord::Base
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
   belongs_to :user
-  belongs_to :trip, counter_cache: true
-  belongs_to :stop,  -> { includes(:connection) }
+  belongs_to :trip, -> { unscope(where: :archived) }, counter_cache: true
+  belongs_to :stop, -> { includes(:connection) }
   belongs_to :client
-  belongs_to :main, class_name: 'Booking', foreign_key: :main_id
+  belongs_to :main,  -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
 
-  has_one :return_booking, class_name: 'Booking', foreign_key: :main_id
-  has_one :invoice ,dependent: :delete
+  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
+  has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
 
   has_many :passengers, -> { includes(:passenger_type) }, dependent: :delete_all
@@ -58,6 +58,8 @@ class Booking < ActiveRecord::Base
   scope :travelling, -> { where(arel_table[:status].eq(statuses[:reserved]).or(arel_table[:status].eq(statuses[:paid]))) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
+
+  delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
 
   def open?
     reserved? && !expired?
@@ -87,10 +89,6 @@ class Booking < ActiveRecord::Base
 
   def client
     super || build_client
-  end
-
-  def trip
-    Trip.unscoped { super }
   end
 
   private

@@ -63,7 +63,7 @@ class Booking::Wizard
         end
 
         # Discount
-        discount = SeasonalDiscount.active_in_period(Date.today).find_by(passenger_type: passenger.passenger_type) || passenger.discount
+        discount = SeasonalDiscount.active_in_period(Date.current).find_by(passenger_type: passenger.passenger_type) || passenger.discount
         description = "#{discount.passenger_type.description} discount - #{discount.percentage.round}%".capitalize
         amount = ((price + total_charges) * (discount.percentage.to_f / 100)).round
         invoice.line_items.credit.create(description: description, amount: amount)

@@ -35,7 +35,7 @@ gem 'momentjs-rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'kaminari'
 gem 'nprogress-rails'
-
+gem 'local_time'
 
 # Forms
 gem 'simple_form', '~> 3.0.0'
@@ -110,7 +110,6 @@ group :development do
   gem 'rails_best_practices'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
-  gem 'bullet'
 end
 
 

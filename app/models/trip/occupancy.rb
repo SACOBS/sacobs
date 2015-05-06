@@ -1,5 +1,5 @@
 class Trip::Occupancy
-  class Item < Struct.new(:from, :to, :occupied); end
+  Item = Struct.new(:from, :to, :occupied)
 
   def initialize(trip)
     @trip = trip
@@ -9,7 +9,7 @@ class Trip::Occupancy
     items = []
     occupancy = 0
     from_destinations.each_with_index do |destination, index|
-      occupancy += calculate_occupancy(destination) if trip.bookings.any?
+      occupancy += calculate_occupancy(destination)
       items << Item.new(destination.city.name, to_destinations[index].city.name, occupancy)
     end
     items
@@ -24,7 +24,7 @@ class Trip::Occupancy
   end
 
   def destinations
-    @destinations ||= trip.route.destinations.to_a.sort_by!(&:sequence)
+    @destinations ||= trip.route.destinations.includes(:city).to_a.sort_by!(&:sequence)
   end
 
   def from_destinations

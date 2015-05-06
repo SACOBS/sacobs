@@ -1,4 +1,4 @@
-class StopsEnRoute < Struct.new(:trip, :stop)
+StopsEnRoute = Struct.new(:trip, :stop) do
   def stops
     @stops ||= trip.stops.includes(:trip).joins(connection: :to).where(destinations_to_come.and(stops_to_ignore))
   end

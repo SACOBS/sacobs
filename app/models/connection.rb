@@ -34,9 +34,8 @@ class Connection < ActiveRecord::Base
   before_save :set_percentage, if: :cost_changed?
   before_create :set_name
 
-  delegate :city_name, to: :from, prefix: true
-  delegate :city_name, to: :to, prefix: true
-
+  delegate :city_name, :city_venues, to: :from, prefix: true
+  delegate :city_name, :city_venues, to: :to, prefix: true
 
   private
 
@@ -45,8 +44,8 @@ class Connection < ActiveRecord::Base
       distance: 0,
       cost: 0,
       percentage: 0,
-      arrive: Date.today.at_beginning_of_day,
-      depart:  Date.today.noon
+      arrive: Date.current.at_beginning_of_day,
+      depart: Date.current.noon
     }
   end
 

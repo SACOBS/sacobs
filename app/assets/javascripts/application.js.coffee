@@ -14,6 +14,7 @@
 #= require cocoon
 #= require unobtrusive_flash
 #= require unobtrusive_flash_bootstrap
+#= require local_time
 #= require obfuscatejs
 #= require turbolinks
 #= require_tree .

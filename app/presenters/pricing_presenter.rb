@@ -65,7 +65,7 @@ class PricingPresenter
   end
 
   def seasonal_discounts
-    @seasonal_discounts ||= SeasonalDiscount.active_in_period(Date.today).to_a
+    @seasonal_discounts ||= SeasonalDiscount.active_in_period(Date.current).to_a
   end
 
   def passenger_types

@@ -1,1 +1,1 @@
-class BillingItem < Struct.new(:description, :amount, :type); end
+BillingItem = Struct.new(:description, :amount, :type)

@@ -58,7 +58,7 @@ class Client < ActiveRecord::Base
   end
 
   def age
-    @age ||= ((Date.today - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
+    @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
   end
 
   def is_pensioner?
@@ -76,7 +76,7 @@ class Client < ActiveRecord::Base
   def set_birth_date
     date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
     if date
-      date = date.prev_year(100) if date > Date.today
+      date = date.prev_year(100) if date > Date.current
       self.date_of_birth = date
     end
   end

@@ -20,8 +20,7 @@ class Discount < ActiveRecord::Base
   belongs_to :user
   accepts_nested_attributes_for :passenger_type, reject_if: :all_blank, allow_destroy: true
 
-
   def description
-   @description ||= passenger_type.description
+    @description ||= passenger_type.description
   end
 end

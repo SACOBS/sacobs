@@ -50,19 +50,4 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = false
-    Bullet.bullet_logger = false
-    Bullet.console = true
-    Bullet.growl = false
-    Bullet.rails_logger = true
-    Bullet.bugsnag = false
-    Bullet.airbrake = false
-    Bullet.rollbar = false
-    Bullet.add_footer = false
-  end
-
-
 end
