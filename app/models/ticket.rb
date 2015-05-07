@@ -2,7 +2,6 @@ class Ticket
   attr_reader :booking, :return_booking, :client
 
   delegate :status, :reference_no, :passengers, to: :booking
-  delegate :simple_format, :l, :number_to_currency, to: :view_context
 
   def initialize(booking, view_context)
     @booking = booking.main || booking
@@ -32,11 +31,20 @@ class Ticket
   end
 
   def nett
-   number_to_currency total, unit: 'R'
+    number_to_currency total, unit: 'R'
   end
 
   def to_file_name
-    "#{booking.trip_name}_#{booking.client_name}_#{Time.zone.now.to_i}".gsub(' ', '_').downcase
+    "#{booking.trip.name}_#{booking.client.name}_#{Time.current.to_i}".gsub(' ', '_').downcase
+  end
+
+  def method_missing(method_name, *args, &block)
+    return @view_context.public_send(method_name, *args, &block) if @view_context.respond_to?(method_name)
+    super
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    @view_context.respond_to?(method_name, include_private)
   end
 
   private

@@ -93,7 +93,7 @@ GEM
       haml (~> 4.0)
       rubocop (>= 0.25.0)
       sysexits (~> 1.1)
-    hamlit (1.0.0)
+    hamlit (1.2.0)
       escape_utils
       temple (~> 0.7.3)
       thor
@@ -164,7 +164,7 @@ GEM
       activesupport (>= 3.0.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.6.0)
+    rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)

@@ -10,7 +10,6 @@
 - cache @trip do
   - content_for :sidebar do
     = display_occupancy(@trip)
-
   .well
     %h4 Details
     = render 'trips/shared/details', trip: @trip

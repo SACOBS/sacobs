@@ -1,5 +1,4 @@
 class TripsheetPresenter
-
   def initialize(trip, view_context)
     @trip = trip
     @view_context = view_context
@@ -53,19 +52,21 @@ class TripsheetPresenter
     simple_format(settings.trip_sheet_note4)
   end
 
-
   def method_missing(method_name, *args, &block)
-    return @view_context.public_send(method_name, *args, &block) if @view_context.respond_to?(method_name)
-    super
+    if view_context.respond_to?(method_name)
+      view_context.public_send(method_name, *args, &block)
+    else
+      super
+    end
   end
 
-  def respond_to_missing?(method_name, include_private=false)
-    @view_context.respond_to?(method_name, include_private)
+  def respond_to_missing?(method_name, include_private = false)
+    view_context.respond_to?(method_name, include_private)
   end
 
   private
 
-  attr_reader :trip
+  attr_reader :trip, :view_context
 
   def settings
     @settings ||= Setting.first
