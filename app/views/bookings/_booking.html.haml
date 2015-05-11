@@ -1,18 +1,33 @@
-= content_tag(:tr, class: booking.standby? ? 'warning' : nil) do
+= content_tag(:tr, class: row_class_for(booking)) do
   %td
     = link_to 'Show', booking, icon: :info, class: t('buttons.mini.info')
-    = link_to_if(booking.paid? || booking.reserved?, 'Generate Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
+    = link_to_if(booking.paid? || booking.reserved?, 'Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
     = link_to_if(booking.reserved?, 'Confirm', new_booking_payment_detail_url(booking), icon: :money, class: t('buttons.mini.inverse')) {}
     = link_to_unless(booking.cancelled?, 'Cancel', cancel_booking_path(booking), icon: :warning, class: t('buttons.mini.warning'), method: :patch){}
     = link_to_if(booking.cancelled?, 'Destroy', booking, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you wish to destroy this booking?'}){}
-  %td{ data: { dateformat: 'DD MMM H:mm' } }= local_time_ago(booking.expiry_date)
-  %td= link_to booking.client.full_name, booking.client, target: '_blank'
-  %td= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A'
-  %td= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A'
-  %td= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A'
-  %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long) if booking.trip.start_date.present?
+  %td{ data: { dateformat: 'DD MMM H:mm' } }
+    %small= local_time_ago(booking.expiry_date)
+  %td
+    = link_to booking.client, target: '_blank' do
+      = content_tag(:em, booking.client.full_name)
+  %td
+    %ul.inline
+      - if booking.client.home_no.present?
+        %li
+          %abbr.initialism{title: 'Home'} H:
+          %strong= number_to_phone(booking.client.home_no, area_code: true)
+      - if booking.client.work_no.present?
+        %li
+          %abbr.initialism{title: 'Work'} W:
+          %strong= number_to_phone(booking.client.work_no, area_code: true)
+      - if booking.client.cell_no.present?
+        %li
+          %abbr.initialism{title: 'Cell'} C:
+          %strong= number_to_phone(booking.client.cell_no, area_code: true)
+  %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
   %td= badge_for(booking.quantity)
-  %td= booking.stop.from_city_name
-  %td= booking.stop.to_city_name
+  %td
+    %span.label.label-inverse #{booking.stop.from_city_name} to #{booking.stop.to_city_name}
+
 
 
