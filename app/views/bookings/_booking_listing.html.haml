@@ -1,7 +1,7 @@
-#myOtherSkinnedTabWrapper
+#bookings
   %ul.nav.nav-tabs
     %li.active
-      %a{ href: '#reserved', data: { toggle: :tab } }
+      %a{ data: {target: '#reserved', toggle: :tab } }
         Reserved
         %span.badge.badge-info= booking_presenter.reserved.total_count
     %li
@@ -18,11 +18,7 @@
         %span.badge.badge-important= booking_presenter.cancelled.total_count
 
   .tab-content
-    .tab-pane.active#reserved
-      = render 'bookings', bookings: booking_presenter.reserved, type: :reserved
-    .tab-pane#standby
-      = render 'bookings', bookings: booking_presenter.standby, type: :standby
-    .tab-pane#paid
-      = render 'bookings', bookings: booking_presenter.paid, type: :paid
-    .tab-pane#cancelled
-      = render 'bookings', bookings: booking_presenter.cancelled, type: :cancelled
+    .tab-pane.active#reserved{data: { type: 'reserved' }}
+    .tab-pane#standby{data: { type: 'standby' }}
+    .tab-pane#paid{data: { type: 'paid' }}
+    .tab-pane#cancelled{data: { type: 'cancelled' }}

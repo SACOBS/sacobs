@@ -9,7 +9,7 @@ class Views.Clients.IndexView extends Views.ApplicationView
         $tab_pane.html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x"></i></div>')
         $.ajax(
           method: "GET",
-          url: "\clients",
+          url: "clients",
           data: { letter: $tab.text() }
           dataType: 'script'
         )

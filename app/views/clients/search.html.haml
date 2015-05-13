@@ -1,0 +1,31 @@
+= content_for(:title) do
+  Client Search
+
+.information.page-header
+  %h2
+    Client Search
+    %small (Remember the more specific the search the higher chance of success)
+  %h3
+    Results for search term #{params[:q][:full_name_cont]}
+  = back_to clients_path
+  .search.pull-right
+    = simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search'} do |f|
+      = f.input :full_name_cont, as: :search_box
+      = f.submit 'Search', class: t('buttons.mini.warning')
+      = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
+.sort-links
+  %ul.inline
+    %li.header Sort By:
+    %li= sort_link @search, :name, "Name", default_order: :desc
+    %li.divider
+    %li= sort_link @search, :surname, "Surname", default_order: :desc
+    %li.divider
+    %li= sort_link @search, :created, "Creation Date", default_order: :desc
+%hr
+.clients
+  - if @results.any?
+    - @results.in_groups_of(3, false) do |group|
+      .row-fluid
+        = render group, cache: true
+  - else
+    %h3.text-center No results were found for the specified search term.

@@ -52,6 +52,8 @@ class Booking < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
 
+  scope :open, -> { where(arel_table[:expiry_date].gt(Time.current)) }
+  scope :expired, -> { where(arel_table[:expiry_date].lteq(Time.current)) }
   scope :recent, -> { unscoped.includes(:stop).processed.order(created_at: :desc).limit(5) }
   scope :processed, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
   scope :for_today, -> { where(created_at: Time.now.midnight..Time.now.end_of_day) }

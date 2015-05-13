@@ -9,13 +9,30 @@ module BookingsHelper
 
   def row_class_for(booking)
     if booking.standby?
-      return 'warning'
+       'warning'
     elsif booking.paid?
-      return 'success'
+       'success'
     elsif booking.cancelled?
-      return 'error'
+       'error'
     else
-      return 'info'
+       'info'
     end
   end
+
+  def reserved_booking_count
+    Booking.processed.reserved.open.size
+  end
+
+  def standby_booking_count
+    Booking.processed.reserved.expired.size
+  end
+
+  def paid_booking_count
+    Booking.processed.paid.size
+  end
+
+  def cancelled_booking_count
+    Booking.processed.cancelled.size
+  end
+
 end

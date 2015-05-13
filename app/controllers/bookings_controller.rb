@@ -2,8 +2,20 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :destroy]
 
   def index
-    bookings = booking_scope.all
-    @booking_presenter = BookingPresenter.new(bookings, params)
+    case params[:type]
+      when 'reserved'
+        @bookings = booking_scope.reserved.open.page(params[:reserved_page])
+      when 'standby'
+        @bookings = booking_scope.reserved.expired.page(params[:standby_page])
+      when 'paid'
+        @bookings = booking_scope.paid.page(params[:paid_page])
+      when 'cancelled'
+        @bookings =  booking_scope.cancelled.page(params[:cancelled_page])
+      else
+        @bookings = booking_scope.none
+    end
+
+    @booking_presenter = BookingPresenter.new(@bookings, params)
   end
 
   def daily
@@ -19,10 +31,8 @@ class BookingsController < ApplicationController
   end
 
   def search
-    results = booking_scope.search(params[:q]).result.distinct(true)
-    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
-    @booking_presenter = BookingPresenter.new(results, params)
-    render partial: 'bookings/booking_listing', locals: { booking_presenter: @booking_presenter }
+    @search = booking_scope.search(params[:q])
+    @results = @search.result.limit(50)
   end
 
   def create

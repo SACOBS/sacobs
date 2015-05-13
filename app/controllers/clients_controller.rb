@@ -9,8 +9,8 @@ class ClientsController < ApplicationController
   end
 
   def search
-    @results = client_scope.search(params[:q]).result(distinct: true).limit(50)
-    flash.now[:notice] = "#{view_context.pluralize(@results.size, 'Result')} found. Please note the more specific a search is, the higher the chance of success is."
+    @search = client_scope.search(params[:q])
+    @results = @search.result.limit(50)
   end
 
   def show

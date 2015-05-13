@@ -80,7 +80,7 @@ body {
 }
 
 
-#myOtherSkinnedTabWrapper>ul>li {
+.tab-wrapper>ul>li {
   border: 1px solid #ddd;
   border-radius: 4px 4px 0 0;
   -webkit-border-radius: 4px 4px 0 0;
@@ -91,26 +91,26 @@ body {
   font-weight: normal;
 }
 
-#myOtherSkinnedTabWrapper>ul>li>a {
+.tab-wrapper>ul>li>a {
   margin-right: 0px;
   padding: .5em 1em;
 
 }
 
 
-#myOtherSkinnedTabWrapper>ul>li>a,
-#myOtherSkinnedTabWrapper>ul>li>a:link,
-#myOtherSkinnedTabWrapper>ul>li>a:visited {
+.tab-wrapper>ul>li>a,
+.tab-wrapper>ul>li>a:link,
+.tab-wrapper>ul>li>a:visited {
   color: #555;
   text-decoration: none;
 }
 
-#myOtherSkinnedTabWrapper>ul>li>a:hover {
+.tab-wrapper>ul>li>a:hover {
   color: #212121;
   text-decoration: none;
 }
 
-#myOtherSkinnedTabWrapper>ul>li.active {
+.tab-wrapper>ul>li.active {
   border-bottom-color: #fff;
   margin-bottom: -1px;
   padding-bottom: 2px;
@@ -121,11 +121,11 @@ body {
   background-image:  linear-gradient(bottom, #333333 2px, transparent 2px);
 }
 
-#myOtherSkinnedTabWrapper>div {
+.tab-wrapper>div {
   padding: 10px 10px 10px 10px;
 }
 
-#myOtherSkinnedTabWrapper>div {
+.tab-wrapper>div {
   border: 1px solid #ddd;
   background: transparent;
   border-radius: 0 0 4px 4px;
