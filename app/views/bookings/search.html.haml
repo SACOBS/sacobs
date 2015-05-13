@@ -33,7 +33,7 @@
 .bookings
   - if @results.any?
     = bootstrap_table headers: ['Actions', 'Expires', 'Client', 'Contact', 'Trip Date', 'Qty', 'Connection'],
-                      types: %i(hover condensed), html_options: { class: 'sortable' } do
+                      types: %i(hover condensed) do
       = render @results, cache: true
   - else
     %h3.text-center No results were found for the specified search term.

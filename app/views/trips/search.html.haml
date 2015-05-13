@@ -26,7 +26,7 @@
 %hr
 .bookings
   - if @results.any?
-    = bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed), html_options: { class: 'sortable' } do
+    = bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed) do
       = render @results, cache: true
   - else
     %h3.text-center No results were found for the specified search term.

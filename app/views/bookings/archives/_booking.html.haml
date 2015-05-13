@@ -3,10 +3,12 @@
     = link_to 'Show', bookings_archive_path(booking), icon: :info, class: t('buttons.mini.info')
     = link_to_if(booking.paid? || booking.reserved?, 'Generate Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
   %td= status_label_for(booking)
-  %td= link_to booking.client.full_name, booking.client, target: '_blank'
+  %td
+    = link_to booking.client, target: '_blank' do
+      = content_tag(:em, booking.client.full_name)
   %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
   %td= badge_for(booking.quantity)
-  %td= booking.stop.from_city_name
-  %td= booking.stop.to_city_name
+  %td
+    %span.label.label-inverse #{booking.stop.from_city_name} to #{booking.stop.to_city_name}
 
 

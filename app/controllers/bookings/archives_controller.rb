@@ -5,7 +5,7 @@ class Bookings::ArchivesController < ApplicationController
 
   def search
     @search = booking_scope.search(params[:q])
-    @results = @search.result.includes(:stop, :client, :trip).limit(50)
+    @results = @search.result.includes(:stop, :client).limit(50)
   end
 
   def show

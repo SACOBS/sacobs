@@ -21,8 +21,6 @@
     %li.divider
     %li= sort_link @search, :status, "Status", default_order: :desc
     %li.divider
-    %li= sort_link @search, :trip_start_date, "Trip Date", default_order: :desc
-    %li.divider
     %li= sort_link @search, :stop_connection_from_city_name, "From City", default_order: :desc
     %li.divider
     %li= sort_link @search, :stop_connection_to_city_name, "To City", default_order: :desc
@@ -30,8 +28,8 @@
 %hr
 .bookings
   - if @results.any?
-    = bootstrap_table headers: ['Actions', 'Status', 'Client Name', 'Trip Date', 'Qty', 'From', 'To'],
-                    types: %i(hover condensed), html_options: { class: 'sortable' } do
+    = bootstrap_table headers: ['Actions', 'Status', 'Client Name', 'Trip Date', 'Qty', 'Connection'],
+                    types: %i(hover condensed) do
       = render partial: 'bookings/archives/booking', collection: @results, cache: true
 
   - else
