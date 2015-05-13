@@ -1,11 +1,11 @@
 class Bookings::ArchivesController < ApplicationController
   def index
-    @bookings = booking_scope.includes(:stop, :client).page(params[:page])
+    @bookings = Trip.unscoped { booking_scope.includes(:trip, :stop, :client).page(params[:page]) }
   end
 
   def search
-    @search = booking_scope.search(params[:q])
-    @results = @search.result.includes(:stop, :client).limit(50)
+    @search =  Trip.unscoped { booking_scope.includes(:trip, :stop, :client).search(params[:q]) }
+    @results =   @search.result.includes(:trip, :stop, :client).limit(50)
   end
 
   def show
