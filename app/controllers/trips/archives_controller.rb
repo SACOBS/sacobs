@@ -10,9 +10,8 @@ class Trips::ArchivesController < ApplicationController
   end
 
   def search
-    results = trip_scope.search(params[:q]).result(distinct: true).page(params[:page])
-    flash[:notice] = "#{view_context.pluralize(results.total_count, 'Result')} found"
-    render partial: 'trips/archives/trips', locals: { trips: results }
+    @search = trip_scope.includes(:bus, :route).search(params[:q])
+    @results = @search.result.limit(50)
   end
 
   private

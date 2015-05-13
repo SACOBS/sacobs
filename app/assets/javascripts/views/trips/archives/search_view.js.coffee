@@ -1,6 +1,6 @@
 window.Views.Trips ||= {}
 window.Views.Trips.Archives ||= {}
-class Views.Trips.Archives.IndexView extends Views.ApplicationView
+class Views.Trips.Archives.SearchView extends Views.ApplicationView
   render: ->
     super()
     Widgets.DateTimePicker.enable()

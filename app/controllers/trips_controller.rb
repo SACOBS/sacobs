@@ -7,9 +7,8 @@ class TripsController < ApplicationController
   end
 
   def search
-    results = Trip.search(params[:q]).result(distinct: true).page(params[:page])
-    flash[:notice] = "#{view_context.pluralize(results.size, 'Result')} found"
-    render partial: 'trips', locals: { trips: results }
+    @search = Trip.includes(:bus, :route, :bookings).search(params[:q])
+    @results = @search.result.limit(50)
   end
 
   def show

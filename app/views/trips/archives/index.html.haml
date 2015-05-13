@@ -6,7 +6,7 @@
 
 
   .search.pull-right
-    = simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } }, remote: true do |f|
+    = simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } } do |f|
       = f.input :start_date_eq, as: :date_picker, placeholder: 'Search trip dates'
       = f.input :name_cont, as: :search_box
       = f.submit 'Search', class: t('buttons.mini.warning')

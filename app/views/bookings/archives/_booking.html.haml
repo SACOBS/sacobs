@@ -4,10 +4,7 @@
     = link_to_if(booking.paid? || booking.reserved?, 'Generate Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank'){}
   %td= status_label_for(booking)
   %td= link_to booking.client.full_name, booking.client, target: '_blank'
-  %td= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A'
-  %td= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A'
-  %td= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A'
-  %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long) if booking.trip.start_date.present?
+  %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
   %td= badge_for(booking.quantity)
   %td= booking.stop.from_city_name
   %td= booking.stop.to_city_name
