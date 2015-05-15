@@ -222,6 +222,7 @@ Sacobs::Application.routes.draw do
         get :search
       end
     end
+    resources :builder, only: [:show, :update], controller: 'builder'
   end
 
   resources :trips, only: [:index, :show, :edit, :update, :destroy] do
@@ -231,7 +232,10 @@ Sacobs::Application.routes.draw do
     collection do
       get :search
     end
-    resources :builder, only: [:show, :update, :create], controller: 'trips/builder'
+  end
+
+  namespace :routes do
+    resources :builder, only: [:show, :update], controller: 'builder'
   end
 
   resources :routes, only: [:index, :edit, :update, :show, :destroy] do
@@ -246,7 +250,6 @@ Sacobs::Application.routes.draw do
         patch :update
       end
     end
-    resources :builder, only: [:show, :update, :create], controller: 'routes/builder'
   end
 
   resources :buses, only: [:index, :show, :edit, :update, :destroy] do

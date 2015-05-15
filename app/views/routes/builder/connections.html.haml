@@ -1,14 +1,14 @@
 = content_for(:title) do
   Route Wizard - Connections
 #errors= errors_for @route
-= simple_form_for @route, defaults: { error: false }, url: wizard_path do |f|
+= simple_form_for @route, defaults: { error: false }, url: wizard_path, method: :patch do |f|
   %fieldset
     = bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections' } do
       = f.simple_fields_for :connections, wrapper: false do |connection|
         = render 'routes/builder/connection_fields', f: connection
   .form-actions
     = f.submit 'Finish', class: t('buttons.primary')
-    = link_to 'Cancel', route_path(@route), method: :delete, class: t('buttons.danger')
+    = link_to 'Cancel', @route, method: :delete, class: t('buttons.danger')
 
 
 

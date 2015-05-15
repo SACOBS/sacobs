@@ -37,6 +37,8 @@ class Connection < ActiveRecord::Base
   delegate :city_name, :city_venues, to: :from, prefix: true
   delegate :city_name, :city_venues, to: :to, prefix: true
 
+  accepts_nested_attributes_for :from, :to
+
   private
 
   def defaults

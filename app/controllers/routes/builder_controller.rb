@@ -4,38 +4,56 @@ module Routes
 
     layout 'wizard'
 
-    before_action :set_route, only: [:show, :update]
-
-    steps :route_details, :destinations, :connections
-
-    def create
-      @route = Route.create
-      redirect_to wizard_path(steps.first, route_id: @route)
-    end
+    steps :details, :destinations, :connections
 
     def show
+      case step
+        when :details
+          @route = Route.new
+          session[:route] = nil
+        when :destinations
+          @route = Route.new(session[:route])
+        when :connections
+          @route = Route.find(session[:route])
+      end
       render_wizard
     end
 
     def update
-      @route.update!(route_params)
-      render_wizard @route
+      case step
+        when :details
+          @route = Route.new(route_params)
+          if @route.valid?
+            session[:route] = route_params
+            redirect_to next_wizard_path
+          else
+            render :details
+          end
+        when :destinations
+          @route = Route.new(session[:route].merge(route_params))
+          if @route.save
+            session[:route] = @route.id
+            redirect_to next_wizard_path
+          else
+            render :destinations
+          end
+        when :connections
+          @route = Route.find(session[:route])
+          if @route.update(route_params)
+            session[:route] = nil
+            redirect_to @route
+          else
+            render :connections
+          end
+      end
     end
 
     private
-
-    def finish_wizard_path
-      routes_url
-    end
-
-    def set_route
-      @route = Route.find(params[:route_id])
-    end
-
     def route_params
       params.fetch(:route, {}).permit(:name, :cost, :distance,
                                       destinations_attributes: [:city_id, :sequence,  :_destroy],
-                                      connections_attributes: [:id, :_destroy, :from_id, :to_id, :distance, :percentage, :cost, :depart, :arrive]
+                                      connections_attributes: [:id, :_destroy,  :distance, :percentage, :cost, :depart, :arrive,
+                                                               :from_id, :to_id]
                                      ).merge(user_id: current_user.id)
     end
   end

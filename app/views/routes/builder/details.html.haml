@@ -1,11 +1,11 @@
 = content_for(:title) do
   Route Wizard - Details
 #errors= errors_for @route
-= simple_form_for @route, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @route, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' }, method: :patch do |f|
   %fieldset
     = f.input :name, autofocus: true
     = f.input :cost, as: :cost, label: 'Master Rate'
     = f.input :distance, as: :distance
   .form-actions
     = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', @route, method: :delete, class: t('buttons.danger')
+    = link_to 'Cancel', routes_path, class: t('buttons.danger')

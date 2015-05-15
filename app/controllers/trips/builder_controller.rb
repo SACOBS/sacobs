@@ -1,52 +1,58 @@
-module Trips
-  class BuilderController < ApplicationController
-    include Wicked::Wizard
+class Trips::BuilderController < ApplicationController
+  include Wicked::Wizard
 
-    layout 'wizard'
+  layout 'wizard'
 
-    before_action :set_trip, only: [:show, :update]
+  steps :details, :stops
 
-    steps :trip_details, :stops
-
-    def create
-      @trip = Trip.create(trip_params)
-      redirect_to wizard_path(Wicked::FIRST_STEP, trip_id: @trip)
+  def show
+    case step
+      when :details
+        @trip = Trip.new
+        session[:trip] = nil
+      when :stops
+        @trip = Trip.new(session[:trip])
+        @trip.build_stops
     end
+    render_wizard
+  end
 
-    def show
-      render_wizard
+  def update
+    case step
+      when :details
+        @trip = Trip.new(trip_params)
+        if @trip.valid?
+          session[:trip] = trip_params
+          redirect_to next_wizard_path
+        else
+          render :details
+        end
+      when :stops
+        @trip = Trip.new(session[:trip].merge(trip_params))
+        if @trip.save
+          session[:trip] = nil
+          redirect_to @trip
+        else
+          render :stops
+        end
     end
+  end
 
-    def update
-      Trip.no_touching { @trip.update(trip_params) }
-      render_wizard @trip
-    end
-
-    private
-
-    def finish_wizard_path
-      trips_url
-    end
-
-    def set_trip
-      @trip = Trip.find(params[:trip_id])
-    end
-
-    def trip_params
-      params.fetch(:trip, {}).permit(:name,
-                                     :start_date,
-                                     :end_date,
-                                     :route_id,
-                                     :bus_id,
-                                     :notes,
-                                     driver_ids: [],
-                                     stops_attributes: [:id,
-                                                        :arrive,
-                                                        :depart,
-                                                        :_destroy,
-                                                        :connection_id,
-                                                        :available_seats]
-                                    )
-    end
+  private
+  def trip_params
+    params.fetch(:trip, {}).permit(:name,
+                                   :start_date,
+                                   :end_date,
+                                   :route_id,
+                                   :bus_id,
+                                   :notes,
+                                   driver_ids: [],
+                                   stops_attributes: [:id,
+                                                      :arrive,
+                                                      :depart,
+                                                      :_destroy,
+                                                      :connection_id,
+                                                      :available_seats]
+    )
   end
 end

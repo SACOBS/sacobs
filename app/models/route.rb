@@ -34,7 +34,7 @@ class Route < ActiveRecord::Base
   validates :name, :cost, :distance, presence: true, on: :update
 
   before_save :set_connection_costs, if: :cost_changed?
-  after_save :build_connections, if: proc { |route| route.destinations.any? { |d| d.previous_changes.any? } }
+  after_save :generate_connections, if: proc { |route| route.destinations.any? { |d| d.previous_changes.any? } }
   after_update { touch }
 
   def copy
@@ -62,11 +62,11 @@ class Route < ActiveRecord::Base
   end
 
   def start_city
-    destinations.first.try(:city)
+    destinations.first.city
   end
 
   def end_city
-    destinations.last.try(:city)
+    destinations.last.city
   end
 
   private
@@ -81,7 +81,7 @@ class Route < ActiveRecord::Base
     connections.each { |c| c.cost = ((cost * (c.percentage / 100)) / 5.0).ceil * 5 }
   end
 
-  def build_connections
+  def generate_connections
     destinations.each do |from|
       destinations.drop(from.sequence).each { |to| connections.where(from: from, to: to).first_or_create }
     end

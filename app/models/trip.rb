@@ -38,7 +38,8 @@ class Trip < ActiveRecord::Base
 
   accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
 
-  validates :start_date, :end_date, :route, :bus, presence: true, on: :update
+  validates :start_date, :end_date, :route, :bus, presence: true
+  validates :drivers, length: { minimum: 1 }
 
   before_save :set_name
   after_update :generate_stops, if: :route_id_changed?
@@ -51,6 +52,11 @@ class Trip < ActiveRecord::Base
     copy.drivers = drivers.map(&:dup)
     copy.stops = stops.map(&:dup)
     copy
+  end
+
+  def build_stops
+    puts route.connections.first.inspect
+    stops.build(route.connections.map { |connection| { connection_id: connection.id, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
   end
 
   def assign_seats(stop, qty)

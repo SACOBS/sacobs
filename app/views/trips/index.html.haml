@@ -9,7 +9,7 @@
     Page #{content_tag(:strong, @trips.current_page)} of #{content_tag(:strong, @trips.total_pages)}
   %p= page_entries_info @trips
   = paginate @trips
-  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
+  = link_to 'Setup Trip', trips_builder_path(:details), class: t('buttons.primary'), icon: :plus
   = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 .search.pull-right
@@ -26,7 +26,7 @@
 
 %br
 .actions
-  = link_to 'Setup Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.primary'), icon: :plus, method: :post
+  = link_to 'Setup Trip', trips_builder_path(:details), class: t('buttons.primary'), icon: :plus
   = link_to 'Refresh', trips_path, class: t('buttons.default'), icon: :refresh
 
 
