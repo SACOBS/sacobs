@@ -2,7 +2,6 @@ window.Views.Bookings ||= {}
 class Views.Bookings.IndexView extends Views.ApplicationView
   render: ->
     super()
-    Widgets.DateTimePicker.enable()
     $('a[data-toggle="tab"]').on 'show', (e) ->
       $tab = $(e.target)
       $tab_pane = $($tab.data('target'))
@@ -18,5 +17,4 @@ class Views.Bookings.IndexView extends Views.ApplicationView
     $('#bookings ul li:first a').tab('show');
   cleanup: ->
     super()
-    Widgets.DateTimePicker.cleanup()
     $('#booking_search').off 'ajax:success'

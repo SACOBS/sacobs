@@ -6,11 +6,11 @@
 
 #errors= errors_for @trip
 
-%ul.nav.nav-tabs#Tabbed
+%ul.nav.nav-tabs
   %li.active
-    %a{ href: '#details' } Details
+    %a{ href: '#details', data: { toggle: 'tab' }  } Details
   %li
-    %a{ href: '#stops' } Stops
+    %a{ href: '#stops', data: { toggle: 'tab' }  } Stops
 
 
 = simple_form_for @trip, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|

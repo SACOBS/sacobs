@@ -5,9 +5,12 @@ class Views.ApplicationView
     $('[rel~="tooltip"]').tooltip()
     $('#show_notes').click ->
       $('#notes').toggle();
+    Widgets.DateTimePicker.enable()
+
 
 
   cleanup: ->
     $('[rel~="tooltip"]').off()
+    Widgets.DateTimePicker.cleanup()
 
 
