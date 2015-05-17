@@ -1,7 +1,7 @@
 = content_for(:title) do
   Bus Wizard - Seats
 #errors= errors_for @bus
-= simple_form_for @bus, defaults: { error: false }, url: wizard_path do |f|
+= simple_form_for @bus, defaults: { error: false }, url: wizard_path, method: :patch do |f|
   %fieldset
     = bootstrap_table headers: ['Row', 'Number', ''], types: [:hover, :condensed], html_options: { id: 'seats' } do
       = f.simple_fields_for :seats, wrapper: false do |seat|
@@ -10,4 +10,4 @@
       = link_to_add_association 'Add Seat', f, :seats, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' }
   .form-actions
     = f.submit 'Complete', class: t('buttons.primary')
-    = link_to 'Cancel', bus_path(@bus), method: :delete, class: t('buttons.danger')
+    = link_to 'Cancel', buses_path, class: t('buttons.danger')

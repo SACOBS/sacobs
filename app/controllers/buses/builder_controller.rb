@@ -4,34 +4,42 @@ module Buses
 
     layout 'wizard'
 
-    before_action :set_bus, only: [:show, :update]
-
-    steps :bus_details, :seats
-
-    def create
-      @bus = Bus.create
-      redirect_to wizard_path(Wicked::FIRST_STEP, bus_id: @bus)
-    end
+    steps :details, :seats
 
     def show
-      @bus.build_seats if step == :seats
+      case step
+        when :details
+          @bus = Bus.new
+          session[:bus] = nil
+        when :seats
+          @bus = Bus.new(session[:bus])
+          @bus.build_seats
+      end
       render_wizard
     end
 
     def update
-      @bus.update(bus_params)
-      render_wizard @bus
+      case step
+        when :details
+          @bus = Bus.new(bus_params)
+          if @bus.valid?
+            session[:bus] = bus_params
+            redirect_to next_wizard_path
+          else
+            render :details
+          end
+        when :seats
+          @bus = Bus.new(session[:bus].merge(bus_params))
+          if @bus.save
+            session[:bus] = nil
+            redirect_to @bus
+          else
+            render :seats
+          end
+      end
     end
 
     private
-
-    def finish_wizard_path
-      buses_url
-    end
-
-    def set_bus
-      @bus = Bus.find(params[:bus_id])
-    end
 
     def bus_params
       params.fetch(:bus, {}).permit(:name,

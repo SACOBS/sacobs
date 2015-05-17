@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -101,6 +102,7 @@ gem 'headjs-rails', '~> 0.4.2'
 
 # Simple Defaults
 gem 'simple_defaults'
+
 
 group :development do
   gem 'rails_apps_testing'

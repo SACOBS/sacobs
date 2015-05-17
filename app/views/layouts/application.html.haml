@@ -14,7 +14,7 @@
     = favicon_link_tag 'apple-touch-icon-iphone-60x60-precomposed.png', rel: 'apple-touch-icon', type: 'image/png'
     = favicon_link_tag 'apple-touch-icon-iphone-retina-120x120-precomposed.png', rel: 'apple-touch-icon', type: 'image/png'
     = yield(:head)
-  %body{ data: { action: action_name, controller: controller_path, class_name: js_class_name } }
+  %body{ class: controller_name, data: { action: action_name, controller: controller_path, class_name: js_class_name } }
     #wrap
       %header.navbar.navbar-fixed-top.navbar-inverse
         %nav.navbar-inner

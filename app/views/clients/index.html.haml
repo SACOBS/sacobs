@@ -12,8 +12,6 @@
       = f.submit 'Search', class: t('buttons.mini.warning')
       = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
-.results
-
 .tabbable.tabs-left#listing
   %ul.nav.nav-tabs#directory
     - ('A'..'Z').each do |letter|
