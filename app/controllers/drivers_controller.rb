@@ -3,11 +3,12 @@ class DriversController < ApplicationController
 
   def index
     @drivers = driver_scope
+    respond_with(@drivers)
   end
 
   def search
     @drivers = driver_scope.search(params[:q]).result(distinct: true)
-    render partial: 'driver', collection: @drivers, cache: true
+    respond_with(@drivers)
   end
 
   def new

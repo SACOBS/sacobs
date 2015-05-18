@@ -3,7 +3,6 @@ window.Views.Bookings.Builder ||= {}
 class Views.Bookings.Builder.EditView extends Views.ApplicationView
   render: ->
     super()
-    Widgets.TypeAhead.enable()
 
     $('#trip_search').on 'ajax:success', (evt, data, status, xhr) ->
       $('.trips').html(data)
@@ -22,7 +21,6 @@ class Views.Bookings.Builder.EditView extends Views.ApplicationView
 
   cleanup: ->
     super()
-    Widgets.TypeAhead.cleanup()
     $('#trip_search').off 'ajax:success'
     $('#return_trip_search').off 'ajax:success'
     $('.amount').off 'change'

@@ -4,7 +4,6 @@ class Views.Routes.Builder.ShowView extends Views.ApplicationView
   render: ->
     super()
     Widgets.Calculator.enable()
-    Widgets.TypeAhead.enable()
 
     $(document).on 'cocoon:after-insert', ->
       Widgets.TypeAhead.enable()

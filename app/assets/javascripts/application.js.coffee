@@ -20,6 +20,9 @@
 #= require_tree .
 
 
+Turbolinks.enableTransitionCache();
+$.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs'
+
 pageLoad = ->
   className = $('body').attr('data-class-name')
   window.applicationView = try
@@ -32,8 +35,6 @@ pageLoad = ->
 
 head ->
   $ ->
-    Turbolinks.enableTransitionCache();
-    $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs'
     pageLoad()
     $(document).on 'page:load', pageLoad
     $(document).on 'page:before-change', ->

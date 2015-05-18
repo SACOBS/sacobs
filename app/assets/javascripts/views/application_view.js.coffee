@@ -6,11 +6,13 @@ class Views.ApplicationView
     $('#show_notes').click ->
       $('#notes').toggle();
     Widgets.DateTimePicker.enable()
+    Widgets.TypeAhead.enable()
 
 
 
   cleanup: ->
     $('[rel~="tooltip"]').off()
     Widgets.DateTimePicker.cleanup()
+    Widgets.TypeAhead.cleanup()
 
 

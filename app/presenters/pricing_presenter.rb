@@ -69,6 +69,8 @@ class PricingPresenter
   end
 
   def passenger_types
-    @passenger_types ||= PassengerType.all
+    Rails.cache.fetch("passenger_types/#{PassengerType.count}/#{PassengerType.maximum(:updated_at).to_i}") do
+      PassengerType.all
+    end
   end
 end

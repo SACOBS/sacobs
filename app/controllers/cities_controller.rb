@@ -9,7 +9,7 @@ class CitiesController < ApplicationController
 
   def search
     @cities = city_scope.search(params[:q]).result(distinct: true).page(params[:page])
-    render partial: 'cities', locals: { cities: @cities }
+    respond_with(@cities)
   end
 
   def new

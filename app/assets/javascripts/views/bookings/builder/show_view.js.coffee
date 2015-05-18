@@ -3,8 +3,6 @@ window.Views.Bookings.Builder ||= {}
 class Views.Bookings.Builder.ShowView extends Views.ApplicationView
   render: ->
     super()
-    Widgets.DateTimePicker.enable()
-    Widgets.TypeAhead.enable()
 
     $trip_search = $('#trip_search')
     $trip_search.submit() if $trip_search.length
@@ -26,8 +24,6 @@ class Views.Bookings.Builder.ShowView extends Views.ApplicationView
 
   cleanup: ->
     super()
-    Widgets.DateTimePicker.cleanup()
-    Widgets.TypeAhead.cleanup()
     $('#trip_search').off 'ajax:success'
     $('#return_trip_search').off 'ajax:success'
     $('.amount').off 'change'
