@@ -1,5 +1,15 @@
 = content_for(:title) do
   Route Wizard - Connections
+
+.help-notes
+  %dl.dl-horizontal
+    %dd
+      %h4 Notes
+    %dt Percentage:
+    %dd When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the master rate)
+    %dt Cost:
+    %dd When changing the cost, the percentage will be recalculated and updated (eg. half of the master rate will make the percentage 50%)
+
 #errors= errors_for @route
 = simple_form_for @route, defaults: { error: false }, url: wizard_path, method: :patch do |f|
   %fieldset

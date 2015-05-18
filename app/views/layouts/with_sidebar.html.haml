@@ -6,8 +6,7 @@
     %meta{ content: content_for?(:description) ? yield(:description) : 'Sacobs', name: 'description' }
     %meta{ content: content_for?(:keywords) ? yield(:keywords) : 'Sacobs', name: 'keywords' }
     = stylesheet_link_tag :application, media: 'all',  'data-turbolinks-track' => true
-    = javascript_include_tag 'head'
-    = headjs_include_tag 'vendor', 'application'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
     = yield(:head)
   %body{ data: { action: action_name, controller: controller_path, class_name: js_class_name } }

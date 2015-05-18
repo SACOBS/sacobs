@@ -19,8 +19,8 @@ class Views.Routes.Builder.ShowView extends Views.ApplicationView
       $costInput.val(cost);
 
     $(document).on 'cocoon:after-insert',(event, destination) ->
-      destination.find("td input[name*='sequence']").val(destination.index() + 1)
       Widgets.TypeAhead.enable()
+      destination.find("td input[name*='sequence']").val(destination.index() + 1)
 
     $(document).on 'cocoon:after-remove',(event, destination) ->
       $('#destinations').find('tr').each (index) ->

@@ -25,13 +25,21 @@
         = f.input :cost, as: :cost, label: 'Master Rate'
         = f.input :distance, as: :distance
     .tab-pane#connections
+      .help-notes
+        %dl.dl-horizontal
+          %dd
+            %h4 Notes
+          %dt Percentage:
+          %dd When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the master rate)
+          %dt Cost:
+          %dd When changing the cost, the percentage will be recalculated and updated (eg. half of the master rate will make the percentage 50%)
       %fieldset
         = bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
           = f.simple_fields_for :connections, wrapper: false do |connection|
             %tr
               %td= connection.object.from_city_name
               %td= connection.object.to_city_name
-              %td= connection.input_field :percentage, as: :percentage, label: false, class: 'input-small calc'
+              %td= connection.input_field :percentage, as: :percentage, label: false, class: 'input-small'
               %td= connection.input_field :cost, as: :cost, label: false, class: 'input-small'
               %td= connection.input_field :distance, as: :distance, label: false, class: 'input-small'
               %td= connection.input_field :depart, as: :time_picker, label: false, class: 'input-small'
