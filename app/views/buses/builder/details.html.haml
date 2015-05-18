@@ -8,6 +8,7 @@
     = f.input :capacity
     = f.input :year
     = f.input :model
-  .form-actions
-    = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', buses_path, class: t('buttons.danger')
+  .control-group
+    .controls
+      = f.submit 'Next', class: t('buttons.primary')
+      = link_to 'Cancel', buses_path, class: t('buttons.danger')

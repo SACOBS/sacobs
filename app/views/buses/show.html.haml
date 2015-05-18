@@ -4,6 +4,10 @@
 - cache @bus do
   .page-header
     %h2 Bus
+    .actions
+      = back_to buses_path
+      = link_to 'Edit', edit_bus_path(@bus), icon: :edit, class: t('buttons.inverse')
+      = link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: t('messages.confirm', resource: :bus) }, icon: :times, class: t('buttons.danger')
   .well
     %p
       %strong Name:
@@ -29,11 +33,6 @@
           %tr
             %td= seat.row
             %td= seat.number
-  .form-actions
-    = back_to buses_path
-    = link_to 'Edit', edit_bus_path(@bus), icon: :edit, class: t('buttons.inverse')
-    = link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: t('messages.confirm', resource: :bus) }, icon: :times, class: t('buttons.danger')
-
 
 
 

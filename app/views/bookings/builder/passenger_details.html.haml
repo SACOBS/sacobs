@@ -6,8 +6,9 @@
 
 #errors= errors_for @booking
 = simple_form_for @booking, defaults: { error: false, label: false }, url: wizard_path, html: {  method: :patch } do |f|
-  .form-actions
-    = f.submit 'Next (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n'
+  .control-group
+    .controls
+      = f.submit 'Next (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n'
   %fieldset
     = bootstrap_table headers: ['Name', 'Surname', 'Cell No', 'Email', 'Type'], types: [:hover, :condensed], html_options: { id: 'passengers' } do
       = f.simple_fields_for :passengers, wrapper: false do |passenger|

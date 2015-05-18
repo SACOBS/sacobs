@@ -7,8 +7,9 @@
 
 
 = simple_form_for @booking, url: wizard_path, method: :patch do |f|
-  .form-actions
-    = f.submit 'Next (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n'
+  .control-group
+    .controls
+      = f.submit 'Next (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n'
   = f.fields_for :passengers do |p|
     %h5 #{p.object.full_name} (#{p.object.passenger_type.description.titleize})
     - Charge.all.each do |c|

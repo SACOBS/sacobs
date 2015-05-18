@@ -8,7 +8,8 @@ class Widgets.TypeAhead
    $('input.typeahead').keyup ->
     if($.trim($(this).val()) == '')
       targets = $(this).data('targets').split(',')
-      Utilities.updateCollectionValues(targets, '')
+      $.each targets, (index, item) ->
+         $(item).val('')
       if $(this).data().hasOwnProperty('populate')
         $(this).closest('form')[0].reset()
 

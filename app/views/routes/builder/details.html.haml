@@ -6,6 +6,7 @@
     = f.input :name, autofocus: true
     = f.input :cost, as: :cost, label: 'Master Rate'
     = f.input :distance, as: :distance
-  .form-actions
-    = f.submit 'Next', class: t('buttons.primary')
-    = link_to 'Cancel', routes_path, class: t('buttons.danger')
+  .control-group
+    .controls
+      = f.submit 'Next', class: t('buttons.primary')
+      = link_to 'Cancel', routes_path, class: t('buttons.danger')

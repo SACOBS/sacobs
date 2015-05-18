@@ -2,6 +2,12 @@
   #{@city.name}
 .page-header
   %h2 City
+  .actions
+    = back_to cities_path
+    = link_to 'Edit', edit_city_path(@city), icon: :edit, class: t('buttons.info')
+    = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: t('messages.confirm', resource: :city) }, icon: :times, class: t('buttons.danger')
+
+
 .well
   %p
     %strong Name:
@@ -16,11 +22,5 @@
     - else
       %br
       None
-.form-actions
-  = back_to cities_path
-  = link_to 'Edit', edit_city_path(@city), icon: :edit, class: t('buttons.info')
-  = link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: t('messages.confirm', resource: :city) }, icon: :times, class: t('buttons.danger')
-
-
 
 

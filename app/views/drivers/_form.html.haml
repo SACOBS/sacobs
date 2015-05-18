@@ -3,7 +3,8 @@
   %fieldset
     = f.input :name, autofocus: true
     = f.input :surname
-  .form-actions
-    = f.submit class: t('buttons.primary')
-    = link_to 'Cancel', drivers_path, class: t('buttons.default')
+  .control-group
+    .controls
+      = f.submit class: t('buttons.primary')
+      = link_to 'Cancel', drivers_path, class: t('buttons.default')
 

@@ -2,16 +2,18 @@
   Trip Wizard - Stops
 #errors= errors_for @trip
 = simple_form_for @trip, defaults: { error: false }, url: wizard_path, method: :patch do |f|
-  .form-actions
-    = f.submit 'Finish', class: t('buttons.primary')
-    = link_to 'Cancel', trips_path, class: t('buttons.danger')
+  .control-group
+    .controls
+      = f.submit 'Finish', class: t('buttons.primary')
+      = link_to 'Cancel', trips_path, class: t('buttons.danger')
 
   %fieldset
     = bootstrap_table headers: %w(From To Arrive Depart), types: [:hover, :condensed], html_options: { id: 'stops' } do
       = f.simple_fields_for :stops, wrapper: false do |stop|
         = render 'trips/builder/stop_fields', f: stop
-  .form-actions
-    = f.submit 'Finish', class: t('buttons.primary')
-    = link_to 'Cancel', trips_path, class: t('buttons.danger')
+  .control-group
+    .controls
+      = f.submit 'Finish', class: t('buttons.primary')
+      = link_to 'Cancel', trips_path, class: t('buttons.danger')
 
 

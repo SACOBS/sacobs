@@ -8,8 +8,9 @@
   %fieldset
     = f.input :description, autofocus: true
     = f.input :percentage
-  .form-actions
-    = f.submit class: t('buttons.primary')
-    = link_to 'Cancel', charges_path, class: t('buttons.default')
+  .control-group
+    .controls
+      = f.submit class: t('buttons.primary')
+      = link_to 'Cancel', charges_path, class: t('buttons.default')
 
 
