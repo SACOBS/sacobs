@@ -2,15 +2,16 @@
   Edit #{@route.name}
 .page-header
   %h2 Edit Route
+  %h4 Notes:
   %ol
     %li
       %p
         %strong Percentage:
-        When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the #{content_tag(:strong, 'Master Rate')})
+        %em When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the #{content_tag(:strong, 'Master Rate')})
     %li
       %p
         %strong Cost:
-        When changing the cost, the percentage will be recalculated and updated (eg. half of the #{content_tag(:strong, 'Master Rate')} will make the percentage 50%)
+        %em When changing the cost, the percentage will be recalculated and updated (eg. half of the #{content_tag(:strong, 'Master Rate')} will make the percentage 50%)
 
 
 #errors= errors_for @route
