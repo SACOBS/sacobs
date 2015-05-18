@@ -11,7 +11,7 @@
 #  cell_no       :string(255)
 #  email         :string(255)
 #  user_id       :integer
-#  high_risk     :boolean          default("false")
+#  high_risk     :boolean          default(FALSE)
 #  work_no       :string(255)
 #  date_of_birth :date
 #  title         :string(255)

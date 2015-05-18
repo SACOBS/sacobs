@@ -17,6 +17,8 @@
 #  has_return   :boolean
 #  stop_id      :integer
 #  sequence_id  :integer
+#  archived     :boolean          default(FALSE)
+#  archived_at  :datetime
 #
 # Indexes
 #

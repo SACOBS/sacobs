@@ -7,7 +7,7 @@
 #  user_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  criteria    :json             default("{}"), not null
+#  criteria    :json             default({}), not null
 #  period_from :date
 #  period_to   :date
 #

@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  name         :string(255)
 #  user_id      :integer
-#  venues_count :integer          default("0")
+#  venues_count :integer          default(0)
 #  created_at   :datetime
 #  updated_at   :datetime
 #
