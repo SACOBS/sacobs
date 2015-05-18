@@ -18,8 +18,13 @@ class Views.Routes.Builder.ShowView extends Views.ApplicationView
       cost = Math.ceil(((percentage / 100) * route_cost) / 5) * 5
       $costInput.val(cost);
 
-    $(document).on 'cocoon:after-insert', ->
+    $(document).on 'cocoon:after-insert',(event, destination) ->
+      destination.find("td input[name*='sequence']").val(destination.index() + 1)
       Widgets.TypeAhead.enable()
+
+    $(document).on 'cocoon:after-remove',(event, destination) ->
+      $('#destinations').find('tr').each (index) ->
+        $(this).find("td input[name*='sequence']").val(index)
   cleanup: ->
     super()
     $( "#connections input[name*='cost']" ).off 'input'
