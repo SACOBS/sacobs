@@ -31,7 +31,7 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :connections, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, :cost, :distance, presence: true, on: :update
+  validates :name, :cost, :distance, presence: true
 
   before_save :set_connection_costs, if: :cost_changed?
   after_save :generate_connections, if: proc { |route| route.destinations.any? { |d| d.previous_changes.any? } }

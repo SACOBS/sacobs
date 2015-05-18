@@ -3,13 +3,27 @@ window.Views.Routes.Builder ||= {}
 class Views.Routes.Builder.ShowView extends Views.ApplicationView
   render: ->
     super()
-    Widgets.Calculator.enable()
+    $( "#connections input[name*='cost']" ).on 'input', ->
+      route_cost = $("#connections").data('route-cost')
+      cost = this.value
+      $percentageInput = $(this).closest('tr').find("input[name*='percentage']")
+      percentage = Math.round((cost / route_cost) * 100)
+      $percentageInput.val(percentage);
+
+    $( "#connections input[name*='percentage']" ).on 'input', ->
+      route_cost = $("#connections").data('route-cost')
+      percentage = this.value
+      $costInput = $(this).closest('tr').find("input[name*='cost']")
+
+      cost = Math.ceil(((percentage / 100) * route_cost) / 5) * 5
+      $costInput.val(cost);
 
     $(document).on 'cocoon:after-insert', ->
       Widgets.TypeAhead.enable()
   cleanup: ->
     super()
-    Widgets.Calculator.cleanup()
+    $( "#connections input[name*='cost']" ).off 'input'
+    $( "#connections input[name*='percentage']" ).off 'input'
     Widgets.TypeAhead.cleanup()
     $(document).off 'cocoon:after-insert'
 
