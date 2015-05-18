@@ -9,6 +9,8 @@
 #
 
 class PassengerType < ActiveRecord::Base
+  include CollectionCacheable
+
   default_scope { order(description: :asc) }
 
   validates :description, presence: true

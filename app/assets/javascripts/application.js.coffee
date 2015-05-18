@@ -1,8 +1,6 @@
 #= require jquery
 #= require jquery-ui/effect.all
 #= require jquery_ujs
-#= require jquery.plugin
-#= require jquery.calculator
 #= require nprogress
 #= require nprogress-ajax
 #= require nprogress-turbolinks
@@ -33,19 +31,18 @@ pageLoad = ->
 
 
 
-head ->
-  $ ->
+$ ->
+  pageLoad()
+  $(document).on 'page:load', pageLoad
+  $(document).on 'page:before-change', ->
+    localStorage.clear()
+    window.applicationView.cleanup()
+    true
+  $(document).on 'page:restore', ->
+    localStorage.clear()
+    window.applicationView.cleanup()
     pageLoad()
-    $(document).on 'page:load', pageLoad
-    $(document).on 'page:before-change', ->
-      localStorage.clear()
-      window.applicationView.cleanup()
-      true
-    $(document).on 'page:restore', ->
-      localStorage.clear()
-      window.applicationView.cleanup()
-      pageLoad()
-      true
+    true
 
 
 

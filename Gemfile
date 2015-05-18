@@ -97,9 +97,6 @@ gem 'pg'
 # Email Obfuscation
 gem 'obfuscatejs'
 
-# Head Js
-gem 'headjs-rails', '~> 0.4.2'
-
 # Simple Defaults
 gem 'simple_defaults'
 
