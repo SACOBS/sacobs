@@ -2,48 +2,41 @@
   Edit #{@route.name}
 .page-header
   %h2 Edit Route
+  %ol
+    %li
+      %p
+        %strong Percentage:
+        When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the #{content_tag(:strong, 'Master Rate')})
+    %li
+      %p
+        %strong Cost:
+        When changing the cost, the percentage will be recalculated and updated (eg. half of the #{content_tag(:strong, 'Master Rate')} will make the percentage 50%)
+
 
 #errors= errors_for @route
 
-%ul.nav.nav-tabs
-  %li.active
-    %a{ href: '#details', data: { toggle: 'tab' }  } Details
-  %li
-    %a{ href: '#connections', data: { toggle: 'tab' }  } Connections
-
-
-= simple_form_for @route, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @route, defaults: { error: false }, html: { class: 'form-inline' } do |f|
   .control-group
     .controls
       = f.submit class: t('buttons.primary')
       = link_to 'Back', routes_path, class: t('buttons.info')
-
-  .tab-content
-    .tab-pane.active#details
-      %fieldset
-        = f.input :name, autofocus: true
-        = f.input :cost, as: :cost, label: 'Master Rate'
-        = f.input :distance, as: :distance
-    .tab-pane#connections
-      .help-notes
-        %dl.dl-horizontal
-          %dd
-            %h4 Notes
-          %dt Percentage:
-          %dd When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the master rate)
-          %dt Cost:
-          %dd When changing the cost, the percentage will be recalculated and updated (eg. half of the master rate will make the percentage 50%)
-      %fieldset
-        = bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
-          = f.simple_fields_for :connections, wrapper: false do |connection|
-            %tr
-              %td= connection.object.from_city_name
-              %td= connection.object.to_city_name
-              %td= connection.input_field :percentage, as: :percentage, label: false, class: 'input-small'
-              %td= connection.input_field :cost, as: :cost, label: false, class: 'input-small'
-              %td= connection.input_field :distance, as: :distance, label: false, class: 'input-small'
-              %td= connection.input_field :depart, as: :time_picker, label: false, class: 'input-small'
-              %td= connection.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
+  %hr
+  %fieldset
+    = f.input :name, autofocus: true, label: 'Name:'
+    = f.input :cost, as: :cost, label: 'Master Rate:'
+    = f.input :distance, as: :distance, label: 'Distance:'
+  %hr
+  %fieldset
+    = bootstrap_table headers: ['From', 'To', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
+      = f.simple_fields_for :connections, wrapper: false do |connection|
+        %tr
+          %td= connection.object.from_city_name
+          %td= connection.object.to_city_name
+          %td= connection.input_field :percentage, as: :percentage, label: false, class: 'input-small'
+          %td= connection.input_field :cost, as: :cost, label: false, class: 'input-small'
+          %td= connection.input_field :distance, as: :distance, label: false, class: 'input-small'
+          %td= connection.input_field :depart, as: :time_picker, label: false, class: 'input-small'
+          %td= connection.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
 
   .control-group
     .controls
