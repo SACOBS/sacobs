@@ -4,5 +4,5 @@
   %td= number_to_human(connection.distance, units: :distance)
   %td= number_to_percentage(connection.percentage, precision: 0)
   %td= number_to_currency(connection.cost, unit: 'R')
-  %td= l(connection.depart, format: :short)
-  %td= l(connection.arrive, format: :short)
+  %td= local_time(connection.depart, format: :short)
+  %td= local_time(connection.arrive, format: :short)
