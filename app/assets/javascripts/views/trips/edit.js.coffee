@@ -1,6 +1,5 @@
 window.Views.Trips ||= {}
-window.Views.Trips.Builder ||= {}
-class Views.Trips.Builder.ShowView extends Views.ApplicationView
+class Views.Trips.EditView extends Views.ApplicationView
   render: ->
     super()
     $('.trip_start_date').on 'changeDate', (e) ->

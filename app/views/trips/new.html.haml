@@ -1,23 +1,26 @@
 = content_for (:title) do
-  Trip Wizard - Details
-#errors= errors_for @trip
+  New Trip
 
-= simple_form_for @trip, url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal' }, method: :patch do |f|
+.page-header
+  %h2 New Trip
+
+#errors= errors_for @trip
+= simple_form_for @trip, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   .control-group
     .controls
-      = f.submit 'Next', class: t('buttons.primary')
+      = f.submit 'Save', class: t('buttons.primary')
       = link_to 'Cancel', trips_path, class: t('buttons.danger')
   %fieldset
-    = f.input :name, autofocus: true
+    = f.input :name, autofocus: true, placeholder: 'Name'
     = f.input :start_date, as: :date_picker
     = f.input :end_date, as: :date_picker
     = f.association :route, as: :radio_buttons, item_wrapper_class: 'inline'
     = f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline'
-    = f.association :drivers, as: :check_boxes
-    = f.input :notes, as: :text
+    = f.association :drivers, as: :check_boxes, item_wrapper_class: 'inline'
+    = f.input :notes, as: :text, placeholder: 'Notes'
   .control-group
     .controls
-      = f.submit 'Next', class: t('buttons.primary')
+      = f.submit 'Save', class: t('buttons.primary')
       = link_to 'Cancel', trips_path, class: t('buttons.danger')
 
 

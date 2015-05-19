@@ -15,6 +15,15 @@ class TripsController < ApplicationController
     fresh_when @trip, last_modified: @trip.updated_at
   end
 
+  def new
+    @trip = Trip.new
+  end
+
+  def create
+    @trip = Trip.create(trip_params)
+    respond_with(@trip)
+  end
+
   def copy
     copy = @trip.copy
     copy.user = current_user

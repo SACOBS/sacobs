@@ -34,18 +34,16 @@ class Trip < ActiveRecord::Base
 
   has_and_belongs_to_many :drivers
 
-  with_options dependent: :delete_all do |assoc|
-    assoc.has_many :stops
-    assoc.has_many :bookings, -> { unscope(where: :archived) }
-  end
+  has_many :stops, ->{ includes(:connection) } ,dependent: :destroy
+  has_many :bookings, -> { unscope(where: :archived) }, dependent: :destroy
 
-  accepts_nested_attributes_for :stops, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :stops
 
   validates :start_date, :end_date, :route, :bus, presence: true
-  validates :drivers, length: { minimum: 1 }
+  validates :drivers, length: { minimum: 1, too_short: 'minimum of 1 driver required' }
 
-  before_save :set_name
-  after_update :generate_stops, if: :route_id_changed?
+  before_create :set_name
+  after_create :generate_stops
 
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
@@ -55,11 +53,6 @@ class Trip < ActiveRecord::Base
     copy.drivers = drivers.map(&:dup)
     copy.stops = stops.map(&:dup)
     copy
-  end
-
-  def build_stops
-    puts route.connections.first.inspect
-    stops.build(route.connections.map { |connection| { connection_id: connection.id, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
   end
 
   def assign_seats(stop, qty)
@@ -80,21 +73,15 @@ class Trip < ActiveRecord::Base
     "#{name}_#{Time.current.to_i}".gsub(' ', '_').downcase
   end
 
-  private
-
-  def defaults
-    { start_date: Date.current, end_date: (start_date || Date.current.next) }
-  end
 
   protected
 
   def set_name
-    self.name = route.try(:name) unless name.present?
+    self.name ||= route.name
   end
 
   def generate_stops
     transaction do
-      stops.clear
       stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
     end
   end

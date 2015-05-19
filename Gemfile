@@ -97,9 +97,6 @@ gem 'pg'
 # Email Obfuscation
 gem 'obfuscatejs'
 
-# Simple Defaults
-gem 'simple_defaults'
-
 
 group :development do
   gem 'rails_apps_testing'

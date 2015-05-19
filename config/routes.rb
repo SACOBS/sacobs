@@ -227,10 +227,9 @@ Sacobs::Application.routes.draw do
         get :search
       end
     end
-    resources :builder, only: [:show, :update], controller: 'builder'
   end
 
-  resources :trips, only: [:index, :show, :edit, :update, :destroy] do
+  resources :trips do
     member do
       post :copy
     end

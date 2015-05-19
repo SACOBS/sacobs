@@ -236,9 +236,6 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.5.1)
-    simple_defaults (0.0.1)
-      activerecord (>= 4.0.0)
-      activesupport (>= 4.0.0)
     simple_form (3.0.3)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -329,7 +326,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   scripture (~> 0.1.0)
   sdoc
-  simple_defaults
   simple_form (~> 3.0.0)
   sucker_punch (~> 1.0)
   turbolinks
