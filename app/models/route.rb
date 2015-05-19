@@ -28,11 +28,12 @@ class Route < ActiveRecord::Base
 
   has_many :connections, dependent: :destroy, inverse_of: :route
 
-  accepts_nested_attributes_for :connections, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :connections, reject_if: :all_blank
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :cost, :distance, presence: true
   validates :cost, :distance, numericality: true
+  validates :destinations, presence: true, length: { minimum: 2, too_short: "is too short (at least %{count} destinations required)" }
 
   before_save :set_connection_costs, if: :cost_changed?
   after_save :generate_connections, if: proc { |route| route.destinations.any? { |d| d.previous_changes.any? } }

@@ -93,14 +93,13 @@
 #                            PATCH  /trips/:id(.:format)                                trips#update
 #                            PUT    /trips/:id(.:format)                                trips#update
 #                            DELETE /trips/:id(.:format)                                trips#destroy
-#             routes_builder GET    /routes/builder/:id(.:format)                       routes/builder#show
-#                            PATCH  /routes/builder/:id(.:format)                       routes/builder#update
-#                            PUT    /routes/builder/:id(.:format)                       routes/builder#update
 #                 copy_route POST   /routes/:id/copy(.:format)                          routes#copy
 #         reverse_copy_route POST   /routes/:id/reverse_copy(.:format)                  routes#reverse_copy
 #    edit_route_destinations GET    /routes/:route_id/destinations/edit(.:format)       destinations#edit
 #         route_destinations PATCH  /routes/:route_id/destinations(.:format)            destinations#update
 #                     routes GET    /routes(.:format)                                   routes#index
+#                            POST   /routes(.:format)                                   routes#create
+#                  new_route GET    /routes/new(.:format)                               routes#new
 #                 edit_route GET    /routes/:id/edit(.:format)                          routes#edit
 #                      route GET    /routes/:id(.:format)                               routes#show
 #                            PATCH  /routes/:id(.:format)                               routes#update
@@ -240,11 +239,8 @@ Sacobs::Application.routes.draw do
     end
   end
 
-  namespace :routes do
-    resources :builder, only: [:show, :update], controller: 'builder'
-  end
 
-  resources :routes, only: [:index, :edit, :update, :show, :destroy] do
+  resources :routes do
     member do
       post :copy
       post :reverse_copy

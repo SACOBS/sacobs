@@ -1,9 +1,18 @@
 class RoutesController < ApplicationController
-  before_action :set_route, except: [:index]
+  before_action :set_route, except: [:index, :new, :create]
 
   def index
     @routes = route_scope.all
     fresh_when @routes, last_modified: @routes.maximum(:updated_at)
+  end
+
+  def new
+    @route = Route.new
+  end
+
+  def create
+    @route = Route.create(route_params)
+    respond_with(@route)
   end
 
   def show

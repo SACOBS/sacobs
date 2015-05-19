@@ -1,0 +1,45 @@
+= content_for(:title) do
+  New Route
+.page-header
+  %h2 New Route
+  %h5 Instructions
+  %ol
+    %li
+      Add all the destinations(cities) that the bus will travel through on the route.
+    %li
+      Set the destination(city) order in the order the buses will travel along the route. For example on a route from East London to PE, East London will be 1 and Port Alfred will be 2 and so on.
+  %p
+    %b NB:
+    %em
+      Please note the connections on the next step in the wizard are generated from these destinations and the order they are in, so make 100% sure you are happy before moving onto the connections.
+
+
+#errors= errors_for @route
+= simple_form_for @route,  defaults: { error: false } do |f|
+  .control-group
+    .controls
+      = f.submit 'Save', class: t('buttons.primary')
+      = link_to 'Cancel', routes_path, class: t('buttons.danger')
+  %hr
+
+  .row-fluid
+    .span3
+      %fieldset
+        %legend Details
+        = f.input :name, autofocus: true
+        = f.input :cost, as: :cost, label: 'Master Rate'
+        = f.input :distance, as: :distance
+    .span9
+      %fieldset
+        %legend Destinations
+        = bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { id: 'destinations' } do
+          = f.simple_fields_for :destinations, wrapper: false do |destination|
+            = render 'destination_fields', f: destination
+
+        .links= link_to_add_association 'Add Destination', f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' },  class: t('buttons.warning'), icon: :plus
+
+  %hr
+  .control-group
+    .controls
+      = f.submit 'Save', class: t('buttons.primary')
+      = link_to 'Cancel', routes_path, class: t('buttons.danger')
