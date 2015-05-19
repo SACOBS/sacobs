@@ -33,11 +33,11 @@
         %tr
           %td= connection.object.from_city_name
           %td= connection.object.to_city_name
-          %td= connection.input_field :percentage, as: :percentage, label: false, class: 'input-small'
-          %td= connection.input_field :cost, as: :cost, label: false, class: 'input-small'
-          %td= connection.input_field :distance, as: :distance, label: false, class: 'input-small'
-          %td= connection.input_field :depart, as: :time_picker, label: false, class: 'input-small'
-          %td= connection.input_field :arrive, as: :time_picker, label: false, class: 'input-small'
+          %td= connection.input_field :percentage, as: :percentage, class: 'input-small'
+          %td= connection.input_field :cost, as: :cost, class: 'input-small'
+          %td= connection.input_field :distance, as: :distance, class: 'input-small'
+          %td= connection.input_field :depart, class: 'input-small'
+          %td= connection.input_field :arrive,  class: 'input-small'
 
   .control-group
     .controls

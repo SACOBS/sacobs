@@ -24,6 +24,8 @@
 #
 
 class Connection < ActiveRecord::Base
+  default_scope -> { order(:created_at) }
+
   belongs_to :route, inverse_of: :connections
   belongs_to :from, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
   belongs_to :to, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
@@ -46,8 +48,8 @@ class Connection < ActiveRecord::Base
       distance: 0,
       cost: 0,
       percentage: 0,
-      arrive: Date.current.at_beginning_of_day,
-      depart: Date.current.noon
+      arrive: Time.current.at_beginning_of_day,
+      depart: Time.current.noon
     }
   end
 
