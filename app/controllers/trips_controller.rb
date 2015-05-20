@@ -1,30 +1,40 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
   layout 'with_sidebar', only: :show
 
+  before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
+
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, only: [:index, :search]
+
   def index
-    @trips = Trip.all.includes(:bus, :route, :bookings).page(params[:page])
+    authorize Trip
+    @trips = trip_scope.page(params[:page])
   end
 
   def search
-    @search = Trip.includes(:bus, :route, :bookings).search(params[:q])
+    authorize Trip
+    @search = trip_scope.search(params[:q])
     @results = @search.result.limit(50)
   end
 
   def show
+    authorize @trip
     fresh_when @trip, last_modified: @trip.updated_at
   end
 
   def new
+    authorize @trip
     @trip = Trip.new
   end
 
   def create
+    authorize @trip
     @trip = Trip.create(trip_params)
     respond_with(@trip)
   end
 
   def copy
+    authorize @trip
     copy = @trip.copy
     copy.user = current_user
     if copy.save
@@ -35,19 +45,24 @@ class TripsController < ApplicationController
   end
 
   def update
+    authorize @trip
     @trip.update(trip_params)
     respond_with @trip
   end
 
   def destroy
-    Trip.no_touching { @trip.destroy }
+    authorize @trip
+    @trip.destroy
     respond_with @trip
   end
 
   private
+  def trip_scope
+    policy_scope(Trip).includes(:bus, :route, :bookings)
+  end
 
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = trip_scope.find(params[:id])
   end
 
   def trip_params

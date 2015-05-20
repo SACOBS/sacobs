@@ -6,35 +6,16 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
+  class Scope
+    attr_reader :user, :scope
 
-  def show?
-    true
-  end
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
 
-  def create?
-    false
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
-  end
-
-  def scope
-    Pundit.policy_scope!(user, record.class)
+    def resolve
+      scope
+    end
   end
 end
