@@ -97,7 +97,6 @@ gem 'pg'
 # Email Obfuscation
 gem 'obfuscatejs'
 
-
 group :development do
   gem 'rails_apps_testing'
   gem 'web-console', '~> 2.0'
