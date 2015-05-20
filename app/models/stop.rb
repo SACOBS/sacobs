@@ -18,7 +18,7 @@
 #
 
 class Stop < ActiveRecord::Base
-  belongs_to :trip, -> { unscope(where: :archived) }
+  belongs_to :trip, -> { unscope(where: :archived) }, touch: true
   belongs_to :connection, -> { includes(from: :city, to: :city) }
   has_many :bookings
 

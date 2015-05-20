@@ -42,9 +42,9 @@ class Trip < ActiveRecord::Base
   validates :start_date, :end_date, :route, :bus, presence: true
   validates :drivers, length: { minimum: 1, too_short: 'minimum of 1 driver required' }
 
-  after_initialize :set_defaults, if: :new_record?
+  after_initialize :set_defaults
   before_create :set_name
-  after_create :generate_stops
+  after_save :generate_stops, if: :route_id_changed?
 
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
@@ -78,7 +78,7 @@ class Trip < ActiveRecord::Base
   protected
   def set_defaults
     self.start_date ||= Date.current
-    self.end_date ||= Date.current 
+    self.end_date ||= Date.current
   end
 
   def set_name
@@ -86,8 +86,10 @@ class Trip < ActiveRecord::Base
   end
 
   def generate_stops
-    transaction do
-      stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
+    self.class.no_touching do
+      self.stops.clear if stops.any?
+      self.stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
     end
   end
+
  end
