@@ -16,8 +16,16 @@ class TripPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def new?
+    create?
+  end
+
   def create?
     user.admin?
+  end
+
+  def edit?
+    update?
   end
 
   def update?

@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   layout 'with_sidebar', only: :show
 
+  before_action :build_trip, only: [:new, :create]
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
   after_action :verify_authorized
@@ -9,6 +10,7 @@ class TripsController < ApplicationController
   def index
     authorize Trip
     @trips = trip_scope.page(params[:page])
+    fresh_when @trips
   end
 
   def search
@@ -24,17 +26,17 @@ class TripsController < ApplicationController
 
   def new
     authorize @trip
-    @trip = Trip.new
   end
 
   def create
     authorize @trip
-    @trip = Trip.create(trip_params)
+    @trip.save
     respond_with(@trip)
   end
 
   def copy
     authorize @trip
+
     copy = @trip.copy
     copy.user = current_user
     if copy.save
@@ -42,6 +44,10 @@ class TripsController < ApplicationController
     else
       redirect_to trips_url, alert: 'Trip could not be copied.'
     end
+  end
+
+  def edit
+    authorize @trip
   end
 
   def update
@@ -59,6 +65,10 @@ class TripsController < ApplicationController
   private
   def trip_scope
     policy_scope(Trip).includes(:bus, :route, :bookings)
+  end
+
+  def build_trip
+    @trip = Trip.new(trip_params)
   end
 
   def set_trip

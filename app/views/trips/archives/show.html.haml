@@ -5,7 +5,10 @@
   .actions
     = back_to trips_archives_path
 - content_for :sidebar do
-  = display_occupancy(@trip)
+  - if @trip.bus
+    = display_occupancy(@trip)
+  - else
+    %p=@trip.bus_id
 
 - cache @trip do
   .well

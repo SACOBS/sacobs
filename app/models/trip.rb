@@ -24,7 +24,7 @@
 #
 
 class Trip < ActiveRecord::Base
-  include Archivable
+  include Archivable, CollectionCacheable
 
   to_param :name
 
@@ -42,6 +42,7 @@ class Trip < ActiveRecord::Base
   validates :start_date, :end_date, :route, :bus, presence: true
   validates :drivers, length: { minimum: 1, too_short: 'minimum of 1 driver required' }
 
+  after_initialize :set_defaults, if: :new_record?
   before_create :set_name
   after_create :generate_stops
 
@@ -75,6 +76,10 @@ class Trip < ActiveRecord::Base
 
 
   protected
+  def set_defaults
+    self.start_date ||= Date.current
+    self.end_date ||= Date.current 
+  end
 
   def set_name
     self.name ||= route.name
