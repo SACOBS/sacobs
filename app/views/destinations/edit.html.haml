@@ -25,7 +25,7 @@
   .span2
     %h4 Current Destinations
     %ol
-      - @route.destinations.order(:sequence).map {|destination| destination.city.name}.each do |city_name|
+      - @route.destinations.order(:sequence).map { |destination| destination.city.name }.each do |city_name|
         %li= city_name
   .span3
     %h4 Add Destination

@@ -5,7 +5,7 @@
   .page-header.text-center
     %h2 Booking Details
     .actions.text-center
-      = link_to_if(@booking.paid? || @booking.reserved?, 'Generate Ticket', ticket_path(@booking), icon: :tasks, class: t('buttons.large.default'), target: '_blank'){}
+      = link_to_if(@booking.paid? || @booking.reserved?, 'Generate Ticket', ticket_path(@booking), icon: :tasks, class: t('buttons.large.default'), target: '_blank') {}
       = link_to_if(@booking.reserved?, 'Confirm', new_booking_payment_detail_url(@booking), icon: :money, class: t('buttons.large.inverse')) {}
   .well
     .client-information
@@ -23,6 +23,6 @@
       %h4 Passengers
       = render 'bookings/shared/passengers', passengers: @booking.passengers
   .actions.text-center
-    = link_to_if(@booking.paid? || @booking.reserved?, 'Generate Ticket', ticket_path(@booking), icon: :tasks, class: t('buttons.large.default'), target: '_blank'){}
+    = link_to_if(@booking.paid? || @booking.reserved?, 'Generate Ticket', ticket_path(@booking), icon: :tasks, class: t('buttons.large.default'), target: '_blank') {}
     = link_to_if(@booking.reserved?, 'Confirm', new_booking_payment_detail_url(@booking), icon: :money, class: t('buttons.large.inverse')) {}
 

@@ -4,22 +4,21 @@
       .pull-left
         %i.fa.fa-user.fa-3x
       .media-body
-        %h5.media-heading
-          =link_to client.full_name, client
+        %h5.media-heading= link_to client.full_name, client
         .pull-left
           %address
             %strong Contact
             %br
-            %abbr.initialism{title: 'Home'} H:
+            %abbr.initialism{ title: 'Home' } H:
             %strong= number_to_phone(client.home_no, area_code: true).presence || 'N/A'
             %br
-            %abbr.initialism{title: 'Work'} W:
+            %abbr.initialism{ title: 'Work' } W:
             %strong= number_to_phone(client.work_no, area_code: true).presence || 'N/A'
             %br
-            %abbr.initialism{title: 'Cell'} C:
+            %abbr.initialism{ title: 'Cell' } C:
             %strong= number_to_phone(client.cell_no, area_code: true).presence || 'N/A'
             %br
-            %abbr.initialism{title: 'Email'} E:
+            %abbr.initialism{ title: 'Email' } E:
             = client.email.present? ? mail_to(client.email) : 'N/A'
 
 
@@ -27,5 +26,5 @@
           .btn-group.btn-group-vertical
             = link_to 'Show', client, icon: :info, class: t('buttons.info')
             = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.inverse')
-            = link_to 'Destroy', client, icon: :times, class: t('buttons.danger'), method: :delete, data: {confirm: 'Are you sure you want to destroy this client?'}
+            = link_to 'Destroy', client, icon: :times, class: t('buttons.danger'), method: :delete, data: { confirm: 'Are you sure you want to destroy this client?' }
 

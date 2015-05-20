@@ -1,6 +1,4 @@
 class BusPolicy < ApplicationPolicy
-
-
   def index?
     user.admin?
   end

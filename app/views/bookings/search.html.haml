@@ -17,17 +17,17 @@
 .sort-links
   %ul.inline
     %li.header Sort By:
-    %li= sort_link @search, :client_full_name, "Client", default_order: :desc
+    %li= sort_link @search, :client_full_name, 'Client', default_order: :desc
     %li.divider
-    %li= sort_link @search, :status, "Status", default_order: :desc
+    %li= sort_link @search, :status, 'Status', default_order: :desc
     %li.divider
-    %li= sort_link @search, :created, "Creation Date", default_order: :desc
+    %li= sort_link @search, :created, 'Creation Date', default_order: :desc
     %li.divider
-    %li= sort_link @search, :trip_start_date, "Trip Date", default_order: :desc
+    %li= sort_link @search, :trip_start_date, 'Trip Date', default_order: :desc
     %li.divider
-    %li= sort_link @search, :stop_connection_from_city_name, "From City", default_order: :desc
+    %li= sort_link @search, :stop_connection_from_city_name, 'From City', default_order: :desc
     %li.divider
-    %li= sort_link @search, :stop_connection_to_city_name, "To City", default_order: :desc
+    %li= sort_link @search, :stop_connection_to_city_name, 'To City', default_order: :desc
 
 %hr
 .bookings

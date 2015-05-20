@@ -3,8 +3,8 @@
     = link_to 'Copy', copy_trip_path(trip), icon: :copy, class: t('buttons.mini.warning'), method: :post, data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip'
     = link_to 'TripSheet', trip_sheet_path(trip), target: '_blank', icon: :road, class: t('buttons.mini.default')
     = link_to 'Show', trip, icon: :info, class: t('buttons.mini.info')
-    = link_to_if(policy(trip).update?, 'Edit', edit_trip_path(trip), icon: :edit,  class: t('buttons.mini.inverse')){}
-    = link_to_if(policy(trip).destroy?,'Destroy', trip, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }){}
+    = link_to_if(policy(trip).update?, 'Edit', edit_trip_path(trip), icon: :edit,  class: t('buttons.mini.inverse')) {}
+    = link_to_if(policy(trip).destroy?, 'Destroy', trip, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }) {}
   %td= link_to trip.name, trip
   %td= l(trip.start_date, format: :day)
   %td{ data: { dateformat: 'll' } }= l(trip.start_date, format: :long)

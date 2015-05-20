@@ -17,7 +17,7 @@
 #
 
 class Bus < ActiveRecord::Base
-  to_param :name 
+  to_param :name
 
   belongs_to :user
   has_many :seats, dependent: :delete_all
@@ -30,7 +30,6 @@ class Bus < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
   after_create :generate_seats
-
 
   protected
 

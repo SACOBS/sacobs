@@ -2,10 +2,8 @@ class BusesController < ApplicationController
   before_action :set_bus, only: [:edit, :show, :destroy, :update]
   before_action :build_bus, only: [:new, :create]
 
-
   after_action :verify_authorized
   after_action :verify_policy_scoped, only: :index
-
 
   def index
     authorize Bus

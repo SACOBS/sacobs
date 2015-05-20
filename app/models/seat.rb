@@ -25,7 +25,7 @@ class Seat < ActiveRecord::Base
   private
 
   def set_defaults
-    self.row ||=  'A-Z'
+    self.row ||= 'A-Z'
     self.number ||= 0
   end
 end

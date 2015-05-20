@@ -1,6 +1,6 @@
 %tr
   %td
-    = link_to 'Generate TripSheet', trip_sheet_path(trip),icon: :road, class: t('buttons.mini.default'), target: '_blank'
+    = link_to 'Generate TripSheet', trip_sheet_path(trip), icon: :road, class: t('buttons.mini.default'), target: '_blank'
     = link_to 'Show', trips_archive_path(trip), icon: :info, class: t('buttons.mini.info')
   %td= link_to trip.name, trip
   %td{ data: { dateformat: 'll' } }= l(trip.start_date, format: :long)
