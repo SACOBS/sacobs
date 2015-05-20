@@ -31,8 +31,8 @@
       = f.simple_fields_for :stops, wrapper: false do |stop|
         %tr
           %td= stop.object.connection.name
-          %td= stop.input :depart, label: false, input_html: { class: 'input-medium'}
-          %td= stop.input :arrive, label: false, input_html: { class: 'input-medium'}
+          %td= stop.input :depart, label: false, input_html: { class: 'input-small'}
+          %td= stop.input :arrive, label: false, input_html: { class: 'input-small'}
   .control-group
     .controls
       = f.submit class: t('buttons.primary')

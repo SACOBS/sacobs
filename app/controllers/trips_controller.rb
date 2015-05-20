@@ -60,10 +60,7 @@ class TripsController < ApplicationController
                                    driver_ids: [],
                                    stops_attributes: [:id,
                                                       :arrive,
-                                                      :depart,
-                                                      :_destroy,
-                                                      :connection_id,
-                                                      :available_seats]
+                                                      :depart]
                                   )
   end
 end

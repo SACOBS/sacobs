@@ -19,11 +19,12 @@
         .container-fluid
           .content
             .unobtrusive-flash-container
-              .sidebar.span4.well
-                = yield(:sidebar)
-              .main-section.span8
-                = yield
-                = render 'shared/notes'
+              .row-fluid
+                .sidebar.span4.well.well-small
+                  = yield(:sidebar)
+                .main-section.span8
+                  = yield
+                  = render 'shared/notes'
 
       #push
     %footer.navbar.navbar-fixed-bottom.navbar-inverse

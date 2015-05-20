@@ -1,6 +1,6 @@
 = bootstrap_table headers: ['Status', 'Client Name', 'From', 'To', 'Qty', 'Telephone'],
                         types: %i(hover condensed), html_options: { class: 'sortable' } do
-  - trip.bookings.includes(:stop, :client).processed.each do |booking|
+  - trip.bookings.each do |booking|
     %tr
       %td= status_label_for(booking)
       %td= booking.client.full_name
