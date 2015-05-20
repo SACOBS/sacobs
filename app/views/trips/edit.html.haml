@@ -12,6 +12,7 @@
     .controls
       = f.submit class: t('buttons.primary')
       = link_to 'Back', trips_path, class: t('buttons.info')
+  %hr
   %fieldset
     .row-fluid
       .span6
@@ -21,7 +22,7 @@
         = f.input :route, disabled: true, input_html: { value: f.object.route.name }, readonly: true
         = f.input :notes, as: :text
       .span6
-        = f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline'
+        = f.input :bus, disabled: true, input_html: { value: f.object.bus.name }, readonly: true
         = f.association :drivers, as: :check_boxes
 
   %hr
