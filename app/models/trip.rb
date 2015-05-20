@@ -34,7 +34,7 @@ class Trip < ActiveRecord::Base
 
   has_and_belongs_to_many :drivers
 
-  has_many :stops, ->{ includes(:connection) } ,dependent: :destroy
+  has_many :stops, -> { includes(:connection) }, dependent: :destroy
   has_many :bookings, -> { unscope(where: :archived).includes(:client, :stop).processed }, dependent: :destroy
 
   accepts_nested_attributes_for :stops
@@ -74,8 +74,12 @@ class Trip < ActiveRecord::Base
     "#{name}_#{Time.current.to_i}".gsub(' ', '_').downcase
   end
 
+  def booked?
+    bookings.any?
+  end
 
   protected
+
   def set_defaults
     self.start_date ||= Date.current
     self.end_date ||= Date.current
@@ -87,9 +91,8 @@ class Trip < ActiveRecord::Base
 
   def generate_stops
     self.class.no_touching do
-      self.stops.clear if stops.any?
-      self.stops.create!(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
+      stops.clear if stops.any?
+      stops.create!(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity, depart: connection.depart, arrive: connection.arrive } })
     end
   end
-
  end

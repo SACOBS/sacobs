@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   helper_method :notes
 
   protected
+
   def devise_parameter_sanitizer
     UserSanitizer.new(User, :user, params)
   end

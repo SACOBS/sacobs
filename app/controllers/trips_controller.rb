@@ -63,6 +63,7 @@ class TripsController < ApplicationController
   end
 
   private
+
   def trip_scope
     policy_scope(Trip).includes(:bus, :route, :bookings)
   end

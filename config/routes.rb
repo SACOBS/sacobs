@@ -253,11 +253,7 @@ Sacobs::Application.routes.draw do
     end
   end
 
-  resources :buses, only: [:index, :show, :edit, :update, :destroy]
-  namespace :buses do
-    resources :builder, only: [:show, :update]
-  end
-
+  resources :buses
 
   resources :seasonal_discounts, except: [:show, :destroy, :edit]
 

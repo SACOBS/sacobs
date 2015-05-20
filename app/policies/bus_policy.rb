@@ -1,17 +1,11 @@
-class TripPolicy < ApplicationPolicy
+class BusPolicy < ApplicationPolicy
+
+
   def index?
     user.admin?
   end
 
-  def search?
-    index?
-  end
-
   def show?
-    user.admin?
-  end
-
-  def copy?
     user.admin?
   end
 
@@ -28,11 +22,11 @@ class TripPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? && record.bookings.empty?
+    user.admin? && !record.trips.any?(&:booked?)
   end
 
   def destroy?
-    user.admin? && record.bookings.empty?
+    user.admin? && !record.trips.any?(&:booked?)
   end
 
   class Scope < Scope

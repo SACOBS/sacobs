@@ -20,9 +20,12 @@ class Seat < ActiveRecord::Base
   validates :row, :number, presence: true
   validates :number, numericality: true
 
+  after_initialize :set_defaults, if: :new_record?
+
   private
 
-  def defaults
-    { row: 'A-Z', number: 0 }
+  def set_defaults
+    self.row ||=  'A-Z'
+    self.number ||= 0
   end
 end

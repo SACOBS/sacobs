@@ -17,24 +17,31 @@
 #
 
 class Bus < ActiveRecord::Base
+  to_param :name 
+
   belongs_to :user
   has_many :seats, dependent: :delete_all
+  has_many :trips
 
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
-  with_options on: :update do |model|
-    model.validates :name, :capacity, :year, :model, presence: true
-    model.validates :capacity, numericality: { greater_than: 0 }
+  validates :name, :capacity, :year, :model, presence: true
+  validates :capacity, numericality: { greater_than: 0 }
+
+  after_initialize :set_defaults, if: :new_record?
+  after_create :generate_seats
+
+
+  protected
+
+  def set_defaults
+    self.name ||= 'Bus'
+    self.capacity ||= 0
+    self.year ||= Date.current.year
+    self.model ||= 'Model'
   end
 
-  def build_seats
-    seats.clear
-    capacity.times { seats.build }
-  end
-
-  private
-
-  def defaults
-    { name: 'Bus', capacity: 0, year: 1, model: 'bus' }
+  def generate_seats
+    capacity.times { seats.create! }
   end
 end

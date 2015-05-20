@@ -9,13 +9,13 @@ module BookingsHelper
 
   def row_class_for(booking)
     if booking.standby?
-       'warning'
+      'warning'
     elsif booking.paid?
-       'success'
+      'success'
     elsif booking.cancelled?
-       'error'
+      'error'
     else
-       'info'
+      'info'
     end
   end
 
@@ -34,5 +34,4 @@ module BookingsHelper
   def cancelled_booking_count
     Booking.processed.cancelled.size
   end
-
 end

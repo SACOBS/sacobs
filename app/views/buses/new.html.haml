@@ -1,0 +1,19 @@
+= content_for(:title) do
+  New Bus
+
+.page-header
+  %h2 New Bus
+
+#errors= errors_for @bus
+= simple_form_for @bus, defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
+  .control-group
+    .controls
+      = f.submit class: t('buttons.primary')
+  %fieldset
+    = f.input :name, autofocus: true
+    = f.input :capacity
+    = f.input :year
+    = f.input :model
+  .control-group
+    .controls
+      = f.submit class: t('buttons.primary')
