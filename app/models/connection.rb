@@ -33,6 +33,7 @@ class Connection < ActiveRecord::Base
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
+  after_initialize :set_defaults, if: :new_record?
   before_save :set_percentage, if: :cost_changed?
   before_create :set_name
 
@@ -41,19 +42,17 @@ class Connection < ActiveRecord::Base
 
   accepts_nested_attributes_for :from, :to
 
-  private
 
-  def defaults
-    {
-      distance: 0,
-      cost: 0,
-      percentage: 0,
-      arrive: Time.current.at_beginning_of_day,
-      depart: Time.current.noon
-    }
-  end
 
   protected
+
+  def set_defaults
+    self.distance ||= 0
+    self.cost ||= 0
+    self.percentage ||= 0
+    self.arrive ||= Time.current.at_beginning_of_day
+    self.depart ||= Time.current.noon
+  end
 
   def set_name
     self.name = "#{from.city.name} to #{to.city.name}"

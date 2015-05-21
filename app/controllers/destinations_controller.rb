@@ -12,7 +12,7 @@ class DestinationsController < ApplicationController
   end
 
   def destinations
-    @destinations ||= @route.destinations.to_json(only: [:id], methods: :name)
+    @destinations ||= @route.destinations.map(&:city).to_json(only: [:id, :name])
   end
   helper_method :destinations
 

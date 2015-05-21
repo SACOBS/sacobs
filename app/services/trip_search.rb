@@ -7,7 +7,7 @@ class TripSearch
   end
 
   def execute
-    Stop.includes(:trip, :connection).search(criteria).result.limit(30)
+    Stop.includes(:trip, :connection).search(criteria).result.limit(30).order('trips.start_date ASC')
   end
 
   private

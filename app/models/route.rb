@@ -35,9 +35,8 @@ class Route < ActiveRecord::Base
   validates :cost, :distance, numericality: true
   validates :destinations, presence: true, length: { minimum: 2, too_short: 'is too short (at least %{count} destinations required)' }
 
-  before_save :set_connection_costs, if: :cost_changed?
   before_save :normalize_name
-  after_save :generate_connections, if: proc { |route| route.destinations.any? { |d| d.previous_changes.any? } }
+  before_save :generate_connections
   after_update { touch }
 
   def copy
@@ -84,13 +83,11 @@ class Route < ActiveRecord::Base
     end
   end
 
-  def set_connection_costs
-    connections.each { |c| c.cost = ((cost * (c.percentage / 100)) / 5.0).ceil * 5 }
-  end
-
   def generate_connections
-    destinations.each do |from|
-      destinations.drop(from.sequence).each { |to| connections.where(from: from, to: to).first_or_create }
+    if destinations.any?(&:changed?)
+      destinations.each do |from|
+        destinations.drop(from.sequence).each { |to| connections.find_or_initialize_by(from: from, to: to) }
+      end
     end
   end
 end

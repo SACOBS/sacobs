@@ -11,7 +11,7 @@ class RoutesController < ApplicationController
   end
 
   def create
-    @route = Route.create(route_params)
+    @route = Route.create!(route_params)
     respond_with(@route)
   end
 

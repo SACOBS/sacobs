@@ -12,7 +12,7 @@ class PricingPresenter
   end
 
   def cost
-    @cost ||= round_up(@connection.cost)
+    @connection.cost
   end
 
   def price
@@ -69,7 +69,7 @@ class PricingPresenter
   end
 
   def passenger_types
-    Rails.cache.fetch(PassengerType.collection_cache_key) do
+    Rails.cache.fetch(PassengerType.cache_key) do
       PassengerType.all
     end
   end

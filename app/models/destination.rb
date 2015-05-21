@@ -32,6 +32,10 @@ class Destination < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
 
+  def name
+    city_name
+  end
+
   protected
 
   def set_defaults
