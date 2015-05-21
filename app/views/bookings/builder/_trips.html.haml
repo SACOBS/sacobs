@@ -24,7 +24,7 @@
 - else
   .hero-unit.text-center
     %h3 There are no trips available. To add a new trip please press the button below.
-    = link_to 'New Trip', trip_builder_index_path(trip_id: :building), class: t('buttons.large.primary'), icon: :plus, method: :post, target: '_blank'
+    = link_to 'New Trip', new_trip_path, class: t('buttons.large.primary'), icon: :plus, method: :post, target: '_blank'
 
 
 
