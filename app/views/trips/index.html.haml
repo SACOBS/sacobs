@@ -22,8 +22,9 @@
 
 #trips
   - if @trips.any?
-    = bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed), html_options: { class: 'sortable' } do
-      = render @trips, cache: true
+    - cache @trips do
+      = bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed), html_options: { class: 'sortable' } do
+        = render @trips, cache: true
   - else
     .hero-unit.text-center
       %h3.text-error There are currently no trips on the system. Click #{content_tag(:strong, 'Setup Trip')} above to create one.

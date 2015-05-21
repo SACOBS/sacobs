@@ -52,11 +52,11 @@ class RoutesController < ApplicationController
   private
 
   def route_scope
-    @route_scope ||= Route.includes(:connections).all
+    Route.includes(:connections).all
   end
 
   def set_route
-    @route = Route.includes(connections: [:from, :to]).find(params[:id])
+    @route = Route.find(params[:id])
   end
 
   def route_params

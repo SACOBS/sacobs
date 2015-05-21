@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
-  include JavascriptClassName
-  include LayoutRequired
-  include Pundit
+  include JavascriptClassName, LayoutRequired, Pundit
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

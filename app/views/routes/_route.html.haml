@@ -1,0 +1,14 @@
+%tr
+  %td
+    = link_to 'Add Destination', edit_route_destinations_path(route), icon: :plus, class: t('buttons.mini.primary'),  data: { toggle: 'tooltip', title: 'Click here to add a new destination (eg East London) to the route.' }, rel: 'tooltip'
+    = link_to 'Copy', copy_route_path(route), method: :post, icon: :copy, class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route.' }, rel: 'tooltip'
+    = link_to 'Reverse Copy', reverse_copy_route_path(route), method: :post, icon: :copy, class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route in reverse(eg EL to PE will be copied as PE to EL).' }, rel: 'tooltip'
+    = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
+    = link_to 'Edit', edit_route_path(route), icon: :edit,  class: t('buttons.mini.inverse')
+    = link_to_unless(route.connections.any?, 'Destroy', route, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this route?' }) {}
+  %td= link_to route.name, route
+  %td= route.start_city
+  %td= route.end_city
+  %td= number_to_currency(route.cost, unit: 'R')
+  %td= number_to_human(route.distance, units: :distance)
+  %td= route.connections.size

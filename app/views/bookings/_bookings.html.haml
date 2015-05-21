@@ -1,8 +1,9 @@
 = paginate bookings, param_name: "#{type}_page", remote: true
-- if bookings.any?
 
-  = bootstrap_table headers: ['Actions', 'Expires', 'Client', 'Contact', 'Trip Date', 'Qty', 'Connection'],
-                    types: %i(hover condensed), html_options: { class: 'sortable' } do
-    = render bookings, cache: true
+- if bookings.any?
+  - cache bookings do
+    = bootstrap_table headers: ['Actions', 'Expires', 'Client', 'Contact', 'Trip Date', 'Qty', 'Connection'],
+                      types: %i(hover condensed), html_options: { class: 'sortable' } do
+      = render bookings, cache: true
 - else
   %h3 There are currently 0 #{type} bookings.

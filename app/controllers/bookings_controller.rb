@@ -14,8 +14,6 @@ class BookingsController < ApplicationController
       else
         @bookings = booking_scope.none
     end
-
-    @booking_presenter = BookingPresenter.new(@bookings, params)
   end
 
   def daily
