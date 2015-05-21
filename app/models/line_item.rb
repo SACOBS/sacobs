@@ -22,11 +22,11 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :invoice
 
+  after_initialize :set_defaults, if: :new_record?
+
   private
 
-  def defaults
-    {
-      amount:  0
-    }
+  def set_defaults
+    self.amount ||= 0
   end
 end

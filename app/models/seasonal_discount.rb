@@ -29,13 +29,18 @@ class SeasonalDiscount < ActiveRecord::Base
 
   validates :name, :passenger_type, presence: true
 
+  after_initialize :set_defaults, if: :new_record?
+
   def description
     @description ||= "#{name}(seasonal_#{passenger_type.description}_discount)".titleize
   end
 
-  private
+  protected
 
-  def defaults
-    { percentage: 0, period_from: Date.current, period_to: Date.current.next, active: true }
+  def set_defaults
+    self.percentage ||= 0
+    self.period_from ||= Date.current
+    self.period_to ||= Date.tomorrow
+    self.active = true
   end
 end

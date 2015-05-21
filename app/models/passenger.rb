@@ -23,6 +23,7 @@ class Passenger < ActiveRecord::Base
   belongs_to :booking
   belongs_to :passenger_type
 
+  after_initialize :set_defaults, if: :new_record?
   before_save :normalize_names
 
   def full_name
@@ -39,8 +40,8 @@ class Passenger < ActiveRecord::Base
 
   protected
 
-  def defaults
-    { passenger_type: PassengerType.find_by(description: :standard) }
+  def set_defaults
+    self.passenger_type ||= PassengerType.find_by(description: :standard)
   end
 
   def normalize_names

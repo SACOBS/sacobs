@@ -22,9 +22,11 @@ class PaymentDetail < ActiveRecord::Base
 
   validates :booking, :payment_type, presence: true
 
+  after_initialize :set_defaults, if: :new_record?
+
   private
 
-  def defaults
-    { payment_date: Time.zone.now }
+  def set_defaults
+    self.payment_date ||= Time.current
   end
 end

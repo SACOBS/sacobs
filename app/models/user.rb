@@ -33,8 +33,11 @@ class User < ActiveRecord::Base
 
   enum role: [:admin, :clerk]
 
-  scope :all_except, ->(user) { where.not(id: user) }
   has_many :bookings
+
+  scope :all_except, ->(user) { where.not(id: user) }
+
+  after_initialize :set_defaults, if: :new_record?
 
   def to_s
     "#{name} #{surname}".titleize
@@ -42,9 +45,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def defaults
-    {
-      role: :clerk
-    }
+  def set_defaults
+    self.role ||= :clerk 
   end
 end

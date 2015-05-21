@@ -16,9 +16,13 @@
 #
 
 class Setting < ActiveRecord::Base
-  private
 
-   def defaults
-     { booking_expiry_period: 25 }
+
+  after_initialize :set_defaults, if: :new_record?
+
+  protected
+
+   def set_defaults
+     self.booking_expiry_period ||= 25
    end
 end
