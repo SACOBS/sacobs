@@ -56,7 +56,7 @@ class RoutesController < ApplicationController
   end
 
   def set_route
-    @route = Route.find(params[:id])
+    @route = Route.includes(:connections).find(params[:id])
   end
 
   def route_params
