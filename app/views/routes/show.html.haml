@@ -29,7 +29,7 @@
           = number_to_human(@route.distance, units: :distance)
     %h4 Connections
     - cache @route.connections do
-      = bootstrap_table headers: ['Name', 'Distance', 'Percentage', 'Cost', 'Depart Time', 'Arrive Time'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
+      = bootstrap_table headers: ['Name', 'Distance', 'Percentage', 'Cost'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
         = render partial: 'connections/connection', collection: @route.connections, cache: true
   .actions
     = back_to routes_path

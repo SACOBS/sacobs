@@ -28,7 +28,7 @@
     = f.input :distance, as: :distance, label: 'Distance:'
   %hr
   %fieldset
-    = bootstrap_table headers: ['Name', 'Percentage', 'Cost', 'Distance', 'Depart Time', 'Arrive Time', ''], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do
+    = bootstrap_table headers: ['Name', 'Percentage', 'Cost', 'Distance', ''], types: [:condensed], html_options: { id: 'connections', class: 'sortable' } do
       = f.simple_fields_for :connections, wrapper: false do |connection|
         %tr
           %td= connection.object.name

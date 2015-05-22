@@ -5,25 +5,29 @@ class Views.Routes.EditView extends Views.ApplicationView
 
     $( "#connections input[name*='cost']" ).on 'change', ->
       route_cost = $("input[name~='route[cost]']").val()
-      cost = this.value
       $percentageInput = $(this).closest('tr').find("input[name*='percentage']")
-      percentage = Math.round((cost / route_cost) * 100)
-      $percentageInput.val(percentage)
+      $percentageInput.val(calculatePercentage(this.value, route_cost))
 
     $( "#connections input[name*='percentage']" ).on 'change', ->
       route_cost = $("input[name~='route[cost]']").val()
-      percentage = this.value
       $costInput = $(this).closest('tr').find("input[name*='cost']")
+      $costInput.val(calculateCost(this.value, route_cost ))
 
-      cost = Math.ceil(((percentage / 100) * route_cost) / 5) * 5
-      $costInput.val(cost)
 
     $("input[name~='route[cost]']").on 'change', ->
-      cost = this.value
+      route_cost = this.value
       $connections = $('#connections')
       $rows = $connections.find('tr')
       $.each $rows, (index, row) ->
-        $(row).find("input[name*='percentage']").trigger('change')
+        percentage = $(row).find("input[name*='percentage']").val()
+        $costInput = $(row).find("input[name*='cost']")
+        $costInput.val(calculateCost(percentage, route_cost ))
+
+  calculateCost = (percentage, amount) ->
+    Math.ceil(((percentage / 100 * amount) / 5) * 5)
+
+  calculatePercentage = (amount, total) ->
+    Math.round((amount / total) * 100)
 
   cleanup: ->
     super()

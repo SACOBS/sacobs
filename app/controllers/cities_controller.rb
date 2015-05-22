@@ -14,6 +14,15 @@ class CitiesController < ApplicationController
 
   def new
     @city = City.new
+    @city.time_tables.build(direction: :outgoing)
+    @city.time_tables.build(direction: :incoming)
+  end
+
+  def edit
+    if @city.time_tables.empty?
+      @city.time_tables.build(direction: :outgoing)
+      @city.time_tables.build(direction: :incoming)
+    end
   end
 
   def show
@@ -46,6 +55,6 @@ class CitiesController < ApplicationController
   end
 
   def city_params
-    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy]).merge(user: current_user)
+    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy], time_tables_attributes: [:arrive, :depart, :direction]).merge(user_id: current_user.id)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522100306) do
+ActiveRecord::Schema.define(version: 20150522105817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,6 +308,17 @@ ActiveRecord::Schema.define(version: 20150522100306) do
   add_index "stops", ["connection_id"], name: "index_stops_on_connection_id", using: :btree
   add_index "stops", ["trip_id"], name: "index_stops_on_trip_id", using: :btree
 
+  create_table "time_tables", force: :cascade do |t|
+    t.time     "arrive"
+    t.time     "depart"
+    t.integer  "direction",  default: 0
+    t.integer  "city_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "time_tables", ["city_id"], name: "index_time_tables_on_city_id", using: :btree
+
   create_table "trips", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.date     "start_date"
@@ -372,4 +383,5 @@ ActiveRecord::Schema.define(version: 20150522100306) do
   add_index "vouchers", ["user_id"], name: "index_vouchers_on_user_id", using: :btree
 
   add_foreign_key "bookings", "clients", on_delete: :cascade
+  add_foreign_key "time_tables", "cities"
 end

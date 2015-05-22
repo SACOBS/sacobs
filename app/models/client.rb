@@ -31,7 +31,7 @@ class Client < ActiveRecord::Base
   PENSIONER_AGE = 65
 
   TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
-  BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec].freeze
+  BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec, :Cash].freeze
 
   attr_reader :age, :full_name
 

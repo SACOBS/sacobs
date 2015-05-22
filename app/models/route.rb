@@ -64,11 +64,11 @@ class Route < ActiveRecord::Base
   end
 
   def start_city
-    destinations.first.city
+    destinations.first.city_name
   end
 
   def end_city
-    destinations.last.city
+    destinations.last.city_name
   end
 
   private

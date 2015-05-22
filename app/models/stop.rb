@@ -5,8 +5,6 @@
 #  id              :integer          not null, primary key
 #  connection_id   :integer
 #  trip_id         :integer
-#  arrive          :time without tim
-#  depart          :time without tim
 #  available_seats :integer
 #  created_at      :timestamp withou
 #  updated_at      :timestamp withou
