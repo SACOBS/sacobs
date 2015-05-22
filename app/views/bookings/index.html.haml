@@ -16,13 +16,13 @@
 .tab-wrapper#bookings
   %ul.nav.nav-tabs
     %li
-      %a{ data: { target: '#reserved', toggle: :tab } }
-        Reserved
-        %span.badge.badge-info= reserved_booking_count
-    %li
       %a{ data: { target: '#standby', toggle: :tab } }
         Standby/Expired
         %span.badge.badge-warning= standby_booking_count
+    %li
+      %a{ data: { target: '#reserved', toggle: :tab } }
+        Reserved
+        %span.badge.badge-info= reserved_booking_count
     %li
       %a{ data: { target: '#paid',  toggle: :tab } }
         Paid

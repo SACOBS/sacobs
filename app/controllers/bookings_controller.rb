@@ -60,7 +60,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_scope
-    @booking_scope ||= Booking.processed.includes(:stop, :client, :trip)
+    @booking_scope ||= Booking.processed.includes(:stop, :client, :trip).order(:created_at)
   end
 
   def set_booking
