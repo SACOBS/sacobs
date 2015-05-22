@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522070806) do
+ActiveRecord::Schema.define(version: 20150522090629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,23 +36,24 @@ ActiveRecord::Schema.define(version: 20150522070806) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "trip_id"
-    t.decimal  "price"
-    t.integer  "status"
+    t.decimal  "price",                    default: 0.0
+    t.integer  "status",                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity"
+    t.integer  "quantity",                 default: 0
     t.datetime "expiry_date"
     t.integer  "client_id"
     t.integer  "user_id"
     t.string   "reference_no", limit: 255
     t.integer  "main_id"
-    t.boolean  "has_return"
+    t.boolean  "has_return",               default: false
     t.integer  "stop_id"
     t.integer  "sequence_id",              default: "nextval('sequence_id_seq'::regclass)"
     t.boolean  "archived",                 default: false
     t.datetime "archived_at"
   end
 
+  add_index "bookings", ["archived"], name: "index_bookings_on_archived", using: :btree
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id", using: :btree
   add_index "bookings", ["main_id"], name: "index_bookings_on_main_id", using: :btree
   add_index "bookings", ["stop_id"], name: "index_bookings_on_stop_id", using: :btree
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150522070806) do
     t.datetime "updated_at"
   end
 
+  add_index "cities", ["name"], name: "index_cities_on_name", using: :btree
   add_index "cities", ["user_id"], name: "index_cities_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 20150522070806) do
   add_index "destinations", ["city_id", "route_id"], name: "index_destinations_on_city_id_and_route_id", using: :btree
   add_index "destinations", ["city_id"], name: "index_destinations_on_city_id", using: :btree
   add_index "destinations", ["route_id"], name: "index_destinations_on_route_id", using: :btree
+  add_index "destinations", ["sequence"], name: "index_destinations_on_sequence", using: :btree
 
   create_table "discounts", force: :cascade do |t|
     t.decimal  "percentage",        precision: 5, scale: 2
@@ -322,6 +325,7 @@ ActiveRecord::Schema.define(version: 20150522070806) do
     t.integer  "bookings_count",             default: 0
   end
 
+  add_index "trips", ["archived"], name: "index_trips_on_archived", using: :btree
   add_index "trips", ["bus_id"], name: "index_trips_on_bus_id", using: :btree
   add_index "trips", ["route_id"], name: "index_trips_on_route_id", using: :btree
   add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree

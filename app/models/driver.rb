@@ -3,10 +3,10 @@
 # Table name: drivers
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
-#  surname    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  name       :character varyin
+#  surname    :character varyin
+#  created_at :timestamp withou
+#  updated_at :timestamp withou
 #  user_id    :integer
 #
 # Indexes

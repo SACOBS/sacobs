@@ -3,10 +3,10 @@
 # Table name: venues
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  name       :character varyin
 #  city_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :timestamp withou
+#  updated_at :timestamp withou
 #
 # Indexes
 #

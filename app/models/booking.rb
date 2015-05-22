@@ -4,24 +4,25 @@
 #
 #  id           :integer          not null, primary key
 #  trip_id      :integer
-#  price        :decimal(, )
-#  status       :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  quantity     :integer
-#  expiry_date  :datetime
+#  price        :numeric          default(0.0)
+#  status       :integer          default(0)
+#  created_at   :timestamp withou
+#  updated_at   :timestamp withou
+#  quantity     :integer          default(0)
+#  expiry_date  :timestamp withou
 #  client_id    :integer
 #  user_id      :integer
-#  reference_no :string(255)
+#  reference_no :character varyin
 #  main_id      :integer
-#  has_return   :boolean
+#  has_return   :boolean          default(FALSE)
 #  stop_id      :integer
 #  sequence_id  :integer
 #  archived     :boolean          default(FALSE)
-#  archived_at  :datetime
+#  archived_at  :timestamp withou
 #
 # Indexes
 #
+#  index_bookings_on_archived   (archived)
 #  index_bookings_on_client_id  (client_id)
 #  index_bookings_on_main_id    (main_id)
 #  index_bookings_on_stop_id    (stop_id)
@@ -52,7 +53,8 @@ class Booking < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
 
-  after_initialize :set_defaults, if: :new_record?
+  before_create :generate_reference
+  before_create :set_expiry_date
 
   scope :open, -> { where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { where(arel_table[:expiry_date].lteq(Time.current)) }
@@ -97,13 +99,12 @@ class Booking < ActiveRecord::Base
 
   private
 
-  def set_defaults
-    self.status = :in_process
-    self.price = 0
-    self.quantity = 1
-    self.has_return = false
+  def generate_reference
     self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
     self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{'%03d' % sequence_id}"
+  end
+
+  def set_expiry_date
     self.expiry_date = Time.current.advance(hours: Setting.first.booking_expiry_period)
   end
 

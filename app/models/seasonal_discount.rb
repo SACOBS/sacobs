@@ -3,15 +3,15 @@
 # Table name: seasonal_discounts
 #
 #  id                :integer          not null, primary key
-#  percentage        :decimal(, )
+#  percentage        :numeric
 #  period_from       :date
 #  period_to         :date
 #  active            :boolean          default(FALSE)
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :timestamp withou
+#  updated_at        :timestamp withou
 #  user_id           :integer
 #  passenger_type_id :integer
-#  name              :string(255)
+#  name              :character varyin
 #
 # Indexes
 #

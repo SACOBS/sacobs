@@ -82,12 +82,11 @@
 #      search_trips_archives GET    /trips/archives/search(.:format)                    trips/archives#search
 #             trips_archives GET    /trips/archives(.:format)                           trips/archives#index
 #              trips_archive GET    /trips/archives/:id(.:format)                       trips/archives#show
-#              trips_builder GET    /trips/builder/:id(.:format)                        trips/builder#show
-#                            PATCH  /trips/builder/:id(.:format)                        trips/builder#update
-#                            PUT    /trips/builder/:id(.:format)                        trips/builder#update
 #                  copy_trip POST   /trips/:id/copy(.:format)                           trips#copy
 #               search_trips GET    /trips/search(.:format)                             trips#search
 #                      trips GET    /trips(.:format)                                    trips#index
+#                            POST   /trips(.:format)                                    trips#create
+#                   new_trip GET    /trips/new(.:format)                                trips#new
 #                  edit_trip GET    /trips/:id/edit(.:format)                           trips#edit
 #                       trip GET    /trips/:id(.:format)                                trips#show
 #                            PATCH  /trips/:id(.:format)                                trips#update
@@ -106,14 +105,13 @@
 #                            PUT    /routes/:id(.:format)                               routes#update
 #                            DELETE /routes/:id(.:format)                               routes#destroy
 #                      buses GET    /buses(.:format)                                    buses#index
+#                            POST   /buses(.:format)                                    buses#create
+#                    new_bus GET    /buses/new(.:format)                                buses#new
 #                   edit_bus GET    /buses/:id/edit(.:format)                           buses#edit
 #                        bus GET    /buses/:id(.:format)                                buses#show
 #                            PATCH  /buses/:id(.:format)                                buses#update
 #                            PUT    /buses/:id(.:format)                                buses#update
 #                            DELETE /buses/:id(.:format)                                buses#destroy
-#              buses_builder GET    /buses/builder/:id(.:format)                        buses/builder#show
-#                            PATCH  /buses/builder/:id(.:format)                        buses/builder#update
-#                            PUT    /buses/builder/:id(.:format)                        buses/builder#update
 #         seasonal_discounts GET    /seasonal_discounts(.:format)                       seasonal_discounts#index
 #                            POST   /seasonal_discounts(.:format)                       seasonal_discounts#create
 #      new_seasonal_discount GET    /seasonal_discounts/new(.:format)                   seasonal_discounts#new

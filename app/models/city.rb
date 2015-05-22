@@ -3,14 +3,15 @@
 # Table name: cities
 #
 #  id           :integer          not null, primary key
-#  name         :string(255)
+#  name         :character varyin
 #  user_id      :integer
 #  venues_count :integer          default(0)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :timestamp withou
+#  updated_at   :timestamp withou
 #
 # Indexes
 #
+#  index_cities_on_name     (name)
 #  index_cities_on_user_id  (user_id)
 #
 

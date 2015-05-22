@@ -3,11 +3,11 @@
 # Table name: seats
 #
 #  id         :integer          not null, primary key
-#  row        :string(255)
+#  row        :character varyin
 #  number     :integer
 #  bus_id     :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :timestamp withou
+#  updated_at :timestamp withou
 #
 # Indexes
 #

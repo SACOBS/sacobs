@@ -3,12 +3,12 @@
 # Table name: vouchers
 #
 #  id         :integer          not null, primary key
-#  ref_no     :string(255)
-#  amount     :decimal(, )
+#  ref_no     :character varyin
+#  amount     :numeric
 #  active     :boolean          default(TRUE)
 #  client_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :timestamp withou
+#  updated_at :timestamp withou
 #  user_id    :integer
 #
 # Indexes

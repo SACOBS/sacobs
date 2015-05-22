@@ -3,14 +3,14 @@
 # Table name: addresses
 #
 #  id               :integer          not null, primary key
-#  street_address1  :string(255)
-#  street_address2  :string(255)
-#  city             :string(255)
-#  postal_code      :string(255)
+#  street_address1  :character varyin
+#  street_address2  :character varyin
+#  city             :character varyin
+#  postal_code      :character varyin
 #  addressable_id   :integer
-#  addressable_type :string(255)
-#  created_at       :datetime
-#  updated_at       :datetime
+#  addressable_type :character varyin
+#  created_at       :timestamp withou
+#  updated_at       :timestamp withou
 #
 # Indexes
 #

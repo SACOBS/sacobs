@@ -3,11 +3,11 @@
 # Table name: routes
 #
 #  id         :integer          not null, primary key
-#  cost       :decimal(8, 2)
+#  cost       :numeric(8,2)
 #  distance   :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  name       :string(255)
+#  created_at :timestamp withou
+#  updated_at :timestamp withou
+#  name       :character varyin
 #  user_id    :integer
 #
 # Indexes

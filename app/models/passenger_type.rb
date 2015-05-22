@@ -3,9 +3,9 @@
 # Table name: passenger_types
 #
 #  id          :integer          not null, primary key
-#  description :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  description :character varyin
+#  created_at  :timestamp withou
+#  updated_at  :timestamp withou
 #
 
 class PassengerType < ActiveRecord::Base

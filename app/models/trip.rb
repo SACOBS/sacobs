@@ -3,21 +3,22 @@
 # Table name: trips
 #
 #  id             :integer          not null, primary key
-#  name           :string(255)
+#  name           :character varyin
 #  start_date     :date
 #  end_date       :date
 #  route_id       :integer
 #  bus_id         :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :timestamp withou
+#  updated_at     :timestamp withou
 #  user_id        :integer
 #  notes          :text
 #  archived       :boolean          default(FALSE)
-#  archived_at    :datetime
+#  archived_at    :timestamp withou
 #  bookings_count :integer          default(0)
 #
 # Indexes
 #
+#  index_trips_on_archived  (archived)
 #  index_trips_on_bus_id    (bus_id)
 #  index_trips_on_route_id  (route_id)
 #  index_trips_on_user_id   (user_id)

@@ -3,11 +3,11 @@
 # Table name: line_items
 #
 #  id             :integer          not null, primary key
-#  description    :string(255)
+#  description    :character varyin
 #  invoice_id     :integer
-#  created_at     :datetime
-#  updated_at     :datetime
-#  amount         :decimal(8, 2)
+#  created_at     :timestamp withou
+#  updated_at     :timestamp withou
+#  amount         :numeric(8,2)     default(0.0)
 #  line_item_type :integer
 #
 # Indexes
