@@ -16,11 +16,11 @@
 #
 
 class Discount < ActiveRecord::Base
-  belongs_to :passenger_type
-  belongs_to :user
-  accepts_nested_attributes_for :passenger_type, reject_if: :all_blank, allow_destroy: true
+  belongs_to :passenger_type, dependent: :destroy
+  accepts_nested_attributes_for :passenger_type
 
-  def description
-    @description ||= passenger_type.description
-  end
+  validates :passenger_type, :percentage, presence: true
+
+  delegate :description, to: :passenger_type
+
 end

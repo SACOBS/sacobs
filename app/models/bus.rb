@@ -28,18 +28,9 @@ class Bus < ActiveRecord::Base
   validates :name, :capacity, :year, :model, presence: true
   validates :capacity, numericality: { greater_than: 0 }
 
-  after_initialize :set_defaults, if: :new_record?
   after_create :generate_seats
 
   protected
-
-  def set_defaults
-    self.name ||= 'Bus'
-    self.capacity ||= 0
-    self.year ||= Date.current.year
-    self.model ||= 'Model'
-  end
-
   def generate_seats
     capacity.times { seats.create! }
   end

@@ -27,9 +27,9 @@ class SeasonalDiscount < ActiveRecord::Base
   scope :applicable, -> { where(arel_table[:period_from].gteq(Time.zone.today)) }
   scope :active_in_period, -> (date) { where(arel_table[:period_from].lteq(date).and(arel_table[:period_to].gteq(date))).merge(active) }
 
-  validates :name, :passenger_type, presence: true
+  validates :name, :passenger_type, :period_from, :period_to, :percentage, presence: true
 
-  after_initialize :set_defaults, if: :new_record?
+  before_create :activate
 
   def description
     @description ||= "#{name}(seasonal_#{passenger_type.description}_discount)".titleize
@@ -37,10 +37,7 @@ class SeasonalDiscount < ActiveRecord::Base
 
   protected
 
-  def set_defaults
-    self.percentage ||= 0
-    self.period_from ||= Date.current
-    self.period_to ||= Date.tomorrow
+  def activate
     self.active = true
   end
 end

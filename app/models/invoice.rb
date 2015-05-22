@@ -19,7 +19,7 @@ class Invoice < ActiveRecord::Base
 
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
 
-  after_initialize :set_defaults, if: :new_record?
+  before_create :set_billing_date
 
   def total
     total_cost - total_discount
@@ -34,7 +34,7 @@ class Invoice < ActiveRecord::Base
   end
 
   private
-  def set_defaults
-   self.billing_date ||= Time.current
+  def set_billing_date
+   self.billing_date = Time.current
   end
 end

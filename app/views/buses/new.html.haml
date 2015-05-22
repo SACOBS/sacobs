@@ -10,10 +10,10 @@
     .controls
       = f.submit class: t('buttons.primary')
   %fieldset
-    = f.input :name, autofocus: true
+    = f.input :name, autofocus: true, placeholder: 'Name'
     = f.input :capacity
-    = f.input :year
-    = f.input :model
+    = f.input :year, placeholder: 'Year'
+    = f.input :model, placeholder: 'Model'
   .control-group
     .controls
       = f.submit class: t('buttons.primary')

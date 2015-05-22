@@ -36,6 +36,6 @@ class DiscountsController < ApplicationController
   def discount_params
     params.fetch(:discount, {}).permit(:percentage,
                                        passenger_type_attributes: [:description]
-                                      )
+                                      ).merge(user_id: current_user.id)
   end
 end

@@ -2,13 +2,12 @@
   New Discount
 .page-header
   %h2 New Discount
-
-#errors= errors_for @discount
+  #errors= errors_for @discount
 = simple_form_for @discount,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f|
   %fieldset
     = f.simple_fields_for :passenger_type do |p|
-      = p.input :description, autofocus: true
-    = f.input :percentage
+      = p.input :description, autofocus: true, placeholder: 'Description'
+    = f.input :percentage, placeholder: 'Percentage'
   .control-group
     .controls
       = f.submit class: t('buttons.primary')

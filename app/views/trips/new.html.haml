@@ -12,8 +12,8 @@
       = link_to 'Cancel', trips_path, class: t('buttons.danger')
   %fieldset
     = f.input :name, autofocus: true, placeholder: 'Name'
-    = f.input :start_date, as: :date_picker
-    = f.input :end_date, as: :date_picker
+    = f.input :start_date, as: :date_picker,  placeholder: 'Start Date'
+    = f.input :end_date, as: :date_picker,  placeholder: 'End Date'
     = f.association :route, as: :radio_buttons, item_wrapper_class: 'inline'
     = f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline'
     = f.association :drivers, as: :check_boxes, item_wrapper_class: 'inline'

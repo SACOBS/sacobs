@@ -16,10 +16,6 @@ class PassengerType < ActiveRecord::Base
   validates :description, presence: true
 
   before_create do
-    description.try(:downcase!)
-  end
-
-  def to_label
-    description.titleize
+    self.description = description.upcase
   end
 end

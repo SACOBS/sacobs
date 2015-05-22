@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313125921) do
+ActiveRecord::Schema.define(version: 20150522070806) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street_address1",  limit: 255
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20150313125921) do
 
   create_table "buses", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "capacity"
+    t.integer  "capacity",               default: 0
     t.string   "year",       limit: 255
     t.string   "model",      limit: 255
     t.datetime "created_at"
@@ -113,17 +113,15 @@ ActiveRecord::Schema.define(version: 20150313125921) do
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "connections", force: :cascade do |t|
-    t.integer  "distance"
+    t.integer  "distance",                                       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "route_id"
-    t.decimal  "percentage",             precision: 5, scale: 2
-    t.decimal  "cost",                   precision: 8, scale: 2
+    t.decimal  "percentage",             precision: 5, scale: 2, default: 0.0
+    t.decimal  "cost",                   precision: 8, scale: 2, default: 0.0
     t.string   "name",       limit: 255
     t.integer  "from_id"
     t.integer  "to_id"
-    t.time     "arrive"
-    t.time     "depart"
   end
 
   add_index "connections", ["from_id"], name: "index_connections_on_from_id", using: :btree
@@ -185,7 +183,7 @@ ActiveRecord::Schema.define(version: 20150313125921) do
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",                     precision: 8, scale: 2
+    t.decimal  "amount",                     precision: 8, scale: 2, default: 0.0
     t.integer  "line_item_type"
   end
 
@@ -309,11 +307,6 @@ ActiveRecord::Schema.define(version: 20150313125921) do
   add_index "stops", ["connection_id"], name: "index_stops_on_connection_id", using: :btree
   add_index "stops", ["trip_id"], name: "index_stops_on_trip_id", using: :btree
 
-  create_table "temp_data", force: :cascade do |t|
-    t.string "session_id", limit: 255
-    t.hstore "data"
-  end
-
   create_table "trips", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.date     "start_date"
@@ -348,7 +341,7 @@ ActiveRecord::Schema.define(version: 20150313125921) do
     t.datetime "updated_at"
     t.string   "name",                   limit: 255
     t.string   "surname",                limit: 255
-    t.integer  "role"
+    t.integer  "role",                               default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -376,4 +369,5 @@ ActiveRecord::Schema.define(version: 20150313125921) do
   add_index "vouchers", ["client_id"], name: "index_vouchers_on_client_id", using: :btree
   add_index "vouchers", ["user_id"], name: "index_vouchers_on_user_id", using: :btree
 
+  add_foreign_key "bookings", "clients", on_delete: :cascade
 end

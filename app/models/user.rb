@@ -31,21 +31,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum role: [:admin, :clerk]
+  enum role: [:clerk, :admin]
 
   has_many :bookings
 
   scope :all_except, ->(user) { where.not(id: user) }
 
-  after_initialize :set_defaults, if: :new_record?
-
   def to_s
     "#{name} #{surname}".titleize
-  end
-
-  private
-
-  def set_defaults
-    self.role ||= :clerk 
   end
 end

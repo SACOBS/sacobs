@@ -29,16 +29,4 @@ class Destination < ActiveRecord::Base
   validates :city, uniqueness: { scope: :route, message: 'already exists for this route.' }
 
   delegate :name, :venues, to: :city, prefix: true
-
-  after_initialize :set_defaults, if: :new_record?
-
-  def name
-    city_name
-  end
-
-  protected
-
-  def set_defaults
-    self.sequence ||= 1
-  end
 end
