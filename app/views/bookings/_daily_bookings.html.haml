@@ -12,6 +12,6 @@
           %tr
             %td= status_label_for(b)
             %td= b.reference_no
-            %td #{b.quantity} x #{b.stop.name}
+            %td #{b.quantity} x #{b.stop.connection.name}
             %td{ data: { dateformat: 'll' } }= l(b.trip.start_date, format: :long) if b.trip.start_date.present?
             %td= number_to_currency(b.invoice.total)

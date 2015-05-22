@@ -7,6 +7,14 @@ class ClientPolicy < ApplicationPolicy
     true
   end
 
+  def new?
+    true
+  end
+
+  def edit?
+    update?
+  end
+
   def update?
     true
   end

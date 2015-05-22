@@ -83,10 +83,7 @@ class TripsController < ApplicationController
                                    :route_id,
                                    :bus_id,
                                    :notes,
-                                   driver_ids: [],
-                                   stops_attributes: [:id,
-                                                      :arrive,
-                                                      :depart]
+                                   driver_ids: []
                                   )
   end
 end
