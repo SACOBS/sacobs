@@ -32,15 +32,11 @@ class Connection < ActiveRecord::Base
 
   before_create :set_name
 
-  delegate :city_name, :city_venues, to: :from, prefix: true
-  delegate :city_name, :city_venues, to: :to, prefix: true
-
-  accepts_nested_attributes_for :from, :to
-
-
+  delegate :city, to: :from, prefix: true
+  delegate :city, to: :to, prefix: true
 
   protected
   def set_name
-    self.name = "#{from.city.name} to #{to.city.name}"
+    self.name = "#{from_city.name} to #{to_city.name}".squish.upcase
   end
 end

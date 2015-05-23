@@ -18,8 +18,8 @@
         %td= booking.stop.connection.from_city_venues.first.name
         %td= booking.stop.to_city_name
         %td= booking.stop.connection.to_city_venues.first.name
-        %td
-        %td
+        %td= local_time(booking.stop.connection.from.city.outgoing_time_table.depart, format: :short)
+        %td= local_time(booking.stop.connection.to.city.incoming_time_table.depart, format: :short)
   %tr
     %td
     %td

@@ -20,7 +20,8 @@ class Stop < ActiveRecord::Base
   belongs_to :connection, -> { includes(from: :city, to: :city) }
   has_many :bookings
 
-  delegate :from_city_name, :to_city_name, to: :connection
-
   scope :affected, -> (stop) { includes(:trip).joins(connection: :to).where('connections.from_id != ? and destinations.sequence > ?', stop.connection.to, stop.connection.from.sequence) }
+
+  delegate :from_city, :to_city, to: :connection
+
 end
