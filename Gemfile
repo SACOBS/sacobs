@@ -98,11 +98,9 @@ gem 'pg'
 gem 'obfuscatejs'
 
 group :development do
-  gem 'rails_apps_testing'
   gem 'web-console', '~> 2.0'
   gem 'annotate'
   gem 'quiet_assets'
-  gem 'rails_best_practices'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
 end

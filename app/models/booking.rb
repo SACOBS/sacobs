@@ -69,16 +69,13 @@ class Booking < ActiveRecord::Base
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
   delegate :start_date, to: :trip, prefix: true, allow_nil: true
 
-  def open?
-    reserved? && !expired?
-  end
 
   def standby?
     reserved? && expired?
   end
 
   def expired?
-    expiry_date? && (expiry_date <= Time.current)
+    expiry_date <= Time.current
   end
 
   def reserve

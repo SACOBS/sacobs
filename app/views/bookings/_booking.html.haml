@@ -14,17 +14,11 @@
   %td
     %ul.inline
       - if booking.client.home_no.present?
-        %li
-          %abbr.initialism{ title: 'Home' } H:
-          %strong= number_to_phone(booking.client.home_no, area_code: true)
+        %li=contact_number(booking.client.home_no, 'Home')
       - if booking.client.work_no.present?
-        %li
-          %abbr.initialism{ title: 'Work' } W:
-          %strong= number_to_phone(booking.client.work_no, area_code: true)
+        %li=contact_number(booking.client.work_no, 'Work')
       - if booking.client.cell_no.present?
-        %li
-          %abbr.initialism{ title: 'Cell' } C:
-          %strong= number_to_phone(booking.client.cell_no, area_code: true)
+        %li=contact_number(booking.client.cell_no, 'Cell')
   %td{ data: { dateformat: 'DD MMM' } }
     %small= local_date(booking.trip.start_date)
   %td= badge_for(booking.quantity)

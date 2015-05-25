@@ -8,14 +8,11 @@
         %address
           %strong Contact
           %br
-          %abbr.initialism{ title: 'Home' } H:
-          %strong= number_to_phone(client.home_no, area_code: true).presence || 'N/A'
+          = contact_number(client.home_no.presence || 'N/A', 'Home')
           %br
-          %abbr.initialism{ title: 'Work' } W:
-          %strong= number_to_phone(client.work_no, area_code: true).presence || 'N/A'
+          = contact_number(client.work_no.presence || 'N/A', 'Work')
           %br
-          %abbr.initialism{ title: 'Cell' } C:
-          %strong= number_to_phone(client.cell_no, area_code: true).presence || 'N/A'
+          = contact_number(client.cell_no.presence || 'N/A', 'Cell')
           %br
           %abbr.initialism{ title: 'Email' } E:
           = client.email.present? ? mail_to(client.email) : 'N/A'

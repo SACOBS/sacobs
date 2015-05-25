@@ -57,8 +57,6 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     cocoon (1.2.6)
-    code_analyzer (0.4.5)
-      sexp_processor
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -66,7 +64,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
-    colored (1.2)
     css_parser (1.3.6)
       addressable
     dalli (2.7.4)
@@ -187,16 +184,6 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_apps_testing (0.3.12)
-    rails_best_practices (1.15.7)
-      activesupport
-      code_analyzer (>= 0.4.3)
-      colored
-      erubis
-      i18n
-      json
-      require_all
-      ruby-progressbar
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.3)
     railties (4.2.1)
@@ -213,7 +200,6 @@ GEM
       i18n
       polyamorous (~> 1.2)
     rdoc (4.2.0)
-    require_all (1.3.2)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rubocop (0.31.0)
@@ -235,7 +221,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sexp_processor (4.5.1)
     simple_form (3.0.3)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -318,8 +303,6 @@ DEPENDENCIES
   quiet_assets
   rails (~> 4.2.1)
   rails_12factor
-  rails_apps_testing
-  rails_best_practices
   ransack
   responders
   rubocop
