@@ -6,8 +6,8 @@
 #  connection_id   :integer
 #  trip_id         :integer
 #  available_seats :integer
-#  created_at      :timestamp withou
-#  updated_at      :timestamp withou
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 # Indexes
 #

@@ -3,12 +3,12 @@
 # Table name: time_tables
 #
 #  id         :integer          not null, primary key
-#  arrive     :time without tim
-#  depart     :time without tim
+#  arrive     :time
+#  depart     :time
 #  direction  :integer          default(0)
 #  city_id    :integer
-#  created_at :timestamp withou not null
-#  updated_at :timestamp withou not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #

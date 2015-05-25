@@ -4,9 +4,9 @@
 #
 #  id           :integer          not null, primary key
 #  booking_id   :integer
-#  created_at   :timestamp withou
-#  updated_at   :timestamp withou
-#  billing_date :timestamp withou
+#  created_at   :datetime
+#  updated_at   :datetime
+#  billing_date :datetime
 #
 # Indexes
 #

@@ -3,12 +3,12 @@
 # Table name: buses
 #
 #  id         :integer          not null, primary key
-#  name       :character varyin
+#  name       :string(255)
 #  capacity   :integer          default(0)
-#  year       :character varyin
-#  model      :character varyin
-#  created_at :timestamp withou
-#  updated_at :timestamp withou
+#  year       :string(255)
+#  model      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
 #  user_id    :integer
 #
 # Indexes

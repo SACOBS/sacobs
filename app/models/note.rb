@@ -4,7 +4,7 @@
 #
 #  id      :integer          not null, primary key
 #  content :text
-#  context :character varyin
+#  context :string(255)
 #  user_id :integer
 #
 # Indexes

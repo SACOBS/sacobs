@@ -3,11 +3,11 @@
 # Table name: payment_details
 #
 #  id           :integer          not null, primary key
-#  payment_date :timestamp withou
+#  payment_date :datetime
 #  booking_id   :integer
-#  reference    :character varyin
+#  reference    :string(255)
 #  user_id      :integer
-#  payment_type :character varyin
+#  payment_type :string(255)
 #
 # Indexes
 #

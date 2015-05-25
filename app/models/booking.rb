@@ -4,21 +4,20 @@
 #
 #  id           :integer          not null, primary key
 #  trip_id      :integer
-#  price        :numeric          default(0.0)
+#  price        :decimal(, )      default(0.0)
 #  status       :integer          default(0)
-#  created_at   :timestamp withou
-#  updated_at   :timestamp withou
+#  created_at   :datetime
+#  updated_at   :datetime
 #  quantity     :integer          default(0)
-#  expiry_date  :timestamp withou
+#  expiry_date  :datetime
 #  client_id    :integer
 #  user_id      :integer
-#  reference_no :character varyin
+#  reference_no :string(255)
 #  main_id      :integer
-#  has_return   :boolean          default(FALSE)
 #  stop_id      :integer
 #  sequence_id  :integer
 #  archived     :boolean          default(FALSE)
-#  archived_at  :timestamp withou
+#  archived_at  :datetime
 #
 # Indexes
 #
@@ -56,6 +55,7 @@ class Booking < ActiveRecord::Base
   before_create :generate_reference
   before_create :set_expiry_date
   after_update :clear_passengers
+  before_save :sync_return
 
   scope :open, -> { where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { where(arel_table[:expiry_date].lteq(Time.current)) }
@@ -126,7 +126,15 @@ class Booking < ActiveRecord::Base
     end
   end
 
+
   private
+  def sync_return
+    if return_booking
+      return_booking.client = client if client_id_changed?
+      return_booking.passengers = passengers.map(&:dup) if passengers.any?(&:changed?)
+    end
+  end
+
   def clear_passengers
     if client_id_changed?
       passengers.clear

@@ -3,9 +3,9 @@
 # Table name: scriptures
 #
 #  id         :integer          not null, primary key
-#  verse      :character varyin
-#  created_at :timestamp withou
-#  updated_at :timestamp withou
+#  verse      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class Bible::Scripture < ActiveRecord::Base

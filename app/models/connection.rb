@@ -4,12 +4,12 @@
 #
 #  id         :integer          not null, primary key
 #  distance   :integer          default(0)
-#  created_at :timestamp withou
-#  updated_at :timestamp withou
+#  created_at :datetime
+#  updated_at :datetime
 #  route_id   :integer
-#  percentage :numeric(5,2)     default(0.0)
-#  cost       :numeric(8,2)     default(0.0)
-#  name       :character varyin
+#  percentage :decimal(5, 2)    default(0.0)
+#  cost       :decimal(8, 2)    default(0.0)
+#  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
 #

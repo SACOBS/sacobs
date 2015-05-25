@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525113059) do
+ActiveRecord::Schema.define(version: 20150525120223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20150525113059) do
     t.integer  "user_id"
     t.string   "reference_no", limit: 255
     t.integer  "main_id"
-    t.boolean  "has_return",               default: false
     t.integer  "stop_id"
     t.integer  "sequence_id",              default: "nextval('sequence_id_seq'::regclass)"
     t.boolean  "archived",                 default: false

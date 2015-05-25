@@ -3,10 +3,10 @@
 # Table name: reports
 #
 #  id          :integer          not null, primary key
-#  name        :character varyin not null
+#  name        :string           not null
 #  user_id     :integer
-#  created_at  :timestamp withou not null
-#  updated_at  :timestamp withou not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #  criteria    :json             default({}), not null
 #  period_from :date
 #  period_to   :date

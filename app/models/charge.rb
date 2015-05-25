@@ -3,11 +3,11 @@
 # Table name: charges
 #
 #  id          :integer          not null, primary key
-#  percentage  :numeric(5,2)
+#  percentage  :decimal(5, 2)
 #  user_id     :integer
-#  created_at  :timestamp withou
-#  updated_at  :timestamp withou
-#  description :character varyin
+#  created_at  :datetime
+#  updated_at  :datetime
+#  description :string(255)
 #
 # Indexes
 #

@@ -4,15 +4,15 @@
 #
 #  id                    :integer          not null, primary key
 #  booking_expiry_period :integer
-#  created_at            :timestamp withou
-#  updated_at            :timestamp withou
-#  ticket_instructions   :character varyin
-#  default_scripture     :character varyin
-#  trip_sheet_note1      :character varyin
-#  trip_sheet_note2      :character varyin
-#  trip_sheet_note3      :character varyin
-#  trip_sheet_note4      :character varyin
-#  email                 :character varyin
+#  created_at            :datetime
+#  updated_at            :datetime
+#  ticket_instructions   :string(255)
+#  default_scripture     :string(255)
+#  trip_sheet_note1      :string(255)
+#  trip_sheet_note2      :string(255)
+#  trip_sheet_note3      :string(255)
+#  trip_sheet_note4      :string(255)
+#  email                 :string
 #
 
 class Setting < ActiveRecord::Base

@@ -6,8 +6,8 @@
 #  route_id   :integer
 #  city_id    :integer
 #  sequence   :integer
-#  created_at :timestamp withou
-#  updated_at :timestamp withou
+#  created_at :datetime
+#  updated_at :datetime
 #
 # Indexes
 #

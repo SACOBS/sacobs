@@ -3,17 +3,17 @@
 # Table name: trips
 #
 #  id             :integer          not null, primary key
-#  name           :character varyin
+#  name           :string(255)
 #  start_date     :date
 #  end_date       :date
 #  route_id       :integer
 #  bus_id         :integer
-#  created_at     :timestamp withou
-#  updated_at     :timestamp withou
+#  created_at     :datetime
+#  updated_at     :datetime
 #  user_id        :integer
 #  notes          :text
 #  archived       :boolean          default(FALSE)
-#  archived_at    :timestamp withou
+#  archived_at    :datetime
 #  bookings_count :integer          default(0)
 #
 # Indexes
