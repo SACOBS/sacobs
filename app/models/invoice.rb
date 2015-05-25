@@ -26,11 +26,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def total_cost
-    line_items.debit.sum(:amount)
+    line_items.select(&:debit?).to_a.sum(&:amount)
   end
 
   def total_discount
-    line_items.credit.sum(:amount)
+    line_items.select(&:credit?).to_a.sum(&:amount)
   end
 
   private

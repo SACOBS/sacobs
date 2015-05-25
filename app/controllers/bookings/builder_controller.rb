@@ -4,7 +4,7 @@ module Bookings
 
     layout 'wizard'
 
-    before_action :set_booking, only: [:index, :show, :update]
+    before_action :set_booking, only: [:show, :update]
 
     steps :trip_details,
           :return_trip_details,
@@ -13,45 +13,63 @@ module Bookings
           :passenger_charges,
           :billing_info
 
-    def index
-      if params[:return] == 'true'
-        @stops = ReturnTripSearch.execute(@booking.stop, @booking.quantity, search_params)
-        render partial: 'bookings/builder/return_trips', locals: { booking: @booking, stops: @stops }
-      else
-        @stops = TripSearch.execute(search_params)
-        render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
-      end
-    end
 
     def show
       case step
-        when :return_trip_details then
-          skip_step unless @booking.has_return?
+        when :trip_details
+          fetch_stops
+        when :return_trip_details
+          fetch_return_stops
+          @booking.build_return_booking(quantity: @booking.quantity)
+        when :client_details
+          @booking.build_client unless @booking.client.present?
+        when :passengers
+          @booking.build_passengers
+        when :billing_info
+          @booking.build_invoices
       end
-      render_wizard
+      respond_to do |format|
+        format.html { render_wizard }
+        format.js
+      end
     end
 
     def update
-      @booking_wizard = Booking::Wizard.new(@booking, booking_params)
-      @booking_wizard.process(step)
-      render_wizard @booking_wizard
+      @booking.update(booking_params)
+      render_wizard @booking
     end
 
     private
-
-    def search_params
-      params[:q][:trip_date] = Date.civil(params[:q].delete('trip_date(1i)').to_i,
-                                          params[:q].delete('trip_date(2i)').to_i,
-                                          params[:q].delete('trip_date(3i)').to_i) rescue nil
-      params.fetch(:q, {}).delete_if { |_key, value| value.blank? }
-    end
 
     def set_booking
       @booking = Booking.find(params[:booking_id])
     end
 
-    def finish_wizard_path
-      booking_path(@booking)
+    def fetch_stops
+      params[:q] ||= {}
+      params[:q][:available_seats_gteq] ||= 0
+      if @booking.stop.present?
+        params[:q][:trip_start_date_gteq] = set_trip_date((@booking.trip.start_date))
+        params[:q][:connection_from_city_id_eq] ||= @booking.stop.from_city.id
+        params[:q][:connection_to_city_id_eq] ||= @booking.stop.to_city.id
+      end
+      @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
+    end
+
+    def fetch_return_stops
+      params[:q] ||= {}
+      params[:q][:available_seats_gteq] ||= @booking.quantity
+      params[:q][:trip_start_date_gteq] = set_trip_date(@booking.trip.start_date)
+      params[:q][:connection_to_city_id_eq] ||= @booking.stop.from_city.id
+      params[:q][:connection_from_city_id_eq] ||= @booking.stop.to_city.id
+
+      @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
+    end
+
+    def set_trip_date(default_date=Date.current)
+      trip_date = Date.civil(params[:q].delete("trip_start_date_gteq(1i)").to_i, params[:q].delete("trip_start_date_gteq(2i)").to_i, params[:q].delete("trip_start_date_gteq(3i)").to_i) rescue nil
+      trip_date = default_date unless trip_date.present? && trip_date >= default_date
+      trip_date
     end
 
     def booking_params
@@ -62,10 +80,15 @@ module Bookings
 
       params.fetch(:booking, {}).permit(:trip_id, :status,
                                         :quantity, :client_id,
-                                        :has_return, :stop_id,
+                                        :stop_id,
                                         client_attributes, passengers_attributes,
                                         invoice_attributes, return_booking_attributes
                                        )
+    end
+
+
+    def finish_wizard_path
+      booking_path(@booking)
     end
   end
 end

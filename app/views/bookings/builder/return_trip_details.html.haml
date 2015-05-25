@@ -1,19 +1,24 @@
 = content_for (:title) do
   Booking Wizard - Choose return trip
 = content_for (:actions) do
+  = link_to 'Next', next_wizard_path, class: 'btn btn-info'
   = link_to 'Back', previous_wizard_path, class: t('buttons.inverse')
   = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
 
 .trip-finder.well.well-small
   %h5 Search
-  = simple_form_for :q, url: booking_builder_index_path(@booking, return: true), html: { class: 'form-inline', id: 'return_trip_search' }, method: :get, remote: true do |f|
-    = f.input :from_city, typeahead: cities, label: false, placeholder: 'Select from city', autofocus: true, input_html: { data: { targets: '#q_from_city_id', filter: :name } }
-    = f.hidden_field :from_city_id
-    = f.input :to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_to_city_id', filter: :name } }
-    = f.hidden_field :to_city_id
-    = f.input :trip_date, as: :date, use_short_month: true, order: [:day, :month, :year], label: false, input_html: { class: 'input-medium' }, default: @booking.trip.start_date
+  = simple_form_for :q, url: wizard_path(:return_trip_details), html: { class: 'form-inline', id: 'return_trip_search' }, method: :get, remote: true do |f|
+    = f.input :from_city, typeahead: cities, label: false, placeholder: 'Select from city', autofocus: true, input_html: { data: { targets: '#q_connection_from_city_id_eq', filter: :name } }
+    = f.hidden_field :connection_from_city_id_eq
+    = f.input :to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_connection_to_city_id_eq', filter: :name } }
+    = f.hidden_field :connection_to_city_id_eq
+    = f.input :trip_date, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], label: false, input_html: { class: 'input-medium' }
+    = f.hidden_field :available_seats_gteq
     = f.submit 'Search', class: t('buttons.inverse')
 
 #errors= errors_for @booking
-.returns
+
+
+.trips=render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops }
+
 

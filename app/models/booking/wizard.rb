@@ -7,17 +7,16 @@ class Booking::Wizard
   def process(step)
     Booking.transaction do
       case step
-        when :trip_details
-          build_return_booking
         when :client_details
           build_passengers
+
         when :passenger_charges
           sync_return
           build_invoices
         when :billing_info
           reserve_bookings
       end
-      fail ActiveRecord::Rollback unless @booking.save
+      fail ActiveRecord::Rollback unless @booking.save!
     end
   end
 
@@ -26,15 +25,6 @@ class Booking::Wizard
   end
 
   private
-
-  def build_return_booking
-    if @booking.has_return?
-      @booking.build_return_booking
-    else
-      @booking.return_booking.destroy if @booking.return_booking.present?
-    end
-  end
-
   def build_passengers
     @booking.passengers.clear
     @booking.quantity.times do
@@ -72,7 +62,6 @@ class Booking::Wizard
   end
 
   def sync_return
-    return unless @booking.has_return?
     @booking.return_booking.client = @booking.client
     @booking.return_booking.passengers = @booking.passengers.map(&:dup)
   end

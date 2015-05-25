@@ -192,7 +192,7 @@ Sacobs::Application.routes.draw do
     member do
       patch :cancel
     end
-    resources :builder, only: [:index, :show, :update], controller: 'bookings/builder'
+    resources :builder, only: [:show, :update], controller: 'bookings/builder'
     resources :payment_details, only: [:new, :create]
   end
 

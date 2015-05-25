@@ -41,7 +41,7 @@ class Booking < ActiveRecord::Base
   belongs_to :client
   belongs_to :main,  -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
 
-  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
+  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id, dependent: :destroy
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
 
@@ -66,6 +66,7 @@ class Booking < ActiveRecord::Base
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
+  delegate :start_date, to: :trip, prefix: true, allow_nil: true
 
   def open?
     reserved? && !expired?
@@ -93,8 +94,34 @@ class Booking < ActiveRecord::Base
     end
   end
 
-  def client
-    super || build_client
+  def build_passengers
+    passengers.clear if passengers.any?
+    quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
+  end
+
+  def build_invoices
+    price = stop.connection.cost
+    [self, return_booking].compact.each do |booking|
+      invoice = booking.build_invoice
+      booking.passengers.each do |passenger|
+        invoice.line_items.build(description: "#{passenger.full_name} ticket", amount: price, line_item_type: :debit)
+
+        # Additional Charges
+        total_charges = 0
+        passenger.charges.each do |charge|
+          description = "#{charge.description} charge - #{charge.percentage.round}%".capitalize
+          amount = Calculations.roundup(price * (charge.percentage.to_f / 100))
+          total_charges += amount
+          invoice.line_items.build(description: description, amount: amount, line_item_type: :debit)
+        end
+
+        # Discount
+        discount = SeasonalDiscount.active_in_period(Date.current).find_by(passenger_type: passenger.passenger_type) || passenger.discount
+        description = "#{discount.passenger_type.description} discount (#{discount.percentage.round}%)".capitalize
+        amount = ((price + total_charges) * (discount.percentage.to_f / 100)).round
+        invoice.line_items.build(description: description, amount: amount, line_item_type: :credit)
+      end
+    end
   end
 
   private

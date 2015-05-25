@@ -29,8 +29,4 @@ module ApplicationHelper
   def current_trips_count
     @current_trips_count ||= Trip.count
   end
-
-  def invoice_total(booking)
-    [booking, booking.return_booking].compact.map { |b| b.invoice.total }.sum
-  end
 end
