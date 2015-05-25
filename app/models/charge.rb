@@ -18,4 +18,8 @@ class Charge < ActiveRecord::Base
   belongs_to :user
 
   validates :description, :percentage, presence: true
+
+  before_save do
+    self.description = description.upcase
+  end
 end

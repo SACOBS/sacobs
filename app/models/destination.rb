@@ -26,6 +26,8 @@ class Destination < ActiveRecord::Base
   has_many :connections, inverse_of: :from
   has_many :connections, inverse_of: :to
 
+  delegate :name, to: :city
+
   validates :sequence, presence: true
   validates :city, uniqueness: { scope: :route, message: 'already exists for this route.' }
 

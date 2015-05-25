@@ -34,7 +34,6 @@
 #             daily_bookings GET    /bookings/daily(.:format)                           bookings#daily
 #       print_daily_bookings GET    /bookings/print_daily(.:format)                     bookings#print_daily {:format=>:pdf}
 #             cancel_booking PATCH  /bookings/:id/cancel(.:format)                      bookings#cancel
-#      booking_builder_index GET    /bookings/:booking_id/builder(.:format)             bookings/builder#index
 #            booking_builder GET    /bookings/:booking_id/builder/:id(.:format)         bookings/builder#show
 #                            PATCH  /bookings/:booking_id/builder/:id(.:format)         bookings/builder#update
 #                            PUT    /bookings/:booking_id/builder/:id(.:format)         bookings/builder#update

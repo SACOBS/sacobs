@@ -9,6 +9,6 @@
   %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
   %td= badge_for(booking.quantity)
   %td
-    %span.label.label-inverse #{booking.stop.from_city_name} to #{booking.stop.to_city_name}
+    %span.label.label-inverse= booking.stop.name
 
 
