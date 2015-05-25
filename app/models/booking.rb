@@ -55,6 +55,7 @@ class Booking < ActiveRecord::Base
 
   before_create :generate_reference
   before_create :set_expiry_date
+  after_update :clear_passengers
 
   scope :open, -> { where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { where(arel_table[:expiry_date].lteq(Time.current)) }
@@ -95,8 +96,9 @@ class Booking < ActiveRecord::Base
   end
 
   def build_passengers
-    passengers.clear if passengers.any?
-    quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
+    quantity.times do
+        passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email)
+    end
   end
 
   def build_invoices
@@ -125,6 +127,11 @@ class Booking < ActiveRecord::Base
   end
 
   private
+  def clear_passengers
+    if client_id_changed?
+      passengers.clear
+    end
+  end
 
   def generate_reference
     self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")

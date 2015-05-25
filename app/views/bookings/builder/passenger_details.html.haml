@@ -17,4 +17,4 @@
           %td= passenger.input :surname
           %td= passenger.input :cell_no
           %td= passenger.input :email
-          %td= passenger.association :passenger_type, include_blank: false
+          %td= passenger.association :passenger_type, include_blank: false, label_method: :description

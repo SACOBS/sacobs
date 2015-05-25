@@ -54,16 +54,16 @@
       %h4 Address Info
       %p>
         %strong Street Address 1:
-        = @client.address.street_address1.presence || 'N/A'
+        = @client.street_address1.presence || 'N/A'
       %p>
         %strong Street Address 2:
-        = @client.address.street_address2.presence || 'N/A'
+        = @client.street_address2.presence || 'N/A'
       %p>
         %strong City:
-        = @client.address.city.presence || 'N/A'
+        = @client.city.presence || 'N/A'
       %p>
         %strong Postal Code:
-        = @client.address.postal_code.presence || 'N/A'
+        = @client.postal_code.presence || 'N/A'
   .row-fluid
     .client-vouchers.well.well-small.span6
       %h4 Credit Vouchers
@@ -79,13 +79,12 @@
     .client-bookings.well.well-small.span6
       %h4 Recent Bookings
       - if @client.bookings.recent.any?
-        = bootstrap_table headers: %w(Status TripDate From To Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do
+        = bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do
           - @client.bookings.recent.each do |booking|
             %tr
               %td= status_label_for(booking)
               %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
-              %td= booking.stop.from_city_name
-              %td= booking.stop.to_city_name
+              %td= booking.stop.name
               %td= badge_for(booking.quantity)
       - else
         %h5  This client has no bookings

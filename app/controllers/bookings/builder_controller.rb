@@ -22,8 +22,10 @@ module Bookings
           fetch_return_stops
           @booking.build_return_booking(quantity: @booking.quantity)
         when :client_details
-          @booking.build_client unless @booking.client.present?
-        when :passengers
+          unless @booking.client.present?
+            @booking.build_client
+          end
+        when :passenger_details
           @booking.build_passengers
         when :billing_info
           @booking.build_invoices
@@ -73,7 +75,7 @@ module Bookings
     end
 
     def booking_params
-      client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :user_id, address_attributes: [:id, :street_address1, :street_address2, :city, :postal_code, :_destroy]] }
+      client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :user_id, :street_address1, :street_address2, :city, :postal_code] }
       passengers_attributes = { passengers_attributes: [:id, :name, :surname, :cell_no, :email, :passenger_type_id, charges: []] }
       invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
       return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :user_id, :id, invoice_attributes] }

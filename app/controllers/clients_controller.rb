@@ -68,13 +68,10 @@ class ClientsController < ApplicationController
                                      :bank,
                                      :notes,
                                      :id_number,
-                                     address_attributes: [:id,
-                                                          :street_address1,
-                                                          :street_address2,
-                                                          :city,
-                                                          :postal_code,
-                                                          :_destroy]
-                                    ).merge(user_id: current_user.id)
+                                     :street_address1,
+                                     :street_address2,
+                                     :city,
+                                     :postal_code).merge(user_id: current_user.id)
   end
 
   def interpolation_options

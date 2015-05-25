@@ -22,13 +22,12 @@
 %h4.text-center
   Bookings and Reservations
 %hr
-= bootstrap_table headers: ['Clients', 'From', 'To', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do
+= bootstrap_table headers: ['Clients', 'Connection', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do
   - @trip_sheet_presenter.bookings.each do |booking|
     - booking.passengers.each do |passenger|
       %tr
         %td= passenger.full_name
-        %td= booking.stop.from_city_name
-        %td= booking.stop.to_city_name
+        %td= booking.stop.name
         %td 1
         %td= passenger.cell_no
 

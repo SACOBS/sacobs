@@ -1,7 +1,13 @@
 = content_for (:title) do
   Booking Wizard - Choose return trip
 = content_for (:actions) do
-  = link_to 'Next', next_wizard_path, class: 'btn btn-info'
+  %h4
+    Note:
+    %small
+      %em This step is optional, click Next to go to the next step if you do not wish to book a return
+  %hr
+
+  = link_to 'Next (alt + n)', next_wizard_path, class: t('buttons.primary'), autofocus: true, accesskey: 'n'
   = link_to 'Back', previous_wizard_path, class: t('buttons.inverse')
   = link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger')
 

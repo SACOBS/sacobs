@@ -11,24 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522105817) do
+ActiveRecord::Schema.define(version: 20150525113059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
-
-  create_table "addresses", force: :cascade do |t|
-    t.string   "street_address1",  limit: 255
-    t.string   "street_address2",  limit: 255
-    t.string   "city",             limit: 255
-    t.string   "postal_code",      limit: 255
-    t.integer  "addressable_id"
-    t.string   "addressable_type", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "banks", force: :cascade do |t|
     t.string "name", limit: 255
@@ -94,21 +81,25 @@ ActiveRecord::Schema.define(version: 20150522105817) do
   add_index "cities", ["user_id"], name: "index_cities_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "surname",       limit: 255
+    t.string   "name",            limit: 255
+    t.string   "surname",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "home_no",       limit: 255
-    t.string   "cell_no",       limit: 255
-    t.string   "email",         limit: 255
+    t.string   "home_no",         limit: 255
+    t.string   "cell_no",         limit: 255
+    t.string   "email",           limit: 255
     t.integer  "user_id"
-    t.boolean  "high_risk",                 default: false
-    t.string   "work_no",       limit: 255
+    t.boolean  "high_risk",                   default: false
+    t.string   "work_no",         limit: 255
     t.date     "date_of_birth"
-    t.string   "title",         limit: 255
+    t.string   "title",           limit: 255
     t.text     "notes"
-    t.string   "id_number",     limit: 255
-    t.string   "bank",          limit: 255
+    t.string   "id_number",       limit: 255
+    t.string   "bank",            limit: 255
+    t.string   "street_address1"
+    t.string   "street_address2"
+    t.string   "city"
+    t.string   "postal_code"
   end
 
   add_index "clients", ["name", "surname"], name: "index_clients_on_name_and_surname", unique: true, using: :btree

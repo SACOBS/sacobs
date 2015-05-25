@@ -24,8 +24,7 @@
             = client.input :title, collection: Client::TITLES, include_blank: true, prompt: 'Select a title'
             = client.input :name, placeholder: 'Name'
             = client.input :surname, placeholder: 'Surname'
-            = client.simple_fields_for :address do |address|
-              = address.input :city, placeholder: 'City'
+            = client.input :city, placeholder: 'City'
             = client.input :id_number, placeholder: 'Id Number'
           .span4
             = client.input :bank, include_blank: true, prompt: 'Select a bank', collection: Client::BANKS
@@ -35,10 +34,9 @@
             = client.input :work_no, as: :tel, placeholder: 'Work No'
             = client.input :email, as: :email, placeholder: 'Email'
           .span4
-            = client.simple_fields_for :address do |address|
-              = address.input :street_address1, placeholder: 'Street Address 1'
-              = address.input :street_address2, placeholder: 'Street Address 2'
-              = address.input :postal_code, placeholder: 'Postal Code'
+            = client.input :street_address1, placeholder: 'Street Address 1'
+            = client.input :street_address2, placeholder: 'Street Address 2'
+            = client.input :postal_code, placeholder: 'Postal Code'
             = client.input :notes, placeholder: 'Notes'
         = client.hidden_field :user_id, value: current_user.id
         = client.input :id, as: :hidden

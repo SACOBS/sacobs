@@ -20,6 +20,9 @@
 #
 
 class Passenger < ActiveRecord::Base
+
+  DEFAULT_TYPE = PassengerType.find_by(description: :STANDARD)
+
   belongs_to :booking
   belongs_to :passenger_type
 
@@ -41,7 +44,7 @@ class Passenger < ActiveRecord::Base
   protected
 
   def set_defaults
-    self.passenger_type ||= PassengerType.find_by(description: :standard)
+    self.passenger_type = Passenger::DEFAULT_TYPE
   end
 
   def normalize_names

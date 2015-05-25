@@ -37,11 +37,8 @@ class Client < ActiveRecord::Base
 
   to_param :full_name
 
-  has_one :address, as: :addressable, dependent: :delete
   has_many :bookings
   has_many :vouchers, dependent: :delete_all
-
-  accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :surname, presence: true
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
@@ -54,10 +51,6 @@ class Client < ActiveRecord::Base
   end
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
-
-  def address
-    super || build_address
-  end
 
   def age
     @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
@@ -73,7 +66,6 @@ class Client < ActiveRecord::Base
   end
 
   protected
-
   # Ugly but input is not guaranteed to be valid most of the time
   def set_birth_date
     date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil

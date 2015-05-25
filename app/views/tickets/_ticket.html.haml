@@ -14,12 +14,12 @@
       %tr
         %td= booking.trip.start_date
         %td= passenger.full_name
-        %td= booking.stop.from_city_name
-        %td= booking.stop.connection.from_city_venues.first.name
-        %td= booking.stop.to_city_name
-        %td= booking.stop.connection.to_city_venues.first.name
-        %td= local_time(booking.stop.connection.from.city.outgoing_time_table.depart, format: :short)
-        %td= local_time(booking.stop.connection.to.city.incoming_time_table.depart, format: :short)
+        %td= booking.stop.from_city.name
+        %td= booking.stop.from_city.venues.first.name
+        %td= booking.stop.to_city.name
+        %td= booking.stop.to_city.venues.first.name
+        %td= local_time(booking.stop.from_city.outgoing_time_table.depart, format: :short) if booking.stop.from_city.outgoing_time_table.present?
+        %td= local_time(booking.stop.to_city.incoming_time_table.depart, format: :short) if booking.stop.from_city.incoming_time_table.present?
   %tr
     %td
     %td
