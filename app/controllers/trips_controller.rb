@@ -10,7 +10,9 @@ class TripsController < ApplicationController
   def index
     authorize Trip
     @trips = trip_scope.page(params[:page])
-    fresh_when @trips
+    if stale?(@trips)
+      respond_with([@trips, params[:page]])
+    end
   end
 
   def search

@@ -16,6 +16,11 @@
  *= require bootstrap_and_overrides
  */
 
+
+body {
+  background-image: image_url('background.png');
+}
+
 .form-inline{
   div {
     display: inline-block;
