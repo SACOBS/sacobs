@@ -38,6 +38,9 @@ module Bookings
 
     def update
       @booking.update(booking_params)
+      if step == :billing_info
+        [@booking, @booking.return_booking].compact.each(&:reserve)
+      end
       render_wizard @booking
     end
 
