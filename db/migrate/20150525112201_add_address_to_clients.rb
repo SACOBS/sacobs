@@ -21,4 +21,7 @@ class AddAddressToClients < ActiveRecord::Migration
       end
     end
   end
+
+  class Address < ActiveRecord::Base
+  end
 end
