@@ -1,1 +1,1 @@
-$("##{params[:letter]}").html('#{j render 'clients/clients', clients: @clients}');
+$('##{params[:letter]}').html('#{ j render partial: 'clients', locals: { clients: @clients } }')

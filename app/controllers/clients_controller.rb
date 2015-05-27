@@ -5,7 +5,15 @@ class ClientsController < ApplicationController
   after_action :verify_authorized, except: [:index, :search]
 
   def index
-    @clients = client_scope.surname_starts_with(params[:letter]).order(:surname).page(params[:page])
+    if request.xhr?
+      @clients = client_scope.surname_starts_with(params[:letter]).order(:surname).page(params[:page])
+    else
+      @clients = client_scope.none
+    end
+
+    if stale?(@clients)
+      respond_with @clients
+    end
   end
 
   def search
@@ -15,7 +23,7 @@ class ClientsController < ApplicationController
 
   def show
     authorize :client
-    fresh_when @client, last_modified: @client.updated_at
+    fresh_when @client
   end
 
   def new

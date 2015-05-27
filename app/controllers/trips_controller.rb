@@ -9,9 +9,9 @@ class TripsController < ApplicationController
 
   def index
     authorize Trip
-    @trips = trip_scope.page(params[:page])
+    @trips = trip_scope.includes(:bus, :route).page(params[:page])
     if stale?(@trips)
-      respond_with([@trips, params[:page]])
+      respond_with(@trips)
     end
   end
 
@@ -67,7 +67,7 @@ class TripsController < ApplicationController
   private
 
   def trip_scope
-    policy_scope(Trip).includes(:bus, :route, :bookings)
+    policy_scope(Trip)
   end
 
   def build_trip
@@ -75,7 +75,7 @@ class TripsController < ApplicationController
   end
 
   def set_trip
-    @trip = trip_scope.find(params[:id])
+    @trip = trip_scope.includes(:bookings, :bus, :route).find(params[:id])
   end
 
   def trip_params

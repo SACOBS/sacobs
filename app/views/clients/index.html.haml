@@ -3,7 +3,6 @@
 .page-header
   %h2
     Clients
-    %small= Client.count
   = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
   = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh
   .search.pull-right
