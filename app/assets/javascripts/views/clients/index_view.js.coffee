@@ -3,10 +3,6 @@ class Views.Clients.IndexView extends Views.ApplicationView
   render: ->
     super()
 
-    $('a[data-toggle="tab"]').on 'click', (e) ->
-      e.preventDefault()
-      $(this).tab('show');
-
 
     $('a[data-toggle="tab"]').on 'show', (e) ->
       $tab = $(e.target)
@@ -17,7 +13,9 @@ class Views.Clients.IndexView extends Views.ApplicationView
           method: "GET",
           url: "clients",
           data: { letter: $tab.text() }
-          dataType: 'script'
+          dataType: 'html'
+        ).done((data) ->
+          $tab_pane.html(data)
         )
 
 
@@ -30,5 +28,4 @@ class Views.Clients.IndexView extends Views.ApplicationView
 
   cleanup: ->
     super()
-    $('a[data-toggle="tab"]').off 'click'
     $('.client').off 'ajax:success', '#delete_client'
