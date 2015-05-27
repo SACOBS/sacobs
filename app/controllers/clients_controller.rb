@@ -6,11 +6,6 @@ class ClientsController < ApplicationController
 
   def index
     @clients = client_scope.surname_starts_with(params[:letter]).order(:surname).page(params[:page])
-    if stale?(@clients)
-      if request.xhr?
-        render ''
-      end
-    end
   end
 
   def search
