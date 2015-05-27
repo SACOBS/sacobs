@@ -13,7 +13,7 @@
       = link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times
 
 .tabbable.tabs-left#listing
-  %ul.nav.nav-tabs#directory{ data: { tabs: 'tabs' } }
+  %ul.nav.nav-tabs#directory
     - ('A'..'Z').each do |letter|
       %li
         %a{ data: { target: "##{letter}", toggle: :tab } }= letter

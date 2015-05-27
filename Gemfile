@@ -98,6 +98,7 @@ gem 'pg'
 gem 'obfuscatejs'
 
 group :development do
+  gem 'flatten_migrations'
   gem 'web-console', '~> 2.0'
   gem 'annotate'
   gem 'quiet_assets'

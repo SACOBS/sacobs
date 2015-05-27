@@ -2,6 +2,12 @@ window.Views.Clients ||= {}
 class Views.Clients.IndexView extends Views.ApplicationView
   render: ->
     super()
+
+    $('a[data-toggle="tab"]').on 'click', (e) ->
+      e.preventDefault()
+      $(this).tab('show');
+
+
     $('a[data-toggle="tab"]').on 'show', (e) ->
       $tab = $(e.target)
       $tab_pane = $($tab.data('target'))

@@ -1,19 +1,13 @@
 module LookupsHelper
   def cities
-    Rails.cache.fetch(lookup_cache_key('city')) do
+    Rails.cache.fetch(City.cache_key) do
       City.all.to_json(only: [:id, :name])
     end
   end
 
   def clients
-    Rails.cache.fetch(lookup_cache_key('client')) do
+    Rails.cache.fetch(Client.cache_key) do
       Client.all.to_json(except: [:created_at, :updated_at], methods: :full_name)
     end
-  end
-
-  private
-
-  def lookup_cache_key(model)
-    "#{model.pluralize}/#{model.classify.constantize.count}/#{model.classify.constantize.maximum(:updated_at).to_i}"
   end
 end
