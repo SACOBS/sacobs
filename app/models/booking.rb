@@ -30,7 +30,7 @@
 #
 
 class Booking < ActiveRecord::Base
-  include Archivable
+  include Archivable, CollectionCacheable
 
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
@@ -40,7 +40,7 @@ class Booking < ActiveRecord::Base
   belongs_to :client
   belongs_to :main,  -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
 
-  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id, dependent: :destroy
+  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
 

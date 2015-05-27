@@ -41,7 +41,7 @@ class PricingPresenter
   end
 
   def calculate_percentage_amount(percentage)
-    round_up(percentage * cost)
+    round_up((percentage.to_f / 100) * cost)
   end
 
   def calculate_price
