@@ -30,4 +30,5 @@ class Views.Clients.IndexView extends Views.ApplicationView
 
   cleanup: ->
     super()
+    $('a[data-toggle="tab"]').off 'click'
     $('.client').off 'ajax:success', '#delete_client'
