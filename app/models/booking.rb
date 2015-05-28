@@ -52,10 +52,15 @@ class Booking < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
 
-  before_create :generate_reference
-  before_create :set_expiry_date
-  after_update :clear_passengers
+  after_initialize do
+    self.quantity = main.quantity if main.present?
+  end
+  
+  before_create :generate_reference, :set_expiry_date
   before_save :sync_return
+  before_update :assign_seating, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
+  before_update :unassign_seating, if: Proc.new { |booking| booking.status_changed? && booking.cancelled? }
+
 
   scope :open, -> { where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { where(arel_table[:expiry_date].lteq(Time.current)) }
@@ -76,20 +81,6 @@ class Booking < ActiveRecord::Base
 
   def expired?
     expiry_date <= Time.current
-  end
-
-  def reserve
-    transaction do
-      trip.assign_seats(stop, quantity)
-      reserved!
-    end
-  end
-
-  def cancel
-    transaction do
-      trip.unassign_seats(stop, quantity)
-      cancelled!
-    end
   end
 
   def build_passengers
@@ -125,16 +116,19 @@ class Booking < ActiveRecord::Base
 
 
   private
+
+  def assign_seating
+    trip.assign_seats(stop, quantity)
+  end
+
+  def unassign_seating
+    trip.unassign_seats(stop, quantity)
+  end
+
   def sync_return
     if return_booking
       return_booking.client = client if client_id_changed?
       return_booking.passengers = passengers.map(&:dup) if passengers.any?(&:changed?)
-    end
-  end
-
-  def clear_passengers
-    if client_id_changed?
-      passengers.clear
     end
   end
 

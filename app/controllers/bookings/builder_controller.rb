@@ -20,11 +20,9 @@ module Bookings
           fetch_stops
         when :return_trip_details
           fetch_return_stops
-          @booking.build_return_booking(quantity: @booking.quantity)
+          @booking.build_return_booking
         when :client_details
-          unless @booking.client.present?
-            @booking.build_client
-          end
+          @booking.build_client unless @booking.client.present?
         when :passenger_details
           @booking.build_passengers
         when :billing_info
@@ -37,10 +35,8 @@ module Bookings
     end
 
     def update
-      @booking.update(booking_params)
-      if step == :billing_info
-        [@booking, @booking.return_booking].compact.each(&:reserve)
-      end
+      @booking.assign_attributes(booking_params)
+      @booking.status = :reserved if step == :billing_info
       render_wizard @booking
     end
 

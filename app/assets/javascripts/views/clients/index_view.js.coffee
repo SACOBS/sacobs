@@ -11,11 +11,6 @@ class Views.Clients.IndexView extends Views.ApplicationView
 
     $('#directory a:first').tab('show')
 
-    $(document).on 'ajax:success', '#delete_client' ,(evt, data, status, xhr) ->
-      $client = $(this).closest('.client')
-      $client.fadeOut 'slow', ->
-        $client.remove()
-
   cleanup: ->
     super()
     $('.client').off 'ajax:success', '#delete_client'
