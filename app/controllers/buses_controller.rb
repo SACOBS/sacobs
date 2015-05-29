@@ -2,37 +2,26 @@ class BusesController < ApplicationController
   before_action :set_bus, only: [:edit, :show, :destroy, :update]
   before_action :build_bus, only: [:new, :create]
 
-  after_action :verify_authorized
-  after_action :verify_policy_scoped, only: :index
-
   def index
-    authorize Bus
-    @buses = policy_scope(Bus).search(params[:q]).result
+    @buses = Bus.search(params[:q]).result
   end
 
   def show
-    authorize @bus
     fresh_when @bus
   end
 
-  def new
-    authorize @bus
-  end
 
   def create
-    authorize @bus
     @bus.save
     respond_with(@bus)
   end
 
   def update
-    authorize @bus
     @bus.update(bus_params)
     respond_with @bus
   end
 
   def destroy
-    authorize @bus
     @bus.destroy
     respond_with @bus
   end

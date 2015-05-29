@@ -55,7 +55,7 @@ class Booking < ActiveRecord::Base
   after_initialize do
     self.quantity = main.quantity if main.present?
   end
-  
+
   before_create :generate_reference, :set_expiry_date
   before_save :sync_return
   before_update :assign_seating, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }

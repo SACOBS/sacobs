@@ -1,18 +1,12 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
-  after_action :verify_policy_scoped, only: [:index, :search]
-  after_action :verify_authorized, except: [:index, :search]
-
   def index
     if request.xhr?
       @clients = client_scope.surname_starts_with(params[:letter]).order(:surname).page(params[:page])
-    else
-      @clients = client_scope.none
-    end
-
-    if stale?(@clients)
-      respond_with @clients
+      if stale?(@clients)
+       render partial: 'clients', locals: { clients: @clients }
+      end
     end
   end
 
@@ -22,40 +16,31 @@ class ClientsController < ApplicationController
   end
 
   def show
-    authorize :client
     fresh_when @client
   end
 
   def new
-    authorize :client
     @client = Client.new
   end
 
   def create
-    authorize :client
     @client = Client.create(client_params)
     respond_with @client
   end
 
-  def edit
-    authorize :client
-  end
-
   def update
-    authorize :client
     @client.update(client_params)
     respond_with @client
   end
 
   def destroy
-    authorize :client
     @client.destroy
     respond_with @client
   end
 
   private
   def client_scope
-    policy_scope(Client)
+    Client.all
   end
 
   def set_client

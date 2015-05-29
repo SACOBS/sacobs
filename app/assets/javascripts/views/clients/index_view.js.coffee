@@ -7,7 +7,15 @@ class Views.Clients.IndexView extends Views.ApplicationView
       $tab_pane = $($tab.data('target'))
       if !$.trim( $tab_pane.html() ).length
         $tab_pane.html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x"></i></div>')
-        $.get('clients.js', { letter: $tab.text() })
+        $.get('clients.html', { letter: $tab.text() }, 'html').done((data, status, xhr) ->
+          $tab_pane.html(data);
+        )
+
+    $(document).on 'ajax:success', '.pagination a', (evt, data, status, xhr) ->
+      $(this).closest('.tab-pane').html(data)
+
+
+
 
     $('#directory a:first').tab('show')
 

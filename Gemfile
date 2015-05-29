@@ -44,9 +44,6 @@ gem 'simple_form', '~> 3.0.0'
 # Authentication
 gem 'devise'
 
-# Authorization
-gem 'pundit'
-
 # Static Pages
 gem 'high_voltage'
 
