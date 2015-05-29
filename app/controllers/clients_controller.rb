@@ -2,10 +2,13 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    if request.xhr?
-      @clients = client_scope.surname_starts_with(params[:letter]).order(:surname).page(params[:page])
-      if stale?(@clients)
-       render partial: 'clients', locals: { clients: @clients }
+    @clients = client_scope.surname_starts_with(params[:letter] || 'A').order(:surname).page(params[:page])
+
+    if stale?(@clients)
+      if request.xhr?
+        render partial: 'clients', locals: { clients: @clients }
+      else
+        render :index
       end
     end
   end
@@ -35,7 +38,10 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy
-    respond_with @client
+    respond_to do |format|
+      format.html { redirect_to clients_url }
+      format.js { head :no_content }
+    end
   end
 
   private

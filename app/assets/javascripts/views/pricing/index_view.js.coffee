@@ -11,9 +11,9 @@ class Views.Pricing.IndexView extends Views.ApplicationView
 
     $('#connection-search').on 'keyup', ->
          search_term = this.value.toLowerCase()
-         $connections.hide().filter(->
-                       $(this).text().toLowerCase().indexOf(search_term) != -1
-                     ).show()
+         $connections.detach().filter(->
+                       $(this).text().toLowerCase().indexOf(search_term) == 0
+                     ).appendTo('#connections-list')
 
     $(document).on 'ajax:success', '#show_pricing' ,(evt, data, status, xhr) ->
       $('.quote').html(data)

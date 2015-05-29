@@ -13,12 +13,14 @@
 
 .tabbable.tabs-left#listing
   %ul.nav.nav-tabs#directory
-    - ('A'..'Z').each do |letter|
-      %li
+    - ('A'..'Z').each_with_index do |letter, index|
+      = content_tag(:li, class: ('active' if index.zero?)) do
         %a{ data: { target: "##{letter}", toggle: :tab } }= letter
+
   .tab-content.span10
-    - ('A'..'Z').each do |letter|
-      .tab-pane{ id: "#{letter}" }
+    - ('A'..'Z').each_with_index do |letter, index|
+      = content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do
+        = render(partial: 'clients', locals: { clients: @clients }) if index.zero?
 
 = link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus
 = link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh

@@ -13,6 +13,13 @@ en:
      inverse: 'btn btn-inverse btn-mini'
      primary: 'btn btn-primary btn-mini'
      warning: 'btn btn-warning btn-mini'
+    small:
+     default: 'btn btn-default btn-small'
+     danger: 'btn btn-danger btn-small'
+     info: 'btn btn-info btn-small'
+     inverse: 'btn btn-inverse btn-small'
+     primary: 'btn btn-primary btn-small'
+     warning: 'btn btn-warning btn-small'
     large:
      default: 'btn btn-default btn-large'
      danger: 'btn btn-danger btn-large'

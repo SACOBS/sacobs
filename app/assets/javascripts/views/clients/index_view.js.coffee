@@ -2,22 +2,24 @@ window.Views.Clients ||= {}
 class Views.Clients.IndexView extends Views.ApplicationView
   render: ->
     super()
+
     $('a[data-toggle="tab"]').on 'show', (e) ->
       $tab = $(e.target)
       $tab_pane = $($tab.data('target'))
       if !$.trim( $tab_pane.html() ).length
-        $tab_pane.html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x"></i></div>')
-        $.get('clients.html', { letter: $tab.text() }, 'html').done((data, status, xhr) ->
-          $tab_pane.html(data);
-        )
+        $.get('clients', { letter: $tab.text() }, (data) ->
+          $tab_pane.html(data)
+        ,"html")
 
     $(document).on 'ajax:success', '.pagination a', (evt, data, status, xhr) ->
-      $(this).closest('.tab-pane').html(data)
+      $tab_pane = $(this).closest('.tab-pane')
+      $tab_pane.html(data)
 
 
-
-
-    $('#directory a:first').tab('show')
+    $(document).on 'ajax:success', '.delete-client',  (evt, data, status, xhr) ->
+        $tab_pane = $(this).closest('.tab-pane')
+        url = $(this).closest('.clients').data('source')
+        $tab_pane.load(url)
 
   cleanup: ->
     super()

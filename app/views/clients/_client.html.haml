@@ -17,7 +17,7 @@
         = client.email.present? ? mail_to(client.email) : 'N/A'
 
       .btn-group.btn-group
-        = link_to 'Show', client, icon: :info, class: t('buttons.info')
-        = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.inverse')
-        = link_to 'Destroy', client, icon: :times, class: t('buttons.danger'), method: :delete, data: { confirm: 'Are you sure you want to destroy this client?' }
+        = link_to 'Show', client, icon: :info, class: t('buttons.small.info')
+        = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.small.inverse')
+        = link_to 'Destroy', client, icon: :times, class: "#{t('buttons.small.danger')} delete-client", method: :delete, data: { confirm: 'Are you sure you want to destroy this client?' }, remote: true
 
