@@ -1,0 +1,15 @@
+= content_for (:title) do
+  Daily Bookings
+
+.text-center= link_to 'Print', print_bookings_daily_index_path, class: t('buttons.primary')
+
+.bookings
+  - if @bookings.any?
+    = render 'bookings/daily/bookings'
+  - else
+    %h4.text-center There have been no bookings made for today yet.
+
+
+.text-center= link_to 'Print', print_bookings_daily_index_path, class: t('buttons.primary')
+
+

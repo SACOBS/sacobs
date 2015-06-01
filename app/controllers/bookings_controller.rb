@@ -2,7 +2,8 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :destroy]
 
   def index
-    case params[:type]
+    type = params[:type] || 'standby'
+    case type
       when 'reserved'
         @bookings = booking_scope.reserved.open.page(params[:reserved_page])
       when 'standby'
@@ -13,6 +14,14 @@ class BookingsController < ApplicationController
         @bookings =  booking_scope.cancelled.page(params[:cancelled_page])
       else
         @bookings = booking_scope.none
+    end
+
+    if stale?(@bookings)
+      if request.xhr?
+        render partial: 'bookings/bookings', locals: { bookings: @bookings, type: params[:type] }
+      else
+        render :index
+      end
     end
   end
 

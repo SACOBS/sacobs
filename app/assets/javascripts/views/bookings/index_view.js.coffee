@@ -6,15 +6,14 @@ class Views.Bookings.IndexView extends Views.ApplicationView
       $tab = $(e.target)
       $tab_pane = $($tab.data('target'))
       if !$.trim( $tab_pane.html() ).length
-        $tab_pane.html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x"></i></div>')
-        $.ajax(
-          method: "GET",
-          url: "bookings",
-          data: { type: $tab_pane.data('type') }
-          dataType: 'script'
-        )
+        $.get('bookings', { type: $tab_pane.data('type') }, (data) ->
+          $tab_pane.html(data)
+        ,"html")
 
-    $('#bookings ul li:first a').tab('show');
+    $(document).on 'ajax:success', '.pagination a', (evt, data, status, xhr) ->
+      $tab_pane = $(this).closest('.tab-pane')
+      $tab_pane.html(data)
+
   cleanup: ->
     super()
-    $('#booking_search').off 'ajax:success'
+    $(document).off 'ajax:success', '.pagination a'

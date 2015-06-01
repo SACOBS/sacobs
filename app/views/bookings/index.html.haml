@@ -15,7 +15,7 @@
 
 .tab-wrapper#bookings
   %ul.nav.nav-tabs
-    %li
+    %li.active
       %a{ data: { target: '#standby', toggle: :tab } }
         Standby/Expired
         %span.badge.badge-warning= standby_booking_count
@@ -34,7 +34,8 @@
 
   .tab-content
     .tab-pane#reserved{ data: { type: 'reserved' } }
-    .tab-pane#standby{ data: { type: 'standby' } }
+    .tab-pane.active#standby{ data: { type: 'standby' } }
+      = render 'bookings/bookings', bookings: @bookings, type: params[:type]
     .tab-pane#paid{ data: { type: 'paid' } }
     .tab-pane#cancelled{ data: { type: 'cancelled' } }
 %br

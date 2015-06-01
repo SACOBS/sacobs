@@ -180,13 +180,17 @@ Sacobs::Application.routes.draw do
         get :search
       end
     end
+
+    resources :daily, only: [:index] do
+      collection do
+        get :print, defaults: { format: :pdf }
+      end
+    end
   end
 
   resources :bookings, only: [:create, :show, :index, :destroy] do
     collection do
       get :search
-      get :daily
-      get :print_daily, defaults: { format: :pdf }
     end
     member do
       patch :cancel
