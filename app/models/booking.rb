@@ -58,15 +58,14 @@ class Booking < ActiveRecord::Base
 
   before_create :generate_reference, :set_expiry_date
   before_save :sync_return
-  before_update :assign_seating, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
+  before_update :assign_seating, :reserve_return, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
   before_update :unassign_seating, if: Proc.new { |booking| booking.status_changed? && booking.cancelled? }
 
 
-  scope :open, -> { where(arel_table[:expiry_date].gt(Time.current)) }
-  scope :expired, -> { where(arel_table[:expiry_date].lteq(Time.current)) }
+  scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
+  scope :expired, -> { reserved.where(arel_table[:expiry_date].lteq(Time.current)) }
   scope :recent, -> { unscoped.includes(:stop).processed.order(created_at: :desc).limit(5) }
   scope :processed, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
-  scope :for_today, -> { where(created_at: Time.now.midnight..Time.now.end_of_day) }
   scope :travelling, -> { where(arel_table[:status].eq(statuses[:reserved]).or(arel_table[:status].eq(statuses[:paid]))) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
@@ -116,6 +115,10 @@ class Booking < ActiveRecord::Base
 
 
   private
+
+  def reserve_return
+    return_booking.update(status: :reserved) if return_booking.present?
+  end
 
   def assign_seating
     trip.assign_seats(stop, quantity)

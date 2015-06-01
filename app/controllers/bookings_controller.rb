@@ -5,9 +5,9 @@ class BookingsController < ApplicationController
     type = params[:type] || 'standby'
     case type
       when 'reserved'
-        @bookings = booking_scope.reserved.open.page(params[:reserved_page])
+        @bookings = booking_scope.open.page(params[:reserved_page])
       when 'standby'
-        @bookings = booking_scope.reserved.expired.page(params[:standby_page])
+        @bookings = booking_scope.expired.page(params[:standby_page])
       when 'paid'
         @bookings = booking_scope.paid.page(params[:paid_page])
       when 'cancelled'
@@ -43,8 +43,7 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    @booking.user = current_user
-    @booking.cancelled!
+    @booking.update(status: :cancelled, user_id: current_user.id)
     if @booking.cancelled?
       redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
     else
