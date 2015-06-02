@@ -10,7 +10,7 @@
     = bootstrap_table headers: ['Trip', 'Start Date', 'Status', 'Client', 'Connection', 'Qty', 'Price'], types: [:condensed] do
       - results_per_month.each do |result|
         %tr
-          %td= result.trip_name
+          %td= result.trip.name 
           %td= l result.trip_start_date, format: :long
           %td= status_label_for(result)
           %td= result.client_full_name
