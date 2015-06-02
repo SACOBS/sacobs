@@ -50,7 +50,7 @@ class ReportsController < ApplicationController
   end
 
   def set_results
-    @results = Booking.unscoped { Booking.all }.processed.where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
+    @results = Booking.unscoped { Booking.all }.processed.includes(invoice: :line_items).where(created_at: @report.period_from..@report.period_to).search(@report.criteria).result
   end
 
   def report_params
