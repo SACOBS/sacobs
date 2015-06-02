@@ -57,9 +57,10 @@ class Booking < ActiveRecord::Base
   end
 
   before_create :generate_reference, :set_expiry_date
-  before_save :sync_return
+  before_save :sync_return, if: Proc.new { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?))}
   before_update :assign_seating, :reserve_return, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
   before_update :unassign_seating, if: Proc.new { |booking| booking.status_changed? && booking.cancelled? }
+  before_update :clear_passengers, if: :client_id_changed?
 
 
   scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
@@ -83,9 +84,7 @@ class Booking < ActiveRecord::Base
   end
 
   def build_passengers
-    quantity.times do
-        passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email)
-    end
+    quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
   end
 
   def build_invoices
@@ -115,6 +114,9 @@ class Booking < ActiveRecord::Base
 
 
   private
+  def clear_passengers
+    passengers.clear
+  end
 
   def reserve_return
     return_booking.update(status: :reserved) if return_booking.present?
@@ -129,10 +131,8 @@ class Booking < ActiveRecord::Base
   end
 
   def sync_return
-    if return_booking
-      return_booking.client = client if client_id_changed?
-      return_booking.passengers = passengers.map(&:dup) if passengers.any?(&:changed?)
-    end
+    return_booking.client = client
+    return_booking.passengers = passengers.map(&:dup)
   end
 
   def generate_reference
