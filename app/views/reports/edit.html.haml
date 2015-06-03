@@ -1,19 +1,3 @@
 .page-header
   %h2 Edit Report
-
-.search-criteria.well
-  %h5 Search
-  = simple_form_for @report do |f|
-    = f.input :name
-    = f.input :period_from, as: :date, discard_day: true, order: [:month, :year], use_short_month: true
-    = f.input :period_to, as: :date, discard_day: true, order: [:month, :year],  use_short_month: true
-    = f.simple_fields_for :criteria do |c|
-      = c.input :stop_from_city, typeahead: cities, label: false, placeholder: 'Select from city', input_html: { value: f.object.from_city, data: { targets: '#report_criteria_stop_connection_from_city_id_eq', filter: :name } }
-      = c.hidden_field :stop_connection_from_city_id_eq, value:  f.object.criteria['stop_connection_from_city_id_eq']
-      = c.input :stop_to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { value: f.object.to_city, data: { targets: '#report_criteria_stop_connection_to_city_id_eq', filter: :name } }
-      = c.hidden_field :stop_connection_to_city_id_eq, value: f.object.criteria['stop_connection_to_city_id_eq']
-      = c.input :status_eq_any, label: 'Statuses', item_wrapper_class: 'inline', collection: Booking.statuses.except(:in_process).transform_keys(&:upcase), as: :check_boxes, include_hidden: false
-      = c.input :passengers_passenger_type_id_eq_any, label: 'Passenger Types', item_wrapper_class: 'inline', collection: PassengerType.all, label_method: :description, as: :check_boxes,  include_hidden: false
-
-
-    = f.submit 'Save', class: t('buttons.inverse')
+= render :partial => 'form'
