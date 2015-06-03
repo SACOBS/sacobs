@@ -74,7 +74,6 @@ class Booking < ActiveRecord::Base
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
   delegate :start_date, to: :trip, prefix: true, allow_nil: true
 
-
   def standby?
     reserved? && expired?
   end
