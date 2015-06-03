@@ -67,7 +67,7 @@
   .row-fluid
     .client-vouchers.well.well-small.span6
       %h4 Credit Vouchers
-      - if @client.vouchers.any?
+      - if @client.vouchers.present?
         = bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed) do
           - @client.vouchers.each do |voucher|
             %tr
@@ -78,7 +78,7 @@
       = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.mini.warning')
     .client-bookings.well.well-small.span6
       %h4 Recent Bookings
-      - if @client.bookings.recent.any?
+      - if @client.bookings.recent.present?
         = bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do
           - @client.bookings.recent.each do |booking|
             %tr

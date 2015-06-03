@@ -82,6 +82,10 @@ class Booking < ActiveRecord::Base
     expiry_date <= Time.current
   end
 
+  def ticketable?
+    paid? || reserved?
+  end
+
   def build_passengers
     quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
   end

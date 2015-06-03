@@ -11,7 +11,7 @@
 %h4 Quick TripSheet
 .results
   .well
-    - if @trips.any?
+    - if @trips.present?
       - @trips.each do |trip|
         .result
           %dl.dl-horizontal

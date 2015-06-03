@@ -19,7 +19,7 @@ class CitiesController < ApplicationController
   end
 
   def edit
-    if @city.time_tables.empty?
+    if @city.time_tables.blank?
       @city.time_tables.build(direction: :outgoing)
       @city.time_tables.build(direction: :incoming)
     end

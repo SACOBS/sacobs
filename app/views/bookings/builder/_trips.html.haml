@@ -1,4 +1,4 @@
-- if stops.any?
+- if stops.present?
   - stops.group_by { |s| s.trip.start_date.beginning_of_month }.sort.each do |month, stops_for_month|
     %h4= l(month, format: :month)
     = bootstrap_table types: [:condensed] do

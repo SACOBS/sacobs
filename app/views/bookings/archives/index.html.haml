@@ -14,7 +14,7 @@
 
 #bookings
   = paginate @bookings
-  - if @bookings.any?
+  - if @bookings.present?
     = bootstrap_table headers: ['Actions', 'Status', 'Client Name', 'Trip Date', 'Qty', 'Connection'],
                       types: %i(hover condensed), html_options: { class: 'sortable' } do
       = render partial: 'bookings/archives/booking', collection: @bookings, cache: true

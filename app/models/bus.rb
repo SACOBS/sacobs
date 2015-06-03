@@ -30,6 +30,10 @@ class Bus < ActiveRecord::Base
 
   after_create :generate_seats
 
+  def in_use?
+    trips.present?
+  end
+
   protected
   def generate_seats
     capacity.times { seats.create! }

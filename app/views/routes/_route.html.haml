@@ -5,7 +5,7 @@
     = link_to 'Reverse Copy', reverse_copy_route_path(route), method: :post, icon: :copy, class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route in reverse(eg EL to PE will be copied as PE to EL).' }, rel: 'tooltip'
     = link_to 'Show', route, icon: :info, class: t('buttons.mini.info')
     = link_to 'Edit', edit_route_path(route), icon: :edit,  class: t('buttons.mini.inverse')
-    = link_to_unless(route.connections.any?, 'Destroy', route, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this route?' }) {}
+    = link_to_unless(route.connections.present?, 'Destroy', route, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this route?' }) {}
   %td= link_to route.name, route
   %td= route.start_city
   %td= route.end_city

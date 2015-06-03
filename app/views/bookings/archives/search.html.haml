@@ -26,7 +26,7 @@
     %li= sort_link @search, :stop_connection_to_city_name, 'To City', default_order: :desc
 %hr
 .bookings
-  - if @results.any?
+  - if @results.present?
     = bootstrap_table headers: ['Actions', 'Status', 'Client Name', 'Trip Date', 'Qty', 'Connection'],
                     types: %i(hover condensed) do
       = render partial: 'bookings/archives/booking', collection: @results, cache: true

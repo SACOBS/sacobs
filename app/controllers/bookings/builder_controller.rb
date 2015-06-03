@@ -22,7 +22,7 @@ class Bookings::BuilderController < ApplicationController
       when :client_details
         @booking.build_client unless @booking.client.present?
       when :passenger_details
-        @booking.build_passengers unless @booking.passengers.any?
+        @booking.build_passengers if @booking.passengers.blank?
       when :billing_info
         @booking.build_invoices
     end

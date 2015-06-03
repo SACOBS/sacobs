@@ -20,7 +20,7 @@ class PaymentDetailsController < ApplicationController
   def valid?(payment_detail)
     payment_detail.valid?
     payment_detail.errors.add(:base, 'The reference supplied already exists. Please enter a unique reference.') if PaymentDetail.exists?(reference: @payment_detail.reference)
-    payment_detail.errors.empty?
+    payment_detail.errors.blank?
   end
 
   def set_booking

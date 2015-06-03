@@ -4,8 +4,8 @@
   %h1 Trip
   .actions
     = back_to trips_path
-    = link_to_if(@trip.bookings.empty?, 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')) {}
-    = link_to_if(@trip.bookings.empty?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }) {}
+    = link_to_unless(@trip.booked?, 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')) {}
+    = link_to_unless(@trip.booked?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }) {}
 
 - cache @trip do
   - content_for :sidebar do
@@ -17,8 +17,8 @@
     = render 'trips/shared/bookings', trip: @trip
 .actions
   = back_to trips_path
-  = link_to_if(@trip.bookings.empty?, 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')) {}
-  = link_to_if(@trip.bookings.empty?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?'  }) {}
+  = link_to_unless(@trip.booked?, 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')) {}
+  = link_to_unless(@trip.booked?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?'  }) {}
 
 
 
