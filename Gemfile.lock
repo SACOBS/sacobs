@@ -93,7 +93,7 @@ GEM
       haml (~> 4.0)
       rubocop (>= 0.25.0)
       sysexits (~> 1.1)
-    hamlit (1.4.3)
+    hamlit (1.4.6)
       escape_utils
       temple (~> 0.7.3)
       thor
@@ -117,7 +117,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    json (1.8.2)
+    json (1.8.3)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
