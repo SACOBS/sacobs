@@ -33,6 +33,7 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
+    puts booking_params.inspect
     @booking.assign_attributes(booking_params)
     @booking.status = :reserved if step == :billing_info
     render_wizard @booking
@@ -72,17 +73,20 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def booking_params
-    client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :user_id, :street_address1, :street_address2, :city, :postal_code] }
+    client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :street_address1, :street_address2, :city, :postal_code] }
     passengers_attributes = { passengers_attributes: [:id, :name, :surname, :cell_no, :email, :passenger_type_id, charges: []] }
     invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
-    return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :user_id, :id, invoice_attributes] }
+    return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity ,:trip_id, :id, invoice_attributes] }
 
-    params.fetch(:booking, {}).permit(:trip_id, :status,
+    permitted = params.fetch(:booking, {}).permit(:trip_id, :status,
                                       :quantity, :client_id,
                                       :stop_id,
                                       client_attributes, passengers_attributes,
                                       invoice_attributes, return_booking_attributes
-                                     )
+                                     ).merge(user_id: current_user.id)
+    permitted.deep_merge!(return_booking_attributes: { user_id: current_user.id} ) if permitted.has_key?(:return_booking_attributes)
+    permitted.deep_merge!(client_attributes: { user_id: current_user.id} ) if permitted.has_key?(:client_attributes)
+    permitted
   end
 
   def finish_wizard_path

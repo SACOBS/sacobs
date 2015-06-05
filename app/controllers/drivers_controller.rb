@@ -45,7 +45,7 @@ class DriversController < ApplicationController
   end
 
   def driver_params
-    params.fetch(:driver, {}).permit(:name, :surname).merge(user: current_user)
+    params.fetch(:driver, {}).permit(:name, :surname).merge(user_id: current_user.id)
   end
 
   def interpolation_options

@@ -18,8 +18,6 @@
 class Route < ActiveRecord::Base
   to_param :name
 
-  belongs_to :user
-
   has_many :destinations, dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
     def beyond(sequence)
       where('sequence > ?', sequence)

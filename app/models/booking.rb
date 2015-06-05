@@ -34,7 +34,6 @@ class Booking < ActiveRecord::Base
 
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
-  belongs_to :user
   belongs_to :trip, -> { unscope(where: :archived) }, counter_cache: true
   belongs_to :stop, -> { includes(:connection) }
   belongs_to :client

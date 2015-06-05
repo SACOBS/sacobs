@@ -19,7 +19,6 @@
 class Bus < ActiveRecord::Base
   to_param :name
 
-  belongs_to :user
   has_many :seats, dependent: :delete_all
   has_many :trips
 

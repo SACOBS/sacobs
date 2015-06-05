@@ -20,7 +20,6 @@
 #
 
 class SeasonalDiscount < ActiveRecord::Base
-  belongs_to :user
   belongs_to :passenger_type
 
   scope :active, -> { where(active: true) }

@@ -19,7 +19,6 @@ class Driver < ActiveRecord::Base
 
   to_param :full_name
 
-  belongs_to :user
   has_and_belongs_to_many :trips
 
   validates :name, :surname, presence: true
