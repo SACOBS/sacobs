@@ -211,8 +211,8 @@ en:
   time:
     am: am
     formats:
-      default: ! '%d/%m/%Y %H:%M:%S %p'
-      long: ! '%B %d, %Y %H:%M'
-      short: ! '%H:%M%p'
+      default: ! '%d/%m/%Y %I:%M:%S %p'
+      long: ! '%B %d, %Y %I:%M'
+      short: ! '%I:%M%p'
 
     pm: pm
