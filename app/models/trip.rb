@@ -35,7 +35,7 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :drivers
 
   has_many :stops, -> { includes(:connection) }, dependent: :destroy
-  has_many :bookings, -> { unscope(where: :archived).includes(:client, :stop).processed }, dependent: :destroy
+  has_many :bookings, -> { unscope(where: :archived).processed }, dependent: :destroy
 
   accepts_nested_attributes_for :stops
 
@@ -74,7 +74,7 @@ class Trip < ActiveRecord::Base
   end
 
   def booked?
-    bookings.present?
+    bookings.size.nonzero?
   end
 
   protected

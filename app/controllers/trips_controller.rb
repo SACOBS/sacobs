@@ -5,7 +5,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
   def index
-    @trips = trip_scope.includes(:bus, :route).page(params[:page])
+    @trips = trip_scope.includes(:bus, :route).page(params[:page]).select(:id, :name, :start_date, :end_date, :bus_id, :route_id, :bookings_count)
     if stale?(@trips)
       respond_with(@trips)
     end

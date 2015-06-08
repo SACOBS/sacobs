@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = client_scope.surname_starts_with(params[:letter] || 'A').order(:surname).page(params[:page])
+    @clients = client_scope.surname_starts_with(params[:letter] || 'A').order(:surname).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email)
 
     if stale?(@clients)
       if request.xhr?

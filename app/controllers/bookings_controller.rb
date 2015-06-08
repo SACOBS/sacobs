@@ -5,16 +5,18 @@ class BookingsController < ApplicationController
     type = params[:type] || 'standby'
     case type
       when 'reserved'
-        @bookings = booking_scope.open.page(params[:reserved_page])
+        bookings = booking_scope.open.page(params[:reserved_page])
       when 'standby'
-        @bookings = booking_scope.expired.page(params[:standby_page])
+        bookings = booking_scope.expired.page(params[:standby_page])
       when 'paid'
-        @bookings = booking_scope.paid.page(params[:paid_page])
+        bookings = booking_scope.paid.page(params[:paid_page])
       when 'cancelled'
-        @bookings =  booking_scope.cancelled.page(params[:cancelled_page])
+        bookings =  booking_scope.cancelled.page(params[:cancelled_page])
       else
-        @bookings = booking_scope.none
+        bookings = booking_scope.none
     end
+
+    @bookings = bookings.select(:id, :status, :created_at, :client_id, :trip_id, :stop_id, :quantity, :expiry_date)
 
     if request.xhr?
       render partial: 'bookings/bookings', locals: { bookings: @bookings, type: params[:type] }
