@@ -11,10 +11,6 @@
 #  updated_at :datetime
 #  user_id    :integer
 #
-# Indexes
-#
-#  index_buses_on_user_id  (user_id)
-#
 
 class Bus < ActiveRecord::Base
   to_param :name

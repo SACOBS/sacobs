@@ -2,8 +2,10 @@ class RoutesController < ApplicationController
   before_action :set_route, except: [:index, :new, :create]
 
   def index
-    @routes = route_scope.all
-    fresh_when @routes, last_modified: @routes.maximum(:updated_at)
+    @routes = route_scope.includes(:destinations, :connections).select(:id, :cost, :distance, :name)
+    if stale?(@routes)
+      respond_with(@routes)
+    end
   end
 
   def new
@@ -52,11 +54,11 @@ class RoutesController < ApplicationController
   private
 
   def route_scope
-    Route.includes(:connections).all
+    Route.all
   end
 
   def set_route
-    @route = Route.includes(:connections).find(params[:id])
+    @route = Route.includes(:connections, :destinations).find(params[:id])
   end
 
   def route_params

@@ -47,6 +47,9 @@ class Trip < ActiveRecord::Base
 
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
+  delegate :name, to: :route, prefix: true
+  delegate :name, to: :bus, prefix: true
+
   def copy
     copy = dup
     copy.name = "Copy of #{name}"
@@ -75,6 +78,10 @@ class Trip < ActiveRecord::Base
 
   def booked?
     bookings.size.nonzero?
+  end
+
+  def drivers_names
+    drivers.map(&:full_name).join(',')
   end
 
   protected

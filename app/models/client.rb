@@ -26,7 +26,6 @@
 # Indexes
 #
 #  index_clients_on_name_and_surname  (name,surname) UNIQUE
-#  index_clients_on_user_id           (user_id)
 #
 
 class Client < ActiveRecord::Base

@@ -12,7 +12,6 @@
 # Indexes
 #
 #  index_discounts_on_passenger_type_id  (passenger_type_id)
-#  index_discounts_on_user_id            (user_id)
 #
 
 class Discount < ActiveRecord::Base

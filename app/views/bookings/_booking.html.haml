@@ -10,20 +10,20 @@
     %small= local_date(booking.created_at)
   %td
     = link_to booking.client, target: '_blank' do
-      = content_tag(:em, booking.client.full_name)
+      = content_tag(:em, booking.client_full_name)
   %td
     %ul.inline
-      - if booking.client.home_no.present?
-        %li=contact_number(booking.client.home_no, 'Home')
-      - if booking.client.work_no.present?
-        %li=contact_number(booking.client.work_no, 'Work')
-      - if booking.client.cell_no.present?
-        %li=contact_number(booking.client.cell_no, 'Cell')
+      - if booking.client_home_no.present?
+        %li=contact_number(booking.client_home_no, 'Home')
+      - if booking.client_work_no.present?
+        %li=contact_number(booking.client_work_no, 'Work')
+      - if booking.client_cell_no.present?
+        %li=contact_number(booking.client_cell_no, 'Cell')
   %td{ data: { dateformat: 'DD MMM' } }
-    %small= local_date(booking.trip.start_date)
+    %small= local_date(booking.trip_start_date)
   %td= badge_for(booking.quantity)
   %td
-    %span.label.label-inverse= booking.stop.name
+    %span.label.label-inverse= booking.stop_name
 
 
 

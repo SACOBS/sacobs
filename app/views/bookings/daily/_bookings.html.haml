@@ -4,7 +4,7 @@
       = l(Date.current, format: :long)
     %br
     .text-center
-      %p #{booking.client.title.upcase} #{booking.client.full_name}
+      %p #{booking.client_title.upcase} #{booking.client_full_name}
     .info
       %p= content_tag :strong, booking.payment_detail.payment_type if booking.payment_detail.present?
       - [booking.main, booking, booking.return_booking].compact.each do |b|

@@ -2,6 +2,6 @@
   %tr
     %td= trip.name
     %td= l(trip.start_date, format: :long)
-    %td= trip.route.name
-    %td= trip.bus.name
-    %td= trip.drivers.map(&:full_name).join(',')
+    %td= trip.route_name
+    %td= trip.bus_name
+    %td= trip.drivers_names

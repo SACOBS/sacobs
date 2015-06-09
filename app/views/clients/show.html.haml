@@ -83,8 +83,8 @@
           - @client.bookings.recent.each do |booking|
             %tr
               %td= status_label_for(booking)
-              %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
-              %td= booking.stop.name
+              %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long)
+              %td= booking.stop_name
               %td= badge_for(booking.quantity)
       - else
         %h5  This client has no bookings

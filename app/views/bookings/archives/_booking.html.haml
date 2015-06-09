@@ -5,10 +5,10 @@
   %td= status_label_for(booking)
   %td
     = link_to booking.client, target: '_blank' do
-      = content_tag(:em, booking.client.full_name)
+      = content_tag(:em, booking.client_full_name)
   %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
   %td= badge_for(booking.quantity)
   %td
-    %span.label.label-inverse= booking.stop.name
+    %span.label.label-inverse= booking.stop_name
 
 

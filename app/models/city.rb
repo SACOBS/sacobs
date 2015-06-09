@@ -11,8 +11,7 @@
 #
 # Indexes
 #
-#  index_cities_on_name     (name)
-#  index_cities_on_user_id  (user_id)
+#  index_cities_on_name  (name)
 #
 
 class City < ActiveRecord::Base

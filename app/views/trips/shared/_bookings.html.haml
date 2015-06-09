@@ -4,7 +4,7 @@
     - cache booking do
       %tr
         %td= status_label_for(booking)
-        %td= booking.client.full_name
-        %td= booking.stop.name
+        %td= booking.client_full_name
+        %td= booking.stop_name
         %td= badge_for(booking.quantity)
         %td= contact_numbers_for(booking.client)

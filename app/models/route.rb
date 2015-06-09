@@ -10,15 +10,13 @@
 #  name       :string(255)
 #  user_id    :integer
 #
-# Indexes
-#
-#  index_routes_on_user_id  (user_id)
-#
 
 class Route < ActiveRecord::Base
+  include CollectionCacheable
+
   to_param :name
 
-  has_many :destinations, dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
+  has_many :destinations, -> { includes(:city) } ,dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
     def beyond(sequence)
       where('sequence > ?', sequence)
     end

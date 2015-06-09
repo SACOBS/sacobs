@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: :update
 
   def index
-    @users = User.all_except(current_user)
+    @users = User.all_except(current_user).select(:name, :email, :surname, :role, :id)
   end
 
   def update

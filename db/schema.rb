@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527083455) do
+ActiveRecord::Schema.define(version: 20150608153304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
   add_index "bookings", ["main_id"], name: "index_bookings_on_main_id", using: :btree
   add_index "bookings", ["stop_id"], name: "index_bookings_on_stop_id", using: :btree
   add_index "bookings", ["trip_id"], name: "index_bookings_on_trip_id", using: :btree
-  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "buses", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -56,8 +55,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
     t.integer  "user_id"
   end
 
-  add_index "buses", ["user_id"], name: "index_buses_on_user_id", using: :btree
-
   create_table "charges", force: :cascade do |t|
     t.decimal  "percentage",              precision: 5, scale: 2
     t.integer  "user_id"
@@ -65,8 +62,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
     t.datetime "updated_at"
     t.string   "description", limit: 255
   end
-
-  add_index "charges", ["user_id"], name: "index_charges_on_user_id", using: :btree
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -77,7 +72,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
   end
 
   add_index "cities", ["name"], name: "index_cities_on_name", using: :btree
-  add_index "cities", ["user_id"], name: "index_cities_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -102,7 +96,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
   end
 
   add_index "clients", ["name", "surname"], name: "index_clients_on_name_and_surname", unique: true, using: :btree
-  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "connections", force: :cascade do |t|
     t.integer  "distance",                                       default: 0
@@ -142,7 +135,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
   end
 
   add_index "discounts", ["passenger_type_id"], name: "index_discounts_on_passenger_type_id", using: :btree
-  add_index "discounts", ["user_id"], name: "index_discounts_on_user_id", using: :btree
 
   create_table "drivers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -151,8 +143,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
-
-  add_index "drivers", ["user_id"], name: "index_drivers_on_user_id", using: :btree
 
   create_table "drivers_trips", force: :cascade do |t|
     t.integer "driver_id"
@@ -188,8 +178,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
     t.integer "user_id"
   end
 
-  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
-
   create_table "passenger_types", force: :cascade do |t|
     t.string   "description", limit: 255
     t.datetime "created_at"
@@ -220,7 +208,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
   end
 
   add_index "payment_details", ["booking_id"], name: "index_payment_details_on_booking_id", using: :btree
-  add_index "payment_details", ["user_id"], name: "index_payment_details_on_user_id", using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.string   "name",                     null: false
@@ -240,8 +227,6 @@ ActiveRecord::Schema.define(version: 20150527083455) do
     t.string   "name",       limit: 255
     t.integer  "user_id"
   end
-
-  add_index "routes", ["user_id"], name: "index_routes_on_user_id", using: :btree
 
   create_table "scriptures", force: :cascade do |t|
     t.string   "verse",      limit: 255

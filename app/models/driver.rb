@@ -9,10 +9,6 @@
 #  updated_at :datetime
 #  user_id    :integer
 #
-# Indexes
-#
-#  index_drivers_on_user_id  (user_id)
-#
 
 class Driver < ActiveRecord::Base
   attr_reader :full_name

@@ -13,7 +13,7 @@ class TripsheetPresenter
   end
 
   def bus_name
-    trip.bus.name
+    trip.bus_name
   end
 
   def bus_capacity
@@ -29,7 +29,7 @@ class TripsheetPresenter
   end
 
   def drivers_names
-    trip.drivers.map(&:name)
+    trip.drivers_names
   end
 
   def notes

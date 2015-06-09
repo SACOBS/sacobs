@@ -5,5 +5,5 @@
   %td= link_to trip.name, trip
   %td{ data: { dateformat: 'll' } }= l(trip.start_date, format: :long)
   %td{ data: { dateformat: 'll' } }= l(trip.end_date, format: :long)
-  %td= trip.route.name
-  %td= trip.bus.name
+  %td= trip.route_name
+  %td= trip.bus_name

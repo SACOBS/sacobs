@@ -26,7 +26,6 @@
 #  index_bookings_on_main_id    (main_id)
 #  index_bookings_on_stop_id    (stop_id)
 #  index_bookings_on_trip_id    (trip_id)
-#  index_bookings_on_user_id    (user_id)
 #
 
 class Booking < ActiveRecord::Base
@@ -70,8 +69,12 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
+
+  delegate :full_name, :home_no, :work_no, :cell_no, :title, :bank, to: :client, prefix: true
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
-  delegate :start_date, to: :trip, prefix: true, allow_nil: true
+  delegate :name, :start_date, to: :trip, prefix: true
+  delegate :name, to: :stop, prefix: true
+
 
   def standby?
     reserved? && expired?

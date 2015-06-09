@@ -4,7 +4,7 @@ class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 
   def index
-    @cities = city_scope.page(params[:page])
+    @cities = city_scope.page(params[:page]).select(:id, :name, :venues_count)
   end
 
   def search
