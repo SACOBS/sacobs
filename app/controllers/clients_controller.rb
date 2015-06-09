@@ -4,12 +4,10 @@ class ClientsController < ApplicationController
   def index
     @clients = Client.surname_starts_with(params[:letter] || 'A').order(:surname).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email)
 
-    if stale?(@clients)
-      if request.xhr?
-        render partial: 'clients', locals: { clients: @clients }
-      else
-        render :index
-      end
+    if request.xhr?
+      render partial: 'clients', locals: { clients: @clients }
+    else
+      render :index
     end
   end
 

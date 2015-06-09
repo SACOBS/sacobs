@@ -1,34 +1,35 @@
 = content_for(:title) do
   #{@client.full_name}
 - cache @client do
+  - client_decorator = decorate(@client)
   .page-header
-    %h3= @client.full_name
+    %h3= client_decorator.full_name
     .actions
       = back_to clients_path
-      = link_to 'Edit', edit_client_path(@client), icon: :edit, class: t('buttons.inverse')
-      = link_to 'Destroy', @client, icon: :times, class: t('buttons.danger'), method: :delete, data: { confirm: 'Are you sure you want to destroy this client?' }
+      = client_decorator.edit_link class: t('buttons.inverse')
+      = client_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this client?' }
 
   .row-fluid.well.well-small
     .span4
       %h4 Details
       %p>
         %strong Title:
-        = @client.title.upcase
+        = client_decorator.title
       %p>
         %strong Name:
-        = @client.name
+        = client_decorator.name
       %p>
         %strong Surname:
-        = @client.surname
+        = client_decorator.surname
       %p>
         %strong Age:
-        = @client.age.presence || 'N/A'
+        = client_decorator.age
       %p>
         %strong Date Of Birth:
-        = @client.date_of_birth.present? ? l(@client.date_of_birth, format: :long) : 'N/A'
+        = client_decorator.date_of_birth
       %p>
         %strong Bank:
-        = @client.bank.presence || 'N/A'
+        = client_decorator.bank
       %p>
         %strong High Risk:
         = @client.high_risk? ? 'Yes' : 'No'
@@ -40,47 +41,47 @@
       %h4 Contact Info
       %p>
         %strong Home Telephone No:
-        = number_to_phone(@client.home_no, area_code: true).presence || 'N/A'
+        = client_decorator.home_no
       %p>
         %strong Work Telephone No:
-        = number_to_phone(@client.work_no, area_code: true).presence || 'N/A'
+        = client_decorator.work_no
       %p>
         %strong Cellphone No:
-        = number_to_phone(@client.cell_no, area_code: true).presence || 'N/A'
+        = client_decorator.cell_no
       %p>
         %strong Email:
-        = @client.email.present? ? mail_to(@client.email) : 'N/A'
+        = client_decorator.email
     .span4
       %h4 Address Info
       %p>
         %strong Street Address 1:
-        = @client.street_address1.presence || 'N/A'
+        = client_decorator.street_address1
       %p>
         %strong Street Address 2:
-        = @client.street_address2.presence || 'N/A'
+        = client_decorator.street_address2
       %p>
         %strong City:
-        = @client.city.presence || 'N/A'
+        = client_decorator.city
       %p>
         %strong Postal Code:
-        = @client.postal_code.presence || 'N/A'
+        = client_decorator.postal_code
   .row-fluid
     .client-vouchers.well.well-small.span6
       %h4 Credit Vouchers
-      - if @client.vouchers.present?
+      - if client_decorator.vouchers.present?
         = bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed) do
-          - @client.vouchers.each do |voucher|
+          - client_decorator.vouchers.each do |voucher|
             %tr
               %td= voucher.ref_no
               %td= number_to_currency(voucher.amount, unit: 'R')
       - else
         %h5  This client has no vouchers
-      = link_to 'Add Credit Voucher', new_client_voucher_path(@client), icon: :money, class: t('buttons.mini.warning')
+      = client_decorator.add_voucher_link class: t('buttons.mini.warning')
     .client-bookings.well.well-small.span6
       %h4 Recent Bookings
-      - if @client.bookings.recent.present?
+      - if client_decorator.recent_bookings.present?
         = bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do
-          - @client.bookings.recent.each do |booking|
+          - client_decorator.recent_bookings.each do |booking|
             %tr
               %td= status_label_for(booking)
               %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long)

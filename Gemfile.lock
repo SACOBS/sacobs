@@ -121,6 +121,8 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    little_decorator (0.0.6)
+      rails
     local_time (1.0.2)
       coffee-rails
     loofah (2.0.2)
@@ -290,6 +292,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
+  little_decorator
   local_time
   memcachier
   momentjs-rails

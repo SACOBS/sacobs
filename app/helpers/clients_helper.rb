@@ -7,7 +7,7 @@ module ClientsHelper
     initial = type.chr
     capture do
       concat content_tag(:abbr, "#{initial}: ", class: 'initialism', title: type)
-      concat content_tag(:strong, number_to_phone(number, area_code: true))
+      concat content_tag(:strong, number)
     end
   end
 end

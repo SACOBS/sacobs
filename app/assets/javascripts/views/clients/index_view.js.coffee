@@ -16,11 +16,14 @@ class Views.Clients.IndexView extends Views.ApplicationView
       $tab_pane.html(data)
 
 
-    $(document).on 'ajax:success', '.delete-client',  (evt, data, status, xhr) ->
+    $(document).on 'ajax:success', '[data-behavior~=delete-client]',  (evt, data, status, xhr) ->
         $tab_pane = $(this).closest('.tab-pane')
         url = $(this).closest('.clients').data('source')
         $tab_pane.load(url)
 
   cleanup: ->
     super()
-    $('.client').off 'ajax:success', '#delete_client'
+    $(document).off 'ajax:success', '[data-behavior~=delete-client]'
+    $(document).off 'ajax:success', '.pagination a'
+
+

@@ -1,3 +1,4 @@
+- client_decorator = decorate(client)
 .span4.client.well.well-small
   .media
     .pull-left
@@ -7,17 +8,17 @@
       %address
         %strong Contact
         %br
-        = contact_number(client.home_no.presence || 'N/A', 'Home')
+        = contact_number(client_decorator.home_no, 'Home')
         %br
-        = contact_number(client.work_no.presence || 'N/A', 'Work')
+        = contact_number(client_decorator.work_no, 'Work')
         %br
-        = contact_number(client.cell_no.presence || 'N/A', 'Cell')
+        = contact_number(client_decorator.cell_no, 'Cell')
         %br
         %abbr.initialism{ title: 'Email' } E:
-        = client.email.present? ? mail_to(client.email) : 'N/A'
+        = client_decorator.email
 
       .btn-group.btn-group
-        = link_to 'Show', client, icon: :info, class: t('buttons.small.info')
-        = link_to 'Edit', edit_client_path(client), icon: :edit, class: t('buttons.small.inverse')
-        = link_to 'Destroy', client, icon: :times, class: "#{t('buttons.small.danger')} delete-client", method: :delete, data: { confirm: 'Are you sure you want to destroy this client?' }, remote: true
+        = client_decorator.show_link class: t('buttons.small.info')
+        = client_decorator.edit_link class: t('buttons.small.inverse')
+        = client_decorator.destroy_link class: "#{t('buttons.small.danger')}", data: { behavior: 'delete-client', confirm: 'Are you sure you want to destroy this client?' }, remote: true
 

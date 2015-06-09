@@ -94,6 +94,9 @@ gem 'pg'
 # Email Obfuscation
 gem 'obfuscatejs'
 
+
+gem 'little_decorator'
+
 group :development do
   gem 'flatten_migrations'
   gem 'web-console', '~> 2.0'
