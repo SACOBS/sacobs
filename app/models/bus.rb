@@ -30,6 +30,7 @@ class Bus < ActiveRecord::Base
   end
 
   protected
+
   def generate_seats
     capacity.times { seats.create! }
   end

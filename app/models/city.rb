@@ -39,8 +39,6 @@ class City < ActiveRecord::Base
     time_tables.incoming.first
   end
 
-
-
   protected
 
   def format_name

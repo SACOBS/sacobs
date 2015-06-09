@@ -16,7 +16,7 @@ class Route < ActiveRecord::Base
 
   to_param :name
 
-  has_many :destinations, -> { includes(:city) } ,dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
+  has_many :destinations, -> { includes(:city) }, dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
     def beyond(sequence)
       where('sequence > ?', sequence)
     end

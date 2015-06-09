@@ -20,7 +20,6 @@
 #
 
 class Passenger < ActiveRecord::Base
-
   DEFAULT_TYPE = PassengerType.find_by(description: :STANDARD)
 
   belongs_to :booking

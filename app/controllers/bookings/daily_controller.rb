@@ -12,6 +12,7 @@ class Bookings::DailyController < ApplicationController
   end
 
   private
+
   def bookings
     @bookings ||= Booking.processed.where(created_at: Time.now.midnight..Time.now.end_of_day)
   end

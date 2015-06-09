@@ -36,6 +36,7 @@ class Connection < ActiveRecord::Base
   delegate :city, to: :to, prefix: true
 
   protected
+
   def set_name
     self.name = "#{from_city.name} to #{to_city.name}".squish.upcase
   end

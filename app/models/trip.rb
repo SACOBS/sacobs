@@ -93,7 +93,7 @@ class Trip < ActiveRecord::Base
   def generate_stops
     self.class.no_touching do
       stops.clear if stops.present?
-      stops.create!(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity }})
+      stops.create!(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity } })
     end
   end
  end

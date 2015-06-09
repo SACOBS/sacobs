@@ -10,7 +10,6 @@ class BusesController < ApplicationController
     fresh_when @bus
   end
 
-
   def create
     @bus.save
     respond_with(@bus)

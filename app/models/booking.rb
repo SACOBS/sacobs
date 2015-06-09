@@ -55,11 +55,10 @@ class Booking < ActiveRecord::Base
   end
 
   before_create :generate_reference, :set_expiry_date
-  before_save :sync_return, if: Proc.new { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?))}
-  before_update :assign_seating, :reserve_return, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
-  before_update :unassign_seating, if: Proc.new { |booking| booking.status_changed? && booking.cancelled? }
+  before_save :sync_return, if: proc { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?)) }
+  before_update :assign_seating, :reserve_return, if: proc { |booking| booking.status_changed? && booking.reserved? }
+  before_update :unassign_seating, if: proc { |booking| booking.status_changed? && booking.cancelled? }
   before_update :clear_passengers, if: :client_id_changed?
-
 
   scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { reserved.where(arel_table[:expiry_date].lteq(Time.current)) }
@@ -69,12 +68,10 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
-
   delegate :full_name, :home_no, :work_no, :cell_no, :title, :bank, to: :client, prefix: true
   delegate :total, :total_cost, :total_discount, to: :invoice, prefix: true
   delegate :name, :start_date, to: :trip, prefix: true
   delegate :name, to: :stop, prefix: true
-
 
   def standby?
     reserved? && expired?
@@ -117,8 +114,8 @@ class Booking < ActiveRecord::Base
     end
   end
 
-
   private
+
   def clear_passengers
     passengers.clear
   end

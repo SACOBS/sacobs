@@ -6,9 +6,7 @@ class TripsController < ApplicationController
 
   def index
     @trips = trip_scope.includes(:bus, :route).page(params[:page]).select(:id, :name, :start_date, :end_date, :bus_id, :route_id, :bookings_count)
-    if stale?(@trips)
-      respond_with(@trips)
-    end
+    respond_with(@trips) if stale?(@trips)
   end
 
   def search

@@ -21,5 +21,4 @@ class Discount < ActiveRecord::Base
   validates :passenger_type, :percentage, presence: true
 
   delegate :description, to: :passenger_type
-
 end

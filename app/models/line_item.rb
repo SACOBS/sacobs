@@ -21,5 +21,4 @@ class LineItem < ActiveRecord::Base
   enum line_item_type: [:debit, :credit]
 
   belongs_to :invoice
-
 end

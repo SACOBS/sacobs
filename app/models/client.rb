@@ -69,6 +69,7 @@ class Client < ActiveRecord::Base
   end
 
   protected
+
   # Ugly but input is not guaranteed to be valid most of the time
   def set_birth_date
     date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil

@@ -34,7 +34,8 @@ class Invoice < ActiveRecord::Base
   end
 
   private
+
   def set_billing_date
-   self.billing_date = Time.current
+    self.billing_date = Time.current
   end
 end

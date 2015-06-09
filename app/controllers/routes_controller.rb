@@ -3,9 +3,7 @@ class RoutesController < ApplicationController
 
   def index
     @routes = route_scope.includes(:destinations, :connections).select(:id, :cost, :distance, :name)
-    if stale?(@routes)
-      respond_with(@routes)
-    end
+    respond_with(@routes) if stale?(@routes)
   end
 
   def new

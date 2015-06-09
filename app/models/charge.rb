@@ -11,7 +11,6 @@
 #
 
 class Charge < ActiveRecord::Base
-
   validates :description, :percentage, presence: true
 
   before_save do

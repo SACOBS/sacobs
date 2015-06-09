@@ -66,8 +66,8 @@ class Bookings::BuilderController < ApplicationController
     @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
 
-  def set_trip_date(default_date=Date.current)
-    trip_date = Date.civil(params[:q].delete("trip_start_date_gteq(1i)").to_i, params[:q].delete("trip_start_date_gteq(2i)").to_i, params[:q].delete("trip_start_date_gteq(3i)").to_i) rescue nil
+  def set_trip_date(default_date = Date.current)
+    trip_date = Date.civil(params[:q].delete('trip_start_date_gteq(1i)').to_i, params[:q].delete('trip_start_date_gteq(2i)').to_i, params[:q].delete('trip_start_date_gteq(3i)').to_i) rescue nil
     trip_date = default_date unless trip_date.present? && trip_date >= default_date
     trip_date
   end
@@ -76,16 +76,16 @@ class Bookings::BuilderController < ApplicationController
     client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :street_address1, :street_address2, :city, :postal_code] }
     passengers_attributes = { passengers_attributes: [:id, :name, :surname, :cell_no, :email, :passenger_type_id, charges: []] }
     invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
-    return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity ,:trip_id, :id, invoice_attributes] }
+    return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
 
     permitted = params.fetch(:booking, {}).permit(:trip_id, :status,
-                                      :quantity, :client_id,
-                                      :stop_id,
-                                      client_attributes, passengers_attributes,
-                                      invoice_attributes, return_booking_attributes
-                                     ).merge(user_id: current_user.id)
-    permitted.deep_merge!(return_booking_attributes: { user_id: current_user.id} ) if permitted.has_key?(:return_booking_attributes)
-    permitted.deep_merge!(client_attributes: { user_id: current_user.id} ) if permitted.has_key?(:client_attributes)
+                                                  :quantity, :client_id,
+                                                  :stop_id,
+                                                  client_attributes, passengers_attributes,
+                                                  invoice_attributes, return_booking_attributes
+                                                 ).merge(user_id: current_user.id)
+    permitted.deep_merge!(return_booking_attributes: { user_id: current_user.id }) if permitted.key?(:return_booking_attributes)
+    permitted.deep_merge!(client_attributes: { user_id: current_user.id }) if permitted.key?(:client_attributes)
     permitted
   end
 
