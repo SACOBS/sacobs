@@ -1,11 +1,14 @@
+- trip_decorator = decorate(@trip)
+
 = content_for (:title) do
-  #{@trip.name} #{l @trip.start_date, format: :long}
+  #{trip_decorator.name} #{@trip.start_date}
 .page-header
   %h1 Trip
   .actions
     = back_to trips_path
-    = link_to_unless(@trip.booked?, 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')) {}
-    = link_to_unless(@trip.booked?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }) {}
+    - unless trip_decorator.booked?
+      = trip_decorator.edit_link class: t('buttons.info')
+      = trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
 
 - cache @trip do
   - content_for :sidebar do
@@ -17,12 +20,9 @@
     = render 'trips/shared/bookings', trip: @trip
 .actions
   = back_to trips_path
-  = link_to_unless(@trip.booked?, 'Edit', edit_trip_path(@trip), icon: :edit, class: t('buttons.info')) {}
-  = link_to_unless(@trip.booked?, 'Destroy', @trip, method: :delete, icon: :times, class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?'  }) {}
-
-
-
-
+  - unless trip_decorator.booked?
+    = trip_decorator.edit_link class: t('buttons.info')
+    = trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
 
 
 

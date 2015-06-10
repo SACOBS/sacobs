@@ -1,11 +1,11 @@
 class Trips::ArchivesController < ApplicationController
   def index
-    @trips = trip_scope.page(params[:page])
+    @trips = Trip.archived.page(params[:page])
     fresh_when @trips
   end
 
   def show
-    @trip = trip_scope.find(params[:id])
+    @trip = Trip.archived.find(params[:id])
     respond_to do |format|
       format.html { render layout: 'with_sidebar' }
     end
@@ -14,11 +14,5 @@ class Trips::ArchivesController < ApplicationController
   def search
     @search = trip_scope.includes(:bus, :route).search(params[:q])
     @results = @search.result.limit(50)
-  end
-
-  private
-
-  def trip_scope
-    Trip.archived
   end
 end

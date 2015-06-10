@@ -1,16 +1,17 @@
+- trip_decorator = decorate(trip)
 %tr
   %td
-    = link_to 'Copy', copy_trip_path(trip), icon: :copy, class: t('buttons.mini.warning'), method: :post, data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip'
-    = link_to 'TripSheet', trip_sheet_path(trip), target: '_blank', icon: :road, class: t('buttons.mini.default')
-    = link_to 'Show', trip, icon: :info, class: t('buttons.mini.info')
-    - unless trip.booked?
-      = link_to 'Edit', edit_trip_path(trip), icon: :edit,  class: t('buttons.mini.inverse')
-      = link_to 'Destroy', trip, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
+    = trip_decorator.copy_link class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip'
+    = trip_decorator.trip_sheet_link target: '_blank', class: t('buttons.mini.default')
+    = trip_decorator.show_link class: t('buttons.mini.info')
+    - unless trip_decorator.booked?
+      = trip_decorator.edit_link class: t('buttons.mini.inverse')
+      = trip_decorator.destroy_link class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
   %td= link_to trip.name, trip
-  %td= l(trip.start_date, format: :day)
-  %td{ data: { dateformat: 'll' } }= l(trip.start_date, format: :long)
-  %td{ data: { dateformat: 'll' } }= l(trip.end_date, format: :long)
-  %td= trip.route_name
-  %td= trip.bus_name
+  %td= trip_decorator.day
+  %td{ data: { dateformat: 'll' } }= trip_decorator.start_date
+  %td{ data: { dateformat: 'll' } }= trip_decorator.end_date
+  %td= trip_decorator.route_name
+  %td= trip_decorator.bus_name
 
 

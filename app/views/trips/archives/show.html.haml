@@ -1,5 +1,5 @@
 = content_for (:title) do
-  #{@trip.name} #{l @trip.start_date, format: :long}
+  #{@trip.name} #{@trip.start_date}
 .page-header
   %h1 Trip
   .actions
