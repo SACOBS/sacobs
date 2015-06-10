@@ -59,14 +59,6 @@ class Route < ActiveRecord::Base
     reverse_copy
   end
 
-  def start_city
-    destinations.first.name
-  end
-
-  def end_city
-    destinations.last.name
-  end
-
   private
 
   def normalize_name
