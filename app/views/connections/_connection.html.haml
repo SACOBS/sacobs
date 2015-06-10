@@ -1,5 +1,6 @@
+- connection_decorator = decorate(connection)
 %tr
-  %td= connection.name
-  %td= number_to_human(connection.distance, units: :distance)
-  %td= number_to_percentage(connection.percentage, precision: 0)
-  %td= number_to_currency(connection.cost, unit: 'R')
+  %td= connection_decorator.name
+  %td= connection_decorator.distance
+  %td= connection_decorator.percentage
+  %td= connection_decorator.cost
