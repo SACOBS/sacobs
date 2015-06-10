@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
         bookings = booking_scope.none
     end
 
-    @bookings = bookings.select(:id, :status, :created_at, :client_id, :trip_id, :stop_id, :quantity, :expiry_date)
+    @bookings = bookings.select(:id, :status, :created_at, :client_id, :trip_id, :stop_id, :quantity, :expiry_date, :updated_at)
 
     if request.xhr?
       render partial: 'bookings/bookings', locals: { bookings: @bookings, type: params[:type] }

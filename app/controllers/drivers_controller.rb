@@ -2,7 +2,7 @@ class DriversController < ApplicationController
   before_action :set_driver, only: [:edit, :update, :destroy]
 
   def index
-    @drivers = driver_scope.select(:id, :name, :surname)
+    @drivers = driver_scope.select(:id, :name, :surname, :updated_at)
     respond_with(@drivers)
   end
 

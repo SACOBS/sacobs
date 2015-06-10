@@ -3,7 +3,7 @@ class BusesController < ApplicationController
   before_action :build_bus, only: [:new, :create]
 
   def index
-    @buses = Bus.search(params[:q]).result.select(:id, :name, :year, :model, :capacity)
+    @buses = Bus.search(params[:q]).result.select(:id, :name, :year, :model, :capacity, :updated_at)
   end
 
   def show

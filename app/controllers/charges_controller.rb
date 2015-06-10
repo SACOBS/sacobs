@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
   before_action :set_charge, only: [:edit, :update, :destroy]
 
   def index
-    @charges = Charge.select(:id, :percentage, :description)
+    @charges = Charge.select(:id, :percentage, :description, :updated_at)
   end
 
   def new
