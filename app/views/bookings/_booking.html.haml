@@ -1,29 +1,24 @@
-= content_tag(:tr, class: row_class_for(booking)) do
+- booking_decorator = decorate(booking)
+= content_tag(:tr, class: booking_decorator.row_class) do
   %td
-    = link_to 'Show', booking, icon: :info, class: t('buttons.mini.info')
-    = link_to_if(booking.ticketable?, 'Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank') {}
-    = link_to_if(booking.reserved?, 'Confirm', new_booking_payment_detail_url(booking), icon: :money, class: t('buttons.mini.inverse')) {}
-    = link_to_unless(booking.cancelled?, 'Cancel', cancel_booking_path(booking), icon: :warning, class: t('buttons.mini.warning'), method: :patch) {}
-    = link_to_if(booking.cancelled?, 'Destroy', booking, method: :delete, icon: :times, class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you wish to destroy this booking?' }) {}
+    = booking_decorator.show_link class: t('buttons.mini.info')
+    = booking_decorator.ticket_link class: t('buttons.mini.default'), target: '_blank'
+    = booking_decorator.confirmation_link class: t('buttons.mini.inverse')
+    = booking_decorator.destroy_link class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you wish to destroy this booking?' }
+    = booking_decorator.cancel_link class: t('buttons.mini.warning')
 
   %td{ data: { dateformat: 'DD MMM' } }
-    %small= local_date(booking.created_at)
-  %td
-    = link_to booking.client, target: '_blank' do
-      = content_tag(:em, booking.client_full_name)
+    %small= booking_decorator.created_at
+  %td= booking_decorator.client_link target: '_blank'
   %td
     %ul.inline
-      - if booking.client_home_no.present?
-        %li=contact_number(booking.client_home_no, 'Home')
-      - if booking.client_work_no.present?
-        %li=contact_number(booking.client_work_no, 'Work')
-      - if booking.client_cell_no.present?
-        %li=contact_number(booking.client_cell_no, 'Cell')
+      %li= contact_number(booking_decorator.client_home_no, 'Home')
+      %li= contact_number(booking_decorator.client_work_no, 'Work')
+      %li=contact_number(booking_decorator.client_cell_no, 'Cell')
   %td{ data: { dateformat: 'DD MMM' } }
-    %small= local_date(booking.trip_start_date)
-  %td= badge_for(booking.quantity)
-  %td
-    %span.label.label-inverse= booking.stop_name
+    %small= booking_decorator.trip_start_date
+  %td= booking_decorator.quantity
+  %td= booking_decorator.connection
 
 
 

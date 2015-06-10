@@ -1,7 +1,7 @@
 class ClientDecorator < LittleDecorator
 
   def recent_bookings
-    bookings.recent
+    decorate(bookings.recent)
   end
 
   def title

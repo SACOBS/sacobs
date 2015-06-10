@@ -1,14 +1,12 @@
+- booking_decorator = decorate(booking)
 %tr
   %td
-    = link_to 'Show', bookings_archive_path(booking), icon: :info, class: t('buttons.mini.info')
-    = link_to_if(booking.ticketable?, 'Generate Ticket', ticket_path(booking), icon: :tasks, class: t('buttons.mini.default'), target: '_blank') {}
-  %td= status_label_for(booking)
-  %td
-    = link_to booking.client, target: '_blank' do
-      = content_tag(:em, booking.client_full_name)
-  %td{ data: { dateformat: 'll' } }= l(booking.trip.start_date, format: :long)
-  %td= badge_for(booking.quantity)
-  %td
-    %span.label.label-inverse= booking.stop_name
+    = booking_decorator.archived_show_link class: t('buttons.mini.info')
+    = booking_decorator.ticket_link class: t('buttons.mini.default'), target: '_blank'
+  %td= booking_decorator.status
+  %td= booking_decorator.client_link target: '_blank'
+  %td{ data: { dateformat: 'll' } }= booking_decorator.trip_start_date
+  %td= booking_decorator.quantity
+  %td=booking_decorator.connection
 
 

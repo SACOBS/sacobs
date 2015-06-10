@@ -24,11 +24,13 @@ class TripDecorator < LittleDecorator
   end
 
   def edit_link(opts={})
+    return if booked?
     opts.merge!(icon: :edit)
     link_to 'Edit', edit_trip_path(record), opts
   end
 
   def destroy_link(opts={})
+    return if booked?
     opts.merge!(method: :delete, icon: :times)
     link_to 'Destroy', record, opts
   end

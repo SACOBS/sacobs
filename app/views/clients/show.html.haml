@@ -83,10 +83,10 @@
         = bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do
           - client_decorator.recent_bookings.each do |booking|
             %tr
-              %td= status_label_for(booking)
-              %td{ data: { dateformat: 'll' } }= l(booking.trip_start_date, format: :long)
-              %td= booking.stop_name
-              %td= badge_for(booking.quantity)
+              %td= booking.status
+              %td{ data: { dateformat: 'll' } }= booking.trip_start_date
+              %td= booking.connection
+              %td= booking.quantity
       - else
         %h5  This client has no bookings
 

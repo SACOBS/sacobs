@@ -1,17 +1,17 @@
-- @bookings.each do |booking|
-  .well.well-small.booking
-    .pull-left
-      = l(Date.current, format: :long)
-    %br
-    .text-center
-      %p #{booking.client_title.upcase} #{booking.client_full_name}
-    .info
-      %p= content_tag :strong, booking.payment_detail.payment_type if booking.payment_detail.present?
-      - [booking.main, booking, booking.return_booking].compact.each do |b|
+.well.well-small.booking
+  .pull-left
+    = l(Date.current, format: :long)
+  - @bookings.group_by {|b| b.client }.sort.each do |client, bookings|
+    - client_decorator = decorate(client)
+    %p.text-center #{client_decorator.title} #{client_decorator.full_name}
+    - bookings.each do |booking|
+      - booking_decorator = decorate(booking)
+      .info
+        %p= content_tag :strong, booking.payment_detail.payment_type if booking.payment_detail.present?
         = bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do
           %tr
-            %td= status_label_for(b)
-            %td= b.reference_no
-            %td #{b.quantity} x #{b.stop.connection.name}
-            %td{ data: { dateformat: 'll' } }= l(b.trip.start_date, format: :long) if b.trip.start_date.present?
-            %td= number_to_currency(b.invoice.total)
+            %td= booking_decorator.status
+            %td= booking_decorator.reference_no
+            %td #{booking_decorator.quantity} x #{booking_decorator.connection}
+            %td{ data: { dateformat: 'll' } }= booking_decorator.trip_start_date
+            %td= booking_decorator.price

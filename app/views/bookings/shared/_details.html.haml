@@ -1,8 +1,9 @@
+- booking_decorator = decorate(booking)
 = bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'Connection', 'Price'], types: [:condensed] do
   %tr
-    %td= status_label_for(booking)
-    %td= booking.reference_no
-    %td= booking.trip_name
-    %td= l(booking.trip.start_date, format: :long) if booking.trip.start_date.present?
-    %td= booking.stop_name
-    %td= number_to_currency(booking.invoice.total)
+    %td= booking_decorator.status
+    %td= booking_decorator.reference_no
+    %td= booking_decorator.trip_name
+    %td= booking_decorator.trip_start_date
+    %td= booking_decorator.connection
+    %td= booking_decorator.price

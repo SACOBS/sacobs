@@ -35,7 +35,7 @@ class Ticket
   end
 
   def to_file_name
-    "#{booking.trip_name}_#{booking.client.full_name}_#{Time.current.to_i}".gsub(' ', '_').downcase
+    "#{booking.trip.name}_#{booking.client.full_name}_#{Time.current.to_i}".gsub(' ', '_').downcase
   end
 
   def method_missing(method_name, *args, &block)
@@ -58,15 +58,15 @@ class Ticket
   end
 
   def total
-    @total ||= [booking, return_booking].compact.map(&:invoice_total).sum
+    @total ||= [booking, return_booking].compact.map{|b| b.invoice.total }.sum
   end
 
   def total_cost
-    @total_cost ||= [booking, return_booking].compact.map(&:invoice_total_cost).sum
+    @total_cost ||= [booking, return_booking].compact.map{|b| b.invoice.total_cost }.sum
   end
 
   def total_discount
-    @total_discount ||= [booking, return_booking].compact.map(&:invoice_total_discount).sum
+    @total_discount ||= [booking, return_booking].compact.map{|b| b.invoice.total_discount }.sum
   end
 
   def view_context

@@ -6,9 +6,8 @@
   %h1 Trip
   .actions
     = back_to trips_path
-    - unless trip_decorator.booked?
-      = trip_decorator.edit_link class: t('buttons.info')
-      = trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
+    = trip_decorator.edit_link class: t('buttons.info')
+    = trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
 
 - cache @trip do
   - content_for :sidebar do
@@ -20,9 +19,8 @@
     = render 'trips/shared/bookings', trip: @trip
 .actions
   = back_to trips_path
-  - unless trip_decorator.booked?
-    = trip_decorator.edit_link class: t('buttons.info')
-    = trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
+  = trip_decorator.edit_link class: t('buttons.info')
+  = trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' }
 
 
 
