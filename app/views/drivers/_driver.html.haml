@@ -1,6 +1,5 @@
 %tr{ class: dom_class(driver), id: dom_id(driver) }
   %td
-    = link_to 'Show', driver, icon: :info, class: t('buttons.mini.info')
     = link_to 'Edit', edit_driver_path(driver), icon: :edit, class: t('buttons.mini.inverse')
     = link_to 'Destroy', driver, icon: :times, data: { confirm: t('messages.confirm', resource: :driver) }, method: :delete, class: t('buttons.mini.danger')
   %td= driver.name

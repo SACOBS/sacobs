@@ -216,7 +216,7 @@ Sacobs::Application.routes.draw do
 
   resource :contacts, only: [:new, :create]
 
-  resources :drivers do
+  resources :drivers, except: :show do
     collection do
       get :search
     end

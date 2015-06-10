@@ -11,14 +11,12 @@ class SeasonalDiscountsController < ApplicationController
 
   def create
     @seasonal_discount = SeasonalDiscount.new(seasonal_discount_params)
-    @seasonal_discount.user = current_user
     @seasonal_discount.save
     respond_with @seasonal_discount
   end
 
   def update
     @seasonal_discount = SeasonalDiscount.find(params[:id])
-    @seasonal_discount.user = current_user
     @seasonal_discount.update(seasonal_discount_params)
     respond_with @seasonal_discount
   end
@@ -32,6 +30,6 @@ class SeasonalDiscountsController < ApplicationController
                                                 :period_from,
                                                 :period_to,
                                                 :active
-                                               )
+                                               ).merge(user_id: current_user.id)
   end
 end

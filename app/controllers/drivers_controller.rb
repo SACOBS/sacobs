@@ -1,5 +1,5 @@
 class DriversController < ApplicationController
-  before_action :set_driver, only: [:show, :edit, :update, :destroy]
+  before_action :set_driver, only: [:edit, :update, :destroy]
 
   def index
     @drivers = driver_scope.select(:id, :name, :surname)
@@ -15,18 +15,15 @@ class DriversController < ApplicationController
     @driver = Driver.new
   end
 
-  def show
-    fresh_when @driver, last_modified: @driver.updated_at
-  end
 
   def create
     @driver = Driver.create(driver_params)
-    respond_with @driver
+    respond_with @driver, location: drivers_url
   end
 
   def update
     @driver.update(driver_params)
-    respond_with @driver
+    respond_with @driver, location: drivers_url
   end
 
   def destroy

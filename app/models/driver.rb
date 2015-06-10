@@ -28,7 +28,7 @@ class Driver < ActiveRecord::Base
   protected
 
   def normalize_names
-    self.name = name.downcase.squish
-    self.surname = surname.downcase.squish
+    self.name = name.upcase.squish
+    self.surname = surname.upcase.squish
   end
 end
