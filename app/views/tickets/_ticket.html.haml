@@ -8,35 +8,35 @@
     %strong Today's Date:
     = ticket.ticket_date
 .passengers
-= bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
-  - [ticket.booking, ticket.return_booking].compact.each do |booking|
-    - ticket.passengers.each do |passenger|
-      %tr
-        %td= booking.trip.start_date
-        %td= passenger.full_name
-        %td= booking.stop.from_city.name
-        %td= booking.stop.from_city.venues.first.name
-        %td= booking.stop.to_city.name
-        %td= booking.stop.to_city.venues.first.name
-        %td= local_time(booking.stop.from_city.outgoing_time_table.depart, format: :short) if booking.stop.from_city.outgoing_time_table.present?
-        %td= local_time(booking.stop.to_city.incoming_time_table.depart, format: :short) if booking.stop.from_city.incoming_time_table.present?
-  %tr
-    %td
-    %td
-    %td
-    %td
-    %td
-    %td
-    %td
-    %td
-      %strong Price:
-      %strong= ticket.price
-    %td
-      %strong Discount:
-      %strong= ticket.discount
-    %td
-      %strong Total:
-      %strong= ticket.nett
+  = bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do
+    - [ticket.booking, ticket.return_booking].compact.each do |booking|
+      - ticket.passengers.each do |passenger|
+        %tr
+          %td= booking.trip.start_date
+          %td= passenger.full_name
+          %td= booking.stop.from_city.name
+          %td= booking.stop.from_city.venues.first.name
+          %td= booking.stop.to_city.name
+          %td= booking.stop.to_city.venues.first.name
+          %td= local_time(booking.stop.from_city.outgoing_time_table.depart, format: :short) if booking.stop.from_city.outgoing_time_table.present?
+          %td= local_time(booking.stop.to_city.incoming_time_table.depart, format: :short) if booking.stop.from_city.incoming_time_table.present?
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td
+      %td
+      %td
+      %td
+        %strong Price:
+        %strong= ticket.price
+      %td
+        %strong Discount:
+        %strong= ticket.discount
+      %td
+        %strong Total:
+        %strong= ticket.nett
 .special-instructions.text-center
   %p
     %em= ticket.instructions
