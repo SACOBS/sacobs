@@ -36,27 +36,35 @@ class Route < ActiveRecord::Base
   after_update { touch }
 
   def copy
-    copy = dup
-    copy.name = "Copy of #{name}"
-    destinations.map { |d| copy.destinations.build(city: d.city, sequence: d.sequence) }
-    connections.each do |original|
-      from = copy.destinations.find { |d| d.city == original.from.city }
-      to = copy.destinations.find { |d| d.city == original.to.city }
-      copy.connections.build(from: from, to: to)
-    end
-    copy
+    self.class.skip_callback(:save, :before, :generate_connections)
+      object = dup
+      object.name = "Copy of #{name}"
+      destinations.map { |d| object.destinations.build(city: d.city, sequence: d.sequence) }
+      connections.each do |original|
+        from = object.destinations.find { |d| d.city == original.from.city }
+        to = object.destinations.find { |d| d.city == original.to.city }
+        object.connections.build(from: from, to: to, cost: original.cost, percentage: original.percentage, distance: original.distance)
+      end
+      yield(object) if block_given?
+      object.save
+    self.class.set_callback(:save, :before, :generate_connections)
+    object
   end
 
   def reverse_copy
-    reverse_copy = dup
-    reverse_copy.name = "Reverse of #{name}"
-    destinations.reverse.map.with_index(1) { |original, index| reverse_copy.destinations.build(city: original.city, sequence: index) }
-    connections.reverse_each do |original|
-      from = reverse_copy.destinations.find { |d| d.city == original.to.city }
-      to = reverse_copy.destinations.find { |d| d.city == original.from.city }
-      reverse_copy.connections.build(from: from, to: to)
-    end
-    reverse_copy
+    self.class.skip_callback(:save, :before, :generate_connections)
+      object = dup
+      object.name = "Reverse of #{name}"
+      destinations.reverse.map.with_index(1) { |original, index| object.destinations.build(city: original.city, sequence: index) }
+      connections.reverse_each do |original|
+        from = object.destinations.find { |d| d.city == original.to.city }
+        to = object.destinations.find { |d| d.city == original.from.city }
+        object.connections.build(from: from, to: to, percentage: original.percentage, cost: original.cost, distance: original.distance)
+      end
+      yield(object) if block_given?
+      object.save
+    self.class.set_callback(:save, :before, :generate_connections)
+    object
   end
 
   private

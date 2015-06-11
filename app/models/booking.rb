@@ -73,7 +73,7 @@ class Booking < ActiveRecord::Base
   end
 
   def expired?
-    expiry_date <= Time.current
+    expiry_date.past?
   end
 
   def build_passengers
@@ -134,7 +134,7 @@ class Booking < ActiveRecord::Base
   end
 
   def set_expiry_date
-    self.expiry_date = Time.current.advance(hours: Setting.first.booking_expiry_period)
+    self.expiry_date = Setting.first.booking_expiry_period.hours.from_now
   end
 
   def quantity_available
