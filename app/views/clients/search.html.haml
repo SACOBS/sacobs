@@ -23,7 +23,7 @@
     %li= sort_link @search, :created, 'Creation Date', default_order: :desc
 %hr
 .clients
-  - if @clients.present?
+  - if @clients.any?
     - @clients.in_groups_of(3, false) do |group|
       .row-fluid
         = render group, cache: true

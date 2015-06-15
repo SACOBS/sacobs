@@ -11,8 +11,6 @@ class Views.ApplicationView
       e.preventDefault()
       $(this).tab('show');
 
-
-
   cleanup: ->
     $('a[data-toggle="tab"]').off 'click'
     $('[rel~="tooltip"]').off()

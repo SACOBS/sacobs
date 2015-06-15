@@ -1,5 +1,4 @@
 class ClientDecorator < LittleDecorator
-
   def recent_bookings
     decorate(bookings.recent)
   end
@@ -72,23 +71,23 @@ class ClientDecorator < LittleDecorator
     number_to_phone(record.cell_no, area_code: true)
   end
 
-  def add_voucher_link(opts={})
-     opts.merge!(icon: :money)
-     link_to 'Add Credit Voucher', new_client_voucher_path(record), opts
+  def add_voucher_link(opts = {})
+    opts.merge!(icon: :money)
+    link_to 'Add Credit Voucher', new_client_voucher_path(record), opts
   end
 
-  def show_link(opts={})
+  def show_link(opts = {})
     opts.merge!(icon: :info)
     link_to 'Show', record, opts
   end
 
-  def edit_link(opts={})
+  def edit_link(opts = {})
     opts.merge!(icon: :edit)
     link_to 'Edit', edit_client_path(record), opts
   end
 
-  def destroy_link(opts={})
-   opts.merge!(method: :delete, icon: :times)
-   link_to 'Destroy', record, opts
+  def destroy_link(opts = {})
+    opts.merge!(method: :delete, icon: :times)
+    link_to 'Destroy', record, opts
   end
 end

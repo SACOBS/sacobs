@@ -25,7 +25,7 @@
 
 %hr
 .bookings
-  - if @results.present?
+  - if @results.any?
     = bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed) do
       = render @results, cache: true
   - else

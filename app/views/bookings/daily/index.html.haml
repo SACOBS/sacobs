@@ -5,7 +5,7 @@
 
 %hr
 .bookings
-  - if @bookings.present?
+  - if @bookings.any?
     = render 'bookings/daily/bookings'
   - else
     %h4.text-center There have been no bookings made for today yet.

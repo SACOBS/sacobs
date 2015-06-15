@@ -26,7 +26,7 @@ class Bus < ActiveRecord::Base
   after_create :generate_seats
 
   def in_use?
-    trips.present?
+    trips.any?
   end
 
   protected

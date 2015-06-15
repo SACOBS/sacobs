@@ -38,6 +38,7 @@ gem 'kaminari'
 gem 'nprogress-rails'
 gem 'local_time'
 
+
 # Forms
 gem 'simple_form', '~> 3.0.0'
 

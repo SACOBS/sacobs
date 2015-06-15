@@ -15,7 +15,6 @@ class DriversController < ApplicationController
     @driver = Driver.new
   end
 
-
   def create
     @driver = Driver.create(driver_params)
     respond_with @driver, location: drivers_url

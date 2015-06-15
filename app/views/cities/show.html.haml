@@ -15,10 +15,8 @@
     = @city.name
   %p
     %strong Venues:
-    - if @city.venues.present?
-      %ul
-        - @city.venues.each do |v|
-          %li= v.name
+    - if @city.venues.any?
+      %ul= content_tag_for(:li, @city.venues) { |venue| venue.name }
     - else
       %br
       None
