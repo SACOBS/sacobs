@@ -26,7 +26,6 @@ class Passenger < ActiveRecord::Base
   belongs_to :passenger_type
 
   after_initialize :set_defaults, if: :new_record?
-  before_save :normalize_names
 
   def full_name
     "#{name} #{surname}"
@@ -40,14 +39,17 @@ class Passenger < ActiveRecord::Base
     Discount.find_by(passenger_type: passenger_type)
   end
 
-  protected
+  def name=(value)
+    super(value.squish.upcase)
+  end
 
+  def surname=(value)
+    super(value.squish.upcase)
+  end
+
+  protected
   def set_defaults
     self.passenger_type = Passenger::DEFAULT_TYPE
   end
 
-  def normalize_names
-    self.name = name.squish.upcase
-    self.surname = surname.squish.upcase
-  end
 end

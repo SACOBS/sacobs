@@ -15,7 +15,7 @@ class Ticket
   end
 
   def scripture
-    simple_format(scripture_service.fetch || settings.default_scripture)
+    simple_format(ScriptureForToday.generate || settings.default_scripture)
   end
 
   def ticket_date
@@ -51,10 +51,6 @@ class Ticket
 
   def settings
     @settings ||= Setting.first
-  end
-
-  def scripture_service
-    @scripture_service ||= ScriptureService.new
   end
 
   def total

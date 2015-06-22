@@ -108,6 +108,20 @@ group :development do
 end
 
 
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
+
 
 group :production do
   gem 'puma'

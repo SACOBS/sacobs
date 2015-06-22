@@ -47,7 +47,19 @@ class Client < ActiveRecord::Base
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
   validates :date_of_birth, presence: { message: 'obtained from id number is not a valid date, please check the id number field.' }, if: proc { |client| client.id_number.present? }
 
-  before_validation :normalize, :set_birth_date
+  before_validation :set_birth_date
+
+  def name=(val)
+    super(val.squish.upcase)
+  end
+
+  def surname=(val)
+    super(val.squish.upcase)
+  end
+
+  def email=(val)
+    super(val.squish.downcase)
+  end
 
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
@@ -60,7 +72,7 @@ class Client < ActiveRecord::Base
   end
 
   def is_pensioner?
-    return unless age.present?
+    return false unless age.present?
     age >= PENSIONER_AGE
   end
 
@@ -77,11 +89,5 @@ class Client < ActiveRecord::Base
       date = date.prev_year(100) if date > Date.current
       self.date_of_birth = date
     end
-  end
-
-  def normalize
-    name.try(:squish!).try(:upcase!)
-    surname.try(:squish!).try(:upcase!)
-    email.try(:squish!).try(:downcase!)
   end
 end

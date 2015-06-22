@@ -19,16 +19,15 @@ class Driver < ActiveRecord::Base
 
   validates :name, :surname, presence: true
 
-  before_save :normalize_names
+  def name=(value)
+    super(value.squish.upcase)
+  end
+
+  def surname=(value)
+    super(value.squish.upcase)
+  end
 
   def full_name
     @full_name ||= "#{name} #{surname}"
-  end
-
-  protected
-
-  def normalize_names
-    self.name = name.upcase.squish
-    self.surname = surname.upcase.squish
   end
 end

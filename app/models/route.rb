@@ -31,7 +31,6 @@ class Route < ActiveRecord::Base
   validates :cost, :distance, numericality: true
   validates :destinations, presence: true, length: {minimum: 2, too_short: 'is too short (at least %{count} destinations required)'}
 
-  before_save :normalize_name
   before_save :generate_connections
   after_update { touch }
 
@@ -67,11 +66,11 @@ class Route < ActiveRecord::Base
     object
   end
 
-  private
-
-  def normalize_name
-    self.name = name.strip.upcase
+  def name=(value)
+    super(value.squish.upcase)
   end
+
+  private
 
   def reorder_destinations(destination)
     if destinations.exists?(sequence: destination.sequence)
