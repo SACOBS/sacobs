@@ -15,7 +15,7 @@ class PassengerType < ActiveRecord::Base
 
   validates :description, presence: true
 
-  before_create do
-    self.description = description.upcase
+  def description=(value)
+    super(value.upcase)
   end
 end

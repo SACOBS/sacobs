@@ -33,7 +33,6 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    puts booking_params.inspect
     @booking.assign_attributes(booking_params)
     @booking.status = :reserved if step == :billing_info
     render_wizard @booking
