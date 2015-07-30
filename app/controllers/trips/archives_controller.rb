@@ -1,6 +1,7 @@
 class Trips::ArchivesController < ApplicationController
   def index
     @trips = Trip.archived.page(params[:page])
+    fresh_when @trips, template: 'trips/archives/index'
   end
 
   def show

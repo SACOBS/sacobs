@@ -1,6 +1,7 @@
 class Bookings::ArchivesController < ApplicationController
   def index
     @bookings = Trip.unscoped { booking_scope.includes(:trip, :stop, :client).page(params[:page]) }
+    fresh_when @bookings, template: 'bookings/archives/index'
   end
 
   def search
