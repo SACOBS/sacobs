@@ -61,6 +61,7 @@ class Booking < ActiveRecord::Base
   before_update :unassign_seating, if: proc { |booking| booking.status_changed? && booking.cancelled? }
   before_update :clear_passengers, if: :client_id_changed?
 
+
   scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { reserved.where(arel_table[:expiry_date].lteq(Time.current)) }
   scope :recent, -> { unscoped.includes(:stop).processed.order(created_at: :desc).limit(5) }
