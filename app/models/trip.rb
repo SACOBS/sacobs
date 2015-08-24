@@ -25,7 +25,7 @@
 #
 
 class Trip < ActiveRecord::Base
-  include Archivable, CollectionCacheable
+  include Archivable
 
   to_param :name
 

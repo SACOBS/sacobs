@@ -29,8 +29,6 @@
 #
 
 class Client < ActiveRecord::Base
-  include CollectionCacheable
-
   PENSIONER_AGE = 65
 
   TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze

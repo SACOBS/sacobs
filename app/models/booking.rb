@@ -29,7 +29,7 @@
 #
 
 class Booking < ActiveRecord::Base
-  include Archivable, CollectionCacheable
+  include Archivable
 
   enum status: [:in_process, :reserved, :paid, :cancelled]
 

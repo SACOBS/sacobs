@@ -15,7 +15,6 @@
 #
 
 class City < ActiveRecord::Base
-  include CollectionCacheable
 
   default_scope { order(name: :asc) }
 

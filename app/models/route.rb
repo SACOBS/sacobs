@@ -12,7 +12,6 @@
 #
 
 class Route < ActiveRecord::Base
-  include CollectionCacheable
 
   to_param :name
 
