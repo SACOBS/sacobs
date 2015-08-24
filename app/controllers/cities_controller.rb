@@ -55,6 +55,6 @@ class CitiesController < ApplicationController
   end
 
   def city_params
-    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy], time_tables_attributes: [:arrive, :depart, :direction]).merge(user_id: current_user.id)
+    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy], time_tables_attributes: [:arrive, :depart, :direction, :id]).merge(user_id: current_user.id)
   end
 end
