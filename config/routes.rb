@@ -30,9 +30,9 @@
 #   search_bookings_archives GET    /bookings/archives/search(.:format)                 bookings/archives#search
 #          bookings_archives GET    /bookings/archives(.:format)                        bookings/archives#index
 #           bookings_archive GET    /bookings/archives/:id(.:format)                    bookings/archives#show
+# print_bookings_daily_index GET    /bookings/daily/print(.:format)                     bookings/daily#print {:format=>:pdf}
+#       bookings_daily_index GET    /bookings/daily(.:format)                           bookings/daily#index
 #            search_bookings GET    /bookings/search(.:format)                          bookings#search
-#             daily_bookings GET    /bookings/daily(.:format)                           bookings#daily
-#       print_daily_bookings GET    /bookings/print_daily(.:format)                     bookings#print_daily {:format=>:pdf}
 #             cancel_booking PATCH  /bookings/:id/cancel(.:format)                      bookings#cancel
 #            booking_builder GET    /bookings/:booking_id/builder/:id(.:format)         bookings/builder#show
 #                            PATCH  /bookings/:booking_id/builder/:id(.:format)         bookings/builder#update
@@ -48,6 +48,7 @@
 #                            PATCH  /setting(.:format)                                  settings#update
 #                            PUT    /setting(.:format)                                  settings#update
 #             search_clients GET    /clients/search(.:format)                           clients#search
+#              print_clients GET    /clients/print(.:format)                            clients#print {:format=>:xls}
 #            client_vouchers POST   /clients/:client_id/vouchers(.:format)              vouchers#create
 #         new_client_voucher GET    /clients/:client_id/vouchers/new(.:format)          vouchers#new
 #                    clients GET    /clients(.:format)                                  clients#index
@@ -74,8 +75,7 @@
 #                            POST   /drivers(.:format)                                  drivers#create
 #                 new_driver GET    /drivers/new(.:format)                              drivers#new
 #                edit_driver GET    /drivers/:id/edit(.:format)                         drivers#edit
-#                     driver GET    /drivers/:id(.:format)                              drivers#show
-#                            PATCH  /drivers/:id(.:format)                              drivers#update
+#                     driver PATCH  /drivers/:id(.:format)                              drivers#update
 #                            PUT    /drivers/:id(.:format)                              drivers#update
 #                            DELETE /drivers/:id(.:format)                              drivers#destroy
 #      search_trips_archives GET    /trips/archives/search(.:format)                    trips/archives#search
@@ -204,6 +204,7 @@ Sacobs::Application.routes.draw do
   resources :clients do
     collection do
       get :search
+      get :print, defaults: { format: :xls }
     end
     resources :vouchers, only: [:new, :create]
   end

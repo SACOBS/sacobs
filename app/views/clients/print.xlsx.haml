@@ -1,0 +1,19 @@
+%table
+  %caption Clients
+  %thead
+    %tr
+      %td Name
+      %td Surname
+      %td Cell No
+      %td Home No
+      %td Work No
+      %td Email
+  %tbody
+    - @clients.each do |client|
+      %tr
+        %td= client.name.titleize
+        %td= client.surname.titleize
+        %td= number_to_phone(client.cell_no, area_code: true)
+        %td= number_to_phone(client.home_no, area_code: true)
+        %td= number_to_phone(client.cell_no, area_code: true)
+        %td= client.email

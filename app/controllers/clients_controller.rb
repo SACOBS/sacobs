@@ -40,6 +40,11 @@ class ClientsController < ApplicationController
     end
   end
 
+  def print
+    @clients = Client.all
+    render xlsx: :print, filename: "clients"
+  end
+
   private
 
   def set_client

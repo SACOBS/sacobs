@@ -98,6 +98,8 @@ gem 'obfuscatejs'
 
 gem 'little_decorator'
 
+gem 'to_spreadsheet'
+
 group :development do
   gem 'flatten_migrations'
   gem 'web-console', '~> 2.0'

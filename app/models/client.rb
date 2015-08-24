@@ -47,6 +47,13 @@ class Client < ActiveRecord::Base
 
   before_validation :set_birth_date
 
+
+  ransacker :full_name do |parent|
+    Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
+  end
+
+  scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
+
   def name=(val)
     value.squish!.upcase! if value.present?
     super(value)
@@ -62,12 +69,6 @@ class Client < ActiveRecord::Base
     super(value)
   end
 
-  ransacker :full_name do |parent|
-    Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
-  end
-
-  scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
-
   def age
     @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
   end
@@ -75,6 +76,15 @@ class Client < ActiveRecord::Base
   def is_pensioner?
     return false unless age.present?
     age >= PENSIONER_AGE
+  end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |client|
+        csv << client.attributes.values_at(*column_names)
+      end
+    end
   end
 
   def full_name
