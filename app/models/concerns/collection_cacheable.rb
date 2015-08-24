@@ -3,8 +3,11 @@ module CollectionCacheable
 
   module ClassMethods
     def cache_key
-      key = Digest::MD5.hexdigest(pluck(:id, :updated_at).map { |id, updated_at| "#{id}-#{updated_at.to_i}" }.to_s)
-      "#{model_name.plural}/#{key}"
+      model_identifier = name.underscore.pluralize
+      relation_identifier = Digest::MD5.hexdigest(@relation.to_sql.downcase)
+      max_updated_at = @relation.maximum(:updated_at).try(:utc).try(:to_s, :number)
+
+      "#{model_identifier}/#{relation_identifier}-#{count}-#{max_updated_at}"
     end
   end
 end
