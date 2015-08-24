@@ -29,7 +29,10 @@ class City < ActiveRecord::Base
 
   validates :name, presence: true
 
-  before_save :format_name
+  def name=(value)
+   value.squish!.upcase! if value.present?
+   super(value)
+  end
 
   def outgoing_time_table
     time_tables.outgoing.first
@@ -37,11 +40,5 @@ class City < ActiveRecord::Base
 
   def incoming_time_table
     time_tables.incoming.first
-  end
-
-  protected
-
-  def format_name
-    self.name = name.squish.upcase
   end
 end

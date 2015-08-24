@@ -16,6 +16,7 @@ class PassengerType < ActiveRecord::Base
   validates :description, presence: true
 
   def description=(value)
-    super(value.upcase)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 end

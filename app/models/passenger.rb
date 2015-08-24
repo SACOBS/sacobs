@@ -40,11 +40,13 @@ class Passenger < ActiveRecord::Base
   end
 
   def name=(value)
-    super(value.squish.upcase)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 
   def surname=(value)
-    super(value.squish.upcase)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 
   protected

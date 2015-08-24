@@ -50,15 +50,18 @@ class Client < ActiveRecord::Base
   before_validation :set_birth_date
 
   def name=(val)
-    super(val.squish.upcase)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 
   def surname=(val)
-    super(val.squish.upcase)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 
   def email=(val)
-    super(val.squish.downcase)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 
   ransacker :full_name do |parent|
