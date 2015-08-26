@@ -53,17 +53,17 @@ class Client < ActiveRecord::Base
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
-  def name=(_val)
+  def name=(value)
     value.squish!.upcase! if value.present?
     super(value)
   end
 
-  def surname=(_val)
+  def surname=(value)
     value.squish!.upcase! if value.present?
     super(value)
   end
 
-  def email=(_val)
+  def email=(value)
     value.squish!.upcase! if value.present?
     super(value)
   end

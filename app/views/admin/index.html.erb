@@ -3,19 +3,37 @@
   <hr/>
   <div class="row">
     <div class="span4">
-      <%= link_to 'Buses', buses_path, class: "#{t('buttons.large.primary')} btn-block", icon: :cog %>
-      <%= link_to 'Cities', cities_path, class: "#{t('buttons.large.primary')} btn-block", icon: :cog %>
-      <%= link_to 'Routes', routes_path, class: "#{t('buttons.large.primary')} btn-block", icon: :cog %>
+      <%= link_to  buses_path, class: "btn btn-large btn-primary btn-block" do %>
+        <%= fa_icon :cog, text: 'Buses' %>
+      <% end %>
+      <%= link_to  cities_path, class: "btn btn-large btn-primary btn-block" do %>
+          <%= fa_icon :cog, text: 'Cities' %>
+      <% end %>
+      <%= link_to  routes_path, class: "btn btn-large btn-primary btn-block" do %>
+          <%= fa_icon :cog, text: 'Routes' %>
+      <% end %>
     </div>
     <div class="span4">
-      <%= link_to 'Discount', discounts_path, class: "#{t('buttons.large.info')} btn-block", icon: :cog %>
-      <%= link_to 'Charges', charges_path, class: "#{t('buttons.large.info')} btn-block", icon: :cog %>
-      <%= link_to 'Priority Pricing', seasonal_discounts_path, class: "#{t('buttons.large.info')} btn-block", icon: :cog %>
+      <%= link_to  discounts_path, class: "btn btn-large btn-info btn-block" do %>
+          <%= fa_icon :cog, text: 'Discounts' %>
+      <% end %>
+      <%= link_to  charges_path, class: "btn btn-large btn-info btn-block" do %>
+          <%= fa_icon :cog, text: 'Charges' %>
+      <% end %>
+      <%= link_to  seasonal_discounts_path, class: "btn btn-large btn-info btn-block" do %>
+          <%= fa_icon :cog, text: 'Priority Pricing' %>
+      <% end %>
     </div>
     <div class="span4">
-      <%= link_to 'Drivers', drivers_path, class: "#{t('buttons.large.warning')} btn-block", icon: :cog %>
-      <%= link_to 'Users', users_path, class: "#{t('buttons.large.warning')} btn-block", icon: :cog %>
-      <%= link_to 'Settings', setting_path, class: "#{t('buttons.large.warning')} btn-block", icon: :cog %>
+      <%= link_to  drivers_path, class: "btn btn-large btn-warning btn-block" do %>
+          <%= fa_icon :cog, text: 'Drivers' %>
+      <% end %>
+      <%= link_to  users_path, class: "btn btn-large btn-warning btn-block" do %>
+          <%= fa_icon :cog, text: 'Users' %>
+      <% end %>
+      <%= link_to  setting_path, class: "btn btn-large btn-warning btn-block" do %>
+          <%= fa_icon :cog, text: 'Settings' %>
+      <% end %>
     </div>
   </div>
 </div>
