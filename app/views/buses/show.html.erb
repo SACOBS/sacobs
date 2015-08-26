@@ -1,0 +1,52 @@
+<%= content_for(:title) do %>
+    <%= @bus.name %>
+<% end %>
+<% cache @bus do %>
+    <div class="page-header">
+      <h2>Bus</h2>
+      <div class="actions">
+        <%= back_to buses_path %>
+        <%= link_to 'Edit', edit_bus_path(@bus), icon: :edit, class: t('buttons.inverse') %>
+        <%= link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: t('messages.confirm', resource: :bus) }, icon: :times, class: t('buttons.danger') %>
+      </div>
+    </div>
+    <div class="well">
+      <p>
+        <strong>Name:</strong>
+        <br/>
+        <%= @bus.name %>
+      </p>
+      <p>
+        <strong>Capacity:</strong>
+        <br/>
+        <%= @bus.capacity %>
+      </p>
+      <p>
+        <strong>Year:</strong>
+        <br/>
+        <%= @bus.year %>
+      </p>
+      <p>
+        <strong>Model:</strong>
+        <br/>
+        <%= @bus.model %>
+      </p>
+    </div>
+    <div class="well">
+      <p>
+        <strong>Seats:</strong>
+        <%= bootstrap_table headers: %w(Row Number), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+            <% @bus.seats.each do |seat| %>
+                <tr>
+                  <td>
+                    <%= seat.row %>
+                  </td>
+                  <td>
+                    <%= seat.number %>
+                  </td>
+                </tr>
+            <% end %>
+        <% end %>
+      </p>
+    </div>
+<% end %>

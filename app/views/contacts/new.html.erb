@@ -1,0 +1,16 @@
+<%= content_for(:title) do %>
+    Contact and Support
+<% end %>
+<h2>Contact and Support</h2>
+<br/>
+<h5>Email us at:</h5>
+<a href="mailto:Support@SearleConsulting.co.za">Support@SearleConsulting.co.za</a>
+<h5>Let us get back to you:</h5>
+<div class="row span12">
+  <%= simple_form_for @contact, defaults: { required: false } do |f| %>
+      <%= f.input :name %>
+      <%= f.input :email %>
+      <%= f.input :message, as: :text, label: false, input_html: { class: 'input-xxlarge', rows: '10' } %>
+      <%= f.button :submit, 'Send message', class: t('buttons.primary') %>
+  <% end %>
+</div>

@@ -1,0 +1,47 @@
+<%= content_for(:title) do %>
+    Clients
+<% end %>
+<div class="page-header">
+  <h2>
+    Clients
+  </h2>
+  <div class="btn-group">
+    <%= link_to new_client_path, class: t('buttons.primary') do %>
+        <%= fa_icon :plus, text: 'Setup Client' %>
+    <% end %>
+    <%= link_to clients_path, class: t('buttons.default') do %>
+        <%= fa_icon :refresh, text: 'Refresh' %>
+    <% end %>
+    <%= link_to print_clients_path, class: t('buttons.info'), data: { no_turbolink: true } do %>
+        <%= fa_icon :download, text: 'Download' %>
+    <% end %>
+  </div>
+  <div class="search pull-right">
+    <%= simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search' } do |f| %>
+        <%= f.input :full_name_cont, as: :search_box %>
+        <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+        <%= link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times %>
+    <% end %>
+  </div>
+</div>
+<div class="tabbable tabs-left" id="listing">
+  <ul class="nav nav-tabs" id="directory">
+    <% ('A'..'Z').each_with_index do |letter, index| %>
+        <%= content_tag(:li, class: ('active' if index.zero?)) do %>
+            <a data-toggle="tab" data-target="#<%= letter %>">
+              <%= letter %>
+            </a>
+        <% end %>
+    <% end %>
+  </ul>
+  <div class="tab-content span10">
+    <% ('A'..'Z').each_with_index do |letter, index| %>
+        <%= content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do %>
+            <%= render(partial: 'clients', locals: { clients: @clients }) if index.zero? %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Setup Client', new_client_path, class: t('buttons.primary'), icon: :plus %>
+<%= link_to 'Refresh', clients_path, class: t('buttons.default'), icon: :refresh %>

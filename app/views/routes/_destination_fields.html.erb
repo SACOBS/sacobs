@@ -1,0 +1,12 @@
+<tr class="nested-fields">
+  <td>
+    <%= f.input :city, typeahead: cities, label: false, placeholder: 'Select city', input_html: { value: f.object.city, data: { targets: "#route_destinations_attributes_#{f.index}_city_id", filter: :name } } %>
+    <%= f.hidden_field :city_id %>
+  </td>
+  <td>
+    <%= f.input :sequence, label: false, input_html: { class: 'input-mini' } %>
+  </td>
+  <td>
+    <%= link_to_remove_association 'Remove', f, class: t('buttons.mini.danger') %>
+  </td>
+</tr>

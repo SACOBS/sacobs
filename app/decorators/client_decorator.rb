@@ -77,17 +77,21 @@ class ClientDecorator < LittleDecorator
   end
 
   def show_link(opts = {})
-    opts.merge!(icon: :info)
-    link_to 'Show', record, opts
+    link_to record, opts do
+      fa_icon :info, text: 'Show'
+    end
   end
 
   def edit_link(opts = {})
-    opts.merge!(icon: :edit)
-    link_to 'Edit', edit_client_path(record), opts
+    link_to edit_client_path(record), opts do
+      fa_icon :edit, text: 'Edit'
+    end
   end
 
   def destroy_link(opts = {})
-    opts.merge!(method: :delete, icon: :times)
-    link_to 'Destroy', record, opts
+    opts.merge!(method: :delete)
+    link_to record, opts do
+      fa_icon :times, text: 'Destroy'
+    end
   end
 end

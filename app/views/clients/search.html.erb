@@ -1,0 +1,48 @@
+<%= content_for(:title) do %>
+    Client Search
+<% end %>
+<div class="information page-header">
+  <h2>
+    Client Search
+    <small>(Remember the more specific the search the higher chance of success)</small>
+  </h2>
+  <h3>
+    Results for search term <%= params[:q][:full_name_cont] %>
+  </h3>
+  <%= back_to clients_path %>
+  <div class="search pull-right">
+    <%= simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search' } do |f| %>
+        <%= f.input :full_name_cont, as: :search_box %>
+        <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+        <%= link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times %>
+    <% end %>
+  </div>
+</div>
+<div class="sort-links">
+  <ul class="inline">
+    <li class="header">Sort By:</li>
+    <li>
+      <%= sort_link @search, :name, 'Name', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :surname, 'Surname', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :created, 'Creation Date', default_order: :desc %>
+    </li>
+  </ul>
+</div>
+<hr/>
+<div class="clients">
+  <% if @clients.any? %>
+      <% @clients.in_groups_of(3, false) do |group| %>
+          <div class="row-fluid">
+            <%= render group %>
+          </div>
+      <% end %>
+  <% else %>
+      <h3 class="text-center">No results were found for the specified search term.</h3>
+  <% end %>
+</div>

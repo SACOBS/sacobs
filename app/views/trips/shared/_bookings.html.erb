@@ -1,0 +1,24 @@
+<%= bootstrap_table headers: ['Status', 'Client Name', 'Connection', 'Qty', 'Telephone'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+    <% trip.bookings.each do |booking| %>
+        <% booking_decorator = decorate(booking) %>
+        <% cache booking do %>
+            <tr>
+              <td>
+                <%= booking_decorator.status %>
+              </td>
+              <td>
+                <%= booking_decorator.client_link %>
+              </td>
+              <td>
+                <%= booking_decorator.connection %>
+              </td>
+              <td>
+                <%= booking_decorator.quantity %>
+              </td>
+              <td>
+                <%= contact_numbers_for(booking.client) %>
+              </td>
+            </tr>
+        <% end %>
+    <% end %>
+<% end %>

@@ -3,7 +3,7 @@ class DatePickerInput < SimpleForm::Inputs::Base
     value = input_html_options[:value]
     value ||= object.send(attribute_name) if object.respond_to? attribute_name
     input_html_options[:value] ||= template.l(value.to_date) if value.present?
-    input_html_options[:data] =  { format: 'dd/MM/yyyy' }
+    input_html_options[:data] = { format: 'dd/MM/yyyy' }
     template.content_tag(:div, class: 'input-append datepicker') do
       @builder.text_field(attribute_name, input_html_options) +
         template.content_tag(:span, class: 'add-on') do

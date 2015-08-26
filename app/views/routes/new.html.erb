@@ -1,0 +1,63 @@
+<%= content_for(:title) do %>
+    New Route
+<% end %>
+<div class="page-header">
+  <h2>New Route</h2>
+  <h5>Instructions</h5>
+  <ol>
+    <li>
+      Add all the destinations(cities) that the bus will travel through on the route.
+    </li>
+    <li>
+      Set the destination(city) order in the order the buses will travel along the route. For example on a route from East London to PE, East London will be 1 and Port Alfred will be 2 and so on.
+    </li>
+  </ol>
+  <p>
+    <b>NB:</b>
+    <em>
+      Please note the connections on the next step in the wizard are generated from these destinations and the order they are in, so make 100% sure you are happy before moving onto the connections.
+    </em>
+  </p>
+</div>
+<div id="errors">
+  <%= errors_for @route %>
+</div>
+<%= simple_form_for @route,  defaults: { error: false } do |f| %>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'Save', class: t('buttons.primary') %>
+        <%= link_to 'Cancel', routes_path, class: t('buttons.danger') %>
+      </div>
+    </div>
+    <hr/>
+    <div class="row-fluid">
+      <div class="span3">
+        <fieldset>
+          <legend>Details</legend>
+          <%= f.input :name, autofocus: true %>
+          <%= f.input :cost, as: :cost, label: 'Master Rate' %>
+          <%= f.input :distance, as: :distance %>
+        </fieldset>
+      </div>
+      <div class="span9">
+        <fieldset>
+          <legend>Destinations</legend>
+          <%= bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { id: 'destinations' } do %>
+              <%= f.simple_fields_for :destinations, wrapper: false do |destination| %>
+                  <%= render 'destination_fields', f: destination %>
+              <% end %>
+          <% end %>
+          <div class="links">
+            <%= link_to_add_association 'Add Destination', f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' },  class: t('buttons.warning'), icon: :plus %>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <hr/>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'Save', class: t('buttons.primary') %>
+        <%= link_to 'Cancel', routes_path, class: t('buttons.danger') %>
+      </div>
+    </div>
+<% end %>

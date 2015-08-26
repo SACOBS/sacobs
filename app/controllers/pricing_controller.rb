@@ -6,7 +6,7 @@ class PricingController < ApplicationController
   end
 
   def show
-    connection =  Connection.find(params[:id])
+    connection = Connection.find(params[:id])
     @pricing = PricingPresenter.new(connection)
   end
 end

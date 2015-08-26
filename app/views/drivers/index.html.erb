@@ -1,0 +1,20 @@
+<%= content_for(:title) do %>
+    Drivers
+<% end %>
+<div class="page-header">
+  <h2>Drivers</h2>
+  <%= link_to 'Setup Driver', new_driver_path, class: t('buttons.primary'), icon: :plus %>
+  <%= link_to 'Refresh', drivers_path, class: t('buttons.default'), icon: :refresh %>
+</div>
+<div class="search pull-right">
+  <%= simple_form_for :q, url: search_drivers_path, defaults: { required: false, label: false }, html: { class: 'form-inline' }, method: :get, remote: true do |f| %>
+      <%= f.input :name_start, as: :search_box %>
+      <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+      <%= link_to 'Clear', drivers_path, class: t('buttons.mini.inverse'), icon: :times %>
+  <% end %>
+</div>
+<%= bootstrap_table headers: %w(Actions Name Surname), types: %i(hover condensed), html_options: { class: 'sortable', id: 'drivers' } do %>
+    <%= render @drivers, cache: true %>
+<% end %>
+<%= link_to 'Setup Driver', new_driver_path, class: t('buttons.primary'), icon: :plus %>
+<%= link_to 'Refresh', drivers_path, class: t('buttons.default'), icon: :refresh %>

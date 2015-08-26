@@ -1,0 +1,25 @@
+<%= content_for :title do %>
+    Quick quote
+<% end %>
+<% content_for :sidebar do %>
+    <h3>Quick Quote</h3>
+    <div class="connection-finder">
+      <%= simple_form_for :q do |f| %>
+          <%= f.input :route, collection: Route.all, as: :radio_buttons, item_wrapper_class: 'inline', label: 'Select a route', autofocus: true %>
+      <% end %>
+      <h5>Connections</h5>
+      <input id="connection-search" placeholder="Search Connections" required type="text">
+      <div class="connections">
+        <ul class="unstyled" id="connections-list">
+          <% @connections.each do |connection| %>
+              <%= content_tag_for :li, connection, data: {route: connection.route_id} do %>
+                  <%= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: {type: :html}, remote: true %>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+<% end %>
+<div class="quote">
+  <%= render 'pricing/quote', pricing: @pricing %>
+</div>

@@ -1,0 +1,10 @@
+<%= paginate bookings, param_name: "#{type}_page", remote: true %>
+<% if bookings.any? %>
+    <% cache bookings do %>
+        <%= bootstrap_table headers: ['Actions', 'Booked', 'Client', 'Contact', 'Trip Date', 'Qty', 'Connection'],types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+            <%= render bookings, cache: true %>
+        <% end %>
+    <% end %>
+<% else %>
+    <h3>There are currently 0 #{type} bookings.</h3>
+<% end %>

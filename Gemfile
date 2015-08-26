@@ -26,7 +26,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Frontend
-gem 'hamlit'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
 gem 'bootswatch-rails', '~> 0.5.0'
@@ -56,7 +55,6 @@ gem 'figaro'
 
 # Email
 gem 'premailer-rails'
-gem 'nokogiri'
 
 # Font Awesome
 gem 'font-awesome-rails'
@@ -95,7 +93,6 @@ gem 'pg'
 # Email Obfuscation
 gem 'obfuscatejs'
 
-
 gem 'little_decorator'
 
 gem 'to_spreadsheet'
@@ -106,7 +103,6 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rubocop', require: false
-  gem 'haml-lint', require: false
 end
 
 

@@ -1,0 +1,20 @@
+<%= content_for(:title) do %>
+    Buses
+<% end %>
+<div class="page-header">
+  <h2>Buses</h2>
+</div>
+<div class="search pull-right">
+  <%= simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f| %>
+      <%= f.input :name_or_model_cont, as: :search_box %>
+      <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+      <%= link_to 'Clear', buses_path, class: t('buttons.mini.inverse'), icon: :times %>
+  <% end %>
+</div>
+<%= link_to 'Setup Bus', new_bus_path,  icon: :plus, class: t('buttons.primary') %>
+<%= link_to 'Refresh', buses_path, class: t('buttons.default'), icon: :refresh %>
+<%= bootstrap_table headers: %w(Actions Name Year Model Capacity), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+    <%= render @buses, cache: true %>
+<% end %>
+<%= link_to 'Setup Bus', new_bus_path,  icon: :plus, class: t('buttons.primary') %>
+<%= link_to 'Refresh', buses_path, class: t('buttons.default'), icon: :refresh %>

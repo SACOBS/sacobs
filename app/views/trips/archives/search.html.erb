@@ -1,0 +1,47 @@
+<%= content_for(:title) do %>
+  Archived Trips Search
+<% end %>
+<div class="information page-header">
+  <h2>
+    Archived Trips Search
+    <small>(Remember the more specific the search the higher chance of success)</small>
+  </h2>
+  <h3>
+    Results for search term <%= [params[:q][:name_cont], params[:q][:start_date_eq]].join(' ') %>
+  </h3>
+  <%= back_to trips_archives_path %>
+  <div class="search pull-right">
+    <%= simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, data: { type: :html } } do |f| %>
+        <%= f.input :start_date_eq, as: :date_picker, placeholder: 'Search trip dates' %>
+        <%= f.input :name_cont, as: :search_box %>
+        <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+        <%= link_to 'Clear', trips_archives_path, class: t('buttons.mini.inverse'), icon: :times %>
+    <% end %>
+  </div>
+</div>
+<div class="sort-links">
+  <ul class="inline">
+    <li class="header">Sort By:</li>
+    <li>
+      <%= sort_link @search, :name, 'Name', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :start_date, 'Start Date', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :route_name, 'Route', default_order: :desc %>
+    </li>
+  </ul>
+</div>
+<hr/>
+<div class="bookings">
+  <% if @results.any? %>
+      <%= bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed) do %>
+          <%= render partial: 'trip', collection: @results, as: :trip %>
+      <% end %>
+  <% else %>
+      <h3 class="text-center">No results were found for the specified search term.</h3>
+  <% end %>
+</div>

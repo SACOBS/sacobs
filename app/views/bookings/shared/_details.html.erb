@@ -1,0 +1,23 @@
+<% booking_decorator = decorate(booking) %>
+<%= bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'Connection', 'Price'], types: [:condensed] do %>
+    <tr>
+      <td>
+        <%= booking_decorator.status %>
+      </td>
+      <td>
+        <%= booking_decorator.reference_no %>
+      </td>
+      <td>
+        <%= booking_decorator.trip_name %>
+      </td>
+      <td>
+        <%= booking_decorator.trip_start_date %>
+      </td>
+      <td>
+        <%= booking_decorator.connection %>
+      </td>
+      <td>
+        <%= booking_decorator.price %>
+      </td>
+    </tr>
+<% end %>

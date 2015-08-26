@@ -1,0 +1,9 @@
+<%= content_tag_for(:tr, user) do %>
+<td><%= user %></td>
+<td><%= obfuscate_email user.email %></td>
+<td><span class="label label-info"><%= user.role.capitalize %></span></td>
+<td>
+  <%= link_to 'Upgrade Role', user_path(user, user: { role: :admin }), icon: :user, method: :put, class: t('buttons.mini.warning') %>
+  <%= link_to 'Downgrade Role', user_path(user, user: { role: :clerk }), icon: :user, method: :put, class: t('buttons.mini.warning') %>
+</td>
+<% end %>

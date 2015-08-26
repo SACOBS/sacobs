@@ -1,6 +1,6 @@
 class Trips::ArchivesController < ApplicationController
   def index
-    @trips = Trip.archived.page(params[:page])
+    @trips = Trip.archived.includes(:bus, :route).page(params[:page])
     fresh_when @trips, template: 'trips/archives/index'
   end
 
@@ -12,7 +12,7 @@ class Trips::ArchivesController < ApplicationController
   end
 
   def search
-    @search = trip_scope.includes(:bus, :route).search(params[:q])
+    @search = Trip.archived.includes(:bus, :route).search(params[:q])
     @results = @search.result.limit(50)
   end
 end

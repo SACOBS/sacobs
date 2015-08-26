@@ -37,7 +37,7 @@ class Booking < ActiveRecord::Base
   belongs_to :stop, -> { includes(:connection) }
   belongs_to :client
 
-  belongs_to :main,  -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
+  belongs_to :main, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
   has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
 
   has_one :invoice, dependent: :delete
@@ -60,7 +60,6 @@ class Booking < ActiveRecord::Base
   before_update :assign_seating, :reserve_return, if: proc { |booking| booking.status_changed? && booking.reserved? }
   before_update :unassign_seating, if: proc { |booking| booking.status_changed? && booking.cancelled? }
   before_update :clear_passengers, if: :client_id_changed?
-
 
   scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
   scope :expired, -> { reserved.where(arel_table[:expiry_date].lteq(Time.current)) }

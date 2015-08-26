@@ -1,0 +1,27 @@
+<div class="well">
+  <h4>
+    <%= pricing.connection_name %>
+  </h4>
+  <p>
+    <strong>Ticket Price:</strong>
+    <%= number_to_currency pricing.price, unit: 'R' %>
+  </p>
+</div>
+<div class="row-fluid span10">
+  <div class="span5 well">
+    <h5>Discounts</h5>
+    <% pricing.discount_prices.each do |key, value| %>
+      <ul>
+        <li><%= "#{key.to_s.humanize}: #{number_to_currency(value, unit: 'R')}" %></li>
+      </ul>
+    <% end %>
+  </div>
+  <div class="span5 well">
+    <h5>Charges</h5>
+    <% pricing.charges.each do |key, value| %>
+      <ul>
+        <li><%= "#{key.to_s.humanize}: #{number_to_currency(value, unit: 'R')}" %></li>
+      </ul>
+    <% end %>
+  </div>
+</div>

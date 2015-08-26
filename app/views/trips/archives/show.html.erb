@@ -1,0 +1,23 @@
+<%= content_for(:title) do %>
+    <%= @trip.name %> <%= @trip.start_date %>
+<% end %>
+<div class="page-header">
+  <h1>Trip</h1>
+  <div class="actions">
+    <%= back_to trips_archives_path %>
+  </div>
+</div>
+<% cache @trip do %>
+    <% content_for :sidebar do %>
+        <%= display_occupancy(@trip) %>
+    <% end %>
+    <div class="well">
+      <h4>Details</h4>
+      <%= render 'trips/shared/details', trip: @trip %>
+      <h4>Bookings</h4>
+      <%= render 'trips/shared/bookings', trip: @trip %>
+    </div>
+<% end %>
+<div class="actions">
+  <%= back_to trips_archives_path %>
+</div>

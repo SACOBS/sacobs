@@ -1,0 +1,142 @@
+<%= content_for(:title) do %>
+    <%= @client.full_name %>
+<% end %>
+<% cache @client do %>
+    <% client_decorator = decorate(@client) %>
+    <div class="page-header">
+      <h3>
+        <%= client_decorator.full_name %>
+      </h3>
+      <div class="actions">
+        <%= back_to clients_path %>
+        <%= client_decorator.edit_link class: t('buttons.inverse') %>
+        <%= client_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this client?' } %>
+      </div>
+    </div>
+    <div class="row-fluid well well-small">
+      <div class="span4">
+        <h4>Details</h4>
+        <p>
+          <strong>Title:</strong>
+          <%= client_decorator.title %>
+        </p>
+        <p>
+          <strong>Name:</strong>
+          <%= client_decorator.name %>
+        </p>
+        <p>
+          <strong>Surname:</strong>
+          <%= client_decorator.surname %>
+        </p>
+        <p>
+          <strong>Age:</strong>
+          <%= client_decorator.age %>
+        </p>
+        <p>
+          <strong>Date Of Birth:</strong>
+          <%= client_decorator.date_of_birth %>
+        </p>
+        <p>
+          <strong>Bank:</strong>
+          <%= client_decorator.bank %>
+        </p>
+        <p>
+          <strong>High Risk:</strong>
+          <%= @client.high_risk? ? 'Yes' : 'No' %>
+        </p>
+        <p>
+          <strong>
+            <u>Notes</u>
+          </strong>
+            <blockquote>
+              <%= simple_format(@client.notes.presence || 'N/A') %>
+            </blockquote>
+        </p>
+      </div>
+      <div class="span4">
+        <h4>Contact Info</h4>
+        <p>>
+          <strong>Home Telephone No:</strong>
+          <%= client_decorator.home_no %>
+        </p>
+        <p>>
+          <strong>Work Telephone No:</strong>
+          <%= client_decorator.work_no %>
+        </p>
+        <p>>
+          <strong>Cellphone No:</strong>
+          <%= client_decorator.cell_no %>
+        </p>
+        <p>>
+          <strong>Email:</strong>
+          <%= client_decorator.email %>
+        </p>
+      </div>
+      <div class="span4">
+        <h4>Address Info</h4>
+        <p>>
+          <strong>Street Address 1:</strong>
+          <%= client_decorator.street_address1 %>
+        </p>
+        <p>>
+          <strong>Street Address 2:</strong>
+          <%= client_decorator.street_address2 %>
+        </p>
+        <p>>
+          <strong>City:</strong>
+          <%= client_decorator.city %>
+        </p>
+        <p>>
+          <strong>Postal Code:</strong>
+          <%= client_decorator.postal_code %>
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="client-vouchers well well-small span6">
+        <h4>Credit Vouchers</h4>
+        <% if client_decorator.vouchers.any? %>
+            <%= bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed) do %>
+                <% client_decorator.vouchers.each do |voucher| %>
+                    <tr>
+                      <td>
+                        <%= voucher.ref_no %>
+                      </td>
+                      <td>
+                        <%= number_to_currency(voucher.amount, unit: 'R') %>
+                      </td>
+                    </tr>
+                <% end %>
+            <% end %>
+        <% else %>
+            <h5>This client has no vouchers</h5>
+        <% end %>
+        <%= client_decorator.add_voucher_link class: t('buttons.mini.warning') %>
+      </div>
+      <div class="client-bookings well well-small span6">
+        <h4>Recent Bookings</h4>
+        <% if client_decorator.recent_bookings.any? %>
+            <%= bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do %>
+                <% client_decorator.recent_bookings.each do |booking| %>
+                    <tr>
+                      <td>
+                        <%= booking.status %>
+                      </td>
+                      <td data-dateformat="ll">
+                        <%= booking.trip_start_date %>
+                      </td>
+                      <td>
+                        <%= booking.connection %>
+                      </td>
+                      <td>
+                        <%= booking.quantity %>
+                      </td>
+                    </tr>
+                <% end %>
+            <% end %>
+        <% else %>
+            <h5>This client has no bookings</h5>
+        <% end %>
+      </div>
+    </div>
+<% end %>

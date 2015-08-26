@@ -35,7 +35,7 @@ class Ticket
   end
 
   def to_file_name
-    "#{booking.trip.name}_#{booking.client.full_name}_#{Time.current.to_i}".gsub(' ', '_').downcase
+    "#{booking.trip.name}_#{booking.client.full_name}_#{Time.current.to_i}".tr(' ', '_').downcase
   end
 
   def method_missing(method_name, *args, &block)

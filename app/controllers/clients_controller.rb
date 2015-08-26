@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
     @clients = Client.surname_starts_with(params[:letter] || 'A').order(:surname).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email, :updated_at)
 
     if stale?(@clients)
-      request.xhr? ? render(partial: 'clients', locals: {clients: @clients}) : render(:index)
+      request.xhr? ? render(partial: 'clients', locals: { clients: @clients }) : render(:index)
     end
   end
 
@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
 
   def print
     @clients = Client.all
-    render xlsx: :print, filename: "clients"
+    render xlsx: :print, filename: 'clients'
   end
 
   private

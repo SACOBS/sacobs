@@ -1,0 +1,29 @@
+<% route_decorator = decorate(route) %>
+<tr>
+  <td>
+    <%= route_decorator.add_destination_link class: t('buttons.mini.primary'),  data: { toggle: 'tooltip', title: 'Click here to add a new destination (eg East London) to the route.' }, rel: 'tooltip' %>
+    <%= route_decorator.copy_link class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route.' }, rel: 'tooltip' %>
+    <%= route_decorator.reverse_copy_link class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this route in reverse(eg EL to PE will be copied as PE to EL).' }, rel: 'tooltip' %>
+    <%= route_decorator.show_link class: t('buttons.mini.info') %>
+    <%= route_decorator.edit_link class: t('buttons.mini.inverse') %>
+    <%= route_decorator.destroy_link class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this route?' } %>
+  </td>
+  <td>
+    <%= link_to route.name, route %>
+  </td>
+  <td>
+    <%= route_decorator.start_city %>
+  </td>
+  <td>
+    <%= route_decorator.end_city %>
+  </td>
+  <td>
+    <%= route_decorator.cost %>
+  </td>
+  <td>
+    <%= route_decorator.distance %>
+  </td>
+  <td>
+    <%= route_decorator.connections_count %>
+  </td>
+</tr>

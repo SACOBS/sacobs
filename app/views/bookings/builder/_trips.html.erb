@@ -1,0 +1,83 @@
+<% if stops.any? %>
+    <% stops.group_by { |s| s.trip.start_date.beginning_of_month }.sort.each do |month, stops_for_month| %>
+        <h4>
+          <%= l(month, format: :month) %>
+        </h4>
+        <%= bootstrap_table types: [:condensed] do %>
+            <% stops_for_month.each do |stop| %>
+                <tr>
+                  <td>
+                    <%= simple_form_for booking, namespace: stop.id, url: wizard_path, method: :patch, wrapper: false, defaults: { label: false } do |f| %>
+                        <% if step == :trip_details %>
+                            <%= bootstrap_table headers: ['Trip', 'Start Date', 'Connection', 'Available Seats', 'Pricing', 'Qty'], types: [:condensed] do %>
+                            <tr>
+                              <td>
+                                <%= link_to stop.trip.name, trip_path(stop.trip_id), target: '_blank' %>
+                              </td>
+                              <td>
+                                <%= l(stop.trip.start_date, format: :long) %>
+                              </td>
+                              <td>
+                                <%= stop.name %>
+                              </td>
+                              <td>
+                                <%= stop.available_seats %>
+                              </td>
+                              <td>
+                                <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
+                              </td>
+                              <td>
+                                <%= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, class: 'input-mini' } %>
+                              </td>
+                              <td>
+                                <%= token_tag %>
+                                <%= f.hidden_field :trip_id, value: stop.trip_id %>
+                                <%= f.hidden_field :stop_id, value: stop.id %>
+                                <%= f.submit 'Book', class: t('buttons.primary') %>
+                              </td>
+                            </tr>
+                        <% end %>
+                    <% else %>
+                        <%= f.simple_fields_for :return_booking, namespace: stop.id do |return_booking| %>
+                            <%= bootstrap_table headers: ['Trip', 'Start Date', 'Connection', 'Available Seats', 'Pricing', 'Qty'], types: [:condensed] do %>
+                                <tr>
+                                  <td>
+                                    <%= link_to stop.trip.name, trip_path(stop.trip_id), target: '_blank' %>
+                                  </td>
+                                  <td>
+                                    <%= l(stop.trip.start_date, format: :long) %>
+                                  </td>
+                                  <td>
+                                    <%= stop.name %>
+                                  </td>
+                                  <td>
+                                    <%= stop.available_seats %>
+                                  </td>
+                                  <td>
+                                    <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
+                                  </td>
+                                  <td>
+                                    <%= return_booking.input :quantity, as: :integer, readonly: true, input_html: { min: 1, max: stop.available_seats, class: 'input-mini' } %>
+                                  </td>
+                                  <td>
+                                    <%= token_tag %>
+                                    <%= return_booking.hidden_field :trip_id, value: stop.trip.id %>
+                                    <%= return_booking.hidden_field :stop_id, value: stop.id %>
+                                    <%= f.submit 'Book Return', class: t('buttons.primary') %>
+                                  </td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                </td>
+                </tr>
+            <% end %>
+        <% end %>
+    <% end %>
+<% else %>
+    <div class="hero-unit text-center">
+      <h3>There are no trips available. To add a new trip please press the button below.</h3>
+      <%= link_to 'New Trip', new_trip_path, class: t('buttons.large.primary'), icon: :plus, method: :post, target: '_blank' %>
+    </div>
+<% end %>

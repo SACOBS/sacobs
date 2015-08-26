@@ -1,0 +1,105 @@
+<div class="tripsheet-notes">
+  <p>
+    <strong>
+      <%= trip_sheet_presenter.notes %>
+    </strong>
+  </p>
+  <p>
+    <strong>
+      <%= trip_sheet_presenter.trip_sheet_note1 %>
+    </strong>
+  </p>
+  <p>
+    <strong>
+      <%= trip_sheet_presenter.trip_sheet_note2 %>
+    </strong>
+  </p>
+  <p>
+    <strong>
+      <%= trip_sheet_presenter.trip_sheet_note3 %>
+    </strong>
+  </p>
+</div>
+<%= bootstrap_table headers: %w(Drivers From Time O/Reading To Time), types: [:bordered] do %>
+    <% 5.times do %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    <% end %>
+<% end %>
+<%= bootstrap_table headers: [], types: [:bordered, :condensed] do %>
+    <tr>
+      <td>cash</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>cash send</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>cash send</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>POB</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>difference</td>
+      <td></td>
+    </tr>
+<% end %>
+<%= bootstrap_table headers: ['Trip remarks'], types: [:bordered, :condensed] do %>
+    <tr>
+      <td>Diesel</td>
+    </tr>
+    <tr>
+      <td>PE</td>
+      <td></td>
+      <td>Diesel</td>
+    </tr>
+    <tr>
+      <td>Toll</td>
+      <td></td>
+      <td></td>
+      <td>Mos</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Mos</td>
+      <td></td>
+      <td></td>
+      <td>Toll</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Cpt</td>
+      <td></td>
+      <td></td>
+      <td>PE</td>
+      <td></td>
+    </tr>
+<% end %>
+<%= bootstrap_table headers: ['Items on checklist to report pm'], types: [:bordered, :condensed] do %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+<% end %>
+<p>
+  <strong>
+    <%= trip_sheet_presenter.trip_sheet_note4 %>
+  </strong>
+</p>
+<p class="pull-right">
+  PTO
+</p>

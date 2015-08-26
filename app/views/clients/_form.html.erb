@@ -1,0 +1,42 @@
+<div id="errors">
+  <%= errors_for client %>
+</div>
+<%= simple_form_for client, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', clients_path, class: t('buttons.default') %>
+      </div>
+    </div>
+    <fieldset>
+      <div class="row">
+        <div class="span4">
+          <%= f.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title' %>
+          <%= f.input :name %>
+          <%= f.input :surname %>
+          <%= f.input :city %>
+          <%= f.input :id_number %>
+          <%= f.input :high_risk %>
+          <%= f.input :bank, include_blank: true, label: 'Select a bank', collection: Client::BANKS %>
+        </div>
+        <div class="span4">
+          <%= f.input :cell_no, as: :tel %>
+          <%= f.input :home_no, as: :tel %>
+          <%= f.input :work_no, as: :tel %>
+          <%= f.input :email, as: :email %>
+        </div>
+        <div class="span4">
+          <%= f.input :street_address1 %>
+          <%= f.input :street_address2 %>
+          <%= f.input :postal_code %>
+          <%= f.input :notes, as: :text %>
+        </div>
+      </div>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', clients_path, class: t('buttons.default') %>
+      </div>
+    </div>
+<% end %>

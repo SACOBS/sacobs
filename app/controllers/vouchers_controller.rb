@@ -6,9 +6,7 @@ class VouchersController < ApplicationController
   end
 
   def create
-    @voucher = @client.vouchers.build(voucher_params)
-    @voucher.user = current_user
-    @voucher.save
+    @voucher = @client.vouchers.create(voucher_params)
     respond_with @client, @voucher, location: client_url(@client)
   end
 
@@ -19,6 +17,6 @@ class VouchersController < ApplicationController
   end
 
   def voucher_params
-    params.fetch(:voucher, {}).permit(:amount)
+    params.fetch(:voucher, {}).permit(:amount).merge(user_id: current_user.id)
   end
 end

@@ -1,0 +1,20 @@
+<%= content_for(:title) do %>
+    Cities
+<% end %>
+<div class="page-header">
+  <h2>Cities</h2>
+</div>
+<div class="search pull-right">
+  <%= simple_form_for :q, url: search_cities_path, defaults: { required: false, label: false }, html: { class: 'form-inline' },  method: :get, remote: true do |f| %>
+      <%= f.input :name_cont, as: :search_box %>
+      <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+      <%= link_to 'Clear', cities_path, class: t('buttons.mini.inverse'), icon: :times %>
+  <% end %>
+</div>
+<%= link_to 'Setup City', new_city_path, class: t('buttons.primary'), icon: :plus %>
+<%= link_to 'Refresh', cities_path, class: t('buttons.default'), icon: :refresh %>
+<div id="cities">
+  <%= render partial: 'cities', locals: { cities: @cities } %>
+</div>
+<%= link_to 'Setup City', new_city_path, class: t('buttons.primary'), icon: :plus %>
+<%= link_to 'Refresh', cities_path, class: t('buttons.default'), icon: :refresh %>

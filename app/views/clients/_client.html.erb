@@ -1,0 +1,30 @@
+<% client_decorator = decorate(client) %>
+<div class="span4 client well well-small">
+  <div class="media">
+    <div class="pull-left">
+      <i class="fa fa-user fa-3x"></i>
+    </div>
+    <div class="media-body">
+      <h5 class="media-heading">
+        <%= link_to client.full_name, client %>
+      </h5>
+      <address>
+        <strong>Contact</strong>
+        <br/>
+        <%= contact_number(client_decorator.home_no, 'Home') %>
+        <br/>
+        <%= contact_number(client_decorator.work_no, 'Work') %>
+        <br/>
+        <%= contact_number(client_decorator.cell_no, 'Cell') %>
+        <br/>
+        <abbr class="initialism" title="Email">E:</abbr>
+        <%= client_decorator.email %>
+      </address>
+      <div class="btn-group">
+        <%= client_decorator.show_link class: t('buttons.small.info') %>
+        <%= client_decorator.edit_link class: t('buttons.small.inverse') %>
+        <%= client_decorator.destroy_link class: "#{t('buttons.small.danger')}", data: { behavior: 'delete-client', confirm: 'Are you sure you want to destroy this client?' }, remote: true %>
+      </div>
+    </div>
+  </div>
+</div>

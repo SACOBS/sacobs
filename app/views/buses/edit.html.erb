@@ -1,0 +1,41 @@
+<%= content_for(:title) do %>
+    Edit <%= @bus.name %>
+<% end %>
+<div class="page-header">
+  <h2>Edit Bus</h2>
+</div>
+<div id="errors">
+  <%= errors_for @bus %>
+</div>
+<%= simple_form_for @bus, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+      </div>
+    </div>
+    <fieldset>
+      <%= f.input :name, autofocus: true %>
+      <%= f.input :capacity, readonly: true %>
+      <%= f.input :year %>
+      <%= f.input :model %>
+    </fieldset>
+    <fieldset>
+      <%= bootstrap_table headers: ['Row', 'Number', ''], types: [:hover, :condensed], html_options: { id: 'seats' } do %>
+          <%= f.simple_fields_for :seats, wrapper: false do |seat| %>
+              <tr>
+                <td>
+                  <%= seat.input :row, label: false, class: 'input-small' %>
+                </td>
+                <td>
+                  <%= seat.input :number, label: false, class: 'input-small' %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+      </div>
+    </div>
+<% end %>

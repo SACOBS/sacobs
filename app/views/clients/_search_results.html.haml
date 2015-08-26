@@ -1,7 +1,0 @@
-.information.page-header
-  %h4 #{pluralize(clients.size, 'Result')} found that match #{params[:q][:full_name_cont]}
-
-.clients
-  - clients.in_groups_of(3, false) do |group|
-    .row-fluid
-      = render group, cache: true

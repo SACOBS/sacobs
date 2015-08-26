@@ -1,0 +1,21 @@
+<%= content_for(:title) do %>
+    Edit #{@discount.passenger_type.description}
+<% end %>
+<div class="page-header">
+  <h2>Edit Discount</h2>
+</div>
+<div id="errors">
+  <%= errors_for @discount %>
+</div>
+<%= simple_form_for @discount, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+    <fieldset>
+      <%= f.input :passenger_type, disabled: true, input_html: { value: f.object.passenger_type.description } %>
+      <%= f.input :percentage, autofocus: true %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', discounts_path, class: t('buttons.default') %>
+      </div>
+    </div>
+<% end %>

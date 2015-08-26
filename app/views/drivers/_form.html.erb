@@ -1,0 +1,15 @@
+<div id="errors">
+  <%= errors_for driver %>
+</div>
+<%= simple_form_for driver, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+    <fieldset>
+      <%= f.input :name, autofocus: true %>
+      <%= f.input :surname %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', drivers_path, class: t('buttons.default') %>
+      </div>
+    </div>
+<% end %>

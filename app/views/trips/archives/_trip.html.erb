@@ -1,0 +1,25 @@
+<% trip_decorator = decorate(trip) %>
+<tr>
+  <td>
+    <%= trip_decorator.trip_sheet_link class: t('buttons.mini.default'), target: '_blank' %>
+    <%= trip_decorator.archived_show_link class: t('buttons.mini.info') %>
+  </td>
+  <td>
+    <%= link_to trip.name, trip %>
+  </td>
+  <td>
+    <%= trip_decorator.day %>
+  </td>
+  <td data-dateformat="ll">
+    <%= trip_decorator.start_date %>
+  </td>
+  <td data-dateformat="ll">
+    <%= trip_decorator.end_date %>
+  </td>
+  <td>
+    <%= trip_decorator.route_name %>
+  </td>
+  <td>
+    <%= trip_decorator.bus_name %>
+  </td>
+</tr>

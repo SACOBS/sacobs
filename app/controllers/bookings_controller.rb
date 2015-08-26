@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
       when 'paid'
         bookings = booking_scope.paid.page(params[:paid_page])
       when 'cancelled'
-        bookings =  booking_scope.cancelled.page(params[:cancelled_page])
+        bookings = booking_scope.cancelled.page(params[:cancelled_page])
       else
         bookings = booking_scope.none
     end

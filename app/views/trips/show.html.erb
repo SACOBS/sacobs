@@ -1,0 +1,31 @@
+<% trip_decorator = decorate(@trip) %>
+
+<%= content_for(:title) do %>
+    <%= "#{trip_decorator.name} #{@trip.start_date}" %>
+<% end %>
+
+<div class="page-header">
+  <h1>Trip</h1>
+  <div class="actions">
+    <%= back_to trips_path %>
+    <%= trip_decorator.edit_link class: t('buttons.info') %>
+    <%= trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' } %>
+  </div>
+</div>
+
+<% cache @trip do %>
+  <% content_for(:sidebar) do %>
+     <%= display_occupancy(@trip) %>
+  <% end %>
+<div class="well">
+  <h4>Details</h4>
+  <%= render 'trips/shared/details', trip: @trip %>
+  <h4>Bookings</h4>
+  <%= render 'trips/shared/bookings', trip: @trip %>
+</div>
+<% end %>
+<div class="actions">
+  <%= back_to trips_path %>
+  <%= trip_decorator.edit_link class: t('buttons.info') %>
+  <%= trip_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' } %>
+</div>

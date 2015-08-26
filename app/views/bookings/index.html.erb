@@ -1,0 +1,64 @@
+<%= content_for (:title) do %>
+    Bookings
+<% end %>
+<div class="page-header">
+  <h2>Bookings</h2>
+  <%= link_to 'Make Booking', bookings_path, method: :post, icon: :plus, class: t('buttons.primary') %>
+  <%= link_to 'Refresh', bookings_path, class: t('buttons.default'), icon: :refresh %>
+</div>
+<div class="search pull-right">
+  <%= simple_form_for :q, url: search_bookings_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'booking_search', data: { type: :html } } do |f| %>
+      <%= f.input :created_at_date_eq, as: :date_picker, placeholder: 'Search booking dates' %>
+      <%= f.input :reference_no_or_client_surname_cont, as: :search_box %>
+      <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+      <%= link_to 'Clear', bookings_path, class: t('buttons.mini.inverse'), icon: :times %>
+  <% end %>
+</div>
+<div class="tab-wrapper" id="bookings">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" data-target="#standby">
+        Standby/Expired
+        <span class="badge badge-warning">
+          <%= standby_booking_count %>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="tab" data-target="#reserved">
+        Reserved
+        <span class="badge badge-info">
+          <%= reserved_booking_count %>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="tab" data-target="#paid">
+        Paid
+        <span class="badge badge-success">
+          <%= paid_booking_count %>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="tab" data-target="#cancelled">
+        Cancelled
+        <span class="badge badge-important">
+          <%= cancelled_booking_count %>
+        </span>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane" id="reserved" data-type="reserved"></div>
+    <div class="tab-pane active" id="standby" data-type="standby">
+      <%= render 'bookings/bookings', bookings: @bookings, type: params[:type] %>
+    </div>
+    <div class="tab-pane" id="paid" data-type="paid"></div>
+    <div class="tab-pane" id="cancelled" data-type="cancelled"></div>
+  </div>
+</div>
+
+<br/>
+<%= link_to 'Make Booking', bookings_path, method: :post, icon: :plus, class: t('buttons.primary') %>
+<%= link_to 'Refresh', bookings_path, class: t('buttons.default'), icon: :refresh %>

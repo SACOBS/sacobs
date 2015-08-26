@@ -69,7 +69,7 @@ class PricingPresenter
   end
 
   def passenger_types
-    Rails.cache.fetch(PassengerType.cache_key) do
+    Rails.cache.fetch(PassengerType.all.cache_key) do
       PassengerType.all
     end
   end

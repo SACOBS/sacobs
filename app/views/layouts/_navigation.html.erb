@@ -1,0 +1,83 @@
+<% if user_signed_in? %>
+    <%= link_to 'Home', dashboard_path, class: 'brand' %>
+    <ul class="nav pull-left">
+      <li>
+        <%= link_to 'New (B)ooking', bookings_path, method: :post, accesskey: 'b', target: '_blank' %>
+      </li>
+      <li>
+        <%= link_to 'New (C)lient', new_client_path, accesskey: 'c', target: '_blank' %>
+      </li>
+      <% if current_user.admin? %>
+          <li>
+            <%= link_to 'New (T)rip', new_trip_path, accesskey: 't', target: '_blank' %>
+          </li>
+      <% end %>
+      <%= drop_down_menu('Bookings') do %>
+          <li>
+            <%= link_to 'View', bookings_path %>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Archives', bookings_archives_path %>
+          </li>
+      <% end %>
+      <li>
+        <%= link_to 'Clients', clients_path %>
+      </li>
+      <% if current_user.admin? %>
+          <%= drop_down_menu('Trips') do %>
+              <li>
+                <%= link_to 'View', trips_path %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Archives', trips_archives_path %>
+              </li>
+          <% end %>
+          <li>
+            <%= link_to 'Manage', admin_index_path %>
+          </li>
+          <%= drop_down_menu('Reports') do %>
+              <li>
+                <%= link_to 'Reports', reports_path %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Daily Bookings', bookings_daily_index_path %>
+              </li>
+          <% end %>
+      <% end %>
+      <li>
+        <%= link_to 'Quotes', quick_quote_path %>
+      </li>
+      <li>
+        <%= link_to 'Tripsheets', trip_sheets_path %>
+      </li>
+      <li>
+        <%= link_to 'Notes', '#', id: 'show_notes' %>
+      </li>
+    </ul>
+    <ul class="nav pull-right">
+      <li class="divider-vertical"></li>
+      <%= drop_down_menu('Account') do %>
+          <li>
+            <%= link_to 'Edit account', edit_user_registration_path %>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+          </li>
+      <% end %>
+      <li class="divider-vertical"></li>
+    </ul>
+<% else %>
+    <%= link_to 'Home', root_path, class: 'brand' %>
+    <ul class="nav">
+      <li>
+        <%= link_to 'Login', new_user_session_path %>
+      </li>
+      <li>
+        <%= link_to 'Sign up', new_user_registration_path %>
+      </li>
+    </ul>
+<% end %>

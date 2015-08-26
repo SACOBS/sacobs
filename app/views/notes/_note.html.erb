@@ -1,0 +1,6 @@
+<% cache note do %>
+    <%= content_tag_for :li, note do %>
+      <%= note.content %>
+      <%= link_to_if(current_user.admin?, '', note, icon: :times, method: :delete, remote: true) {} %>
+    <% end %>
+<% end %>

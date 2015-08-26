@@ -1,0 +1,28 @@
+<table class="table table-condensed table-hover table-bordered sortable">
+  <thead>
+  <tr>
+    <th>From</th>
+    <th>Ocp</th>
+    <th>Cap</th>
+    <th>To</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% items.each do |item| %>
+      <tr>
+        <td>
+          <%= item.from %>
+        </td>
+        <td>
+          <%= item.occupied %>
+        </td>
+        <td>
+          <%= capacity %>
+        </td>
+        <td>
+          <%= item.to %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

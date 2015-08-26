@@ -1,0 +1,20 @@
+<% client_decorator = decorate(client) %>
+<%= bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do %>
+    <tr>
+      <td>
+        <%= client_decorator.full_name %>
+      </td>
+      <td>
+        <%= client_decorator.home_no %>
+      </td>
+      <td>
+        <%= client_decorator.cell_no %>
+      </td>
+      <td>
+        <%= client_decorator.work_no %>
+      </td>
+      <td>
+        <%= client_decorator.email %>
+      </td>
+    </tr>
+<% end %>

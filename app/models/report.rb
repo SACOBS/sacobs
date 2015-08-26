@@ -27,7 +27,7 @@ class Report < ActiveRecord::Base
   end
 
   def to_file_name
-    "#{name}_#{Time.current.to_i}".gsub(' ', '_').downcase
+    "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
   end
 
   private

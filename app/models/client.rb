@@ -47,24 +47,23 @@ class Client < ActiveRecord::Base
 
   before_validation :set_birth_date
 
-
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
   end
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
-  def name=(val)
+  def name=(_val)
     value.squish!.upcase! if value.present?
     super(value)
   end
 
-  def surname=(val)
+  def surname=(_val)
     value.squish!.upcase! if value.present?
     super(value)
   end
 
-  def email=(val)
+  def email=(_val)
     value.squish!.upcase! if value.present?
     super(value)
   end

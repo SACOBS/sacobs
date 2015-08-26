@@ -1,0 +1,23 @@
+<%= content_for(:title) do %>
+    Payment Details
+<% end %>
+<div class="page-header">
+  <h2>Enter Payment Details</h2>
+  <h4>Booking Reference: <%= @booking.reference_no %></h4>
+</div>
+<div id="errors">
+  <%= errors_for @payment_detail %>
+</div>
+<%= simple_form_for [@booking, @payment_detail], defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+    <fieldset>
+      <%= f.input :reference, label: 'Client Payment Reference', hint: 'Put the reference from the bank for the client payment.', autofocus: true %>
+      <%= f.input :payment_type, collection: PaymentDetail::PAYMENT_TYPES.sort, include_blank: false, prompt: 'Select a payment type', selected: @booking.client.bank %>
+      <%= f.input :payment_date, as: :date_time_picker %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', bookings_path, class: t('buttons.default') %>
+      </div>
+    </div>
+<% end %>

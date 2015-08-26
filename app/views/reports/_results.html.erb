@@ -1,0 +1,43 @@
+<div class="well well-small">
+  <h3>
+    <%= @report.name %>
+  </h3>
+  <h4>Results Summary</h4>
+  <p>Items: #{@results.size}</p>
+  <p>Total Amount: #{number_to_currency(@results.map(&:price).compact.reduce(&:+))}</p>
+</div>
+<div class="results">
+  <% @results.group_by { |result| result.updated_at.beginning_of_month }.sort.each do |month, results_per_month| %>
+      <h4>
+        <%= l(month.to_date, format: :month) %>
+      </h4>
+      <%= bootstrap_table headers: ['Trip', 'Start Date', 'Status', 'Client', 'Connection', 'Qty', 'Price'], types: [:condensed] do %>
+          <% results_per_month.each do |result| %>
+              <% booking_decorator = decorate(result) %>
+              <tr>
+                <td>
+                  <%= booking_decorator.trip_name %>
+                </td>
+                <td>
+                  <%= booking_decorator.trip_start_date %>
+                </td>
+                <td>
+                  <%= booking_decorator.status %>
+                </td>
+                <td>
+                  <%= booking_decorator.client_full_name %>
+                </td>
+                <td>
+                  <%= booking_decorator.connection %>
+                </td>
+                <td>
+                  <%= booking_decorator.quantity %>
+                </td>
+                <td>
+                  <%= booking_decorator.price %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>

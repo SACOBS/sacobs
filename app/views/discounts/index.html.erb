@@ -1,0 +1,11 @@
+<%= content_for(:title) do %>
+    Discounts
+<% end %>
+<div class="page-header">
+  <h2>Discounts</h2>
+  <%= link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus %>
+</div>
+<%= bootstrap_table headers: %w(Actions Passenger Percentage), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+    <%= render @discounts, cache: true %>
+<% end %>
+<%= link_to 'Setup Discount', new_discount_path, class: t('buttons.primary'), icon: :plus %>

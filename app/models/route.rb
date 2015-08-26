@@ -12,7 +12,6 @@
 #
 
 class Route < ActiveRecord::Base
-
   to_param :name
 
   has_many :destinations, -> { includes(:city) }, dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations do
@@ -28,7 +27,7 @@ class Route < ActiveRecord::Base
 
   validates :name, :cost, :distance, presence: true
   validates :cost, :distance, numericality: true
-  validates :destinations, presence: true, length: {minimum: 2, too_short: 'is too short (at least %{count} destinations required)'}
+  validates :destinations, presence: true, length: { minimum: 2, too_short: 'is too short (at least %{count} destinations required)' }
 
   before_save :generate_connections
   after_update { touch }

@@ -1,0 +1,37 @@
+<table>
+  <caption>Clients</caption>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Surname</td>
+    <td>Cell No</td>
+    <td>Home No</td>
+    <td>Work No</td>
+    <td>Email</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @clients.each do |client| %>
+      <tr>
+        <td>
+          <%= client.name.titleize %>
+        </td>
+        <td>
+          <%= client.surname.titleize %>
+        </td>
+        <td>
+          <%= number_to_phone(client.cell_no, area_code: true) %>
+        </td>
+        <td>
+          <%= number_to_phone(client.home_no, area_code: true) %>
+        </td>
+        <td>
+          <%= number_to_phone(client.cell_no, area_code: true) %>
+        </td>
+        <td>
+          <%= client.email %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

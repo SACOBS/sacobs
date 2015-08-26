@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   etag { current_user.try :id }
 
   def context
-    controller_path.gsub('/', '')
+    controller_path.delete('/')
   end
   helper_method :context
 

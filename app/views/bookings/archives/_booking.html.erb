@@ -1,0 +1,22 @@
+<% booking_decorator = decorate(booking) %>
+<tr>
+  <td>
+    <%= booking_decorator.archived_show_link class: t('buttons.mini.info') %>
+    <%= booking_decorator.ticket_link class: t('buttons.mini.default'), target: '_blank' %>
+  </td>
+  <td>
+    <%= booking_decorator.status %>
+  </td>
+  <td>
+    <%= booking_decorator.client_link target: '_blank' %>
+  </td>
+  <td data-dateformat="ll">
+    <%= booking_decorator.trip_start_date %>
+  </td>
+  <td>
+    <%= booking_decorator.quantity %>
+  </td>
+  <td>
+    <%= booking_decorator.connection %>
+  </td>
+</tr>

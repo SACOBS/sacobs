@@ -1,0 +1,33 @@
+<%= content_for :title do %>
+    Edit Settings
+<% end %>
+<div class="page-header">
+  <h2>Edit Setting</h2>
+</div>
+<div id="errors">
+  <%= errors_for @setting %>
+</div>
+<%= simple_form_for @setting, url: setting_url(format: :html), defaults: { error: false }, method: :patch, html: { class: 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', root_path, class: t('buttons.default') %>
+      </div>
+    </div>
+    <fieldset>
+      <%= f.input :booking_expiry_period, autofocus: true %>
+      <%= f.input :email, as: :email %>
+      <%= f.input :ticket_instructions, as: :text %>
+      <%= f.input :default_scripture, as: :text %>
+      <%= f.input :trip_sheet_note1, as: :text %>
+      <%= f.input :trip_sheet_note2, as: :text %>
+      <%= f.input :trip_sheet_note3, as: :text %>
+      <%= f.input :trip_sheet_note4, as: :text %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Cancel', root_path, class: t('buttons.default') %>
+      </div>
+    </div>
+<% end %>

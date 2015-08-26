@@ -1,0 +1,49 @@
+<%= content_for(:title) do %>
+    Quick Trip Sheet
+<% end %>
+<% content_for :sidebar do %>
+    <h4>Search for trips</h4>
+    <%= simple_form_for :q, url: trip_sheets_path, method: :get  do |f| %>
+        <%= f.input :start_date_eq, as: :date_picker, placeholder: 'Select a date', label: 'Date of trip' %>
+        <%= f.input :route_id_in, collection: Route.all, as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route' %>
+        <%= f.submit 'Search', class: t('buttons.inverse') %>
+    <% end %>
+<% end %>
+<h4>Quick TripSheet</h4>
+<div class="results">
+  <div class="well">
+    <% if @trips.any? %>
+        <% @trips.each do |trip| %>
+            <div class="result">
+              <dl class="dl-horizontal">
+                <dt>Name:</dt>
+                <dd>
+                  <%= trip.name %>
+                </dd>
+                <dt>Route:</dt>
+                <dd>
+                  <%= trip.route_name %>
+                </dd>
+                <dt>Date:</dt>
+                <dd>
+                  <%= l(trip.start_date, format: :long) %>
+                </dd>
+                <dt>Day:</dt>
+                <dd>
+                  <%= l(trip.start_date, format: :day) %>
+                </dd>
+                <dt>Bookings:</dt>
+                <dd>
+                  <%= trip.bookings.size %>
+                </dd>
+                <dd>
+                  <%= link_to 'Generate TripSheet', trip_sheet_path(trip), target: '_blank', icon: :road, class: t('buttons.mini.info') %>
+                </dd>
+              </dl>
+            </div>
+        <% end %>
+    <% else %>
+        <p class="lead text-center">There are currently no trips</p>
+    <% end %>
+  </div>
+</div>

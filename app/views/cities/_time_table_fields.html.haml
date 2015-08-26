@@ -1,9 +1,0 @@
-%tr
-  %td
-    = f.object.outgoing? ? 'From' : 'To'
-    = f.hidden_field :direction
-    = f.hidden_field :id
-
-  %td= f.input_field :arrive, as: :time, class: 'input-small', label: false
-  %td= f.input_field :depart, as: :time, class: 'input-small', label: false
-

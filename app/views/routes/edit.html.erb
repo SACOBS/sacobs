@@ -1,0 +1,65 @@
+<%= content_for(:title) do %>
+    Edit <%= @route.name %>
+<% end %>
+<div class="page-header">
+  <h2>Edit Route</h2>
+  <h4>Notes:</h4>
+  <ol>
+    <li>
+      <p>
+        <strong>Percentage:</strong>
+        <em>When changing the percentage, the cost will be recalculated and updated (eg. 50% will make the cost half of the <strong>'Master Rate'</strong>)</em>
+      </p>
+    </li>
+    <li>
+      <p>
+        <strong>Cost:</strong>
+        <em>When changing the cost, the percentage will be recalculated and updated (eg. half of the  <strong>'Master Rate'</strong> will make the percentage 50%)</em>
+      </p>
+    </li>
+  </ol>
+</div>
+<div id="errors">
+  <%= errors_for @route %>
+</div>
+<%= simple_form_for @route, defaults: { error: false }, html: { class: 'form-inline' } do |f| %>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Back', routes_path, class: t('buttons.info') %>
+      </div>
+    </div>
+    <hr/>
+    <fieldset>
+      <%= f.input :name, autofocus: true, label: 'Name:' %>
+      <%= f.input :cost, as: :cost, label: 'Master Rate:' %>
+      <%= f.input :distance, as: :distance, label: 'Distance:' %>
+    </fieldset>
+    <hr/>
+    <fieldset>
+      <%= bootstrap_table headers: ['Name', 'Percentage', 'Cost', 'Distance', ''], types: [:condensed], html_options: { id: 'connections', class: 'sortable' } do %>
+          <%= f.simple_fields_for :connections, wrapper: false do |connection| %>
+              <tr>
+                <td>
+                  <%= connection.object.name %>
+                </td>
+                <td>
+                  <%= connection.input_field :percentage, as: :percentage, class: 'input-small' %>
+                </td>
+                <td>
+                  <%= connection.input_field :cost, as: :cost, class: 'input-small' %>
+                </td>
+                <td>
+                  <%= connection.input_field :distance, as: :distance, class: 'input-small' %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: t('buttons.primary') %>
+        <%= link_to 'Back', routes_path, class: t('buttons.info') %>
+      </div>
+    </div>
+<% end %>

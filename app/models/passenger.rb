@@ -50,8 +50,8 @@ class Passenger < ActiveRecord::Base
   end
 
   protected
+
   def set_defaults
     self.passenger_type = Passenger::DEFAULT_TYPE
   end
-
 end

@@ -15,7 +15,6 @@
 #
 
 class City < ActiveRecord::Base
-
   default_scope { order(name: :asc) }
 
   to_param :name
@@ -29,8 +28,8 @@ class City < ActiveRecord::Base
   validates :name, presence: true
 
   def name=(value)
-   value.squish!.upcase! if value.present?
-   super(value)
+    value.squish!.upcase! if value.present?
+    super(value)
   end
 
   def outgoing_time_table

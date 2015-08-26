@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h2>Reports</h2>
+</div>
+<ul class="unstyled">
+  <% @reports.each do |report| %>
+    <li>
+      <%= report.name %>
+      <%= link_to 'Show', report %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Add Report', new_report_path %>

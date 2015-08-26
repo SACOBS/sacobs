@@ -6,7 +6,7 @@ module LinkHelper
   end
 
   def iconize(name)
-    "fa fa-#{name.to_s.gsub('_', '-')}"
+    "fa fa-#{name.to_s.tr('_', '-')}"
   end
 
   def back_to(path)

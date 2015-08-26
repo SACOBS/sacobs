@@ -9,7 +9,6 @@
 #
 
 class PassengerType < ActiveRecord::Base
-
   default_scope { order(description: :asc) }
 
   validates :description, presence: true

@@ -1,0 +1,54 @@
+<%= content_for(:title) do %>
+  Edit Destinations
+<% end %>
+<div class="page-header">
+  <h2>Edit Destinations</h2>
+</div>
+<div class="row span12">
+  <div class="span5">
+    <div class="well">
+      <h4>Instructions</h4>
+      <ol>
+        <li>
+          Select the city you want to add to the route from the City input.
+        </li>
+        <li>
+          Select the city that comes before it on the route from the preceding city input. For example, If Port Alfred is selected then East London will be the preceding city.
+        </li>
+        <li>
+          If the city being added is going to be the starting city on the route.
+          <strong>Please leave the preceding city field blank.</strong>
+        </li>
+      </ol>
+      <p>
+        <b>NB</b>
+        <br/>
+        <em>
+          Please note that connections are generated based on the city selected and for all the cities coming before it.
+          Thus it is important to choose the correct preceding city (Blank if the new city is the start of the route) as a number of connections could be created that are incorrect.
+        </em>
+      </p>
+    </div>
+  </div>
+  <div class="span2">
+    <h4>Current Destinations</h4>
+    <ol>
+      <% @route.destinations.order(:sequence).map { |destination| destination.city.name }.each do |city_name| %>
+        <li>
+          <%= city_name %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+  <div class="span3">
+    <h4>Add Destination</h4>
+    <%= simple_form_for :destination, url: route_destinations_path(@route), method: :patch do |f| %>
+      <%= f.input :city, typeahead: cities, label: 'New city to be added:', placeholder: 'New City', input_html: { data: { targets: '#destination_city_id', filter: :name } }, autofocus: true %>
+      <%= f.hidden_field :city_id %>
+      <%= f.input :preceding, typeahead: destinations, placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: '#destination_preceding_id', filter: :name } } %>
+      <%= f.hidden_field :preceding_id %>
+      <%= f.submit 'Save', class: t('buttons.primary') %>
+      <%= link_to 'Back', routes_path, class: t('buttons.info') %>
+    <% end %>
+  </div>
+</div>

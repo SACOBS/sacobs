@@ -1,0 +1,59 @@
+<%= content_for(:title) do %>
+    Bookings Search
+<% end %>
+<div class="information page-header">
+  <h2>
+    Bookings Search
+    <small>(Remember the more specific the search the higher chance of success)</small>
+  </h2>
+  <h3>
+    Results for search term <%= [params[:q][:reference_no_or_client_surname_cont], params[:q][:created_at_date_eq]].join(' ') %>
+  </h3>
+  <%= back_to bookings_path %>
+  <div class="search pull-right">
+    <%= simple_form_for :q, url: search_bookings_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'booking_search', data: { type: :html } } do |f| %>
+        <%= f.input :created_at_date_eq, as: :date_picker, placeholder: 'Search booking dates' %>
+        <%= f.input :reference_no_or_client_surname_cont, as: :search_box %>
+        <%= f.submit 'Search', class: t('buttons.mini.warning') %>
+        <%= link_to 'Clear', bookings_path, class: t('buttons.mini.inverse'), icon: :times %>
+    <% end %>
+  </div>
+</div>
+<div class="sort-links">
+  <ul class="inline">
+    <li class="header">Sort By:</li>
+    <li>
+      <%= sort_link @search, :client_full_name, 'Client', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :status, 'Status', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :created, 'Creation Date', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :trip_start_date, 'Trip Date', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :stop_connection_from_city_name, 'From City', default_order: :desc %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= sort_link @search, :stop_connection_to_city_name, 'To City', default_order: :desc %>
+    </li>
+  </ul>
+</div>
+<hr/>
+<div class="bookings">
+  <% if @results.any? %>
+      <%= bootstrap_table headers: ['Actions', 'Expires', 'Client', 'Contact', 'Trip Date', 'Qty', 'Connection'],types: %i(hover condensed) do %>
+          <%= render @results %>
+      <% end %>
+  <% else %>
+      <h3 class="text-center">No results were found for the specified search term.</h3>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+<%= paginate trips %>
+<%= bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+    <%= render partial: 'trip', collection: trips, as: :trip, cache: true %>
+<% end %>
+<%= paginate trips %>

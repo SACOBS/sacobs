@@ -1,0 +1,19 @@
+<tr class="<%= dom_class(bus) %>" id="<%= dom_id(bus) %>">
+  <td>
+    <%= link_to 'Show', bus, icon: :info, class: t('buttons.mini.info') %>
+    <%= link_to 'Edit', edit_bus_path(bus), icon: :edit, class: t('buttons.mini.inverse') %>
+    <%= link_to 'Delete', bus, icon: :times, data: { confirm: t('messages.confirm', resource: :bus) }, method: :delete,  class: t('buttons.mini.danger') %>
+  </td>
+  <td>
+    <%= link_to bus.name, bus %>
+  </td>
+  <td>
+    <%= bus.year %>
+  </td>
+  <td>
+    <%= bus.model %>
+  </td>
+  <td>
+    <%= bus.capacity %>
+  </td>
+</tr>

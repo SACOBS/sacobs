@@ -1,0 +1,18 @@
+<%= content_for (:title) do %>
+    Daily Bookings
+<% end %>
+<div class="text-center">
+  <%= link_to 'Print', print_bookings_daily_index_path, class: t('buttons.primary') %>
+</div>
+<hr/>
+<div class="bookings">
+  <% if @bookings.any? %>
+      <%= render 'bookings/daily/bookings' %>
+  <% else %>
+      <h4 class="text-center">There have been no bookings made for today yet.</h4>
+  <% end %>
+</div>
+<hr/>
+<div class="text-center">
+  <%= link_to 'Print', print_bookings_daily_index_path, class: t('buttons.primary') %>
+</div>

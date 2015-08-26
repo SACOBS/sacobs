@@ -1,0 +1,20 @@
+<% trip_decorator = decorate(trip) %>
+<%= bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do %>
+    <tr>
+      <td>
+        <%= trip_decorator.name %>
+      </td>
+      <td>
+        <%= trip_decorator.start_date %>
+      </td>
+      <td>
+        <%= trip_decorator.route_name %>
+      </td>
+      <td>
+        <%= trip_decorator.bus_name %>
+      </td>
+      <td>
+        <%= trip_decorator.drivers_names %>
+      </td>
+    </tr>
+<% end %>

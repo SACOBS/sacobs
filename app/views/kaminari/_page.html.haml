@@ -1,7 +1,0 @@
-= content_tag(:li, class: ('active' if page.current?)) do
-  - if page.next?
-    = link_to page, page.current? ? '#' : url,  remote: remote, rel:  'next'
-  - elsif page.prev?
-    = link_to page, page.current? ? '#' : url,  remote: remote, rel:  'prev'
-  - else
-    = link_to page, page.current? ? '#' : url,  remote: remote

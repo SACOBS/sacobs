@@ -1,0 +1,29 @@
+<%= content_for(:title) do %>
+    <%= @city.name %>
+<% end %>
+<div class="page-header">
+  <h2>City</h2>
+  <div class="actions">
+    <%= back_to cities_path %>
+    <%= link_to 'Edit', edit_city_path(@city), icon: :edit, class: t('buttons.info') %>
+    <%= link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: t('messages.confirm', resource: :city) }, icon: :times, class: t('buttons.danger') %>
+  </div>
+</div>
+<div class="well">
+  <p>
+    <strong>Name:</strong>
+    <br/>
+    <%= @city.name %>
+  </p>
+  <p>
+    <strong>Venues:</strong>
+    <% if @city.venues.any? %>
+      <ul>
+        <%= content_tag_for(:li, @city.venues) { |venue| venue.name } %>
+      </ul>
+    <% else %>
+      <br/>
+      None
+    <% end %>
+  </p>
+</div>

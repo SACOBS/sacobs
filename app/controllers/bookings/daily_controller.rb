@@ -4,8 +4,8 @@ class Bookings::DailyController < ApplicationController
   end
 
   def print
-    @bookings =  bookings
-    render pdf: "daily_bookings_#{Time.zone.now.to_i}.pdf".gsub(' ', '_').downcase,
+    @bookings = bookings
+    render pdf: "daily_bookings_#{Time.zone.now.to_i}.pdf".tr(' ', '_').downcase,
            disposition: :inline,
            template: 'bookings/_daily_bookings.html.haml',
            layout: 'pdf.html'

@@ -1,0 +1,11 @@
+<%= content_for(:title) do %>
+    Charges
+<% end %>
+<div class="page-header">
+  <h2>Charges</h2>
+</div>
+<%= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'), icon: :plus %>
+<%= bootstrap_table headers: %w(Actions Description Percentage), types: %i(condensed), html_options: { class: 'sortable' } do %>
+    <%= render @charges, cache: true %>
+<% end %>
+<%= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'), icon: :plus %>
