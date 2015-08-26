@@ -12,7 +12,7 @@
       </div>
     </div>
     <%= f.fields_for :passengers do |p| %>
-        <h5>#{p.object.full_name} (#{p.object.passenger_type.description.titleize})</h5>
+        <h5><%= p.object.full_name %> (<%= p.object.passenger_type.description.titleize %>)</h5>
         <% Charge.all.each do |c| %>
             <%= label_tag 'charge', c.description, class: 'checkbox' do %>
                 <%= check_box_tag "booking[passengers_attributes][#{p.options[:child_index]}]charges[]", c.id, p.object.charges.include?(c), id: dom_id(c) %>
