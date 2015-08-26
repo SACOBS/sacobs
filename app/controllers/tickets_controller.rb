@@ -16,8 +16,12 @@ class TicketsController < ApplicationController
   end
 
   def email
-    TicketMailer.send_ticket(@booking).deliver_later
-    respond_with @booking, location: ticket_url(@booking), notice: 'Ticket has been emailed successfully'
+    if @booking.client.email.present?
+      TicketMailer.send_ticket(@booking).deliver_later
+      redirect_to ticket_url(@booking), notice: 'Ticket has been emailed successfully'
+    else
+      redirect_to ticket_url(@booking), alert: 'The client for this booking does not have an email to send to. Please update the client email and try again.'
+    end
   end
 
   private
