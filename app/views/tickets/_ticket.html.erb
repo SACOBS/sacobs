@@ -34,10 +34,10 @@
                   <%= booking.stop.to_city.venues.first.name %>
                 </td>
                 <td>
-                  <%= local_time(booking.stop.from_city.outgoing_time_table.depart, format: :short) if booking.stop.from_city.outgoing_time_table.present? %>
+                  <%= l(booking.stop.from_city.outgoing_time_table.depart, format: :short) if booking.stop.from_city.outgoing_time_table.present? %>
                 </td>
                 <td>
-                  <%= local_time(booking.stop.to_city.incoming_time_table.depart, format: :short) if booking.stop.from_city.incoming_time_table.present? %>
+                  <%= l(booking.stop.to_city.incoming_time_table.depart, format: :short) if booking.stop.from_city.incoming_time_table.present? %>
                 </td>
               </tr>
           <% end %>

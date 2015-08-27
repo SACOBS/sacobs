@@ -28,7 +28,7 @@ class TicketsController < ApplicationController
 
   def render_pdf(disposition: :inline)
     render pdf: "#{@ticket.to_file_name}",
-           template: 'tickets/_ticket.html.haml',
+           template: 'tickets/_ticket.html.erb',
            disposition: disposition,
            layout: 'pdf.html',
            locals: { ticket: @ticket }
