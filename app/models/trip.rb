@@ -58,18 +58,12 @@ class Trip < ActiveRecord::Base
     copy
   end
 
-  def assign_seats(stop, qty)
-    transaction do
-      stops.affected(stop).update_all(['available_seats = available_seats - ?', qty])
-      touch
-    end
+  def assign_seats!(stop, qty)
+    stops.affected(stop).each { |record| record.decrement(:available_seats, qty).save! }
   end
 
-  def unassign_seats(stop, qty)
-    transaction do
-      stops.affected(stop).update_all(['available_seats = available_seats + ?', qty])
-      touch
-    end
+  def unassign_seats!(stop, qty)
+    stops.affected(stop).each { |record| record.increment(:available_seats, qty).save! }
   end
 
   def to_file_name

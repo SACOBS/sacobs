@@ -45,8 +45,8 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    @booking.update(status: :cancelled, user_id: current_user.id)
-    if @booking.cancelled?
+    @booking.user_id = current_user.id
+    if @booking.cancel
       redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
     else
       redirect_to bookings_url, alert: 'Booking could not be cancelled.'

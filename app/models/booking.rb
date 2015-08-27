@@ -1,4 +1,3 @@
-# == Schema Information
 #
 # Table name: bookings
 #
@@ -58,7 +57,6 @@ class Booking < ActiveRecord::Base
   before_create :generate_reference, :set_expiry_date
   before_save :sync_return, if: proc { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?)) }
   before_update :assign_seating, :reserve_return, if: proc { |booking| booking.status_changed? && booking.reserved? }
-  before_update :unassign_seating, if: proc { |booking| booking.status_changed? && booking.cancelled? }
   before_update :clear_passengers, if: :client_id_changed?
 
   scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
@@ -106,6 +104,18 @@ class Booking < ActiveRecord::Base
     end
   end
 
+
+  def cancel
+    transaction do
+      trip.unassign_seats!(stop, quantity)
+      update!(status: :cancelled)
+    end
+    true
+  rescue => e
+    Rails.logger.error { "Booking #{id} could not be cancelled due to #{e.message}"}
+    nil
+  end
+
   private
 
   def clear_passengers
@@ -120,9 +130,6 @@ class Booking < ActiveRecord::Base
     trip.assign_seats(stop, quantity)
   end
 
-  def unassign_seating
-    trip.unassign_seats(stop, quantity)
-  end
 
   def sync_return
     return_booking.client = client
