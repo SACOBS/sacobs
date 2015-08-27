@@ -7,7 +7,7 @@
     <small>(Remember the more specific the search the higher chance of success)</small>
   </h2>
   <h3>
-    Results for search term <%= "#{[params[:q][:name_cont], params[:q][:start_date_eq]].join(' ')}" %>
+    Results for search term <%= [params[:q][:name_cont], params[:q][:start_date_eq]].join(' ') %>
   </h3>
   <%= back_to trips_path %>
   <div class="search pull-right">

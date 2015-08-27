@@ -3,8 +3,8 @@
     <%= @report.name %>
   </h3>
   <h4>Results Summary</h4>
-  <p>Items: #{@results.size}</p>
-  <p>Total Amount: #{number_to_currency(@results.map(&:price).compact.reduce(&:+))}</p>
+  <p>Items: <%= @results.size %></p>
+  <p>Total Amount: <%= number_to_currency(@results.map(&:price).compact.reduce(&:+)) %></p>
 </div>
 <div class="results">
   <% @results.group_by { |result| result.updated_at.beginning_of_month }.sort.each do |month, results_per_month| %>

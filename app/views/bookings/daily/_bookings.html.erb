@@ -4,7 +4,7 @@
   </div>
   <% @bookings.group_by {|b| b.client }.sort.each do |client, bookings| %>
       <% client_decorator = decorate(client) %>
-      <p class="text-center">#{client_decorator.title} #{client_decorator.full_name}</p>
+      <p class="text-center"><%= client_decorator.title %> <%= client_decorator.full_name %></p>
       <% bookings.each do |booking| %>
           <% booking_decorator = decorate(booking) %>
           <div class="info">
@@ -19,7 +19,7 @@
                   <td>
                     <%= booking_decorator.reference_no %>
                   </td>
-                  <td>#{booking_decorator.quantity} x #{booking_decorator.connection}</td>
+                  <td><%= booking_decorator.quantity %> x <%= booking_decorator.connection %></td>
                   <td data-dateformat="ll">
                     <%= booking_decorator.trip_start_date %>
                   </td>

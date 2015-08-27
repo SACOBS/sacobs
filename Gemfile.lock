@@ -292,7 +292,7 @@ GEM
     twitter-bootstrap-rails-confirm (1.0.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unobtrusive_flash (3.1.0)
