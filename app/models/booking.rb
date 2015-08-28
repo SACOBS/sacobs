@@ -56,7 +56,6 @@ class Booking < ActiveRecord::Base
 
   before_create :generate_reference, :set_expiry_date
   before_save :sync_return, if: proc { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?)) }
-  before_update :assign_seating, :reserve_return, if: proc { |booking| booking.status_changed? && booking.reserved? }
   before_update :clear_passengers, if: :client_id_changed?
 
   scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
@@ -116,20 +115,23 @@ class Booking < ActiveRecord::Base
     nil
   end
 
+  def reserve
+    transaction do
+      trip.assign_seats!(stop, quantity)
+      update!(status: :reserved)
+      return_booking.reserve if return_booking.present?
+    end
+    true
+  rescue => e
+    Rails.logger.error { "Booking #{id} could not be reserved due to #{e.message}"}
+    nil
+  end
+
   private
 
   def clear_passengers
     passengers.clear
   end
-
-  def reserve_return
-    return_booking.update(status: :reserved) if return_booking.present?
-  end
-
-  def assign_seating
-    trip.assign_seats(stop, quantity)
-  end
-
 
   def sync_return
     return_booking.client = client

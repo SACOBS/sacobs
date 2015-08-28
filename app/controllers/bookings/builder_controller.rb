@@ -33,8 +33,7 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    @booking.assign_attributes(booking_params)
-    @booking.status = :reserved if step == :billing_info
+    @booking.reserve if step == :billing_info
     render_wizard @booking
   end
 
@@ -42,6 +41,7 @@ class Bookings::BuilderController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:booking_id])
+    @booking.assign_attributes(booking_params)
   end
 
   def fetch_stops

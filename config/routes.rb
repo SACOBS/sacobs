@@ -204,7 +204,6 @@ Sacobs::Application.routes.draw do
   resources :clients do
     collection do
       get :search
-      get :print, defaults: { format: :xls }
     end
     resources :vouchers, only: [:new, :create]
   end

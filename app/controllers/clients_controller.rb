@@ -2,11 +2,13 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = Client.surname_starts_with(params[:letter] || 'A').order(:surname).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email, :updated_at)
+    @clients = Client.surname_starts_with(params.fetch(:letter, 'A' )).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email, :updated_at)
+    respond_with(@clients)
+  end
 
-    if stale?(@clients)
-      request.xhr? ? render(partial: 'clients', locals: { clients: @clients }) : render(:index)
-    end
+  def download
+    @clients = Client.all
+    respond_with(@clients)
   end
 
   def search
@@ -34,15 +36,7 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy
-    respond_to do |format|
-      format.html { redirect_to clients_url }
-      format.js { head :no_content }
-    end
-  end
-
-  def print
-    @clients = Client.all
-    render xlsx: :print, filename: 'clients'
+    respond_with(@client)
   end
 
   private

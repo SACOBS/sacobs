@@ -95,7 +95,7 @@ gem 'obfuscatejs'
 
 gem 'little_decorator'
 
-gem 'to_spreadsheet'
+#gem 'to_spreadsheet'
 
 group :development do
   gem 'flatten_migrations'

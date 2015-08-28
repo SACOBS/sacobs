@@ -2,8 +2,8 @@ class RoutesController < ApplicationController
   before_action :set_route, except: [:index, :new, :create]
 
   def index
-    @routes = route_scope.includes(:destinations, :connections).select(:id, :cost, :distance, :name, :updated_at)
-    respond_with(@routes) if stale?(@routes)
+    @routes = route_scope.includes(:destinations, :connections)
+    respond_with(@routes)
   end
 
   def new

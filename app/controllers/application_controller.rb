@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   self.responder = ApplicationResponder
-  respond_to :html, :js, :json, :pdf
+  respond_to :html, :js, :json, :pdf, :xls
 
   before_action :authenticate_user!
   after_action :prepare_unobtrusive_flash, except: :destroy
