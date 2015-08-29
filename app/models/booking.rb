@@ -116,6 +116,7 @@ class Booking < ActiveRecord::Base
   end
 
   def reserve
+    return if reserved?
     transaction do
       trip.assign_seats!(stop, quantity)
       update!(status: :reserved)
