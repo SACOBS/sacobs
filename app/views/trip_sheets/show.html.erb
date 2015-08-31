@@ -2,13 +2,29 @@
 Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
 <% end %>
 <div class="actions text-center">
-  <%= link_to_unless(@trip.archived, 'Add/Edit Notes', edit_trip_sheet_path(@trip), class: t('buttons.warning')) {} %>
-  <%= link_to 'Print', print_trip_sheet_path(@trip), class: t('buttons.primary'), target: '_blank' %>
-  <%= link_to 'Download', download_trip_sheet_path(@trip), class: t('buttons.info'), data: { no_turbolink: true } %>
+  <% unless @trip.archived %>
+      <%= link_to edit_trip_sheet_path(@trip), class: 'btn btn-warning' do %>
+        <%= fa_icon :edit, text: 'Add/Edit Notes' %>
+      <% end %>
+<% end %>
+  <%= link_to print_trip_sheet_path(@trip), class: 'btn btn-primary', target: '_blank' do %>
+      <%= fa_icon :print, text: 'Print' %>
+  <% end %>
+  <%= link_to download_trip_sheet_path(@trip), class: 'btn btn-info',  data: { no_turbolink: true } do %>
+      <%= fa_icon :download, text: 'Download' %>
+  <% end %>
 </div>
 <%= render 'trip_sheets/trip_sheet', trip: @trip %>
 <div class="actions text-center">
-  <%= link_to_unless(@trip.archived, 'Add/Edit Notes', edit_trip_sheet_path(@trip), class: t('buttons.warning')) {} %>
-  <%= link_to 'Print', print_trip_sheet_path(@trip), class: t('buttons.primary'), target: '_blank' %>
-  <%= link_to 'Download', download_trip_sheet_path(@trip), class: t('buttons.info'), data: { no_turbolink: true } %>
+  <% unless @trip.archived %>
+      <%= link_to edit_trip_sheet_path(@trip), class: 'btn btn-warning' do %>
+          <%= fa_icon :edit, text: 'Add/Edit Notes' %>
+      <% end %>
+  <% end %>
+  <%= link_to print_trip_sheet_path(@trip), class: 'btn btn-primary', target: '_blank' do %>
+      <%= fa_icon :print, text: 'Print' %>
+  <% end %>
+  <%= link_to download_trip_sheet_path(@trip), class: 'btn btn-info',  data: { no_turbolink: true } do %>
+      <%= fa_icon :download, text: 'Download' %>
+  <% end %>
 </div>

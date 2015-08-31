@@ -7,6 +7,8 @@
     <%= f.input :sequence, label: false, input_html: { class: 'input-mini' } %>
   </td>
   <td>
-    <%= link_to_remove_association 'Remove', f, class: t('buttons.mini.danger') %>
+    <%= link_to_remove_association  f, class: 'btn btn-mini btn-danger' do %>
+      <%= fa_icon :times, text: 'Remove'%>
+    <% end %>
   </td>
 </tr>

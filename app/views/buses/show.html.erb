@@ -6,8 +6,12 @@
       <h2>Bus</h2>
       <div class="actions">
         <%= back_to buses_path %>
-        <%= link_to 'Edit', edit_bus_path(@bus), icon: :edit, class: t('buttons.inverse') %>
-        <%= link_to 'Destroy', bus_path(@bus), method: :delete, data: { confirm: t('messages.confirm', resource: :bus) }, icon: :times, class: t('buttons.danger') %>
+        <%= link_to edit_bus_path(@bus), class: 'btn btn-inverse' do %>
+            <%= fa_icon :edit, text: 'Edit' %>
+        <% end %>
+        <%= link_to @bus, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
+            <%= fa_icon :times, text: 'Destroy' %>
+        <% end %>
       </div>
     </div>
     <div class="well">

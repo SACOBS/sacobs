@@ -25,8 +25,8 @@
 <%= simple_form_for @route,  defaults: { error: false } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Save', class: t('buttons.primary') %>
-        <%= link_to 'Cancel', routes_path, class: t('buttons.danger') %>
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', routes_path, class: 'btn btn-danger' %>
       </div>
     </div>
     <hr/>
@@ -48,7 +48,9 @@
               <% end %>
           <% end %>
           <div class="links">
-            <%= link_to_add_association 'Add Destination', f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' },  class: t('buttons.warning'), icon: :plus %>
+            <%= link_to_add_association  f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' },  class: 'btn btn-warning' do %>
+              <%= fa_icon :plus, text: 'Add destination' %>
+            <% end %>
           </div>
         </fieldset>
       </div>
@@ -56,8 +58,8 @@
     <hr/>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Save', class: t('buttons.primary') %>
-        <%= link_to 'Cancel', routes_path, class: t('buttons.danger') %>
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', routes_path, class: 'btn btn-danger' %>
       </div>
     </div>
 <% end %>

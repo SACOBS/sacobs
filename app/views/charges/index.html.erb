@@ -4,8 +4,18 @@
 <div class="page-header">
   <h2>Charges</h2>
 </div>
-<%= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'), icon: :plus %>
+<%= link_to new_charge_path,  class: 'btn btn-primary' do %>
+    <%= fa_icon :plus, text: 'Setup charge' %>
+<% end %>
+<%= link_to charges_path, class: 'btn btn-default' do %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
+<% end %>
 <%= bootstrap_table headers: %w(Actions Description Percentage), types: %i(condensed), html_options: { class: 'sortable' } do %>
     <%= render @charges, cache: true %>
 <% end %>
-<%= link_to 'Setup Charge', new_charge_path, class: t('buttons.primary'), icon: :plus %>
+<%= link_to new_charge_path,  class: 'btn btn-primary' do %>
+    <%= fa_icon :plus, text: 'Setup charge' %>
+<% end %>
+<%= link_to charges_path, class: 'btn btn-default' do %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
+<% end %>

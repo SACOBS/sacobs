@@ -3,8 +3,13 @@
 <% end %>
 <div class="page-header">
   <h2>Users</h2>
+  <%= link_to users_path, class: 'btn btn-default' do %>
+      <%= fa_icon :refresh, text: 'Refresh' %>
+  <% end %>
 </div>
 <%= bootstrap_table headers: %w(Actions Name Email Role), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <%= render @users, cache: true %>
 <% end %>
-<%= link_to 'Refresh', users_path, class: t('buttons.default'), icon: :refresh %>
+<%= link_to users_path, class: 'btn btn-default' do %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
+<% end %>

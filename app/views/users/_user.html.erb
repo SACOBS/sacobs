@@ -3,7 +3,11 @@
 <td><%= obfuscate_email user.email %></td>
 <td><span class="label label-info"><%= user.role.capitalize %></span></td>
 <td>
-  <%= link_to 'Upgrade Role', user_path(user, user: { role: :admin }), icon: :user, method: :put, class: t('buttons.mini.warning') %>
-  <%= link_to 'Downgrade Role', user_path(user, user: { role: :clerk }), icon: :user, method: :put, class: t('buttons.mini.warning') %>
+  <%= link_to user_path(user, user: { role: :admin }), method: :patch, class: 'btn btn-mini btn-warning' do %>
+      <%= fa_icon :user, text: 'Upgrade role' %>
+  <% end %>
+  <%= link_to user_path(user, user: { role: :clerk }), method: :patch, class: 'btn btn-mini btn-warning' do %>
+      <%= fa_icon :user, text: 'Downgrade role' %>
+  <% end %>
 </td>
 <% end %>

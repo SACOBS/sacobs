@@ -3,14 +3,18 @@
 <% end %>
 <div class="page-header">
   <h2>Archived Bookings</h2>
-  <%= link_to 'Refresh', bookings_archives_path, class: t('buttons.default'), icon: :refresh %>
+  <%= link_to bookings_archives_path, class: 'btn btn-default' do %>
+      <%= fa_icon :refresh, text: 'Refresh' %>
+  <% end %>
 </div>
 <div class="search pull-right">
   <%= simple_form_for :q, url: search_bookings_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'booking_search', data: { type: :html } } do |f| %>
       <%= f.input :created_at_date_eq, as: :date_picker, placeholder: 'Search booking dates' %>
       <%= f.input :reference_no_or_client_surname_cont, as: :search_box %>
-      <%= f.submit 'Search', class: t('buttons.mini.warning') %>
-      <%= link_to 'Clear', bookings_archives_path, class: t('buttons.mini.inverse'), icon: :times %>
+      <%= f.submit 'Search', class: 'btn btn-mini btn-warning' %>
+      <%= link_to bookings_archives_path, class: 'btn btn-mini btn-inverse' do %>
+          <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
   <% end %>
 </div>
 <div id="bookings">
@@ -24,4 +28,6 @@
   <% end %>
 </div>
 <br/>
-<%= link_to 'Refresh', bookings_archives_path, class: t('buttons.default'), icon: :refresh %>
+<%= link_to bookings_archives_path, class: 'btn btn-default' do %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
+<% end %>

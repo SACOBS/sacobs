@@ -4,8 +4,8 @@
 <%= simple_form_for client, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit class: t('buttons.primary') %>
-        <%= link_to 'Cancel', clients_path, class: t('buttons.default') %>
+        <%= f.submit class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', clients_path, class: 'btn btn-default' %>
       </div>
     </div>
     <fieldset>
@@ -35,8 +35,8 @@
     </fieldset>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit class: t('buttons.primary') %>
-        <%= link_to 'Cancel', clients_path, class: t('buttons.default') %>
+        <%= f.submit class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', clients_path, class: 'btn btn-default' %>
       </div>
     </div>
 <% end %>

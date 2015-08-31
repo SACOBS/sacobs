@@ -1,7 +1,14 @@
 <tr>
   <td>
-    <%= link_to_if(seasonal_discount.active?, 'Deactivate', seasonal_discount_path(seasonal_discount, seasonal_discount: { active: false }), method: :patch,  icon: :times, class: t('buttons.mini.danger')) {} %>
-    <%= link_to_unless(seasonal_discount.active?, 'Activate', seasonal_discount_path(seasonal_discount, seasonal_discount: { active: true }), method: :patch, icon: :times, class: t('buttons.mini.danger')) {} %>
+    <% if seasonal_discount.active? %>
+      <%= link_to seasonal_discount_path(seasonal_discount, seasonal_discount: { active: false }), method: :patch, class: 'btn btn-mini btn-danger' do %>
+       <%= fa_icon :times, text: 'Deactivate' %>
+      <% end %>
+  <% else %>
+        <%= link_to seasonal_discount_path(seasonal_discount, seasonal_discount: { active: true }), method: :patch, class: 'btn btn-mini btn-danger' do %>
+            <%= fa_icon :times, text: 'Activate' %>
+        <% end %>
+    <% end %>
   </td>
   <td>
     <%= seasonal_discount.name %>

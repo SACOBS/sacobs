@@ -7,14 +7,24 @@
 <div class="search pull-right">
   <%= simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f| %>
       <%= f.input :name_or_model_cont, as: :search_box %>
-      <%= f.submit 'Search', class: t('buttons.mini.warning') %>
-      <%= link_to 'Clear', buses_path, class: t('buttons.mini.inverse'), icon: :times %>
+      <%= f.submit 'Search', class: 'btn btn-mini btn-warning'  %>
+      <%= link_to buses_path, class: 'btn btn-mini btn-inverse' do %>
+          <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
   <% end %>
 </div>
-<%= link_to 'Setup Bus', new_bus_path,  icon: :plus, class: t('buttons.primary') %>
-<%= link_to 'Refresh', buses_path, class: t('buttons.default'), icon: :refresh %>
+<%= link_to new_bus_path,  class: 'btn btn-primary' do %>
+    <%= fa_icon :plus, text: 'Setup bus' %>
+<% end %>
+<%= link_to buses_path, class: 'btn btn-default' do %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
+<% end %>
 <%= bootstrap_table headers: %w(Actions Name Year Model Capacity), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <%= render @buses, cache: true %>
 <% end %>
-<%= link_to 'Setup Bus', new_bus_path,  icon: :plus, class: t('buttons.primary') %>
-<%= link_to 'Refresh', buses_path, class: t('buttons.default'), icon: :refresh %>
+<%= link_to new_bus_path,  class: 'btn btn-primary' do %>
+    <%= fa_icon :plus, text: 'Setup bus' %>
+<% end %>
+<%= link_to buses_path, class: 'btn btn-default' do %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
+<% end %>

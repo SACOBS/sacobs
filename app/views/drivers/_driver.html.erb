@@ -1,7 +1,11 @@
 <tr class="<%= dom_class(driver) %>" id="<%= dom_id(driver) %>">
   <td>
-    <%= link_to 'Edit', edit_driver_path(driver), icon: :edit, class: t('buttons.mini.inverse') %>
-    <%= link_to 'Destroy', driver, icon: :times, data: { confirm: t('messages.confirm', resource: :driver) }, method: :delete, class: t('buttons.mini.danger') %>
+    <%= link_to edit_driver_path(driver), class: 'btn btn-mini btn-inverse' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+    <% end %>
+    <%= link_to driver, method: :delete, class: 'btn btn-mini btn-danger',  data: { confirm: t('messages.confirm', resource: :driver) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+    <% end %>
   </td>
   <td>
     <%= driver.name %>

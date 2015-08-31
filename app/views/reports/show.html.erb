@@ -4,10 +4,18 @@
   </h2>
   <div class="actions">
     <%= back_to reports_path %>
-    <%= link_to 'Edit', edit_report_path(@report), icon: :edit, class: t('buttons.inverse') %>
-    <%= link_to 'Destroy', @report, icon: :times, class: t('buttons.danger'), method: :delete %>
-    <%= link_to 'Print', print_report_path(@report), class: t('buttons.primary'), target: '_blank' %>
-    <%= link_to 'Download', download_report_path(@report), class: t('buttons.info'), data: { no_turbolink: true } %>
+    <%= link_to edit_report_path(@report), class: 'btn btn-inverse' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+    <% end %>
+    <%= link_to @report, method: :delete,  class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :report) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+    <% end %>
+    <%= link_to print_report_path(@report), class: 'btn btn-primary', target: '_blank' do %>
+        <%= fa_icon :print, text: 'Print' %>
+    <% end %>
+    <%= link_to download_report_path(@report), class: 'btn btn-info',  data: { no_turbolink: true } do %>
+        <%= fa_icon :download, text: 'Download' %>
+    <% end %>
   </div>
 </div>
 <%= render 'reports/results' %>

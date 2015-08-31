@@ -2,7 +2,9 @@
     Daily Bookings
 <% end %>
 <div class="text-center">
-  <%= link_to 'Print', print_bookings_daily_index_path, class: t('buttons.primary') %>
+  <%= link_to print_bookings_daily_index_path, class: 'btn btn-primary' do  %>
+    <%= fa_icon :print, text: 'Print' %>
+  <% end %>
 </div>
 <hr/>
 <div class="bookings">
@@ -14,5 +16,7 @@
 </div>
 <hr/>
 <div class="text-center">
-  <%= link_to 'Print', print_bookings_daily_index_path, class: t('buttons.primary') %>
+  <%= link_to print_bookings_daily_index_path, class: 'btn btn-primary' do  %>
+      <%= fa_icon :print, text: 'Print' %>
+  <% end %>
 </div>

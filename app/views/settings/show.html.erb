@@ -5,8 +5,9 @@
   <h2>Settings</h2>
 </div>
 <div class="actions">
-  <%= link_to 'Edit', edit_setting_path, icon: :edit, class: t('buttons.info') %>
-</div>
+  <%= link_to edit_setting_path, class: 'btn btn-inverse' do %>
+      <%= fa_icon :edit, text: 'Edit' %>
+  <% end %></div>
 <br/>
 <div class="well">
   <p>
@@ -43,5 +44,7 @@
   </p>
 </div>
 <div class="actions">
-  <%= link_to 'Edit', edit_setting_path, icon: :edit, class: t('buttons.info') %>
+  <%= link_to edit_setting_path, class: 'btn btn-inverse' do %>
+      <%= fa_icon :edit, text: 'Edit' %>
+  <% end %>
 </div>

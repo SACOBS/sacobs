@@ -1,30 +1,42 @@
-<div id="errors">
-  <%= errors_for @city %>
-</div>
-<%= simple_form_for city, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for @city, defaults: { error: false } do |f| %>
     <fieldset>
-      <legend>City</legend>
-      <%= f.input :name, required: false, autofocus: true %>
+      <%= f.input :name, required: false, autofocus: true, placeholder: 'Name' %>
     </fieldset>
-    <div id="time_tables">
-      <%= f.simple_fields_for :time_tables do |time_table| %>
-          <%= render 'time_table_fields', f: time_table %>
-      <% end %>
-    </div>
-    <div id="venues">
-      <%= f.simple_fields_for :venues do |venue| %>
-          <%= render 'venue_fields', f: venue %>
-      <% end %>
-      <div class="links">
-        <hr/>
-        <%= link_to_add_association 'Add Venue', f, :venues, class: t('buttons.mini.info') %>
+    <div class="row-fluid">
+      <div class="span6">
+        <div id="time_tables">
+          <fieldset>
+            <legend>Times</legend>
+            <%= bootstrap_table headers: ['Direction', 'Arrive', 'Depart'], types: [:condensed] do %>
+                <%= f.simple_fields_for :time_tables, wrapper: false do |time_table| %>
+                    <%= render 'time_table_fields', f: time_table %>
+                <% end %>
+            <% end %>
+          </fieldset>
+        </div>
+      </div>
+      <div class="span6">
+        <div id="venues">
+          <fieldset>
+            <legend>Venues</legend>
+            <%= bootstrap_table headers: ['Name', ' '], types: [:condensed], html_options: { id: 'venues_table'} do %>
+                <%= f.simple_fields_for :venues, wrapper: false do |venue| %>
+                    <%= render 'venue_fields', f: venue %>
+                <% end %>
+            <% end %>
+          </fieldset>
+          <div class="links">
+            <hr/>
+            <%= link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-mini btn-info', data: { association_insertion_node: '#venues_table > tbody', association_insertion_method: 'append'  } %>
+          </div>
+        </div>
         <hr/>
       </div>
     </div>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit class: t('buttons.primary') %>
-        <%= link_to 'Cancel', cities_path, class: t('buttons.default') %>
+        <%= f.submit class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', cities_path, class: 'btn btn-default' %>
       </div>
     </div>
 <% end %>

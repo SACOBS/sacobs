@@ -1,8 +1,14 @@
 <tr class="<%= dom_class(city) %>" id="<%= dom_id(city) %>">
   <td>
-    <%= link_to 'View', city, icon: :info, class: t('buttons.mini.info') %>
-    <%= link_to 'Edit', edit_city_path(city), icon: :edit, class: t('buttons.mini.inverse') %>
-    <%= link_to 'Destroy', city, icon: :times, data: { confirm: t('messages.confirm', resource: :city) }, method: :delete, class: t('buttons.mini.danger') %>
+    <%= link_to city, class: 'btn btn-mini btn-info' do %>
+      <%= fa_icon :info, text: 'Show' %>
+    <% end %>
+    <%= link_to edit_city_path(city), class: 'btn btn-mini btn-inverse' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+    <% end %>
+    <%= link_to city, method: :delete,  class: 'btn btn-mini btn-danger', data: { confirm: t('messages.confirm', resource: :city) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+    <% end %>
   </td>
   <td>
     <%= link_to city.name, city %>

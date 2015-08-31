@@ -1,0 +1,14 @@
+<%= simple_form_for @discount, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+    <fieldset>
+      <%= f.simple_fields_for :passenger_type do |passenger_type_form| %>
+         <%= passenger_type_form.input :description, disabled: passenger_type_form.object.persisted? %>
+      <% end %>
+      <%= f.input :percentage, autofocus: true %>
+    </fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', discounts_path, class: 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>

@@ -3,12 +3,12 @@
       <%= link_to booking, class: 'btn btn-mini btn-info' do %>
          <%= fa_icon :info, text: 'Show' %>
       <% end %>
-      <% unless booking.paid? || booking.reserved? %>
+      <% if booking.paid? || booking.reserved? %>
           <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
               <%= fa_icon :tasks, text: 'Ticket' %>
           <% end %>
       <% end %>
-      <% unless booking.reserved? %>
+      <% if booking.reserved? %>
           <%= link_to new_booking_payment_detail_url(booking), class: 'btn btn-mini btn-inverse' do %>
               <%= fa_icon :money, text: 'Confirm' %>
           <% end %>

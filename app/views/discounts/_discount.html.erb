@@ -1,7 +1,11 @@
 <tr class="<%= dom_class(discount) %>" id="<%= dom_id(discount) %>">
   <td>
-    <%= link_to 'Edit', edit_discount_path(discount), icon: :edit, class: t('buttons.mini.inverse') %>
-    <%= link_to 'Destroy', discount, icon: :times, data: { confirm: t('messages.confirm', resource: :discount) }, method: :delete, class: t('buttons.mini.danger') %>
+    <%= link_to edit_discount_path(discount), class: 'btn btn-mini btn-inverse' do  %>
+      <%= fa_icon :edit, text: 'Edit' %>
+    <% end %>
+    <%= link_to discount, method: :delete,  class: 'btn btn-mini btn-danger', data: { confirm: t('messages.confirm', resource: :discount) } do  %>
+        <%= fa_icon :times, text: 'Destroy' %>
+    <% end %>
   </td>
   <td>
     <%= discount.passenger_type.description.capitalize %>

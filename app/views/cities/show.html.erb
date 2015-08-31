@@ -5,8 +5,12 @@
   <h2>City</h2>
   <div class="actions">
     <%= back_to cities_path %>
-    <%= link_to 'Edit', edit_city_path(@city), icon: :edit, class: t('buttons.info') %>
-    <%= link_to 'Destroy', city_path(@city), method: :delete, data: { confirm: t('messages.confirm', resource: :city) }, icon: :times, class: t('buttons.danger') %>
+    <%= link_to edit_city_path(@city), class: 'btn  btn-inverse' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+    <% end %>
+    <%= link_to @city, method: :delete,  class: 'btn  btn-danger', data: { confirm: t('messages.confirm', resource: :city) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+    <% end %>
   </div>
 </div>
 <div class="well">
