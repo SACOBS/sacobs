@@ -47,7 +47,7 @@
       <%= f.hidden_field :city_id %>
       <%= f.input :preceding, typeahead: destinations, placeholder: 'Preceding City', hint: raw('<strong>Leave blank if new city is the start of the route. </strong>'), label: 'City that comes before new city:', input_html: {  data: { targets: '#destination_preceding_id', filter: :name } } %>
       <%= f.hidden_field :preceding_id %>
-      <%= f.submit  %>
+      <%= f.button :submit  %>
       <%= link_to 'Back', routes_path, class: 'btn btn-info' %>
     <% end %>
   </div>

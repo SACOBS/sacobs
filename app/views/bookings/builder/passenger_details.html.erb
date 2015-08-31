@@ -11,7 +11,7 @@
 <%= simple_form_for @booking, defaults: { error: false, label: false }, url: wizard_path, html: {  method: :patch } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Next (alt + n)', autofocus: true, accesskey: 'n' %>
+        <%= f.button :submit, 'Next (alt + n)', autofocus: true, accesskey: 'n' %>
       </div>
     </div>
     <fieldset>

@@ -11,7 +11,7 @@
 <%= simple_form_for @booking,  url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal', method: :patch } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Next (alt + n)', accesskey: 'n' %>
+        <%= f.button :submit, 'Next (alt + n)', accesskey: 'n' %>
       </div>
     </div>
     <div class="search">

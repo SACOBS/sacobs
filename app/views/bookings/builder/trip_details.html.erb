@@ -13,7 +13,7 @@
       <%= f.hidden_field :connection_to_city_id_eq %>
       <%= f.input :trip_start_date_gteq, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], label: false, input_html: { class: 'input-medium' } %>
       <%= f.hidden_field :available_seats_gt %>
-      <%= f.submit 'Search', class: 'btn btn-inverse' %>
+      <%= f.button :submit, 'Search', class: 'btn btn-inverse' %>
   <% end %>
 </div>
 <div id="errors">

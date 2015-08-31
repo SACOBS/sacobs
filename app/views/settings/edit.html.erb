@@ -10,7 +10,7 @@
 <%= simple_form_for @setting, url: setting_url(format: :html), defaults: { error: false }, method: :patch, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit %>
+        <%= f.button :submit %>
         <%= link_to 'Cancel', root_path, class: 'btn btn-default' %>
       </div>
     </div>
@@ -26,7 +26,7 @@
     </fieldset>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit %>
+        <%= f.button :submit %>
         <%= link_to 'Cancel', root_path, class: 'btn btn-default' %>
       </div>
     </div>

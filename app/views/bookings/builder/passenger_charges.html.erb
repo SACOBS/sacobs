@@ -8,7 +8,7 @@
 <%= simple_form_for @booking, url: wizard_path, method: :patch do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Next (alt + n)', autofocus: true, accesskey: 'n' %>
+        <%= f.button :submit, 'Next (alt + n)', autofocus: true, accesskey: 'n' %>
       </div>
     </div>
     <%= f.fields_for :passengers do |p| %>

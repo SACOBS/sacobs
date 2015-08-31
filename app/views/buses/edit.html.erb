@@ -10,7 +10,7 @@
 <%= simple_form_for @bus, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit  %>
+        <%= f.button :submit  %>
       </div>
     </div>
     <fieldset>
@@ -35,7 +35,7 @@
     </fieldset>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit %>
+        <%= f.button :submit %>
       </div>
     </div>
 <% end %>

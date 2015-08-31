@@ -11,7 +11,7 @@
 <%= simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Complete (alt + n)', autofocus: true, accesskey: 'n' %>
+        <%= f.button :submit, 'Complete (alt + n)', autofocus: true, accesskey: 'n' %>
       </div>
     </div>
     <%= bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do %>
