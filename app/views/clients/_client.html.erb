@@ -1,4 +1,3 @@
-<% client_decorator = decorate(client) %>
 <div class="span4 client well well-small" id="<%= dom_id(client) %>">
   <div class="media">
     <div class="pull-left">
@@ -11,19 +10,38 @@
       <address>
         <strong>Contact</strong>
         <br/>
-        <%= contact_number(client_decorator.home_no, 'Home') %>
+        <abbr class="initialism" title="Home">
+          <strong>
+            H:
+            <%= number_to_phone(client.home_no, area_code: true).presence || 'N/A' %>
+          </strong>
+        </abbr>
         <br/>
-        <%= contact_number(client_decorator.work_no, 'Work') %>
-        <br/>
-        <%= contact_number(client_decorator.cell_no, 'Cell') %>
-        <br/>
+        <abbr class="initialism" title="Work">
+          <strong>
+            W:
+            <%= number_to_phone(client.work_no, area_code: true).presence || 'N/A' %>
+          </strong>
+        </abbr>        <br/>
+        <abbr class="initialism" title="Cell">
+          <strong>
+            C:
+            <%= number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %>
+          </strong>
+        </abbr>        <br/>
         <abbr class="initialism" title="Email">E:</abbr>
-        <%= client_decorator.email %>
+        <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
       </address>
       <div class="btn-group">
-        <%= client_decorator.show_link class: t('buttons.small.info') %>
-        <%= client_decorator.edit_link class: t('buttons.small.inverse') %>
-        <%= client_decorator.destroy_link class: "#{t('buttons.small.danger')}", data: { behavior: 'delete-client', confirm: 'Are you sure you want to destroy this client?' }, remote: true %>
+        <%= link_to client, class: 'btn btn-info btn-small' do %>
+          <%= fa_icon :info, text: 'Show' %>
+        <% end %>
+        <%= link_to edit_client_path(client), class: 'btn btn-inverse btn-small' do %>
+            <%= fa_icon :edit, text: 'Edit' %>
+        <% end %>
+        <%= link_to client, class: 'btn btn-danger btn-small', method: :delete, data: { behavior: 'delete-client', confirm: 'Are you sure you want to destroy this client?' }, remote: true do %>
+            <%= fa_icon :times, text: 'Destroy' %>
+        <% end %>
       </div>
     </div>
   </div>

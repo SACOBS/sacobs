@@ -1,20 +1,19 @@
-<% client_decorator = decorate(client) %>
 <%= bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do %>
     <tr>
       <td>
-        <%= client_decorator.full_name %>
+        <%= client.full_name %>
       </td>
       <td>
-        <%= client_decorator.home_no %>
+        <%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %>
       </td>
       <td>
-        <%= client_decorator.cell_no %>
+        <%= number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %>
       </td>
       <td>
-        <%= client_decorator.work_no %>
+        <%= number_to_phone(client.work_no, area_code: true).presence || 'N/A' %>
       </td>
       <td>
-        <%= client_decorator.email %>
+        <%= client.email.present? ? mail_to(@client.email) : 'N/A' %>
       </td>
     </tr>
 <% end %>

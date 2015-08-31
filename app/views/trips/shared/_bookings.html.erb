@@ -1,19 +1,20 @@
 <%= bootstrap_table headers: ['Status', 'Client Name', 'Connection', 'Qty', 'Telephone'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <% trip.bookings.each do |booking| %>
-        <% booking_decorator = decorate(booking) %>
         <% cache booking do %>
             <tr>
               <td>
-                <%= booking_decorator.status %>
+                <%= status_label_for(booking) %>
               </td>
               <td>
-                <%= booking_decorator.client_link %>
+                <%= link_to booking.client, target: '_blank' do %>
+                    <%= content_tag(:em, booking.client.full_name) %>
+                <% end %>
               </td>
               <td>
-                <%= booking_decorator.connection %>
+                <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
               </td>
               <td>
-                <%= booking_decorator.quantity %>
+                <%= badge_for(booking.quantity) %>
               </td>
               <td>
                 <%= contact_numbers_for(booking.client) %>

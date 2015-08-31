@@ -15,7 +15,7 @@
 #
 
 class PaymentDetail < ActiveRecord::Base
-  PAYMENT_TYPES = [:Absa, :Nedbank, :StandardBank, :Nedbank, :Capitec, :FNB, :POB, :Cash, :Cheque, :Investec].freeze
+  PAYMENT_TYPES = [:Absa, :Nedbank, :StandardBank, :Capitec, :FNB, :POB, :Cash, :Cheque, :Investec].freeze
 
   belongs_to :booking
 

@@ -1,15 +1,14 @@
-<% connection_decorator = decorate(connection) %>
 <tr>
   <td>
-    <%= connection_decorator.name %>
+    <%= connection.name %>
   </td>
   <td>
-    <%= connection_decorator.distance %>
+    <%= number_to_human(connection.distance, units: :distance) %>
   </td>
   <td>
-    <%= connection_decorator.percentage %>
+    <%=  number_to_percentage(connection.percentage, precision: 0) %>
   </td>
   <td>
-    <%= connection_decorator.cost %>
+    <%= number_to_currency(connection.cost) %>
   </td>
 </tr>

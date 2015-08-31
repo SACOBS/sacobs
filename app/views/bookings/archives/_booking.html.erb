@@ -1,22 +1,29 @@
-<% booking_decorator = decorate(booking) %>
 <tr>
   <td>
-    <%= booking_decorator.archived_show_link class: t('buttons.mini.info') %>
-    <%= booking_decorator.ticket_link class: t('buttons.mini.default'), target: '_blank' %>
+    <%= link_to bookings_archive_path(booking), class: 'btn btn-mini btn-info' do %>
+      <%= fa_icon :info, text: 'Show' %>
+    <% end %>
+    <% unless booking.paid? || booking.reserved? %>
+        <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
+            <%= fa_icon :tasks, text: 'Ticket' %>
+        <% end %>
+    <% end %>
   </td>
   <td>
-    <%= booking_decorator.status %>
+    <%= status_label_for(booking) %>
   </td>
   <td>
-    <%= booking_decorator.client_link target: '_blank' %>
+    <%= link_to booking.client, target: '_blank' do %>
+        <%= content_tag(:em, booking.client.full_name) %>
+    <% end %>
   </td>
   <td data-dateformat="ll">
-    <%= booking_decorator.trip_start_date %>
+    <%= local_date(booking.trip.start_date) %>
   </td>
   <td>
-    <%= booking_decorator.quantity %>
+    <%= badge_for(booking.quantity) %>
   </td>
   <td>
-    <%= booking_decorator.connection %>
+    <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
   </td>
 </tr>

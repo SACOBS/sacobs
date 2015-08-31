@@ -3,10 +3,8 @@
     <%= l(Date.current, format: :long) %>
   </div>
   <% @bookings.group_by {|b| b.client }.sort.each do |client, bookings| %>
-      <% client_decorator = decorate(client) %>
-      <p class="text-center"><%= client_decorator.title %> <%= client_decorator.full_name %></p>
+      <p class="text-center"><%= client.title.upcase %> <%= client.full_name %></p>
       <% bookings.each do |booking| %>
-          <% booking_decorator = decorate(booking) %>
           <div class="info">
             <p>
               <%= content_tag :strong, booking.payment_detail.payment_type if booking.payment_detail.present? %>
@@ -14,17 +12,17 @@
             <%= bootstrap_table headers: ['Status', 'Reference', 'Location', 'Travel Date', 'Price'], types: [:condensed] do %>
                 <tr>
                   <td>
-                    <%= booking_decorator.status %>
+                    <%= status_label_for(booking) %>
                   </td>
                   <td>
-                    <%= booking_decorator.reference_no %>
+                    <%= booking.reference_no %>
                   </td>
-                  <td><%= booking_decorator.quantity %> x <%= booking_decorator.connection %></td>
+                  <td><%= badge_for(booking.quantity) %> x <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %></td>
                   <td data-dateformat="ll">
-                    <%= booking_decorator.trip_start_date %>
+                    <%= local_date(booking.trip.start_date) %>
                   </td>
                   <td>
-                    <%= booking_decorator.price %>
+                    <%= number_to_currency(booking.invoice.total) %>
                   </td>
                 </tr>
             <% end %>

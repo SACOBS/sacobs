@@ -1,16 +1,19 @@
-<% route_decorator = decorate(@route) %>
 <%= content_for(:title) do %>
-    <%= route_decorator.name %>
+    <%= @route.name.upcase %>
 <% end %>
 <% cache @route do %>
     <div class="page-header">
       <h2>
-        <%= route_decorator.name %>
+        <%= @route.name.upcase %>
       </h2>
       <div class="actions">
         <%= back_to routes_path %>
-        <%= route_decorator.edit_link class: t('buttons.inverse') %>
-        <%= route_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this route?' } %>
+        <%= link_to edit_route_path(@route), class: 'btn btn-inverse' do %>
+            <%= fa_icon :edit, text: 'Edit' %>
+        <% end %>
+        <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to destroy this route?' } do %>
+            <%= fa_icon :times, text: 'Destroy' %>
+        <% end %>
       </div>
     </div>
     <div class="well">
@@ -19,38 +22,40 @@
         <li>
           <p>
             <strong>From:</strong>
-            <%= route_decorator.start_city %>
+            <%= @route.destinations.first.name %>
           </p>
         </li>
         <li>
           <p>
             <strong>To:</strong>
-            <%= route_decorator.end_city %>
+            <%= @route.destinations.last.name%>
           </p>
         </li>
         <li>
           <p>
             <strong>Master Rate:</strong>
-            <%= route_decorator.cost %>
+            <%= number_to_currency(@route.cost) %>
           </p>
         </li>
         <li>
           <p>
             <strong>Distance:</strong>
-            <%= route_decorator.distance %>
+            <%= number_to_human(@route.distance, units: :distance) %>
           </p>
         </li>
       </ul>
       <h4>Connections</h4>
-      <% cache @route.connections do %>
-          <%= bootstrap_table headers: ['Name', 'Distance', 'Percentage', 'Cost'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do %>
-              <%= render partial: 'connections/connection', collection: @route.connections, cache: true %>
-          <% end %>
+      <%= bootstrap_table headers: ['Name', 'Distance', 'Percentage', 'Cost'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do %>
+          <%= render partial: 'connections/connection', collection: @route.connections, cache: true %>
       <% end %>
     </div>
     <div class="actions">
       <%= back_to routes_path %>
-      <%= route_decorator.edit_link class: t('buttons.inverse') %>
-      <%= route_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this route?' } %>
+      <%= link_to edit_route_path(@route), class: 'btn btn-inverse' do %>
+          <%= fa_icon :edit, text: 'Edit' %>
+      <% end %>
+      <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to destroy this route?' } do %>
+          <%= fa_icon :times, text: 'Destroy' %>
+      <% end %>
     </div>
 <% end %>

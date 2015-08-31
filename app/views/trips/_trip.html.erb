@@ -1,30 +1,39 @@
-<% trip_decorator = decorate(trip) %>
 <tr>
   <td>
-    <%= trip_decorator.copy_link class: t('buttons.mini.warning'), data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip' %>
-    <%= trip_decorator.trip_sheet_link target: '_blank', class: t('buttons.mini.default') %>
-    <%= trip_decorator.show_link class: t('buttons.mini.info') %>
-    <% unless trip_decorator.booked? %>
-        <%= trip_decorator.edit_link class: t('buttons.mini.inverse') %>
-        <%= trip_decorator.destroy_link class: t('buttons.mini.danger'), data: { confirm: 'Are you sure you want to destroy this trip?' } %>
+    <%= link_to copy_trip_path(trip), method: :post, class: 'btn btn-warning btn-mini', data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip' do %>
+        <%= fa_icon :copy, text: 'Copy' %>
+    <% end %>
+    <%= link_to trip_sheet_path(trip), class: 'btn btn-default btn-mini', target: '_blank' do %>
+        <%= fa_icon :road, text: 'Tripsheet' %>
+    <% end %>
+    <%= link_to trip, class: 'btn btn-info btn-mini' do %>
+        <%= fa_icon :info, text: 'Show' %>
+    <% end %>
+    <% unless trip.booked? %>
+        <%= link_to edit_trip_path(trip), class: 'btn btn-inverse btn-mini' do %>
+            <%= fa_icon :edit, text: 'Edit' %>
+        <% end %>
+        <%= link_to trip, method: :delete, class: 'btn btn-danger btn-mini', data: { confirm: 'Are you sure you want to destroy this trip?' } do %>
+            <%= fa_icon :times, text: 'Destroy' %>
+        <% end %>
     <% end %>
   </td>
   <td>
     <%= link_to trip.name, trip %>
   </td>
   <td>
-    <%= trip_decorator.day %>
+    <%=  l(trip.start_date, format: :day) %>
   </td>
   <td data-dateformat="ll">
-    <%= trip_decorator.start_date %>
+    <%= local_date(trip.start_date) %>
   </td>
   <td data-dateformat="ll">
-    <%= trip_decorator.end_date %>
+    <%= local_date(trip.end_date)%>
   </td>
   <td>
-    <%= trip_decorator.route_name %>
+    <%= trip.route_name %>
   </td>
   <td>
-    <%= trip_decorator.bus_name %>
+    <%= trip.bus_name %>
   </td>
 </tr>

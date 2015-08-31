@@ -13,28 +13,27 @@
       </h4>
       <%= bootstrap_table headers: ['Trip', 'Start Date', 'Status', 'Client', 'Connection', 'Qty', 'Price'], types: [:condensed] do %>
           <% results_per_month.each do |result| %>
-              <% booking_decorator = decorate(result) %>
               <tr>
                 <td>
-                  <%= booking_decorator.trip_name %>
+                  <%= booking.trip.name %>
                 </td>
                 <td>
-                  <%= booking_decorator.trip_start_date %>
+                  <%= local_date(booking.trip.start_date) %>
                 </td>
                 <td>
-                  <%= booking_decorator.status %>
+                  <%= status_label_for(booking) %>
                 </td>
                 <td>
-                  <%= booking_decorator.client_full_name %>
+                  <%= booking.client.full_name %>
                 </td>
                 <td>
-                  <%= booking_decorator.connection %>
+                  <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
                 </td>
                 <td>
-                  <%= booking_decorator.quantity %>
+                  <%= badge_for(booking.quantity) %>
                 </td>
                 <td>
-                  <%= booking_decorator.price %>
+                  <%= number_to_currency(booking.invoice.total) %>
                 </td>
               </tr>
           <% end %>

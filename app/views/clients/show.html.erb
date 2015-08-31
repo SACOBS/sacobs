@@ -2,15 +2,18 @@
     <%= @client.full_name %>
 <% end %>
 <% cache @client do %>
-    <% client_decorator = decorate(@client) %>
     <div class="page-header">
       <h3>
-        <%= client_decorator.full_name %>
+        <%= @client.full_name %>
       </h3>
       <div class="actions">
         <%= back_to clients_path %>
-        <%= client_decorator.edit_link class: t('buttons.inverse') %>
-        <%= client_decorator.destroy_link class: t('buttons.danger'), data: { confirm: 'Are you sure you want to destroy this client?' } %>
+        <%= link_to edit_client_path(@client), class: 'btn btn-inverse' do %>
+            <%= fa_icon :edit, text: 'Edit' %>
+        <% end %>
+        <%= link_to @client, class: 'btn btn-danger', method: :delete, data: { behavior: 'delete-client', confirm: 'Are you sure you want to destroy this client?' } do %>
+            <%= fa_icon :times, text: 'Destroy' %>
+        <% end %>
       </div>
     </div>
     <div class="row-fluid well well-small">
@@ -18,27 +21,27 @@
         <h4>Details</h4>
         <p>
           <strong>Title:</strong>
-          <%= client_decorator.title %>
+          <%= @client.title.upcase %>
         </p>
         <p>
           <strong>Name:</strong>
-          <%= client_decorator.name %>
+          <%= @client.name %>
         </p>
         <p>
           <strong>Surname:</strong>
-          <%= client_decorator.surname %>
+          <%= @client.surname %>
         </p>
         <p>
           <strong>Age:</strong>
-          <%= client_decorator.age %>
+          <%= @client.age.presence || 'N/A' %>
         </p>
         <p>
           <strong>Date Of Birth:</strong>
-          <%= client_decorator.date_of_birth %>
+          <%= @client.date_of_birth.present? ? local_date(@client.date_of_birth) : 'N/A' %>
         </p>
         <p>
           <strong>Bank:</strong>
-          <%= client_decorator.bank %>
+          <%= @client.bank.presence || 'N/A' %>
         </p>
         <p>
           <strong>High Risk:</strong>
@@ -57,47 +60,47 @@
         <h4>Contact Info</h4>
         <p>>
           <strong>Home Telephone No:</strong>
-          <%= client_decorator.home_no %>
+          <%= number_to_phone(@client.home_no, area_code: true).presence || 'N/A' %>
         </p>
         <p>>
           <strong>Work Telephone No:</strong>
-          <%= client_decorator.work_no %>
+          <%= number_to_phone(@client.work_no, area_code: true).presence || 'N/A' %>
         </p>
         <p>>
           <strong>Cellphone No:</strong>
-          <%= client_decorator.cell_no %>
+          <%= number_to_phone(@client.cell_no, area_code: true).presence || 'N/A' %>
         </p>
         <p>>
           <strong>Email:</strong>
-          <%= client_decorator.email %>
+          <%= @client.email.present? ? mail_to(@client.email) : 'N/A' %>
         </p>
       </div>
       <div class="span4">
         <h4>Address Info</h4>
         <p>>
           <strong>Street Address 1:</strong>
-          <%= client_decorator.street_address1 %>
+          <%= @client.street_address1.presence || 'N/A' %>
         </p>
         <p>>
           <strong>Street Address 2:</strong>
-          <%= client_decorator.street_address2 %>
+          <%= @client.street_address2.presence || 'N/A' %>
         </p>
         <p>>
           <strong>City:</strong>
-          <%= client_decorator.city %>
+          <%= @client.city.presence || 'N/A' %>
         </p>
         <p>>
           <strong>Postal Code:</strong>
-          <%= client_decorator.postal_code %>
+          <%= @client.postal_code.presence || 'N/A' %>
         </p>
       </div>
     </div>
     <div class="row-fluid">
       <div class="client-vouchers well well-small span6">
         <h4>Credit Vouchers</h4>
-        <% if client_decorator.vouchers.any? %>
+        <% if @client.vouchers.any? %>
             <%= bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed) do %>
-                <% client_decorator.vouchers.each do |voucher| %>
+                <% @client.vouchers.each do |voucher| %>
                     <tr>
                       <td>
                         <%= voucher.ref_no %>
@@ -111,25 +114,27 @@
         <% else %>
             <h5>This client has no vouchers</h5>
         <% end %>
-        <%= client_decorator.add_voucher_link class: t('buttons.mini.warning') %>
+        <%= link_to  new_client_voucher_path(@client), class: 'btn btn-warning btn-mini' do %>
+           <%= fa_icon :money, text: 'Add credit voucher' %>
+        <% end %>
       </div>
       <div class="client-bookings well well-small span6">
         <h4>Recent Bookings</h4>
-        <% if client_decorator.recent_bookings.any? %>
+        <% if @client.bookings.recent.any? %>
             <%= bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do %>
-                <% client_decorator.recent_bookings.each do |booking| %>
+                <% @client.bookings.recent.each do |booking| %>
                     <tr>
                       <td>
-                        <%= booking.status %>
+                        <%= status_label_for(booking) %>
                       </td>
                       <td data-dateformat="ll">
-                        <%= booking.trip_start_date %>
+                        <%= local_date(booking.trip.start_date) %>
                       </td>
                       <td>
-                        <%= booking.connection %>
+                        <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
                       </td>
                       <td>
-                        <%= booking.quantity %>
+                        <%= badge_for(booking.quantity) %>
                       </td>
                     </tr>
                 <% end %>

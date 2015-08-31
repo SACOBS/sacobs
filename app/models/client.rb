@@ -80,15 +80,6 @@ class Client < ActiveRecord::Base
     age >= PENSIONER_AGE
   end
 
-  def self.to_csv(options = {})
-    CSV.generate(options) do |csv|
-      csv << column_names
-      all.each do |client|
-        csv << client.attributes.values_at(*column_names)
-      end
-    end
-  end
-
   def full_name
     @full_name ||= "#{name} #{surname}"
   end

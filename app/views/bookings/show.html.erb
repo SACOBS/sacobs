@@ -1,13 +1,20 @@
-<% booking_decorator = decorate(@booking) %>
 <%= content_for (:title) do %>
-  <%= booking_decorator.reference_no %>
+  <%= @booking.reference_no %>
 <% end %>
 <% cache @booking do %>
   <div class="page-header text-center">
     <h2>Booking Details</h2>
     <div class="actions text-center">
-      <%= booking_decorator.ticket_link class: t('buttons.large.default'), target: '_blank' %>
-      <%= booking_decorator.confirmation_link class: t('buttons.large.inverse') %>
+      <% unless @booking.paid? || @booking.reserved? %>
+          <%= link_to ticket_path(@booking), class: 'btn btn-large btn-default', target: '_blank' do %>
+              <%= fa_icon :tasks, text: 'Ticket' %>
+          <% end %>
+      <% end %>
+      <% unless @booking.reserved? %>
+          <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-inverse' do %>
+              <%= fa_icon :money, text: 'Confirm' %>
+          <% end %>
+      <% end %>
     </div>
   </div>
   <div class="well">
@@ -33,7 +40,15 @@
     </div>
   </div>
   <div class="actions text-center">
-    <%= booking_decorator.ticket_link class: t('buttons.large.default'), target: '_blank' %>
-    <%= booking_decorator.confirmation_link class: t('buttons.large.inverse') %>
+    <% unless @booking.paid? || @booking.reserved? %>
+        <%= link_to ticket_path(@booking), class: 'btn btn-large btn-default', target: '_blank' do %>
+            <%= fa_icon :tasks, text: 'Ticket' %>
+        <% end %>
+    <% end %>
+    <% unless @booking.reserved? %>
+        <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-inverse' do %>
+            <%= fa_icon :money, text: 'Confirm' %>
+        <% end %>
+    <% end %>
   </div>
 <% end %>
