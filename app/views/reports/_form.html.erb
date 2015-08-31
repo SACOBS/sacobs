@@ -11,6 +11,6 @@
       <%= c.input :status_eq_any, label: 'Statuses', item_wrapper_class: 'inline', collection: Booking.statuses.except(:in_process).transform_keys(&:upcase), as: :check_boxes, include_hidden: false %>
       <%= c.input :passengers_passenger_type_id_eq_any, label: 'Passenger Types', item_wrapper_class: 'inline', collection: PassengerType.all, label_method: :description, as: :check_boxes,  include_hidden: false %>
     <% end %>
-    <%= f.submit 'Save', class: 'btn btn-inverse' %>
+    <%= f.submit %>
   <% end %>
 </div>

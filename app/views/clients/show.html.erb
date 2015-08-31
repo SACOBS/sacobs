@@ -11,7 +11,7 @@
         <%= link_to edit_client_path(@client), class: 'btn btn-inverse' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
-        <%= link_to @client, class: 'btn btn-danger', method: :delete, data: { behavior: 'delete-client', confirm: 'Are you sure you want to destroy this client?' } do %>
+        <%= link_to @client, class: 'btn btn-danger', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) } do %>
             <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
       </div>

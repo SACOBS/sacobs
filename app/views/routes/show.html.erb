@@ -11,7 +11,7 @@
         <%= link_to edit_route_path(@route), class: 'btn btn-inverse' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
-        <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to destroy this route?' } do %>
+        <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :route) } do %>
             <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
       </div>
@@ -54,7 +54,7 @@
       <%= link_to edit_route_path(@route), class: 'btn btn-inverse' do %>
           <%= fa_icon :edit, text: 'Edit' %>
       <% end %>
-      <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to destroy this route?' } do %>
+      <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :route) } do %>
           <%= fa_icon :times, text: 'Destroy' %>
       <% end %>
     </div>

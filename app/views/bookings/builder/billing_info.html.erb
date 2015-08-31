@@ -2,8 +2,8 @@
     Booking Wizard - Billing information
 <% end %>
 <%= content_for (:actions) do %>
-    <%= link_to 'Back', previous_wizard_path, class: t('buttons.inverse') %>
-    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger') %>
+    <%= link_to 'Back', previous_wizard_path, class: 'btn btn-inverse' %>
+    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <div id="errors">
   <%= errors_for @booking %>
@@ -11,7 +11,7 @@
 <%= simple_form_for @booking, url: wizard_path, defaults: { label: false, error: false } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Complete (alt + n)', class: t('buttons.primary'), autofocus: true, accesskey: 'n' %>
+        <%= f.submit 'Complete (alt + n)', autofocus: true, accesskey: 'n' %>
       </div>
     </div>
     <%= bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do %>

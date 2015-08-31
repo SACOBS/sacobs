@@ -2,8 +2,8 @@
     Booking Wizard - Choose client
 <% end %>
 <%= content_for (:actions) do %>
-    <%= link_to 'Back', previous_wizard_path, class: t('buttons.inverse') %>
-    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger') %>
+    <%= link_to 'Back', previous_wizard_path, class: 'btn btn-inverse' %>
+    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <div id="errors">
   <%= errors_for @booking %>
@@ -11,7 +11,7 @@
 <%= simple_form_for @booking,  url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal', method: :patch } do |f| %>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit 'Next (alt + n)', class: t('buttons.primary'), accesskey: 'n' %>
+        <%= f.submit 'Next (alt + n)', accesskey: 'n' %>
       </div>
     </div>
     <div class="search">

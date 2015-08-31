@@ -13,8 +13,10 @@
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search' } do |f| %>
         <%= f.input :full_name_cont, as: :search_box %>
-        <%= f.submit 'Search', class: t('buttons.mini.warning') %>
-        <%= link_to 'Clear', clients_path, class: t('buttons.mini.inverse'), icon: :times %>
+        <%= f.submit 'Search', class: 'btn btn-mini btn-warning'  %>
+        <%= link_to clients_path, class: 'btn btn-mini btn-inverse' do %>
+            <%= fa_icon :times, text: 'Clear' %>
+        <% end %>
     <% end %>
   </div>
 </div>

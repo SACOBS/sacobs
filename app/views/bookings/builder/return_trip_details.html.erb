@@ -9,9 +9,9 @@
       </small>
     </h4>
     <hr/>
-    <%= link_to 'Next (alt + n)', next_wizard_path, class: t('buttons.primary'), autofocus: true, accesskey: 'n' %>
-    <%= link_to 'Back', previous_wizard_path, class: t('buttons.inverse') %>
-    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger') %>
+    <%= link_to 'Next (alt + n)', next_wizard_path, class: 'btn btn-primary', autofocus: true, accesskey: 'n' %>
+    <%= link_to 'Back', previous_wizard_path, class: 'btn btn-inverse' %>
+    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <div class="trip-finder well well-small">
   <h5>Search</h5>

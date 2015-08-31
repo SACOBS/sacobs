@@ -2,7 +2,7 @@
     Booking Wizard - Choose trip
 <% end %>
 <%= content_for (:actions) do %>
-    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: t('buttons.danger') %>
+    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <div class="trip-finder well well-small">
   <h5>Search</h5>
@@ -13,7 +13,7 @@
       <%= f.hidden_field :connection_to_city_id_eq %>
       <%= f.input :trip_start_date_gteq, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], label: false, input_html: { class: 'input-medium' } %>
       <%= f.hidden_field :available_seats_gt %>
-      <%= f.submit 'Search', class: t('buttons.inverse') %>
+      <%= f.submit 'Search', class: 'btn btn-inverse' %>
   <% end %>
 </div>
 <div id="errors">

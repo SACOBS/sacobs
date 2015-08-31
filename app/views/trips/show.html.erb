@@ -10,7 +10,7 @@
        <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
         <%= fa_icon :edit, text: 'Edit' %>
        <% end %>
-        <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to destroy this trip?' } do %>
+        <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :trip) } do %>
             <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
   <% end %>
@@ -34,7 +34,7 @@
       <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
           <%= fa_icon :edit, text: 'Edit' %>
       <% end %>
-      <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to destroy this trip?' } do %>
+      <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :trip) } do %>
           <%= fa_icon :times, text: 'Destroy' %>
       <% end %>
   <% end %>

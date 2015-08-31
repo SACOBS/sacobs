@@ -14,7 +14,7 @@
     <%= page_entries_info @trips %>
   </p>
   <%= paginate @trips %>
-  <%= link_to trips_path,  class: 'btn btn-primary' do %>
+  <%= link_to new_trip_path,  class: 'btn btn-primary' do %>
       <%= fa_icon :plus, text: 'Setup trip' %>
   <% end %>
   <%= link_to trips_path, class: 'btn btn-default' do %>
