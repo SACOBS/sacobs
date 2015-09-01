@@ -1,6 +1,6 @@
 inherit_from: .rubocop_todo.yml
 AllCops:
-  RunRailsCops: false
+  RunRailsCops: true
   Include:
     - Rakefile
     - config.ru

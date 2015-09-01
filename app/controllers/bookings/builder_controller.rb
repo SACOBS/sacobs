@@ -18,7 +18,7 @@ class Bookings::BuilderController < ApplicationController
         fetch_stops
       when :return_trip_details
         fetch_return_stops
-        @booking.build_return_booking
+        @booking.build_return_booking(quantity: @booking.quantity)
       when :client_details
         @booking.build_client unless @booking.client.present?
       when :passenger_details
@@ -33,7 +33,16 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
-    @booking.reserve if step == :billing_info
+    case step
+      when :trip_details
+        @booking.user_id = current_user.id
+      when :return_trip_details
+        @booking.return_booking.user_id = current_user.id
+      when :client_details
+        @booking.client.user_id = current_user.id
+      when :billing_info
+        @booking.reserve
+    end
     render_wizard @booking
   end
 
@@ -83,9 +92,6 @@ class Bookings::BuilderController < ApplicationController
                                                   client_attributes, passengers_attributes,
                                                   invoice_attributes, return_booking_attributes
                                                  ).merge(user_id: current_user.id)
-    permitted.deep_merge!(return_booking_attributes: { user_id: current_user.id }) if permitted.key?(:return_booking_attributes)
-    permitted.deep_merge!(client_attributes: { user_id: current_user.id }) if permitted.key?(:client_attributes)
-    permitted
   end
 
   def finish_wizard_path

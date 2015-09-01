@@ -13,7 +13,7 @@
         <%= number_to_phone(client.work_no, area_code: true).presence || 'N/A' %>
       </td>
       <td>
-        <%= client.email.present? ? mail_to(@client.email) : 'N/A' %>
+        <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
       </td>
     </tr>
 <% end %>

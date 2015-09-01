@@ -50,19 +50,17 @@ class Booking < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validate :quantity_available, if: :stop
 
-  after_initialize do
-    self.quantity = main.quantity if main.present?
-  end
+  after_initialize :set_defaults, if: :new_record?
 
-  before_create :generate_reference, :set_expiry_date
+  before_create :generate_reference_no
   before_save :sync_return, if: proc { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?)) }
   before_update :clear_passengers, if: :client_id_changed?
 
-  scope :open, -> { reserved.where(arel_table[:expiry_date].gt(Time.current)) }
-  scope :expired, -> { reserved.where(arel_table[:expiry_date].lteq(Time.current)) }
+  scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
+  scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
   scope :recent, -> { unscoped.includes(:stop).processed.order(created_at: :desc).limit(5) }
-  scope :processed, -> { where(arel_table[:status].not_eq(statuses[:in_process])) }
-  scope :travelling, -> { where(arel_table[:status].eq(statuses[:reserved]).or(arel_table[:status].eq(statuses[:paid]))) }
+  scope :processed, -> { where.not(status: statuses[:in_process]) }
+  scope :travelling, -> { where(status: [statuses[:reserved], statuses[:paid]]) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
@@ -103,7 +101,6 @@ class Booking < ActiveRecord::Base
     end
   end
 
-
   def cancel
     transaction do
       trip.unassign_seats!(stop, quantity)
@@ -111,7 +108,7 @@ class Booking < ActiveRecord::Base
     end
     true
   rescue => e
-    Rails.logger.error { "Booking #{id} could not be cancelled due to #{e.message}"}
+    Rails.logger.error { "Booking #{id} could not be cancelled due to #{e.message}" }
     nil
   end
 
@@ -119,16 +116,21 @@ class Booking < ActiveRecord::Base
     return if reserved?
     transaction do
       trip.assign_seats!(stop, quantity)
-      update!(status: :reserved)
+      update!(status: :reserved, expiry_date: Setting.first.booking_expiry_period.hours.from_now)
       return_booking.reserve if return_booking.present?
     end
     true
   rescue => e
-    Rails.logger.error { "Booking #{id} could not be reserved due to #{e.message}"}
+    Rails.logger.error { "Booking #{id} could not be reserved due to #{e.message}" }
     nil
   end
 
   private
+
+  def set_defaults
+    self.quantity = 1
+    self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
+  end
 
   def clear_passengers
     passengers.clear
@@ -139,13 +141,8 @@ class Booking < ActiveRecord::Base
     return_booking.passengers = passengers.map(&:dup)
   end
 
-  def generate_reference
-    self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
-    self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase}#{'%03d' % sequence_id}"
-  end
-
-  def set_expiry_date
-    self.expiry_date = Setting.first.booking_expiry_period.hours.from_now
+  def generate_reference_no
+    self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase.concat('%03d' % sequence_id)}"
   end
 
   def quantity_available

@@ -8,13 +8,9 @@ class TripsheetPresenter
     trip.bookings.includes(:stop, :passengers)
   end
 
-  def stops
-    trip.stops
-  end
+  delegate :stops, to: :trip
 
-  def bus_name
-    trip.bus_name
-  end
+  delegate :bus_name, to: :trip
 
   def bus_capacity
     trip.bus.capacity
@@ -28,9 +24,7 @@ class TripsheetPresenter
     l(Date.current, format: :long)
   end
 
-  def drivers_names
-    trip.drivers_names
-  end
+  delegate :drivers_names, to: :trip
 
   def notes
     simple_format(trip.notes)

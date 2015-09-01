@@ -29,7 +29,6 @@
 #
 
 class Client < ActiveRecord::Base
-
   default_scope { order(:surname) }
 
   PENSIONER_AGE = 65

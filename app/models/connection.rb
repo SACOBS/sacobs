@@ -23,7 +23,7 @@
 #
 
 class Connection < ActiveRecord::Base
-  default_scope -> { order(:created_at) }
+  default_scope { order(:created_at) }
 
   belongs_to :route, inverse_of: :connections
   belongs_to :from, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections

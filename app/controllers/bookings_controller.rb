@@ -16,9 +16,7 @@ class BookingsController < ApplicationController
         @bookings = booking_scope.none
     end
 
-    if stale?(@bookings)
-      respond_with(@bookings)
-    end
+    respond_with(@bookings) if stale?(@bookings)
   end
 
   def search
@@ -27,7 +25,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.create(quantity: 1)
+    @booking = Booking.create
     redirect_to booking_builder_url(@booking, :trip_details)
   end
 

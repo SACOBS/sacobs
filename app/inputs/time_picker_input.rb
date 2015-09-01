@@ -2,7 +2,7 @@ class TimePickerInput < SimpleForm::Inputs::Base
   def input
     value = input_html_options[:value]
     value ||= object.send(attribute_name) if object.respond_to? attribute_name
-    input_html_options[:value] ||= template.l(Time.at(value), format: :short) if value.present?
+    input_html_options[:value] ||= template.l(Time.zone.at(value), format: :short) if value.present?
     input_html_options[:data] = { format: 'hh:mm PP' }
     template.content_tag(:div, class: 'input-append timepicker') do
       @builder.text_field(attribute_name, input_html_options) +
