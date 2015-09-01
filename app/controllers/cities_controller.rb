@@ -14,16 +14,9 @@ class CitiesController < ApplicationController
 
   def new
     @city = City.new
-    @city.time_tables.build(direction: :outgoing)
-    @city.time_tables.build(direction: :incoming)
   end
 
-  def edit
-    if @city.time_tables.empty?
-      @city.time_tables.build(direction: :outgoing)
-      @city.time_tables.build(direction: :incoming)
-    end
-  end
+  def edit; end
 
   def show
     fresh_when @city, last_modified: @city.updated_at
@@ -55,6 +48,6 @@ class CitiesController < ApplicationController
   end
 
   def city_params
-    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy], time_tables_attributes: [:arrive, :depart, :direction, :id]).merge(user_id: current_user.id)
+    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy]).merge(user_id: current_user.id)
   end
 end

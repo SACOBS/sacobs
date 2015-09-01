@@ -12,6 +12,8 @@
 #  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
+#  leaving    :time
+#  arriving   :time
 #
 # Indexes
 #
@@ -27,7 +29,7 @@ class Connection < ActiveRecord::Base
   belongs_to :from, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
   belongs_to :to, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
 
-  validates :route, :from, :to, presence: true
+  validates :route, :from, :to, :leaving, :arriving, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
   before_create :set_name

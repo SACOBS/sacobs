@@ -1,0 +1,2 @@
+$('#<%= params[:type]%>').html('<%= j render(partial: 'bookings/bookings', locals: { bookings: @bookings, type: params[:type] }) %>');
+$.bootstrapSortable(applyLast=true);

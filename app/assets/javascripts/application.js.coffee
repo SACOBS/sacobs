@@ -29,8 +29,6 @@ pageLoad = ->
     new Views.ApplicationView()
   window.applicationView.render()
 
-
-
 $ ->
   pageLoad()
   $(document).on 'page:load', pageLoad

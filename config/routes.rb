@@ -48,7 +48,6 @@
 #                            PATCH  /setting(.:format)                                  settings#update
 #                            PUT    /setting(.:format)                                  settings#update
 #             search_clients GET    /clients/search(.:format)                           clients#search
-#              print_clients GET    /clients/print(.:format)                            clients#print {:format=>:xls}
 #            client_vouchers POST   /clients/:client_id/vouchers(.:format)              vouchers#create
 #         new_client_voucher GET    /clients/:client_id/vouchers/new(.:format)          vouchers#new
 #                    clients GET    /clients(.:format)                                  clients#index

@@ -23,36 +23,36 @@
 <div class="tab-wrapper" id="bookings">
   <ul class="nav nav-tabs">
     <li class="active">
-      <a data-toggle="tab" data-target="#standby">
-        Standby/Expired
+      <%= link_to bookings_path(type: :standby), data: { toggle: 'tab', target: '#standby' }, remote: true do %>
+          Standby/Expired
         <span class="badge badge-warning">
           <%= standby_booking_count %>
         </span>
-      </a>
+      <% end %>
     </li>
     <li>
-      <a data-toggle="tab" data-target="#reserved">
+      <%= link_to bookings_path(type: :reserved), data: { toggle: 'tab', target: '#reserved' }, remote: true do %>
         Reserved
         <span class="badge badge-info">
           <%= reserved_booking_count %>
         </span>
-      </a>
+      <% end %>
     </li>
     <li>
-      <a data-toggle="tab" data-target="#paid">
-        Paid
+      <%= link_to bookings_path(type: :paid), data: { toggle: 'tab', target: '#paid' }, remote: true do %>
+          Paid
         <span class="badge badge-success">
           <%= paid_booking_count %>
         </span>
-      </a>
+      <% end %>
     </li>
     <li>
-      <a data-toggle="tab" data-target="#cancelled">
-        Cancelled
+      <%= link_to bookings_path(type: :cancelled) ,data: { toggle: 'tab', target: '#cancelled' }, remote: true do %>
+          Cancelled
         <span class="badge badge-important">
           <%= cancelled_booking_count %>
         </span>
-      </a>
+      <% end %>
     </li>
   </ul>
   <div class="tab-content">

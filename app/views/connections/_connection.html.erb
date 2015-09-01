@@ -11,4 +11,10 @@
   <td>
     <%= number_to_currency(connection.cost) %>
   </td>
+  <td>
+    <%= l(connection.leaving, format: :short) %>
+  </td>
+  <td>
+    <%= l(connection.arriving, format: :short) %>
+  </td>
 </tr>

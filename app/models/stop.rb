@@ -22,5 +22,5 @@ class Stop < ActiveRecord::Base
 
   scope :affected, -> (stop) { includes(:trip).joins(connection: :to).where('connections.from_id != ? and destinations.sequence > ?', stop.connection.to, stop.connection.from.sequence) }
 
-  delegate :name, :from_city, :to_city, to: :connection
+  delegate :name, :from_city, :to_city, :leaving, :arriving, to: :connection, allow_nil: true
 end

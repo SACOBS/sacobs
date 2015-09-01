@@ -55,10 +55,10 @@
                   <%= booking.stop.to_city.venues.first.name %>
                 </td>
                 <td>
-                  <%= l(booking.stop.from_city.outgoing_time_table.depart, format: :short) if booking.stop.from_city.outgoing_time_table.present? %>
+                  <%= l(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
                 </td>
                 <td>
-                  <%= l(booking.stop.to_city.incoming_time_table.depart, format: :short) if booking.stop.from_city.incoming_time_table.present? %>
+                  <%= l(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
                 </td>
               </tr>
           <% end %>
