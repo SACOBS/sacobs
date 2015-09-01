@@ -60,10 +60,12 @@ class Trip < ActiveRecord::Base
 
   def assign_seats!(stop, qty)
     stops.affected(stop).update_all(['available_seats = available_seats - ?', qty])
+    touch
   end
 
   def unassign_seats!(stop, qty)
     stops.affected(stop).update_all(['available_seats = available_seats + ?', qty])
+    touch
   end
 
   def to_file_name

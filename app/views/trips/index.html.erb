@@ -13,7 +13,6 @@
   <p>
     <%= page_entries_info @trips %>
   </p>
-  <%= paginate @trips %>
   <%= link_to new_trip_path,  class: 'btn btn-primary' do %>
       <%= fa_icon :plus, text: 'Setup trip' %>
   <% end %>
@@ -33,12 +32,14 @@
 </div>
 <div id="trips">
   <% if @trips.any? %>
+      <%= paginate @trips %>
       <% cache @trips do %>
           <%= bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed), html_options: {class: 'sortable'} do %>
               <%= render @trips, cache: true %>
           <% end %>
       <% end %>
-  <% else %>
+      <%= paginate @trips %>
+ <% else %>
       <div class="hero-unit text-center">
         <h3 class="text-error">There are currently no trips on the system. Click <strong>'Setup Trip'</strong> above to create one.</h3>
       </div>

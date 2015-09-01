@@ -3,7 +3,9 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.surname_starts_with(params.fetch(:letter, 'A' )).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email, :updated_at)
-    respond_with(@clients)
+    if stale?(@clients)
+      respond_with(@clients)
+    end
   end
 
   def download
