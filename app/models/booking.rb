@@ -37,7 +37,7 @@ class Booking < ActiveRecord::Base
   belongs_to :client
 
   belongs_to :main, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
-  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
+  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id, autosave: true
 
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
@@ -51,10 +51,13 @@ class Booking < ActiveRecord::Base
   validate :quantity_available, if: :stop
 
   after_initialize :set_defaults, if: :new_record?
-
   before_create :generate_reference_no
-  before_save :sync_return, if: proc { |booking| booking.return_booking.present? && (client_id_changed? || passengers.any?(&:changed?)) }
-  before_update :clear_passengers, if: :client_id_changed?
+
+  before_save :clear_passengers, if: :client_id_changed?
+  before_save :update_return_booking, if: :return_booking
+  before_save :assign_seats,  :reserve_return_booking, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
+  before_save :unassign_seats, if: Proc.new { |booking| booking.status_changed? && booking.cancelled? }
+  before_save :reserve_return_booking, if: Proc.new { |booking| booking.method_defined?(:return_booking) && booking.return_booking && booking.status_changed? && booking.reserved? }
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
   scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
@@ -101,43 +104,32 @@ class Booking < ActiveRecord::Base
     end
   end
 
-  def cancel
-    transaction do
-      trip.unassign_seats!(stop, quantity)
-      update!(status: :cancelled)
-    end
-    true
-  rescue => e
-    Rails.logger.error { "Booking #{id} could not be cancelled due to #{e.message}" }
-    nil
-  end
-
-  def reserve(expiry_date)
-    return if reserved?
-    transaction do
-      trip.assign_seats!(stop, quantity)
-      update!(status: :reserved, expiry_date: expiry_date)
-      return_booking.reserve(expiry_date) if return_booking.present?
-    end
-    true
-  rescue => e
-    Rails.logger.error { "Booking #{id} could not be reserved due to #{e.message}" }
-    nil
-  end
-
   private
   def set_defaults
     self.quantity = 1
     self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
   end
 
-  def clear_passengers
-    passengers.clear
+  def assign_seats
+      trip.assign_seats(stop, quantity)
   end
 
-  def sync_return
-    return_booking.client = client
-    return_booking.passengers = passengers.map(&:dup)
+  def unassign_seats
+      trip.unassign_seats(stop, quantity)
+  end
+
+  def clear_passengers
+     passengers.clear
+  end
+
+  def update_return_booking
+     return_booking.client = client
+     return_booking.passengers = passengers.map(&:dup)
+  end
+
+  def reserve_return_booking
+    return_booking.expiry_date = expiry_date
+    return_booking.status = :reserved
   end
 
   def generate_reference_no

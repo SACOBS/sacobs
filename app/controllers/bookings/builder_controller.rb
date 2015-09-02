@@ -33,6 +33,7 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
+    @booking.assign_attributes(booking_params)
     case step
       when :trip_details
         @booking.user_id = current_user.id
@@ -41,7 +42,8 @@ class Bookings::BuilderController < ApplicationController
       when :client_details
         @booking.client.user_id = current_user.id
       when :billing_info
-        @booking.reserve(@settings.booking_expiry_period.hours.from_now)
+        @booking.expiry_date = @settings.booking_expiry_period.hours.from_now
+        @booking.status = :reserved
     end
     render_wizard @booking
   end
@@ -50,7 +52,6 @@ class Bookings::BuilderController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:booking_id])
-    @booking.assign_attributes(booking_params)
   end
 
   def fetch_stops
