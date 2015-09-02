@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.create
+    @booking = Booking.create(user_id: current_user.id)
     redirect_to booking_builder_url(@booking, :trip_details)
   end
 

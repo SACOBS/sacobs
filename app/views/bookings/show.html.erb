@@ -5,12 +5,12 @@
   <div class="page-header text-center">
     <h2>Booking Details</h2>
     <div class="actions text-center">
-      <% unless @booking.paid? || @booking.reserved? %>
+      <% if @booking.paid? || @booking.reserved? %>
           <%= link_to ticket_path(@booking), class: 'btn btn-large btn-default', target: '_blank' do %>
               <%= fa_icon :tasks, text: 'Ticket' %>
           <% end %>
       <% end %>
-      <% unless @booking.reserved? %>
+      <% if @booking.reserved? %>
           <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-inverse' do %>
               <%= fa_icon :money, text: 'Confirm' %>
           <% end %>
@@ -40,12 +40,12 @@
     </div>
   </div>
   <div class="actions text-center">
-    <% unless @booking.paid? || @booking.reserved? %>
+    <% if @booking.paid? || @booking.reserved? %>
         <%= link_to ticket_path(@booking), class: 'btn btn-large btn-default', target: '_blank' do %>
             <%= fa_icon :tasks, text: 'Ticket' %>
         <% end %>
     <% end %>
-    <% unless @booking.reserved? %>
+    <% if @booking.reserved? %>
         <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-inverse' do %>
             <%= fa_icon :money, text: 'Confirm' %>
         <% end %>

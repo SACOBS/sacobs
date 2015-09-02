@@ -19,19 +19,19 @@
           <%= f.simple_fields_for :passengers, wrapper: false do |passenger| %>
               <tr>
                 <td>
-                  <%= passenger.association :passenger_type, include_blank: false, label_method: :description %>
+                  <%= passenger.association :passenger_type, include_blank: false, label_method: :description, input_html: { class: 'input-medium'} %>
                 </td>
                 <td>
-                  <%= passenger.input :name %>
+                  <%= passenger.input :name, input_html: { class: 'input-medium'} %>
                 </td>
                 <td>
-                  <%= passenger.input :surname %>
+                  <%= passenger.input :surname, input_html: { class: 'input-medium'} %>
                 </td>
                 <td>
-                  <%= passenger.input :cell_no %>
+                  <%= passenger.input :cell_no, input_html: { class: 'input-small'} %>
                 </td>
                 <td>
-                  <%= passenger.input :email %>
+                  <%= passenger.input :email, input_html: { class: 'input-small'} %>
                 </td>
               </tr>
           <% end %>

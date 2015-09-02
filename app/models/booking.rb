@@ -37,7 +37,7 @@ class Booking < ActiveRecord::Base
   belongs_to :client
 
   belongs_to :main, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
-  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id, autosave: true
+  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
 
   has_one :invoice, dependent: :delete
   has_one :payment_detail, dependent: :delete
@@ -53,11 +53,8 @@ class Booking < ActiveRecord::Base
   after_initialize :set_defaults, if: :new_record?
   before_create :generate_reference_no
 
-  before_save :clear_passengers, if: :client_id_changed?
-  before_save :update_return_booking, if: :return_booking
-  before_save :assign_seats, :reserve_return_booking, if: proc { |booking| booking.status_changed? && booking.reserved? }
+  before_save :assign_seats, if: proc { |booking| booking.status_changed? && booking.reserved? }
   before_save :unassign_seats, if: proc { |booking| booking.status_changed? && booking.cancelled? }
-  before_save :reserve_return_booking, if: proc { |booking| booking.respond_to?(:return_booking) && booking.return_booking && booking.status_changed? && booking.reserved? }
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
   scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
@@ -117,20 +114,6 @@ class Booking < ActiveRecord::Base
 
   def unassign_seats
     trip.unassign_seats(stop, quantity)
-  end
-
-  def clear_passengers
-    passengers.clear
-  end
-
-  def update_return_booking
-    return_booking.client = client
-    return_booking.passengers = passengers.map(&:dup)
-  end
-
-  def reserve_return_booking
-    return_booking.expiry_date = expiry_date
-    return_booking.status = :reserved
   end
 
   def generate_reference_no
