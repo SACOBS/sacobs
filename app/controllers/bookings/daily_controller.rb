@@ -14,6 +14,6 @@ class Bookings::DailyController < ApplicationController
   private
 
   def bookings
-    @bookings ||= Booking.processed.where(created_at: Time.current.midnight..Time.current.now.end_of_day)
+    @bookings ||= Booking.processed.where(created_at: Time.current.midnight..Time.current.end_of_day)
   end
 end
