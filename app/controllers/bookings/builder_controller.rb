@@ -22,9 +22,10 @@ class Bookings::BuilderController < ApplicationController
       when :client_details
         @booking.build_client unless @booking.client
       when :passenger_details
-        @booking.build_passengers
+        @booking.build_passengers if @booking.passengers.empty?
       when :billing_info
-        @booking.build_invoices
+        @booking.calculate_costs
+        @booking.return_booking.calculate_costs if @booking.return_booking
     end
     respond_to do |format|
       format.html { render_wizard }
