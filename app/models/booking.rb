@@ -57,7 +57,7 @@ class Booking < ActiveRecord::Base
   before_save :update_return_booking, if: :return_booking
   before_save :assign_seats, :reserve_return_booking, if: proc { |booking| booking.status_changed? && booking.reserved? }
   before_save :unassign_seats, if: proc { |booking| booking.status_changed? && booking.cancelled? }
-  before_save :reserve_return_booking, if: proc { |booking| booking.method_defined?(:return_booking) && booking.return_booking && booking.status_changed? && booking.reserved? }
+  before_save :reserve_return_booking, if: proc { |booking| booking.respond_to?(:return_booking) && booking.return_booking && booking.status_changed? && booking.reserved? }
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
   scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
