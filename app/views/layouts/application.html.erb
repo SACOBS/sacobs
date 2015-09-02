@@ -16,8 +16,7 @@
   <%= favicon_link_tag 'apple-touch-icon-iphone-retina-120x120-precomposed.png', rel: 'apple-touch-icon', type: 'image/png' %>
   <%= yield(:head) %>
 </head>
-<body class="<%= controller_name %>" data-action="<%= action_name %>" data-controller="<%= controller_path %>" data-class-name="<%= js_class_name %>">
-<div id="wrap">
+<body class="<%= controller_path.gsub(/\/|_/, "-") %> <%= action_name %>">
   <header class="navbar navbar-fixed-top navbar-inverse">
     <nav class="navbar-inner">
       <div class="container-fluid">
@@ -35,7 +34,6 @@
       </div>
     </div>
   </div>
-  <div id="push"></div>
   <footer class="navbar navbar-fixed-bottom navbar-inverse">
     <nav class="navbar-inner">
       <div class="container-fluid">
@@ -43,7 +41,6 @@
       </div>
     </nav>
   </footer>
-</div>
 </body>
 </html>
 

@@ -12,35 +12,35 @@
 <div class="well">
   <p>
     <strong>Booking Expiry Period:</strong>
-    <%= "#{@setting.booking_expiry_period} hours" %>
+    <%= "#{@settings.booking_expiry_period} hours" %>
   </p>
   <p>
     <strong>Email from which tickets will be sent, emails will also be cc'ed to this address:</strong>
-    <%= @setting.email %>
+    <%= @settings.email %>
   </p>
   <p>
     <strong>Ticket Instructions:</strong>
-    <%= simple_format(@setting.ticket_instructions) %>
+    <%= simple_format(@settings.ticket_instructions) %>
   </p>
   <p>
     <strong>Default Scripture:</strong>
-    <%= simple_format(@setting.default_scripture) %>
+    <%= simple_format(@settings.default_scripture) %>
   </p>
   <p>
     <strong><%= 1.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@setting.trip_sheet_note1) %>
+    <%= simple_format(@settings.trip_sheet_note1) %>
   </p>
   <p>
     <strong><%= 2.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@setting.trip_sheet_note2) %>
+    <%= simple_format(@settings.trip_sheet_note2) %>
   </p>
   <p>
     <strong><%= 3.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@setting.trip_sheet_note3) %>
+    <%= simple_format(@settings.trip_sheet_note3) %>
   </p>
   <p>
     <strong><%= 4.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@setting.trip_sheet_note4) %>
+    <%= simple_format(@settings.trip_sheet_note4) %>
   </p>
 </div>
 <div class="actions">

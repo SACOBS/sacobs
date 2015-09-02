@@ -5,9 +5,9 @@
   <h2>Edit Setting</h2>
 </div>
 <div id="errors">
-  <%= errors_for @setting %>
+  <%= errors_for settings %>
 </div>
-<%= simple_form_for @setting, url: setting_url(format: :html), defaults: { error: false }, method: :patch, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for settings, url: setting_url(format: :html), defaults: { error: false }, method: :patch, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit %>

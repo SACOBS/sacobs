@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include JavascriptClassName, LayoutRequired
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -8,8 +7,10 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html, :js, :json, :pdf, :xls
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :common_settings
   after_action :prepare_unobtrusive_flash, except: :destroy
+
+  layout :layout_required?
 
   etag { current_user.try :id }
 
@@ -24,8 +25,18 @@ class ApplicationController < ActionController::Base
   helper_method :notes
 
   protected
-
   def devise_parameter_sanitizer
     UserSanitizer.new(User, :user, params)
+  end
+
+  def layout_required?
+    false if request.xhr?
+  end
+
+
+  def common_settings
+    @settings = Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
+      Setting.first_or_create
+    end
   end
 end

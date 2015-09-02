@@ -3,19 +3,20 @@ class Ticket
 
   delegate :status, :reference_no, :passengers, to: :booking
 
-  def initialize(booking, view_context)
+  def initialize(booking, view_context, settings)
     @booking = booking.main || booking
     @return_booking = booking.return_booking
     @client = @booking.client
     @view_context = view_context
+    @settings = settings
   end
 
   def instructions
-    simple_format(settings.ticket_instructions)
+    simple_format(@settings.ticket_instructions)
   end
 
   def scripture
-    simple_format(ScriptureForToday.generate || settings.default_scripture)
+    simple_format(ScriptureForToday.generate || @settings.default_scripture)
   end
 
   def ticket_date
@@ -48,11 +49,6 @@ class Ticket
   end
 
   private
-
-  def settings
-    @settings ||= Setting.first
-  end
-
   def total
     @total ||= [booking, return_booking].compact.map { |b| b.invoice.total }.sum
   end

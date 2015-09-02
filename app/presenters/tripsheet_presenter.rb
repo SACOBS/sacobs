@@ -1,7 +1,8 @@
 class TripsheetPresenter
-  def initialize(trip, view_context)
+  def initialize(trip, view_context, settings)
     @trip = trip
     @view_context = view_context
+    @settings = settings
   end
 
   def bookings
@@ -31,19 +32,19 @@ class TripsheetPresenter
   end
 
   def trip_sheet_note1
-    simple_format(settings.trip_sheet_note1)
+    simple_format(@settings.trip_sheet_note1)
   end
 
   def trip_sheet_note2
-    simple_format(settings.trip_sheet_note2)
+    simple_format(@settings.trip_sheet_note2)
   end
 
   def trip_sheet_note3
-    simple_format(settings.trip_sheet_note3)
+    simple_format(@settings.trip_sheet_note3)
   end
 
   def trip_sheet_note4
-    simple_format(settings.trip_sheet_note4)
+    simple_format(@settings.trip_sheet_note4)
   end
 
   def method_missing(method_name, *args, &block)
@@ -59,10 +60,5 @@ class TripsheetPresenter
   end
 
   private
-
   attr_reader :trip, :view_context
-
-  def settings
-    @settings ||= Setting.first
-  end
 end
