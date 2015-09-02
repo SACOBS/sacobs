@@ -1,5 +1,4 @@
 class SettingsController < ApplicationController
-
   def edit; end
 
   def update
@@ -8,6 +7,7 @@ class SettingsController < ApplicationController
   end
 
   private
+
   def setting_params
     params.fetch(:setting, {}).permit(:booking_expiry_period,
                                       :email,

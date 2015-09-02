@@ -9,6 +9,7 @@ class TicketMailer < ActionMailer::Base
   end
 
   private
+
   def common_settings
     @settings = Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
       Setting.first_or_create

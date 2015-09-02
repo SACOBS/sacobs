@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -25,6 +24,7 @@ class ApplicationController < ActionController::Base
   helper_method :notes
 
   protected
+
   def devise_parameter_sanitizer
     UserSanitizer.new(User, :user, params)
   end
@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
   def layout_required?
     false if request.xhr?
   end
-
 
   def common_settings
     @settings = Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do

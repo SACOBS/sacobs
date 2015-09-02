@@ -60,5 +60,6 @@ class TripsheetPresenter
   end
 
   private
+
   attr_reader :trip, :view_context
 end

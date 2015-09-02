@@ -55,9 +55,9 @@ class Booking < ActiveRecord::Base
 
   before_save :clear_passengers, if: :client_id_changed?
   before_save :update_return_booking, if: :return_booking
-  before_save :assign_seats,  :reserve_return_booking, if: Proc.new { |booking| booking.status_changed? && booking.reserved? }
-  before_save :unassign_seats, if: Proc.new { |booking| booking.status_changed? && booking.cancelled? }
-  before_save :reserve_return_booking, if: Proc.new { |booking| booking.method_defined?(:return_booking) && booking.return_booking && booking.status_changed? && booking.reserved? }
+  before_save :assign_seats, :reserve_return_booking, if: proc { |booking| booking.status_changed? && booking.reserved? }
+  before_save :unassign_seats, if: proc { |booking| booking.status_changed? && booking.cancelled? }
+  before_save :reserve_return_booking, if: proc { |booking| booking.method_defined?(:return_booking) && booking.return_booking && booking.status_changed? && booking.reserved? }
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
   scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
@@ -105,26 +105,27 @@ class Booking < ActiveRecord::Base
   end
 
   private
+
   def set_defaults
     self.quantity = 1
     self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
   end
 
   def assign_seats
-      trip.assign_seats(stop, quantity)
+    trip.assign_seats(stop, quantity)
   end
 
   def unassign_seats
-      trip.unassign_seats(stop, quantity)
+    trip.unassign_seats(stop, quantity)
   end
 
   def clear_passengers
-     passengers.clear
+    passengers.clear
   end
 
   def update_return_booking
-     return_booking.client = client
-     return_booking.passengers = passengers.map(&:dup)
+    return_booking.client = client
+    return_booking.passengers = passengers.map(&:dup)
   end
 
   def reserve_return_booking

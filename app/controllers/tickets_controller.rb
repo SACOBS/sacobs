@@ -2,16 +2,16 @@ class TicketsController < ApplicationController
   before_action :set_booking
 
   def download
-    @ticket = Ticket.new(@booking, view_context)
+    @ticket = Ticket.new(@booking, view_context, @settings)
     render_pdf(disposition: :attachment)
   end
 
   def show
-    @ticket = Ticket.new(@booking, view_context)
+    @ticket = Ticket.new(@booking, view_context, @settings)
   end
 
   def print
-    @ticket = Ticket.new(@booking, view_context)
+    @ticket = Ticket.new(@booking, view_context, @settings)
     render_pdf
   end
 

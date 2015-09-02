@@ -49,6 +49,7 @@ class Ticket
   end
 
   private
+
   def total
     @total ||= [booking, return_booking].compact.map { |b| b.invoice.total }.sum
   end
