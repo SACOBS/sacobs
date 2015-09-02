@@ -112,12 +112,12 @@ class Booking < ActiveRecord::Base
     nil
   end
 
-  def reserve
+  def reserve(expiry_date)
     return if reserved?
     transaction do
       trip.assign_seats!(stop, quantity)
-      update!(status: :reserved, expiry_date: Setting.first.booking_expiry_period.hours.from_now)
-      return_booking.reserve if return_booking.present?
+      update!(status: :reserved, expiry_date: expiry_date)
+      return_booking.reserve(expiry_date) if return_booking.present?
     end
     true
   rescue => e
@@ -126,7 +126,6 @@ class Booking < ActiveRecord::Base
   end
 
   private
-
   def set_defaults
     self.quantity = 1
     self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")

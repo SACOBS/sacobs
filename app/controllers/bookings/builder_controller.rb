@@ -41,7 +41,7 @@ class Bookings::BuilderController < ApplicationController
       when :client_details
         @booking.client.user_id = current_user.id
       when :billing_info
-        @booking.reserve
+        @booking.reserve(@settings.booking_expiry_period.hours.from_now)
     end
     render_wizard @booking
   end
