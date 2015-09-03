@@ -5,8 +5,8 @@
   <h2>TripSheet Notes</h2>
   <h4>Add additional notes for the trip sheet here</h4>
 </div>
-<%= errors_for @trip %>
 <%= simple_form_for @trip, url: trip_sheet_path do |f| %>
+    <%= f.error_notification %>
     <%= f.input :notes, label: false, as: :text, input_html: { class: 'input-xxlarge', rows: 20, style: 'width: 100%;' }, autofocus: true %>
     <%= f.button :submit  %>
 <% end %>

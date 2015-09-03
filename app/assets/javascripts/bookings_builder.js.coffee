@@ -7,3 +7,4 @@ $(document).on "page:change", ->
       value = value * -1 if $(this).data('type') == 'credit'
       total += value if (!isNaN(value))
     $('.total').html("<strong> R" + total.toFixed(2) + "</strong>")
+  $('.amount').trigger('change')

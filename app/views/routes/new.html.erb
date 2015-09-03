@@ -19,10 +19,7 @@
     </em>
   </p>
 </div>
-<div id="errors">
-  <%= errors_for @route %>
-</div>
-<%= simple_form_for @route,  defaults: { error: false } do |f| %>
+<%= simple_form_for @route do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit  %>
@@ -30,6 +27,7 @@
       </div>
     </div>
     <hr/>
+    <%= f.error_notification %>
     <div class="row-fluid">
       <div class="span3">
         <fieldset>

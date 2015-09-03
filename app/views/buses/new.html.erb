@@ -4,15 +4,13 @@
 <div class="page-header">
   <h2>New Bus</h2>
 </div>
-<div id="errors">
-  <%= errors_for @bus %>
-</div>
-<%= simple_form_for @bus, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for @bus, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit %>
       </div>
     </div>
+    <%= f.error_notification %>
     <fieldset>
       <%= f.input :name, autofocus: true, placeholder: 'Name' %>
       <%= f.input :capacity %>

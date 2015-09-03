@@ -1,13 +1,11 @@
-<div id="errors">
-  <%= errors_for @trip %>
-</div>
-<%= simple_form_for @trip, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for @trip, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit  %>
         <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
       </div>
     </div>
+    <%= f.error_notification %>
     <fieldset>
       <%= f.input :name, autofocus: true, placeholder: 'Name' %>
       <%= f.input :start_date, as: :date_picker,  placeholder: 'Start Date' %>

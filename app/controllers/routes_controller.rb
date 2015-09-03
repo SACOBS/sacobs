@@ -30,7 +30,7 @@ class RoutesController < ApplicationController
   end
 
   def copy
-    copy = @route.copy { |copy| copy.user_id = current_user.id }
+    copy = @route.copy { |c| c.user_id = current_user.id }
     if copy.persisted?
       redirect_to copy, notice: 'Route was successfully copied.'
     else
@@ -39,7 +39,7 @@ class RoutesController < ApplicationController
   end
 
   def reverse_copy
-    reverse_copy = @route.reverse_copy { |reverse_copy| reverse_copy.user_id = current_user.id }
+    reverse_copy = @route.reverse_copy { |r| r.user_id = current_user.id }
     if reverse_copy.persisted?
       redirect_to reverse_copy, notice: 'Route was successfully reverse copied.'
     else

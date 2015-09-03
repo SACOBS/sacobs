@@ -1,13 +1,11 @@
-<div id="errors">
-  <%= errors_for client %>
-</div>
-<%= simple_form_for client, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for client, html: { class: 'form-horizontal' } do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit  %>
         <%= link_to 'Cancel', clients_path, class: 'btn btn-default' %>
       </div>
     </div>
+    <%= f.error_notification %>
     <fieldset>
       <div class="row">
         <div class="span4">

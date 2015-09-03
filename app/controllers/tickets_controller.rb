@@ -37,5 +37,4 @@ class TicketsController < ApplicationController
   def set_booking
     @booking = Booking.unscoped { Booking.find(params[:id]) }
   end
-
 end

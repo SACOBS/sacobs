@@ -12,54 +12,45 @@ class Ticket
   end
 
   def instructions
-    simple_format(@settings.ticket_instructions)
+    view_context.simple_format(@settings.ticket_instructions)
   end
 
   def scripture
-    simple_format(ScriptureForToday.generate || @settings.default_scripture)
+    view_context.simple_format(ScriptureForToday.generate || @settings.default_scripture)
   end
 
   def ticket_date
-    l Date.current, format: :long
+    view_context.l Date.current, format: :long
   end
 
   def price
-    number_to_currency total_cost, unit: 'R'
+    view_context.number_to_currency total_cost, unit: 'R'
   end
 
   def discount
-    number_to_currency total_discount, unit: 'R'
+    view_context.number_to_currency total_discount, unit: 'R'
   end
 
   def nett
-    number_to_currency total, unit: 'R'
+    view_context.number_to_currency total, unit: 'R'
   end
 
   def to_file_name
     "#{booking.trip.name}_#{booking.client.full_name}_#{Time.current.to_i}".tr(' ', '_').downcase
   end
 
-  def method_missing(method_name, *args, &block)
-    return @view_context.public_send(method_name, *args, &block) if @view_context.respond_to?(method_name)
-    super
-  end
-
-  def respond_to_missing?(method_name, include_private = false)
-    @view_context.respond_to?(method_name, include_private)
-  end
-
   private
 
   def total
-    @total ||= [booking, return_booking].compact.map { |b| b.invoice.total }.sum
+    @total ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total }
   end
 
   def total_cost
-    @total_cost ||= [booking, return_booking].compact.map { |b| b.invoice.total_cost }.sum
+    @total_cost ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total_cost }
   end
 
   def total_discount
-    @total_discount ||= [booking, return_booking].compact.map { |b| b.invoice.total_discount }.sum
+    @total_discount ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total_discount }
   end
 
   def view_context

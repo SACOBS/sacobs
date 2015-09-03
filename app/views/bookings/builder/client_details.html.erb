@@ -5,15 +5,13 @@
     <%= link_to 'Back', previous_wizard_path, class: 'btn btn-inverse' %>
     <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
-<div id="errors">
-  <%= errors_for @booking %>
-</div>
-<%= simple_form_for @booking,  url: wizard_path, defaults: { error: false }, html: { class: 'form-horizontal', method: :patch } do |f| %>
+<%= simple_form_for @booking,  url: wizard_path, html: { class: 'form-horizontal', method: :patch } do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit, 'Next (alt + n)', accesskey: 'n' %>
       </div>
     </div>
+    <%= f.error_notification %>
     <div class="search">
       <fieldset>
         <legend>Search for client</legend>

@@ -19,10 +19,7 @@
     </li>
   </ol>
 </div>
-<div id="errors">
-  <%= errors_for @route %>
-</div>
-<%= simple_form_for @route, defaults: { error: false }, html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for @route, html: { class: 'form-inline' } do |f| %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit %>
@@ -30,6 +27,7 @@
       </div>
     </div>
     <hr/>
+    <%= f.error_notification %>
     <fieldset>
       <%= f.input :name, autofocus: true, label: 'Name:' %>
       <%= f.input :cost, as: :cost, label: 'Master Rate:' %>

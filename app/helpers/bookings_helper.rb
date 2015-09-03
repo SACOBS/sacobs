@@ -34,8 +34,4 @@ module BookingsHelper
   def cancelled_booking_count
     Booking.processed.cancelled.size
   end
-
-  def invoice_total(booking)
-    [booking, booking.return_booking].compact.map { |b| b.invoice.total }.sum
-  end
 end

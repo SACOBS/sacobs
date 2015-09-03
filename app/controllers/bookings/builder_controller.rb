@@ -4,7 +4,7 @@ class Bookings::BuilderController < ApplicationController
   layout 'wizard'
 
   before_action :set_booking, only: [:show, :update]
-
+  before_action :wizard_completed, only: :show
   steps :trip_details,
         :return_trip_details,
         :client_details,
@@ -47,12 +47,7 @@ class Bookings::BuilderController < ApplicationController
           @booking.return_booking.passengers = @booking.passengers.map(&:dup)
         end
       when :billing_info
-        @booking.expiry_date = @settings.booking_expiry_period.hours.from_now
-        @booking.status = :reserved
-        if @booking.return_booking
-          @booking.return_booking.expiry_date = @settings.booking_expiry_period.hours.from_now
-          @booking.return_booking.status = :reserved
-        end
+        Booking::Reserve.new(@booking, @settings).perform
     end
     render_wizard @booking
   end
@@ -68,8 +63,13 @@ class Bookings::BuilderController < ApplicationController
     params[:q][:available_seats_gteq] ||= @booking.quantity
     if @booking.stop.present?
       params[:q][:trip_start_date_gteq] = set_trip_date((@booking.trip.start_date))
-      params[:q][:connection_from_city_id_eq] ||= @booking.stop.from_city.id
-      params[:q][:connection_to_city_id_eq] ||= @booking.stop.to_city.id
+      if step == :return_trip_details
+        params[:q][:connection_from_city_id_eq] ||= @booking.stop.to_city.id
+        params[:q][:connection_to_city_id_eq] ||= @booking.stop.from_city.id
+      else
+        params[:q][:connection_from_city_id_eq] ||= @booking.stop.from_city.id
+        params[:q][:connection_to_city_id_eq] ||= @booking.stop.to_city.id
+      end
     end
     @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
@@ -95,6 +95,11 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def finish_wizard_path
-    booking_path(@booking)
+    booking_url(@booking)
+  end
+
+  private
+  def wizard_completed
+    redirect_to @booking if @booking.reserved?
   end
 end

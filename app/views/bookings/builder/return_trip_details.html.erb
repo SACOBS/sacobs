@@ -25,9 +25,6 @@
       <%= f.button :submit, 'Search', class: 'btn btn-inverse' %>
   <% end %>
 </div>
-<div id="errors">
-  <%= errors_for @booking %>
-</div>
 <div class="trips">
   <%= render partial: 'bookings/builder/trips', locals: { booking: @booking, stops: @stops } %>
 </div>

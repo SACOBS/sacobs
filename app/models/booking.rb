@@ -53,7 +53,6 @@ class Booking < ActiveRecord::Base
   after_initialize :set_defaults, if: :new_record?
   before_create :generate_reference_no
 
-  before_save :assign_seats, if: proc { |booking| booking.status_changed? && booking.reserved? }
   before_save :unassign_seats, if: proc { |booking| booking.status_changed? && booking.cancelled? }
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
@@ -105,10 +104,6 @@ class Booking < ActiveRecord::Base
   def set_defaults
     self.quantity = 1
     self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
-  end
-
-  def assign_seats
-    trip.assign_seats(stop, quantity)
   end
 
   def unassign_seats

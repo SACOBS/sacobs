@@ -1,4 +1,5 @@
-<%= simple_form_for @charge, defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for @charge, html: { class: 'form-horizontal' } do |f| %>
+    <%= f.error_notification %>
     <fieldset>
       <%= f.input :description, autofocus: true, placeholder: 'Description' %>
       <%= f.input :percentage, placeholder: 'Percentage' %>
