@@ -29,6 +29,7 @@ class Route < ActiveRecord::Base
   validates :cost, :distance, numericality: true
   validates :destinations, presence: true, length: { minimum: 2, too_short: 'is too short (at least %{count} destinations required)' }
 
+
   before_save :generate_connections
   after_update { touch }
 
@@ -38,9 +39,9 @@ class Route < ActiveRecord::Base
     object.name = "Copy of #{name}"
     destinations.map { |d| object.destinations.build(city: d.city, sequence: d.sequence) }
     connections.each do |original|
-      from = object.destinations.find { |d| d.city == original.from.city }
-      to = object.destinations.find { |d| d.city == original.to.city }
-      object.connections.build(from: from, to: to, cost: original.cost, percentage: original.percentage, distance: original.distance)
+      from = object.destinations.find { |destination| destination.city == original.from.city }
+      to = object.destinations.find { |destination| destination.city == original.to.city }
+      object.connections.build(from: from, to: to, cost: original.cost, percentage: original.percentage, distance: original.distance, leaving: original.leaving, arriving: original.arriving)
     end
     yield(object) if block_given?
     object.save
@@ -56,7 +57,7 @@ class Route < ActiveRecord::Base
     connections.reverse_each do |original|
       from = object.destinations.find { |d| d.city == original.to.city }
       to = object.destinations.find { |d| d.city == original.from.city }
-      object.connections.build(from: from, to: to, percentage: original.percentage, cost: original.cost, distance: original.distance)
+      object.connections.build(from: from, to: to, percentage: original.percentage, cost: original.cost, distance: original.distance, leaving: original.leaving, arriving: original.arriving)
     end
     yield(object) if block_given?
     object.save
@@ -69,6 +70,7 @@ class Route < ActiveRecord::Base
   end
 
   private
+
 
   def reorder_destinations(destination)
     if destinations.exists?(sequence: destination.sequence)

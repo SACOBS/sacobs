@@ -32,12 +32,17 @@ class Connection < ActiveRecord::Base
   validates :route, :from, :to, :leaving, :arriving, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
+  after_initialize :set_defaults
   before_create :set_name
 
   delegate :city, to: :from, prefix: true
   delegate :city, to: :to, prefix: true
 
   protected
+  def set_defaults
+    self.leaving = Time.current
+    self.arriving = Time.current
+  end
 
   def set_name
     self.name = "#{from_city.name} to #{to_city.name}".squish.upcase
