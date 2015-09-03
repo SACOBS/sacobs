@@ -41,15 +41,11 @@ class PricingPresenter
   end
 
   def calculate_percentage_amount(percentage)
-    round_up((percentage.to_f / 100) * cost)
+    percentage.percent_of(cost).round_up(5)
   end
 
   def calculate_price
-    round_up(cost)
-  end
-
-  def round_up(cost)
-    (cost / 5.0).ceil * 5
+    cost.round_up(5)
   end
 
   def find_seasonal_discount(passenger_type)

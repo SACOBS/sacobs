@@ -26,7 +26,7 @@ module Sacobs
 
     config.exceptions_app = routes
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths << Rails.root.join('lib')
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w(pdf.css)

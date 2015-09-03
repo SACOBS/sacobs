@@ -86,15 +86,16 @@ class Booking < ActiveRecord::Base
       total_charges = 0
       passenger.charges.each do |charge|
         description = "#{charge.description} charge - #{charge.percentage.round}%".capitalize
-        amount = Calculations.roundup(price * (charge.percentage.to_f / 100))
+        amount = charge.percentage.percent_of(price).round_up(5)
         total_charges += amount
         invoice.line_items.build(description: description, amount: amount, line_item_type: :debit)
       end
 
       # Discount
       discount = SeasonalDiscount.active_in_period(Date.current).find_by(passenger_type: passenger.passenger_type) || passenger.discount
-      description = "#{discount.passenger_type.description} discount (#{discount.percentage.round}%)".capitalize
-      amount = ((price + total_charges) * (discount.percentage.to_f / 100)).round
+      description = "#{passenger.passenger_type.description} discount (#{discount.percentage.round}%)".capitalize
+      total_cost = price + total_charges
+      amount = discount.percentage.percent_of(total_cost).round_up(5)
       invoice.line_items.build(description: description, amount: amount, line_item_type: :credit)
     end
   end
