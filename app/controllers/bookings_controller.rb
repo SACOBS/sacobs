@@ -25,7 +25,8 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.create(user_id: current_user.id)
+    @booking = Booking.new(user_id: current_user.id)
+    @booking.save(validate: false)
     redirect_to booking_builder_url(@booking, :trip_details)
   end
 
@@ -39,16 +40,11 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    @booking.user_id = current_user.id
-    if @booking.cancel
-      redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
-    else
-      redirect_to bookings_url, alert: 'Booking could not be cancelled.'
-    end
+    CancelBooking.new(@booking, current_user).perform
+    redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
   end
 
   private
-
   def booking_scope
     @booking_scope ||= Booking.processed.includes(:stop, :client, :trip).order(:created_at)
   end

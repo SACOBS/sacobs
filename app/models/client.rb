@@ -48,27 +48,13 @@ class Client < ActiveRecord::Base
   validates :date_of_birth, presence: { message: 'obtained from id number is not a valid date, please check the id number field.' }, if: proc { |client| client.id_number.present? }
 
   before_validation :set_birth_date
+  before_save :normalize
 
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
   end
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
-
-  def name=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
-  end
-
-  def surname=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
-  end
-
-  def email=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
-  end
 
   def age
     @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
@@ -84,13 +70,18 @@ class Client < ActiveRecord::Base
   end
 
   protected
+  def normalize
+    self.name = name.squish.upcase
+    self.surname = surname.squish.upcase
+  end
 
-  # Ugly but input is not guaranteed to be valid most of the time
   def set_birth_date
-    date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
-    if date
-      date = date.prev_year(100) if date > Date.current
-      self.date_of_birth = date
+    if id_number
+      date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
+      if date
+        date = date.prev_year(100) if date > Date.current
+        self.date_of_birth = date
+      end
     end
   end
 end

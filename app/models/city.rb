@@ -25,8 +25,10 @@ class City < ActiveRecord::Base
 
   validates :name, presence: true
 
-  def name=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
+  before_save :normalize
+
+  private
+  def normalize
+    self.name = name.squish.upcase
   end
 end

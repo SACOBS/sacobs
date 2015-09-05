@@ -9,12 +9,13 @@
 #
 
 class PassengerType < ActiveRecord::Base
-  default_scope { order(description: :asc) }
+  default_scope { order(:description) }
 
   validates :description, presence: true
+  before_save :normalize
 
-  def description=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
+  private
+  def normalize
+    self.description = description.squish.upcase
   end
 end

@@ -8,7 +8,6 @@
                 <tr>
                   <td>
                     <%= simple_form_for booking, namespace: stop.id, url: wizard_path, method: :patch, wrapper: false, defaults: { label: false } do |f| %>
-                        <%= f.error_notification %>
                         <% if step == :trip_details %>
                             <%= bootstrap_table headers: ['Trip', 'Start Date', 'Connection', 'Available Seats', 'Pricing', 'Qty'], types: [:condensed] do %>
                             <tr>
@@ -28,7 +27,7 @@
                                 <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
                               </td>
                               <td>
-                                <%= f.input :quantity, as: :integer, input_html: { min: 1, max: stop.available_seats, class: 'input-mini' } %>
+                                <%= f.input :quantity, as: :integer, input_html: { max: stop.available_seats, class: 'input-mini' } %>
                               </td>
                               <td>
                                 <%= token_tag %>

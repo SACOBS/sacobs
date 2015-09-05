@@ -3,8 +3,8 @@
 # Table name: seats
 #
 #  id         :integer          not null, primary key
-#  row        :string(255)
-#  number     :integer
+#  row        :string(255)      default("A-Z")
+#  number     :integer          default(0)
 #  bus_id     :integer
 #  created_at :datetime
 #  updated_at :datetime
@@ -17,15 +17,6 @@
 class Seat < ActiveRecord::Base
   belongs_to :bus, touch: true
 
-  validates :row, :number, presence: true
-  validates :number, numericality: true
-
-  after_initialize :set_defaults, if: :new_record?
-
-  private
-
-  def set_defaults
-    self.row ||= 'A-Z'
-    self.number ||= 0
-  end
+  validates :row, presence: true
+  validates :number, presence: true, numericality: true
 end

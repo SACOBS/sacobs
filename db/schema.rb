@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901075034) do
+ActiveRecord::Schema.define(version: 20150904091615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(version: 20150901075034) do
   add_index "passengers", ["passenger_type_id"], name: "index_passengers_on_passenger_type_id", using: :btree
 
   create_table "payment_details", force: :cascade do |t|
-    t.datetime "payment_date"
+    t.datetime "paid_at"
     t.integer  "booking_id"
     t.string   "reference",    limit: 255
     t.integer  "user_id"
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 20150901075034) do
     t.decimal  "percentage"
     t.date     "period_from"
     t.date     "period_to"
-    t.boolean  "active",                        default: false
+    t.boolean  "active",                        default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -252,8 +252,8 @@ ActiveRecord::Schema.define(version: 20150901075034) do
   add_index "seasonal_discounts", ["user_id"], name: "index_seasonal_discounts_on_user_id", using: :btree
 
   create_table "seats", force: :cascade do |t|
-    t.string   "row",        limit: 255
-    t.integer  "number"
+    t.string   "row",        limit: 255, default: "A-Z"
+    t.integer  "number",                 default: 0
     t.integer  "bus_id"
     t.datetime "created_at"
     t.datetime "updated_at"

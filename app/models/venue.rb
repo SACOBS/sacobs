@@ -14,7 +14,14 @@
 #
 
 class Venue < ActiveRecord::Base
-  belongs_to :city, counter_cache: true, touch: true
+  belongs_to :city, counter_cache: true, touch: true, required: true
 
   validates :name, presence: true
+
+  before_save :normalize
+
+  private
+  def normalize
+    self.name = name.squish.upcase
+  end
 end

@@ -17,8 +17,8 @@ class Bookings::BuilderController < ApplicationController
       when :trip_details
         fetch_stops
       when :return_trip_details
-        @booking.build_return_booking(quantity: @booking.quantity)
         fetch_stops
+        @booking.build_return_booking(quantity: @booking.quantity)
       when :client_details
         @booking.build_client unless @booking.client
       when :passenger_details
@@ -36,8 +36,11 @@ class Bookings::BuilderController < ApplicationController
   def update
     @booking.assign_attributes(booking_params)
     case step
+      when :trip_details
+        @stops = [@booking.stop] unless @booking.valid?
       when :return_trip_details
         @booking.return_booking.user_id = current_user.id
+        @stops = [@booking.return_booking.stop] unless @booking.return_booking.valid?
       when :client_details
         @booking.client.user_id = current_user.id
         @booking.passengers.clear if @booking.client_id_changed?
@@ -47,7 +50,7 @@ class Bookings::BuilderController < ApplicationController
           @booking.return_booking.passengers = @booking.passengers.map(&:dup)
         end
       when :billing_info
-        Booking::Reserve.new(@booking, @settings).perform
+        ReserveBooking.new(@booking, @settings).perform
     end
     render_wizard @booking
   end
@@ -61,15 +64,11 @@ class Bookings::BuilderController < ApplicationController
   def fetch_stops
     params[:q] ||= {}
     params[:q][:available_seats_gteq] ||= @booking.quantity
-    if @booking.stop.present?
+    params[:q][:trip_start_date_gteq] = set_trip_date
+    if step == :return_trip_details
       params[:q][:trip_start_date_gteq] = set_trip_date((@booking.trip.start_date))
-      if step == :return_trip_details
-        params[:q][:connection_from_city_id_eq] ||= @booking.stop.to_city.id
-        params[:q][:connection_to_city_id_eq] ||= @booking.stop.from_city.id
-      else
-        params[:q][:connection_from_city_id_eq] ||= @booking.stop.from_city.id
-        params[:q][:connection_to_city_id_eq] ||= @booking.stop.to_city.id
-      end
+      params[:q][:connection_from_city_id_eq] ||= @booking.stop.connection.from.city.id
+      params[:q][:connection_to_city_id_eq] ||= @booking.stop.connection.to.city.id
     end
     @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
@@ -86,9 +85,7 @@ class Bookings::BuilderController < ApplicationController
     invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
     return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
 
-    permitted = params.fetch(:booking, {}).permit(:trip_id, :status,
-                                                  :quantity, :client_id,
-                                                  :stop_id,
+    params.fetch(:booking, {}).permit(:trip_id, :status, :quantity, :client_id, :stop_id,
                                                   client_attributes, passengers_attributes,
                                                   invoice_attributes, return_booking_attributes
                                                  ).merge(user_id: current_user.id)
@@ -99,6 +96,7 @@ class Bookings::BuilderController < ApplicationController
   end
 
   private
+
   def wizard_completed
     redirect_to @booking if @booking.reserved?
   end

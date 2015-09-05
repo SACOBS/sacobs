@@ -47,13 +47,10 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :client, :passengers, :invoice
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
-  validates :quantity, numericality: { greater_than: 0 }
-  validate :quantity_available, if: :stop
-
-  after_initialize :set_defaults, if: :new_record?
-  before_create :generate_reference_no
-
-  before_save :unassign_seats, if: proc { |booking| booking.status_changed? && booking.cancelled? }
+  with_options if: :in_process? do
+    validates :quantity, numericality: { greater_than: 0 }
+    validate :seats_are_available
+  end
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
   scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
@@ -84,7 +81,7 @@ class Booking < ActiveRecord::Base
       # Additional Charges
       total_charges = 0
       passenger.charges.each do |charge|
-        description = "#{charge.description} charge - #{charge.percentage.round}%".capitalize
+        description = "#{charge.description} charge - #{charge.percentage}%".capitalize
         amount = charge.percentage.percent_of(price).round_up(5)
         total_charges += amount
         invoice.line_items.build(description: description, amount: amount, line_item_type: :debit)
@@ -92,7 +89,7 @@ class Booking < ActiveRecord::Base
 
       # Discount
       discount = SeasonalDiscount.active_in_period(Date.current).find_by(passenger_type: passenger.passenger_type) || passenger.discount
-      description = "#{passenger.passenger_type.description} discount (#{discount.percentage.round}%)".capitalize
+      description = "#{passenger.passenger_type.description} discount (#{discount.percentage}%)".capitalize
       total_cost = price + total_charges
       amount = discount.percentage.percent_of(total_cost).round_up(5)
       invoice.line_items.build(description: description, amount: amount, line_item_type: :credit)
@@ -101,20 +98,9 @@ class Booking < ActiveRecord::Base
 
   private
 
-  def set_defaults
-    self.quantity = 1
-    self.sequence_id = self.class.connection.select_value("SELECT nextval('sequence_id_seq')")
-  end
-
-  def unassign_seats
-    trip.unassign_seats(stop, quantity)
-  end
-
-  def generate_reference_no
-    self.reference_no = "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase.concat('%03d' % sequence_id)}"
-  end
-
-  def quantity_available
-    errors.add(:quantity, 'The number of seats selected exceeds the available seating on the bus for this connection.') unless quantity <= stop.available_seats
+  def seats_are_available
+    if stop.present? && quantity > stop.available_seats
+     errors.add(:quantity, "The number of seats #{quantity} selected exceeds the available seating #{stop.available_seats} for this connection.")
+    end
   end
 end

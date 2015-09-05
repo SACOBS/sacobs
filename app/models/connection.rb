@@ -12,8 +12,8 @@
 #  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
-#  leaving    :time
-#  arriving   :time
+#  leaving    :time             default(2000-01-01 08:28:02 UTC)
+#  arriving   :time             default(2000-01-01 08:28:02 UTC)
 #
 # Indexes
 #
@@ -25,27 +25,26 @@
 class Connection < ActiveRecord::Base
   default_scope { order(:created_at) }
 
-  belongs_to :route, inverse_of: :connections
-  belongs_to :from, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
-  belongs_to :to, -> { includes(:city) }, class_name: :Destination, inverse_of: :connections
+  belongs_to :route
+  belongs_to :from, -> { includes(:city) }, class_name: :Destination
+  belongs_to :to, -> { includes(:city) }, class_name: :Destination
 
   validates :route, :from, :to, :leaving, :arriving, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
-  after_initialize :set_defaults
+  after_initialize :set_defaults, if: :new_record?
   before_create :set_name
 
-  delegate :city, to: :from, prefix: true
-  delegate :city, to: :to, prefix: true
+  delegate :city_name, :city_venues, to: :from, prefix: true
+  delegate :city_name, :city_venues, to: :to, prefix: true
 
-  protected
-
+  private
   def set_defaults
     self.leaving = Time.current
     self.arriving = Time.current
   end
 
   def set_name
-    self.name = "#{from_city.name} to #{to_city.name}".squish.upcase
+    self.name = "#{from_city_name} to #{to_city_name}"
   end
 end

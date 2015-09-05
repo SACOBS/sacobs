@@ -26,15 +26,14 @@ class Invoice < ActiveRecord::Base
   end
 
   def total_cost
-    line_items.select(&:debit?).to_a.sum(&:amount)
+    line_items.debit.sum(:amount)
   end
 
   def total_discount
-    line_items.select(&:credit?).to_a.sum(&:amount)
+    line_items.credit.sum(:amount)
   end
 
   private
-
   def set_billing_date
     self.billing_date = Time.current
   end

@@ -3,7 +3,7 @@
 # Table name: payment_details
 #
 #  id           :integer          not null, primary key
-#  payment_date :datetime
+#  paid_at      :datetime         default(Fri, 04 Sep 2015 11:18:07 SAST +02:00)
 #  booking_id   :integer
 #  reference    :string(255)
 #  user_id      :integer
@@ -21,11 +21,10 @@ class PaymentDetail < ActiveRecord::Base
 
   validates :booking, :payment_type, presence: true
 
-  before_create :set_payment_date
+  before_create :set_paid_at
 
   private
-
-  def set_payment_date
-    self.payment_date = Time.current
+  def set_paid_at
+    self.paid_at = Time.current
   end
 end

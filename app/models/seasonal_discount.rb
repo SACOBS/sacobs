@@ -6,7 +6,7 @@
 #  percentage        :decimal(, )
 #  period_from       :date
 #  period_to         :date
-#  active            :boolean          default(FALSE)
+#  active            :boolean          default(TRUE)
 #  created_at        :datetime
 #  updated_at        :datetime
 #  user_id           :integer
@@ -20,23 +20,23 @@
 #
 
 class SeasonalDiscount < ActiveRecord::Base
-  belongs_to :passenger_type
+  belongs_to :passenger_type, required: true
 
   scope :active, -> { where(active: true) }
   scope :applicable, -> { where(arel_table[:period_from].gteq(Time.zone.today)) }
   scope :active_in_period, -> (date) { where(arel_table[:period_from].lteq(date).and(arel_table[:period_to].gteq(date))).merge(active) }
 
-  validates :name, :passenger_type, :period_from, :period_to, :percentage, presence: true
+  validates :name, :period_from, :period_to, :percentage, presence: true
 
-  before_create :activate
+  before_save :normalize
 
   def description
     @description ||= "#{name}(seasonal_#{passenger_type.description}_discount)".titleize
   end
 
   protected
-
-  def activate
-    self.active = true
+  def normalize
+    self.name = name.squish.upcase
   end
+
 end

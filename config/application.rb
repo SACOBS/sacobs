@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module Sacobs
   class Application < Rails::Application
 
+    config.autoload_paths << Rails.root.join('lib')
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -26,11 +27,8 @@ module Sacobs
 
     config.exceptions_app = routes
 
-    config.autoload_paths << Rails.root.join('lib')
-
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w(pdf.css)
-    config.assets.precompile += %w(head.js)
 
     I18n.enforce_available_locales = true
 

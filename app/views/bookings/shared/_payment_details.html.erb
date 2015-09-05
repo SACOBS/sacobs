@@ -1,7 +1,7 @@
 <%= bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do %>
     <tr>
       <td>
-        <%= l(payment_detail.payment_date, format: :long) %>
+        <%= l(payment_detail.paid_at, format: :long) %>
       </td>
       <td>
         <%= payment_detail.reference %>

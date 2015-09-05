@@ -18,16 +18,15 @@ class Driver < ActiveRecord::Base
   has_and_belongs_to_many :trips
 
   validates :name, :surname, presence: true
-
-  def name=(value)
-    super(value.squish.upcase)
-  end
-
-  def surname=(value)
-    super(value.squish.upcase)
-  end
+  before_save :normalize
 
   def full_name
     @full_name ||= "#{name} #{surname}"
+  end
+
+  private
+  def normalize
+    self.name = name.squish.upcase
+    self.surname = name.squish.upcase
   end
 end

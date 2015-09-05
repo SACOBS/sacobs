@@ -20,38 +20,33 @@
 #
 
 class Passenger < ActiveRecord::Base
-  DEFAULT_TYPE = PassengerType.find_by(description: :STANDARD)
-
   belongs_to :booking
   belongs_to :passenger_type
 
+  validates :name, :surname, presence: true
+
   after_initialize :set_defaults, if: :new_record?
+  before_save :normalize
 
   def full_name
-    "#{name} #{surname}"
+   @full_name ||= "#{name} #{surname}"
   end
 
   def charges
-    Charge.find(self[:charges])
+   @charges ||= Charge.find(self[:charges])
   end
 
   def discount
-    Discount.find_by(passenger_type: passenger_type)
-  end
-
-  def name=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
-  end
-
-  def surname=(value)
-    value.squish!.upcase! if value.present?
-    super(value)
+   @discount ||= Discount.find_by(passenger_type: passenger_type)
   end
 
   protected
+  def normalize
+    self.name = name.squish.upcase
+    self.surname = surname.squish.upcase
+  end
 
   def set_defaults
-    self.passenger_type = Passenger::DEFAULT_TYPE
+    self.passenger_type = PassengerType.find_by(description: :STANDARD)
   end
 end

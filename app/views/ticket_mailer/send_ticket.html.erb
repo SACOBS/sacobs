@@ -43,16 +43,16 @@
                   <%= passenger.full_name %>
                 </td>
                 <td>
-                  <%= booking.stop.from_city.name %>
+                  <%= booking.stop.from_city_name %>
                 </td>
                 <td>
-                  <%= booking.stop.from_city.venues.first.name %>
+                  <%= booking.stop.from_city_venues.first.name %>
                 </td>
                 <td>
-                  <%= booking.stop.to_city.name %>
+                  <%= booking.stop.to_city_name %>
                 </td>
                 <td>
-                  <%= booking.stop.to_city.venues.first.name %>
+                  <%= booking.stop.to_city_venues.first.name %>
                 </td>
                 <td>
                   <%= l(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>

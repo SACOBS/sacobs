@@ -13,7 +13,10 @@
 class Charge < ActiveRecord::Base
   validates :description, :percentage, presence: true
 
-  before_save do
-    self.description = description.upcase
+  before_save :normalize
+
+  private
+  def normalize
+    self.description = description.squish.upcase
   end
 end

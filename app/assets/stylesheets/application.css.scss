@@ -38,6 +38,18 @@ td{
   background-color: lightcyan;
 }
 
+#error-explanation{
+  ul{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+  }
+  li{
+    display:inline-block;
+    /*width:100%;*/
+    margin:0 3px;
+  }
+}
 
 #notes {
   display: none;

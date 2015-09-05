@@ -37,7 +37,17 @@ class User < ActiveRecord::Base
 
   scope :all_except, ->(user) { where.not(id: user) }
 
+  validates :name, :surname, presence: true
+
+  before_save :normalize
+
   def to_s
     "#{name} #{surname}".titleize
+  end
+
+  private
+  def normalize
+    self.name = name.squish.upcase
+    self.surname = name.squish.upcase
   end
 end
