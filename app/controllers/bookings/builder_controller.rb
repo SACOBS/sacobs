@@ -34,18 +34,17 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def update
+    puts booking_params.inspect
     @booking.assign_attributes(booking_params)
     case step
       when :trip_details
         @stops = [@booking.stop] unless @booking.valid?
       when :return_trip_details
-        @booking.return_booking.user_id = current_user.id
         @stops = [@booking.return_booking.stop] unless @booking.return_booking.valid?
       when :client_details
-        @booking.client.user_id = current_user.id
         @booking.passengers.clear if @booking.client_id_changed?
       when :passenger_charges
-        if @booking.return_booking
+        if @booking.return_booking.present?
           @booking.return_booking.client = @booking.client
           @booking.return_booking.passengers = @booking.passengers.map(&:dup)
         end
@@ -80,15 +79,16 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def booking_params
-    client_attributes = { client_attributes: [:id, :_destroy, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :street_address1, :street_address2, :city, :postal_code] }
+    client_attributes = {client_attributes: [:id, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :street_address1, :street_address2, :city, :postal_code]}
     passengers_attributes = { passengers_attributes: [:id, :name, :surname, :cell_no, :email, :passenger_type_id, charges: []] }
     invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
     return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
 
-    params.fetch(:booking, {}).permit(:trip_id, :status, :quantity, :client_id, :stop_id,
-                                                  client_attributes, passengers_attributes,
-                                                  invoice_attributes, return_booking_attributes
-                                                 ).merge(user_id: current_user.id)
+    params.require(:booking).permit(:trip_id, :status, :quantity, :client_id, :stop_id, client_attributes, passengers_attributes, invoice_attributes, return_booking_attributes).tap do |whitelisted|
+      whitelisted.merge!(user_id: current_user.id)
+      whitelisted[:client_attributes].merge!(user_id: current_user.id) if whitelisted.has_key?(:client_attributes)
+      whitelisted[:return_booking_attributes].merge!(user_id: current_user.id) if whitelisted.has_key?(:return_booking_attributes)
+    end
   end
 
   def finish_wizard_path
