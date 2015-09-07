@@ -54,20 +54,20 @@ body
   @extend .row-fluid;
 }
 
+.form-inline{
+  div {
+    display: inline-block;
+  }
+  label{
+    padding: 3px;
+  }
+}
 
 .page-header{
   padding-bottom: 2em;
   .search-box{
     @extend .pull-right;
     margin-bottom: 2em;
-    .form-inline{
-      div {
-        display: inline-block;
-      }
-      label{
-        padding: 3px;
-      }
-    }
   }
 }
 

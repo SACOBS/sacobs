@@ -4,7 +4,8 @@ class Bookings::WizardController < ApplicationController
   layout 'wizard'
 
   before_action :set_booking, only: [:show, :update]
-  before_action :wizard_completed, only: :show
+  before_action :set_stops, :set_return_stops, :wizard_completed, only: :show
+
   steps :trip_details,
         :return_trip_details,
         :client_details,
@@ -14,10 +15,7 @@ class Bookings::WizardController < ApplicationController
 
   def show
     case step
-      when :trip_details
-        fetch_stops
       when :return_trip_details
-        fetch_stops
         @booking.build_return_booking(quantity: @booking.quantity)
       when :client_details
         @booking.build_client unless @booking.client
@@ -34,13 +32,12 @@ class Bookings::WizardController < ApplicationController
   end
 
   def update
-    puts booking_params.inspect
     @booking.assign_attributes(booking_params)
     case step
       when :trip_details
-        @stops = [@booking.stop] unless @booking.valid?
+        @stops = [@booking.stop]
       when :return_trip_details
-        @stops = [@booking.return_booking.stop] unless @booking.return_booking.valid?
+        @stops = [@booking.return_booking.stop]
       when :client_details
         @booking.passengers.clear if @booking.client_id_changed?
       when :passenger_charges
@@ -60,22 +57,34 @@ class Bookings::WizardController < ApplicationController
     @booking = Booking.find(params[:booking_id])
   end
 
-  def fetch_stops
-    params[:q] ||= {}
-    params[:q][:available_seats_gteq] ||= @booking.quantity
-    params[:q][:trip_start_date_gteq] = set_trip_date
-    if step == :return_trip_details
-      params[:q][:trip_start_date_gteq] = set_trip_date((@booking.trip.start_date))
-      params[:q][:connection_from_city_id_eq] ||= @booking.stop.connection.from.city.id
-      params[:q][:connection_to_city_id_eq] ||= @booking.stop.connection.to.city.id
+  def set_stops
+    if step == :trip_details
+      params[:q] ||= {}
+      params[:q][:available_seats_gteq] = @booking.quantity
+      params[:q][:trip_start_date_gteq] = Date.civil(params[:q].delete('trip_start_date_gteq(1i)').to_i, params[:q].delete('trip_start_date_gteq(2i)').to_i, params[:q].delete('trip_start_date_gteq(3i)').to_i) rescue Date.current
+      if @booking.stop.present?
+        params[:q][:trip_start_date_gteq] = @booking.trip.start_date
+        params[:q][:connection_from_city_id_eq] = @booking.stop.connection.from.city_id
+        params[:q][:connection_to_city_id_eq] = @booking.stop.connection.to.city_id
+      end
     end
     @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
 
-  def set_trip_date(default_date = Date.current)
-    trip_date = Date.civil(params[:q].delete('trip_start_date_gteq(1i)').to_i, params[:q].delete('trip_start_date_gteq(2i)').to_i, params[:q].delete('trip_start_date_gteq(3i)').to_i) rescue nil
-    trip_date = default_date unless trip_date.present? && trip_date >= default_date
-    trip_date
+  def set_return_stops
+    if step == :return_trip_details
+      params[:q] ||= {}
+      params[:q][:available_seats_gteq] = @booking.quantity
+      params[:q][:trip_start_date_gteq] = @booking.trip.start_date
+      params[:q][:connection_from_city_id_eq] = @booking.stop.connection.to.city_id
+      params[:q][:connection_to_city_id_eq] = @booking.stop.connection.from.city_id
+      if @booking.return_booking.present? && @booking.return_booking.stop.present?
+        params[:q][:trip_start_date_gteq] = @booking.return_booking.trip.start_date
+        params[:q][:connection_from_city_id_eq] = @booking.return_booking.stop.connection.from.city_id
+        params[:q][:connection_to_city_id_eq] = @booking.return_booking.stop.connection.to.city_id
+      end
+    end
+    @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
 
   def booking_params

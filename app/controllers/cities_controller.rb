@@ -3,6 +3,7 @@ class CitiesController < ApplicationController
 
   def index
     @cities = city_scope.page(params[:page]).select(:id, :name, :venues_count, :updated_at)
+    respond_with(@cities) if stale?(@cities)
   end
 
   def search

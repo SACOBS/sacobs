@@ -1,3 +1,5 @@
 json.array!(@cities) do |city|
-  json.extract! city, :id, :name
+  json.cache! city do
+   json.extract! city, :id, :name
+  end
 end

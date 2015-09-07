@@ -11,7 +11,6 @@
         <%= f.button :submit, 'Complete (alt + n)', autofocus: true, accesskey: 'n' %>
       </div>
     </div>
-    <%= f.error_notification %>
     <%= bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do %>
         <%= f.simple_fields_for :invoice do |invoice| %>
             <%= invoice.simple_fields_for :line_items, wrapper: false do |line_item| %>

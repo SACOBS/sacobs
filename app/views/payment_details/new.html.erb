@@ -6,7 +6,7 @@
   <h4>Booking Reference: <%= @booking.reference_no %></h4>
 </div>
 <%= simple_form_for [@booking, @payment_detail], html: { class: 'form-horizontal' } do |f| %>
-    <%= f.error_notification %>
+
     <fieldset>
       <%= f.input :reference, label: 'Client Payment Reference', hint: 'Put the reference from the bank for the client payment.', autofocus: true %>
       <%= f.input :payment_type, collection: PaymentDetail::PAYMENT_TYPES.sort, include_blank: false, prompt: 'Select a payment type', selected: @booking.client.bank %>
