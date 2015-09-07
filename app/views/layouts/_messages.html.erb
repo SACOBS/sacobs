@@ -1,6 +1,5 @@
 <% flash.each do |type, msg| %>
     <% if msg.is_a?(String) %>
-        <% puts type.inspect %>
         <div class="<%= alert_class_for(type) %>">
           <button type="button" class="close" data-dismiss="alert">x</button>
           <%= msg %>

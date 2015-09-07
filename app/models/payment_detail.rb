@@ -19,13 +19,14 @@ class PaymentDetail < ActiveRecord::Base
 
   belongs_to :booking
 
-  validates :booking, :payment_type, presence: true
+  validates :booking, :payment_type, :reference, presence: true
+  validates :reference, uniqueness: true
 
   before_create :set_paid_at
 
   private
 
   def set_paid_at
-    self.paid_at = Time.current
+    self.paid_at ||= Time.current
   end
 end

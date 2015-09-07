@@ -10,14 +10,12 @@ class ReserveBooking
       [booking, return_booking].compact.each do |booking|
         assign_seats(booking.trip, booking.stop, booking.quantity)
         booking.expiry_date = settings.booking_expiry_period.hours.from_now
-        booking.reference_no = generate_reference(booking)
         booking.update!(status: :reserved)
       end
     end
   end
 
   private
-
   attr_reader :booking, :return_booking, :settings
 
   def assign_seats(trip, stop, qty)

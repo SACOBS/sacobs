@@ -16,7 +16,7 @@ class Ticket
   end
 
   def scripture
-    view_context.simple_format(ScriptureForToday.generate || @settings.default_scripture)
+    view_context.simple_format(Bible::Scripture.for_today || @settings.default_scripture)
   end
 
   def ticket_date

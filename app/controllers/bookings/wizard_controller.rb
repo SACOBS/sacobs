@@ -93,10 +93,10 @@ class Bookings::WizardController < ApplicationController
     invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
     return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
 
-    params.require(:booking).permit(:trip_id, :status, :quantity, :client_id, :stop_id, client_attributes, passengers_attributes, invoice_attributes, return_booking_attributes).tap do |whitelisted|
-      whitelisted.merge!(user_id: current_user.id)
-      whitelisted[:client_attributes].merge!(user_id: current_user.id) if whitelisted.key?(:client_attributes)
-      whitelisted[:return_booking_attributes].merge!(user_id: current_user.id) if whitelisted.key?(:return_booking_attributes)
+    params.require(:booking).permit(:trip_id, :status, :quantity, :client_id, :stop_id, client_attributes, passengers_attributes, invoice_attributes, return_booking_attributes).tap do |whitelist|
+      whitelist.merge!(user_id: current_user.id)
+      whitelist[:client_attributes].merge!(user_id: current_user.id) if whitelist.key?(:client_attributes)
+      whitelist[:return_booking_attributes].merge!(user_id: current_user.id) if whitelist.key?(:return_booking_attributes)
     end
   end
 

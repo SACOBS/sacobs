@@ -9,4 +9,7 @@
 #
 
 class Bible::Scripture < ActiveRecord::Base
+  def self.for_today
+    Scripture.get_verse(find(rand(count)).verse) rescue nil
+  end
 end

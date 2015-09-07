@@ -58,11 +58,11 @@
       </div>
       <div class="span4">
         <h4>Contact Info</h4>
-        <p>>
+        <p>
           <strong>Home Telephone No:</strong>
           <%= number_to_phone(@client.home_no, area_code: true).presence || 'N/A' %>
         </p>
-        <p>>
+        <p>
           <strong>Work Telephone No:</strong>
           <%= number_to_phone(@client.work_no, area_code: true).presence || 'N/A' %>
         </p>
@@ -70,26 +70,26 @@
           <strong>Cellphone No:</strong>
           <%= number_to_phone(@client.cell_no, area_code: true).presence || 'N/A' %>
         </p>
-        <p>>
+        <p>
           <strong>Email:</strong>
           <%= @client.email.present? ? mail_to(@client.email) : 'N/A' %>
         </p>
       </div>
       <div class="span4">
         <h4>Address Info</h4>
-        <p>>
+        <p>
           <strong>Street Address 1:</strong>
           <%= @client.street_address1.presence || 'N/A' %>
         </p>
-        <p>>
+        <p>
           <strong>Street Address 2:</strong>
           <%= @client.street_address2.presence || 'N/A' %>
         </p>
-        <p>>
+        <p>
           <strong>City:</strong>
           <%= @client.city.presence || 'N/A' %>
         </p>
-        <p>>
+        <p>
           <strong>Postal Code:</strong>
           <%= @client.postal_code.presence || 'N/A' %>
         </p>
