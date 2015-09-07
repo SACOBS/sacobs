@@ -8,7 +8,7 @@ class PaymentDetailsController < ApplicationController
   def create
     @payment_detail = @booking.build_payment_detail(payment_details_params)
     if @payment_detail.valid?
-      ConfirmBooking.new(@booking).perform(payment_details_params)
+      ConfirmBooking.new(@booking, current_user).perform(payment_details_params)
       redirect_to booking_url(@booking), notice: 'Booking has been successfully confirmed.'
     else
       render :new
