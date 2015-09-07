@@ -29,18 +29,19 @@ class Passenger < ActiveRecord::Base
   before_save :normalize
 
   def full_name
-   @full_name ||= "#{name} #{surname}"
+    @full_name ||= "#{name} #{surname}"
   end
 
   def charges
-   @charges ||= Charge.find(self[:charges])
+    @charges ||= Charge.find(self[:charges])
   end
 
   def discount
-   @discount ||= Discount.find_by(passenger_type: passenger_type)
+    @discount ||= Discount.find_by(passenger_type: passenger_type)
   end
 
   protected
+
   def normalize
     self.name = name.squish.upcase
     self.surname = surname.squish.upcase

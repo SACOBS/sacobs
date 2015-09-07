@@ -70,6 +70,7 @@ class Client < ActiveRecord::Base
   end
 
   protected
+
   def normalize
     self.name = name.squish.upcase
     self.surname = surname.squish.upcase

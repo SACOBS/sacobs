@@ -9,26 +9,9 @@ body {
 
 @import "bootswatch/cerulean/bootswatch";
 
-
-
 .content {
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-}
-
-
-.rounded{
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; /* future proofing */
-}
-
-.ticket-details {
-  background-color: dodgerblue;
-  h3, h4{
-    color: whitesmoke;
-  }
-  padding: 4px;
 }
 
 

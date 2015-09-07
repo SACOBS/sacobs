@@ -17,7 +17,6 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -37,7 +36,6 @@ gem 'kaminari'
 gem 'nprogress-rails'
 gem 'local_time'
 
-
 # Forms
 gem 'simple_form', '~> 3.0.0'
 
@@ -46,9 +44,6 @@ gem 'devise'
 
 # Static Pages
 gem 'high_voltage'
-
-# Flash Responders
-gem 'responders'
 
 # Env variables
 gem 'figaro'
@@ -83,10 +78,6 @@ gem 'scripture', '~> 0.1.0'
 # Background Processing
 gem 'sucker_punch', '~> 1.0'
 
-
-# Flash
-gem 'unobtrusive_flash'
-
 # PG
 gem 'pg'
 
@@ -94,11 +85,9 @@ gem 'pg'
 gem 'obfuscatejs'
 
 group :development do
-  gem 'flatten_migrations'
   gem 'web-console', '~> 2.0'
   gem 'annotate'
   gem 'quiet_assets'
-  gem 'rubocop', require: false
 end
 
 
@@ -115,7 +104,6 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
-
 
 group :production do
   gem 'puma'

@@ -160,8 +160,6 @@
 #
 
 Sacobs::Application.routes.draw do
-
-
   resources :admin, only: [:index]
 
   devise_for :users
@@ -194,7 +192,7 @@ Sacobs::Application.routes.draw do
     member do
       patch :cancel
     end
-    resources :builder, only: [:show, :update], controller: 'bookings/builder'
+    resources :wizard, only: [:show, :update], controller: 'bookings/wizard'
     resources :payment_details, only: [:new, :create]
   end
 
@@ -237,7 +235,6 @@ Sacobs::Application.routes.draw do
       get :search
     end
   end
-
 
   resources :routes do
     member do
@@ -293,5 +290,4 @@ Sacobs::Application.routes.draw do
   get '/dashboard', to: 'dashboard#show', as: :dashboard
 
   match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
-
 end

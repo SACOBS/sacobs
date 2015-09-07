@@ -21,6 +21,7 @@ class Venue < ActiveRecord::Base
   before_save :normalize
 
   private
+
   def normalize
     self.name = name.squish.upcase
   end

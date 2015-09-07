@@ -60,13 +60,14 @@ class Route < ActiveRecord::Base
   end
 
   private
+
   def normalize
     self.name = name.squish.upcase
   end
 
   def reorder_destinations(destination)
     if destinations.exists?(sequence: destination.sequence)
-      destinations.where('sequence > ?', destination.sequence.pred).each { |shifting| shifting.increment!(:sequence) }
+      destinations.where('sequence > ?', destination.sequence.pred).find_each { |shifting| shifting.increment!(:sequence) }
     end
   end
 

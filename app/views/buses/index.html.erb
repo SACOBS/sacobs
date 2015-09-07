@@ -3,8 +3,13 @@
 <% end %>
 <div class="page-header">
   <h2>Buses</h2>
-</div>
-<div class="search pull-right">
+  <%= link_to new_bus_path,  class: 'btn btn-primary' do %>
+      <%= fa_icon :plus, text: 'Setup bus' %>
+  <% end %>
+  <%= link_to buses_path, class: 'btn btn-default' do %>
+      <%= fa_icon :refresh, text: 'Refresh' %>
+  <% end %>
+<div class="search-box">
   <%= simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f| %>
       <%= f.input :name_or_model_cont, as: :search_box %>
       <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
@@ -13,12 +18,8 @@
       <% end %>
   <% end %>
 </div>
-<%= link_to new_bus_path,  class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Setup bus' %>
-<% end %>
-<%= link_to buses_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
-<% end %>
+</div>
+
 <%= bootstrap_table headers: %w(Actions Name Year Model Capacity), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <%= render @buses, cache: true %>
 <% end %>

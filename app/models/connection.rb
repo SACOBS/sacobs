@@ -39,6 +39,7 @@ class Connection < ActiveRecord::Base
   delegate :city_name, :city_venues, to: :to, prefix: true
 
   private
+
   def set_defaults
     self.leaving = Time.current
     self.arriving = Time.current

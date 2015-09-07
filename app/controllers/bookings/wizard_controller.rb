@@ -1,4 +1,4 @@
-class Bookings::BuilderController < ApplicationController
+class Bookings::WizardController < ApplicationController
   include Wicked::Wizard
 
   layout 'wizard'
@@ -79,15 +79,15 @@ class Bookings::BuilderController < ApplicationController
   end
 
   def booking_params
-    client_attributes = {client_attributes: [:id, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :street_address1, :street_address2, :city, :postal_code]}
+    client_attributes = { client_attributes: [:id, :title, :name, :surname, :date_of_birth, :high_risk, :cell_no, :home_no, :work_no, :email, :bank, :id_number, :notes, :street_address1, :street_address2, :city, :postal_code] }
     passengers_attributes = { passengers_attributes: [:id, :name, :surname, :cell_no, :email, :passenger_type_id, charges: []] }
     invoice_attributes = { invoice_attributes: [:id, :billing_date, line_items_attributes: [:id, :description, :amount, :line_item_type]] }
     return_booking_attributes = { return_booking_attributes: [:stop_id, :quantity, :trip_id, :id, invoice_attributes] }
 
     params.require(:booking).permit(:trip_id, :status, :quantity, :client_id, :stop_id, client_attributes, passengers_attributes, invoice_attributes, return_booking_attributes).tap do |whitelisted|
       whitelisted.merge!(user_id: current_user.id)
-      whitelisted[:client_attributes].merge!(user_id: current_user.id) if whitelisted.has_key?(:client_attributes)
-      whitelisted[:return_booking_attributes].merge!(user_id: current_user.id) if whitelisted.has_key?(:return_booking_attributes)
+      whitelisted[:client_attributes].merge!(user_id: current_user.id) if whitelisted.key?(:client_attributes)
+      whitelisted[:return_booking_attributes].merge!(user_id: current_user.id) if whitelisted.key?(:return_booking_attributes)
     end
   end
 

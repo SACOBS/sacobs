@@ -3,8 +3,7 @@
 $paginationActiveBackground: darkgray;
 
 @import "bootstrap";
-
-body { padding-top: 60px; }
+body { padding-top: 60px };
 @import 'bootstrap-responsive';
 @import 'bootstrap-datetimepicker';
 
@@ -12,8 +11,6 @@ $nprogress-color: red;
 $nprogress-height: 5px;
 @import "nprogress";
 @import "nprogress-bootstrap";
-
-
 
 @import "bootswatch/cerulean/bootswatch";
 
@@ -24,6 +21,11 @@ html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
+}
+
+body
+{
+  background-image: image_url('background.png');
 }
 
 /* Set the fixed height of the footer here */
@@ -52,31 +54,33 @@ body {
   @extend .row-fluid;
 }
 
-.search{
-  margin-bottom: 2em;
-}
-
-.rounded{
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; /* future proofing */
-}
 
 .page-header{
   padding-bottom: 2em;
+  .search-box{
+    @extend .pull-right;
+    margin-bottom: 2em;
+    .form-inline{
+      div {
+        display: inline-block;
+      }
+      label{
+        padding: 3px;
+      }
+    }
+  }
 }
 
-.ticket-details {
-  background-color: dodgerblue;
-  h3, h4{
-    color: whitesmoke;
-  }
-  padding: 4px;
+th, td {
+  overflow: hidden;
+}
+
+td{
+  background-color: lightcyan;
 }
 
 
 .tab-wrapper>ul>li {
-  border: 1px solid #ddd;
   border-radius: 4px 4px 0 0;
   -webkit-border-radius: 4px 4px 0 0;
   -moz-border-radius: 4px 4px 0 0;

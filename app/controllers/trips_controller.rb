@@ -1,6 +1,4 @@
 class TripsController < ApplicationController
-  layout 'with_sidebar', only: :show
-
   before_action :build_trip, only: [:new, :create]
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 

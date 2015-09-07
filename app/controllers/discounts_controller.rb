@@ -1,6 +1,4 @@
 class DiscountsController < ApplicationController
-  responders :flash, :collection
-
   before_action :set_discount, only: [:edit, :update, :destroy]
 
   def index
@@ -14,7 +12,7 @@ class DiscountsController < ApplicationController
 
   def create
     @discount = Discount.create(discount_params)
-    respond_with @discount
+    respond_with @discount, location: discounts_url
   end
 
   def update

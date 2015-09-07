@@ -1,6 +1,4 @@
 class CitiesController < ApplicationController
-  responders :collection, :flash
-
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 
   def index

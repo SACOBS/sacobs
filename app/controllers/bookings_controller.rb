@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(user_id: current_user.id)
     @booking.save(validate: false)
-    redirect_to booking_builder_url(@booking, :trip_details)
+    redirect_to booking_wizard_url(@booking, :trip_details)
   end
 
   def show
@@ -45,6 +45,7 @@ class BookingsController < ApplicationController
   end
 
   private
+
   def booking_scope
     @booking_scope ||= Booking.processed.includes(:stop, :client, :trip).order(:created_at)
   end

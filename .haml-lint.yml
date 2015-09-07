@@ -1,5 +1,0 @@
-linters:
-  LineLength:
-    enabled: false
-  ConsecutiveSilentScripts:
-    enabled: false

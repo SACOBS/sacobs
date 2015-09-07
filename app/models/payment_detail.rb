@@ -24,6 +24,7 @@ class PaymentDetail < ActiveRecord::Base
   before_create :set_paid_at
 
   private
+
   def set_paid_at
     self.paid_at = Time.current
   end

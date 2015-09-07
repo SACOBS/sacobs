@@ -1,3 +1,5 @@
 class DashboardController < ApplicationController
-  def show; end
+  def show
+    render
+  end
 end

@@ -23,10 +23,10 @@
     <%= link_to route.name.upcase, route %>
   </td>
   <td>
-    <%= route.destinations.first.name %>
+    <%= route.destinations.first.city_name %>
   </td>
   <td>
-    <%= route.destinations.last.name %>
+    <%= route.destinations.last.city_name %>
   </td>
   <td>
     <%=  number_to_currency(route.cost) %>

@@ -8,56 +8,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require normalize-rails
  *= require bootstrap-sortable
  *= require font-awesome
  *= require tripsheets
+ *= require notes
  *= require bootstrap_and_overrides
  */
-
-
-body {
-  background-image: image_url('background.png');
-}
-
-.form-inline{
-  div {
-    display: inline-block;
-  }
-  label{
-    padding: 3px;
-  }
-}
-
-th, td {
-  overflow: hidden;
-}
-
-td{
-  background-color: lightcyan;
-}
-
-#error-explanation{
-  ul{
-    list-style-type:none;
-    margin:0;
-    padding:0;
-  }
-  li{
-    display:inline-block;
-    /*width:100%;*/
-    margin:0 3px;
-  }
-}
-
-#notes {
-  display: none;
-  visibility: inherit;
-  margin-top: 10px;
-  background-color: darkgray;
-  textarea{
-    width: 99%;
-  }
-}
-

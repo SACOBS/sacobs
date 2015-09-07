@@ -1,28 +1,3 @@
-#= require jquery
-#= require jquery-ui/effect.all
-#= require jquery_ujs
-#= require nprogress
-#= require nprogress-ajax
-#= require nprogress-turbolinks
-#= require moment
-#= require bootstrap
-#= require bootstrap-sortable
-#= require bootstrap-datetimepicker
-#= require twitter/bootstrap/rails/confirm
-#= require cocoon
-#= require unobtrusive_flash
-#= require unobtrusive_flash_bootstrap
-#= require local_time
-#= require obfuscatejs
-#= require turbolinks
-#= require bookings_builder
-#= require pricing
-#= require routes
-#= require seasonal_discounts
-#= require trips
-#= require_self
-
-Turbolinks.enableTransitionCache();
 $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs'
 
 $(document).on "page:change", ->

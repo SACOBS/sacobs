@@ -22,9 +22,9 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  #config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  config.static_cache_control = "public, max-age=31536000"
+  config.static_cache_control = 'public, max-age=31536000'
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -91,5 +91,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
 end

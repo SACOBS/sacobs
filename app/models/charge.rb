@@ -16,6 +16,7 @@ class Charge < ActiveRecord::Base
   before_save :normalize
 
   private
+
   def normalize
     self.description = description.squish.upcase
   end

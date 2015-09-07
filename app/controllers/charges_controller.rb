@@ -1,6 +1,4 @@
 class ChargesController < ApplicationController
-  responders :flash, :collection
-
   before_action :set_charge, only: [:edit, :update, :destroy]
 
   def index
@@ -13,7 +11,7 @@ class ChargesController < ApplicationController
 
   def create
     @charge = Charge.create(charge_params)
-    respond_with @charge
+    respond_with @charge, location: charges_url
   end
 
   def update

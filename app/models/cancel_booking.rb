@@ -1,23 +1,23 @@
 class CancelBooking
+  delegate :stop, :trip, :quantity, to: :booking
 
-    delegate :stop, :trip, :quantity, to: :booking
+  def initialize(booking, user)
+    @booking = booking
+    @user = user
+  end
 
-    def initialize(booking, user)
-      @booking = booking
-      @user = user
+  def perform
+    Booking.transaction do
+      unassign_seats
+      booking.update!(status: :cancelled, user_id: user.id)
     end
+  end
 
-    def perform
-      Booking.transaction do
-        unassign_seats
-        booking.update!(status: :cancelled, user_id: user.id)
-      end
-    end
+  private
 
-    private
-    attr_reader :booking, :user
+  attr_reader :booking, :user
 
-    def unassign_seats
-      trip.unassign_seats(stop, quantity)
-    end
+  def unassign_seats
+    trip.unassign_seats(stop, quantity)
+  end
 end

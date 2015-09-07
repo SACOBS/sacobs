@@ -7,11 +7,10 @@ class ApplicationController < ActionController::Base
   respond_to :html, :js, :json, :pdf, :xls
 
   before_action :authenticate_user!, :common_settings
-  after_action :prepare_unobtrusive_flash, except: :destroy
 
   layout :layout_required?
 
-  etag { current_user.try :id }
+  etag { [current_user.try(:id), flash] }
 
   def context
     controller_path.delete('/')

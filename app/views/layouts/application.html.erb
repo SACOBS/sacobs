@@ -17,30 +17,40 @@
   <%= yield(:head) %>
 </head>
 <body class="<%= controller_path.gsub(/\/|_/, "-") %> <%= action_name %>">
-  <header class="navbar navbar-fixed-top navbar-inverse">
-    <nav class="navbar-inner">
-      <div class="container-fluid">
-        <%= render 'layouts/navigation' %>
-      </div>
-    </nav>
-  </header>
-  <div id="main" role='main'>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <nav class="navbar-inner">
     <div class="container-fluid">
-      <div class="content">
-        <div class="unobtrusive-flash-container">
+      <%= render 'layouts/navigation' %>
+    </div>
+  </nav>
+</header>
+<div id="main" role='main'>
+  <div class="container-fluid">
+    <div class="content">
+      <%= render 'layouts/messages' %>
+      <% if content_for?(:sidebar) %>
+          <div class="row-fluid">
+            <div class="sidebar span4 well well-small">
+              <%= yield(:sidebar) %>
+            </div>
+            <div class="main-section span8">
+              <%= yield %>
+            </div>
+          </div>
+      <% else %>
           <%= yield %>
-          <%= render 'shared/notes' if user_signed_in? %>
-        </div>
-      </div>
+      <% end %>
+      <%= render 'shared/notes' if user_signed_in? %>
     </div>
   </div>
-  <footer class="navbar navbar-fixed-bottom navbar-inverse">
-    <nav class="navbar-inner">
-      <div class="container-fluid">
-        <%= render 'layouts/footer' %>
-      </div>
-    </nav>
-  </footer>
+</div>
+<footer class="navbar navbar-fixed-bottom navbar-inverse">
+  <nav class="navbar-inner">
+    <div class="container-fluid">
+      <%= render 'layouts/footer' %>
+    </div>
+  </nav>
+</footer>
 </body>
 </html>
 

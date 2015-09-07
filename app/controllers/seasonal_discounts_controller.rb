@@ -1,6 +1,4 @@
 class SeasonalDiscountsController < ApplicationController
-  responders :collection, :flash
-
   def index
     @seasonal_discounts = SeasonalDiscount.applicable
   end
@@ -10,9 +8,8 @@ class SeasonalDiscountsController < ApplicationController
   end
 
   def create
-    @seasonal_discount = SeasonalDiscount.new(seasonal_discount_params)
-    @seasonal_discount.save
-    respond_with @seasonal_discount
+    @seasonal_discount = SeasonalDiscount.create(seasonal_discount_params)
+    respond_with @seasonal_discount, location: seasonal_discounts_url
   end
 
   def update

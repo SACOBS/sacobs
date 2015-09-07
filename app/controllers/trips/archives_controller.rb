@@ -6,9 +6,6 @@ class Trips::ArchivesController < ApplicationController
 
   def show
     @trip = Trip.archived.find(params[:id])
-    respond_to do |format|
-      format.html { render layout: 'with_sidebar' }
-    end
   end
 
   def search

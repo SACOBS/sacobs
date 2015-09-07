@@ -6,7 +6,7 @@ class DestinationsController < ApplicationController
     if @route.save
       redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
     else
-      flash[:alert] = destination.errors.full_messages.join(',')
+      flash[:error] = destination.errors.full_messages.join(',')
       render :edit
     end
   end

@@ -100,7 +100,7 @@ class Booking < ActiveRecord::Base
 
   def seats_are_available
     if stop.present? && quantity > stop.available_seats
-     errors.add(:quantity, "The number of seats #{quantity} selected exceeds the available seating #{stop.available_seats} for this connection.")
+      errors.add(:quantity, "The number of seats #{quantity} selected exceeds the available seating #{stop.available_seats} for this connection.")
     end
   end
 end

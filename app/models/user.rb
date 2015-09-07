@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def normalize
     self.name = name.squish.upcase
     self.surname = name.squish.upcase

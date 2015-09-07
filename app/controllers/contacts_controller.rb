@@ -12,7 +12,7 @@ class ContactsController < ApplicationController
       flash[:notice] = 'Thank you for your message. We will get back to you as soon as possible.'
       redirect_to root_path
     else
-      flash.now[:alert] = 'There was a problem sending your mail. Please try again.'
+      flash.now[:error] = 'There was a problem sending your mail. Please try again.'
       render :new
     end
   end
