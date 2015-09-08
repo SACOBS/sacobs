@@ -16,7 +16,10 @@ class Ticket
   end
 
   def scripture
-    view_context.simple_format(Bible::Scripture.for_today || @settings.default_scripture)
+    content = Rails.cache.fetch('scripture_for_today', expires_in: 8.hours) do
+      Bible::Scripture.for_today || @settings.default_scripture
+    end
+    view_context.simple_format(content)
   end
 
   def ticket_date
