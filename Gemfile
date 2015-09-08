@@ -45,9 +45,6 @@ gem 'devise'
 # Static Pages
 gem 'high_voltage'
 
-# Env variables
-gem 'figaro'
-
 # Email
 gem 'premailer-rails'
 

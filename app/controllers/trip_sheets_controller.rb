@@ -13,22 +13,19 @@ class TripSheetsController < ApplicationController
   end
 
   def download
-    render_pdf(disposition: :attachment)
-  end
-
-  def print
-    render_pdf
-  end
-
-  private
-
-  def render_pdf(disposition: :inline)
     render pdf: @trip.to_file_name,
-           template: 'trip_sheets/_trip_sheet.html.erb',
-           disposition: disposition,
+           template: 'trip_sheets/trip_sheet.pdf.erb',
+           disposition: :attachment,
            layout: 'pdf.html'
   end
 
+  def print
+    render pdf: @trip.to_file_name,
+           template: 'trip_sheets/trip_sheet',
+           layout: 'pdf.html'
+  end
+
+  private
   def set_trip
     @trip = Trip.unscoped { Trip.find(params[:id]) }
   end

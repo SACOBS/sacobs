@@ -3,7 +3,10 @@ class TicketsController < ApplicationController
 
   def download
     @ticket = Ticket.new(@booking, view_context, @settings)
-    render_pdf(disposition: :attachment)
+    render pdf: "#{@ticket.to_file_name}",
+           template: 'tickets/ticket.pdf.erb',
+           disposition: :attachment,
+           layout: 'pdf.html'
   end
 
   def show
@@ -12,7 +15,9 @@ class TicketsController < ApplicationController
 
   def print
     @ticket = Ticket.new(@booking, view_context, @settings)
-    render_pdf
+    render pdf: "#{@ticket.to_file_name}",
+           template: 'tickets/ticket.pdf.erb',
+           layout: 'pdf.html'
   end
 
   def email
@@ -25,15 +30,6 @@ class TicketsController < ApplicationController
   end
 
   private
-
-  def render_pdf(disposition: :inline)
-    render pdf: "#{@ticket.to_file_name}",
-           template: 'tickets/_ticket.html.erb',
-           disposition: disposition,
-           layout: 'pdf.html',
-           locals: { ticket: @ticket }
-  end
-
   def set_booking
     @booking = Booking.unscoped { Booking.find(params[:id]) }
   end

@@ -1,0 +1,165 @@
+<div class="page-header text-center">
+  <h5 class="pull-left">
+    <strong>SA Connection</strong>
+  </h5>
+  <h5 class="pull-right">
+    <strong>
+      <%= @trip_sheet_presenter.current_date %>
+    </strong>
+  </h5>
+  <h2>TRIP SHEET FOR <%= @trip_sheet_presenter.trip_name %></h2>
+</div>
+<p class="pull-left">
+  <strong>Drivers:</strong>
+  <br/>
+<ul class="unstyled">
+  <% @trip_sheet_presenter.drivers_names do |name| %>
+      <li>
+        <%= name %>
+      </li>
+  <% end %>
+</ul>
+</p>
+<p class="pull-right">
+  <strong>Bus:</strong>
+  <%= @trip_sheet_presenter.bus_name %>
+</p>
+<br/>
+<hr/>
+<p class="pull-left">Bookings: 0861102426</p>
+<p class="pull-right">Bookings: 0861102426</p>
+<h4 class="text-center">
+  Bookings and Reservations
+</h4>
+<hr/>
+<%= bootstrap_table headers: ['Clients', 'Connection', 'Quantity Seats', 'Telephone nos'], types: [:bordered] do %>
+    <% @trip_sheet_presenter.bookings.each do |booking| %>
+        <% booking.passengers.each do |passenger| %>
+            <tr>
+              <td>
+                <%= passenger.full_name %>
+              </td>
+              <td>
+                <%= booking.stop.name  %>
+              </td>
+              <td>1</td>
+              <td>
+                <%= passenger.cell_no %>
+              </td>
+            </tr>
+        <% end %>
+    <% end %>
+<% end %>
+<br/>
+<br/>
+<div class="additional-info alwaysbreak">
+  <div class="tripsheet-notes">
+    <p>
+      <strong>
+        <%= @trip_sheet_presenter.notes %>
+      </strong>
+    </p>
+    <p>
+      <strong>
+        <%= @trip_sheet_presenter.trip_sheet_note1 %>
+      </strong>
+    </p>
+    <p>
+      <strong>
+        <%= @trip_sheet_presenter.trip_sheet_note2 %>
+      </strong>
+    </p>
+    <p>
+      <strong>
+        <%= @trip_sheet_presenter.trip_sheet_note3 %>
+      </strong>
+    </p>
+  </div>
+  <%= bootstrap_table headers: %w(Drivers From Time O/Reading To Time), types: [:bordered] do %>
+      <% 5.times do %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+      <% end %>
+  <% end %>
+  <%= bootstrap_table headers: [], types: [:bordered, :condensed] do %>
+      <tr>
+        <td>cash</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>cash send</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>cash send</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>POB</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>difference</td>
+        <td></td>
+      </tr>
+  <% end %>
+  <%= bootstrap_table headers: ['Trip remarks'], types: [:bordered, :condensed] do %>
+      <tr>
+        <td>Diesel</td>
+      </tr>
+      <tr>
+        <td>PE</td>
+        <td></td>
+        <td>Diesel</td>
+      </tr>
+      <tr>
+        <td>Toll</td>
+        <td></td>
+        <td></td>
+        <td>Mos</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Mos</td>
+        <td></td>
+        <td></td>
+        <td>Toll</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Cpt</td>
+        <td></td>
+        <td></td>
+        <td>PE</td>
+        <td></td>
+      </tr>
+  <% end %>
+  <%= bootstrap_table headers: ['Items on checklist to report pm'], types: [:bordered, :condensed] do %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+  <% end %>
+  <p>
+    <strong>
+      <%= @trip_sheet_presenter.trip_sheet_note4 %>
+    </strong>
+  </p>
+  <p class="pull-right">
+    PTO
+  </p>
+</div>
+<div class="occupational-info alwaysbreak">
+  <h5>Occupational Info</h5>
+  <%= display_occupancy(@trip) %>
+</div>

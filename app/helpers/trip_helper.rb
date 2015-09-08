@@ -1,7 +1,7 @@
 module TripHelper
   def display_occupancy(trip)
     items = calculate_statistics(trip)
-    render partial: 'trips/occupancy', locals: { capacity: trip.bus.capacity, items: items }
+    render partial: 'trips/occupancy.html.erb', locals: { capacity: trip.bus.capacity, items: items }
   end
 
   private

@@ -12,7 +12,94 @@
       <%= fa_icon :envelope, text: 'Email' %>
   <% end %>
 </div>
-<%= render partial: 'ticket', locals: { ticket: @ticket } %>
+<div class="details">
+  <p class="pull-left">
+    <strong>Reference No:</strong>
+    <%= @ticket.reference_no %>
+    <strong>Status:</strong>
+    <%= status_label_for(@ticket) %>
+  </p>
+  <p class="pull-right">
+    <strong>Today's Date:</strong>
+    <%= @ticket.ticket_date %>
+  </p>
+</div>
+<div class="passengers">
+  <%= bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do %>
+      <% [@ticket.booking, @ticket.return_booking].compact.each do |booking| %>
+          <% @ticket.passengers.each do |passenger| %>
+              <tr>
+                <td>
+                  <%= booking.trip.start_date %>
+                </td>
+                <td>
+                  <%= passenger.full_name %>
+                </td>
+                <td>
+                  <%= booking.stop.from_city_name %>
+                </td>
+                <td>
+                  <%= booking.stop.from_city_venues.first.name %>
+                </td>
+                <td>
+                  <%= booking.stop.to_city_name %>
+                </td>
+                <td>
+                  <%= booking.stop.to_city_venues.first.name %>
+                </td>
+                <td>
+                  <%= l(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
+                </td>
+                <td>
+                  <%= l(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <strong>Price:</strong>
+          <strong>
+            <%= @ticket.price %>
+          </strong>
+        </td>
+        <td>
+          <strong>Discount:</strong>
+          <strong>
+            <%= @ticket.discount %>
+          </strong>
+        </td>
+        <td>
+          <strong>Total:</strong>
+          <strong>
+            <%= @ticket.nett %>
+          </strong>
+        </td>
+      </tr>
+  <% end %>
+</div>
+<div class="special-instructions text-center">
+  <p>
+    <em>
+      <%= @ticket.instructions %>
+    </em>
+  </p>
+</div>
+<div class="scripture text-center">
+  <p></p>
+  <strong>Thought for today</strong>
+  <em>
+    <%= @ticket.scripture %>
+  </em>
+</div>
+
 <br/>
 <br/>
 <div class="actions text-center">

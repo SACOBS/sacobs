@@ -23,15 +23,14 @@ class ReportsController < ApplicationController
     respond_with @report
   end
 
-  def show
-  end
+  def show;end
 
   def download
-    render_pdf(disposition: :attachment)
+    render pdf: @report.to_file_name, template: 'reports/results.pdf.erb', disposition: :attachment, layout: 'pdf.html'
   end
 
   def print
-    render_pdf
+    render pdf: @report.to_file_name, template: 'reports/results.pdf.erb', layout: 'pdf.html'
   end
 
   def destroy
@@ -40,11 +39,6 @@ class ReportsController < ApplicationController
   end
 
   private
-
-  def render_pdf(disposition: :inline)
-    render pdf: @report.to_file_name, template: 'reports/_results.html.erb', disposition: disposition, layout: 'pdf.html'
-  end
-
   def set_report
     @report = Report.find(params[:id])
   end
