@@ -1,4 +1,4 @@
-class ChangePaymentDateToPaidOnInPaymentDetails < ActiveRecord::Migration
+class ChangePaymentDateToPaidAtInPaymentDetails < ActiveRecord::Migration
   def up
     rename_column :payment_details, :payment_date, :paid_at
   end
