@@ -60,8 +60,7 @@ class Bookings::WizardController < ApplicationController
   def set_stops
     if step == :trip_details
       params[:q] ||= {}
-      params[:q][:available_seats_gteq] = @booking.quantity
-      params[:q][:trip_start_date_gteq] = Date.civil(params[:q].delete('trip_start_date_gteq(1i)').to_i, params[:q].delete('trip_start_date_gteq(2i)').to_i, params[:q].delete('trip_start_date_gteq(3i)').to_i) rescue Date.current
+      params[:q][:available_seats_gt] = 0
       if @booking.stop.present?
         params[:q][:trip_start_date_gteq] = @booking.trip.start_date
         params[:q][:connection_from_city_id_eq] = @booking.stop.connection.from.city_id
