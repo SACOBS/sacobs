@@ -6,15 +6,12 @@
 #= require moment
 #= require bootstrap
 #= require bootstrap-sortable
-#= require bootstrap-datetimepicker
 #= require cocoon
 #= require local_time
 #= require turbolinks
-#= require app.date_time_picker
 #= require app.type_ahead
 #= require bookings_wizard
 #= require pricing
 #= require routes
 #= require seasonal_discounts
-#= require trips
 #= require init

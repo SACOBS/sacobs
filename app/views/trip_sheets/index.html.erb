@@ -4,7 +4,7 @@
 <% content_for :sidebar do %>
     <h4>Search for trips</h4>
     <%= simple_form_for :q, url: trip_sheets_path, method: :get  do |f| %>
-        <%= f.input :start_date_eq, as: :date_picker, placeholder: 'Select a date', label: 'Date of trip' %>
+        <%= f.input :start_date_eq, as: :date, label: 'Date of trip', use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], input_html: { class: 'input-small' }  %>
         <%= f.input :route_id_in, collection: Route.all, as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route' %>
         <%= f.button :submit, 'Search', class: 'btn btn-inverse' %>
     <% end %>

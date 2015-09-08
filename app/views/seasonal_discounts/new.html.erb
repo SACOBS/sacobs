@@ -29,14 +29,13 @@
     </div>
   </div>
   <div class="span6 pull-left">
-    <%= simple_form_for @seasonal_discount,  defaults: { error: false }, html: { class: 'form-horizontal' } do |f| %>
-
+    <%= simple_form_for @seasonal_discount,  html: { class: 'form-horizontal' } do |f| %>
         <fieldset>
           <%= f.input :name, autofocus: true, placeholder: 'Name' %>
           <%= f.association :passenger_type, include_blank: false, label_method: :description %>
           <%= f.input :percentage, placeholder: 'Percentage' %>
-          <%= f.input :period_from, as: :date_picker, placeholder: 'Period From' %>
-          <%= f.input :period_to, as: :date_picker, placeholder: 'Period To' %>
+          <%= f.input :period_from, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], input_html: { class: 'input-small' }  %>
+          <%= f.input :period_to, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], input_html: { class: 'input-small' }  %>
           <%= f.input :active, as: :boolean, inline_label: true, label: false %>
         </fieldset>
         <div class="control-group">

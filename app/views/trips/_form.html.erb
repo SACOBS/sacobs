@@ -8,8 +8,8 @@
 
     <fieldset>
       <%= f.input :name, autofocus: true, placeholder: 'Name' %>
-      <%= f.input :start_date, as: :date_picker,  placeholder: 'Start Date' %>
-      <%= f.input :end_date, as: :date_picker,  placeholder: 'End Date' %>
+      <%= f.input :start_date, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], input_html: { class: 'input-small' }  %>
+      <%= f.input :end_date, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], input_html: { class: 'input-small' }  %>
       <%= f.association :route, as: :radio_buttons, item_wrapper_class: 'inline' %>
       <%= f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline' %>
       <%= f.association :drivers, as: :check_boxes, item_wrapper_class: 'inline' %>
