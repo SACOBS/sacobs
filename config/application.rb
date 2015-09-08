@@ -28,9 +28,6 @@ module Sacobs
 
     config.exceptions_app = routes
 
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-    config.assets.precompile += %w(pdf.css)
-
     I18n.enforce_available_locales = true
 
     config.generators do |g|
