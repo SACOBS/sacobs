@@ -18,6 +18,6 @@ class App.DateTimePicker
 
 
 $(document).on "page:change", ->
-  return unless $('input').find('.datepicker, .timepicker, .datetimepicker').length > 0
+  return unless $(".datepicker, .timepicker, .datetimepicker").length > 0
   dateTimePicker = new App.DateTimePicker
   dateTimePicker.render()

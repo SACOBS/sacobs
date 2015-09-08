@@ -19489,7 +19489,7 @@ jQuery(function() {
 
   $(document).on("page:change", function() {
     var dateTimePicker;
-    if (!($('input').find('.datepicker, .timepicker, .datetimepicker').length > 0)) {
+    if (!($(".datepicker, .timepicker, .datetimepicker").length > 0)) {
       return;
     }
     dateTimePicker = new App.DateTimePicker;

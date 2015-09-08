@@ -10,7 +10,7 @@
 #= require cocoon
 #= require local_time
 #= require turbolinks
-#= require app.date_time_picker.coffee
+#= require app.date_time_picker
 #= require app.type_ahead
 #= require bookings_wizard
 #= require pricing
