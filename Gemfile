@@ -84,6 +84,9 @@ gem 'pg'
 # Email Obfuscation
 gem 'obfuscatejs'
 
+# Timeouts
+gem "rack-timeout"
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'annotate'
@@ -107,7 +110,6 @@ end
 group :production do
   gem 'puma'
   gem 'rails_12factor'
-  gem 'heroku-deflater'
 end
 
 group :doc do

@@ -15,21 +15,11 @@ Rails.application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: 'utf-8'
 
-  config.action_mailer.smtp_settings = {
-    address: ENV['GMAIL_ADDRESS'],
-    port: ENV['GMAIL_PORT'],
-    domain: 'sacobs.herokuapp.com',
-    authentication: 'plain',
-    enable_starttls_auto: true,
-    user_name: ENV['GMAIL_USER_NAME'],
-    password: ENV['GMAIL_PASSWORD']
-  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
