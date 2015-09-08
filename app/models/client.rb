@@ -40,7 +40,7 @@ class Client < ActiveRecord::Base
 
   to_param :full_name
 
-  has_many :bookings
+  has_many :bookings, -> { unscope(where: :archived) }
   has_many :vouchers, dependent: :delete_all
 
   validates :name, :surname, presence: true
