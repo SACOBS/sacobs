@@ -30,6 +30,10 @@ class Report < ActiveRecord::Base
     "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
   end
 
+  def date_range
+    daily? ? Date.current.beginning_of_day..Date.current.end_of_day : period_from..period_to
+  end
+
   private
 
   def adjust_period_from

@@ -1,6 +1,7 @@
 <div class="well">
   <%= simple_form_for @report do |f| %>
     <%= f.input :name %>
+    <%= f.input :daily, hint: 'This allows a report to be run each day only for that specific day, it will take precedence over period_from and period_to' %>
     <%= f.input :period_from, as: :date, discard_day: true, order: [:month, :year], use_short_month: true %>
     <%= f.input :period_to, as: :date, discard_day: true, order: [:month, :year],  use_short_month: true %>
     <%= f.simple_fields_for :criteria do |c| %>
