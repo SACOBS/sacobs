@@ -48,6 +48,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.fetch(:report, {}).permit(:name, :period_from, :period_to, criteria: [:stop_connection_from_city_id_eq, :stop_connection_to_city_id_eq, status_eq_any: [], passengers_passenger_type_id_eq_any: []])
+    params.fetch(:report, {}).permit(:name, :daily, :period_from, :period_to, criteria: [:stop_connection_from_city_id_eq, :stop_connection_to_city_id_eq, status_eq_any: [], passengers_passenger_type_id_eq_any: []])
   end
 end

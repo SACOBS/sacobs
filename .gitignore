@@ -30,7 +30,6 @@
 /coverage.data
 /coverage/
 /db/*.javadb/
-/db/*.sqlite3
 /doc/api/
 /doc/app/
 /doc/features.html

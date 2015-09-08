@@ -54,7 +54,7 @@ class Booking < ActiveRecord::Base
 
   scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
   scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
-  scope :recent, -> { unscoped.includes(:stop).processed.order(created_at: :desc).limit(5) }
+  scope :recent, -> { unscope(where: :archived).includes(:stop).processed.order(created_at: :desc).limit(5) }
   scope :processed, -> { where.not(status: statuses[:in_process]) }
   scope :travelling, -> { where(status: [statuses[:reserved], statuses[:paid]]) }
 
