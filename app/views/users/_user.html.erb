@@ -1,6 +1,6 @@
 <%= content_tag_for(:tr, user) do %>
 <td><%= user %></td>
-<td><%= obfuscate_email user.email %></td>
+<td><%= mail_to user.email %></td>
 <td><span class="label label-info"><%= user.role.capitalize %></span></td>
 <td>
   <%= link_to user_path(user, user: { role: :admin }), method: :patch, class: 'btn btn-mini btn-warning' do %>

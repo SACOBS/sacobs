@@ -7,10 +7,8 @@
 #= require bootstrap
 #= require bootstrap-sortable
 #= require bootstrap-datetimepicker
-#= require twitter/bootstrap/rails/confirm
 #= require cocoon
 #= require local_time
-#= require obfuscatejs
 #= require turbolinks
 #= require app.date_time_picker.coffee
 #= require app.type_ahead

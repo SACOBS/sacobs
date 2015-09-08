@@ -28,7 +28,6 @@ gem 'jbuilder', '~> 1.2'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'normalize-rails'
 gem 'bootswatch-rails', '~> 0.5.0'
-gem 'twitter-bootstrap-rails-confirm'
 gem 'bootstrap_sortable_rails'
 gem 'momentjs-rails'
 gem 'bootstrap-datetimepicker-rails'
@@ -41,9 +40,6 @@ gem 'simple_form', '~> 3.0.0'
 
 # Authentication
 gem 'devise'
-
-# Static Pages
-gem 'high_voltage'
 
 # Email
 gem 'premailer-rails'
@@ -77,9 +73,6 @@ gem 'sucker_punch', '~> 1.0'
 
 # PG
 gem 'pg'
-
-# Email Obfuscation
-gem 'obfuscatejs'
 
 # Timeouts
 gem "rack-timeout"
