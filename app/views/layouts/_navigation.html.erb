@@ -37,15 +37,9 @@
           <li>
             <%= link_to 'Manage', admin_index_path %>
           </li>
-          <%= drop_down_menu('Reports') do %>
-              <li>
-                <%= link_to 'Reports', reports_path %>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to 'Daily Bookings', bookings_daily_index_path %>
-              </li>
-          <% end %>
+          <li>
+            <%= link_to 'Reports', reports_path %>
+          </li>
       <% end %>
       <li>
         <%= link_to 'Quotes', quick_quote_path %>
