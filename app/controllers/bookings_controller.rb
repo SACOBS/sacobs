@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
         @bookings = booking_scope.none
     end
 
-    respond_with(@bookings) if stale?(@bookings)
+    respond_with(@bookings) #if stale?(@bookings)
   end
 
   def search

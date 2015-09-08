@@ -1,5 +1,6 @@
 $(document).on "page:change", ->
   return unless $(".bookings-wizard").length > 0
+
   $('.amount').on 'change', ->
     total = 0
     $('#line_items tr.line_item').each ->

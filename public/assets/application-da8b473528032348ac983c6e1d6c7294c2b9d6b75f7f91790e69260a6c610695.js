@@ -19558,6 +19558,126 @@ jQuery(function() {
 
 }).call(this);
 (function() {
+  window.App || (window.App = {});
+
+  App.DateTimePicker = (function() {
+    function DateTimePicker() {
+      $('.datepicker').datetimepicker({
+        pickTime: false
+      });
+      $('.timepicker').datetimepicker({
+        pickDate: false,
+        pickSeconds: false
+      });
+      $('.datetimepicker').datetimepicker();
+    }
+
+    DateTimePicker.prototype.render = function() {
+      $(document).on('focus', '.datepicker, .timepicker, .datetimepicker', function() {
+        $(this).datetimepicker('show');
+      });
+      return $(document).on('blur', '.datepicker, .timepicker, .datetimepicker', function() {
+        if ($(this).data('datetimepicker').viewMode === 0) {
+          $(this).datetimepicker('hide');
+        }
+      });
+    };
+
+    return DateTimePicker;
+
+  })();
+
+  $(document).on("page:change", function() {
+    var dateTimePicker;
+    if (!($('input').find('.datepicker, .timepicker, .datetimepicker').length > 0)) {
+      return;
+    }
+    dateTimePicker = new App.DateTimePicker;
+    return dateTimePicker.render();
+  });
+
+}).call(this);
+(function() {
+  window.App || (window.App = {});
+
+  App.TypeAhead = (function() {
+    function TypeAhead() {
+      $('input.typeahead').typeahead({
+        items: 20,
+        source: function(query, process) {
+          var data, objects;
+          data = $(this.$element.data('source'));
+          objects = $.map(data, function(item) {
+            return JSON.stringify(item);
+          });
+          process(objects);
+        },
+        highlighter: function(item) {
+          return JSON.parse(item)[this.$element.data('filter').toString()];
+        },
+        matcher: function(item) {
+          return JSON.parse(item)[this.$element.data('filter').toString()].toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) !== -1;
+        },
+        updater: function(item) {
+          var field_container, item_id, object, targets;
+          object = JSON.parse(item);
+          if (this.$element.data().hasOwnProperty('populate')) {
+            field_container = this.$element.data('populate').toString();
+            $.each(object, function(key, value) {
+              var input;
+              if (key !== 'id') {
+                input = $(field_container).find('[name*=' + key + ']');
+                if (value) {
+                  return $(input).val(value.toString());
+                } else {
+                  return $(input).val('');
+                }
+              }
+            });
+          }
+          item_id = object.id;
+          targets = this.$element.data('targets').split(',');
+          $.each(targets, function(index, value) {
+            return $(value).val(item_id);
+          });
+          return JSON.parse(item)[this.$element.data('filter').toString()];
+        }
+      });
+    }
+
+    TypeAhead.prototype.render = function() {
+      $('input.typeahead').each(function() {
+        return $(this).prop('name', '');
+      });
+      return $('input.typeahead').keyup(function() {
+        var targets;
+        if ($.trim($(this).val()) === '') {
+          targets = $(this).data('targets').split(',');
+          $.each(targets, function(index, item) {
+            return $(item).val('');
+          });
+          if ($(this).data().hasOwnProperty('populate')) {
+            return $(this).closest('form')[0].reset();
+          }
+        }
+      });
+    };
+
+    return TypeAhead;
+
+  })();
+
+  $(document).on("page:change", function() {
+    var typeAhead;
+    if (!($('input.typeahead').length > 0)) {
+      return;
+    }
+    typeAhead = new App.TypeAhead;
+    return typeAhead.render();
+  });
+
+}).call(this);
+(function() {
   $(document).on("page:change", function() {
     if (!($(".bookings-wizard").length > 0)) {
       return;
@@ -19611,64 +19731,10 @@ jQuery(function() {
       return;
     }
     $(document).on('cocoon:after-insert', function(event, destination) {
+      var typeAhead;
       destination.find("td input[name*='sequence']").val(destination.index() + 1);
-      $('input.typeahead').each(function() {
-        $(this).prop('autocomplete', 'off');
-        return $(this).prop('name', '');
-      });
-      $('input.typeahead').keyup(function() {
-        var targets;
-        if ($.trim($(this).val()) === '') {
-          targets = $(this).data('targets').split(',');
-          $.each(targets, function(index, item) {
-            return $(item).val('');
-          });
-          if ($(this).data().hasOwnProperty('populate')) {
-            return $(this).closest('form')[0].reset();
-          }
-        }
-      });
-      return $('input.typeahead').typeahead({
-        items: 20,
-        source: function(query, process) {
-          var data, objects;
-          data = $(this.$element.data('source'));
-          objects = $.map(data, function(item) {
-            return JSON.stringify(item);
-          });
-          process(objects);
-        },
-        highlighter: function(item) {
-          return JSON.parse(item)[this.$element.data('filter').toString()];
-        },
-        matcher: function(item) {
-          return JSON.parse(item)[this.$element.data('filter').toString()].toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) !== -1;
-        },
-        updater: function(item) {
-          var field_container, item_id, object, targets;
-          object = JSON.parse(item);
-          if (this.$element.data().hasOwnProperty('populate')) {
-            field_container = this.$element.data('populate').toString();
-            $.each(object, function(key, value) {
-              var input;
-              if (key !== 'id') {
-                input = $(field_container).find('[name*=' + key + ']');
-                if (value) {
-                  return $(input).val(value.toString());
-                } else {
-                  return $(input).val('');
-                }
-              }
-            });
-          }
-          item_id = object.id;
-          targets = this.$element.data('targets').split(',');
-          $.each(targets, function(index, value) {
-            return $(value).val(item_id);
-          });
-          return JSON.parse(item)[this.$element.data('filter').toString()];
-        }
-      });
+      typeAhead = new App.TypeAhead;
+      return typeAhead.render();
     });
     $(document).on('cocoon:after-remove', function(event, destination) {
       return $('#destinations').find('tr').each(function(index) {
@@ -19739,8 +19805,6 @@ jQuery(function() {
 
 }).call(this);
 (function() {
-  $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Sacobs';
-
   $(document).on("page:change", function() {
     var applyLast;
     $.bootstrapSortable(applyLast = true);
@@ -19748,103 +19812,14 @@ jQuery(function() {
     $('#show_notes').click(function() {
       return $('#notes').toggle();
     });
-    $('a[data-toggle="tab"]').on('click', function(e) {
+    return $('a[data-toggle="tab"]').on('click', function(e) {
       e.preventDefault();
       return $(this).tab('show');
-    });
-    $('.datepicker').datetimepicker({
-      pickTime: false
-    });
-    $('.timepicker').datetimepicker({
-      pickDate: false,
-      pickSeconds: false
-    });
-    $('.datetimepicker').datetimepicker();
-    $(document).on('focus', '.datepicker, .timepicker, .datetimepicker', function() {
-      $(this).datetimepicker('show');
-    });
-    $(document).on('blur', '.datepicker, .timepicker, .datetimepicker', function() {
-      if ($(this).data('datetimepicker').viewMode === 0) {
-        $(this).datetimepicker('hide');
-      }
-    });
-    $('input.typeahead').each(function() {
-      $(this).prop('autocomplete', 'off');
-      return $(this).prop('name', '');
-    });
-    $('input.typeahead').keyup(function() {
-      var targets;
-      if ($.trim($(this).val()) === '') {
-        targets = $(this).data('targets').split(',');
-        $.each(targets, function(index, item) {
-          return $(item).val('');
-        });
-        if ($(this).data().hasOwnProperty('populate')) {
-          return $(this).closest('form')[0].reset();
-        }
-      }
-    });
-    return $('input.typeahead').typeahead({
-      items: 20,
-      source: function(query, process) {
-        var data, objects;
-        data = $(this.$element.data('source'));
-        objects = $.map(data, function(item) {
-          return JSON.stringify(item);
-        });
-        process(objects);
-      },
-      highlighter: function(item) {
-        return JSON.parse(item)[this.$element.data('filter').toString()];
-      },
-      matcher: function(item) {
-        return JSON.parse(item)[this.$element.data('filter').toString()].toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) !== -1;
-      },
-      updater: function(item) {
-        var field_container, item_id, object, targets;
-        object = JSON.parse(item);
-        if (this.$element.data().hasOwnProperty('populate')) {
-          field_container = this.$element.data('populate').toString();
-          $.each(object, function(key, value) {
-            var input;
-            if (key !== 'id') {
-              input = $(field_container).find('[name*=' + key + ']');
-              if (value) {
-                return $(input).val(value.toString());
-              } else {
-                return $(input).val('');
-              }
-            }
-          });
-        }
-        item_id = object.id;
-        targets = this.$element.data('targets').split(',');
-        $.each(targets, function(index, value) {
-          return $(value).val(item_id);
-        });
-        return JSON.parse(item)[this.$element.data('filter').toString()];
-      }
     });
   });
 
 }).call(this);
+(function() {
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}).call(this);

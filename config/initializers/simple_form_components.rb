@@ -2,6 +2,7 @@ module SimpleForm
   module Components
     module Typeahead
       def typeahead
+        input_html_options['autocomplete'] = 'off'
         input_html_options['class'] ||= 'typeahead'
         input_html_options['data-source'] ||= options[:typeahead]
         nil

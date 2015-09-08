@@ -2547,18 +2547,18 @@ table.sortable thead th div.mozilla {
 .fa-fonticons:before {
   content: "\f280";
 }
-/* line 1, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/tripsheets.css.scss */
+/* line 1, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/tripsheets.scss */
 .tripsheet-notes {
   margin-bottom: 2em;
 }
-/* line 2, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/notes.css.scss */
+/* line 2, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/notes.scss */
 #notes {
   display: none;
   visibility: inherit;
   margin-top: 10px;
   background-color: darkgray;
 }
-/* line 7, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/notes.css.scss */
+/* line 7, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/notes.scss */
 #notes textarea {
   width: 99%;
 }
@@ -11549,20 +11549,20 @@ i[class^="icon-"] {
 }
 
 /* Layout */
-/* line 20, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 20, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 html {
   position: relative;
   min-height: 100%;
 }
 
-/* line 24, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 24, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 body {
   background-image: url(/assets/background-e8e98b073b4dead7ac1da988433f6062f22b6667113bee63a9aa757da097b2eb.png);
   padding-top: 60px;
   padding-bottom: 70px;
 }
 
-/* line 32, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 32, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .content {
   padding: 20px;
   margin: 0 -20px;
@@ -11574,35 +11574,35 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-/* line 41, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 41, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .form-inline div {
   display: inline-block;
 }
-/* line 44, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 44, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .form-inline label {
   padding: 3px;
 }
 
-/* line 49, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 49, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .page-header {
   padding-bottom: 2em;
 }
-/* line 51, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 51, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .page-header .search-box {
   margin-bottom: 2em;
 }
 
-/* line 57, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 57, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 th, td {
   overflow: hidden;
 }
 
-/* line 61, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 61, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 td {
   background-color: lightcyan;
 }
 
-/* line 66, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 66, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > ul > li {
   border-radius: 4px 4px 0 0;
   -webkit-border-radius: 4px 4px 0 0;
@@ -11613,13 +11613,13 @@ td {
   font-weight: normal;
 }
 
-/* line 76, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 76, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > ul > li > a {
   margin-right: 0px;
   padding: .5em 1em;
 }
 
-/* line 83, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 83, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > ul > li > a,
 .tab-wrapper > ul > li > a:link,
 .tab-wrapper > ul > li > a:visited {
@@ -11627,13 +11627,13 @@ td {
   text-decoration: none;
 }
 
-/* line 90, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 90, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > ul > li > a:hover {
   color: #212121;
   text-decoration: none;
 }
 
-/* line 95, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 95, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > ul > li.active {
   border-bottom-color: #fff;
   margin-bottom: -1px;
@@ -11645,12 +11645,12 @@ td {
   background-image: linear-gradient(bottom, #333333 2px, transparent 2px);
 }
 
-/* line 106, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 106, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > div {
   padding: 10px 10px 10px 10px;
 }
 
-/* line 110, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.css.scss */
+/* line 110, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/bootstrap_and_overrides.scss */
 .tab-wrapper > div {
   border: 1px solid #ddd;
   background: transparent;
@@ -11661,15 +11661,6 @@ td {
   border-top: transparent;
 }
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
 
 
 

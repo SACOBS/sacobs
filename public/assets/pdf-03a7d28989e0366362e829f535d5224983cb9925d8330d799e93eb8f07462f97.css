@@ -6783,7 +6783,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   box-sizing: border-box;
 }
 
-/* line 4, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.css.scss */
+/* line 4, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.scss */
 body {
   padding-top: 60px;
   font-size: 8px;
@@ -8571,24 +8571,24 @@ i[class^="icon-"] {
   opacity: 0.8;
 }
 
-/* line 12, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.css.scss */
+/* line 12, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.scss */
 .content {
   padding: 20px;
   margin: 0 -20px;
   /* negative indent the amount of the padding to maintain the grid system */
 }
 
-/* line 16, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.css.scss */
+/* line 16, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.scss */
 div.alwaysbreak {
   page-break-before: always;
 }
 
-/* line 17, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.css.scss */
+/* line 17, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.scss */
 div.nobreak:before {
   clear: both;
 }
 
-/* line 18, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.css.scss */
+/* line 18, /Users/pauljansevanrensburg/RailsApps/sacobs/app/assets/stylesheets/pdf.scss */
 div.nobreak {
   page-break-inside: avoid;
 }
