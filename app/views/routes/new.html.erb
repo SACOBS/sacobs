@@ -40,7 +40,7 @@
       <div class="span9">
         <fieldset>
           <legend>Destinations</legend>
-          <%= bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { id: 'destinations' } do %>
+          <%= bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { class: 'route-destinations' } do %>
               <%= f.simple_fields_for :destinations, wrapper: false do |destination| %>
                   <%= render 'destination_fields', f: destination %>
               <% end %>

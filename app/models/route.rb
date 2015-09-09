@@ -14,7 +14,7 @@
 class Route < ActiveRecord::Base
   to_param :name
 
-  has_many :destinations, -> { includes(:city) }, dependent: :destroy, inverse_of: :route, before_add: :reorder_destinations
+  has_many :destinations, -> { includes(:city) }, dependent: :destroy, inverse_of: :route
 
   has_many :connections, dependent: :destroy, inverse_of: :route
 
@@ -25,7 +25,8 @@ class Route < ActiveRecord::Base
   validates :cost, :distance, numericality: true
   validates :destinations, presence: true, length: { minimum: 2, too_short: 'is too short (at least %{count} destinations required)' }
 
-  before_save :normalize, :generate_connections
+  before_save :normalize
+  after_save :generate_connections
 
   def copy
     self.class.skip_callback(:save, :before, :generate_connections)
@@ -65,17 +66,9 @@ class Route < ActiveRecord::Base
     self.name = name.squish.upcase
   end
 
-  def reorder_destinations(destination)
-    if destinations.exists?(sequence: destination.sequence)
-      destinations.where('sequence > ?', destination.sequence.pred).find_each { |shifting| shifting.increment!(:sequence) }
-    end
-  end
-
   def generate_connections
-    if destinations.any?(&:changed?)
-      destinations.each do |from|
-        destinations.drop(from.sequence).each { |to| connections.find_or_initialize_by(from: from, to: to) }
-      end
+    destinations.each do |from|
+      destinations.drop(from.sequence).each { |to| connections.find_or_initialize_by(from_id: from.id, to_id: to.id).save! }
     end
   end
 end

@@ -2,11 +2,10 @@ class DestinationsController < ApplicationController
   before_action :set_route
 
   def update
-    @route.destinations.build(city: city, sequence: sequence)
-    if @route.save
+    if @route.update(route_params)
       redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
     else
-      flash[:error] = destination.errors.full_messages.join(',')
+      flash.now[:alert] = 'Destinations could not be updated.'
       render :edit
     end
   end
@@ -22,19 +21,7 @@ class DestinationsController < ApplicationController
     @route = Route.find(params[:route_id])
   end
 
-  def city
-    City.find_by(id: destination_params[:city_id])
-  end
-
-  def preceding_destination
-    @route.destinations.find_by(id: destination_params[:preceding_id])
-  end
-
-  def sequence
-    (preceding_destination.try(:sequence) || 0).next
-  end
-
-  def destination_params
-    params.require(:destination).permit(:city_id, :preceding_id)
+  def route_params
+    params.require(:route).permit(destinations_attributes: [:city_id, :sequence, :id])
   end
 end

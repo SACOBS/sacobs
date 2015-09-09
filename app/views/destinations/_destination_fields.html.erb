@@ -1,0 +1,9 @@
+<tr class="destination nested_fields <%= 'disable-sort-item' unless f.object.new_record? %>">
+  <% if f.object.new_record? %>
+     <td><%= f.input :city, typeahead: cities, label: false, placeholder: 'Select city', input_html: { data: { targets: "#route_destinations_attributes_#{f.index}_city_id", filter: :name } } %></td>
+  <% else %>
+    <td><%= f.object.city.name %></td>
+  <% end %>
+  <td><%= f.input :sequence, label: false, readonly: true, input_html: { class: 'input-small' } %></td>
+  <td><%= f.input :city_id, as: :hidden %><%= f.input :id, as: :hidden %></td>
+</tr>

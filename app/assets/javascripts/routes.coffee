@@ -1,11 +1,12 @@
 $(document).on "page:change", ->
   return unless $(".routes").length > 0
-  $(document).on 'cocoon:after-insert',(event, destination) ->
+  $('.route-destinations').on 'cocoon:after-insert',(event, destination) ->
+    destination.find("td input[name*='city']").prop('enabled', true).focus()
     destination.find("td input[name*='sequence']").val(destination.index() + 1)
     typeAhead = new App.TypeAhead
     typeAhead.render()
 
-  $(document).on 'cocoon:after-remove',(event, destination) ->
+  $('.route-destinations').on 'cocoon:after-remove',(event, destination) ->
     $('#destinations').find('tr').each (index) ->
       $(this).find("td input[name*='sequence']").val(index)
 

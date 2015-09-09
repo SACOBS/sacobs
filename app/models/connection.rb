@@ -29,7 +29,7 @@ class Connection < ActiveRecord::Base
   belongs_to :from, -> { includes(:city) }, class_name: :Destination
   belongs_to :to, -> { includes(:city) }, class_name: :Destination
 
-  validates :route, :from, :to, :leaving, :arriving, presence: true
+  validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 
   after_initialize :set_defaults, if: :new_record?
