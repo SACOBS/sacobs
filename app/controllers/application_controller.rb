@@ -12,16 +12,6 @@ class ApplicationController < ActionController::Base
 
   etag { [current_user.try(:id), flash] }
 
-  def context
-    controller_path.delete('/')
-  end
-  helper_method :context
-
-  def notes
-    Note.for_context(context).all
-  end
-  helper_method :notes
-
   protected
 
   def devise_parameter_sanitizer

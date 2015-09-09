@@ -252,7 +252,7 @@ Sacobs::Application.routes.draw do
 
   resources :charges, except: [:show]
 
-  resources :notes, except: [:show]
+  resources :notes, only: [:index, :create, :destroy]
 
   resources :tickets, only: [:show] do
     member do

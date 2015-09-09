@@ -1,56 +1,53 @@
 <%= content_for(:title) do %>
-  Edit Destinations
+    Edit Destinations
 <% end %>
 <div class="page-header">
   <h2>Edit Destinations</h2>
 </div>
 <div class="row span12">
-  <!--<div class="span4">-->
-    <!--<div class="well">-->
-      <!--<h4>Instructions</h4>-->
-      <!--<ol>-->
-        <!--<li>-->
-          <!--Select the city you want to add to the route from the City input.-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--Select the city that comes before it on the route from the preceding city input. For example, If Port Alfred is selected then East London will be the preceding city.-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--If the city being added is going to be the starting city on the route.-->
-          <!--<strong>Please leave the preceding city field blank.</strong>-->
-        <!--</li>-->
-      <!--</ol>-->
-      <!--<p>-->
-        <!--<b>NB</b>-->
-        <!--<br/>-->
-        <!--<em>-->
-          <!--Please note that connections are generated based on the city selected and for all the cities coming before it.-->
-          <!--Thus it is important to choose the correct preceding city (Blank if the new city is the start of the route) as a number of connections could be created that are incorrect.-->
-        <!--</em>-->
-      <!--</p>-->
-    <!--</div>-->
-  <!--</div>-->
   <div class="span7">
     <h4>Destinations</h4>
     <%= simple_form_for @route, url: route_destinations_path(@route), method: :patch do |f| %>
         <%= link_to_add_association  f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' },  class: 'btn btn-warning' do %>
             <%= fa_icon :plus, text: 'Add destination' %>
         <% end %>
-          <table class="table table-bordered table-condensed route-destinations" data-behaviour="sortable">
-            <thead>
-              <tr>
-                <th>City</th>
-                <th>Sequence</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= f.simple_fields_for :destinations do |destination_form| %>
-                <%= render 'destination_fields', f: destination_form %>
-              <% end %>
-            </tbody>
-          </table>
-      <%= f.button :submit  %>
-      <%= link_to 'Back', routes_path, class: 'btn btn-info' %>
+        <table class="table table-bordered table-condensed route-destinations" data-behaviour="sortable">
+          <thead>
+          <tr>
+            <th>City</th>
+            <th>Sequence</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= f.simple_fields_for :destinations do |destination_form| %>
+              <%= render 'destination_fields', f: destination_form %>
+          <% end %>
+          </tbody>
+        </table>
+        <%= f.button :submit  %>
+        <%= link_to 'Back', routes_path, class: 'btn btn-info' %>
     <% end %>
+  </div>
+  <div class="span4 well">
+    <h4>Instructions</h4>
+    <ol>
+      <li>
+        Click the orange add destination button above the table. This will add a new destination row at the end of the table.
+      </li>
+      <li>
+        <strong>Click</strong> on the new destination row and <strong>drag</strong> the new destination to its correct position in the table. Eg  Port Alfred will come after East London.
+      </li>
+      <li>
+       Once the new destination is dragged to its correct position all the other positions will be updated correctly.
+      </li>
+    </ol>
+    <p>
+      <b>NB</b>
+      <br/>
+      <em>
+        Please note that connections are generated based on the position of the cities. thus please ensure that the correct position is setup.
+        Thus it is important to choose the correct position, as a number of connections could be created that are incorrect.
+      </em>
+    </p>
   </div>
 </div>

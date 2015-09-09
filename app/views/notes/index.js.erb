@@ -1,0 +1,2 @@
+$('body').append('<%= j render(partial: 'notes', locals: { notes: @notes, context: params[:context] }) %>');
+$('#notes').modal('show');

@@ -1,4 +1,8 @@
 class NotesController < ApplicationController
+  def index
+    @notes = Note.for_context(params[:context])
+  end
+
   def create
     @note = Note.create(note_params)
   end
