@@ -11,7 +11,7 @@ class RoutesController < ApplicationController
   end
 
   def create
-    @route = Route.create!(route_params)
+    @route = Route::Create.perform(route_params)
     respond_with(@route)
   end
 
@@ -20,7 +20,7 @@ class RoutesController < ApplicationController
   end
 
   def update
-    @route.update(route_params)
+    @route = Route::Update.perform(@route, route_params)
     respond_with @route
   end
 

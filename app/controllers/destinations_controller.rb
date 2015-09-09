@@ -1,14 +1,10 @@
 class DestinationsController < ApplicationController
   before_action :set_route
 
-  def update
-    if @route.update(route_params)
-      redirect_to edit_route_url(@route), notice: 'New destination was successfully added.'
-    else
-      flash.now[:alert] = 'Destinations could not be updated.'
-      render :edit
-    end
-  end
+   def update
+      @route = Route::Update.new(@route, route_params).perform
+      respond_with(@route, location: edit_route_url(@route))
+   end
 
   def destinations
     @destinations ||= @route.destinations.map(&:city).to_json(only: [:id, :name])

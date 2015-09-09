@@ -26,10 +26,8 @@ class Route < ActiveRecord::Base
   validates :destinations, presence: true, length: { minimum: 2, too_short: 'is too short (at least %{count} destinations required)' }
 
   before_save :normalize
-  after_save :generate_connections
 
   def copy
-    self.class.skip_callback(:save, :before, :generate_connections)
     object = dup
     object.name = "Copy of #{name}"
     destinations.map { |d| object.destinations.build(city: d.city, sequence: d.sequence) }
@@ -40,12 +38,10 @@ class Route < ActiveRecord::Base
     end
     yield(object) if block_given?
     object.save
-    self.class.set_callback(:save, :before, :generate_connections)
     object
   end
 
   def reverse_copy
-    self.class.skip_callback(:save, :before, :generate_connections)
     object = dup
     object.name = "Reverse of #{name}"
     destinations.reverse.map.with_index(1) { |original, index| object.destinations.build(city: original.city, sequence: index) }
@@ -56,7 +52,6 @@ class Route < ActiveRecord::Base
     end
     yield(object) if block_given?
     object.save
-    self.class.set_callback(:save, :before, :generate_connections)
     object
   end
 
@@ -64,11 +59,5 @@ class Route < ActiveRecord::Base
 
   def normalize
     self.name = name.squish.upcase
-  end
-
-  def generate_connections
-    destinations.each do |from|
-      destinations.drop(from.sequence).each { |to| connections.find_or_initialize_by(from_id: from.id, to_id: to.id).save! }
-    end
   end
 end
