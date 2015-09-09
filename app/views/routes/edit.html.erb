@@ -20,6 +20,7 @@
   </ol>
 </div>
 <%= simple_form_for @route, html: { class: 'form-inline' } do |f| %>
+    <%= render 'shared/error_messages', object: @route %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit %>

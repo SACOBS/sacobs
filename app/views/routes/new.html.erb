@@ -20,6 +20,7 @@
   </p>
 </div>
 <%= simple_form_for @route do |f| %>
+    <%= render 'shared/error_messages', object: @route %>
     <div class="control-group">
       <div class="controls">
         <%= f.button :submit  %>
