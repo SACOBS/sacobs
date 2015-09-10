@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
 
   def index
     @routes = route_scope.includes(:destinations, :connections)
-    respond_with(@routes)
+    respond_with(@routes) if stale?(@routes)
   end
 
   def new
@@ -30,20 +30,20 @@ class RoutesController < ApplicationController
   end
 
   def copy
-    copy = @route.copy { |c| c.user_id = current_user.id }
-    if copy.persisted?
-      redirect_to copy, notice: 'Route was successfully copied.'
+    copy = Route::Copy.perform(@route, current_user)
+    if copy.save
+      redirect_to copy, notice:  t('flash.routes.copy.notice', resource_name: copy.name)
     else
-      redirect_to routes_url, alert: 'Route could not be copied.'
+      redirect_to routes_url, alert: t('flash.routes.copy.alert', resource_name: @route.name)
     end
   end
 
   def reverse_copy
-    reverse_copy = @route.reverse_copy { |r| r.user_id = current_user.id }
-    if reverse_copy.persisted?
-      redirect_to reverse_copy, notice: 'Route was successfully reverse copied.'
+    copy = Route::ReverseCopy.perform(@route, current_user)
+    if copy.save
+      redirect_to copy, notice:  t('flash.routes.copy.notice', resource_name: copy.name)
     else
-      redirect_to routes_url, alert: 'Route could not be reverse copied.'
+      redirect_to routes_url, alert: t('flash.routes.copy.alert', resource_name: @route.name)
     end
   end
 

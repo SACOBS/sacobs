@@ -15,8 +15,6 @@ $(document).on "page:change", ->
   $('.route-destinations').on 'cocoon:after-insert',(event, destination) ->
     destination.find("td input[name*='city']").focus()
     destination.find("td input[name*='sequence']").val(destination.index() + 1)
-    typeAhead = new App.TypeAhead
-    typeAhead.render()
 
   $(document).on 'click', '[data-behaviour~=sortable] input', ->
     $(this).focus()

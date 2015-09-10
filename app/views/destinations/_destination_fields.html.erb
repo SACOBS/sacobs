@@ -1,6 +1,6 @@
 <tr class="destination nested_fields <%= 'disable-sort-item' unless f.object.new_record? %>">
   <% if f.object.new_record? %>
-     <td><%= f.input :city, typeahead: cities, label: false, placeholder: 'Select city', input_html: { data: { targets: "#route_destinations_attributes_#{f.index}_city_id", filter: :name } } %></td>
+     <td><%= f.association :city, label: false, prompt: 'Select a city' %></td>
   <% else %>
     <td><%= f.object.city.name %></td>
   <% end %>
