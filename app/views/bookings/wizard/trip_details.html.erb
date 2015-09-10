@@ -12,7 +12,6 @@
       <%= f.input :to_city, typeahead: cities, label: false, placeholder: 'Select to city', input_html: { data: { targets: '#q_connection_to_city_id_eq', filter: :name } } %>
       <%= f.hidden_field :connection_to_city_id_eq %>
       <%= f.input :trip_start_date_gteq, as: :date, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], label: false, input_html: { class: 'input-medium' } %>
-      <%= f.hidden_field :available_seats_gt %>
       <%= f.button :submit, 'Search', class: 'btn btn-inverse' %>
   <% end %>
 </div>
