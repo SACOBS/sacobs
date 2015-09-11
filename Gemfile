@@ -74,13 +74,12 @@ gem 'sucker_punch', '~> 1.0'
 # PG
 gem 'pg'
 
-# Timeouts
-gem "rack-timeout"
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'annotate'
   gem 'quiet_assets'
+  gem "bullet"
 end
 
 group :development, :test do
@@ -100,6 +99,7 @@ end
 group :production do
   gem 'puma'
   gem 'rails_12factor'
+  gem "rack-timeout"
 end
 
 group :doc do

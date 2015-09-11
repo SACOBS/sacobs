@@ -10,7 +10,7 @@
 
 class Bible::Scripture < ActiveRecord::Base
   def self.for_today
-     random_scripture = find(rand(count))
+     random_scripture = find_by(id: rand(count))
      Scripture.get_verse(random_scripture.verse) rescue nil
   end
 end

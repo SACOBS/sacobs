@@ -1,20 +1,14 @@
 class Bookings::ArchivesController < ApplicationController
   def index
-    @bookings = Trip.unscoped { booking_scope.includes(:trip, :stop, :client).page(params[:page]) }
+    @bookings = Booking.includes(:client, :trip, stop: :connection).archived.page(params[:page])
   end
 
   def search
-    @search = Trip.unscoped { booking_scope.includes(:trip, :stop, :client).search(params[:q]) }
-    @results = @search.result.includes(:trip, :stop, :client).limit(50)
+    @search = Booking.archived.search(params[:q].merge(m: 'or'))
+    @results = @search.result.includes(:client, :trip, stop: :connection).limit(50)
   end
 
   def show
-    @booking = booking_scope.find(params[:id])
-  end
-
-  private
-
-  def booking_scope
-    @booking_scope ||= Booking.archived.processed
+    @booking = Booking.archived.find(params[:id])
   end
 end

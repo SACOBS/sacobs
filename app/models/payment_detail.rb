@@ -3,15 +3,10 @@
 # Table name: payment_details
 #
 #  id           :integer          not null, primary key
-#  paid_at      :datetime         default(Fri, 04 Sep 2015 11:18:07 SAST +02:00)
-#  booking_id   :integer
+#  paid_at      :datetime
 #  reference    :string(255)
 #  user_id      :integer
 #  payment_type :string(255)
-#
-# Indexes
-#
-#  index_payment_details_on_booking_id  (booking_id)
 #
 
 class PaymentDetail < ActiveRecord::Base

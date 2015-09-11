@@ -18,7 +18,9 @@ class Booking::Reserve
     Booking.transaction do
       [booking, return_booking].compact.each do |booking|
         assign_seats(booking.trip, booking.stop, booking.quantity)
+        booking.reference_no = generate_reference(booking)
         booking.expiry_date = expiry_date
+        booking.price = booking.invoice.total
         booking.status = :reserved
         booking.save!
       end

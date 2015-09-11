@@ -66,8 +66,8 @@ class Bookings::WizardController < ApplicationController
         params[:q][:connection_from_city_id_eq] = @booking.stop.connection.from.city_id
         params[:q][:connection_to_city_id_eq] = @booking.stop.connection.to.city_id
       end
+      @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
     end
-    @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
 
   def set_return_stops
@@ -82,8 +82,8 @@ class Bookings::WizardController < ApplicationController
         params[:q][:connection_from_city_id_eq] = @booking.return_booking.stop.connection.from.city_id
         params[:q][:connection_to_city_id_eq] = @booking.return_booking.stop.connection.to.city_id
       end
+      @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
     end
-    @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
   end
 
   def booking_params

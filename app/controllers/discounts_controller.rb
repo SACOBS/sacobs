@@ -2,7 +2,7 @@ class DiscountsController < ApplicationController
   before_action :set_discount, only: [:edit, :update, :destroy]
 
   def index
-    @discounts = Discount.includes(:passenger_type).select(:id, :percentage, :passenger_type_id, :updated_at)
+    @discounts = Discount.includes(:passenger_type).all
   end
 
   def new

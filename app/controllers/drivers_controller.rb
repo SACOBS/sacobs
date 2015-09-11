@@ -2,12 +2,12 @@ class DriversController < ApplicationController
   before_action :set_driver, only: [:edit, :update, :destroy]
 
   def index
-    @drivers = driver_scope.select(:id, :name, :surname, :updated_at)
-    respond_with(@drivers)
+    @drivers = Driver.all
+    respond_with(@drivers) if stale?(@drivers)
   end
 
   def search
-    @drivers = driver_scope.search(params[:q]).result(distinct: true)
+    @drivers = Driver.search(params[:q]).result(distinct: true)
     respond_with(@drivers)
   end
 
@@ -31,11 +31,6 @@ class DriversController < ApplicationController
   end
 
   private
-
-  def driver_scope
-    @driver_scope ||= Driver.all
-  end
-
   def set_driver
     @driver = Driver.find(params[:id])
   end

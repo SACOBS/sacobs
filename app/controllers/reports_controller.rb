@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
   end
 
   def set_results
-    @results = Booking.unscoped { Booking.all }.processed.includes(invoice: :line_items).where(created_at: @report.date_range).search(@report.criteria).result
+    @results = Booking.includes(:client, :trip, stop: :connection).unscope(where: :archived).processed.where(created_at: @report.date_range).search(@report.criteria).result
   end
 
   def report_params

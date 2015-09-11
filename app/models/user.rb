@@ -33,15 +33,11 @@ class User < ActiveRecord::Base
 
   enum role: [:clerk, :admin]
 
-  has_many :bookings
-
-  scope :all_except, ->(user) { where.not(id: user) }
-
   validates :name, :surname, presence: true
 
   before_save :normalize
 
-  def to_s
+  def full_name
     "#{name} #{surname}".titleize
   end
 

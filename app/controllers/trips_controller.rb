@@ -1,23 +1,26 @@
 class TripsController < ApplicationController
-  before_action :build_trip, only: [:new, :create]
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
   def index
-    @trips = trip_scope.includes(:bus, :route).page(params[:page]).select(:id, :name, :start_date, :end_date, :bus_id, :route_id, :bookings_count, :updated_at)
+    @trips = Trip.includes(:bus, :route).page(params[:page])
     respond_with(@trips) if stale?(@trips)
   end
 
   def search
-    @search = trip_scope.search(params[:q])
-    @results = @search.result.limit(50)
+    @search = Trip.search(params[:q].merge(m: 'or'))
+    @results = @search.result.includes(:bus, :route).limit(50)
   end
 
   def show
-    fresh_when @trip, last_modified: @trip.updated_at
+    fresh_when @trip
+  end
+
+  def new
+    @trip = Trip.new
   end
 
   def create
-    @trip.save
+    @trip = Trip.create(trip_params)
     respond_with(@trip)
   end
 
@@ -42,17 +45,8 @@ class TripsController < ApplicationController
   end
 
   private
-
-  def trip_scope
-    Trip.all
-  end
-
-  def build_trip
-    @trip = Trip.new(trip_params)
-  end
-
   def set_trip
-    @trip = trip_scope.includes(:bookings, :bus, :route).find(params[:id])
+    @trip = Trip.includes(bookings: [:client, stop: :connection], route: { destinations: :city}).find(params[:id])
   end
 
   def trip_params

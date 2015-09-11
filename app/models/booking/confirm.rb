@@ -12,7 +12,6 @@ class Booking::Confirm
   def perform
     Booking.transaction do
       [booking, return_booking].compact.each do |booking|
-        booking.price = booking.invoice.total
         booking.status = :paid
         booking.user_id = user.id
         booking.save!

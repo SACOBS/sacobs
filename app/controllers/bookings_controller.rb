@@ -5,23 +5,23 @@ class BookingsController < ApplicationController
     type = params[:type] || 'standby'
     case type
       when 'reserved'
-        @bookings = booking_scope.open.page(params[:reserved_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).open.order(:created_at).page(params[:reserved_page])
       when 'standby'
-        @bookings = booking_scope.expired.page(params[:standby_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).expired.order(:created_at).page(params[:standby_page])
       when 'paid'
-        @bookings = booking_scope.paid.page(params[:paid_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).paid.order(:created_at).page(params[:paid_page])
       when 'cancelled'
-        @bookings = booking_scope.cancelled.page(params[:cancelled_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).cancelled.order(:created_at).page(params[:cancelled_page])
       else
-        @bookings = booking_scope.none
+        @bookings = Booking.none
     end
 
-    respond_with(@bookings) #if stale?(@bookings)
+    respond_with(@bookings) if stale?(@bookings)
   end
 
   def search
-    @search = booking_scope.search(params[:q])
-    @results = @search.result.limit(50)
+    @search = Booking.processed.search(params[:q].merge(m: 'or'))
+    @results = @search.result.includes(:client,  :trip, stop: :connection).order(:created_at).limit(50)
   end
 
   def create
@@ -45,10 +45,6 @@ class BookingsController < ApplicationController
   end
 
   private
-
-  def booking_scope
-    @booking_scope ||= Booking.processed.includes(:stop, :client, :trip).order(:created_at)
-  end
 
   def set_booking
     @booking = Booking.find(params[:id])

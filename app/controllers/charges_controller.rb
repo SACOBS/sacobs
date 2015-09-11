@@ -2,7 +2,7 @@ class ChargesController < ApplicationController
   before_action :set_charge, only: [:edit, :update, :destroy]
 
   def index
-    @charges = Charge.select(:id, :percentage, :description, :updated_at)
+    @charges = Charge.all
   end
 
   def new
@@ -16,7 +16,7 @@ class ChargesController < ApplicationController
 
   def update
     @charge.update(charge_params)
-    respond_with @charge
+    respond_with @charge, location: charges_url
   end
 
   def destroy

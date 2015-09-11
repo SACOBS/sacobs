@@ -24,7 +24,7 @@ class Trip::Occupancy
   end
 
   def destinations
-    @destinations ||= trip.route.destinations.includes(:city).to_a.sort_by!(&:sequence)
+    @destinations ||= trip.route.destinations.to_a.sort_by!(&:sequence)
   end
 
   def from_destinations

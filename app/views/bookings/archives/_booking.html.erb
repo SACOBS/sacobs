@@ -3,7 +3,7 @@
     <%= link_to bookings_archive_path(booking), class: 'btn btn-mini btn-info' do %>
       <%= fa_icon :info, text: 'Show' %>
     <% end %>
-    <% unless booking.paid? || booking.reserved? %>
+    <% if booking.paid? || booking.reserved? %>
         <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
             <%= fa_icon :tasks, text: 'Ticket' %>
         <% end %>

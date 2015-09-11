@@ -1,5 +1,5 @@
 <%= content_tag_for(:tr, user) do %>
-<td><%= user %></td>
+<td><%= user.full_name %></td>
 <td><%= mail_to user.email %></td>
 <td><span class="label label-info"><%= user.role.capitalize %></span></td>
 <td>

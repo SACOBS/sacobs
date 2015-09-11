@@ -7,7 +7,7 @@
       <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
 </div>
-<%= bootstrap_table headers: %w(Actions Name Email Role), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+<%= bootstrap_table headers: %w(Name Email Role Actions), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <%= render @users, cache: true %>
 <% end %>
 <%= link_to users_path, class: 'btn btn-default' do %>

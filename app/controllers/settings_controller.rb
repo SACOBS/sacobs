@@ -3,7 +3,7 @@ class SettingsController < ApplicationController
 
   def update
     @settings.update(setting_params)
-    redirect_to setting_url
+    respond_with(@settings, location: settings_url)
   end
 
   private

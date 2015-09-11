@@ -1,15 +1,16 @@
 class Trips::ArchivesController < ApplicationController
   def index
-    @trips = Trip.archived.includes(:bus, :route).page(params[:page])
+    @trips = Trip.includes(:bus, :route).archived.page(params[:page])
     fresh_when @trips, template: 'trips/archives/index'
   end
 
-  def show
-    @trip = Trip.archived.find(params[:id])
+  def search
+    @search = Trip.archived.search(params[:q].merge(m: 'or'))
+    @results = @search.result.includes(:bus, :route).limit(50)
   end
 
-  def search
-    @search = Trip.archived.includes(:bus, :route).search(params[:q])
-    @results = @search.result.limit(50)
+  def show
+    @trip = Trip.includes(bookings: [:client, stop: :connection]).archived.find(params[:id])
   end
+
 end

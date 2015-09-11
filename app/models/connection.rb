@@ -12,8 +12,8 @@
 #  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
-#  leaving    :time             default(2000-01-01 08:28:02 UTC)
-#  arriving   :time             default(2000-01-01 08:28:02 UTC)
+#  leaving    :time
+#  arriving   :time
 #
 # Indexes
 #
@@ -25,9 +25,9 @@
 class Connection < ActiveRecord::Base
   default_scope { order(:created_at) }
 
-  belongs_to :route
-  belongs_to :from, -> { includes(:city) }, class_name: :Destination
-  belongs_to :to, -> { includes(:city) }, class_name: :Destination
+  belongs_to :route, counter_cache: true
+  belongs_to :from, class_name: :Destination
+  belongs_to :to, class_name: :Destination
 
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true

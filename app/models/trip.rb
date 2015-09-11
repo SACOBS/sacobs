@@ -34,7 +34,7 @@ class Trip < ActiveRecord::Base
 
   has_and_belongs_to_many :drivers
 
-  has_many :stops, -> { includes(:connection) }
+  has_many :stops
   has_many :bookings, -> { unscope(where: :archived).processed }
 
   accepts_nested_attributes_for :stops

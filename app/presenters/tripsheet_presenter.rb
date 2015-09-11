@@ -8,7 +8,7 @@ class TripsheetPresenter
   end
 
   def bookings
-    trip.bookings.includes(:stop, :passengers)
+    trip.bookings
   end
 
   def bus_capacity

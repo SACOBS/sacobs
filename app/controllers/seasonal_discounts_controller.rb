@@ -15,7 +15,7 @@ class SeasonalDiscountsController < ApplicationController
   def update
     @seasonal_discount = SeasonalDiscount.find(params[:id])
     @seasonal_discount.update(seasonal_discount_params)
-    respond_with @seasonal_discount
+    respond_with @seasonal_discount, location: seasonal_discounts_url
   end
 
   private

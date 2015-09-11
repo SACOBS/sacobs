@@ -30,13 +30,11 @@
 #   search_bookings_archives GET    /bookings/archives/search(.:format)                 bookings/archives#search
 #          bookings_archives GET    /bookings/archives(.:format)                        bookings/archives#index
 #           bookings_archive GET    /bookings/archives/:id(.:format)                    bookings/archives#show
-# print_bookings_daily_index GET    /bookings/daily/print(.:format)                     bookings/daily#print {:format=>:pdf}
-#       bookings_daily_index GET    /bookings/daily(.:format)                           bookings/daily#index
 #            search_bookings GET    /bookings/search(.:format)                          bookings#search
 #             cancel_booking PATCH  /bookings/:id/cancel(.:format)                      bookings#cancel
-#            booking_builder GET    /bookings/:booking_id/builder/:id(.:format)         bookings/builder#show
-#                            PATCH  /bookings/:booking_id/builder/:id(.:format)         bookings/builder#update
-#                            PUT    /bookings/:booking_id/builder/:id(.:format)         bookings/builder#update
+#             booking_wizard GET    /bookings/:booking_id/wizard/:id(.:format)          bookings/wizard#show
+#                            PATCH  /bookings/:booking_id/wizard/:id(.:format)          bookings/wizard#update
+#                            PUT    /bookings/:booking_id/wizard/:id(.:format)          bookings/wizard#update
 #    booking_payment_details POST   /bookings/:booking_id/payment_details(.:format)     payment_details#create
 # new_booking_payment_detail GET    /bookings/:booking_id/payment_details/new(.:format) payment_details#new
 #                   bookings GET    /bookings(.:format)                                 bookings#index
@@ -131,11 +129,7 @@
 #                            DELETE /charges/:id(.:format)                              charges#destroy
 #                      notes GET    /notes(.:format)                                    notes#index
 #                            POST   /notes(.:format)                                    notes#create
-#                   new_note GET    /notes/new(.:format)                                notes#new
-#                  edit_note GET    /notes/:id/edit(.:format)                           notes#edit
-#                       note PATCH  /notes/:id(.:format)                                notes#update
-#                            PUT    /notes/:id(.:format)                                notes#update
-#                            DELETE /notes/:id(.:format)                                notes#destroy
+#                       note DELETE /notes/:id(.:format)                                notes#destroy
 #               print_ticket GET    /tickets/:id/print(.:format)                        tickets#print {:format=>:pdf}
 #               email_ticket POST   /tickets/:id/email(.:format)                        tickets#email
 #            download_ticket GET    /tickets/:id/download(.:format)                     tickets#download
@@ -190,7 +184,7 @@ Sacobs::Application.routes.draw do
     resources :payment_details, only: [:new, :create]
   end
 
-  resource :setting, only: [:show, :edit, :update]
+  resource :settings, only: [:show, :edit, :update]
 
   resources :clients do
     collection do

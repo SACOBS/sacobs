@@ -3,8 +3,8 @@ class TripSheetsController < ApplicationController
   before_action :set_trip_sheet_presenter, except: [:index, :edit, :update]
 
   def index
-    @q = Trip.includes(:route).search(params[:q])
-    @trips = @q.result(distinct: true).order(start_date: :asc)
+    @q = Trip.search(params[:q].try(:merge, m: 'or'))
+    @trips = @q.result(distinct: true).includes(:route).order(:start_date)
   end
 
   def update
@@ -27,7 +27,7 @@ class TripSheetsController < ApplicationController
 
   private
   def set_trip
-    @trip = Trip.unscoped { Trip.find(params[:id]) }
+    @trip = Trip.unscoped { Trip.includes(bookings: [:passengers, { stop: :connection }], route: [destinations: :city]).find(params[:id]) }
   end
 
   def set_trip_sheet_presenter

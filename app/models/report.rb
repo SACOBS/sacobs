@@ -10,6 +10,7 @@
 #  criteria    :json             default({}), not null
 #  period_from :date
 #  period_to   :date
+#  daily       :boolean          default(FALSE)
 #
 
 class Report < ActiveRecord::Base

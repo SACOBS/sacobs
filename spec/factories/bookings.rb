@@ -2,22 +2,23 @@
 #
 # Table name: bookings
 #
-#  id           :integer          not null, primary key
-#  trip_id      :integer
-#  price        :decimal(, )      default(0.0)
-#  status       :integer          default(0)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  quantity     :integer          default(0)
-#  expiry_date  :datetime
-#  client_id    :integer
-#  user_id      :integer
-#  reference_no :string(255)
-#  main_id      :integer
-#  stop_id      :integer
-#  sequence_id  :integer
-#  archived     :boolean          default(FALSE)
-#  archived_at  :datetime
+#  id                :integer          not null, primary key
+#  trip_id           :integer
+#  price             :decimal(, )      default(0.0)
+#  status            :integer          default(0)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  quantity          :integer          default(0)
+#  expiry_date       :datetime
+#  client_id         :integer
+#  user_id           :integer
+#  reference_no      :string(255)
+#  main_id           :integer
+#  stop_id           :integer
+#  sequence_id       :integer
+#  archived          :boolean          default(FALSE)
+#  archived_at       :datetime
+#  payment_detail_id :integer
 #
 # Indexes
 #

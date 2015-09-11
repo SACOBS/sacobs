@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910134958) do
+ActiveRecord::Schema.define(version: 20150911084229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,12 +221,13 @@ ActiveRecord::Schema.define(version: 20150910134958) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.decimal  "cost",                   precision: 8, scale: 2
+    t.decimal  "cost",                          precision: 8, scale: 2
     t.integer  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",       limit: 255
+    t.string   "name",              limit: 255
     t.integer  "user_id"
+    t.integer  "connections_count",                                     default: 0
   end
 
   create_table "scriptures", force: :cascade do |t|
@@ -302,7 +303,6 @@ ActiveRecord::Schema.define(version: 20150910134958) do
   add_index "trips", ["archived"], name: "index_trips_on_archived", using: :btree
   add_index "trips", ["bus_id"], name: "index_trips_on_bus_id", using: :btree
   add_index "trips", ["route_id"], name: "index_trips_on_route_id", using: :btree
-  add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -345,7 +345,6 @@ ActiveRecord::Schema.define(version: 20150910134958) do
   end
 
   add_index "vouchers", ["client_id"], name: "index_vouchers_on_client_id", using: :btree
-  add_index "vouchers", ["user_id"], name: "index_vouchers_on_user_id", using: :btree
 
   add_foreign_key "bookings", "clients", on_delete: :cascade
 end
