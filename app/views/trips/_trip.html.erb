@@ -9,7 +9,7 @@
     <%= link_to trip, class: 'btn btn-info btn-mini' do %>
         <%= fa_icon :info, text: 'Show' %>
     <% end %>
-    <% unless trip.bookings.size > 0 %>
+    <% if trip.bookings.size.zero? %>
         <%= link_to edit_trip_path(trip), class: 'btn btn-inverse btn-mini' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>

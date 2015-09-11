@@ -6,7 +6,7 @@
   <h1>Trip</h1>
   <div class="actions">
     <%= back_to trips_path %>
-    <% unless @trip.booked? %>
+    <% if @trip.bookings.empty? %>
        <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
         <%= fa_icon :edit, text: 'Edit' %>
        <% end %>
@@ -30,7 +30,7 @@
 <% end %>
 <div class="actions">
   <%= back_to trips_path %>
-  <% unless @trip.booked? %>
+  <% if @trip.bookings.empty? %>
       <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
           <%= fa_icon :edit, text: 'Edit' %>
       <% end %>

@@ -52,10 +52,6 @@ class Trip < ActiveRecord::Base
     "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
   end
 
-  def booked?
-    bookings.any?
-  end
-
   def drivers_names
     drivers.map(&:full_name).join(',')
   end
