@@ -21,7 +21,7 @@ class Destination < ActiveRecord::Base
   default_scope { order(sequence: :asc) }
 
   belongs_to :city, required: true
-  belongs_to :route, required: true
+  belongs_to :route, required: true, inverse_of: :destinations
 
   delegate :name, :venues, to: :city, prefix: true
 

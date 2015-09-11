@@ -14,7 +14,7 @@
 class Route < ActiveRecord::Base
   to_param :name
 
-  has_many :destinations
+  has_many :destinations, inverse_of: :route
 
   has_many :connections
 
