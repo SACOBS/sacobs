@@ -20,18 +20,18 @@ module BookingsHelper
   end
 
   def reserved_booking_count
-    Booking.open.size
+    Booking.available.open.size
   end
 
   def standby_booking_count
-    Booking.expired.size
+    Booking.available.standby.size
   end
 
   def paid_booking_count
-    Booking.paid.size
+    Booking.available.paid.size
   end
 
   def cancelled_booking_count
-    Booking.cancelled.size
+    Booking.available.cancelled.size
   end
 end

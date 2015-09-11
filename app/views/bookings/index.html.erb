@@ -25,7 +25,7 @@
       <% end %>
     </li>
     <li>
-      <%= link_to bookings_path(type: :reserved), data: { toggle: 'tab', target: '#reserved' }, remote: true do %>
+      <%= link_to bookings_path(type: :open), data: { toggle: 'tab', target: '#open' }, remote: true do %>
         Reserved
         <span class="badge badge-info">
           <%= reserved_booking_count %>
@@ -50,10 +50,10 @@
     </li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane" id="reserved" data-type="reserved"></div>
     <div class="tab-pane active" id="standby" data-type="standby">
       <%= render 'bookings/bookings', bookings: @bookings, type: params[:type] %>
     </div>
+    <div class="tab-pane" id="open" data-type="open"></div>
     <div class="tab-pane" id="paid" data-type="paid"></div>
     <div class="tab-pane" id="cancelled" data-type="cancelled"></div>
   </div>

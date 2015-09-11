@@ -2,18 +2,17 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :cancel, :destroy]
 
   def index
-    type = params[:type] || 'standby'
-    case type
-      when 'reserved'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).open.page(params[:reserved_page])
-      when 'standby'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).expired.page(params[:standby_page])
+    params[:type] ||= 'standby'
+    @bookings = Booking.includes(:client,  :trip, stop: :connection)
+    case params[:type]
+      when 'open'
+        @bookings = @bookings.open.page(params[:reserved_page])
       when 'paid'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).paid.page(params[:paid_page])
+        @bookings = @bookings.paid.page(params[:paid_page])
       when 'cancelled'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).cancelled.page(params[:cancelled_page])
+        @bookings = @bookings.cancelled.page(params[:cancelled_page])
       else
-        @bookings = Booking.none
+        @bookings = @bookings.standby.page(params[:standby_page])
     end
 
     respond_with(@bookings) if stale?(@bookings)

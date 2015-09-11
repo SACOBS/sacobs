@@ -86,8 +86,8 @@ class Booking < ActiveRecord::Base
     validate :seats_are_available
   end
 
-  scope :open, -> { available.reserved.where('expiry_date > ?', Time.current) }
-  scope :expired, -> { available.reserved.where('expiry_date <= ?', Time.current) }
+  scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
+  scope :standby, -> { reserved.where('expiry_date <= ?', Time.current) }
   scope :completed, -> { where.not(status: statuses[:in_process]) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
