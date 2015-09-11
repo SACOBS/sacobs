@@ -17,3 +17,9 @@ en:
       reverse_copy:
         notice: '%{resource_name} was successfully reverse copied.'
         alert: '%{resource_name} could not be copied.'
+    trips:
+      copy:
+        notice: '%{resource_name} was successfully copied.'
+        alert: '%{resource_name} could not be copied.'
+
+

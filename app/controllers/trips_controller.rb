@@ -20,22 +20,21 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.create(trip_params)
+    @trip = Trip::Create.perform(trip_params)
     respond_with(@trip)
   end
 
   def copy
-    copy = @trip.copy
-    copy.user = current_user
+    copy = Trip::Copy.perform(@trip, current_user)
     if copy.save
-      redirect_to copy, notice: 'Trip was successfully copied.'
+      redirect_to copy, notice: t('flash.trips.copy.notice', resource_name: copy.name)
     else
-      redirect_to trips_url, alert: 'Trip could not be copied.'
+      redirect_to trips_url, alert: t('flash.trips.copy.alert', resource_name: copy.name)
     end
   end
 
   def update
-    @trip.update(trip_params)
+    @trip = Trip::Update.perform(@trip, trip_params)
     respond_with @trip
   end
 
@@ -57,6 +56,6 @@ class TripsController < ApplicationController
                                    :bus_id,
                                    :notes,
                                    driver_ids: []
-                                  )
+                                  ).merge(user_id: current_user.id)
   end
 end

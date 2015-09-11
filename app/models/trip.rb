@@ -34,7 +34,7 @@ class Trip < ActiveRecord::Base
 
   has_and_belongs_to_many :drivers
 
-  has_many :stops
+  has_many :stops, dependent: :delete_all
   has_many :bookings, -> { unscope(where: :archived).processed }
 
   accepts_nested_attributes_for :stops
@@ -42,21 +42,11 @@ class Trip < ActiveRecord::Base
   validates :start_date, :end_date, :route, :bus, presence: true
   validates :drivers, length: { minimum: 1, too_short: 'minimum of 1 driver required' }
 
-  before_create :set_name
-  after_save :generate_stops, if: :route_id_changed?
-
   ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
 
   delegate :name, to: :route, prefix: true
   delegate :name, to: :bus, prefix: true
 
-  def copy
-    copy = dup
-    copy.name = "Copy of #{name}"
-    copy.drivers = drivers.map(&:dup)
-    copy.stops = stops.map(&:dup)
-    copy
-  end
 
   def to_file_name
     "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
@@ -68,18 +58,5 @@ class Trip < ActiveRecord::Base
 
   def drivers_names
     drivers.map(&:full_name).join(',')
-  end
-
-  protected
-
-  def set_name
-    self.name ||= route.name
-  end
-
-  def generate_stops
-    self.class.no_touching do
-      stops.clear if stops.any?
-      stops.create!(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity } })
-    end
   end
  end
