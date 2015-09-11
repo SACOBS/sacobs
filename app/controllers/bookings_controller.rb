@@ -5,13 +5,13 @@ class BookingsController < ApplicationController
     type = params[:type] || 'standby'
     case type
       when 'reserved'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).open.order(:created_at).page(params[:reserved_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).open.page(params[:reserved_page])
       when 'standby'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).expired.order(:created_at).page(params[:standby_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).expired.page(params[:standby_page])
       when 'paid'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).paid.order(:created_at).page(params[:paid_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).paid.page(params[:paid_page])
       when 'cancelled'
-        @bookings = Booking.includes(:client,  :trip, stop: :connection).cancelled.order(:created_at).page(params[:cancelled_page])
+        @bookings = Booking.includes(:client,  :trip, stop: :connection).cancelled.page(params[:cancelled_page])
       else
         @bookings = Booking.none
     end
@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
 
   def search
     @search = Booking.available.completed.search(params[:q].merge(m: 'or'))
-    @results = @search.result.includes(:client,  :trip, stop: :connection).order(:created_at).limit(50)
+    @results = @search.result.includes(:client,  :trip, stop: :connection).limit(50)
   end
 
   def create

@@ -61,6 +61,8 @@
 class Booking < ActiveRecord::Base
   include Archivable
 
+  default_scope { order(:created_at) }
+
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
   belongs_to :trip, counter_cache: true
