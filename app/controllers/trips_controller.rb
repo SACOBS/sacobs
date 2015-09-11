@@ -2,12 +2,12 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 
   def index
-    @trips = Trip.includes(:bus, :route).page(params[:page])
+    @trips = Trip.includes(:bus, :route).available.page(params[:page])
     respond_with(@trips) if stale?(@trips)
   end
 
   def search
-    @search = Trip.search(params[:q].merge(m: 'or'))
+    @search = Trip.available.search(params[:q].merge(m: 'or'))
     @results = @search.result.includes(:bus, :route).limit(50)
   end
 

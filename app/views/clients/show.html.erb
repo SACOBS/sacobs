@@ -120,9 +120,9 @@
       </div>
       <div class="client-bookings well well-small span6">
         <h4>Recent Bookings</h4>
-        <% if @client.bookings.recent.any? %>
+        <% if @client.bookings.any? %>
             <%= bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(bordered condensed), html_options: { class: 'sortable' } do %>
-                <% @client.bookings.recent.each do |booking| %>
+                <% @client.bookings.limit(5).each do |booking| %>
                     <tr>
                       <td>
                         <%= status_label_for(booking) %>

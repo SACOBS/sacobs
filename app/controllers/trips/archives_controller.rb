@@ -10,7 +10,7 @@ class Trips::ArchivesController < ApplicationController
   end
 
   def show
-    @trip = Trip.includes(bookings: [:client, stop: :connection]).archived.find(params[:id])
+    @trip = Trip.includes(bookings: [:client, stop: :connection]).find(params[:id])
   end
 
 end

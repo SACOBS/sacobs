@@ -29,9 +29,9 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
   <strong>Drivers:</strong>
   <br/>
 <ul class="unstyled">
-  <% @trip_sheet_presenter.drivers_names do |name| %>
+  <% @trip_sheet_presenter.drivers do |driver| %>
       <li>
-        <%= name %>
+        <%= driver.full_name %>
       </li>
   <% end %>
 </ul>

@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
   end
 
   def search
-    @search = Booking.processed.search(params[:q].merge(m: 'or'))
+    @search = Booking.available.completed.search(params[:q].merge(m: 'or'))
     @results = @search.result.includes(:client,  :trip, stop: :connection).order(:created_at).limit(50)
   end
 

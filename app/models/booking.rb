@@ -63,14 +63,14 @@ class Booking < ActiveRecord::Base
 
   enum status: [:in_process, :reserved, :paid, :cancelled]
 
-  belongs_to :trip, -> { unscope(where: :archived) }, counter_cache: true
+  belongs_to :trip, counter_cache: true
   belongs_to :stop
   belongs_to :client
   belongs_to :payment_detail
 
 
-  belongs_to :main, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
-  has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
+  belongs_to :main, class_name: 'Booking', foreign_key: :main_id
+  has_one :return_booking, class_name: 'Booking', foreign_key: :main_id
 
   has_one :invoice
 
@@ -84,11 +84,9 @@ class Booking < ActiveRecord::Base
     validate :seats_are_available
   end
 
-  scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
-  scope :expired, -> { reserved.where('expiry_date <= ?', Time.current) }
-  scope :recent, -> { processed.order(created_at: :desc).limit(5) }
-  scope :processed, -> { where.not(status: statuses[:in_process]) }
-  scope :travelling, -> { where(status: [statuses[:reserved], statuses[:paid]]) }
+  scope :open, -> { available.reserved.where('expiry_date > ?', Time.current) }
+  scope :expired, -> { available.reserved.where('expiry_date <= ?', Time.current) }
+  scope :completed, -> { where.not(status: statuses[:in_process]) }
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 

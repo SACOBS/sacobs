@@ -40,7 +40,7 @@ class Client < ActiveRecord::Base
 
   to_param :full_name
 
-  has_many :bookings, -> { unscope(where: :archived) }
+  has_many :bookings, -> { available.completed.order(created_at: :desc) }
   has_many :vouchers
 
   validates :name, :surname, presence: true

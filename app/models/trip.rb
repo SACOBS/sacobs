@@ -35,9 +35,7 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :drivers
 
   has_many :stops, dependent: :delete_all
-  has_many :bookings, -> { unscope(where: :archived).processed }
-
-  accepts_nested_attributes_for :stops
+  has_many :bookings
 
   validates :start_date, :end_date, :route, :bus, presence: true
   validates :drivers, length: { minimum: 1, too_short: 'minimum of 1 driver required' }
@@ -46,13 +44,5 @@ class Trip < ActiveRecord::Base
 
   delegate :name, to: :route, prefix: true
   delegate :name, to: :bus, prefix: true
-
-
-  def to_file_name
-    "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
-  end
-
-  def drivers_names
-    drivers.map(&:full_name).join(',')
-  end
+  
  end

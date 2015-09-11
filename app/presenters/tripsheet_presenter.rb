@@ -1,5 +1,5 @@
 class TripsheetPresenter
-  delegate :bus_name, :drivers_names, :stops, to: :trip
+  delegate :bus_name, :drivers, :stops, to: :trip
 
   def initialize(trip, view_context, settings)
     @trip = trip

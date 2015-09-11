@@ -9,6 +9,6 @@ class Bookings::ArchivesController < ApplicationController
   end
 
   def show
-    @booking = Booking.archived.find(params[:id])
+    @booking = Booking.find(params[:id])
   end
 end

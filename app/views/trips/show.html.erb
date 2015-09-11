@@ -4,29 +4,34 @@
 
 <div class="page-header">
   <h1>Trip</h1>
+
   <div class="actions">
     <%= back_to trips_path %>
     <% if @trip.bookings.empty? %>
-       <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
-        <%= fa_icon :edit, text: 'Edit' %>
-       <% end %>
-        <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :trip) } do %>
+        <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
+            <%= fa_icon :edit, text: 'Edit' %>
+        <% end %>
+        <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: {confirm: t('messages.confirm', resource: :trip)} do %>
             <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
-  <% end %>
+    <% end %>
   </div>
 </div>
 
 <% cache @trip do %>
-  <% content_for(:sidebar) do %>
-     <%= display_occupancy(@trip) %>
-  <% end %>
-<div class="well">
-  <h4>Details</h4>
-  <%= render 'trips/shared/details', trip: @trip %>
-  <h4>Bookings</h4>
-  <%= render 'trips/shared/bookings', trip: @trip %>
-</div>
+    <% content_for(:sidebar) do %>
+        <%= display_occupancy(@trip) %>
+    <% end %>
+    <div class="well">
+      <h4>Details</h4>
+      <%= render 'trips/shared/details', trip: @trip %>
+      <h4>Bookings</h4>
+      <% if @trip.bookings.any? %>
+          <%= render 'trips/shared/bookings', trip: @trip %>
+      <% else %>
+          <strong class="text-center">There are no bookings for this trip.</strong>
+      <% end %>
+    </div>
 <% end %>
 <div class="actions">
   <%= back_to trips_path %>
@@ -34,7 +39,7 @@
       <%= link_to edit_trip_path(@trip), class: 'btn btn-info' do %>
           <%= fa_icon :edit, text: 'Edit' %>
       <% end %>
-      <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :trip) } do %>
+      <%= link_to @trip, method: :delete, class: 'btn btn-danger', data: {confirm: t('messages.confirm', resource: :trip)} do %>
           <%= fa_icon :times, text: 'Destroy' %>
       <% end %>
   <% end %>

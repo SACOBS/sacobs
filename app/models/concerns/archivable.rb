@@ -2,9 +2,8 @@ module Archivable
   extend ActiveSupport::Concern
 
   included do
-    default_scope { where(archived: false) }
-
-    scope :archived, -> { unscoped { where(archived: true) } }
+    scope :archived, -> { where(archived: true)  }
+    scope :available, -> { where(archived: false) }
   end
 
   def archive!

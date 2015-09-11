@@ -13,7 +13,11 @@
         <%= trip.bus_name %>
       </td>
       <td>
-        <%= trip.drivers_names %>
+        <ul class="inline">
+          <% trip.drivers.each do |driver| %>
+            <li><%= driver.name %></li>
+          <% end %>
+        </ul>
       </td>
     </tr>
 <% end %>

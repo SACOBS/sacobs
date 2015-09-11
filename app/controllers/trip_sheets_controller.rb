@@ -13,21 +13,21 @@ class TripSheetsController < ApplicationController
   end
 
   def download
-    render pdf: @trip.to_file_name,
+    render pdf: @trip.name,
            template: 'trip_sheets/trip_sheet.pdf.erb',
            disposition: :attachment,
            layout: 'pdf.html'
   end
 
   def print
-    render pdf: @trip.to_file_name,
+    render pdf: @trip.name,
            template: 'trip_sheets/trip_sheet',
            layout: 'pdf.html'
   end
 
   private
   def set_trip
-    @trip = Trip.unscoped { Trip.includes(bookings: [:passengers, { stop: :connection }], route: [destinations: :city]).find(params[:id]) }
+    @trip = Trip.includes(bookings: [:passengers, { stop: :connection }], route: [destinations: :city]).find(params[:id])
   end
 
   def set_trip_sheet_presenter
