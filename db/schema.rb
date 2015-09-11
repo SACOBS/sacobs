@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908101056) do
+ActiveRecord::Schema.define(version: 20150910134958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,20 +23,21 @@ ActiveRecord::Schema.define(version: 20150908101056) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "trip_id"
-    t.decimal  "price",                    default: 0.0
-    t.integer  "status",                   default: 0
+    t.decimal  "price",                         default: 0.0
+    t.integer  "status",                        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity",                 default: 0
+    t.integer  "quantity",                      default: 0
     t.datetime "expiry_date"
     t.integer  "client_id"
     t.integer  "user_id"
-    t.string   "reference_no", limit: 255
+    t.string   "reference_no",      limit: 255
     t.integer  "main_id"
     t.integer  "stop_id"
-    t.integer  "sequence_id",              default: "nextval('sequence_id_seq'::regclass)"
-    t.boolean  "archived",                 default: false
+    t.integer  "sequence_id",                   default: "nextval('sequence_id_seq'::regclass)"
+    t.boolean  "archived",                      default: false
     t.datetime "archived_at"
+    t.integer  "payment_detail_id"
   end
 
   add_index "bookings", ["archived"], name: "index_bookings_on_archived", using: :btree
@@ -203,13 +204,10 @@ ActiveRecord::Schema.define(version: 20150908101056) do
 
   create_table "payment_details", force: :cascade do |t|
     t.datetime "paid_at"
-    t.integer  "booking_id"
     t.string   "reference",    limit: 255
     t.integer  "user_id"
     t.string   "payment_type", limit: 255
   end
-
-  add_index "payment_details", ["booking_id"], name: "index_payment_details_on_booking_id", using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.string   "name",                        null: false

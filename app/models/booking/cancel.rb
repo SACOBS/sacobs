@@ -1,5 +1,10 @@
-class CancelBooking
+class Booking::Cancel
+
   delegate :stop, :trip, :quantity, to: :booking
+
+  def self.perform(*args)
+    new(*args).perform
+  end
 
   def initialize(booking, user)
     @booking = booking
@@ -9,7 +14,9 @@ class CancelBooking
   def perform
     Booking.transaction do
       unassign_seats
-      booking.update!(status: :cancelled, user_id: user.id)
+      booking.user_id = user.id
+      booking.status = :cancelled
+      booking.save!
     end
   end
 
@@ -18,6 +25,6 @@ class CancelBooking
   attr_reader :booking, :user
 
   def unassign_seats
-    trip.unassign_seats(stop, quantity)
+    Trip::UnassignSeats.perform(trip, stop, quantity)
   end
 end

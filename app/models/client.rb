@@ -41,7 +41,7 @@ class Client < ActiveRecord::Base
   to_param :full_name
 
   has_many :bookings, -> { unscope(where: :archived) }
-  has_many :vouchers, dependent: :delete_all
+  has_many :vouchers
 
   validates :name, :surname, presence: true
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }

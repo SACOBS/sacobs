@@ -46,7 +46,7 @@ class Bookings::WizardController < ApplicationController
           @booking.return_booking.passengers = @booking.passengers.map(&:dup)
         end
       when :billing_info
-        ReserveBooking.new(@booking, @settings).perform
+        Booking::Reserve.perform(@booking, @settings)
     end
     render_wizard @booking
   end

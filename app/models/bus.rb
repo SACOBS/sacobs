@@ -15,7 +15,7 @@
 class Bus < ActiveRecord::Base
   to_param :name
 
-  has_many :seats, dependent: :delete_all
+  has_many :seats
   has_many :trips
 
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true

@@ -15,7 +15,7 @@
 #
 
 class Discount < ActiveRecord::Base
-  belongs_to :passenger_type, dependent: :destroy, required: true
+  belongs_to :passenger_type, required: true
   accepts_nested_attributes_for :passenger_type
 
   validates :percentage, presence: true

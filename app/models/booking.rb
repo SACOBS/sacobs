@@ -35,12 +35,13 @@ class Booking < ActiveRecord::Base
   belongs_to :trip, -> { unscope(where: :archived) }, counter_cache: true
   belongs_to :stop, -> { includes(:connection) }
   belongs_to :client
+  belongs_to :payment_detail
+
 
   belongs_to :main, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
   has_one :return_booking, -> { unscope(where: :archived) }, class_name: 'Booking', foreign_key: :main_id
 
-  has_one :invoice, dependent: :delete
-  has_one :payment_detail, dependent: :delete
+  has_one :invoice
 
   has_many :passengers, -> { includes(:passenger_type) }, dependent: :delete_all
 

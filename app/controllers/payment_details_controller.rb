@@ -2,28 +2,30 @@ class PaymentDetailsController < ApplicationController
   before_action :set_booking
 
   def new
-    @payment_detail = PaymentDetail.new(booking: @booking)
+    @payment_detail = PaymentDetail.new
   end
 
   def create
-    @payment_detail = @booking.build_payment_detail(payment_details_params)
-    if @payment_detail.valid?
-      ConfirmBooking.new(@booking, current_user).perform(payment_details_params)
+    puts @booking.inspect
+    @payment_detail = PaymentDetail.new(payment_details_params)
+    @payment_detail.bookings = [@booking, @booking.main, @booking.return_booking].compact
+    @payment_detail.user_id = current_user.id
+    if @payment_detail.save
+      Booking::Confirm.perform(@booking, current_user)
       redirect_to booking_url(@booking), notice: 'Booking has been successfully confirmed.'
     else
       render :new
     end
   end
 
+  private
   def set_booking
     @booking = Booking.find(params[:booking_id])
   end
 
   def payment_details_params
-    params.fetch(:payment_detail, {}).permit(:booking_id,
-                                             :paid_at,
+    params.fetch(:payment_detail, {}).permit(:paid_at,
                                              :payment_type,
-                                             :reference
-                                            ).merge(user_id: current_user.id)
+                                             :reference)
   end
 end

@@ -40,7 +40,7 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    CancelBooking.new(@booking, current_user).perform
+    Booking::Cancel.perform(@booking, current_user)
     redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
   end
 

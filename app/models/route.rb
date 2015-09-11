@@ -14,9 +14,9 @@
 class Route < ActiveRecord::Base
   to_param :name
 
-  has_many :destinations, -> { includes(:city) }, dependent: :destroy, inverse_of: :route
+  has_many :destinations, -> { includes(:city) }
 
-  has_many :connections, dependent: :destroy, inverse_of: :route
+  has_many :connections, dependent: :destroy
 
   accepts_nested_attributes_for :connections, reject_if: :all_blank
   accepts_nested_attributes_for :destinations, reject_if: :all_blank, allow_destroy: true

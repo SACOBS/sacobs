@@ -1,14 +1,17 @@
-class ConfirmBooking
+class Booking::Confirm
+  def self.perform(*args)
+    new(*args).perform
+  end
+
   def initialize(booking, user)
     @booking = booking.main || booking
     @return_booking =  @booking.return_booking
     @user = user
   end
 
-  def perform(payment_details)
+  def perform
     Booking.transaction do
       [booking, return_booking].compact.each do |booking|
-        booking.build_payment_detail(payment_details).save!(validate: false)
         booking.price = booking.invoice.total
         booking.status = :paid
         booking.user_id = user.id
@@ -18,5 +21,5 @@ class ConfirmBooking
   end
 
   private
-  attr_reader :booking, :return_booking, :user
+  attr_reader :booking, :return_booking, :user, :payment_details
 end

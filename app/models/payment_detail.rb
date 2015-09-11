@@ -17,9 +17,9 @@
 class PaymentDetail < ActiveRecord::Base
   PAYMENT_TYPES = [:Absa, :Nedbank, :StandardBank, :Capitec, :FNB, :POB, :Cash, :Cheque, :Investec].freeze
 
-  belongs_to :booking
+  has_many :bookings
 
-  validates :booking, :payment_type, :reference, presence: true
+  validates :payment_type, :reference, presence: true
   validates :reference, uniqueness: true
 
   before_create :set_paid_at

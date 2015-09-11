@@ -34,8 +34,8 @@ class Trip < ActiveRecord::Base
 
   has_and_belongs_to_many :drivers
 
-  has_many :stops, -> { includes(:connection) }, dependent: :destroy
-  has_many :bookings, -> { unscope(where: :archived).processed }, dependent: :destroy
+  has_many :stops, -> { includes(:connection) }
+  has_many :bookings, -> { unscope(where: :archived).processed }
 
   accepts_nested_attributes_for :stops
 
@@ -58,22 +58,12 @@ class Trip < ActiveRecord::Base
     copy
   end
 
-  def assign_seats(stop, qty)
-    stops.affected(stop).update_all(['available_seats = available_seats - ?', qty])
-    touch
-  end
-
-  def unassign_seats(stop, qty)
-    stops.affected(stop).update_all(['available_seats = available_seats + ?', qty])
-    touch
-  end
-
   def to_file_name
     "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
   end
 
   def booked?
-    bookings.size.nonzero?
+    bookings.any?
   end
 
   def drivers_names
