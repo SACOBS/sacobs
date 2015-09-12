@@ -16,8 +16,9 @@
 #
 
 class Stop < ActiveRecord::Base
-  belongs_to :trip, -> { unscope(where: :archived) }
+  belongs_to :trip
   belongs_to :connection
+
   has_many :bookings
 
   delegate :name, :from_city_name, :from_city_venues, :to_city_name, :to_city_venues, :leaving, :arriving, to: :connection

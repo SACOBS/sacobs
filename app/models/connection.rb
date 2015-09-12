@@ -27,7 +27,10 @@ class Connection < ActiveRecord::Base
 
   belongs_to :route, counter_cache: true
   belongs_to :from, class_name: :Destination
+  has_one :from_city, through: :from, source: :city
   belongs_to :to, class_name: :Destination
+  has_one :to_city, through: :to, source: :city
+
 
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true

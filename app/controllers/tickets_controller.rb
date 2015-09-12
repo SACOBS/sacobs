@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
     render pdf: "#{@ticket.to_file_name}",
            template: 'tickets/ticket.pdf.erb',
            disposition: :attachment,
-           layout: 'pdf.html'
+           layout: 'application.pdf.erb'
   end
 
   def show
@@ -17,7 +17,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(@booking, view_context, @settings)
     render pdf: "#{@ticket.to_file_name}",
            template: 'tickets/ticket.pdf.erb',
-           layout: 'pdf.html'
+           layout: 'application.pdf.erb'
   end
 
   def email

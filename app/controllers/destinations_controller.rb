@@ -6,11 +6,6 @@ class DestinationsController < ApplicationController
       respond_with(@route, location: edit_route_url(@route))
    end
 
-  def destinations
-    @destinations ||= @route.destinations.map(&:city).to_json(only: [:id, :name])
-  end
-  helper_method :destinations
-
   private
 
   def set_route

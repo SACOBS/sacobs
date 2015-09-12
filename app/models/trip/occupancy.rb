@@ -36,7 +36,7 @@ class Trip::Occupancy
   end
 
   def bookings
-    @bookings ||= trip.bookings.where(status: [statuses[:reserved], statuses[:paid]])
+    @bookings ||= trip.bookings.where(status: [Booking.statuses[:reserved], Booking.statuses[:paid]])
   end
 
   def getting_on_at(destination)

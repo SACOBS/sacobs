@@ -15,7 +15,6 @@ class Route < ActiveRecord::Base
   to_param :name
 
   has_many :destinations, inverse_of: :route
-
   has_many :connections
 
   accepts_nested_attributes_for :connections, reject_if: :all_blank

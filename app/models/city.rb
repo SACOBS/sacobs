@@ -19,6 +19,7 @@ class City < ActiveRecord::Base
 
   to_param :name
 
+  has_many :destinations, inverse_of: :city
   has_many :venues
 
   accepts_nested_attributes_for :venues, reject_if: :all_blank, allow_destroy: true

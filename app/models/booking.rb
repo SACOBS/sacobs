@@ -67,6 +67,7 @@ class Booking < ActiveRecord::Base
 
   belongs_to :trip, counter_cache: true
   belongs_to :stop
+  has_one :connection, through: :stop
   belongs_to :client
   belongs_to :payment_detail
 
@@ -106,7 +107,7 @@ class Booking < ActiveRecord::Base
 
   def calculate_costs
     invoice = build_invoice
-    price = stop.connection.cost
+    price = connection.cost
     passengers.each do |passenger|
       invoice.line_items.build(description: "#{passenger.full_name} ticket", amount: price, line_item_type: :debit)
 

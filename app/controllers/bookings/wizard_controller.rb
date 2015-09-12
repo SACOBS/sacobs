@@ -63,8 +63,8 @@ class Bookings::WizardController < ApplicationController
       params[:q][:available_seats_gt] = 0
       if @booking.stop.present?
         params[:q][:trip_start_date_gteq] = @booking.trip.start_date
-        params[:q][:connection_from_city_id_eq] = @booking.stop.connection.from.city_id
-        params[:q][:connection_to_city_id_eq] = @booking.stop.connection.to.city_id
+        params[:q][:connection_from_city_id_eq] = @booking.connection.from.city_id
+        params[:q][:connection_to_city_id_eq] = @booking.connection.to.city_id
       end
       @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
     end
@@ -75,12 +75,12 @@ class Bookings::WizardController < ApplicationController
       params[:q] ||= {}
       params[:q][:available_seats_gteq] = @booking.quantity
       params[:q][:trip_start_date_gteq] = @booking.trip.start_date
-      params[:q][:connection_from_city_id_eq] = @booking.stop.connection.to.city_id
-      params[:q][:connection_to_city_id_eq] = @booking.stop.connection.from.city_id
+      params[:q][:connection_from_city_id_eq] = @booking.connection.to.city_id
+      params[:q][:connection_to_city_id_eq] = @booking.connection.from.city_id
       if @booking.return_booking.present? && @booking.return_booking.stop.present?
         params[:q][:trip_start_date_gteq] = @booking.return_booking.trip.start_date
-        params[:q][:connection_from_city_id_eq] = @booking.return_booking.stop.connection.from.city_id
-        params[:q][:connection_to_city_id_eq] = @booking.return_booking.stop.connection.to.city_id
+        params[:q][:connection_from_city_id_eq] = @booking.return_booking.connection.from.city_id
+        params[:q][:connection_to_city_id_eq] = @booking.return_booking.connection.to.city_id
       end
       @stops = Stop.includes(:trip, :connection).search(params[:q]).result.limit(30).order('trips.start_date')
     end

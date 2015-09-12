@@ -1,6 +1,5 @@
 class TripSheetsController < ApplicationController
   before_action :set_trip, except: :index
-  before_action :set_trip_sheet_presenter, except: [:index, :edit, :update]
 
   def index
     @q = Trip.search(params[:q].try(:merge, m: 'or'))
@@ -15,22 +14,18 @@ class TripSheetsController < ApplicationController
   def download
     render pdf: @trip.name,
            template: 'trip_sheets/trip_sheet.pdf.erb',
-           disposition: :attachment,
-           layout: 'pdf.html'
+           layout: 'application.pdf.erb',
+           disposition: :attachment
   end
 
   def print
     render pdf: @trip.name,
-           template: 'trip_sheets/trip_sheet',
-           layout: 'pdf.html'
+           template: 'trip_sheets/trip_sheet.pdf.erb',
+           layout: 'application.pdf.erb'
   end
 
   private
   def set_trip
     @trip = Trip.includes(bookings: [:passengers, { stop: :connection }], route: [destinations: :city]).find(params[:id])
-  end
-
-  def set_trip_sheet_presenter
-    @trip_sheet_presenter = TripsheetPresenter.new(@trip, view_context, @settings)
   end
 end
