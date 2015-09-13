@@ -31,7 +31,7 @@ class RoutesController < ApplicationController
 
   def copy
     copy = Route::Copy.perform(@route, current_user)
-    if copy.save
+    if copy.save!
       redirect_to copy, notice:  t('flash.routes.copy.notice', resource_name: copy.name)
     else
       redirect_to routes_url, alert: t('flash.routes.copy.alert', resource_name: @route.name)

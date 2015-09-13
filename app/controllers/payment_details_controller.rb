@@ -6,7 +6,6 @@ class PaymentDetailsController < ApplicationController
   end
 
   def create
-    puts @booking.inspect
     @payment_detail = PaymentDetail.new(payment_details_params)
     @payment_detail.bookings = [@booking, @booking.main, @booking.return_booking].compact
     @payment_detail.user_id = current_user.id

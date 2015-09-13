@@ -15,43 +15,43 @@
 <div class="details">
   <p class="pull-left">
     <strong>Reference No:</strong>
-    <%= @ticket.reference_no %>
+    <%= @booking.reference_no %>
     <strong>Status:</strong>
-    <%= status_label_for(@ticket) %>
+    <%= status_label_for(@booking) %>
   </p>
   <p class="pull-right">
     <strong>Today's Date:</strong>
-    <%= @ticket.ticket_date %>
+    <%= l(Date.current, format: :long) %>
   </p>
 </div>
 <div class="passengers">
   <%= bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do %>
-      <% [@ticket.booking, @ticket.return_booking].compact.each do |booking| %>
-          <% @ticket.passengers.each do |passenger| %>
+      <% [@booking, @return_booking].compact.each do |booking| %>
+          <% booking.passengers.each do |passenger| %>
               <tr>
                 <td>
-                  <%= booking.trip.start_date %>
+                  <%= l booking.trip.start_date %>
                 </td>
                 <td>
                   <%= passenger.full_name %>
                 </td>
                 <td>
-                  <%= booking.stop.from_city_name %>
+                  <%= booking.connection.from_city_name %>
                 </td>
                 <td>
-                  <%= booking.stop.from_city_venues.first.name %>
+                  <%= booking.connection.from_city_venues.first.name %>
                 </td>
                 <td>
-                  <%= booking.stop.to_city_name %>
+                  <%= booking.connection.to_city_name %>
                 </td>
                 <td>
-                  <%= booking.stop.to_city_venues.first.name %>
+                  <%= booking.connection.to_city_venues.first.name %>
                 </td>
                 <td>
-                  <%= l(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
+                  <%= l(booking.connection.leaving, format: :short) if booking.connection.leaving.present? %>
                 </td>
                 <td>
-                  <%= l(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
+                  <%= l(booking.connection.arriving, format: :short) if booking.connection.arriving.present? %>
                 </td>
               </tr>
           <% end %>
@@ -67,19 +67,19 @@
         <td>
           <strong>Price:</strong>
           <strong>
-            <%= @ticket.price %>
+            <%= gross_price(@booking, @return_booking) %>
           </strong>
         </td>
         <td>
           <strong>Discount:</strong>
           <strong>
-            <%= @ticket.discount %>
+            <%= discount(@booking, @return_booking) %>
           </strong>
         </td>
         <td>
           <strong>Total:</strong>
           <strong>
-            <%= @ticket.nett %>
+            <%= nett_price(@booking, @return_booking) %>
           </strong>
         </td>
       </tr>
@@ -88,7 +88,7 @@
 <div class="special-instructions text-center">
   <p>
     <em>
-      <%= @ticket.instructions %>
+      <%= simple_format(@settings.ticket_instructions) %>
     </em>
   </p>
 </div>
@@ -96,7 +96,7 @@
   <p></p>
   <strong>Thought for today</strong>
   <em>
-    <%= @ticket.scripture %>
+    <%= simple_format(scripture_for_today) %>
   </em>
 </div>
 

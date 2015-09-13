@@ -22,10 +22,6 @@ class Ticket
     view_context.simple_format(content)
   end
 
-  def ticket_date
-    view_context.l Date.current, format: :long
-  end
-
   def price
     view_context.number_to_currency total_cost, unit: 'R'
   end

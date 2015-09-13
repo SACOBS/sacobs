@@ -25,7 +25,7 @@
 class Connection < ActiveRecord::Base
   default_scope { order(:created_at) }
 
-  belongs_to :route, counter_cache: true
+  belongs_to :route, counter_cache: true, inverse_of: :connections
   belongs_to :from, class_name: :Destination
   has_one :from_city, through: :from, source: :city
   belongs_to :to, class_name: :Destination

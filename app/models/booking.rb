@@ -93,6 +93,10 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
+  def return?
+    !!main
+  end
+
   def standby?
     reserved? && expired?
   end

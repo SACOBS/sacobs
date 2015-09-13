@@ -4,23 +4,28 @@ class Route::ReverseCopy
   end
 
   def initialize(route, user)
+    @copy = route.dup
     @route = route
     @user = user
   end
 
   def perform
-    copy = route.dup
     copy.name = "Reverse of #{route.name}"
     copy.user_id = user.id
-    route.destinations.reverse.each_with_index { |destination, index| copy.destinations.build(city: destination.city, sequence: index) }
-    route.connections.reverse_each do |connection|
-      from_destination = copy.destinations.find { |destination| destination.city == connection.to.city  }
-      to_destination = copy.destinations.find { |destination| destination.city == connection.from.city }
-      copy.connections.build(from: from_destination, to: to_destination, cost: connection.cost, percentage: connection.percentage, distance: connection.distance, leaving: connection.leaving, arriving: connection.arriving)
+    copy.connections_count = 0
+    copy.connections << route.connections.reverse.map do |connection|
+      connection.dup.tap do |duplicate|
+        duplicate.from = find_or_initialize_destination(connection.to.city, connection.to.sequence)
+        duplicate.to = find_or_initialize_destination(connection.from.city, connection.from.sequence)
+      end
     end
     copy
   end
 
   private
-  attr_reader :route, :user
+  attr_reader :route, :user, :copy
+
+  def find_or_initialize_destination(city, sequence)
+    copy.destinations.detect { |destination| destination.city == city} || copy.destinations.build(city: city, sequence: sequence)
+  end
 end

@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_booking
+  before_action :set_bookings
 
   def download
     @ticket = Ticket.new(@booking, view_context, @settings)
@@ -9,9 +9,7 @@ class TicketsController < ApplicationController
            layout: 'application.pdf.erb'
   end
 
-  def show
-    @ticket = Ticket.new(@booking, view_context, @settings)
-  end
+  def show;end
 
   def print
     @ticket = Ticket.new(@booking, view_context, @settings)
@@ -30,7 +28,8 @@ class TicketsController < ApplicationController
   end
 
   private
-  def set_booking
-    @booking = Booking.unscoped { Booking.find(params[:id]) }
+  def set_bookings
+    @booking = Booking.find(params[:id]).tap {|booking| booking.main || booking  }
+    @return_booking = @booking.return_booking
   end
 end

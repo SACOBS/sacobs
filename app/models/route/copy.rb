@@ -4,23 +4,29 @@ class Route::Copy
   end
 
   def initialize(route, user)
+    @copy = route.dup
     @route = route
     @user = user
   end
 
   def perform
-    copy = route.dup
     copy.name = "Copy of #{route.name}"
     copy.user_id = user.id
-    route.destinations.each { |destination| copy.destinations.build(city: destination.city, sequence: destination.sequence) }
-    route.connections.each do |connection|
-      from_destination = copy.destinations.find { |destination| destination.city == connection.from.city  }
-      to_destination = copy.destinations.find { |destination| destination.city == connection.to.city }
-      copy.connections.build(from: from_destination, to: to_destination, cost: connection.cost, percentage: connection.percentage, distance: connection.distance, leaving: connection.leaving, arriving: connection.arriving)
+    copy.connections_count = 0
+    copy.connections << route.connections.map do |connection|
+      connection.dup.tap do |duplicate|
+        duplicate.from = find_or_initialize_destination(connection.from.city, connection.from.sequence)
+        duplicate.to = find_or_initialize_destination(connection.to.city, connection.to.sequence)
+      end
     end
     copy
   end
 
   private
-  attr_reader :route, :user
+  attr_reader :copy, :route, :user
+
+  def find_or_initialize_destination(city, sequence)
+    copy.destinations.detect { |destination| destination.city == city} || copy.destinations.build(city: city, sequence: sequence)
+  end
+
 end
