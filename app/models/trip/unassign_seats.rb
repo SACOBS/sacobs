@@ -21,6 +21,6 @@ class Trip::UnassignSeats
   attr_reader :trip, :stop, :quantity
 
   def stops_to_assign
-    stops.joins(connection: :to).where('connections.from_id != ? and destinations.sequence > ?', stop.connection.to, stop.connection.from.sequence)
+    stops.along_the_way(stop.connection.from, stop.connection.to)
   end
 end

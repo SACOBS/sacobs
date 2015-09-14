@@ -9,7 +9,7 @@ class DestinationsController < ApplicationController
   private
 
   def set_route
-    @route = Route.find(params[:route_id])
+    @route = Route.includes(destinations: :city).find(params[:route_id])
   end
 
   def route_params

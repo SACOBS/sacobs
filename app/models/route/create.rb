@@ -20,8 +20,8 @@ class Route::Create
   private
 
   def create_connections
-    destinations.each do |from|
-      destinations.drop(from.sequence).each { |to| connections.find_or_create_by(from_id: from.id, to_id: to.id) }
+    destinations.sort_by(&:sequence).each do |from|
+      destinations.sort_by(&:sequence).drop(from.sequence).each { |to| connections.find_or_create_by(from_id: from.id, to_id: to.id) }
     end
     connections.all?(&:persisted?)
   end

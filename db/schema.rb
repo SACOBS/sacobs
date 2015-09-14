@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911084229) do
+ActiveRecord::Schema.define(version: 20150913204143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,23 +23,22 @@ ActiveRecord::Schema.define(version: 20150911084229) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "trip_id"
-    t.decimal  "price",                         default: 0.0
-    t.integer  "status",                        default: 0
+    t.decimal  "price",             default: 0.0
+    t.integer  "status",            default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity",                      default: 0
+    t.integer  "quantity",          default: 0
     t.datetime "expiry_date"
     t.integer  "client_id"
     t.integer  "user_id"
     t.string   "reference_no",      limit: 255
     t.integer  "main_id"
     t.integer  "stop_id"
-    t.integer  "sequence_id",                   default: "nextval('sequence_id_seq'::regclass)"
-    t.boolean  "archived",                      default: false
+    t.integer  "sequence_id",       default: { expr: "nextval('sequence_id_seq'::regclass)" }, default: "nextval('sequence_id_seq'::regclass)"
+    t.boolean  "archived",          default: false
     t.datetime "archived_at"
     t.integer  "payment_detail_id"
   end
-
   add_index "bookings", ["archived"], name: "index_bookings_on_archived", using: :btree
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id", using: :btree
   add_index "bookings", ["main_id"], name: "index_bookings_on_main_id", using: :btree
@@ -48,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150911084229) do
 
   create_table "buses", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "capacity",               default: 0
+    t.integer  "capacity",   default: 0
     t.string   "year",       limit: 255
     t.string   "model",      limit: 255
     t.datetime "created_at"
@@ -57,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150911084229) do
   end
 
   create_table "charges", force: :cascade do |t|
-    t.decimal  "percentage",              precision: 5, scale: 2
+    t.decimal  "percentage",  precision: 5, scale: 2
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -67,11 +66,10 @@ ActiveRecord::Schema.define(version: 20150911084229) do
   create_table "cities", force: :cascade do |t|
     t.string   "name",         limit: 255
     t.integer  "user_id"
-    t.integer  "venues_count",             default: 0
+    t.integer  "venues_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
   add_index "cities", ["name"], name: "index_cities_on_name", using: :btree
 
   create_table "clients", force: :cascade do |t|
@@ -83,7 +81,7 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.string   "cell_no",         limit: 255
     t.string   "email",           limit: 255
     t.integer  "user_id"
-    t.boolean  "high_risk",                   default: false
+    t.boolean  "high_risk",       default: false
     t.string   "work_no",         limit: 255
     t.date     "date_of_birth"
     t.string   "title",           limit: 255
@@ -95,23 +93,21 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.string   "city"
     t.string   "postal_code"
   end
-
   add_index "clients", ["name", "surname"], name: "index_clients_on_name_and_surname", unique: true, using: :btree
 
   create_table "connections", force: :cascade do |t|
-    t.integer  "distance",                                       default: 0
+    t.integer  "distance",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "route_id"
-    t.decimal  "percentage",             precision: 5, scale: 2, default: 0.0
-    t.decimal  "cost",                   precision: 8, scale: 2, default: 0.0
+    t.decimal  "percentage", precision: 5, scale: 2, default: 0.0
+    t.decimal  "cost",       precision: 8, scale: 2, default: 0.0
     t.string   "name",       limit: 255
     t.integer  "from_id"
     t.integer  "to_id"
-    t.time     "leaving"
-    t.time     "arriving"
+    t.time     "leaving",    default: '2000-01-01 05:47:45'
+    t.time     "arriving",   default: '2000-01-01 05:47:45'
   end
-
   add_index "connections", ["from_id"], name: "index_connections_on_from_id", using: :btree
   add_index "connections", ["route_id"], name: "index_connections_on_route_id", using: :btree
   add_index "connections", ["to_id"], name: "index_connections_on_to_id", using: :btree
@@ -123,7 +119,6 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
   add_index "destinations", ["city_id", "route_id"], name: "index_destinations_on_city_id_and_route_id", using: :btree
   add_index "destinations", ["city_id"], name: "index_destinations_on_city_id", using: :btree
   add_index "destinations", ["route_id"], name: "index_destinations_on_route_id", using: :btree
@@ -136,7 +131,6 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
-
   add_index "discounts", ["passenger_type_id"], name: "index_discounts_on_passenger_type_id", using: :btree
 
   create_table "drivers", force: :cascade do |t|
@@ -151,7 +145,6 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.integer "driver_id"
     t.integer "trip_id"
   end
-
   add_index "drivers_trips", ["driver_id", "trip_id"], name: "index_drivers_trips_on_driver_id_and_trip_id", using: :btree
   add_index "drivers_trips", ["trip_id", "driver_id"], name: "index_drivers_trips_on_trip_id_and_driver_id", using: :btree
 
@@ -161,7 +154,6 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "updated_at"
     t.datetime "billing_date"
   end
-
   add_index "invoices", ["booking_id"], name: "index_invoices_on_booking_id", using: :btree
 
   create_table "line_items", force: :cascade do |t|
@@ -169,10 +161,9 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",                     precision: 8, scale: 2, default: 0.0
+    t.decimal  "amount",         precision: 8, scale: 2, default: 0.0
     t.integer  "line_item_type"
   end
-
   add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
@@ -196,9 +187,8 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.integer  "passenger_type_id"
     t.string   "cell_no",           limit: 255
     t.string   "email",             limit: 255
-    t.integer  "charges",                       default: [], array: true
+    t.integer  "charges",           default: [], array: true
   end
-
   add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id", using: :btree
   add_index "passengers", ["passenger_type_id"], name: "index_passengers_on_passenger_type_id", using: :btree
 
@@ -210,10 +200,10 @@ ActiveRecord::Schema.define(version: 20150911084229) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string   "name",                        null: false
+    t.string   "name",        null: false
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.json     "criteria",    default: {},    null: false
     t.date     "period_from"
     t.date     "period_to"
@@ -221,13 +211,13 @@ ActiveRecord::Schema.define(version: 20150911084229) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.decimal  "cost",                          precision: 8, scale: 2
+    t.decimal  "cost",              precision: 8, scale: 2
     t.integer  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name",              limit: 255
     t.integer  "user_id"
-    t.integer  "connections_count",                                     default: 0
+    t.integer  "connections_count", default: 0
   end
 
   create_table "scriptures", force: :cascade do |t|
@@ -240,25 +230,23 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.decimal  "percentage"
     t.date     "period_from"
     t.date     "period_to"
-    t.boolean  "active",                        default: true
+    t.boolean  "active",            default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "passenger_type_id"
     t.string   "name",              limit: 255
   end
-
   add_index "seasonal_discounts", ["passenger_type_id"], name: "index_seasonal_discounts_on_passenger_type_id", using: :btree
   add_index "seasonal_discounts", ["user_id"], name: "index_seasonal_discounts_on_user_id", using: :btree
 
   create_table "seats", force: :cascade do |t|
     t.string   "row",        limit: 255, default: "A-Z"
-    t.integer  "number",                 default: 0
+    t.integer  "number",     default: 0
     t.integer  "bus_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
   add_index "seats", ["bus_id"], name: "index_seats_on_bus_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
@@ -281,7 +269,6 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
   add_index "stops", ["connection_id"], name: "index_stops_on_connection_id", using: :btree
   add_index "stops", ["trip_id"], name: "index_stops_on_trip_id", using: :btree
 
@@ -295,11 +282,10 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.text     "notes"
-    t.boolean  "archived",                   default: false
+    t.boolean  "archived",       default: false
     t.datetime "archived_at"
-    t.integer  "bookings_count",             default: 0
+    t.integer  "bookings_count", default: 0
   end
-
   add_index "trips", ["archived"], name: "index_trips_on_archived", using: :btree
   add_index "trips", ["bus_id"], name: "index_trips_on_bus_id", using: :btree
   add_index "trips", ["route_id"], name: "index_trips_on_route_id", using: :btree
@@ -310,7 +296,7 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -319,9 +305,8 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "updated_at"
     t.string   "name",                   limit: 255
     t.string   "surname",                limit: 255
-    t.integer  "role",                               default: 0
+    t.integer  "role",                   default: 0
   end
-
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
@@ -331,20 +316,17 @@ ActiveRecord::Schema.define(version: 20150911084229) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
   add_index "venues", ["city_id"], name: "index_venues_on_city_id", using: :btree
 
   create_table "vouchers", force: :cascade do |t|
     t.string   "ref_no",     limit: 255
     t.decimal  "amount"
-    t.boolean  "active",                 default: true
+    t.boolean  "active",     default: true
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
   end
-
   add_index "vouchers", ["client_id"], name: "index_vouchers_on_client_id", using: :btree
 
-  add_foreign_key "bookings", "clients", on_delete: :cascade
 end

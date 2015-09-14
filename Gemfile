@@ -73,6 +73,7 @@ gem 'sucker_punch', '~> 1.0'
 
 # PG
 gem 'pg'
+gem "schema_plus_default_expr"
 
 
 group :development do

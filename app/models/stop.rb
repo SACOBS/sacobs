@@ -23,4 +23,6 @@ class Stop < ActiveRecord::Base
 
   delegate :name, :from_city_name, :from_city_venues, :to_city_name, :to_city_venues, :leaving, :arriving, to: :connection
 
+  scope :along_the_way, -> (from, to) { joins(connection: :to).where('connections.from_id != ? and destinations.sequence > ?', to, from.sequence) }
+
 end
