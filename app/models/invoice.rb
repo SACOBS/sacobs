@@ -20,7 +20,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :line_items, reject_if: :all_blank
 
   before_create :set_billing_date
-
+  
   def total
     total_cost - total_discount
   end

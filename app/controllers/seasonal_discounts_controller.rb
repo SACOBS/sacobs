@@ -1,6 +1,6 @@
 class SeasonalDiscountsController < ApplicationController
   def index
-    @seasonal_discounts = SeasonalDiscount.applicable
+    @seasonal_discounts = SeasonalDiscount.available
   end
 
   def new

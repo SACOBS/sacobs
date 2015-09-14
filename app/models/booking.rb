@@ -111,25 +111,19 @@ class Booking < ActiveRecord::Base
 
   def calculate_costs
     invoice = build_invoice
-    price = connection.cost
+    gross = connection.cost
+    nett = connection.cost
     passengers.each do |passenger|
-      invoice.line_items.build(description: "#{passenger.full_name} ticket", amount: price, line_item_type: :debit)
+      invoice.line_items.debit.build(description: "#{passenger.full_name} ticket", amount: gross)
 
-      # Additional Charges
-      total_charges = 0
       passenger.charges.each do |charge|
-        description = "#{charge.description} charge - #{charge.percentage}%".capitalize
-        amount = charge.percentage.percent_of(price).round_up(5)
-        total_charges += amount
-        invoice.line_items.build(description: description, amount: amount, line_item_type: :debit)
+        amount = charge.percentage.percent_of(gross).round_up(5)
+        nett += amount
+        invoice.line_items.debit.build(description: charge.description, amount: amount)
       end
 
-      # Discount
-      discount = SeasonalDiscount.active_in_period(Date.current).find_by(passenger_type: passenger.passenger_type) || passenger.discount
-      description = "#{passenger.passenger_type.description} discount (#{discount.percentage}%)".capitalize
-      total_cost = price + total_charges
-      amount = discount.percentage.percent_of(total_cost).round_up(5)
-      invoice.line_items.build(description: description, amount: amount, line_item_type: :credit)
+      amount = passenger.discount.percentage.percent_of(nett).round_up(5)
+      invoice.line_items.credit.build(description: passenger.discount.description, amount: amount)
     end
   end
 
