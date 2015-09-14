@@ -22,32 +22,45 @@
     </li>
     <li class="divider"></li>
     <li>
-      <%= sort_link @search, :status, 'Status', default_order: :desc %>
+      <%= sort_link @search, :status, 'Status' %>
     </li>
     <li class="divider"></li>
     <li>
-      <%= sort_link @search, :created, 'Creation Date', default_order: :desc %>
+      <%= sort_link @search, :created, 'Creation Date' %>
     </li>
     <li class="divider"></li>
     <li>
-      <%= sort_link @search, :trip_start_date, 'Trip Date', default_order: :desc %>
+      <%= sort_link @search, :trip_start_date, 'Trip Date' %>
     </li>
     <li class="divider"></li>
     <li>
-      <%= sort_link @search, :stop_connection_from_city_name, 'From City', default_order: :desc %>
+      <%= sort_link @search, :stop_connection_from_city_name, 'From City' %>
     </li>
     <li class="divider"></li>
     <li>
-      <%= sort_link @search, :stop_connection_to_city_name, 'To City', default_order: :desc %>
+      <%= sort_link @search, :stop_connection_to_city_name, 'To City' %>
     </li>
   </ul>
 </div>
 <hr/>
 <div class="bookings">
   <% if @results.any? %>
-      <%= bootstrap_table headers: ['Actions', 'Expires', 'Client', 'Contact', 'Trip Date', 'Qty', 'Connection'],types: %i(hover condensed) do %>
-          <%= render @results %>
-      <% end %>
+      <table class="table table-hover table-condensed sortable">
+        <thead>
+        <tr>
+          <th>Actions</th>
+          <th>Booked</th>
+          <th>Client</th>
+          <th>Contact</th>
+          <th>Trip Date</th>
+          <th>Qty</th>
+          <th>Connection</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @results%>
+        </tbody>
+      </table>
   <% else %>
       <h3 class="text-center">No results were found for the specified search term.</h3>
   <% end %>

@@ -15,7 +15,7 @@ class BookingsController < ApplicationController
         @bookings = @bookings.standby.page(params[:standby_page])
     end
 
-    respond_with(@bookings) if stale?(@bookings)
+    respond_with(@bookings) #if stale?(@bookings)
   end
 
   def search

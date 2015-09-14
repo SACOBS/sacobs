@@ -18,6 +18,6 @@ class Charge < ActiveRecord::Base
   private
 
   def normalize
-    self.description = "#{description} charge - #{percentage}%".squish.upcase
+    self.description = "#{description}".squish.upcase
   end
 end

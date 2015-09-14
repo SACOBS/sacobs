@@ -17,7 +17,16 @@
                 <%= badge_for(booking.quantity) %>
               </td>
               <td>
-                <%= contact_numbers_for(booking.client) %>
+                <address>
+                  <abbr class="initialism" title="Home">H:</abbr>
+                  <%= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A' %>
+                  <br>
+                  <abbr class="initialism" title="Work">W:</abbr>
+                  <%= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A' %>
+                  <br>
+                  <abbr class="initialism" title="Cell">C:</abbr>
+                  <%= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A' %>
+                </address>
               </td>
             </tr>
         <% end %>

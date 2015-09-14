@@ -11,12 +11,8 @@ class PricingPresenter
     @connection_name ||= @connection.name
   end
 
-  def cost
-    @connection.cost
-  end
-
   def price
-    @price ||= calculate_price
+    @price ||= @connection.cost
   end
 
   private
@@ -44,9 +40,6 @@ class PricingPresenter
     percentage.percent_of(cost).round_up(5)
   end
 
-  def calculate_price
-    cost.round_up(5)
-  end
 
   def find_seasonal_discount(passenger_type)
     seasonal_discounts.find { |seasonal_discount| seasonal_discount.passenger_type == passenger_type }

@@ -21,6 +21,6 @@ class Discount < ActiveRecord::Base
   validates :percentage, presence: true
 
   def description
-    "#{passenger_type.description} discount - #{percentage}%".capitalize
+    "#{passenger_type.description}".capitalize
   end
 end

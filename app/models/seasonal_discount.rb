@@ -33,6 +33,6 @@ class SeasonalDiscount < ActiveRecord::Base
   protected
 
   def normalize
-    self.name =  "#{name} discount - #{percentage}%".squish.upcase
+    self.name =  "#{name}".squish.upcase
   end
 end

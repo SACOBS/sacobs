@@ -7,7 +7,8 @@
     <small>(Remember the more specific the search the higher chance of success)</small>
   </h2>
   <h3>
-    Results for search term <%= [params[:q][:reference_no_or_client_surname_cont], params[:q][:created_at_date_eq]].join(' ') %>
+    Results for search
+    term <%= [params[:q][:reference_no_or_client_surname_cont], params[:q][:created_at_date_eq]].join(' ') %>
   </h3>
   <%= back_to bookings_archives_path %>
   <div class="search pull-right">
@@ -37,9 +38,21 @@
 <hr/>
 <div class="bookings">
   <% if @results.any? %>
-      <%= bootstrap_table headers: ['Actions', 'Status', 'Client Name', 'Trip Date', 'Qty', 'Connection'], types: %i(hover condensed) do %>
-          <%= render partial: 'bookings/archives/booking', collection: @results, cache: true %>
-      <% end %>
+      <table class="table table-hover table-condensed sortable">
+        <thead>
+        <tr>
+          <th>Actions</th>
+          <th>Status</th>
+          <th>Client</th>
+          <th>Trip Date</th>
+          <th>Qty</th>
+          <th>Connection</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render partial: 'bookings/archives/booking', collection: @results %>
+        </tbody>
+      </table>
   <% else %>
       <h3 class="text-center">No results were found for the specified search term.</h3>
   <% end %>

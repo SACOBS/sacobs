@@ -1,75 +1,60 @@
-<%= content_tag(:tr, class: row_class_for(booking)) do %>
-    <td>
-      <%= link_to booking, class: 'btn btn-mini btn-info' do %>
-         <%= fa_icon :info, text: 'Show' %>
-      <% end %>
-      <% if booking.paid? || booking.reserved? %>
-          <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
-              <%= fa_icon :tasks, text: 'Ticket' %>
-          <% end %>
-      <% end %>
-      <% if booking.reserved? %>
-          <%= link_to new_booking_payment_detail_url(booking), class: 'btn btn-mini btn-inverse' do %>
-              <%= fa_icon :money, text: 'Confirm' %>
-          <% end %>
-      <% end %>
-      <% if booking.cancelled? %>
-          <%= link_to booking, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: t('messages.confirm', resource: :booking) }  do %>
-              <%= fa_icon :times, text: 'Destroy' %>
-          <% end %>
-      <% else %>
-          <%= link_to cancel_booking_path(booking), method: :patch, class: 'btn btn-warning btn-mini'  do %>
-              <%= fa_icon :warning, text: 'Cancel' %>
-          <% end %>
-      <% end %>
-    </td>
-    <td>
-      <small>
-        <%=  local_date(booking.created_at) %>
-      </small>
-    </td>
-    <td data-dateformat="DD MMM">
-      <%= link_to booking.client, target: '_blank' do %>
+<tr class="<%= row_class_for(booking)%>">
+  <td>
+    <%= link_to booking, class: 'btn btn-mini btn-info' do %>
+        <%= fa_icon :info, text: 'Show' %>
+    <% end %>
+    <% if booking.paid? || booking.reserved? %>
+        <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
+            <%= fa_icon :tasks, text: 'Ticket' %>
+        <% end %>
+    <% end %>
+    <% if booking.reserved? %>
+        <%= link_to new_booking_payment_detail_url(booking), class: 'btn btn-mini btn-inverse' do %>
+            <%= fa_icon :money, text: 'Confirm' %>
+        <% end %>
+    <% end %>
+    <% if booking.cancelled? %>
+        <%= link_to booking, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: t('messages.confirm', resource: :booking) }  do %>
+            <%= fa_icon :times, text: 'Destroy' %>
+        <% end %>
+    <% else %>
+        <%= link_to cancel_booking_path(booking), method: :patch, class: 'btn btn-warning btn-mini'  do %>
+            <%= fa_icon :warning, text: 'Cancel' %>
+        <% end %>
+    <% end %>
+  </td>
+  <td data-dateformat="DD MMM">
+    <small>
+      <%=  local_date(booking.created_at) %>
+    </small>
+  </td>
+  <td>
+    <%= link_to booking.client, target: '_blank' do %>
         <%= content_tag(:em, booking.client.full_name) %>
-      <% end %>
-    </td>
-    <td>
-      <ul class="inline">
-        <li>
-          <abbr class="initialism" title="Home">
-            <strong>
-              H:
-              <%= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A' %>
-            </strong>
-          </abbr>
-        </li>
-        <li>
-          <abbr class="initialism" title="Work">
-            <strong>
-              W:
-              <%= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A' %>
-            </strong>
-          </abbr>
-        </li>
-        <li>
-          <abbr class="initialism" title="Cell">
-            <strong>
-              C:
-              <%= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A' %>
-            </strong>
-          </abbr>
-        </li>
-      </ul>
-    </td>
-    <td data-dateformat="DD MMM">
-      <small>
-        <%= local_date(booking.trip.start_date) %>
-      </small>
-    </td>
-    <td>
-      <%= badge_for(booking.quantity) %>
-    </td>
-    <td>
-      <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
-    </td>
-<% end %>
+    <% end %>
+  </td>
+  <td>
+    <address>
+      <abbr class="initialism" title="Home">H:</abbr>
+      <%= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A' %>
+      <br>
+      <abbr class="initialism" title="Work">W:</abbr>
+      <%= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A' %>
+      <br>
+      <abbr class="initialism" title="Cell">C:</abbr>
+      <%= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A' %>
+    </address>
+  </td>
+  <td data-dateformat="DD MMM">
+    <small>
+      <%= local_date(booking.trip.start_date) %>
+    </small>
+  </td>
+  <td>
+    <%= badge_for(booking.quantity) %>
+  </td>
+  <td>
+    <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
+  </td>
+
+</tr>
