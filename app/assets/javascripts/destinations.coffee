@@ -4,7 +4,7 @@ $(document).on "page:change", ->
     axis: 'y'
     items: '.destination'
     cursor: 'move'
-    cancel: ".disable-sort-item"
+    cancel: ".disable-sort-item, select"
     stop: (e, ui) ->
       ui.item.children('td').effect('highlight', {}, 1000)
     update: (e, ui) ->
@@ -13,8 +13,5 @@ $(document).on "page:change", ->
   )
 
   $('.route-destinations').on 'cocoon:after-insert',(event, destination) ->
-    destination.find("td input[name*='city']").focus()
-    destination.find("td input[name*='sequence']").val(destination.index() + 1)
-
-  $(document).on 'click', '[data-behaviour~=sortable] input', ->
-    $(this).focus()
+    next_sequence = destination.parent('tbody').prop('rows').length
+    destination.find("td input[name*='sequence']").val(next_sequence)
