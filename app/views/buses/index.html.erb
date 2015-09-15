@@ -20,9 +20,58 @@
 </div>
 </div>
 
-<%= bootstrap_table headers: %w(Actions Name Year Model Capacity), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
-    <%= render @buses, cache: true %>
-<% end %>
+<ul class="media-list">
+  <% @buses.each do |bus| %>
+      <% cache bus do %>
+          <li class="media">
+            <%= link_to bus, class: 'pull-left' do %>
+                <%= fa_icon 'bus 5x' %>
+            <% end %>
+            <div class="media-body">
+              <h4 class="media-heading"><%= bus.name %></h4>
+              <div class="row span7">
+                <div class="span4">
+                  <ul class="unstyled">
+                    <li>
+                      <p>
+                        <strong>Year:</strong>
+                        <%= bus.year %>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Model:</strong>
+                        <%= bus.model %>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Capacity:</strong>
+                        <%= bus.capacity %>
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="span3">
+                  <div class="btn-group btn-group-vertical pull-right">
+                    <%= link_to  bus, class: 'btn btn-info' do  %>
+                        <%= fa_icon :info, text: 'Show' %>
+                    <% end %>
+                    <%= link_to edit_bus_path(bus), class: 'btn btn-inverse' do %>
+                        <%= fa_icon :edit, text: 'Edit' %>
+                    <% end %>
+                    <%= link_to bus, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
+                        <%= fa_icon :times, text: 'Destroy' %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+      <% end %>
+  <% end %>
+</ul>
+<hr>
 <%= link_to new_bus_path,  class: 'btn btn-primary' do %>
     <%= fa_icon :plus, text: 'Setup bus' %>
 <% end %>
