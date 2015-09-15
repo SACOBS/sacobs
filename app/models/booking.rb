@@ -76,8 +76,7 @@ class Booking < ActiveRecord::Base
   has_one :return_booking, class_name: 'Booking', foreign_key: :main_id
 
   has_one :invoice
-
-  has_many :passengers
+  has_many :passengers, dependent: :delete_all
 
   accepts_nested_attributes_for :client, :passengers, :invoice
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
@@ -93,6 +92,9 @@ class Booking < ActiveRecord::Base
 
   ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
+  before_save :set_passengers, if: :client_id_changed?
+  after_save :synchronize_associations, if: :return_booking
+
   def return?
     !!main
   end
@@ -105,29 +107,19 @@ class Booking < ActiveRecord::Base
     expiry_date.past?
   end
 
-  def build_passengers
+  private
+
+  def set_passengers
+    passengers.clear if passengers.any?
     quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
   end
 
-  def calculate_costs
-    invoice = build_invoice
-    gross = connection.cost
-    nett = connection.cost
-    passengers.each do |passenger|
-      invoice.line_items.debit.build(description: "#{passenger.full_name} ticket", amount: gross)
-
-      passenger.charges.each do |charge|
-        amount = charge.percentage.percent_of(gross).round_up(5)
-        nett += amount
-        invoice.line_items.debit.build(description: charge.description, amount: amount)
-      end
-
-      amount = passenger.discount.percentage.percent_of(nett).round_up(5)
-      invoice.line_items.credit.build(description: passenger.discount.description, amount: amount)
-    end
+  def synchronize_associations
+    return_booking.client = client
+    return_booking.passengers = passengers.map(&:dup)
+    return_booking.save
   end
 
-  private
 
   def seats_are_available
     if stop.present? && quantity > stop.available_seats

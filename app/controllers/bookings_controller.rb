@@ -15,7 +15,7 @@ class BookingsController < ApplicationController
         @bookings = @bookings.standby.page(params[:standby_page])
     end
 
-    respond_with(@bookings) #if stale?(@bookings)
+    respond_with(@bookings) if stale?(@bookings)
   end
 
   def search
@@ -43,8 +43,12 @@ class BookingsController < ApplicationController
     redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
   end
 
-  private
+  def reserve
+    Booking::Reserve.perform(@booking, @settings)
+    redirect_to @booking, notice: 'Booking was successfully reserved.'
+  end
 
+  private
   def set_booking
     @booking = Booking.find(params[:id])
   end
