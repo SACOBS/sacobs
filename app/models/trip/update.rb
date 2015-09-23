@@ -24,11 +24,15 @@ class Trip::Update
   private
 
   def create_stops
-    if trip.route_id_changed?
+    if route_changed?
       stops.clear
       stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity } })
     end
     stops.all?(&:persisted?)
+  end
+
+  def route_changed?
+    trip.route_id_changed?
   end
 
 end
