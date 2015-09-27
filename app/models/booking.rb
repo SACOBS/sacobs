@@ -78,7 +78,7 @@ class Booking < ActiveRecord::Base
   has_one :invoice
   has_many :passengers, dependent: :delete_all
 
-  accepts_nested_attributes_for :client, :passengers, :invoice
+  accepts_nested_attributes_for :client, :passengers, :invoice, reject_if: :all_blank
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   with_options if: :in_process? do
