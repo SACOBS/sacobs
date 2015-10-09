@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913204143) do
+ActiveRecord::Schema.define(version: 20151009194636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150913204143) do
     t.datetime "archived_at"
     t.integer  "payment_detail_id"
   end
-  add_index "bookings", ["archived"], name: "index_bookings_on_archived", using: :btree
+  add_index "bookings", ["archived"], name: "index_bookings_on_archived", where: "(archived = false)", using: :btree
   add_index "bookings", ["client_id"], name: "index_bookings_on_client_id", using: :btree
   add_index "bookings", ["main_id"], name: "index_bookings_on_main_id", using: :btree
   add_index "bookings", ["stop_id"], name: "index_bookings_on_stop_id", using: :btree
@@ -286,7 +286,7 @@ ActiveRecord::Schema.define(version: 20150913204143) do
     t.datetime "archived_at"
     t.integer  "bookings_count", default: 0
   end
-  add_index "trips", ["archived"], name: "index_trips_on_archived", using: :btree
+  add_index "trips", ["archived"], name: "index_trips_on_archived", where: "(archived = false)", using: :btree
   add_index "trips", ["bus_id"], name: "index_trips_on_bus_id", using: :btree
   add_index "trips", ["route_id"], name: "index_trips_on_route_id", using: :btree
 
