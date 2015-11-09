@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require jquery-ui/sortable
 #= require jquery-ui/effect-highlight
+#= require jquery-ui/datepicker
 #= require nprogress
 #= require nprogress-ajax
 #= require nprogress-turbolinks

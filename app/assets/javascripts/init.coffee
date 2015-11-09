@@ -42,6 +42,13 @@ $.rails.allowAction = (element) ->
 $(document).on "page:change", ->
   $.bootstrapSortable(applyLast=true)
   $('[rel~="tooltip"]').tooltip()
+  $('[data-behaviour~=datepicker]').datepicker(
+    autoclose: true,
+    autoSize: true,
+    changeYear: true,
+    changeMonth: true,
+    dateFormat: "DD, d MM, yy"
+  )
   $('a[data-toggle="tab"]').on 'click', (e) ->
     e.preventDefault()
     $(this).tab('show');

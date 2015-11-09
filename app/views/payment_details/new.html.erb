@@ -10,7 +10,6 @@
     <fieldset>
       <%= f.input :reference, label: 'Client Payment Reference', hint: 'Put the reference from the bank for the client payment.', autofocus: true %>
       <%= f.input :payment_type, collection: PaymentDetail::PAYMENT_TYPES.sort, include_blank: false, prompt: 'Select a payment type', selected: @booking.client.bank %>
-      <%= f.input :paid_at, as: :datetime, use_short_month: true, start_year: Date.current.year, order: [:day, :month, :year], input_html: { class: 'input-small' }  %>
     </fieldset>
     <div class="control-group">
       <div class="controls">
