@@ -3,7 +3,7 @@ class Bookings::WizardController < ApplicationController
 
   layout 'wizard'
 
-  before_action :set_booking, only: [:show, :update]
+  before_action :set_booking
   before_action :set_stops, :set_return_stops, :wizard_completed, only: :show
 
   steps :trip_details,
@@ -30,10 +30,15 @@ class Bookings::WizardController < ApplicationController
 
   def update
     @booking.update(booking_params)
-    Booking::Reserve.perform(@booking, @settings) if step == :billing_info
-    respond_to do |format|
-      format.html { render_wizard @booking }
+    case step
+      when :trip_details
+        @stops = [@booking.stop]
+      when :return_trip_details
+        @stops = [@booking.return_booking.stop]
+      when :billing_info
+        Booking::Reserve.perform(@booking, @settings) if step == :billing_info
     end
+    respond_to { |format| format.html { render_wizard @booking } }
   end
 
   private
@@ -57,10 +62,10 @@ class Bookings::WizardController < ApplicationController
   def set_return_stops
     if step == :return_trip_details
       params[:q] ||= {}
-      params[:q][:available_seats_gteq] = @booking.quantity
-      params[:q][:trip_start_date_gteq] = @booking.trip.start_date
-      params[:q][:connection_from_city_id_eq] = @booking.connection.to.city_id
-      params[:q][:connection_to_city_id_eq] = @booking.connection.from.city_id
+      params[:q][:available_seats_gteq] ||= @booking.quantity
+      params[:q][:trip_start_date_gteq] ||= @booking.trip.start_date
+      params[:q][:connection_from_city_id_eq] ||= @booking.connection.to.city_id
+      params[:q][:connection_to_city_id_eq] ||= @booking.connection.from.city_id
       @stops = Stop.includes(:trip, :connection).merge(Trip.available).search(params[:q]).result.limit(30).order('trips.start_date')
     end
   end
