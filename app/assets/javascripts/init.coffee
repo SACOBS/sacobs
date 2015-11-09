@@ -47,7 +47,7 @@ $(document).on "page:change", ->
     autoSize: true,
     changeYear: true,
     changeMonth: true,
-    dateFormat: "DD, d MM, yy"
+    dateFormat: "D, d M, yy"
   )
   $('a[data-toggle="tab"]').on 'click', (e) ->
     e.preventDefault()

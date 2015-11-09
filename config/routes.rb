@@ -179,7 +179,6 @@ Sacobs::Application.routes.draw do
     end
     member do
       patch :cancel
-      patch :reserve
     end
     resources :wizard, only: [:show, :update], controller: 'bookings/wizard'
 
