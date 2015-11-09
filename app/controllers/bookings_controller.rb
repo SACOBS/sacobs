@@ -1,6 +1,4 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :cancel]
-
   def index
     params[:type] ||= 'standby'
     @bookings = Booking.includes(:client,  :trip, stop: :connection).available
@@ -30,7 +28,8 @@ class BookingsController < ApplicationController
   end
 
   def show
-   fresh_when @booking
+    @booking = Booking.includes(:passengers, :stop, :trip, :client, :invoice).find(params[:id])
+    fresh_when @booking
   end
 
   def destroy
@@ -39,12 +38,8 @@ class BookingsController < ApplicationController
   end
 
   def cancel
+    @booking = Booking.find(params[:id])
     Booking::Cancel.perform(@booking, current_user)
     redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
-  end
-
-  private
-  def set_booking
-    @booking = Booking.includes(:passengers, :stop, :trip, :client, :invoice).find(params[:id])
   end
 end
