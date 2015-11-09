@@ -7,7 +7,7 @@
   </p>
   <p class="pull-right">
     <strong>Today's Date:</strong>
-    <%= @ticket.ticket_date %>
+    <%= l(Date.current, format: :long) %>
   </p>
 </div>
 <div class="passengers">
