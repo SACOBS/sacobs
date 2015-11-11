@@ -12,9 +12,9 @@
     <%= number_to_currency(connection.cost) %>
   </td>
   <td>
-    <%= l(connection.leaving, format: :short) if connection.leaving %>
+    <%= time_tag(connection.leaving, format: :short) if connection.leaving %>
   </td>
   <td>
-    <%= l(connection.arriving, format: :short) if connection.arriving %>
+    <%= time_tag(connection.arriving, format: :short) if connection.arriving %>
   </td>
 </tr>

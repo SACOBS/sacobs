@@ -20,10 +20,10 @@
     <%= number_to_percentage(seasonal_discount.percentage, precision: 2) %>
   </td>
   <td data-dateformat="ll">
-    <%= l(seasonal_discount.period_from, format: :long) %>
+    <%= time_tag(seasonal_discount.period_from) %>
   </td>
   <td data-dateformat="ll">
-    <%= l(seasonal_discount.period_to, format: :long) %>
+    <%= time_tag(seasonal_discount.period_to) %>
   </td>
   <td>
     <%= seasonal_discount.active? ? 'Yes' : 'No' %>

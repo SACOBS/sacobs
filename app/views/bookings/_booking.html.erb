@@ -23,9 +23,9 @@
         <% end %>
     <% end %>
   </td>
-  <td data-dateformat="DD MMM">
+  <td data-dateformat="ll">
     <small>
-      <%=  local_date(booking.created_at) %>
+      <%= time_tag(booking.created_at.to_date) %>
     </small>
   </td>
   <td>
@@ -45,9 +45,9 @@
       <%= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A' %>
     </address>
   </td>
-  <td data-dateformat="DD MMM">
+  <td data-dateformat="ll">
     <small>
-      <%= local_date(booking.trip.start_date) %>
+      <%= time_tag(booking.trip.start_date) %>
     </small>
   </td>
   <td>

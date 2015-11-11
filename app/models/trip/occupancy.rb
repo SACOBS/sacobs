@@ -5,7 +5,7 @@ class Trip::Occupancy
     @trip = trip
   end
 
-  def statistics
+  def details
     items = []
     occupancy = 0
     from_destinations.each_with_index do |destination, index|

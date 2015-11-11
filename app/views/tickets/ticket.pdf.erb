@@ -7,7 +7,7 @@
   </p>
   <p class="pull-right">
     <strong>Today's Date:</strong>
-    <%= l(Date.current, format: :long) %>
+    <%= time_tag(Date.current, format: :long) %>
   </p>
 </div>
 <div class="passengers">
@@ -34,10 +34,10 @@
                   <%= booking.stop.to_city_venues.first.name %>
                 </td>
                 <td>
-                  <%= l(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
+                  <%= time_tag(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
                 </td>
                 <td>
-                  <%= l(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
+                  <%= time_tag(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
                 </td>
               </tr>
           <% end %>

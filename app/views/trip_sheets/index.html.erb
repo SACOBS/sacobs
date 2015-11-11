@@ -26,11 +26,11 @@
                 </dd>
                 <dt>Date:</dt>
                 <dd>
-                  <%= l(trip.start_date, format: :long) %>
+                  <%= time_tag(trip.start_date, format: :long) %>
                 </dd>
                 <dt>Day:</dt>
                 <dd>
-                  <%= l(trip.start_date, format: :day) %>
+                  <%= time_tag(trip.start_date, format: :day) %>
                 </dd>
                 <dt>Bookings:</dt>
                 <dd>

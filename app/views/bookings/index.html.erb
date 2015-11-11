@@ -20,7 +20,7 @@
       <%= link_to bookings_path(type: :standby), data: { toggle: 'tab', target: '#standby' }, remote: true do %>
           Standby/Expired
         <span class="badge badge-warning">
-          <%= standby_booking_count %>
+          <%= @presenter.standby_booking_count %>
         </span>
       <% end %>
     </li>
@@ -28,7 +28,7 @@
       <%= link_to bookings_path(type: :open), data: { toggle: 'tab', target: '#open' }, remote: true do %>
         Reserved
         <span class="badge badge-info">
-          <%= reserved_booking_count %>
+          <%= @presenter.reserved_booking_count %>
         </span>
       <% end %>
     </li>
@@ -36,7 +36,7 @@
       <%= link_to bookings_path(type: :paid), data: { toggle: 'tab', target: '#paid' }, remote: true do %>
           Paid
         <span class="badge badge-success">
-          <%= paid_booking_count %>
+          <%= @presenter.paid_booking_count %>
         </span>
       <% end %>
     </li>
@@ -44,14 +44,14 @@
       <%= link_to bookings_path(type: :cancelled) ,data: { toggle: 'tab', target: '#cancelled' }, remote: true do %>
           Cancelled
         <span class="badge badge-important">
-          <%= cancelled_booking_count %>
+          <%= @presenter.cancelled_booking_count %>
         </span>
       <% end %>
     </li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="standby" data-type="standby">
-      <%= render 'bookings/bookings', bookings: @bookings, type: params[:type] %>
+      <%= render 'bookings/bookings', bookings: @presenter.bookings, type: params[:type] %>
     </div>
     <div class="tab-pane" id="open" data-type="open"></div>
     <div class="tab-pane" id="paid" data-type="paid"></div>

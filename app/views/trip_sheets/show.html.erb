@@ -20,7 +20,7 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
   </h5>
   <h5 class="pull-right">
     <strong>
-      <%= l(Date.current, format: :long) %>
+      <%= time_tag(Date.current, format: :long) %>
     </strong>
   </h5>
   <h2>TRIP SHEET FOR <%= @trip.name.titleize %></h2>

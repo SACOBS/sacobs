@@ -132,8 +132,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    local_time (1.0.3)
-      coffee-rails
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -309,7 +307,6 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   launchy
-  local_time
   memcachier
   momentjs-rails
   multi_fetch_fragments

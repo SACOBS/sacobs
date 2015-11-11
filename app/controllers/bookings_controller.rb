@@ -1,19 +1,22 @@
 class BookingsController < ApplicationController
   def index
     params[:type] ||= 'standby'
-    @bookings = Booking.includes(:client,  :trip, stop: :connection).available
+    bookings = Booking.includes(:client,  :trip, stop: :connection).available
     case params[:type]
       when 'open'
-        @bookings = @bookings.open.page(params[:reserved_page])
+        bookings = bookings.open.page(params[:reserved_page])
       when 'paid'
-        @bookings = @bookings.paid.page(params[:paid_page])
+        bookings = bookings.paid.page(params[:paid_page])
       when 'cancelled'
-        @bookings = @bookings.cancelled.page(params[:cancelled_page])
+        bookings = bookings.cancelled.page(params[:cancelled_page])
       else
-        @bookings = @bookings.standby.page(params[:standby_page])
+        bookings = bookings.standby.page(params[:standby_page])
     end
 
-    respond_with(@bookings) if stale?(@bookings)
+    if stale?(bookings)
+      @presenter = Bookings::IndexPresenter.new(bookings)
+      render :index
+    end
   end
 
   def search
@@ -28,7 +31,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.includes(:passengers, :stop, :trip, :client, :invoice).find(params[:id])
+    @booking = Booking.includes(:stop, :trip, :client, :invoice, passengers: :passenger_type).find(params[:id])
     fresh_when @booking
   end
 

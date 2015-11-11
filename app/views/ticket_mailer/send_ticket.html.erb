@@ -26,7 +26,7 @@
   </p>
   <p>
     <strong>Today's Date:</strong>
-    <%= l Time.zone.now, format: :long %>
+    <%= time_tag Time.zone.now, format: :long %>
   </p>
 </div>
 <br/>
@@ -55,10 +55,10 @@
                   <%= booking.stop.to_city_venues.first.name %>
                 </td>
                 <td>
-                  <%= l(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
+                  <%= time_tag(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
                 </td>
                 <td>
-                  <%= l(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
+                  <%= time_tag(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
                 </td>
               </tr>
           <% end %>

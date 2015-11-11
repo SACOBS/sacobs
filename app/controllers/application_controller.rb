@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html, :js, :json, :pdf, :xls
 
-  before_action :authenticate_user!, :common_settings
+  before_action :authenticate_user!, :settings
 
   layout :layout_required?
 
@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
     false if request.xhr?
   end
 
-  def common_settings
-    @common_settings ||= Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
+  def settings
+    @settings ||= Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
       Setting.first_or_create
     end
   end

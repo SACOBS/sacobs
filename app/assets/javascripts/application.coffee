@@ -10,7 +10,6 @@
 #= require bootstrap
 #= require bootstrap-sortable
 #= require cocoon
-#= require local_time
 #= require turbolinks
 #= require app.type_ahead
 #= require bookings_wizard

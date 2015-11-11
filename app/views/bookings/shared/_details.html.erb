@@ -10,7 +10,7 @@
         <%= booking.trip.name %>
       </td>
       <td>
-        <%= local_date(booking.trip.start_date) %>
+        <%= time_tag(booking.trip.start_date) %>
       </td>
       <td>
         <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>

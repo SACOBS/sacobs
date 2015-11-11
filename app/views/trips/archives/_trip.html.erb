@@ -11,13 +11,13 @@
     <%= link_to trip.name, trip %>
   </td>
   <td>
-    <%=  l(trip.start_date, format: :day) %>
+    <%=  time_tag(trip.start_date, format: :day) %>
   </td>
   <td data-dateformat="ll">
-    <%= local_date(trip.start_date) %>
+    <%= time_tag(trip.start_date) %>
   </td>
   <td data-dateformat="ll">
-    <%= local_date(trip.end_date) %>
+    <%= time_tag(trip.end_date) %>
   </td>
   <td>
     <%= trip.route_name %>

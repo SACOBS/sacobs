@@ -37,7 +37,7 @@
         </p>
         <p>
           <strong>Date Of Birth:</strong>
-          <%= @client.date_of_birth.present? ? local_date(@client.date_of_birth) : 'N/A' %>
+          <%= @client.date_of_birth.present? ? time_tag(@client.date_of_birth) : 'N/A' %>
         </p>
         <p>
           <strong>Bank:</strong>
@@ -128,7 +128,7 @@
                         <%= status_label_for(booking) %>
                       </td>
                       <td data-dateformat="ll">
-                        <%= local_date(booking.trip.start_date) %>
+                        <%= time_tag(booking.trip.start_date) %>
                       </td>
                       <td>
                         <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>

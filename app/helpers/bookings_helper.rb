@@ -18,20 +18,4 @@ module BookingsHelper
       'info'
     end
   end
-
-  def reserved_booking_count
-    Booking.available.open.size
-  end
-
-  def standby_booking_count
-    Booking.available.standby.size
-  end
-
-  def paid_booking_count
-    Booking.available.paid.size
-  end
-
-  def cancelled_booking_count
-    Booking.available.cancelled.size
-  end
 end

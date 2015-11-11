@@ -18,7 +18,7 @@
     <% end %>
   </td>
   <td data-dateformat="ll">
-    <%= local_date(booking.trip.start_date) %>
+    <%= time_tag(booking.trip.start_date) %>
   </td>
   <td>
     <%= badge_for(booking.quantity) %>

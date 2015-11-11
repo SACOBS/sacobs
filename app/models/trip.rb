@@ -44,5 +44,10 @@ class Trip < ActiveRecord::Base
 
   delegate :name, to: :route, prefix: true
   delegate :name, to: :bus, prefix: true
-  
+
+  def occupancy
+    Rails.cache.fetch("trips/#{id}/occupancy/#{updated_at.to_i}-#{bookings.size}") do
+      Trip::Occupancy.new(self).details
+    end
+  end
  end
