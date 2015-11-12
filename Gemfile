@@ -51,8 +51,8 @@ gem 'cocoon'
 
 # Caching
 gem 'dalli'
-gem 'memcachier'
 gem 'multi_fetch_fragments'
+gem 'connection_pool'
 
 # Wizard
 gem 'wicked'
