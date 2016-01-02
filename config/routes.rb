@@ -41,10 +41,10 @@
 #                            POST   /bookings(.:format)                                 bookings#create
 #                    booking GET    /bookings/:id(.:format)                             bookings#show
 #                            DELETE /bookings/:id(.:format)                             bookings#destroy
-#               edit_setting GET    /setting/edit(.:format)                             settings#edit
-#                    setting GET    /setting(.:format)                                  settings#show
-#                            PATCH  /setting(.:format)                                  settings#update
-#                            PUT    /setting(.:format)                                  settings#update
+#              edit_settings GET    /settings/edit(.:format)                            settings#edit
+#                   settings GET    /settings(.:format)                                 settings#show
+#                            PATCH  /settings(.:format)                                 settings#update
+#                            PUT    /settings(.:format)                                 settings#update
 #             search_clients GET    /clients/search(.:format)                           clients#search
 #            client_vouchers POST   /clients/:client_id/vouchers(.:format)              vouchers#create
 #         new_client_voucher GET    /clients/:client_id/vouchers/new(.:format)          vouchers#new

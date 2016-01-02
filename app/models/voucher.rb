@@ -14,7 +14,6 @@
 # Indexes
 #
 #  index_vouchers_on_client_id  (client_id)
-#  index_vouchers_on_user_id    (user_id)
 #
 
 class Voucher < ActiveRecord::Base

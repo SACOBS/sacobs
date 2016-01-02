@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: payment_details
+#
+#  id           :integer          not null, primary key
+#  paid_at      :datetime
+#  reference    :string(255)
+#  user_id      :integer
+#  payment_type :string(255)
+#
+
 class PaymentDetailsController < ApplicationController
   before_action :set_booking
 

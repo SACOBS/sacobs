@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: cities
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  user_id      :integer
+#  venues_count :integer          default(0)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+# Indexes
+#
+#  index_cities_on_name  (name)
+#
+
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 

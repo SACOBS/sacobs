@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: routes
+#
+#  id                :integer          not null, primary key
+#  cost              :decimal(8, 2)
+#  distance          :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  name              :string(255)
+#  user_id           :integer
+#  connections_count :integer          default(0)
+#
+
 class RoutesController < ApplicationController
   before_action :set_route, except: [:index, :new, :create]
 

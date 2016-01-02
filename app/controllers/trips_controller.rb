@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: trips
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  start_date     :date
+#  end_date       :date
+#  route_id       :integer
+#  bus_id         :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  user_id        :integer
+#  notes          :text
+#  archived       :boolean          default(FALSE)
+#  archived_at    :datetime
+#  bookings_count :integer          default(0)
+#
+# Indexes
+#
+#  index_trips_on_archived  (archived)
+#  index_trips_on_bus_id    (bus_id)
+#  index_trips_on_route_id  (route_id)
+#
+
 class TripsController < ApplicationController
   before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
 

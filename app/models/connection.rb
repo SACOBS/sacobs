@@ -12,8 +12,8 @@
 #  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
-#  leaving    :time
-#  arriving   :time
+#  leaving    :time             default(2000-01-01 06:13:57 UTC)
+#  arriving   :time             default(2000-01-01 06:13:57 UTC)
 #
 # Indexes
 #

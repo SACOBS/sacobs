@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: buses
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  capacity   :integer          default(0)
+#  year       :string(255)
+#  model      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  user_id    :integer
+#
+
 class BusesController < ApplicationController
   before_action :set_bus, only: [:edit, :show, :destroy, :update]
   before_action :build_bus, only: [:new, :create]

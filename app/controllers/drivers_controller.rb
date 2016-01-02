@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: drivers
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  surname    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  user_id    :integer
+#
+
 class DriversController < ApplicationController
   before_action :set_driver, only: [:edit, :update, :destroy]
 

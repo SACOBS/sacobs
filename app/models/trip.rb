@@ -21,7 +21,6 @@
 #  index_trips_on_archived  (archived)
 #  index_trips_on_bus_id    (bus_id)
 #  index_trips_on_route_id  (route_id)
-#  index_trips_on_user_id   (user_id)
 #
 
 class Trip < ActiveRecord::Base
