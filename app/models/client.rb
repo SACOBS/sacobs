@@ -45,9 +45,9 @@ class Client < ActiveRecord::Base
 
   validates :name, :surname, presence: true
   validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
-  validates :date_of_birth, presence: { message: 'obtained from id number is not a valid date, please check the id number field.' }, if: proc { |client| client.id_number.present? }
+  validates :date_of_birth, presence: { message: 'obtained from id number is not a valid date, please check the id number field.' }, if: :id_number?
 
-  before_validation :set_birth_date
+  before_validation :set_birth_date, if: :id_number?
   before_save :normalize
 
   ransacker :full_name do |parent|
@@ -57,12 +57,11 @@ class Client < ActiveRecord::Base
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
 
   def age
-    @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth.present?
+    @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth?
   end
 
   def is_pensioner?
-    return false unless age.present?
-    age >= PENSIONER_AGE
+    age&.>= PENSIONER_AGE
   end
 
   def full_name
@@ -77,12 +76,7 @@ class Client < ActiveRecord::Base
   end
 
   def set_birth_date
-    if id_number
-      date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
-      if date
-        date = date.prev_year(100) if date > Date.current
-        self.date_of_birth = date
-      end
-    end
+    date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
+    self.date_of_birth = (date&.> Date.current) ? date.prev_year(100) : date
   end
 end

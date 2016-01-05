@@ -1,8 +1,5 @@
 class Trip::AssignSeats
 
-  delegate :stops, to: :trip
-
-
   def self.perform(*args)
     new(*args).perform
   end
@@ -14,14 +11,14 @@ class Trip::AssignSeats
   end
 
   def perform
-    stops_to_unassign.update_all(['available_seats = available_seats - ?', quantity])
+    stops.assign_seats(quantity)
     trip.touch
   end
 
   private
   attr_reader :trip, :stop, :quantity
 
-  def stops_to_unassign
-    stops.along_the_way(stop.connection.from, stop.connection.to)
+  def stops
+    trip.stops.along_the_way(stop.connection.from, stop.connection.to)
   end
 end

@@ -2,7 +2,7 @@ class Trip::Copy
 
   def self.perform(*args)
       new(*args).perform
-    end
+  end
 
     def initialize(trip, user)
       @trip = trip
