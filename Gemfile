@@ -73,6 +73,11 @@ gem 'sucker_punch', '~> 1.0'
 # PG
 gem 'pg'
 
+# Profiling
+gem 'rack-mini-profiler', require: false 
+gem 'flamegraph'
+gem 'stackprof'
+gem 'memory_profiler'
 
 
 group :development do

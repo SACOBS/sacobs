@@ -32,7 +32,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = Client.surname_starts_with(params.fetch(:letter, 'A')).page(params[:page]).select(:id, :name, :surname, :home_no, :work_no, :cell_no, :email, :updated_at)
+    @clients = Client.surname_starts_with(params.fetch(:letter, 'A')).page(params[:page])
     respond_with(@clients) if stale?(@clients)
   end
 

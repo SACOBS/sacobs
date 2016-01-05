@@ -6,13 +6,19 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html, :js, :json, :pdf, :xls
 
-  before_action :authenticate_user!, :settings
+  before_action :authenticate_user!, :check_rack_mini_profiler, :settings
 
   layout :layout_required?
 
   etag { [current_user.try(:id), flash] }
 
   protected
+
+  def check_rack_mini_profiler
+    if current_user&.admin? && params[:rmp].present?
+      Rack::MiniProfiler.authorize_request
+    end
+  end
 
   def devise_parameter_sanitizer
     UserSanitizer.new(User, :user, params)
