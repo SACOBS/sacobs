@@ -37,7 +37,7 @@ class PricingPresenter
   end
 
   def calculate_percentage_amount(percentage)
-    percentage.percent_of(cost).round_up(5)
+    percentage.percent_of(price).round_up(5)
   end
 
 
@@ -54,7 +54,7 @@ class PricingPresenter
   end
 
   def seasonal_discounts
-    @seasonal_discounts ||= SeasonalDiscount.active_in_period(Date.current).to_a
+    @seasonal_discounts ||= SeasonalDiscount.applicable.to_a
   end
 
   def passenger_types

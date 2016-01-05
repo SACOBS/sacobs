@@ -32,7 +32,7 @@
 class BookingsController < ApplicationController
   def index
     params[:type] ||= 'standby'
-    bookings = Booking.includes(:client,  :trip, stop: :connection).available
+    bookings = Booking.includes(:client, :trip, stop: :connection).available
     case params[:type]
       when 'open'
         bookings = bookings.open.page(params[:reserved_page])
