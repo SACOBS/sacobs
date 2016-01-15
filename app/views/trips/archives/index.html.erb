@@ -8,10 +8,10 @@
   <% end %>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } } do |f| %>
-        <%= f.input :start_date, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
-        <%= f.input :name_cont, as: :search_box %>
-        <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
-        <%= link_to trips_archives_path, class: 'btn btn-mini btn-inverse' do %>
+        <%= f.input :start_date, placeholder: 'Start date', input_html: { class: 'input-sm', data: { behaviour: :datepicker } }  %>
+        <%= f.input :name_cont, placeholder: 'Name', input_html: { class: 'input-sm' } %>
+        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-warning'  %>
+        <%= link_to trips_archives_path, class: 'btn btn-sm btn-default' do %>
             <%= fa_icon :times, text: 'Clear' %>
         <% end %>
     <% end %>

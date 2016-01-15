@@ -21,8 +21,8 @@
     <%= simple_form_for :q, url: search_trips_path, defaults: {required: false, label: false}, html: {class: 'form-inline', id: 'trip_search', method: :get, data: {type: :html}} do |f| %>
         <%= f.input :start_date_eq, placeholder: 'Start date', input_html: { class: 'input-sm',  data: { behaviour: :datepicker } }  %>
         <%= f.input :name_cont, placeholder: 'Search name', input_html: { class: 'input-sm' } %>
-        <%= f.button :submit, 'Search', class: 'btn btn-xs btn-primary'  %>
-        <%= link_to trips_path, class: 'btn btn-xs btn-default' do %>
+        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-primary'  %>
+        <%= link_to trips_path, class: 'btn btn-sm btn-default' do %>
             <%= fa_icon :times, text: 'Clear' %>
         <% end %>
     <% end %>
