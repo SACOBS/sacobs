@@ -32,7 +32,11 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = Client.surname_starts_with(params.fetch(:letter, 'A')).page(params[:page])
+    if request.format.xls?
+      @clients = Client.all 
+    else
+      @clients = Client.surname_starts_with(params[:letter] ||= 'A').page(params[:page])
+    end
     respond_with(@clients) if stale?(@clients)
   end
 

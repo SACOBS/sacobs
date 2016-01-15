@@ -1,7 +1,7 @@
-<div class="span4 client well well-small" id="<%= dom_id(client) %>">
+<div class="col-md-4 client well well-sm" id="<%= dom_id(client) %>">
   <div class="media">
     <div class="pull-left">
-      <i class="fa fa-user fa-3x"></i>
+      <i class="fa fa-user fa-2x"></i>
     </div>
     <div class="media-body">
       <h5 class="media-heading">
@@ -33,13 +33,13 @@
         <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
       </address>
       <div class="btn-group">
-        <%= link_to client, class: 'btn btn-info btn-small' do %>
+        <%= link_to client, class: 'btn btn-info btn-sm' do %>
           <%= fa_icon :info, text: 'Show' %>
         <% end %>
-        <%= link_to edit_client_path(client), class: 'btn btn-inverse btn-small' do %>
+        <%= link_to edit_client_path(client), class: 'btn btn-success btn-sm' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
-        <%= link_to client, class: 'btn btn-danger btn-small', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
+        <%= link_to client, class: 'btn btn-danger btn-sm', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
             <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
       </div>

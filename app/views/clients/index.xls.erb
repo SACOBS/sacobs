@@ -14,7 +14,7 @@
         <Cell><Data ss:Type="String">Work No</Data></Cell>
         <Cell><Data ss:Type="String">Email</Data></Cell>
       </Row>
-      <% @clients.unscoped.order(:surname).each do |client| %>
+      <% @clients.each do |client| %>
           <Row>
             <Cell><Data ss:Type="String"><%= client.name.titleize %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client.surname.titleize %></Data></Cell>

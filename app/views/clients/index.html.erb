@@ -18,9 +18,9 @@
   </div>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search' } do |f| %>
-        <%= f.input :full_name_cont, as: :search_box %>
-        <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
-        <%= link_to clients_path, class: 'btn btn-mini btn-inverse' do %>
+        <%= f.input :full_name_cont, placeholder: 'Full name', input_html: { class: 'input-sm' } %>
+        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-warning'  %>
+        <%= link_to clients_path, class: 'btn btn-sm btn-default' do %>
           <%= fa_icon :times, text: 'Clear' %>
         <% end %>
     <% end %>
@@ -34,7 +34,7 @@
         <% end %>
     <% end %>
   </ul>
-  <div class="tab-content span10">
+  <div class="tab-content col-md-10">
     <% ('A'..'Z').each_with_index do |letter, index| %>
         <%= content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do %>
             <%= render(partial: 'clients', locals: { clients: @clients }) if index.zero? %>
