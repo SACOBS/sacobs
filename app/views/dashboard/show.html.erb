@@ -1,22 +1,26 @@
-<div class="row hero-unit">
-  <div class="span5 pull-left text-center">
-    <%= link_to bookings_path, {} do %>
-      <%= image_tag 'btn_bookings.png' %>
-    <% end %>
-    <br/>
-    <br/>
-    <%= link_to trips_path, {} do %>
-      <%= image_tag 'btn_trips.png' %>
-    <% end %>
-    <br/>
-    <br/>
-    <%= link_to clients_path, {} do %>
-      <%= image_tag 'btn_clients.png' %>
-    <% end %>
-  </div>
-  <div class="span5 pull-right">
-    <%= link_to bookings_path, method: :post do %>
-      <%= image_tag 'btn_book.png' %>
-    <% end %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 pull-left text-center">
+        <%= link_to bookings_path, {} do %>
+        <%= image_tag 'btn_bookings.png' %>
+        <% end %>
+        <br/>
+        <br/>
+        <%= link_to trips_path, {} do %>
+        <%= image_tag 'btn_trips.png' %>
+        <% end %>
+        <br/>
+        <br/>
+        <%= link_to clients_path, {} do %>
+        <%= image_tag 'btn_clients.png' %>
+        <% end %>
+      </div>
+      <div class="col-md-5 pull-right">
+        <%= link_to bookings_path, method: :post do %>
+        <%= image_tag 'btn_book.png' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

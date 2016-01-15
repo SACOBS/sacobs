@@ -1,19 +1,23 @@
-<div id="notes" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h4><%= context.capitalize %> Notes</h4>
-  </div>
-  <div class="modal-body">
-      <div class="notes-list">
-        <%= render notes %>
+<div id='notes' class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= context.capitalize %> Notes</h4>
       </div>
-      <% if current_user.admin? %>
-          <div class="note-form">
-            <%= render 'notes/form', context: context %>
-          </div>
-      <% end %>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
+      <div class="modal-body">
+        <div class="notes-list">
+          <%= render notes %>
+        </div>
+        <% if current_user.admin? %>
+            <div class="note-form">
+              <%= render 'notes/form', context: context %>
+            </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div
   </div>
 </div>

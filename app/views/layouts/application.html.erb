@@ -1,7 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html lang="en">
 <head>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
     <%= content_for?(:title) ? yield(:title) : 'Sacobs' %>
   </title>
@@ -18,22 +20,20 @@
 </head>
 <body class="<%= controller_path.gsub(/\/|_/, "-") %> <%= action_name %>">
 <header class="navbar navbar-fixed-top navbar-inverse">
-  <nav class="navbar-inner">
     <div class="container-fluid">
       <%= render 'layouts/navigation' %>
     </div>
-  </nav>
 </header>
 <div id="main" role='main'>
   <div class="container-fluid">
     <div class="content">
       <%= render 'layouts/messages' %>
       <% if content_for?(:sidebar) %>
-          <div class="row-fluid">
-            <div class="sidebar span4 well well-small">
+          <div class="row">
+            <div class="sidebar col-md-4 well well-sm">
               <%= yield(:sidebar) %>
             </div>
-            <div class="main-section span8">
+            <div class="main-section col-md-8">
               <%= yield %>
             </div>
           </div>
@@ -45,13 +45,10 @@
 </div>
 <footer>
   <div  class="navbar navbar-fixed-bottom navbar-inverse">
-  <div class="navbar-inner">
     <div class="container-fluid">
       <%= render 'layouts/footer' %>
     </div>
   </div>
-  </div>
 </footer>
 </body>
 </html>
-

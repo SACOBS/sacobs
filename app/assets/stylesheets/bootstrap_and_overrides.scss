@@ -1,11 +1,13 @@
+
+
+
+@import "bootstrap-sprockets";
+
+$pagination-active-bg: #A9A9A9;
 @import "bootswatch/cerulean/variables";
-
-$paginationActiveBackground: darkgray;
-
 @import "bootstrap";
-@import 'bootstrap-responsive';
 
-$nprogress-color: red;
+$nprogress-color: #FF0000;
 $nprogress-height: 5px;
 @import "nprogress";
 @import "nprogress-bootstrap";
@@ -31,9 +33,9 @@ body
 .content {
   padding: 20px;
   margin: 0 -20px;
-  @include border-radius(0 0 6px 6px);
+  //@include border-radius(0 0 6px 6px);
   @include box-shadow(0 1px 2px rgba(0,0,0,0.15));
-  @extend .row-fluid;
+  @extend .row;
 }
 
 .form-inline{
@@ -58,9 +60,12 @@ th, td {
 }
 
 td{
-  background-color: lightcyan;
+  background-color: #E0FFFF;
 }
 
+
+
+// tabs
 
 .tab-wrapper>ul>li {
   border-radius: 4px 4px 0 0;
@@ -115,4 +120,3 @@ td{
   margin-top: -1px;
   border-top: transparent
 }
-

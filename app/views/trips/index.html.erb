@@ -19,10 +19,10 @@
   <% end %>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_trips_path, defaults: {required: false, label: false}, html: {class: 'form-inline', id: 'trip_search', method: :get, data: {type: :html}} do |f| %>
-        <%= f.input :start_date_eq, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
-        <%= f.input :name_cont, as: :search_box, placeholder: 'Search name' %>
-        <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
-        <%= link_to trips_path, class: 'btn btn-mini btn-inverse' do %>
+        <%= f.input :start_date_eq, placeholder: 'Start date', input_html: { class: 'input-sm',  data: { behaviour: :datepicker } }  %>
+        <%= f.input :name_cont, placeholder: 'Search name', input_html: { class: 'input-sm' } %>
+        <%= f.button :submit, 'Search', class: 'btn btn-xs btn-primary'  %>
+        <%= link_to trips_path, class: 'btn btn-xs btn-default' do %>
             <%= fa_icon :times, text: 'Clear' %>
         <% end %>
     <% end %>
@@ -49,7 +49,7 @@
       </table>
       <%= paginate @trips %>
  <% else %>
-      <div class="hero-unit text-center">
+      <div class="jumbotron text-center">
         <h3 class="text-error">There are currently no trips on the system. Click <strong>'Setup Trip'</strong> above to create one.</h3>
       </div>
   <% end %>

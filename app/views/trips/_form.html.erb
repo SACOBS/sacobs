@@ -1,24 +1,34 @@
-<%= simple_form_for @trip, html: { class: 'form-horizontal' } do |f| %>
-    <div class="control-group">
-      <div class="controls">
+<%= simple_form_for @trip do |f| %>
+    <div class='form-group'>
         <%= f.button :submit  %>
         <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
-      </div>
+    </div>
+    <div class='row'>
+        <div class="col-md-6">
+            <%= f.input :name, autofocus: true, placeholder: 'Name' %>
+            <div class='row'>
+             <div class='col-sm-6'>
+               <%= f.input :start_date, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
+
+             </div>
+             <div class='col-md-6'>
+               <%= f.input :end_date, placeholder: 'End date', input_html: {  data: { behaviour: :datepicker } }  %>
+
+             </div>
+            </div>
+            <%= f.input :notes, as: :text, placeholder: 'Notes', input_html: { rows: 8 } %>
+        </div>
+        <div class='col-md-6'>
+          <%= f.association :route, prompt: 'Select Route' %>
+          <%= f.association :bus, prompt: 'Select Bus' %>
+          <%= f.association :drivers, as: :check_boxes %>
+        </div>
+
+  </div>
+    <div class='form-group'>
+        <%= f.button :submit  %>
+        <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
     </div>
 
-    <fieldset>
-      <%= f.input :name, autofocus: true, placeholder: 'Name' %>
-      <%= f.input :start_date, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
-      <%= f.input :end_date, placeholder: 'End date', input_html: {  data: { behaviour: :datepicker } }  %>
-      <%= f.association :route, as: :radio_buttons, item_wrapper_class: 'inline' %>
-      <%= f.association :bus, as: :radio_buttons, item_wrapper_class: 'inline' %>
-      <%= f.association :drivers, as: :check_boxes, item_wrapper_class: 'inline' %>
-      <%= f.input :notes, as: :text, placeholder: 'Notes' %>
-    </fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit  %>
-        <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
-      </div>
-    </div>
+
 <% end %>

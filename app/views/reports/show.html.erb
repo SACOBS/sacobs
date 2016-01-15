@@ -4,7 +4,7 @@
   </h2>
   <div class="actions">
     <%= back_to reports_path %>
-    <%= link_to edit_report_path(@report), class: 'btn btn-inverse' do %>
+    <%= link_to edit_report_path(@report), class: 'btn btn-warning' do %>
         <%= fa_icon :edit, text: 'Edit' %>
     <% end %>
     <%= link_to @report, method: :delete,  class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :report) } do %>
@@ -18,7 +18,7 @@
     <% end %>
   </div>
 </div>
-<div class="well well-small">
+<div class="well well-sm">
   <h3>
     <%= @report.name %>
   </h3>
@@ -35,10 +35,10 @@
           <% results_per_month.each do |result| %>
               <tr>
                 <td>
-                  <%= result.trip.name %>
+                  <%= result&.trip&.name %>
                 </td>
                 <td>
-                  <%= time_tag(result.trip.start_date) %>
+                  <%= time_tag(result&.trip&.start_date || Date.current) %>
                 </td>
                 <td>
                   <%= status_label_for(result) %>
@@ -47,7 +47,7 @@
                   <%= result.client.full_name %>
                 </td>
                 <td>
-                  <%= content_tag(:span, result.stop.name, class: 'label label-inverse') %>
+                  <%= content_tag(:span, result&.stop&.name, class: 'label label-inverse') %>
                 </td>
                 <td>
                   <%= badge_for(result.quantity) %>
@@ -60,4 +60,3 @@
       <% end %>
   <% end %>
 </div>
-

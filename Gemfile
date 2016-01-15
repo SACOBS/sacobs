@@ -26,16 +26,16 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Frontend
-gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-sass'
 gem 'normalize-rails'
-gem 'bootswatch-rails', '~> 0.5.0'
+gem 'bootswatch-rails'
 gem 'bootstrap_sortable_rails'
 gem 'momentjs-rails'
 gem 'kaminari'
 gem 'nprogress-rails'
 
 # Forms
-gem 'simple_form', '~> 3.0.0'
+gem 'simple_form'
 
 # Authentication
 gem 'devise'
@@ -74,7 +74,7 @@ gem 'sucker_punch', '~> 1.0'
 gem 'pg'
 
 # Profiling
-gem 'rack-mini-profiler', require: false 
+gem 'rack-mini-profiler', require: false
 gem 'flamegraph'
 gem 'stackprof'
 gem 'memory_profiler'
