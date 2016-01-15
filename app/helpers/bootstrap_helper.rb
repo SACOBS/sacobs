@@ -1,5 +1,5 @@
 module BootstrapHelper
-  TABLE_CLASSES = { default: 'table', bordered: 'table-bordered', striped: 'table-striped', hover: 'table-hover', condensed: 'table-condensed' }
+  TABLE_CLASSES = { default: 'table', bordered: 'table-bordered', striped: 'table-striped', hover: 'table-hover', condensed: 'table-condensed', responsive: 'table-responsive' }
 
   def bootstrap_table(*args)
     options = args.extract_options!

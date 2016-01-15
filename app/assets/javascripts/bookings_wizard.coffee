@@ -1,6 +1,16 @@
 $(document).on "page:change", ->
   return unless $(".bookings-wizard").length > 0
 
+  $('#booking_client_id').change ->
+    $.getJSON "/clients/" + $(this).val(), (client) ->
+      for key, value of client
+         unless key == 'id'
+          $input = $('.new-client-fields').find('[name*=' + key + ']')
+          if $input.is(':checkbox')
+            $input.prop('checked', value)
+          else
+            $input.val(value)
+
   $('.amount').on 'change', ->
     total = 0
     $('#line_items tr.line_item').each ->

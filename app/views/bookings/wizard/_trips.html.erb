@@ -9,7 +9,7 @@
                   <td>
                     <%= simple_form_for booking, namespace: stop.id, url: wizard_path, method: :patch, wrapper: false ,defaults: {label: false} do |f| %>
                         <% if step == :trip_details %>
-                            <%= bootstrap_table headers: ['Trip', 'Start Date', 'Connection', 'Available Seats', 'Pricing', 'Qty'], types: [:condensed] do %>
+                            <%= bootstrap_table headers: ['Trip', 'Start Date', 'Connection', 'Available Seats', 'Pricing', 'Qty'], types: [:condensed, :responsive] do %>
                             <tr>
                               <td>
                                 <%= link_to stop.trip.name, trip_path(stop.trip_id), target: '_blank' %>
@@ -26,8 +26,8 @@
                               <td>
                                 <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
                               </td>
-                              <td>
-                                <%= f.input :quantity, as: :integer, input_html: {max: stop.available_seats, class: 'input-mini'} %>
+                              <td class='row'>
+                                <%= f.input :quantity, as: :integer, input_html: { max: stop.available_seats } %>
                               </td>
                               <td>
                                 <%= token_tag %>
@@ -57,7 +57,7 @@
                                     <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
                                   </td>
                                   <td>
-                                    <%= return_booking.input :quantity, as: :integer, input_html: {min: 1, max: stop.available_seats, class: 'input-mini'} %>
+                                    <%= return_booking.input :quantity, as: :integer, input_html: {min: 1, max: stop.available_seats } %>
                                   </td>
                                   <td>
                                     <%= token_tag %>
@@ -76,7 +76,7 @@
         <% end %>
     <% end %>
 <% else %>
-    <div class="hero-unit text-center">
+    <div class="jumbotron text-center">
       <h3>There are no trips available. To setup a trip please press the button below.</h3>
       <%= link_to new_trip_path, class: 'btn btn-info', target: '_blank' do %>
           <%= fa_icon :plus, text: 'Setup trip' %>

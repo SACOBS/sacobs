@@ -33,7 +33,7 @@ class ClientsController < ApplicationController
 
   def index
     if request.format.xls?
-      @clients = Client.all 
+      @clients = Client.all
     else
       @clients = Client.surname_starts_with(params[:letter] ||= 'A').page(params[:page])
     end
@@ -51,7 +51,9 @@ class ClientsController < ApplicationController
   end
 
   def show
-    fresh_when @client
+    respond_with(@client) do |format|
+      format.html { fresh_when @client }
+    end   
   end
 
   def new
