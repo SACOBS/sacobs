@@ -1,7 +1,7 @@
 <%= simple_form_for :q, url: search_bookings_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'booking_search', data: { type: :html } } do |f| %>
     <%= f.input :created_at_date_eq, placeholder: 'Booking date', input_html: { class: 'input-sm', data: { behaviour: :datepicker } }  %>
     <%= f.input :reference_no_or_client_surname_or_client_home_no_or_client_cell_no_or_client_work_no_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
-    <%= f.button :submit, 'Search', class: 'btn btn-sm btn-warning' %>
+    <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success' %>
     <%= link_to bookings_path, class: 'btn btn-sm btn-default' do %>
         <%= fa_icon :times, text: 'Clear' %>
     <% end %>

@@ -6,10 +6,10 @@
     <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <%= simple_form_for @booking, url: wizard_path, defaults: { label: false } do |f| %>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit, 'Complete (alt + n)', autofocus: true, accesskey: 'n' %>
-      </div>
+    <div class="form-group">
+
+        <%= f.button :submit, 'Complete (alt + n)', autofocus: true, accesskey: 'n', class: 'btn btn-success' %>
+
     </div>
     <%= bootstrap_table headers: %w(Description Amount), types: [:condensed], html_options: { id: 'line_items' } do %>
         <%= f.simple_fields_for :invoice do |invoice| %>
@@ -50,9 +50,9 @@
           </td>
         </tr>
     <% end %>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit, 'Complete (alt + n)', autofocus: true, accesskey: 'n' %>
-      </div>
+     <div class="form-group">
+
+        <%= f.button :submit, 'Complete (alt + n)', autofocus: true, accesskey: 'n', class: 'btn btn-success' %>
+
     </div>
 <% end %>

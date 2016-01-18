@@ -13,7 +13,7 @@
 <div class="search pull-right">
   <%= simple_form_for :q, url: search_cities_path, defaults: { required: false, label: false }, html: { class: 'form-inline' },  method: :get, remote: true do |f| %>
       <%= f.input :name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
-      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-warning'  %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
       <%= link_to cities_path, class: 'btn btn-sm btn-default' do %>
           <%= fa_icon :times, text: 'Clear' %>
       <% end %>

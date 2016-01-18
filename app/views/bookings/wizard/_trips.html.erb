@@ -33,7 +33,7 @@
                                 <%= token_tag %>
                                 <%= f.hidden_field :trip_id, value: stop.trip_id %>
                                 <%= f.hidden_field :stop_id, value: stop.id %>
-                                <%= f.button :submit, 'Book' %>
+                                <%= f.button :submit, 'Book', class: 'btn btn-success' %>
                               </td>
                             </tr>
                         <% end %>
@@ -63,7 +63,7 @@
                                     <%= token_tag %>
                                     <%= return_booking.hidden_field :trip_id, value: stop.trip.id %>
                                     <%= return_booking.hidden_field :stop_id, value: stop.id %>
-                                    <%= f.button :submit, 'Book Return' %>
+                                    <%= f.button :submit, 'Book Return', class: 'btn btn-success' %>
                                   </td>
                                 </tr>
                             <% end %>

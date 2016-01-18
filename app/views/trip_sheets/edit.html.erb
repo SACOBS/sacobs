@@ -7,6 +7,6 @@
 </div>
 <%= simple_form_for @trip, url: trip_sheet_path do |f| %>
 
-    <%= f.input :notes, label: false, as: :text, input_html: { class: 'input-xxlarge', rows: 20, style: 'width: 100%;' }, autofocus: true %>
-    <%= f.button :submit  %>
+    <%= f.input :notes, label: false, as: :text, input_html: { class: 'input-lg', rows: 20, style: 'width: 100%;' }, autofocus: true %>
+    <%= f.button :submit, class: 'btn btn-success'  %>
 <% end %>

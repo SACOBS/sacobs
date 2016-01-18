@@ -6,7 +6,7 @@
     <%= simple_form_for :q, url: trip_sheets_path, method: :get  do |f| %>
         <%= f.input :start_date_eq, placeholder: 'Date of trip', label: false, input_html: {  data: { behaviour: :datepicker } }  %>
         <%= f.input :route_id_in, collection: Route.all, as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route' %>
-        <%= f.button :submit, 'Search' %>
+        <%= f.button :submit, 'Search', class: 'btn btn-success' %>
     <% end %>
 <% end %>
 <div class="results">
