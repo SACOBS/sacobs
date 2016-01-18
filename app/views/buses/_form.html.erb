@@ -1,0 +1,29 @@
+<%= simple_form_for @bus do |f| %>
+    <fieldset>
+      <%= f.input :name, autofocus: true %>
+      <%= f.input :capacity, readonly: true %>
+      <%= f.input :year %>
+      <%= f.input :model %>
+    </fieldset>
+    <% if @bus.persisted? %>
+    <fieldset>
+      <%= bootstrap_table headers: ['Row', 'Number', ''], types: [:hover, :condensed], html_options: { id: 'seats' } do %>
+          <%= f.simple_fields_for :seats, wrapper: false do |seat| %>
+              <tr>
+                <td>
+                  <%= seat.input :row, label: false, class: 'input-sm' %>
+                </td>
+                <td>
+                  <%= seat.input :number, label: false, class: 'input-sm' %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+    </fieldset>
+    <% end %>
+
+    <div class='form-group'>
+      <%= f.button :submit, class: 'btn btn-success' %>
+    </div>
+
+<% end %>

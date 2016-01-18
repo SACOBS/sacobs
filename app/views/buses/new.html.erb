@@ -4,22 +4,4 @@
 <div class="page-header">
   <h2>New Bus</h2>
 </div>
-<%= simple_form_for @bus, html: { class: 'form-horizontal' } do |f| %>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit %>
-      </div>
-    </div>
-
-    <fieldset>
-      <%= f.input :name, autofocus: true, placeholder: 'Name' %>
-      <%= f.input :capacity %>
-      <%= f.input :year, placeholder: 'Year' %>
-      <%= f.input :model, placeholder: 'Model' %>
-    </fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit %>
-      </div>
-    </div>
-<% end %>
+<%= render 'form' %>

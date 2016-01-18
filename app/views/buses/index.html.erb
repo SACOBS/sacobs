@@ -11,66 +11,23 @@
   <% end %>
 <div class="search-box">
   <%= simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f| %>
-      <%= f.input :name_or_model_cont, as: :search_box %>
-      <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
-      <%= link_to buses_path, class: 'btn btn-mini btn-inverse' do %>
+      <%= f.input :name_or_model_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-warning'  %>
+      <%= link_to buses_path, class: 'btn btn-sm btn-default' do %>
           <%= fa_icon :times, text: 'Clear' %>
       <% end %>
   <% end %>
 </div>
 </div>
+   <div class='col-md-12'>
+     <ul class="media-list">
+       <%= render @buses, cache: true %>
+     </ul>
+   </div>
 
-<ul class="media-list">
-  <% @buses.each do |bus| %>
-      <% cache bus do %>
-          <li class="media">
-            <%= link_to bus, class: 'pull-left' do %>
-                <%= fa_icon 'bus 5x' %>
-            <% end %>
-            <div class="media-body">
-              <h4 class="media-heading"><%= bus.name %></h4>
-              <div class="row span7">
-                <div class="span4">
-                  <ul class="unstyled">
-                    <li>
-                      <p>
-                        <strong>Year:</strong>
-                        <%= bus.year %>
-                      </p>
-                    </li>
-                    <li>
-                      <p>
-                        <strong>Model:</strong>
-                        <%= bus.model %>
-                      </p>
-                    </li>
-                    <li>
-                      <p>
-                        <strong>Capacity:</strong>
-                        <%= bus.capacity %>
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="span3">
-                  <div class="btn-group btn-group-vertical pull-right">
-                    <%= link_to  bus, class: 'btn btn-info' do  %>
-                        <%= fa_icon :info, text: 'Show' %>
-                    <% end %>
-                    <%= link_to edit_bus_path(bus), class: 'btn btn-inverse' do %>
-                        <%= fa_icon :edit, text: 'Edit' %>
-                    <% end %>
-                    <%= link_to bus, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
-                        <%= fa_icon :times, text: 'Destroy' %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-      <% end %>
-  <% end %>
-</ul>
+</div>
+
+
 <hr>
 <%= link_to new_bus_path,  class: 'btn btn-primary' do %>
     <%= fa_icon :plus, text: 'Setup bus' %>

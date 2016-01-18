@@ -7,10 +7,10 @@
 <div class="trip-finder well well-sm">
   <h5>Search</h5>
   <%= simple_form_for :q, url: wizard_path(:trip_details), html: { class: 'form-inline', id: 'trip_search' }, method: :get, remote: true do |f| %>
-      <%= f.input :connection_from_city_id_eq, collection: City.all, label: false, autofocus: true, prompt: 'Select from city', input_html: {  class: 'input-sm' }  %>
-      <%= f.input :connection_to_city_id_eq, collection: City.all, label: false, prompt: 'Select to city', input_html: { class: 'input-sm' }  %>
-      <%= f.input :trip_start_date_gteq, placeholder: 'Trip date', label: false, input_html: { class: 'input-sm', data: { behaviour: :datepicker } }  %>
-      <%= f.button :submit, 'Search', class: 'btn btn-success btn-sm' %>
+      <%= f.input :connection_from_city_id_eq, collection: cities, label: false, autofocus: true, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select from city' } }  %>
+      <%= f.input :connection_to_city_id_eq, collection: cities, label: false, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select to city' } }  %>
+      <%= f.input :trip_start_date_gteq, placeholder: 'Trip date', label: false, input_html: { data: { behaviour: :datepicker } }  %>
+      <%= f.button :submit, 'Search', class: 'btn btn-success' %>
   <% end %>
 </div>
 <div class="trips">

@@ -53,4 +53,8 @@ $(document).on "page:change", ->
     e.preventDefault()
     $(this).tab('show');
 
-
+  $('[data-behaviour~=dropdown]').select2(
+    theme: "bootstrap",
+    minimumResultsForSearch: 15,
+    width: 'resolve'
+  );

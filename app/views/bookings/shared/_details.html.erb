@@ -13,7 +13,7 @@
         <%= time_tag(booking.trip.start_date) %>
       </td>
       <td>
-        <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
+        <%= content_tag(:span, booking.stop.name, class: 'label label-info') %>
       </td>
       <td>
         <%= number_to_currency(booking.invoice.total) %>

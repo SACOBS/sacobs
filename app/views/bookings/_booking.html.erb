@@ -1,24 +1,24 @@
 <tr class="<%= row_class_for(booking)%>">
   <td>
-    <%= link_to booking, class: 'btn btn-mini btn-info' do %>
+    <%= link_to booking, class: 'btn btn-xs btn-primary' do %>
         <%= fa_icon :info, text: 'Show' %>
     <% end %>
     <% if booking.paid? || booking.reserved? %>
-        <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
+        <%= link_to ticket_path(booking), class: 'btn btn-xs btn-info', target: '_blank' do %>
             <%= fa_icon :tasks, text: 'Ticket' %>
         <% end %>
     <% end %>
     <% if booking.reserved? %>
-        <%= link_to new_booking_payment_detail_url(booking), class: 'btn btn-mini btn-inverse' do %>
+        <%= link_to new_booking_payment_detail_url(booking), class: 'btn btn-xs btn-success' do %>
             <%= fa_icon :money, text: 'Confirm' %>
         <% end %>
     <% end %>
     <% if booking.cancelled? %>
-        <%= link_to booking, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: t('messages.confirm', resource: :booking) }  do %>
+        <%= link_to booking, method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: t('messages.confirm', resource: :booking) }  do %>
             <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
     <% else %>
-        <%= link_to cancel_booking_path(booking), method: :patch, class: 'btn btn-warning btn-mini'  do %>
+        <%= link_to cancel_booking_path(booking), method: :patch, class: 'btn btn-warning btn-xs'  do %>
             <%= fa_icon :warning, text: 'Cancel' %>
         <% end %>
     <% end %>
@@ -54,7 +54,7 @@
     <%= badge_for(booking.quantity) %>
   </td>
   <td>
-    <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
+    <%= content_tag(:span, booking.stop.name, class: 'label label-info') %>
   </td>
 
 </tr>

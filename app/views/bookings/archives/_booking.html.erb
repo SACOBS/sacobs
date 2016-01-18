@@ -1,10 +1,10 @@
 <tr>
   <td>
-    <%= link_to bookings_archive_path(booking), class: 'btn btn-mini btn-info' do %>
+    <%= link_to bookings_archive_path(booking), class: 'btn btn-sm btn-info' do %>
       <%= fa_icon :info, text: 'Show' %>
     <% end %>
     <% if booking.paid? || booking.reserved? %>
-        <%= link_to ticket_path(booking), class: 'btn btn-mini btn-default', target: '_blank' do %>
+        <%= link_to ticket_path(booking), class: 'btn btn-sm btn-primary', target: '_blank' do %>
             <%= fa_icon :tasks, text: 'Ticket' %>
         <% end %>
     <% end %>
@@ -24,6 +24,6 @@
     <%= badge_for(booking.quantity) %>
   </td>
   <td>
-    <%= content_tag(:span, booking.stop.name, class: 'label label-inverse') %>
+    <%= content_tag(:span, booking.stop.name, class: 'label label-info') %>
   </td>
 </tr>

@@ -7,7 +7,7 @@
     <small>(Remember the more specific the search the higher chance of success)</small>
   </h2>
   <h3>
-    Results for search term <%= [params[:q][:reference_no_or_client_surname_cont], params[:q][:created_at_date_eq]].join(' ') %>
+    Results for search term <%= [params[:q][:reference_no_or_client_surname_or_client_home_no_or_client_cell_no_or_client_work_no_cont], params[:q][:created_at_date_eq]].join(' ') %>
   </h3>
   <%= back_to bookings_path %>
   <div class="search pull-right">
@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="sort-links">
-  <ul class="inline">
+  <ul class="list-inline">
     <li class="header">Sort By:</li>
     <li>
       <%= sort_link @search, :client_full_name, 'Client', default_order: :desc %>

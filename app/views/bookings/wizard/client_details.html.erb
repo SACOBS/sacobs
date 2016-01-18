@@ -12,7 +12,7 @@
     <div class="search">
       <fieldset>
         <legend>Search for client</legend>
-        <%= f.association :client, label_method: :full_name,  autofocus: true %>
+        <%= f.association :client, collection: clients, label_method: :full_name,  autofocus: true, input_html: { data: { behaviour: 'dropdown', placeholder: 'Select a client' } } %>
       </fieldset>
     </div>
     <div class="new-client-fields">

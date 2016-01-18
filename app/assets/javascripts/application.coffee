@@ -3,6 +3,7 @@
 #= require jquery-ui/sortable
 #= require jquery-ui/effect-highlight
 #= require jquery-ui/datepicker
+#= require select2
 #= require nprogress
 #= require nprogress-ajax
 #= require nprogress-turbolinks
@@ -11,7 +12,6 @@
 #= require bootstrap-sortable
 #= require cocoon
 #= require turbolinks
-#= require app.type_ahead
 #= require bookings_wizard
 #= require destinations
 #= require pricing

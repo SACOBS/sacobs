@@ -33,6 +33,7 @@ gem 'bootstrap_sortable_rails'
 gem 'momentjs-rails'
 gem 'kaminari'
 gem 'nprogress-rails'
+gem 'select2-rails'
 
 # Forms
 gem 'simple_form'

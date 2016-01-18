@@ -4,36 +4,4 @@
 <div class="page-header">
   <h2>Edit Bus</h2>
 </div>
-<%= simple_form_for @bus, html: { class: 'form-horizontal' } do |f| %>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit  %>
-      </div>
-    </div>
-
-    <fieldset>
-      <%= f.input :name, autofocus: true %>
-      <%= f.input :capacity, readonly: true %>
-      <%= f.input :year %>
-      <%= f.input :model %>
-    </fieldset>
-    <fieldset>
-      <%= bootstrap_table headers: ['Row', 'Number', ''], types: [:hover, :condensed], html_options: { id: 'seats' } do %>
-          <%= f.simple_fields_for :seats, wrapper: false do |seat| %>
-              <tr>
-                <td>
-                  <%= seat.input :row, label: false, class: 'input-small' %>
-                </td>
-                <td>
-                  <%= seat.input :number, label: false, class: 'input-small' %>
-                </td>
-              </tr>
-          <% end %>
-      <% end %>
-    </fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit %>
-      </div>
-    </div>
-<% end %>
+<%= render 'form' %>

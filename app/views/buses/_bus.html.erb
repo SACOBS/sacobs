@@ -1,25 +1,45 @@
-<tr class="<%= dom_class(bus) %>" id="<%= dom_id(bus) %>">
-  <td>
-    <%= link_to  bus, class: 'btn btn-mini btn-info' do  %>
-      <%= fa_icon :info, text: 'Show' %>
-    <% end %>
-    <%= link_to edit_bus_path(bus), class: 'btn btn-mini btn-inverse' do %>
-       <%= fa_icon :edit, text: 'Edit' %>
-    <% end %>
-    <%= link_to bus, method: :delete, class: 'btn btn-mini btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
-        <%= fa_icon :times, text: 'Destroy' %>
-    <% end %>
-  </td>
-  <td>
-    <%= link_to bus.name, bus %>
-  </td>
-  <td>
-    <%= bus.year %>
-  </td>
-  <td>
-    <%= bus.model %>
-  </td>
-  <td>
-    <%= bus.capacity %>
-  </td>
-</tr>
+<% cache bus do %>
+<li class="media">
+<div class='media-left'>
+  <%= link_to bus do %>
+  <%= fa_icon 'bus 3x' %>
+  <% end %>
+</div>
+
+<div class="media-body">
+  <h4 class="media-heading"><%= bus.name %></h4>
+  <dl class="dl-horizontal">
+    <dt>
+      Year:
+    </dt>
+    <dd>
+      <%= bus.year %>
+    </dd>
+    <dt>
+      Model:
+    </dt>
+    <dd>
+      <%= bus.model %>
+    </dd>
+    <dt>
+      Capacity:
+    </dt>
+    <dd>
+      <%= bus.capacity %>
+    </dd>
+
+  </dl>
+</div>
+<div class="btn-group btn-group-vertical media-right">
+  <%= link_to  bus, class: 'btn btn-info' do  %>
+  <%= fa_icon :info, text: 'Show' %>
+  <% end %>
+  <%= link_to edit_bus_path(bus), class: 'btn btn-warning' do %>
+  <%= fa_icon :edit, text: 'Edit' %>
+  <% end %>
+  <%= link_to bus, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
+  <%= fa_icon :times, text: 'Destroy' %>
+  <% end %>
+</div>
+</li>
+<% end %>

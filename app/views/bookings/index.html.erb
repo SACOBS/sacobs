@@ -18,34 +18,22 @@
   <ul class="nav nav-tabs">
     <li class="active">
       <%= link_to bookings_path(type: :standby), data: { toggle: 'tab', target: '#standby' }, remote: true do %>
-          Standby/Expired
-        <span class="badge badge-warning">
-          <%= @presenter.standby_booking_count %>
-        </span>
+        <p> <strong>Standby/Expired</strong> <span class="label label-warning"> <%= @presenter.standby_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :open), data: { toggle: 'tab', target: '#open' }, remote: true do %>
-        Reserved
-        <span class="badge badge-info">
-          <%= @presenter.reserved_booking_count %>
-        </span>
+          <p> <strong>Reserved</strong> <span class="label label-info"> <%= @presenter.reserved_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :paid), data: { toggle: 'tab', target: '#paid' }, remote: true do %>
-          Paid
-        <span class="badge badge-success">
-          <%= @presenter.paid_booking_count %>
-        </span>
+         <p> <strong>Paid</strong> <span class="label label-success"> <%= @presenter.paid_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :cancelled) ,data: { toggle: 'tab', target: '#cancelled' }, remote: true do %>
-          Cancelled
-        <span class="badge badge-important">
-          <%= @presenter.cancelled_booking_count %>
-        </span>
+          <p><strong>Cancelled</strong> <span class="label label-danger"> <%= @presenter.cancelled_booking_count %></span></p>
       <% end %>
     </li>
   </ul>
