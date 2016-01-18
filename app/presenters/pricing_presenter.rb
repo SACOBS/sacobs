@@ -50,11 +50,11 @@ class PricingPresenter
   end
 
   def discounts
-    @discounts ||= Discount.all.to_a
+    @discounts ||= Discount.includes(:passenger_type).all.to_a
   end
 
   def seasonal_discounts
-    @seasonal_discounts ||= SeasonalDiscount.applicable.to_a
+    @seasonal_discounts ||= SeasonalDiscount.includes(:passenger_type).applicable.to_a
   end
 
   def passenger_types

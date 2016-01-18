@@ -1,6 +1,6 @@
 <div class="col-md-4 client well well-sm" id="<%= dom_id(client) %>">
   <div class="media">
-    <div class="pull-left">
+    <div class="media-left">
       <i class="fa fa-user fa-2x"></i>
     </div>
     <div class="media-body">
@@ -36,7 +36,7 @@
         <%= link_to client, class: 'btn btn-info btn-sm' do %>
           <%= fa_icon :info, text: 'Show' %>
         <% end %>
-        <%= link_to edit_client_path(client), class: 'btn btn-success btn-sm' do %>
+        <%= link_to edit_client_path(client), class: 'btn btn-warning btn-sm' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
         <%= link_to client, class: 'btn btn-danger btn-sm', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>

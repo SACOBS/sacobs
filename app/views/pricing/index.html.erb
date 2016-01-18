@@ -5,12 +5,18 @@
     <h3>Quick Quote</h3>
     <div class="connection-finder">
       <%= simple_form_for :q do |f| %>
-          <%= f.input :route, collection: Route.all, as: :radio_buttons, item_wrapper_class: 'inline', label: 'Select a route', autofocus: true %>
+          <fieldset>
+          <legend><h5>Select route</h5></legend>
+          <%= f.input :route, collection: Route.all, as: :radio_buttons, item_label_class: 'radio-inline', label: false, autofocus: true,  item_wrapper_tag: false %>
+          </fieldset>
       <% end %>
+
       <h5>Connections</h5>
-      <input id="connection-search" placeholder="Search Connections" required type="text">
+            <div class='form-group'>
+      <input id="connection-search" placeholder="Search Connections" required type="text" class='form-control'>
+      </div>
       <div class="connections">
-        <ul class="unstyled" id="connections-list">
+        <ul class="list-unstyled" id="connections-list">
           <% @connections.each do |connection| %>
               <%= content_tag_for :li, connection, data: {route: connection.route_id} do %>
                   <%= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: {type: :html}, remote: true %>

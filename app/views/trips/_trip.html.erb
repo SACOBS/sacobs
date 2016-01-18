@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= link_to copy_trip_path(trip), method: :post, class: 'btn btn-warning btn-xs', data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip' do %>
+    <%= link_to copy_trip_path(trip), method: :post, class: 'btn btn-success btn-xs', data: { toggle: 'tooltip', title: 'Click here to create a copy of this trip.' }, rel: 'tooltip' do %>
         <%= fa_icon :copy, text: 'Copy' %>
     <% end %>
     <%= link_to trip_sheet_path(trip), class: 'btn btn-default btn-xs', target: '_blank' do %>
@@ -10,7 +10,7 @@
         <%= fa_icon :info, text: 'Show' %>
     <% end %>
     <% if trip.bookings.size.zero? %>
-        <%= link_to edit_trip_path(trip), class: 'btn btn-primary btn-xs' do %>
+        <%= link_to edit_trip_path(trip), class: 'btn btn-warning btn-xs' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
         <%= link_to trip, method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: t('messages.confirm', resource: :trip) } do %>

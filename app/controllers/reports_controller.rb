@@ -15,7 +15,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, except: [:index, :new, :create]
-  before_action :set_results, except: [:index, :new, :create]
+  before_action :set_results, only: [:show, :download, :pdf]
 
   def index
     @reports = Report.all
