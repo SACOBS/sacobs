@@ -13,9 +13,3 @@
 <%= bootstrap_table headers: %w(Actions Passenger Percentage), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <%= render @discounts, cache: true %>
 <% end %>
-<%= link_to new_discount_path,  class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Setup discount' %>
-<% end %>
-<%= link_to discounts_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
-<% end %>

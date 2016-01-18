@@ -21,18 +21,18 @@
 </div>
 <%= simple_form_for @route, html: { class: 'form-inline' } do |f| %>
     <%= render 'shared/error_messages', object: @route %>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit %>
+    <div class="form-group">
+
+        <%= f.button :submit, class: 'btn btn-success' %>
         <%= back_to routes_path %>
-      </div>
+
     </div>
     <hr/>
 
     <fieldset>
       <%= f.input :name, autofocus: true, label: 'Name:' %>
-      <%= f.input :cost, as: :cost, label: 'Master Rate:' %>
-      <%= f.input :distance, as: :distance, label: 'Distance:' %>
+      <%= f.input :cost, label: 'Master Rate:' %>
+      <%= f.input :distance, label: 'Distance:' %>
     </fieldset>
     <hr/>
     <fieldset>
@@ -43,28 +43,28 @@
                   <%= connection.object.name %>
                 </td>
                 <td>
-                  <%= connection.input_field :percentage, as: :percentage, class: 'input-small' %>
+                  <%= connection.input :percentage, label: false, class: 'input-sm' %>
                 </td>
                 <td>
-                  <%= connection.input_field :cost, as: :cost, class: 'input-small' %>
+                  <%= connection.input :cost, label: false, class: 'input-sm' %>
                 </td>
                 <td>
-                  <%= connection.input_field :distance, as: :distance, class: 'input-small' %>
+                  <%= connection.input :distance,  label: false, class: 'input-sm' %>
                 </td>
                 <td>
-                  <%= connection.input_field :leaving, class: 'input-small' %>
+                  <%= connection.input :leaving, label: false, class: 'input-sm' %>
                 </td>
                 <td>
-                  <%= connection.input_field :arriving, class: 'input-small' %>
+                  <%= connection.input :arriving, label: false, class: 'input-sm' %>
                 </td>
               </tr>
           <% end %>
       <% end %>
     </fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit %>
+    <div class="form-group">
+
+        <%= f.button :submit, class: 'btn btn-success' %>
         <%= back_to routes_path %>
-      </div>
+
     </div>
 <% end %>

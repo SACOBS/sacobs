@@ -8,7 +8,7 @@
       </h2>
       <div class="actions">
         <%= back_to routes_path %>
-        <%= link_to edit_route_path(@route), class: 'btn btn-inverse' do %>
+        <%= link_to edit_route_path(@route), class: 'btn btn-warning' do %>
             <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
         <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :route) } do %>
@@ -16,46 +16,23 @@
         <% end %>
       </div>
     </div>
-    <div class="well">
-      <h4>Details</h4>
-      <ul class="inline">
-        <li>
-          <p>
-            <strong>From:</strong>
-            <%= @route.destinations.first.city_name %>
-          </p>
-        </li>
-        <li>
-          <p>
-            <strong>To:</strong>
-            <%= @route.destinations.last.city_name %>
-          </p>
-        </li>
-        <li>
-          <p>
-            <strong>Master Rate:</strong>
-            <%= number_to_currency(@route.cost) %>
-          </p>
-        </li>
-        <li>
-          <p>
-            <strong>Distance:</strong>
-            <%= number_to_human(@route.distance, units: :distance) %>
-          </p>
-        </li>
-      </ul>
-      <h4>Connections</h4>
-      <%= bootstrap_table headers: ['Name', 'Distance', 'Percentage', 'Cost', 'Leaving', 'Arriving'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do %>
-          <%= render partial: 'connections/connection', collection: @route.connections, cache: true %>
-      <% end %>
-    </div>
-    <div class="actions">
-      <%= back_to routes_path %>
-      <%= link_to edit_route_path(@route), class: 'btn btn-inverse' do %>
-          <%= fa_icon :edit, text: 'Edit' %>
-      <% end %>
-      <%= link_to @route, method: :delete, class: 'btn btn-danger', data: { confirm: t('messages.confirm', resource: :route) } do %>
-          <%= fa_icon :times, text: 'Destroy' %>
-      <% end %>
-    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4 class='panel-title'><%= @route.name %></h4></div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>From:</dt>
+                <dd><%= @route.destinations.first.city_name %></dd>
+                <dt>To:</dt>
+                <dd><%= @route.destinations.last.city_name %></dd>
+                <dt>Master Rate:</dt>
+                <dd><%= number_to_currency(@route.cost) %></dd>
+                <dt>Distance:</dt>
+                <dd><%=  number_to_human(@route.distance, units: :distance)  %></dd>
+            </dl>
+        </div>
+        <%= bootstrap_table headers: ['Name', 'Distance', 'Percentage', 'Cost', 'Leaving', 'Arriving'], types: [:hover, :condensed], html_options: { id: 'connections', class: 'sortable' } do %>
+            <%= render partial: 'connections/connection', collection: @route.connections, cache: true %>
+        <% end %>
+
+   </div>
 <% end %>

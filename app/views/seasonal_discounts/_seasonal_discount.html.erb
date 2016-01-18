@@ -1,11 +1,11 @@
 <tr>
   <td>
     <% if seasonal_discount.active? %>
-      <%= link_to seasonal_discount_path(seasonal_discount, seasonal_discount: { active: false }), method: :patch, class: 'btn btn-mini btn-danger' do %>
+      <%= link_to seasonal_discount_path(seasonal_discount, seasonal_discount: { active: false }), method: :patch, class: 'btn btn-xs btn-danger' do %>
        <%= fa_icon :times, text: 'Deactivate' %>
       <% end %>
   <% else %>
-        <%= link_to seasonal_discount_path(seasonal_discount, seasonal_discount: { active: true }), method: :patch, class: 'btn btn-mini btn-danger' do %>
+        <%= link_to seasonal_discount_path(seasonal_discount, seasonal_discount: { active: true }), method: :patch, class: 'btn btn-xs btn-danger' do %>
             <%= fa_icon :times, text: 'Activate' %>
         <% end %>
     <% end %>

@@ -16,9 +16,3 @@
 <%= bootstrap_table headers: ['Actions', 'Name', 'Passenger Type', 'Percentage', 'Period From', 'Period To', 'Active'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
     <%= render @seasonal_discounts, cache: true %>
 <% end %>
-<%= link_to new_seasonal_discount_path, class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Setup priority pricing' %>
-<% end %>
-<%= link_to seasonal_discounts_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
-<% end %>

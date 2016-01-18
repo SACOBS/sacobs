@@ -1,9 +1,9 @@
 <tr class="<%= dom_class(charge) %>" id="<%= dom_id(charge) %>">
   <td>
-    <%= link_to edit_charge_path(charge), class: 'btn btn-mini btn-inverse' do  %>
+    <%= link_to edit_charge_path(charge), class: 'btn btn-xs btn-warning' do  %>
         <%= fa_icon :edit, text: 'Edit' %>
     <% end %>
-    <%= link_to charge, method: :delete,  class: 'btn btn-mini btn-danger', data: { confirm: t('messages.confirm', resource: :charge) } do  %>
+    <%= link_to charge, method: :delete,  class: 'btn btn-xs btn-danger', data: { confirm: t('messages.confirm', resource: :charge) } do  %>
         <%= fa_icon :times, text: 'Destroy' %>
     <% end %>
   </td>

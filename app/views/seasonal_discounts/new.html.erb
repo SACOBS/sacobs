@@ -5,16 +5,16 @@
   <h2>New Priority Pricing</h2>
 </div>
 <div class="row">
-  <div class="span6 pull-right">
-    <div class="calculator well well-small">
+  <div class="col-md-6 pull-right">
+    <div class="calculator well well-sm">
       <h4>Discount calculator</h4>
-      <div class="discounted-price">
-        <label for="discounted-price">New Price</label>
-        <input id="discounted-price" type="<%= :text %>" value="0"/>
-      </div>
-      <div class="original-price">
+      <div class="original-price form-group ">
         <label for="original-price">Original Price</label>
-        <input id="original-price" type="<%= :text %>" value="0"/>
+        <input id="original-price" class='form-control' type="text" value="0"/>
+      </div>
+      <div class="discounted-price form-group">
+        <label for="discounted-price">New Price</label>
+        <input id="discounted-price" class='form-control' type="text" value="0"/>
       </div>
       <div class="results">
         <p id="difference">
@@ -28,8 +28,8 @@
       </div>
     </div>
   </div>
-  <div class="span6 pull-left">
-    <%= simple_form_for @seasonal_discount,  html: { class: 'form-horizontal' } do |f| %>
+  <div class="col-md-6 pull-left">
+    <%= simple_form_for @seasonal_discount do |f| %>
         <fieldset>
           <%= f.input :name, autofocus: true, placeholder: 'Name' %>
           <%= f.association :passenger_type, include_blank: false, label_method: :description %>
@@ -38,11 +38,11 @@
           <%= f.input :period_to, placeholder: 'Period to', input_html: {  data: { behaviour: :datepicker } }  %>
           <%= f.input :active, as: :boolean, inline_label: true, label: false %>
         </fieldset>
-        <div class="control-group">
-          <div class="controls">
-            <%= f.button :submit  %>
+        <div class="form-group">
+
+            <%= f.button :submit, class: 'btn btn-success'  %>
             <%= link_to 'Cancel', seasonal_discounts_path, class: 'btn btn-default' %>
-          </div>
+
         </div>
     <% end %>
   </div>

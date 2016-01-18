@@ -21,7 +21,7 @@ class RoutesController < ApplicationController
   end
 
   def new
-    @route = RouteForm.new
+    @route = Route.new
   end
 
   def create

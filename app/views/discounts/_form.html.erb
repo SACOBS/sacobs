@@ -1,4 +1,4 @@
-<%= simple_form_for @discount, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for @discount do |f| %>
 
     <fieldset>
       <%= f.simple_fields_for :passenger_type do |passenger_type_form| %>
@@ -6,10 +6,10 @@
       <% end %>
       <%= f.input :percentage, autofocus: true %>
     </fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit  %>
+    <div class="form-group">
+
+        <%= f.button :submit, class: 'btn btn-success'  %>
         <%= link_to 'Cancel', discounts_path, class: 'btn btn-default' %>
-      </div>
+
     </div>
 <% end %>

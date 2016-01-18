@@ -17,17 +17,21 @@ $.rails.allowAction = (element) ->
 
   # Create the modal box with the message
   modal_html = """
-               <div class="modal" id="myModal">
-                 <div class="modal-header">
-                   <a class="close" data-dismiss="modal">×</a>
-                   <h4>Sacobs</h4>
-                 </div>
-                 <div class="modal-body">
-                   <p>#{message}</p>
-                 </div>
-                 <div class="modal-footer">
-                   <a data-dismiss="modal" class="btn">Cancel</a>
-                 </div>
+               <div class="modal modal-fade">
+                <div class='modal-dialog'>
+                   <div class='modal-content'> 
+                    <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h4 class='modal-title'>Sacobs</h4>
+                    </div>
+                    <div class="modal-body">
+                    <p>#{message}</p>
+                    </div>
+                    <div class="modal-footer">
+                    <a data-dismiss="modal" class="btn btn-default">Cancel</a>
+                    </div>
+                  </div>  
+                </div>    
                </div>
                """
   $modal_html = $(modal_html)

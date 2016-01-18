@@ -3,48 +3,31 @@
 <% end %>
 <div class="page-header">
   <h2>Settings</h2>
-</div>
+
 <div class="actions">
-  <%= link_to edit_settings_path, class: 'btn btn-inverse' do %>
-      <%= fa_icon :edit, text: 'Edit' %>
-  <% end %></div>
-<br/>
-<div class="well">
-  <p>
-    <strong>Booking Expiry Period:</strong>
-    <%= "#{@settings.booking_expiry_period} hours" %>
-  </p>
-  <p>
-    <strong>Email from which tickets will be sent, emails will also be cc'ed to this address:</strong>
-    <%= @settings.email %>
-  </p>
-  <p>
-    <strong>Ticket Instructions:</strong>
-    <%= simple_format(@settings.ticket_instructions) %>
-  </p>
-  <p>
-    <strong>Default Scripture:</strong>
-    <%= simple_format(@settings.default_scripture) %>
-  </p>
-  <p>
-    <strong><%= 1.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@settings.trip_sheet_note1) %>
-  </p>
-  <p>
-    <strong><%= 2.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@settings.trip_sheet_note2) %>
-  </p>
-  <p>
-    <strong><%= 3.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@settings.trip_sheet_note3) %>
-  </p>
-  <p>
-    <strong><%= 4.ordinalize %> Trip Sheet Note:</strong>
-    <%= simple_format(@settings.trip_sheet_note4) %>
-  </p>
-</div>
-<div class="actions">
-  <%= link_to edit_settings_path, class: 'btn btn-inverse' do %>
+  <%= link_to edit_settings_path, class: 'btn btn-warning' do %>
       <%= fa_icon :edit, text: 'Edit' %>
   <% end %>
-</div>
+  </div>
+  </div>
+
+<dl class='dl-horizontal'>
+  <dt>Booking Expiry Period:</dt>
+  <dd> <%= "#{@settings.booking_expiry_period} hours" %></dd>
+  <dt>Company Email:</dt>
+  <dd><%= @settings.email.presence || 'N/A' %> <em>(Tickets will be sent from this email address, and this address will be bcc'ed on the ticket emails)</em></dd>
+  <dt>Ticket Instructions:</dt>
+  <dd> <%= simple_format(@settings.ticket_instructions) %></dd>
+  <dt>Default Scripture:</dt>
+  <dd> <%= simple_format(@settings.default_scripture) %></dd>
+  <dt>1st Trip Sheet Note:</dt>
+  <dd> <%= simple_format(@settings.trip_sheet_note1) %></dd>
+  <dt>2nd Trip Sheet Note:</dt>
+  <dd> <%= simple_format(@settings.trip_sheet_note2) %></dd>
+  <dt>3rd Trip Sheet Note:</dt>
+  <dd> <%= simple_format(@settings.trip_sheet_note3) %></dd>
+  <dt>4th Trip Sheet Note:</dt>
+  <dd> <%= simple_format(@settings.trip_sheet_note4) %></dd>
+</dl>
+
+

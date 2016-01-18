@@ -9,22 +9,21 @@
   <%= link_to drivers_path, class: 'btn btn-default' do %>
       <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-</div>
+
 <div class="search pull-right">
   <%= simple_form_for :q, url: search_drivers_path, defaults: { required: false, label: false }, html: { class: 'form-inline' }, method: :get, remote: true do |f| %>
-      <%= f.input :name_start, as: :search_box %>
-      <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
-      <%= link_to drivers_path, class: 'btn btn-mini btn-inverse' do %>
+      <%= f.input :name_start, placeholder: 'Search' %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
+      <%= link_to drivers_path, class: 'btn btn-sm btn-default' do %>
           <%= fa_icon :times, text: 'Clear' %>
       <% end %>
   <% end %>
 </div>
-<%= bootstrap_table headers: %w(Actions Name Surname), types: %i(hover condensed), html_options: { class: 'sortable', id: 'drivers' } do %>
-    <%= render @drivers, cache: true %>
-<% end %>
-<%= link_to new_driver_path,  class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Setup driver' %>
-<% end %>
-<%= link_to drivers_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
-<% end %>
+</div>
+ <div class='col-md-12'>
+     <ul class="media-list">
+       <%= render @drivers, cache: true %>
+     </ul>
+</div>
+
+

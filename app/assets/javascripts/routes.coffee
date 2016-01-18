@@ -3,6 +3,11 @@ $(document).on "page:change", ->
   $('.route-destinations').on 'cocoon:after-insert',(event, destination) ->
     destination.find("td input[name*='city']").prop('enabled', true).focus()
     destination.find("td input[name*='sequence']").val(destination.index() + 1)
+    $('[data-behaviour~=dropdown]').select2(
+       theme: "bootstrap",
+       minimumResultsForSearch: 15,
+       width: 'resolve'
+    );
 
 
   $('.route-destinations').on 'cocoon:after-remove',(event, destination) ->

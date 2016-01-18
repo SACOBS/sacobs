@@ -14,14 +14,12 @@
       </fieldset>
       <div class="links">
         <hr/>
-        <%= link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-mini btn-info', data: { association_insertion_node: '#venues_table > tbody', association_insertion_method: 'append'  } %>
+        <%= link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-sm btn-info', data: { association_insertion_node: '#venues_table > tbody', association_insertion_method: 'append'  } %>
       </div>
     </div>
     <hr/>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.button :submit %>
+    <div class="form-group">
+        <%= f.button :submit, class: 'btn btn-success' %>
         <%= link_to 'Cancel', cities_path, class: 'btn btn-default' %>
-      </div>
     </div>
 <% end %>

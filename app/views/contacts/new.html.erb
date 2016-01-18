@@ -10,7 +10,7 @@
   <%= simple_form_for @contact, defaults: { required: false } do |f| %>
       <%= f.input :name %>
       <%= f.input :email %>
-      <%= f.input :message, as: :text, label: false, input_html: { class: 'input-xxlarge', rows: '10' } %>
-      <%= f.button :submit, 'Send message' %>
+      <%= f.input :message, as: :text, label: false, input_html: { class: 'input-lg', rows: '10' } %>
+      <%= f.button :submit, 'Send message', class: 'btn btn-success' %>
   <% end %>
 </div>

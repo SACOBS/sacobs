@@ -3,27 +3,27 @@
 <% end %>
 <div class="page-header">
   <h2>Cities</h2>
-</div>
-<div class="search pull-right">
-  <%= simple_form_for :q, url: search_cities_path, defaults: { required: false, label: false }, html: { class: 'form-inline' },  method: :get, remote: true do |f| %>
-      <%= f.input :name_cont, as: :search_box %>
-      <%= f.button :submit, 'Search', class: 'btn btn-mini btn-warning'  %>
-      <%= link_to cities_path, class: 'btn btn-mini btn-inverse' do %>
-          <%= fa_icon :times, text: 'Clear' %>
-      <% end %>
-  <% end %>
-</div>
-<%= link_to new_city_path,  class: 'btn btn-primary' do %>
+  <%= link_to new_city_path,  class: 'btn btn-primary' do %>
     <%= fa_icon :plus, text: 'Setup city' %>
 <% end %>
 <%= link_to cities_path, class: 'btn btn-default' do %>
     <%= fa_icon :refresh, text: 'Refresh' %>
 <% end %>
+</div>
+<div class="search pull-right">
+  <%= simple_form_for :q, url: search_cities_path, defaults: { required: false, label: false }, html: { class: 'form-inline' },  method: :get, remote: true do |f| %>
+      <%= f.input :name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-warning'  %>
+      <%= link_to cities_path, class: 'btn btn-sm btn-default' do %>
+          <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
+  <% end %>
+</div>
 <div id="cities">
   <%= render partial: 'cities', locals: { cities: @cities } %>
 </div>
 <%= link_to new_bus_path,  class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Setup bus' %>
+    <%= fa_icon :plus, text: 'Setup city' %>
 <% end %>
 <%= link_to buses_path, class: 'btn btn-default' do %>
     <%= fa_icon :refresh, text: 'Refresh' %>
