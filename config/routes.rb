@@ -160,38 +160,38 @@ Sacobs::Application.routes.draw do
 
   resources :reports do
     member do
-      get :print, defaults: { format: :pdf }
+      get :print, defaults: {format: :pdf}
       get :download
     end
   end
 
   namespace :bookings do
-    resources :archives, only: [:index, :show] do
+    resources :archives, only: %i(index show) do
       collection do
         get :search
       end
     end
   end
 
-  resources :bookings, only: [:create, :show, :index, :destroy] do
+  resources :bookings, only: %i(create show index destroy) do
     collection do
       get :search
     end
     member do
       patch :cancel
     end
-    resources :wizard, only: [:show, :update], controller: 'bookings/wizard'
+    resources :wizard, only: %i(show update), controller: "bookings/wizard"
 
-    resources :payment_details, only: [:new, :create]
+    resources :payment_details, only: %i(new create)
   end
 
-  resource :settings, only: [:show, :edit, :update]
+  resource :settings, only: %i(show edit update)
 
   resources :clients do
     collection do
       get :search
     end
-    resources :vouchers, only: [:new, :create]
+    resources :vouchers, only: %i(new create)
   end
 
   resources :cities do
@@ -200,7 +200,7 @@ Sacobs::Application.routes.draw do
     end
   end
 
-  resource :contacts, only: [:new, :create]
+  resource :contacts, only: %i(new create)
 
   resources :drivers, except: :show do
     collection do
@@ -209,7 +209,7 @@ Sacobs::Application.routes.draw do
   end
 
   namespace :trips do
-    resources :archives, only: [:index, :show] do
+    resources :archives, only: %i(index show) do
       collection do
         get :search
       end
@@ -241,42 +241,42 @@ Sacobs::Application.routes.draw do
 
   resources :buses
 
-  resources :seasonal_discounts, except: [:show, :destroy, :edit]
+  resources :seasonal_discounts, except: %i(show destroy edit)
 
   resources :discounts, except: [:show]
 
   resources :charges, except: [:show]
 
-  resources :notes, only: [:index, :create, :destroy]
+  resources :notes, only: %i(index create destroy)
 
   resources :tickets, only: [:show] do
     member do
-      get :print, defaults: { format: :pdf }
+      get :print, defaults: {format: :pdf}
       post :email
       get :download
     end
   end
 
-  resources :trip_sheets, only: [:show, :edit, :update, :index] do
+  resources :trip_sheets, only: %i(show edit update index) do
     member do
-      get :print, defaults: { format: :pdf }
+      get :print, defaults: {format: :pdf}
       get :download
     end
   end
 
-  resources :users, only: [:index, :update]
+  resources :users, only: %i(index update)
 
   authenticated :user do
     root to: 'dashboard#show', as: :authenticated_root
   end
-  root to: 'pages#show', id: 'home'
+  root to: 'pages#show', id: "home"
 
-  get '/pages/*id' => 'pages#show', as: :page, format: false
+  get "/pages/*id" => 'pages#show', :as => :page, :format => false
 
-  get 'pricing/:id', to: 'pricing#show', as: :pricing
-  get '/quick_quote', to: 'pricing#index', as: :quick_quote
+  get "pricing/:id", to: 'pricing#show', as: :pricing
+  get "/quick_quote", to: 'pricing#index', as: :quick_quote
 
-  get '/dashboard', to: 'dashboard#show', as: :dashboard
+  get "/dashboard", to: 'dashboard#show', as: :dashboard
 
-  match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
+  match "(errors)/:status", to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
 end

@@ -1,5 +1,5 @@
-class Booking::BuildInvoice
 
+class Booking::BuildInvoice
   delegate :return_booking, to: :booking
 
   def self.perform(*args)
@@ -30,6 +30,7 @@ class Booking::BuildInvoice
   end
 
   private
+
   attr_reader :booking
 
   def build_invoice(booking)
@@ -39,4 +40,4 @@ class Booking::BuildInvoice
   def build_line_item(invoice, description, amount, type)
     invoice.line_items.build(description: description, amount: amount, line_item_type: type)
   end
-end
+  end

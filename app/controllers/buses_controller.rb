@@ -13,8 +13,8 @@
 #
 
 class BusesController < ApplicationController
-  before_action :set_bus, only: [:edit, :show, :destroy, :update]
-  before_action :build_bus, only: [:new, :create]
+  before_action :set_bus, only: %i(edit show destroy update)
+  before_action :build_bus, only: %i(new create)
 
   def index
     @buses = Bus.search(params[:q]).result
@@ -54,7 +54,7 @@ class BusesController < ApplicationController
                                   :capacity,
                                   :year,
                                   :model,
-                                  seats_attributes: [:id, :_destroy, :row, :number]
+                                  seats_attributes: %i(id _destroy row number)
                                  ).merge(user_id: current_user.id)
   end
 end

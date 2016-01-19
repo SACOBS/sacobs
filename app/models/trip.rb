@@ -37,9 +37,9 @@ class Trip < ActiveRecord::Base
   has_many :bookings
 
   validates :start_date, :end_date, :route, :bus, presence: true
-  validates :drivers, length: { minimum: 1, too_short: 'minimum of 1 driver required' }
+  validates :drivers, length: {minimum: 1, too_short: "minimum of 1 driver required"}
 
-  ransacker(:start_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(trips.start_date)' }
+  ransacker(:start_date, type: :date) {|_parent| Arel::Nodes::SqlLiteral.new "date(trips.start_date)" }
 
   delegate :name, to: :route, prefix: true
   delegate :name, to: :bus, prefix: true

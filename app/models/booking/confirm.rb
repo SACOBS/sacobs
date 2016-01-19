@@ -1,3 +1,4 @@
+
 class Booking::Confirm
   def self.perform(*args)
     new(*args).perform
@@ -5,7 +6,7 @@ class Booking::Confirm
 
   def initialize(booking, user)
     @booking = booking.main || booking
-    @return_booking =  @booking.return_booking
+    @return_booking = @booking.return_booking
     @user = user
   end
 
@@ -20,5 +21,6 @@ class Booking::Confirm
   end
 
   private
+
   attr_reader :booking, :return_booking, :user, :payment_details
-end
+  end

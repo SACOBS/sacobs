@@ -24,7 +24,7 @@
 #
 
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:edit, :copy, :show, :destroy, :update]
+  before_action :set_trip, only: %i(edit copy show destroy update)
 
   def index
     @trips = Trip.includes(:bus, :route).available.page(params[:page])
@@ -32,7 +32,7 @@ class TripsController < ApplicationController
   end
 
   def search
-    @search = Trip.available.search(params[:q].merge(m: 'or'))
+    @search = Trip.available.search(params[:q].merge(m: "or"))
     @results = @search.result.includes(:bus, :route).limit(50)
   end
 
@@ -52,9 +52,9 @@ class TripsController < ApplicationController
   def copy
     copy = Trip::Copy.perform(@trip, current_user)
     if copy.save
-      redirect_to copy, notice: t('flash.trips.copy.notice', resource_name: copy.name)
+      redirect_to copy, notice: t("flash.trips.copy.notice", resource_name: copy.name)
     else
-      redirect_to trips_url, alert: t('flash.trips.copy.alert', resource_name: copy.name)
+      redirect_to trips_url, alert: t("flash.trips.copy.alert", resource_name: copy.name)
     end
   end
 
@@ -69,8 +69,9 @@ class TripsController < ApplicationController
   end
 
   private
+
   def set_trip
-    @trip = Trip.includes(bookings: [:client, stop: :connection], route: { destinations: :city}).find(params[:id])
+    @trip = Trip.includes(bookings: [:client, stop: :connection], route: {destinations: :city}).find(params[:id])
   end
 
   def trip_params

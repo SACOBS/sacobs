@@ -23,7 +23,7 @@ class Route < ActiveRecord::Base
 
   validates :name, :cost, :distance, presence: true
   validates :cost, :distance, numericality: true
-  validates :destinations, presence: true, length: { minimum: 2, too_short: 'is too short (at least %{count} destinations required)' }
+  validates :destinations, presence: true, length: {minimum: 2, too_short: "is too short (at least %{count} destinations required)"}
 
   before_save :normalize
 

@@ -64,7 +64,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    celluloid (0.17.2)
+    celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
       celluloid-fsm
@@ -98,7 +98,7 @@ GEM
     dalli (2.7.5)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
-    devise (3.5.3)
+    devise (3.5.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)

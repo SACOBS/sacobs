@@ -22,13 +22,14 @@ class PaymentDetailsController < ApplicationController
     @payment_detail.user_id = current_user.id
     if @payment_detail.save
       Booking::Confirm.perform(@booking, current_user)
-      redirect_to booking_url(@booking), notice: 'Booking has been successfully confirmed.'
+      redirect_to booking_url(@booking), notice: "Booking has been successfully confirmed."
     else
       render :new
     end
   end
 
   private
+
   def set_booking
     @booking = Booking.find(params[:booking_id])
   end

@@ -11,7 +11,7 @@
 #
 
 class DriversController < ApplicationController
-  before_action :set_driver, only: [:edit, :update, :destroy]
+  before_action :set_driver, only: %i(edit update destroy)
 
   def index
     @drivers = Driver.all
@@ -43,6 +43,7 @@ class DriversController < ApplicationController
   end
 
   private
+
   def set_driver
     @driver = Driver.find(params[:id])
   end
@@ -52,6 +53,6 @@ class DriversController < ApplicationController
   end
 
   def interpolation_options
-    { resource_name: @driver.full_name }
+    {resource_name: @driver.full_name}
   end
 end

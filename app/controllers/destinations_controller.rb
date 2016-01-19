@@ -20,10 +20,10 @@
 class DestinationsController < ApplicationController
   before_action :set_route
 
-   def update
-      @route = Route::Update.new(@route, route_params).perform
-      respond_with(@route, location: edit_route_url(@route))
-   end
+  def update
+    @route = Route::Update.new(@route, route_params).perform
+    respond_with(@route, location: edit_route_url(@route))
+  end
 
   private
 
@@ -32,6 +32,6 @@ class DestinationsController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(destinations_attributes: [:city_id, :sequence, :id])
+    params.require(:route).permit(destinations_attributes: %i(city_id sequence id))
   end
 end

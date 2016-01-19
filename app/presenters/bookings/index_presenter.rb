@@ -22,6 +22,7 @@ class Bookings::IndexPresenter
   end
 
   private
+
   def available_bookings
     @available_bookings ||= Booking.available
   end

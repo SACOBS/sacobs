@@ -31,17 +31,16 @@
 
 class BookingsController < ApplicationController
   def index
-    params[:type] ||= 'standby'
-    bookings = Booking.includes(:client, :trip, stop: :connection).available
-    case params[:type]
-      when 'open'
-        bookings = bookings.open.page(params[:reserved_page])
-      when 'paid'
-        bookings = bookings.paid.page(params[:paid_page])
-      when 'cancelled'
-        bookings = bookings.cancelled.page(params[:cancelled_page])
-      else
-        bookings = bookings.standby.page(params[:standby_page])
+    params[:type] ||= "standby"
+    bookings = case params[:type]
+               when "open"
+                 Booking.includes(:client, :trip, stop: :connection).available.open.page(params[:reserved_page])
+               when "paid"
+                 Booking.includes(:client, :trip, stop: :connection).available.paid.page(params[:paid_page])
+               when "cancelled"
+                 Booking.includes(:client, :trip, stop: :connection).available.cancelled.page(params[:cancelled_page])
+               else
+                 Booking.includes(:client, :trip, stop: :connection).available.standby.page(params[:standby_page])
     end
 
     if stale?(bookings)
@@ -51,8 +50,8 @@ class BookingsController < ApplicationController
   end
 
   def search
-    @search = Booking.available.completed.search(params[:q].merge(m: 'or'))
-    @results = @search.result.includes(:client,  :trip, stop: :connection).limit(50)
+    @search = Booking.available.completed.search(params[:q].merge(m: "or"))
+    @results = @search.result.includes(:client, :trip, stop: :connection).limit(50)
   end
 
   def create
@@ -74,6 +73,6 @@ class BookingsController < ApplicationController
   def cancel
     @booking = Booking.find(params[:id])
     Booking::Cancel.perform(@booking, current_user)
-    redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
+    redirect_to bookings_url, notice: "Booking was successfully cancelled."
   end
 end

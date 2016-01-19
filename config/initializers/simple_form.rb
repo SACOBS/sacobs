@@ -6,7 +6,7 @@ SimpleForm.setup do |config|
   # stack. The options given below are used to wrap the
   # whole input.
   config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors do |b|
+                            hint_class: :field_with_hint, error_class: :field_with_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -41,8 +41,8 @@ SimpleForm.setup do |config|
 
     ## Inputs
     b.use :label_input
-    b.use :hint,  wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
+    b.use :hint,  wrap_with: {tag: :span, class: :hint}
+    b.use :error, wrap_with: {tag: :span, class: :error}
 
     ## full_messages_for
     # If you want to display the full error message for the attribute, you can
@@ -61,7 +61,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :nested
 
   # Default class for buttons
-  #config.button_class = 'btn btn-success'
+  # config.button_class = 'btn btn-success'
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -72,7 +72,7 @@ SimpleForm.setup do |config|
   config.error_notification_tag = :div
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = 'error_notification'
+  config.error_notification_class = "error_notification"
 
   # ID to add for error notification helper.
   # config.error_notification_id = nil
@@ -97,7 +97,7 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  config.label_text = lambda { |label, required, explicit_label| "#{label}" }
+  config.label_text = ->(label, _required, _explicit_label) { label.to_s }
 
   # You can define the class to use on all labels. Default is nil.
   # config.label_class = nil
@@ -154,7 +154,7 @@ SimpleForm.setup do |config|
   # config.input_class = nil
 
   # Define the default class of the input wrapper of the boolean input.
-  config.boolean_label_class = 'checkbox'
+  config.boolean_label_class = "checkbox"
 
   # Defines if the default input wrapper class should be included in radio
   # collection wrappers.

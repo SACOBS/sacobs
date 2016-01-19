@@ -24,7 +24,7 @@ class SeasonalDiscount < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
   scope :available, -> { where(arel_table[:period_from].gteq(Time.zone.today)) }
-  scope :applicable, -> { active.where('period_from >= :date and period_to <= :date', date: Date.current)}
+  scope :applicable, -> { active.where("period_from >= :date and period_to <= :date", date: Date.current) }
 
   validates :name, :period_from, :period_to, :percentage, presence: true
 
@@ -33,6 +33,6 @@ class SeasonalDiscount < ActiveRecord::Base
   protected
 
   def normalize
-    self.name =  "#{name}".squish.upcase
+    self.name = name.to_s.squish.upcase
   end
 end

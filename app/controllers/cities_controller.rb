@@ -15,7 +15,7 @@
 #
 
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :set_city, only: %i(show edit update destroy)
 
   def index
     @cities = City.all.page(params[:page])
@@ -57,6 +57,6 @@ class CitiesController < ApplicationController
   end
 
   def city_params
-    params.fetch(:city, {}).permit(:name, venues_attributes: [:id, :name, :_destroy]).merge(user_id: current_user.id)
+    params.fetch(:city, {}).permit(:name, venues_attributes: %i(id name _destroy)).merge(user_id: current_user.id)
   end
 end

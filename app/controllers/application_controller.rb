@@ -15,9 +15,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_rack_mini_profiler
-    if current_user&.admin? && params[:rmp].present?
-      Rack::MiniProfiler.authorize_request
-    end
+    return unless user_signed_in? && current_user.admin? && params[:rmp].present?
+    Rack::MiniProfiler.authorize_request
   end
 
   def devise_parameter_sanitizer

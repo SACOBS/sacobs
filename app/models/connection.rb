@@ -31,7 +31,6 @@ class Connection < ActiveRecord::Base
   belongs_to :to, class_name: :Destination
   has_one :to_city, through: :to, source: :city
 
-
   validates :route, :from, :to, presence: true
   validates :cost, :percentage, presence: true, numericality: true
 

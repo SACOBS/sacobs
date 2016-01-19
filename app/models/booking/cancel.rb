@@ -1,5 +1,5 @@
-class Booking::Cancel
 
+class Booking::Cancel
   delegate :stop, :trip, :quantity, to: :booking
 
   def self.perform(*args)
@@ -27,4 +27,4 @@ class Booking::Cancel
   def unassign_seats
     Trip::UnassignSeats.perform(trip, stop, quantity)
   end
-end
+  end

@@ -29,13 +29,13 @@
 #
 
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: %i(show edit update destroy)
 
   def index
-    if request.format.xls?
-      @clients = Client.all
-    else
-      @clients = Client.surname_starts_with(params[:letter] ||= 'A').page(params[:page])
+    @clients = if request.format.xls?
+                 Client.all
+               else
+                 Client.surname_starts_with(params[:letter] ||= "A").page(params[:page])
     end
     respond_with(@clients) if stale?(@clients)
   end
@@ -53,7 +53,7 @@ class ClientsController < ApplicationController
   def show
     respond_with(@client) do |format|
       format.html { fresh_when @client }
-    end   
+    end
   end
 
   def new
@@ -101,6 +101,6 @@ class ClientsController < ApplicationController
   end
 
   def interpolation_options
-    { resource_name: @client.full_name }
+    {resource_name: @client.full_name}
   end
 end

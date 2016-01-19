@@ -26,5 +26,5 @@ class Destination < ActiveRecord::Base
   delegate :name, :venues, to: :city, prefix: true
 
   validates :sequence, presence: true, numericality: true
-  validates :city, uniqueness: { scope: :route, message: 'already exists for this route.' }
+  validates :city, uniqueness: {scope: :route, message: "already exists for this route."}
 end

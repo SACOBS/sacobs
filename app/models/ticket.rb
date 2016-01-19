@@ -16,43 +16,41 @@ class Ticket
   end
 
   def scripture
-    content = Rails.cache.fetch('scripture_for_today', expires_in: 8.hours) do
+    content = Rails.cache.fetch("scripture_for_today", expires_in: 8.hours) do
       Bible::Scripture.for_today || @settings.default_scripture
     end
     view_context.simple_format(content)
   end
 
   def price
-    view_context.number_to_currency total_cost, unit: 'R'
+    view_context.number_to_currency total_cost, unit: "R"
   end
 
   def discount
-    view_context.number_to_currency total_discount, unit: 'R'
+    view_context.number_to_currency total_discount, unit: "R"
   end
 
   def nett
-    view_context.number_to_currency total, unit: 'R'
+    view_context.number_to_currency total, unit: "R"
   end
 
   def to_file_name
-    "#{booking.trip.name}_#{booking.client.full_name}_#{Time.current.to_i}".tr(' ', '_').downcase
+    "#{booking.trip.name}_#{booking.client.full_name}_#{Time.current.to_i}".tr(" ", "_").downcase
   end
 
   private
 
   def total
-    @total ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total }
+    @total ||= [booking, return_booking].compact.sum {|booking| booking.invoice.total }
   end
 
   def total_cost
-    @total_cost ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total_cost }
+    @total_cost ||= [booking, return_booking].compact.sum {|booking| booking.invoice.total_cost }
   end
 
   def total_discount
-    @total_discount ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total_discount }
+    @total_discount ||= [booking, return_booking].compact.sum {|booking| booking.invoice.total_discount }
   end
 
-  def view_context
-    @view_context
-  end
+  attr_reader :view_context
 end

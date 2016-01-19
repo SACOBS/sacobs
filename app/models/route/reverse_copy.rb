@@ -23,9 +23,10 @@ class Route::ReverseCopy
   end
 
   private
+
   attr_reader :route, :user, :copy
 
   def find_or_initialize_destination(city, sequence)
-    copy.destinations.detect { |destination| destination.city == city} || copy.destinations.build(city: city, sequence: sequence)
+    copy.destinations.find {|destination| destination.city == city } || copy.destinations.build(city: city, sequence: sequence)
   end
 end

@@ -15,7 +15,7 @@
 #
 
 class DiscountsController < ApplicationController
-  before_action :set_discount, only: [:edit, :update, :destroy]
+  before_action :set_discount, only: %i(edit update destroy)
 
   def index
     @discounts = Discount.includes(:passenger_type).all

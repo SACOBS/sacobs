@@ -17,7 +17,7 @@
 #
 
 class VouchersController < ApplicationController
-  before_action :set_client, only: [:new, :create]
+  before_action :set_client, only: %i(new create)
 
   def new
     @voucher = @client.vouchers.new

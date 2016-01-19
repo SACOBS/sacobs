@@ -10,7 +10,7 @@
 #
 
 class PaymentDetail < ActiveRecord::Base
-  PAYMENT_TYPES = [:Absa, :Nedbank, :StandardBank, :Capitec, :FNB, :POB, :Cash, :Cheque, :Investec].freeze
+  PAYMENT_TYPES = %i(Absa Nedbank StandardBank Capitec FNB POB Cash Cheque Investec).freeze
 
   has_many :bookings
 

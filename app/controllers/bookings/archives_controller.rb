@@ -4,7 +4,7 @@ class Bookings::ArchivesController < ApplicationController
   end
 
   def search
-    @search = Booking.archived.search(params[:q].merge(m: 'or'))
+    @search = Booking.archived.search(params[:q].merge(m: "or"))
     @results = @search.result.includes(:client, :trip, stop: :connection).limit(50)
   end
 

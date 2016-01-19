@@ -18,6 +18,6 @@ class Charge < ActiveRecord::Base
   private
 
   def normalize
-    self.description = "#{description}".squish.upcase
+    self.description = description.to_s.squish.upcase
   end
 end

@@ -1,5 +1,4 @@
 class Trip::UnassignSeats
-
   def self.perform(*args)
     new(*args).perform
   end
@@ -16,6 +15,7 @@ class Trip::UnassignSeats
   end
 
   private
+
   attr_reader :trip, :stop, :quantity
 
   def stops

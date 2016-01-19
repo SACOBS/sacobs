@@ -1,6 +1,6 @@
 class MailInterceptor
   def self.delivering_email(message)
-    message.to = ['paul@searleconsuling.co.za']
+    message.to = ["paul@searleconsuling.co.za"]
   end
 end
 

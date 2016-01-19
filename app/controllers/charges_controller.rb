@@ -11,7 +11,7 @@
 #
 
 class ChargesController < ApplicationController
-  before_action :set_charge, only: [:edit, :update, :destroy]
+  before_action :set_charge, only: %i(edit update destroy)
 
   def index
     @charges = Charge.all

@@ -20,15 +20,15 @@ class Report < ActiveRecord::Base
   before_save :adjust_period_to, if: :period_to?
 
   def from_city
-    @from_city ||= City.where(id: criteria['stop_connection_from_city_id_eq']).pluck(:name)
+    @from_city ||= City.where(id: criteria["stop_connection_from_city_id_eq"]).pluck(:name)
   end
 
   def to_city
-    @to_city ||= City.where(id: criteria['stop_connection_to_city_id_eq']).pluck(:name)
+    @to_city ||= City.where(id: criteria["stop_connection_to_city_id_eq"]).pluck(:name)
   end
 
   def to_file_name
-    "#{name}_#{Time.current.to_i}".tr(' ', '_').downcase
+    "#{name}_#{Time.current.to_i}".tr(" ", "_").downcase
   end
 
   def date_range

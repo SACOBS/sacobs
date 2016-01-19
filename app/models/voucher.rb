@@ -23,7 +23,7 @@ class Voucher < ActiveRecord::Base
 
   before_create :generate_reference_no
 
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: {greater_than: 0}
 
   protected
 

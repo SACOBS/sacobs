@@ -33,5 +33,4 @@ FactoryGirl.define do
     name "Paul"
     surname "JvR"
   end
-
 end

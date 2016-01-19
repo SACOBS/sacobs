@@ -40,10 +40,10 @@ class Trip::Occupancy
   end
 
   def getting_on_at(destination)
-    bookings.joins(stop: :connection).where(connections: { from_id: destination.id }).sum(:quantity)
+    bookings.joins(stop: :connection).where(connections: {from_id: destination.id}).sum(:quantity)
   end
 
   def getting_off_at(destination)
-    bookings.joins(stop: :connection).where(connections: { to_id: destination.id }).sum(:quantity)
+    bookings.joins(stop: :connection).where(connections: {to_id: destination.id}).sum(:quantity)
   end
 end

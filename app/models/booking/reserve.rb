@@ -1,13 +1,10 @@
+
 class Booking::Reserve
-
-
-
   delegate :return_booking, to: :booking
 
   def self.perform(*args)
     new(*args).perform
   end
-
 
   def initialize(booking, settings)
     @booking = booking
@@ -28,6 +25,7 @@ class Booking::Reserve
   end
 
   private
+
   attr_reader :booking, :settings
 
   def assign_seats(trip, stop, qty)
@@ -35,10 +33,10 @@ class Booking::Reserve
   end
 
   def generate_reference(booking)
-    "#{SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase.concat('%03d' % booking.sequence_id)}"
+    SecureRandom.base64(15).tr("+/=lIO0", "pqrsxyz")[0..4].upcase.concat("%03d" % booking.sequence_id).to_s
   end
 
   def expiry_date
-   @expiry_date ||= settings.booking_expiry_period.hours.from_now
+    @expiry_date ||= settings.booking_expiry_period.hours.from_now
   end
-end
+  end

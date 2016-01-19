@@ -23,7 +23,7 @@ class Trip::Create
   private
 
   def create_stops
-    stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity } })
+    stops.create(route.connections.map {|connection| {connection: connection, available_seats: bus.capacity} })
     stops.all?(&:persisted?)
   end
 end

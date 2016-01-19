@@ -33,8 +33,8 @@ class Client < ActiveRecord::Base
 
   PENSIONER_AGE = 65
 
-  TITLES = [:Mr, :Mrs, :Dr, :Miss, :Professor, :Master].freeze
-  BANKS = [:Absa, :StandardBank, :Nedbank, :Capitec, :FNB, :Investec, :Cash].freeze
+  TITLES = %i(Mr Mrs Dr Miss Professor Master).freeze
+  BANKS = %i(Absa StandardBank Nedbank Capitec FNB Investec Cash).freeze
 
   attr_reader :age, :full_name
 
@@ -44,14 +44,14 @@ class Client < ActiveRecord::Base
   has_many :vouchers
 
   validates :name, :surname, presence: true
-  validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
-  validates :date_of_birth, presence: { message: 'obtained from id number is not a valid date, please check the id number field.' }, if: :id_number?
+  validates :surname, uniqueness: {scope: :name, message: "and name already exists"}
+  validates :date_of_birth, presence: {message: "obtained from id number is not a valid date, please check the id number field."}, if: :id_number?
 
   before_validation :set_birth_date, if: :id_number?
   before_save :normalize
 
   ransacker :full_name do |parent|
-    Arel::Nodes::InfixOperation.new('||', Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')), parent.table[:surname])
+    Arel::Nodes::InfixOperation.new("||", Arel::Nodes::InfixOperation.new("||", parent.table[:name], Arel::Nodes.build_quoted(" ")), parent.table[:surname])
   end
 
   scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
@@ -76,7 +76,11 @@ class Client < ActiveRecord::Base
   end
 
   def set_birth_date
-    date = Date.strptime(id_number[0..5], '%y%m%d') rescue nil
+    date = begin
+             Date.strptime(id_number[0..5], "%y%m%d")
+           rescue
+             nil
+           end
     self.date_of_birth = (date&.> Date.current) ? date.prev_year(100) : date
   end
 end

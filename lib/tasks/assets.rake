@@ -1,12 +1,12 @@
 namespace :assets do
   desc "Create .gz versions of assets"
-  task :gzip => :environment do
+  task gzip: :environment do
     zip_types = /\.(?:css|html|js|otf|svg|txt|xml)$/
 
     public_assets = File.join(
-        Rails.root,
-        "public",
-        Rails.application.config.assets.prefix)
+      Rails.root,
+      "public",
+      Rails.application.config.assets.prefix)
 
     Dir["#{public_assets}/**/*"].each do |f|
       next unless f =~ zip_types

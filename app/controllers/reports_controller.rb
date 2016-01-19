@@ -14,8 +14,8 @@
 #
 
 class ReportsController < ApplicationController
-  before_action :set_report, except: [:index, :new, :create]
-  before_action :set_results, only: [:show, :download, :pdf]
+  before_action :set_report, except: %i(index new create)
+  before_action :set_results, only: %i(show download pdf)
 
   def index
     @reports = Report.all
@@ -38,14 +38,14 @@ class ReportsController < ApplicationController
     respond_with @report
   end
 
-  def show;end
+  def show; end
 
   def download
-    render pdf: @report.to_file_name, template: 'reports/results.pdf.erb', disposition: :attachment, layout: 'application.pdf.erb'
+    render pdf: @report.to_file_name, template: "reports/results.pdf.erb", disposition: :attachment, layout: "application.pdf.erb"
   end
 
   def print
-    render pdf: @report.to_file_name, template: 'reports/results.pdf.erb', layout: 'application.pdf.erb'
+    render pdf: @report.to_file_name, template: "reports/results.pdf.erb", layout: "application.pdf.erb"
   end
 
   def destroy
@@ -54,6 +54,7 @@ class ReportsController < ApplicationController
   end
 
   private
+
   def set_report
     @report = Report.find(params[:id])
   end

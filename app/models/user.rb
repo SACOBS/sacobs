@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum role: [:clerk, :admin]
+  enum role: %i(clerk admin)
 
   validates :name, :surname, presence: true
 
