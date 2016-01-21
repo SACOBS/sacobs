@@ -19,7 +19,7 @@
     </li>
   </ol>
 </div>
-<%= simple_form_for @route, html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for @route do |f| %>
     <%= render 'shared/error_messages', object: @route %>
     <div class="form-group">
 
@@ -62,9 +62,7 @@
       <% end %>
     </fieldset>
     <div class="form-group">
-
         <%= f.button :submit, class: 'btn btn-success' %>
         <%= back_to routes_path %>
-
     </div>
 <% end %>

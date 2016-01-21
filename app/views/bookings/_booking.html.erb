@@ -1,10 +1,10 @@
 <tr class="<%= row_class_for(booking)%>">
   <td>
-    <%= link_to booking, class: 'btn btn-xs btn-primary' do %>
+    <%= link_to booking, class: 'btn btn-xs btn-info' do %>
         <%= fa_icon :info, text: 'Show' %>
     <% end %>
     <% if booking.paid? || booking.reserved? %>
-        <%= link_to ticket_path(booking), class: 'btn btn-xs btn-info', target: '_blank' do %>
+        <%= link_to ticket_path(booking), class: 'btn btn-xs btn-primary', target: '_blank' do %>
             <%= fa_icon :tasks, text: 'Ticket' %>
         <% end %>
     <% end %>

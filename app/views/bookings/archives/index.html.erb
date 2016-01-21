@@ -6,9 +6,12 @@
   <%= link_to bookings_archives_path, class: 'btn btn-default' do %>
       <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-</div>
 <div class="search pull-right">
   <%= render 'search_form' %>
+   <p>
+     <i class='small'>Search on booking date or reference no or </br> client surname or client home, work and cell numbers.</i>
+  </p>   
+</div>
 </div>
 <div id="bookings">
   <%= paginate @bookings %>

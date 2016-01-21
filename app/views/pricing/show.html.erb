@@ -9,9 +9,9 @@
     <%= number_to_currency @pricing.price, unit: 'R' %>
   </p>
 </div>
-<div class="span12">
+<div class="col-md-12">
   <div class="row">
-    <div class="span5 well">
+    <div class="col-md-5 well">
       <h5>Discounts</h5>
       <% @pricing.discount_prices.each do |key, value| %>
         <ul>
@@ -19,7 +19,7 @@
         </ul>
       <% end %>
     </div>
-    <div class="span5 well">
+    <div class="col-md-5 well">
       <h5>Charges</h5>
       <% @pricing.charges.each do |key, value| %>
         <ul>

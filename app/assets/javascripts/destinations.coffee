@@ -1,6 +1,8 @@
 $(document).on "page:change", ->
   return unless $(".destinations").length > 0
   $('[data-behaviour~=sortable]').sortable(
+    appendTo: 'body'
+    helper: 'clone'  
     axis: 'y'
     items: '.destination'
     cursor: 'move'
@@ -12,6 +14,5 @@ $(document).on "page:change", ->
         $(row).find("input[name*='sequence']" ).val(index + 1)
   )
 
-  $('.route-destinations').on 'cocoon:after-insert',(event, destination) ->
-    next_sequence = destination.parent('tbody').prop('rows').length
-    destination.find("td input[name*='sequence']").val(next_sequence)
+  $('.route-destinations').on 'cocoon:before-insert',(event, destination) ->
+    destination.find("td input[name*='sequence']").val(parseInt($(this).find('tr:last').find("td input[name*='sequence']").val()) + 1)

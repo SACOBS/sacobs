@@ -9,7 +9,7 @@
     <h4>Destinations</h4>
     <%= simple_form_for @route, url: route_destinations_path(@route), method: :patch do |f| %>
         <%= render 'shared/error_messages', object: @route %>
-        <%= link_to_add_association  f, :destinations, data: { association_insertion_node: 'tbody', association_insertion_method: 'append' },  class: 'btn btn-warning btn-sm' do %>
+        <%= link_to_add_association  f, :destinations, data: { association_insertion_node: '.route-destinations > tbody', association_insertion_method: 'append' },  class: 'btn btn-warning btn-sm' do %>
             <%= fa_icon :plus, text: 'Add destination' %>
         <% end %>
         <table id="destinations" class="table table-bordered table-condensed route-destinations" data-behaviour="sortable">

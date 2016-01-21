@@ -1,12 +1,12 @@
 $(document).on "page:change", ->
   return unless $(".routes").length > 0
-  $('.route-destinations').on 'cocoon:after-insert',(event, destination) ->
+  $('.route-destinations').on 'cocoon:after-insert', (event, destination) ->
+    console.log(destination.index())
     destination.find("td input[name*='city']").prop('enabled', true).focus()
     destination.find("td input[name*='sequence']").val(destination.index() + 1)
     $('[data-behaviour~=dropdown]').select2(
        theme: "bootstrap",
-       minimumResultsForSearch: 15,
-       width: 'resolve'
+       minimumResultsForSearch: 15
     );
 
 
