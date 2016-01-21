@@ -15,7 +15,6 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, except: %i(index new create)
-  before_action :set_results, only: %i(show download pdf)
 
   def index
     @reports = Report.all
@@ -57,10 +56,6 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = Report.find(params[:id])
-  end
-
-  def set_results
-    @results = Booking.includes(:client, :invoice, :trip, stop: :connection).completed.where(created_at: @report.date_range).search(@report.criteria).result
   end
 
   def report_params

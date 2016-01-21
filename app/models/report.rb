@@ -35,6 +35,21 @@ class Report < ActiveRecord::Base
     daily? ? Date.current.beginning_of_day..Date.current.end_of_day : period_from..period_to
   end
 
+  def results
+    @results ||= Booking.completed
+                        .joins(:client, :trip, stop: :connection)
+                        .where(created_at: date_range).search(criteria)
+                        .result.select(
+                          "trips.name as trip_name",
+                          "trips.start_date as trip_date",
+                          :status,
+                          :price,
+                          :quantity,
+                          "concat_ws(' ', clients.name, clients.surname) as client_name",
+                          "connections.name as connection_name"
+                        )
+  end
+
   private
 
   def adjust_period_from

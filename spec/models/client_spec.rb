@@ -62,12 +62,12 @@ RSpec.describe Client, type: :model do
     end
   end
 
-  describe "is_pensioner?" do
+  describe "pensioner?" do
     context "age is 65 or greater" do
       it "should return true" do
         client = build(:client)
         allow(client).to receive(:age).and_return(65)
-        expect(client.is_pensioner?).to be_truthy
+        expect(client.pensioner?).to be_truthy
       end
     end
 
@@ -75,7 +75,7 @@ RSpec.describe Client, type: :model do
       it "should return false" do
         client = build(:client)
         allow(client).to receive(:age).and_return(64)
-        expect(client.is_pensioner?).to_not be_truthy
+        expect(client.pensioner?).to_not be_truthy
       end
     end
   end

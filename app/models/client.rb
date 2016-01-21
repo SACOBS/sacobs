@@ -60,7 +60,7 @@ class Client < ActiveRecord::Base
     @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth?
   end
 
-  def is_pensioner?
+  def pensioner?
     age&.>= PENSIONER_AGE
   end
 

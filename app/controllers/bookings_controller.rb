@@ -55,8 +55,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(user_id: current_user.id)
-    @booking.save(validate: false)
+    @booking = Booking.create(user_id: current_user.id)
     redirect_to booking_wizard_url(@booking, :trip_details)
   end
 

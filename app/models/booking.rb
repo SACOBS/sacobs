@@ -109,7 +109,7 @@ class Booking < ActiveRecord::Base
   private
 
   def set_passengers
-    passengers.clear if passengers.any?
+    passengers.clear
     quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
   end
 
