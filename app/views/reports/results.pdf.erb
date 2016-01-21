@@ -7,35 +7,50 @@
   <p>Total: <%= number_to_currency(@report.results.sum(:price)) %></p>
 </div>
 <div class="results">
- <% @report.results.group_by { |r| r.trip_date.beginning_of_month }.each do |month, monthly_results| %>
-      <h4> <%= time_tag(month.to_date, format: :month) %></h4>
-      <h5>Total: <%= number_to_currency monthly_results.sum(&:price) %>  <h5>
-       <%= bootstrap_table headers: ['Trip', 'Start Date', 'Status', 'Client', 'Connection', 'Qty', 'Price'], types: [:condensed] do %>
-      <% monthly_results.sort_by(&:trip_date).each do |result| %>
-              <tr>
-                <td>
-                  <%= result.trip_name %>
-                </td>
-                <td>
-                  <%= time_tag(result.trip_date || Date.current) %>
-                </td>
-                <td>
-                  <%= status_label_for(result) %>
-                </td>
-                <td>
-                  <%= result.client_name %>
-                </td>
-                <td>
-                  <%= content_tag(:span, result.connection_name, class: 'label label-info') %>
-                </td>
-                <td>
-                  <%= badge_for(result.quantity) %>
-                </td>
-                <td>
-                  <%= number_to_currency(result.price) %>
-                </td>
-              </tr>
-          <% end %>
-      <% end %>
+  <% @report.results.sort_by(&:trip_date).group_by { |r| r.trip_date.beginning_of_month }.each do |month, monthly_results| %>
+      <h4>
+         <%= time_tag(month.to_date, format: :month) %> 
+         <h5>
+            Total: <%= number_to_currency monthly_results.sum(&:price) %>
+         </h5>
+      </h4>
+      <hr>
+
+      <% monthly_results.group_by { |r| r.trip_date.strftime("%W") }.each do |week, weekly_results| %>
+             <h5>
+               Week <%= week %> 
+              <h5>
+               Total: <%= number_to_currency weekly_results.sum(&:price) %>
+              </h5>
+             </h5>
+          <%= bootstrap_table headers: ['Trip', 'Start Date', 'Status', 'Client', 'Connection', 'Qty', 'Price'], types: [:condensed] do %>
+            <% weekly_results.each do |result| %>
+                <tr>
+                    <td>
+                    <%= result.trip_name %>
+                    </td>
+                    <td>
+                    <%= time_tag(result.trip_date || Date.current) %>
+                    </td>
+                    <td>
+                    <%= status_label_for(result) %>
+                    </td>
+                    <td>
+                    <%= result.client_name %>
+                    </td>
+                    <td>
+                    <%= content_tag(:span, result.connection_name, class: 'label label-info') %>
+                    </td>
+                    <td>
+                    <%= badge_for(result.quantity) %>
+                    </td>
+                    <td>
+                    <%= number_to_currency(result.price) %>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+      <% end%>
   <% end %>
 </div>
+
