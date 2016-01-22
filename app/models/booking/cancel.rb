@@ -27,4 +27,4 @@ class Booking::Cancel
   def unassign_seats
     Trip::UnassignSeats.perform(trip, stop, quantity)
   end
-  end
+end

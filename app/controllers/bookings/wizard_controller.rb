@@ -58,10 +58,14 @@ module Bookings
     def search_params
       params[:q] ||= {}
       params[:q][:available_seats_gteq] ||= @booking.quantity
-      params[:q][:trip_start_date_eq] ||= @booking.try(:trip).try(:start_date) || Date.current
+      params[:q][:trip_start_date_eq] ||= start_date
       params[:q][:connection_from_city_id_eq] ||= from_city
       params[:q][:connection_to_city_id_eq] ||= to_city
       params[:q]
+    end
+
+    def start_date
+      @booking.try(:trip).try(:start_date) || Date.current
     end
 
     def from_city
@@ -76,8 +80,10 @@ module Bookings
       params.require(:booking).permit(
         :trip_id, :status, :quantity,
         :client_id, :stop_id,
-        client_attributes: client_attributes, passengers_attributes: passengers_attributes,
-        invoice_attributes: invoice_attributes, return_booking_attributes: return_booking_attributes
+        client_attributes:         client_attributes,
+        passengers_attributes:     passengers_attributes,
+        invoice_attributes:        invoice_attributes,
+        return_booking_attributes: return_booking_attributes
       ).tap do |whitelist|
         whitelist[:user_id] = current_user.id
         whitelist[:client_attributes].try(:merge!, user_id: current_user.id)

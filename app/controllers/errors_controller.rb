@@ -1,6 +1,7 @@
 class ErrorsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_exception, :send_error_notification
+  before_action :set_exception
+  before_action :send_error_notification, if: :internal_server_error?
 
   def show
     respond_to do |format|
@@ -15,15 +16,21 @@ class ErrorsController < ApplicationController
     @exception = env["action_dispatch.exception"]
   end
 
+  def backtrace
+    ActionDispatch::ExceptionWrapper.new(env, @exception).application_trace.join("\n")
+  end
+
+  def status_code
+    ActionDispatch::ExceptionWrapper.status_code_for_exception(@exception.class.name)
+  end
+
   def send_error_notification
-    return unless internal_server_error?
     exception_name = @exception.class.to_s
     message = @exception.message
-    backtrace = ActionDispatch::ExceptionWrapper.new(env, @exception).application_trace.join("\n")
     ExceptionMailer.notify(exception_name, message, backtrace).deliver_later
   end
 
   def internal_server_error?
-    ActionDispatch::ExceptionWrapper.status_code_for_exception(@exception.class.name) == Rack::Utils::SYMBOL_TO_STATUS_CODE[:internal_server_error]
+    status_code == Rack::Utils::SYMBOL_TO_STATUS_CODE[:internal_server_error]
   end
-  end
+end

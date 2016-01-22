@@ -23,4 +23,4 @@ class Booking::Confirm
   private
 
   attr_reader :booking, :return_booking, :user, :payment_details
-  end
+end

@@ -39,4 +39,4 @@ class Booking::Reserve
   def expiry_date
     @expiry_date ||= settings.booking_expiry_period.hours.from_now
   end
-  end
+end

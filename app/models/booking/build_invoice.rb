@@ -40,4 +40,4 @@ class Booking::BuildInvoice
   def build_line_item(invoice, description, amount, type)
     invoice.line_items.build(description: description, amount: amount, line_item_type: type)
   end
-  end
+end
