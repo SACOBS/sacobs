@@ -90,3 +90,12 @@ end
 group :doc do
   gem "sdoc", require: false
 end
+
+group :test do
+  gem 'minitest-reporters'
+  gem 'minitest-rails-capybara'
+
+  gem 'shoulda-context'
+  gem 'shoulda-matchers'
+end
+

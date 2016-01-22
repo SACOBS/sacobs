@@ -38,13 +38,13 @@ class User < ActiveRecord::Base
   before_save :normalize
 
   def full_name
-    "#{name} #{surname}".titleize
+    "#{name} #{surname}"
   end
 
   private
 
   def normalize
     self.name = name.squish.upcase
-    self.surname = name.squish.upcase
+    self.surname = surname.squish.upcase
   end
 end
