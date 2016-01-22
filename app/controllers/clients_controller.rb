@@ -36,7 +36,7 @@ class ClientsController < ApplicationController
                  Client.all
                else
                  Client.surname_starts_with(params[:letter] ||= "A").page(params[:page])
-    end
+               end
     respond_with(@clients) if stale?(@clients)
   end
 

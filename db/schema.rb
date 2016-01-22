@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122112505) do
+ActiveRecord::Schema.define(version: 20160122154131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,14 +147,6 @@ ActiveRecord::Schema.define(version: 20160122112505) do
     t.integer  "user_id"
   end
 
-  create_table "drivers_trips", force: :cascade do |t|
-    t.integer "driver_id"
-    t.integer "trip_id"
-  end
-
-  add_index "drivers_trips", ["driver_id", "trip_id"], name: "index_drivers_trips_on_driver_id_and_trip_id", using: :btree
-  add_index "drivers_trips", ["trip_id", "driver_id"], name: "index_drivers_trips_on_trip_id_and_driver_id", using: :btree
-
   create_table "invoices", force: :cascade do |t|
     t.integer  "booking_id"
     t.datetime "created_at"
@@ -218,6 +210,13 @@ ActiveRecord::Schema.define(version: 20160122112505) do
     t.date     "period_from"
     t.date     "period_to"
     t.boolean  "daily",       default: false
+  end
+
+  create_table "rosters", force: :cascade do |t|
+    t.integer  "driver_id"
+    t.integer  "trip_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "routes", force: :cascade do |t|

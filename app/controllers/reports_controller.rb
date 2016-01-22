@@ -40,11 +40,16 @@ class ReportsController < ApplicationController
   def show; end
 
   def download
-    render pdf: @report.to_file_name, template: "reports/results.pdf.erb", disposition: :attachment, layout: "application.pdf.erb"
+    render pdf:         @report.to_file_name,
+           template:    "reports/results.pdf.erb",
+           disposition: :attachment,
+           layout:      "application.pdf.erb"
   end
 
   def print
-    render pdf: @report.to_file_name, template: "reports/results.pdf.erb", layout: "application.pdf.erb"
+    render pdf:      @report.to_file_name,
+           template: "reports/results.pdf.erb",
+           layout:   "application.pdf.erb"
   end
 
   def destroy
@@ -59,6 +64,13 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.fetch(:report, {}).permit(:name, :daily, :period_from, :period_to, criteria: [:stop_connection_from_city_id_eq, :stop_connection_to_city_id_eq, status_eq_any: [], passengers_passenger_type_id_eq_any: []])
+    params.require(:report).permit(:name,
+                                   :daily,
+                                   :period_from,
+                                   :period_to,
+                                   criteria: [:stop_connection_from_city_id_eq,
+                                              :stop_connection_to_city_id_eq,
+                                              status_eq_any:                       [],
+                                              passengers_passenger_type_id_eq_any: []])
   end
 end

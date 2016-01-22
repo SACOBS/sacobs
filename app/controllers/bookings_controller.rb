@@ -32,21 +32,13 @@
 class BookingsController < ApplicationController
   def index
     params[:type] ||= "standby"
-    bookings = case params[:type]
-               when "open"
-                 Booking.includes(:client, :trip, stop: :connection).available.open.page(params[:reserved_page])
-               when "paid"
-                 Booking.includes(:client, :trip, stop: :connection).available.paid.page(params[:paid_page])
-               when "cancelled"
-                 Booking.includes(:client, :trip, stop: :connection).available.cancelled.page(params[:cancelled_page])
-               else
-                 Booking.includes(:client, :trip, stop: :connection).available.standby.page(params[:standby_page])
-    end
+    bookings = Booking.includes(:client, :trip, stop: :connection)
+                      .available
+                      .public_send(params[:type])
+                      .page(params["#{params[:type]}_page"])
 
-    if stale?(bookings)
-      @presenter = Bookings::IndexPresenter.new(bookings)
-      render :index
-    end
+    @presenter = Bookings::IndexPresenter.new(bookings)
+    render :index
   end
 
   def search

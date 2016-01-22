@@ -15,7 +15,8 @@ class Driver < ActiveRecord::Base
 
   to_param :full_name
 
-  has_and_belongs_to_many :trips
+  has_many :rosters
+  has_many :trips, through: :rosters
 
   validates :name, :surname, presence: true
   before_save :normalize

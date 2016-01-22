@@ -13,7 +13,11 @@ module WizardHelper
       concat content_tag(:h2, "#{wizard_name} Wizard")
       concat content_tag(:h4, "Step #{current_step_number} of #{total_steps}")
       concat content_tag :div, nil, class: "progress" do
-        concat content_tag(:div, nil, class: "progress-bar", role: "progressbar", style: "width: #{percentage_complete}%;")
+        concat content_tag(:div,
+                           nil,
+                           class: "progress-bar",
+                           role:  "progressbar",
+                           style: "width: #{percentage_complete}%;")
       end
       concat content_tag(:h3, step.to_s.titleize)
     end

@@ -31,7 +31,8 @@ class Trip < ActiveRecord::Base
   belongs_to :bus
   belongs_to :route
 
-  has_and_belongs_to_many :drivers
+  has_many :rosters
+  has_many :drivers, through: :rosters
 
   has_many :stops, dependent: :delete_all
   has_many :bookings

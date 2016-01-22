@@ -110,7 +110,14 @@ class Booking < ActiveRecord::Base
 
   def set_passengers
     passengers.clear
-    quantity.times { passengers.build(name: client.name, surname: client.surname, cell_no: client.cell_no, email: client.email) }
+    quantity.times do
+      passengers.build(
+        name:    client.name,
+        surname: client.surname,
+        cell_no: client.cell_no,
+        email:   client.email
+      )
+    end
   end
 
   def synchronize_associations
@@ -121,7 +128,10 @@ class Booking < ActiveRecord::Base
 
   def seats_are_available
     if stop.present? && quantity > stop.available_seats
-      errors.add(:quantity, "The number of seats #{quantity} selected exceeds the available seating #{stop.available_seats} for this connection.")
+      errors.add(
+        :quantity, "The number of seats #{quantity} selected exceeds \
+                            the available seating #{stop.available_seats} for this connection."
+      )
     end
   end
 end

@@ -23,7 +23,8 @@ class TicketsController < ApplicationController
       TicketMailer.send_ticket(@booking).deliver_later
       redirect_to ticket_url(@booking), notice: "Ticket has been emailed successfully"
     else
-      redirect_to ticket_url(@booking), alert: "The client for this booking does not have an email to send to. Please update the client email and try again."
+      redirect_to ticket_url(@booking), alert: "The client for this booking does not have an email to send to.\
+                                                Please update the client email and try again."
     end
   end
 

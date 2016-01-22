@@ -30,8 +30,12 @@
 #
 
 module BookingsHelper
+  STATUS_LABEL_CLASSES = {reserved:  "label label-info",
+                          paid:      "label label-success",
+                          cancelled: "label label-important"}.freeze
+
   def status_label_for(booking)
-    content_tag :span, booking.status.upcase, class: {reserved: "label label-info", paid: "label label-success", cancelled: "label label-important"}.with_indifferent_access[booking.status]
+    content_tag :span, booking.status.upcase, class: STATUS_LABEL_CLASSES[booking.status.to_sym]
   end
 
   def badge_for(value, type=:inverse)

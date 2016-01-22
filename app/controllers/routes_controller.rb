@@ -68,9 +68,21 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.fetch(:route, {}).permit(:name, :cost, :distance,
-                                    destinations_attributes: %i(city_id sequence _destroy id),
-                                    connections_attributes:  %i(id _destroy from_id to_id distance percentage cost leaving arriving)
-                                   ).merge(user_id: current_user.id)
+    params.require(:route).permit(
+      :name,
+      :cost,
+      :distance,
+      destinations_attributes: destination_attributes,
+      connections_attributes:  connections_attributes
+    )
+          .merge(user_id: current_user.id)
+  end
+
+  def destination_attributes
+    %i(city_id sequence _destroy id)
+  end
+
+  def connections_attributes
+    %i(id _destroy from_id to_id distance percentage cost leaving arriving)
   end
 end
