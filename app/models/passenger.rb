@@ -37,10 +37,13 @@ class Passenger < ActiveRecord::Base
   end
 
   def discount
-    @discount ||= (SeasonalDiscount.where(passenger_type: passenger_type).applicable.first || Discount.find_by(passenger_type: passenger_type))
+    @discount ||= (
+                    SeasonalDiscount.where(passenger_type: passenger_type)
+                    .applicable.first || Discount.find_by(passenger_type: passenger_type)
+    )
   end
 
-  protected
+  private
 
   def normalize
     self.name = name.squish.upcase

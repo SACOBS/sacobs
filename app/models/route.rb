@@ -20,8 +20,12 @@ class Route < ActiveRecord::Base
     has_many :connections
   end
 
-  accepts_nested_attributes_for :connections, reject_if:  proc {|attributes| attributes["from_id"].blank? && attributes["to_id"].blank? }
-  accepts_nested_attributes_for :destinations, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :connections,
+                                reject_if: proc {|attrs| attrs.values_at("from_id", "to_id").all?(&:blank?) }
+
+  accepts_nested_attributes_for :destinations,
+                                allow_destroy: true,
+                                reject_if:     :all_blank
 
   validates :name, :cost, :distance, :destinations, presence: true
   validates :cost, :distance, numericality: true

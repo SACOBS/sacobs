@@ -13,13 +13,17 @@ class Route::Copy
     copy.name = "Copy of #{route.name}"
     copy.user_id = user.id
     copy.connections_count = 0
-    copy.connections << route.connections.map {|connection| dup_connection(connection) }
+    copy.connections << dup_connections
     copy
   end
 
   private
 
   attr_reader :copy, :route, :user
+
+  def dup_connections
+    route.connections.map {|connection| dup_connection(connection) }
+  end
 
   def dup_connection(connection)
     connection.dup.tap do |duplicate|
@@ -29,6 +33,14 @@ class Route::Copy
   end
 
   def find_or_initialize_destination(city, sequence)
-    copy.destinations.find {|destination| destination.city == city } || copy.destinations.build(city: city, sequence: sequence)
+    find_copy_destination(city) || build_destination(city, sequence)
+  end
+
+  def find_destination(city)
+    copy.destinations.select {|destination| destination.city == city }
+  end
+
+  def build_destination(city, sequence)
+    copy.destinations.build(city: city, sequence: sequence)
   end
 end
