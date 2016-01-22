@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: cities
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  user_id      :integer
+#  venues_count :integer          default(0)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+# Indexes
+#
+#  index_cities_on_name  (name)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+east_london:
+ name: $LABEL
+ venues_count: 0
+ 
+

@@ -8,7 +8,7 @@
 #  status            :integer          default(0)
 #  created_at        :datetime
 #  updated_at        :datetime
-#  quantity          :integer          default(0)
+#  quantity          :integer          default(1)
 #  expiry_date       :datetime
 #  client_id         :integer
 #  user_id           :integer

@@ -12,8 +12,8 @@
 #  name       :string(255)
 #  from_id    :integer
 #  to_id      :integer
-#  leaving    :time             default(2000-01-01 06:13:57 UTC)
-#  arriving   :time             default(2000-01-01 06:13:57 UTC)
+#  leaving    :time
+#  arriving   :time
 #
 # Indexes
 #
@@ -32,20 +32,14 @@ class Connection < ActiveRecord::Base
   has_one :to_city, through: :to, source: :city
 
   validates :route, :from, :to, presence: true
-  validates :cost, :percentage, presence: true, numericality: true
+  validates :cost, :percentage, numericality: true
 
-  after_initialize :set_defaults, if: :new_record?
   before_create :set_name
 
   delegate :city_name, :city_venues, to: :from, prefix: true
   delegate :city_name, :city_venues, to: :to, prefix: true
 
   private
-
-  def set_defaults
-    self.leaving = Time.current
-    self.arriving = Time.current
-  end
 
   def set_name
     self.name = "#{from_city_name} to #{to_city_name}"

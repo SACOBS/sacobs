@@ -80,7 +80,6 @@ group :development do
   gem "bullet"
 end
 
-
 group :production do
   gem "puma"
   gem "rails_12factor"
@@ -92,10 +91,9 @@ group :doc do
 end
 
 group :test do
-  gem 'minitest-reporters'
-  gem 'minitest-rails-capybara'
+  gem "minitest-reporters"
+  gem "minitest-rails-capybara"
 
-  gem 'shoulda-context'
-  gem 'shoulda-matchers'
+  gem "shoulda-context"
+  gem "shoulda-matchers"
 end
-

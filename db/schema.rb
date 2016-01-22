@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120150342) do
+ActiveRecord::Schema.define(version: 20160122112505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 20160120150342) do
     t.string   "name",       limit: 255
     t.integer  "from_id"
     t.integer  "to_id"
-    t.time     "leaving",                                        default: '2000-01-01 06:13:57'
-    t.time     "arriving",                                       default: '2000-01-01 06:13:57'
+    t.time     "leaving"
+    t.time     "arriving"
   end
 
   add_index "connections", ["from_id"], name: "index_connections_on_from_id", using: :btree

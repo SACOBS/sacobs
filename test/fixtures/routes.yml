@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: routes
+#
+#  id                :integer          not null, primary key
+#  cost              :decimal(8, 2)
+#  distance          :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  name              :string(255)
+#  user_id           :integer
+#  connections_count :integer          default(0)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+eltope:
+ name: $LABEL
+ cost: 200
+ distance: 300
+ connections_count: 0
+

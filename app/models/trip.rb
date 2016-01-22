@@ -49,4 +49,4 @@ class Trip < ActiveRecord::Base
       Trip::Occupancy.new(self).details
     end
   end
- end
+end
