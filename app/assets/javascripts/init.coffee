@@ -57,6 +57,9 @@ $(document).on "page:change", ->
     e.preventDefault()
     $(this).tab('show');
 
+
+
+$(document).on "page:change cocoon:after-insert", ->
   $('[data-behaviour~=dropdown]').select2(
     theme: "bootstrap",
     minimumResultsForSearch: 15,

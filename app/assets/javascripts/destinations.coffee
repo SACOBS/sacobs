@@ -16,3 +16,4 @@ $(document).on "page:change", ->
 
   $('.route-destinations').on 'cocoon:before-insert',(event, destination) ->
     destination.find("td input[name*='sequence']").val(parseInt($(this).find('tr:last').find("td input[name*='sequence']").val()) + 1)
+  
