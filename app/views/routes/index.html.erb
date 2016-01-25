@@ -1,17 +1,30 @@
 <%= content_for(:title) do %>
-    Routes
+  Routes
 <% end %>
 <div class="page-header">
   <h2>Routes</h2>
   <%= link_to new_route_path, class: 'btn btn-primary' do %>
-      <%= fa_icon :plus, text: 'Setup route' %>
+    <%= fa_icon :plus, text: 'Setup route' %>
   <% end %>
   <%= link_to routes_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
 </div>
 <% cache @routes do %>
-    <%= bootstrap_table headers: ['Actions', 'Description', 'Start City', 'End City', 'Master Rate', 'Distance', 'Connections'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
-        <%= render @routes, cache: true %>
-    <% end %>
+  <table class='table table-hover table-condensed sortable'>
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Description</th>
+        <th>Start City</th>
+        <th>End City</th>
+        <th>Master Rate</th>
+        <th>Distance</th>
+        <th>Connections</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @routes, cache: true %>
+    </tbody>
+  </table>
 <% end %>

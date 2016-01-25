@@ -1,6 +1,6 @@
 <tr class="destination nested_fields <%= 'disable-sort-item' unless f.object.new_record? %>">
   <% if f.object.new_record? %>
-     <td><%= f.association :city, collection: cities, label: false, autofocus: true, wrapper_html: { class: 'form-group-sm' }, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select from city' } }  %></td>
+    <td><%= f.association :city, collection: cities, label: false, autofocus: true, wrapper_html: { class: 'form-group-sm' }, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select from city' } }  %></td>
   <% else %>
     <td><%= f.object.city.name %></td>
   <% end %>

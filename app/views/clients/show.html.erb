@@ -1,169 +1,207 @@
 <%= content_for(:title) do %>
-<%= @client.full_name %>
+  <%= @client.full_name %>
 <% end %>
 <% cache @client do %>
-<div class="page-header">
-  <h3>
-    <%= @client.full_name %>
-  </h3>
-  <div class="actions">
-    <%= back_to clients_path %>
-    <%= link_to edit_client_path(@client), class: 'btn btn-success' do %>
-    <%= fa_icon :edit, text: 'Edit' %>
-    <% end %>
-    <%= link_to @client, class: 'btn btn-danger', method: :delete, data: {  confirm: t('messages.confirm', resource: :client) } do %>
-    <%= fa_icon :times, text: 'Destroy' %>
-    <% end %>
+  <div class="page-header">
+    <h3>
+      <%= @client.full_name %>
+    </h3>
+    <div class="actions">
+      <%= back_to clients_path %>
+      <%= link_to edit_client_path(@client), class: 'btn btn-success' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+      <% end %>
+      <%= link_to @client, class: 'btn btn-danger', method: :delete, data: {  confirm: t('messages.confirm', resource: :client) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div class="row well well-sm">
-  <div class="col-md-4">
-    <h4>Details</h4>
-    <p>
-      <strong>Title:</strong>
-      <%= @client.title.upcase %>
-    </p>
-    <p>
-      <strong>Name:</strong>
-      <%= @client.name %>
-    </p>
-    <p>
-      <strong>Surname:</strong>
-      <%= @client.surname %>
-    </p>
-    <p>
-      <strong>Age:</strong>
-      <%= @client.age.presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>Date Of Birth:</strong>
-      <%= @client.date_of_birth.present? ? time_tag(@client.date_of_birth) : 'N/A' %>
-    </p>
-    <p>
-      <strong>Bank:</strong>
-      <%= @client.bank.presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>High Risk:</strong>
-      <%= @client.high_risk? ? 'Yes' : 'No' %>
-    </p>
-    <p>
-      <strong>
-        <u>Notes</u>
-      </strong>
-      <blockquote>
-        <%= simple_format(@client.notes.presence || 'N/A') %>
-      </blockquote>
-    </p>
+  <div class="row well well-sm">
+    <div class="col-md-4">
+      <h4>Details</h4>
+      <p>
+        <strong>Title:</strong>
+        <%= @client.title.upcase %>
+      </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @client.name %>
+      </p>
+      <p>
+        <strong>Surname:</strong>
+        <%= @client.surname %>
+      </p>
+      <p>
+        <strong>Age:</strong>
+        <%= @client.age.presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>Date Of Birth:</strong>
+        <%= @client.date_of_birth.present? ? time_tag(@client.date_of_birth) : 'N/A' %>
+      </p>
+      <p>
+        <strong>Bank:</strong>
+        <%= @client.bank.presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>High Risk:</strong>
+        <%= @client.high_risk? ? 'Yes' : 'No' %>
+      </p>
+      <p>
+        <strong>
+          <u>Notes</u>
+        </strong>
+        <blockquote>
+          <%= simple_format(@client.notes.presence || 'N/A') %>
+        </blockquote>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h4>Contact Info</h4>
+      <p>
+        <strong>Home Telephone No:</strong>
+        <%= number_to_phone(@client.home_no, area_code: true).presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>Work Telephone No:</strong>
+        <%= number_to_phone(@client.work_no, area_code: true).presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>Cellphone No:</strong>
+        <%= number_to_phone(@client.cell_no, area_code: true).presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>Email:</strong>
+        <%= @client.email.present? ? mail_to(@client.email) : 'N/A' %>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h4>Address Info</h4>
+      <p>
+        <strong>Street Address 1:</strong>
+        <%= @client.street_address1.presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>Street Address 2:</strong>
+        <%= @client.street_address2.presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>City:</strong>
+        <%= @client.city.presence || 'N/A' %>
+      </p>
+      <p>
+        <strong>Postal Code:</strong>
+        <%= @client.postal_code.presence || 'N/A' %>
+      </p>
+    </div>
   </div>
-  <div class="col-md-4">
-    <h4>Contact Info</h4>
-    <p>
-      <strong>Home Telephone No:</strong>
-      <%= number_to_phone(@client.home_no, area_code: true).presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>Work Telephone No:</strong>
-      <%= number_to_phone(@client.work_no, area_code: true).presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>Cellphone No:</strong>
-      <%= number_to_phone(@client.cell_no, area_code: true).presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>Email:</strong>
-      <%= @client.email.present? ? mail_to(@client.email) : 'N/A' %>
-    </p>
-  </div>
-  <div class="col-md-4">
-    <h4>Address Info</h4>
-    <p>
-      <strong>Street Address 1:</strong>
-      <%= @client.street_address1.presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>Street Address 2:</strong>
-      <%= @client.street_address2.presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>City:</strong>
-      <%= @client.city.presence || 'N/A' %>
-    </p>
-    <p>
-      <strong>Postal Code:</strong>
-      <%= @client.postal_code.presence || 'N/A' %>
-    </p>
-  </div>
-</div>
-<div class="row">
-  <div class='col-md-6'>
-    <div class="client-vouchers panel panel-default">
-      <div class="panel-heading">
-        <h4 class='panel-title'>
-          Credit Vouchers
-          <div class='pull-right'>
-            <%= link_to new_client_voucher_path(@client), class: 'btn btn-warning btn-xs' do %>
-            <%= fa_icon :money, text: 'Add credit voucher' %>
-            <% end %>
+  <div class="row">
+    <div class='col-md-6'>
+      <div class="client-vouchers panel panel-default">
+        <div class="panel-heading">
+          <h4 class='panel-title'>
+            Credit Vouchers
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <div class='pull-right'>
+              <%= link_to new_client_voucher_path(@client), class: 'btn btn-warning btn-xs' do %>
+                <%= fa_icon :money, text: 'Add credit voucher' %>
+              <% end %>
+            </div>
+          </h4>
+        </div>
+        <div class="panel-body">
+          <% if @client.vouchers.any? %>
+            <table class='table table-bordered table-condensed'>
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @client.vouchers.each do |voucher| %>
+                  <tr>
+                    <td>
+                      <%= voucher.ref_no %>
+                    </td>
+                    <td>
+                      <%= number_to_currency(voucher.amount, unit: 'R') %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class='lead text-center'>This client has no vouchers</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <div class="client-bookings panel panel-default">
+        <div class="panel-heading">
+          <h4 class='panel-title'>Recent Bookings</h4>
+        </div>
+        <% if @client.bookings.any? %>
+          <table class='table table-bordered table-condensed'>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Trip Date</th>
+                <th>Connection</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @client.bookings.limit(5).each do |booking| %>
+                <tr>
+                  <td>
+                    <%= status_label_for(booking) %>
+                  </td>
+                  <td data-dateformat="ll">
+                    <%= time_tag(booking.trip&.start_date || Date.current)  %>
+                  </td>
+                  <td>
+                    <%= content_tag(:span, booking.stop&.name || 'None', class: 'label label-success') %>
+                  </td>
+                  <td>
+                    <%= badge_for(booking.quantity) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <div class='panel-body'>
+            <p class='lead text-center'>This client has no bookings</p>
           </div>
-        </h4>
-      </div>
-      <div class="panel-body">
-        <% if @client.vouchers.any? %>
-        <%= bootstrap_table headers: %w(Reference Amount), types: %i(bordered condensed) do %>
-        <% @client.vouchers.each do |voucher| %>
-        <tr>
-          <td>
-            <%= voucher.ref_no %>
-          </td>
-          <td>
-            <%= number_to_currency(voucher.amount, unit: 'R') %>
-          </td>
-        </tr>
-        <% end %>
-        <% end %>
-      <% else %>
-        <p class='lead text-center'>This client has no vouchers</p>
         <% end %>
       </div>
     </div>
   </div>
-
-  <div class='col-md-6'>
-
-    <div class="client-bookings panel panel-default">
-      <div class="panel-heading">
-
-        <h4 class='panel-title'>Recent Bookings</h4>
-      </div>
-      <% if @client.bookings.any? %>
-      <%= bootstrap_table headers: %w(Status TripDate Connection Qty), types: %i(condensed) do %>
-      <% @client.bookings.limit(5).each do |booking| %>
-      <tr>
-        <td>
-          <%= status_label_for(booking) %>
-        </td>
-        <td data-dateformat="ll">
-          <%= time_tag(booking.trip&.start_date || Date.current)  %>
-        </td>
-        <td>
-          <%= content_tag(:span, booking.stop&.name || 'None', class: 'label label-success') %>
-        </td>
-        <td>
-          <%= badge_for(booking.quantity) %>
-        </td>
-      </tr>
-      <% end %>
-      <% end %>
-    <% else %>
-      <div class='panel-body'>
-
-        <p class='lead text-center'>This client has no bookings</p>
-      </div>
-
-      <% end %>
-    </div>
-  </div>
-
-</div>
 <% end %>

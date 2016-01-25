@@ -1,15 +1,15 @@
 <%= content_for(:title) do %>
-    Ticket <%= @booking.reference_no %>
+  Ticket <%= @booking.reference_no %>
 <% end %>
 <div class="actions text-center">
   <%= link_to print_ticket_path(@booking), class: 'btn btn-primary', target: '_blank' do %>
-      <%= fa_icon :print, text: 'Print' %>
+    <%= fa_icon :print, text: 'Print' %>
   <% end %>
   <%= link_to download_ticket_path(@booking), class: 'btn btn-info',  data: { no_turbolink: true } do %>
-      <%= fa_icon :download, text: 'Download' %>
+    <%= fa_icon :download, text: 'Download' %>
   <% end %>
   <%= link_to email_ticket_path(@booking), method: :post, class: 'btn btn-success' do %>
-      <%= fa_icon :envelope, text: 'Email' %>
+    <%= fa_icon :envelope, text: 'Email' %>
   <% end %>
 </div>
 <div class="details">
@@ -25,65 +25,79 @@
   </p>
 </div>
 <div class="passengers">
-  <%= bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do %>
-      <% [@booking, @return_booking].compact.each do |booking| %>
-          <% booking.passengers.each do |passenger| %>
-              <tr>
-                <td>
-                  <%= time_tag booking.trip.start_date %>
-                </td>
-                <td>
-                  <%= passenger.full_name %>
-                </td>
-                <td>
-                  <%= booking.connection.from_city_name %>
-                </td>
-                <td>
-                  <%= booking.connection.from_city_venues.first.name %>
-                </td>
-                <td>
-                  <%= booking.connection.to_city_name %>
-                </td>
-                <td>
-                  <%= booking.connection.to_city_venues.first.name %>
-                </td>
-                <td>
-                  <%= time_tag(booking.connection.leaving, format: :short) if booking.connection.leaving.present? %>
-                </td>
-                <td>
-                  <%= time_tag(booking.connection.arriving, format: :short) if booking.connection.arriving.present? %>
-                </td>
-              </tr>
-          <% end %>
-      <% end %>
+  <table class='table table-bordered table-condensed'>
+    <thead>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <strong>Price:</strong>
-          <strong>
-            <%= gross_price(@booking, @return_booking) %>
-          </strong>
-        </td>
-        <td>
-          <strong>Discount:</strong>
-          <strong>
-            <%= discount(@booking, @return_booking) %>
-          </strong>
-        </td>
-        <td>
-          <strong>Total:</strong>
-          <strong>
-            <%= nett_price(@booking, @return_booking) %>
-          </strong>
-        </td>
+        <th>Date</th>
+        <th>Name</th>
+        <th>From</th>
+        <th>Terminal</th>
+        <th>To</th>
+        <th>Terminal</th>
+        <th>Departure</th>
+        <th>Arrival</th>
       </tr>
-  <% end %>
+    </thead>
+    <tbody>
+      <% [@booking, @return_booking].compact.each do |booking| %>
+        <% booking.passengers.each do |passenger| %>
+          <tr>
+            <td>
+              <%= time_tag booking.trip.start_date %>
+            </td>
+            <td>
+              <%= passenger.full_name %>
+            </td>
+            <td>
+              <%= booking.connection.from_city_name %>
+            </td>
+            <td>
+              <%= booking.connection.from_city_venues.first.name %>
+            </td>
+            <td>
+              <%= booking.connection.to_city_name %>
+            </td>
+            <td>
+              <%= booking.connection.to_city_venues.first.name %>
+            </td>
+            <td>
+              <%= time_tag(booking.connection.leaving, format: :short) if booking.connection.leaving.present? %>
+            </td>
+            <td>
+              <%= time_tag(booking.connection.arriving, format: :short) if booking.connection.arriving.present? %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <strong>Price:</strong>
+              <strong>
+                <%= gross_price(@booking, @return_booking) %>
+              </strong>
+            </td>
+            <td>
+              <strong>Discount:</strong>
+              <strong>
+                <%= discount(@booking, @return_booking) %>
+              </strong>
+            </td>
+            <td>
+              <strong>Total:</strong>
+              <strong>
+                <%= nett_price(@booking, @return_booking) %>
+              </strong>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 <div class="special-instructions text-center">
   <p>
@@ -99,8 +113,5 @@
     <%= simple_format(scripture_for_today) %>
   </em>
 </div>
-
 <br/>
 <br/>
-
-

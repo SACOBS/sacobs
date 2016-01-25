@@ -1,17 +1,17 @@
 <%= content_for :title do %>
-Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
+  Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
 <% end %>
 <div class="actions text-center">
   <% unless @trip.archived %>
-      <%= link_to edit_trip_sheet_path(@trip), class: 'btn btn-warning' do %>
-        <%= fa_icon :edit, text: 'Add/Edit Notes' %>
-      <% end %>
-<% end %>
+    <%= link_to edit_trip_sheet_path(@trip), class: 'btn btn-warning' do %>
+      <%= fa_icon :edit, text: 'Add/Edit Notes' %>
+    <% end %>
+  <% end %>
   <%= link_to print_trip_sheet_path(@trip), class: 'btn btn-primary', target: '_blank' do %>
-      <%= fa_icon :print, text: 'Print' %>
+    <%= fa_icon :print, text: 'Print' %>
   <% end %>
   <%= link_to download_trip_sheet_path(@trip), class: 'btn btn-info',  data: { no_turbolink: true } do %>
-      <%= fa_icon :download, text: 'Download' %>
+    <%= fa_icon :download, text: 'Download' %>
   <% end %>
 </div>
 <div class="page-header text-center">
@@ -28,13 +28,13 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
 <p class="pull-left">
   <strong>Drivers:</strong>
   <br/>
-<ul class="unstyled">
-  <% @trip.drivers do |driver| %>
+  <ul class="unstyled">
+    <% @trip.drivers do |driver| %>
       <li>
         <%= driver.full_name %>
       </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
 </p>
 <p class="pull-right">
   <strong>Bus:</strong>
@@ -50,30 +50,30 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
 <hr/>
 <table class="table table-bordered">
   <thead>
-  <tr>
-    <th>Clients</th>
-    <th>Connection</th>
-    <th>Quantity Seats</th>
-    <th>Telephone Nos</th>
-  </tr>
+    <tr>
+      <th>Clients</th>
+      <th>Connection</th>
+      <th>Quantity Seats</th>
+      <th>Telephone Nos</th>
+    </tr>
   </thead>
   <tbody>
-  <% @trip.bookings.each do |booking| %>
+    <% @trip.bookings.each do |booking| %>
       <% booking.passengers.each do |passenger| %>
-          <tr>
-            <td>
-              <%= passenger.full_name %>
-            </td>
-            <td>
-              <%= booking.connection.name  %>
-            </td>
-            <td>1</td>
-            <td>
-              <%= passenger.cell_no %>
-            </td>
-          </tr>
+        <tr>
+          <td>
+            <%= passenger.full_name %>
+          </td>
+          <td>
+            <%= booking.connection.name  %>
+          </td>
+          <td>1</td>
+          <td>
+            <%= passenger.cell_no %>
+          </td>
+        </tr>
       <% end %>
-  <% end %>
+    <% end %>
   </tbody>
 </table>
 <br/>
@@ -103,17 +103,17 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
   </div>
   <table class="table table-bordered">
     <thead>
-    <tr>
-      <th>Drivers</th>
-      <th>From</th>
-      <th>Time</th>
-      <th>O/Reading</th>
-      <th>To</th>
-      <th>Time</th>
-    </tr>
+      <tr>
+        <th>Drivers</th>
+        <th>From</th>
+        <th>Time</th>
+        <th>O/Reading</th>
+        <th>To</th>
+        <th>Time</th>
+      </tr>
     </thead>
     <tbody>
-    <% 5.times do %>
+      <% 5.times do %>
         <tr>
           <td></td>
           <td></td>
@@ -122,86 +122,86 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
           <td></td>
           <td></td>
         </tr>
-    <% end %>
+      <% end %>
     </tbody>
   </table>
   <table class="table table-bordered table-condensed">
     <tbody>
-    <tr>
-      <td>cash</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>cash send</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>cash send</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>POB</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>difference</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>cash</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>cash send</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>cash send</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>POB</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>difference</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <table class="table table-bordered table-condensed">
     <thead>
-    <tr>
-      <th>Trip remarks</th>
-    </tr>
+      <tr>
+        <th>Trip remarks</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>Diesel</td>
-    </tr>
-    <tr>
-      <td>PE</td>
-      <td></td>
-      <td>Diesel</td>
-    </tr>
-    <tr>
-      <td>Toll</td>
-      <td></td>
-      <td></td>
-      <td>Mos</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Mos</td>
-      <td></td>
-      <td></td>
-      <td>Toll</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Cpt</td>
-      <td></td>
-      <td></td>
-      <td>PE</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>Diesel</td>
+      </tr>
+      <tr>
+        <td>PE</td>
+        <td></td>
+        <td>Diesel</td>
+      </tr>
+      <tr>
+        <td>Toll</td>
+        <td></td>
+        <td></td>
+        <td>Mos</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Mos</td>
+        <td></td>
+        <td></td>
+        <td>Toll</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Cpt</td>
+        <td></td>
+        <td></td>
+        <td>PE</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <table class="table table-bordered">
     <thead>
-    <tr>
-      <th>Items on checklist to report pm</th>
-    </tr>
+      <tr>
+        <th>Items on checklist to report pm</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <p>
@@ -219,14 +219,14 @@ Trip sheet <%=@trip.name%>_<%=@trip.start_date%>
 </div>
 <div class="actions text-center">
   <% unless @trip.archived %>
-      <%= link_to edit_trip_sheet_path(@trip), class: 'btn btn-warning' do %>
-          <%= fa_icon :edit, text: 'Add/Edit Notes' %>
-      <% end %>
+    <%= link_to edit_trip_sheet_path(@trip), class: 'btn btn-warning' do %>
+      <%= fa_icon :edit, text: 'Add/Edit Notes' %>
+    <% end %>
   <% end %>
   <%= link_to print_trip_sheet_path(@trip), class: 'btn btn-primary', target: '_blank' do %>
-      <%= fa_icon :print, text: 'Print' %>
+    <%= fa_icon :print, text: 'Print' %>
   <% end %>
   <%= link_to download_trip_sheet_path(@trip), class: 'btn btn-info',  data: { no_turbolink: true } do %>
-      <%= fa_icon :download, text: 'Download' %>
+    <%= fa_icon :download, text: 'Download' %>
   <% end %>
 </div>

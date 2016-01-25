@@ -1,16 +1,16 @@
 <%= content_for (:title) do %>
-    Booking Wizard - Choose trip
+  Booking Wizard - Choose trip
 <% end %>
 <%= content_for (:actions) do %>
-    <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
+  <%= link_to 'Cancel', booking_path(@booking), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <div class="trip-finder well well-sm">
   <h5>Search</h5>
   <%= simple_form_for :q, url: wizard_path(:trip_details), html: { class: 'form-inline', id: 'trip_search' }, method: :get, remote: true do |f| %>
-      <%= f.input :connection_from_city_id_eq, collection: cities, label: false, autofocus: true, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select from city' } }  %>
-      <%= f.input :connection_to_city_id_eq, collection: cities, label: false, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select to city' } }  %>
-      <%= f.input :trip_start_date_eq, placeholder: 'Trip date', label: false, input_html: { data: { behaviour: :datepicker } }  %>
-      <%= f.button :submit, 'Search', class: 'btn btn-success' %>
+    <%= f.input :connection_from_city_id_eq, collection: cities, label: false, autofocus: true, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select from city' } }  %>
+    <%= f.input :connection_to_city_id_eq, collection: cities, label: false, input_html: {  data: { behaviour: 'dropdown', placeholder: 'Select to city' } }  %>
+    <%= f.input :trip_start_date_eq, placeholder: 'Trip date', label: false, input_html: { data: { behaviour: :datepicker } }  %>
+    <%= f.button :submit, 'Search', class: 'btn btn-success' %>
   <% end %>
 </div>
 <div class="trips">

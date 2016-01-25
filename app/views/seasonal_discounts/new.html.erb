@@ -1,5 +1,5 @@
 <%= content_for :title do %>
-    New Priority Pricing
+  New Priority Pricing
 <% end %>
 <div class="page-header">
   <h2>New Priority Pricing</h2>
@@ -30,20 +30,18 @@
   </div>
   <div class="col-md-6 pull-left">
     <%= simple_form_for @seasonal_discount do |f| %>
-        <fieldset>
-          <%= f.input :name, autofocus: true, placeholder: 'Name' %>
-          <%= f.association :passenger_type, include_blank: false, label_method: :description %>
-          <%= f.input :percentage, placeholder: 'Percentage' %>
-          <%= f.input :period_from, placeholder: 'Period from', input_html: {  data: { behaviour: :datepicker } }  %>
-          <%= f.input :period_to, placeholder: 'Period to', input_html: {  data: { behaviour: :datepicker } }  %>
-          <%= f.input :active, as: :boolean, inline_label: true, label: false %>
-        </fieldset>
-        <div class="form-group">
-
-            <%= f.button :submit, class: 'btn btn-success'  %>
-            <%= link_to 'Cancel', seasonal_discounts_path, class: 'btn btn-default' %>
-
-        </div>
+      <fieldset>
+        <%= f.input :name, autofocus: true, placeholder: 'Name' %>
+        <%= f.association :passenger_type, include_blank: false, label_method: :description %>
+        <%= f.input :percentage, placeholder: 'Percentage' %>
+        <%= f.input :period_from, placeholder: 'Period from', input_html: {  data: { behaviour: :datepicker } }  %>
+        <%= f.input :period_to, placeholder: 'Period to', input_html: {  data: { behaviour: :datepicker } }  %>
+        <%= f.input :active, as: :boolean, inline_label: true, label: false %>
+      </fieldset>
+      <div class="form-group">
+        <%= f.button :submit, class: 'btn btn-success'  %>
+        <%= link_to 'Cancel', seasonal_discounts_path, class: 'btn btn-default' %>
+      </div>
     <% end %>
   </div>
 </div>

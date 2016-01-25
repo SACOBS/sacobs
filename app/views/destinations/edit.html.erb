@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Edit Destinations
+  Edit Destinations
 <% end %>
 <div class="page-header">
   <h2>Edit Destinations</h2>
@@ -8,25 +8,25 @@
   <div class="col-md-7">
     <h4>Destinations</h4>
     <%= simple_form_for @route, url: route_destinations_path(@route), method: :patch do |f| %>
-        <%= render 'shared/error_messages', object: @route %>
-        <%= link_to_add_association  f, :destinations, data: { association_insertion_node: '.route-destinations > tbody', association_insertion_method: 'append' },  class: 'btn btn-warning btn-sm' do %>
-            <%= fa_icon :plus, text: 'Add destination' %>
-        <% end %>
-        <table id="destinations" class="table table-bordered table-condensed route-destinations" data-behaviour="sortable">
-          <thead>
+      <%= render 'shared/error_messages', object: @route %>
+      <%= link_to_add_association  f, :destinations, data: { association_insertion_node: '.route-destinations > tbody', association_insertion_method: 'append' },  class: 'btn btn-warning btn-sm' do %>
+        <%= fa_icon :plus, text: 'Add destination' %>
+      <% end %>
+      <table id="destinations" class="table table-bordered table-condensed route-destinations" data-behaviour="sortable">
+        <thead>
           <tr>
             <th>City</th>
             <th>Sequence</th>
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           <%= f.simple_fields_for :destinations do |destination_form| %>
-              <%= render 'destination_fields', f: destination_form %>
+            <%= render 'destination_fields', f: destination_form %>
           <% end %>
-          </tbody>
-        </table>
-        <%= f.button :submit, class: 'btn btn-success'  %>
-        <%= link_to 'Back', routes_path, class: 'btn btn-default' %>
+        </tbody>
+      </table>
+      <%= f.button :submit, class: 'btn btn-success'  %>
+      <%= link_to 'Back', routes_path, class: 'btn btn-default' %>
     <% end %>
   </div>
   <div class="col-md-4 well">
@@ -39,7 +39,7 @@
         <strong>Click</strong> on the new destination row and <strong>drag</strong> the new destination to its correct position in the table. Eg  Port Alfred will come after East London.
       </li>
       <li>
-       Once the new destination is dragged to its correct position all the other positions will be updated correctly.
+        Once the new destination is dragged to its correct position all the other positions will be updated correctly.
       </li>
     </ol>
     <p>

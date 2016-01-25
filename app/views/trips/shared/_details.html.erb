@@ -1,4 +1,14 @@
-<%= bootstrap_table headers: ['Name', 'Start Date', 'Route', 'Bus', 'Drivers'], types: [:hover, :condensed] do %>
+<table class='table table-hover table-condensed'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start Date</th>
+      <th>Route</th>
+      <th>Bus</th>
+      <th>Drivers</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>
         <%= trip.name %>
@@ -20,4 +30,5 @@
         </ul>
       </td>
     </tr>
-<% end %>
+  </tbody>
+</table>

@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Trips
+  Trips
 <% end %>
 <div class="page-header">
   <h2>
@@ -12,57 +12,57 @@
     <%= page_entries_info @trips %>
   </p>
   <%= link_to new_trip_path,  class: 'btn btn-primary' do %>
-      <%= fa_icon :plus, text: 'Setup trip' %>
+    <%= fa_icon :plus, text: 'Setup trip' %>
   <% end %>
   <%= link_to trips_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_trips_path, defaults: {required: false, label: false}, html: {class: 'form-inline', id: 'trip_search', method: :get, data: {type: :html}} do |f| %>
-        <%= f.input :start_date_eq, placeholder: 'Start date', input_html: { class: 'input-sm',  data: { behaviour: :datepicker } }  %>
-        <%= f.input :name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
-        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
-        <%= link_to trips_path, class: 'btn btn-sm btn-default' do %>
-            <%= fa_icon :times, text: 'Clear' %>
-        <% end %>
+      <%= f.input :start_date_eq, placeholder: 'Start date', input_html: { class: 'input-sm',  data: { behaviour: :datepicker } }  %>
+      <%= f.input :name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
+      <%= link_to trips_path, class: 'btn btn-sm btn-default' do %>
+        <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
     <% end %>
-     <p>
-     <i class='small'>Search on trip start date or trip name.</i>
-  </p>   
+    <p>
+      <i class='small'>Search on trip start date or trip name.</i>
+    </p>
   </div>
 </div>
 <div id="trips">
   <% if @trips.any? %>
-      <%= paginate @trips %>
-      <table class="table table-hover table-condensed sortable">
-        <thead>
-         <tr>
-           <th>Actions</th>
-           <th>Name</th>
-           <th>Day of week</th>
-           <th>Start date</th>
-           <th>End date</th>
-           <th>Route</th>
-           <th>Bus</th>
-         </tr>
-        </thead>
-        <tbody>
-         <%= render @trips, cache: true %>
-        </tbody>
-      </table>
-      <%= paginate @trips %>
- <% else %>
-      <div class="jumbotron text-center">
-        <h3 class="text-error">There are currently no trips on the system. Click <strong>'Setup Trip'</strong> above to create one.</h3>
-      </div>
+    <%= paginate @trips %>
+    <table class="table table-hover table-condensed sortable">
+      <thead>
+        <tr>
+          <th>Actions</th>
+          <th>Name</th>
+          <th>Day of week</th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Route</th>
+          <th>Bus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @trips, cache: true %>
+      </tbody>
+    </table>
+    <%= paginate @trips %>
+  <% else %>
+    <div class="jumbotron text-center">
+      <h3 class="text-error">There are currently no trips on the system. Click <strong>'Setup Trip'</strong> above to create one.</h3>
+    </div>
   <% end %>
 </div>
 <br/>
 <div class="actions">
   <%= link_to trips_path,  class: 'btn btn-primary' do %>
-      <%= fa_icon :plus, text: 'Setup trip' %>
+    <%= fa_icon :plus, text: 'Setup trip' %>
   <% end %>
   <%= link_to trips_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
 </div>

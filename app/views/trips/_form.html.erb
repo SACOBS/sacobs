@@ -1,34 +1,29 @@
 <%= simple_form_for @trip do |f| %>
-    <div class='form-group'>
-        <%= f.button :submit, class: 'btn btn-success'  %>
-        <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
-    </div>
-    <div class='row'>
-        <div class="col-md-6">
-            <%= f.input :name, autofocus: true, placeholder: 'Name' %>
-            <div class='row'>
-             <div class='col-sm-6'>
-               <%= f.input :start_date, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
-
-             </div>
-             <div class='col-md-6'>
-               <%= f.input :end_date, placeholder: 'End date', input_html: {  data: { behaviour: :datepicker } }  %>
-
-             </div>
-            </div>
-            <%= f.input :notes, as: :text, placeholder: 'Notes', input_html: { rows: 8 } %>
+  <div class='form-group'>
+    <%= f.button :submit, class: 'btn btn-success'  %>
+    <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
+  </div>
+  <div class='row'>
+    <div class="col-md-6">
+      <%= f.input :name, autofocus: true, placeholder: 'Name' %>
+      <div class='row'>
+        <div class='col-sm-6'>
+          <%= f.input :start_date, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
         </div>
         <div class='col-md-6'>
-          <%= f.association :route, prompt: 'Select Route' %>
-          <%= f.association :bus, prompt: 'Select Bus' %>
-          <%= f.association :drivers, as: :check_boxes %>
+          <%= f.input :end_date, placeholder: 'End date', input_html: {  data: { behaviour: :datepicker } }  %>
         </div>
-
-  </div>
-    <div class='form-group'>
-        <%= f.button :submit, class: 'btn btn-success'  %>
-        <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
+      </div>
+      <%= f.input :notes, as: :text, placeholder: 'Notes', input_html: { rows: 8 } %>
     </div>
-
-
+    <div class='col-md-6'>
+      <%= f.association :route, prompt: 'Select Route' %>
+      <%= f.association :bus, prompt: 'Select Bus' %>
+      <%= f.association :drivers, as: :check_boxes %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= f.button :submit, class: 'btn btn-success'  %>
+    <%= link_to 'Cancel', trips_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

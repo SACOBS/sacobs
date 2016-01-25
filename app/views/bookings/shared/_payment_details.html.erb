@@ -1,4 +1,10 @@
-<%= bootstrap_table headers: ['Payment Date', 'Customer Payment Reference', 'Payment Type'], types: [:condensed] do %>
+<table class='table table-condensed'>
+  <thead>
+    <th>Payment Date</th>
+    <th>Customer Payment Reference</th>
+    <th>Payment Type</th>
+  </thead>
+  <tbody>
     <tr>
       <td>
         <%= time_tag(payment_detail.paid_at) %>
@@ -10,4 +16,5 @@
         <%= payment_detail.payment_type %>
       </td>
     </tr>
-<% end %>
+  </tbody>
+</table>

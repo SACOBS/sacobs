@@ -1,15 +1,25 @@
 <%= content_for(:title) do %>
-    Users
+  Users
 <% end %>
 <div class="page-header">
   <h2>Users</h2>
   <%= link_to users_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
 </div>
-<%= bootstrap_table headers: %w(Name Email Role Actions), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+<table class='table table-hover table-condensed sortable'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
     <%= render @users, cache: true %>
-<% end %>
+  </tbody>
+</table>
 <%= link_to users_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
+  <%= fa_icon :refresh, text: 'Refresh' %>
 <% end %>

@@ -1,4 +1,15 @@
-<%= bootstrap_table headers: ['Status', 'Reference', 'Trip', 'Travel Date', 'Connection', 'Price'], types: [:condensed] do %>
+<table class='table table-condensed'>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Reference</th>
+      <th>Trip</th>
+      <th>Travel Date</th>
+      <th>Connection</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>
         <%= status_label_for(booking) %>
@@ -19,4 +30,5 @@
         <%= number_to_currency(booking.invoice.total) %>
       </td>
     </tr>
-<% end %>
+  </tbody>
+</table>

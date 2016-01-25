@@ -1,16 +1,14 @@
 <%= content_for(:title) do %>
-    Settings
+  Settings
 <% end %>
 <div class="page-header">
   <h2>Settings</h2>
-
-<div class="actions">
-  <%= link_to edit_settings_path, class: 'btn btn-warning' do %>
+  <div class="actions">
+    <%= link_to edit_settings_path, class: 'btn btn-warning' do %>
       <%= fa_icon :edit, text: 'Edit' %>
-  <% end %>
+    <% end %>
   </div>
-  </div>
-
+</div>
 <dl class='dl-horizontal'>
   <dt>Booking Expiry Period:</dt>
   <dd> <%= "#{@settings.booking_expiry_period} hours" %></dd>
@@ -29,5 +27,3 @@
   <dt>4th Trip Sheet Note:</dt>
   <dd> <%= simple_format(@settings.trip_sheet_note4) %></dd>
 </dl>
-
-

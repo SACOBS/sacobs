@@ -6,14 +6,14 @@
     <h2>Booking Details</h2>
     <div class="actions text-center">
       <% if @booking.paid? || @booking.reserved? %>
-          <%= link_to ticket_path(@booking), class: 'btn btn-large btn-primary', target: '_blank' do %>
-              <%= fa_icon :tasks, text: 'Ticket' %>
-          <% end %>
+        <%= link_to ticket_path(@booking), class: 'btn btn-large btn-primary', target: '_blank' do %>
+          <%= fa_icon :tasks, text: 'Ticket' %>
+        <% end %>
       <% end %>
       <% if @booking.reserved? %>
-          <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-success' do %>
-              <%= fa_icon :money, text: 'Confirm' %>
-          <% end %>
+        <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-success' do %>
+          <%= fa_icon :money, text: 'Confirm' %>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -40,15 +40,15 @@
     </div>
   </div>
   <div class="actions text-center">
-     <% if @booking.paid? || @booking.reserved? %>
-          <%= link_to ticket_path(@booking), class: 'btn btn-large btn-primary', target: '_blank' do %>
-              <%= fa_icon :tasks, text: 'Ticket' %>
-          <% end %>
+    <% if @booking.paid? || @booking.reserved? %>
+      <%= link_to ticket_path(@booking), class: 'btn btn-large btn-primary', target: '_blank' do %>
+        <%= fa_icon :tasks, text: 'Ticket' %>
       <% end %>
-      <% if @booking.reserved? %>
-          <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-success' do %>
-              <%= fa_icon :money, text: 'Confirm' %>
-          <% end %>
+    <% end %>
+    <% if @booking.reserved? %>
+      <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-success' do %>
+        <%= fa_icon :money, text: 'Confirm' %>
       <% end %>
+    <% end %>
   </div>
 <% end %>

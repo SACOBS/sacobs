@@ -1,23 +1,23 @@
 <%= content_for (:title) do %>
-    Archived Bookings
+  Archived Bookings
 <% end %>
 <div class="page-header">
   <h2>Archived Bookings</h2>
   <%= link_to bookings_archives_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-<div class="search pull-right">
-  <%= render 'search_form' %>
-   <p>
-     <i class='small'>Search on booking date or reference no or </br> client surname or client home, work and cell numbers.</i>
-  </p>   
+  <div class="search pull-right">
+    <%= render 'search_form' %>
+    <p>
+      <i class='small'>Search on booking date or reference no or </br> client surname or client home, work and cell numbers.</i>
+  </p>
 </div>
 </div>
 <div id="bookings">
   <%= paginate @bookings %>
   <% if @bookings.any? %>
-      <table class="table table-hover table-condensed sortable">
-        <thead>
+    <table class="table table-hover table-condensed sortable">
+      <thead>
         <tr>
           <th>Actions</th>
           <th>Status</th>
@@ -26,17 +26,16 @@
           <th>Qty</th>
           <th>Connection</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
         <%= render partial: 'bookings/archives/booking', collection: @bookings, cache: true %>
-
-        </tbody>
-      </table>
+      </tbody>
+    </table>
   <% else %>
-      <h3>There are currently 0 archived bookings.</h3>
+    <h3>There are currently 0 archived bookings.</h3>
   <% end %>
 </div>
 <br/>
 <%= link_to bookings_archives_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
+  <%= fa_icon :refresh, text: 'Refresh' %>
 <% end %>

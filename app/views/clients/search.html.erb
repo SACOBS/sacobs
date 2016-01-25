@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Client Search
+  Client Search
 <% end %>
 <div class="information page-header">
   <h2>
@@ -12,11 +12,11 @@
   <%= back_to clients_path %>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search' } do |f| %>
-        <%= f.input :full_name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
-        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
-        <%= link_to clients_path, class: 'btn btn-sm btn-default' do %>
-          <%= fa_icon :times, text: 'Clear' %>
-        <% end %>
+      <%= f.input :full_name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
+      <%= link_to clients_path, class: 'btn btn-sm btn-default' do %>
+        <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -39,12 +39,12 @@
 <hr/>
 <div class="clients">
   <% if @clients.any? %>
-      <% @clients.in_groups_of(3, false) do |group| %>
-          <div class="row-fluid">
-            <%= render group %>
-          </div>
-      <% end %>
+    <% @clients.in_groups_of(3, false) do |group| %>
+      <div class="row-fluid">
+        <%= render group %>
+      </div>
+    <% end %>
   <% else %>
-      <p class="lead text-center">No results were found for the specified search term.</p>
+    <p class="lead text-center">No results were found for the specified search term.</p>
   <% end %>
 </div>

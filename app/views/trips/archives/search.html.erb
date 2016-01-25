@@ -12,12 +12,12 @@
   <%= back_to trips_archives_path %>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_trips_archives_path, defaults: { required: false, label: false }, html: { class: 'form-inline', id: 'archived_trip_search', method: :get, data: { type: :html } } do |f| %>
-        <%= f.input :start_date, placeholder: 'Start date', input_html: { class: 'input-sm', data: { behaviour: :datepicker } }  %>
-        <%= f.input :name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
-        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
-        <%= link_to trips_archives_path, class: 'btn btn-sm btn-default' do %>
-            <%= fa_icon :times, text: 'Clear' %>
-        <% end %>
+      <%= f.input :start_date, placeholder: 'Start date', input_html: { class: 'input-sm', data: { behaviour: :datepicker } }  %>
+      <%= f.input :name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
+      <%= link_to trips_archives_path, class: 'btn btn-sm btn-default' do %>
+        <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -40,10 +40,23 @@
 <hr/>
 <div class="bookings">
   <% if @results.any? %>
-      <%= bootstrap_table headers: ['Actions', 'Name', 'Day of Week', 'Start Date', 'End Date', 'Route', 'Bus'], types: %i(hover condensed) do %>
-          <%= render partial: 'trip', collection: @results, as: :trip %>
-      <% end %>
+    <table class='table table-hover table-condensed'>
+      <thead>
+        <tr>
+          <th>Actions</th>
+          <th>Name</th>
+          <th>Day of Week</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Route</th>
+          <th>Bus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'trip', collection: @results, as: :trip %>
+      </tbody>
+    </table>
   <% else %>
-      <h3 class="text-center">No results were found for the specified search term.</h3>
+    <h3 class="text-center">No results were found for the specified search term.</h3>
   <% end %>
 </div>

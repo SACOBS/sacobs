@@ -21,7 +21,7 @@ class Route < ActiveRecord::Base
   end
 
   accepts_nested_attributes_for :connections,
-                                reject_if: proc {|attrs| attrs.values_at("from_id", "to_id").all?(&:blank?) }
+                                reject_if: proc {|attrs| [attrs["from_id"], attrs["to_id"]].all?(&:blank?) }
 
   accepts_nested_attributes_for :destinations,
                                 allow_destroy: true,

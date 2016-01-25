@@ -1,32 +1,31 @@
 <%= simple_form_for client do |f| %>
-
-    <fieldset>
-      <div class="row">
-        <div class="col-md-4">
-          <%= f.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title' %>
-          <%= f.input :name %>
-          <%= f.input :surname %>
-          <%= f.input :city %>
-          <%= f.input :id_number %>
-          <%= f.input :high_risk %>
-          <%= f.input :bank, include_blank: true, label: 'Select a bank', collection: Client::BANKS %>
-        </div>
-        <div class="col-md-4">
-          <%= f.input :cell_no, as: :tel %>
-          <%= f.input :home_no, as: :tel %>
-          <%= f.input :work_no, as: :tel %>
-          <%= f.input :email, as: :email %>
-        </div>
-        <div class="col-md-4">
-          <%= f.input :street_address1 %>
-          <%= f.input :street_address2 %>
-          <%= f.input :postal_code %>
-          <%= f.input :notes, as: :text, input_html: { rows: '8' } %>
-        </div>
+  <fieldset>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title' %>
+        <%= f.input :name %>
+        <%= f.input :surname %>
+        <%= f.input :city %>
+        <%= f.input :id_number %>
+        <%= f.input :high_risk %>
+        <%= f.input :bank, include_blank: true, label: 'Select a bank', collection: Client::BANKS %>
       </div>
-    </fieldset>
-    <div class="form-group">
-        <%= f.button :submit, class: 'btn btn-success' %>
-        <%= link_to 'Cancel', clients_path, class: 'btn btn-default' %>
+      <div class="col-md-4">
+        <%= f.input :cell_no, as: :tel %>
+        <%= f.input :home_no, as: :tel %>
+        <%= f.input :work_no, as: :tel %>
+        <%= f.input :email, as: :email %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :street_address1 %>
+        <%= f.input :street_address2 %>
+        <%= f.input :postal_code %>
+        <%= f.input :notes, as: :text, input_html: { rows: '8' } %>
+      </div>
     </div>
+  </fieldset>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success' %>
+    <%= link_to 'Cancel', clients_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

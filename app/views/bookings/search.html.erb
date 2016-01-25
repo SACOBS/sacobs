@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Bookings Search
+  Bookings Search
 <% end %>
 <div class="information page-header">
   <h2>
@@ -45,8 +45,8 @@
 <hr/>
 <div class="bookings">
   <% if @results.any? %>
-      <table class="table table-hover table-condensed sortable">
-        <thead>
+    <table class="table table-hover table-condensed sortable">
+      <thead>
         <tr>
           <th>Actions</th>
           <th>Booked</th>
@@ -56,12 +56,12 @@
           <th>Qty</th>
           <th>Connection</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
         <%= render @results%>
-        </tbody>
-      </table>
+      </tbody>
+    </table>
   <% else %>
-      <h3 class="text-center">No results were found for the specified search term.</h3>
+    <h3 class="text-center">No results were found for the specified search term.</h3>
   <% end %>
 </div>

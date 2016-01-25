@@ -37,10 +37,10 @@
           <%= fa_icon :info, text: 'Show' %>
         <% end %>
         <%= link_to edit_client_path(client), class: 'btn btn-warning btn-sm' do %>
-            <%= fa_icon :edit, text: 'Edit' %>
+          <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
         <%= link_to client, class: 'btn btn-danger btn-sm', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
-            <%= fa_icon :times, text: 'Destroy' %>
+          <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
       </div>
     </div>

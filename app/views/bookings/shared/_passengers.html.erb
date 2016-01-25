@@ -1,18 +1,25 @@
-<%= bootstrap_table headers: ['Name', 'Type', 'Cell No', 'Email'], types: [:condensed] do %>
+<table class='table table-condensed'>
+  <thead>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Cell No</th>
+    <th>Email</th>
+  </thead>
+  <tbody>
     <% passengers.each do |passenger| %>
-        <tr>
-          <td>
-            <%= passenger.full_name %>
-          </td>
-          <td>
-            <%= passenger.passenger_type.description %>
-          </td>
-          <td>
-            <%= number_to_phone(passenger.cell_no, area_code: true) %>
-          </td>
-          <td>
-            <%= mail_to(passenger.email) if passenger.email.present? %>
-          </td>
-        </tr>
-    <% end %>
-<% end %>
+      <tr>
+        <td>
+          <%= passenger.full_name %>
+        </td>
+        <td>
+          <%= passenger.passenger_type.description %>
+        </td>
+        <td>
+          <%= number_to_phone(passenger.cell_no, area_code: true) %>
+        </td>
+        <td>
+          <%= mail_to(passenger.email) if passenger.email.present? %>
+        </td>
+      </tr>
+    </tbody>
+  </table>

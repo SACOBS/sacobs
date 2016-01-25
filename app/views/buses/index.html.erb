@@ -1,40 +1,37 @@
 <%= content_for(:title) do %>
-    Buses
+  Buses
 <% end %>
 <div class="page-header">
   <h2>Buses</h2>
   <%= link_to new_bus_path,  class: 'btn btn-primary' do %>
-      <%= fa_icon :plus, text: 'Setup bus' %>
+    <%= fa_icon :plus, text: 'Setup bus' %>
   <% end %>
   <%= link_to buses_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-<div class="search-box">
-  <%= simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f| %>
+  <div class="search-box">
+    <%= simple_form_for :q, url: buses_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get } do |f| %>
       <%= f.input :name_or_model_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
       <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
       <%= link_to buses_path, class: 'btn btn-sm btn-default' do %>
-          <%= fa_icon :times, text: 'Clear' %>
+        <%= fa_icon :times, text: 'Clear' %>
       <% end %>
-       <p>
-     <i class='small'>Search on bus name or model.</i>
-  </p>   
-  <% end %>
+      <p>
+        <i class='small'>Search on bus name or model.</i>
+      </p>
+    <% end %>
+  </div>
+</div>
+<div class='col-md-12'>
+  <ul class="media-list">
+    <%= render @buses, cache: true %>
+  </ul>
 </div>
 </div>
-   <div class='col-md-12'>
-     <ul class="media-list">
-       <%= render @buses, cache: true %>
-     </ul>
-   </div>
-
-</div>
-
-
 <hr>
 <%= link_to new_bus_path,  class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Setup bus' %>
+  <%= fa_icon :plus, text: 'Setup bus' %>
 <% end %>
 <%= link_to buses_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
+  <%= fa_icon :refresh, text: 'Refresh' %>
 <% end %>

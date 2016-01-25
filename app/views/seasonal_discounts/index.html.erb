@@ -1,18 +1,29 @@
 <%= content_for(:title) do %>
-    Priority Pricing
+  Priority Pricing
 <% end %>
 <div class="page-header">
   <h2>Priority Pricing</h2>
   <h4>These discounts will override the current passenger discount when the booking falls in between the period from and period to dates. Eg Senior Citizen will have 0% added rather than the standard 10%</h4>
   <%= link_to new_seasonal_discount_path, class: 'btn btn-primary' do %>
-      <%= fa_icon :plus, text: 'Setup priority pricing' %>
+    <%= fa_icon :plus, text: 'Setup priority pricing' %>
   <% end %>
   <%= link_to seasonal_discounts_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-
 </div>
-
-<%= bootstrap_table headers: ['Actions', 'Name', 'Passenger Type', 'Percentage', 'Period From', 'Period To', 'Active'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+<table class='table table-hover table-condensed sortable'>
+  <thead>
+    <tr>
+      <th>Actions</th>
+      <th>Name</th>
+      <th>Passenger Type</th>
+      <th>Percentage</th>
+      <th>Period From</th>
+      <th>Period To</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
     <%= render @seasonal_discounts, cache: true %>
-<% end %>
+  </tbody>
+</table>

@@ -4,10 +4,10 @@
       <%= fa_icon :info, text: 'Show' %>
     <% end %>
     <%= link_to edit_city_path(city), class: 'btn btn-sm btn-warning' do %>
-        <%= fa_icon :edit, text: 'Edit' %>
+      <%= fa_icon :edit, text: 'Edit' %>
     <% end %>
     <%= link_to city, method: :delete,  class: 'btn btn-sm btn-danger', data: { confirm: t('messages.confirm', resource: :city) } do %>
-        <%= fa_icon :times, text: 'Destroy' %>
+      <%= fa_icon :times, text: 'Destroy' %>
     <% end %>
   </td>
   <td>

@@ -32,36 +32,49 @@
 <br/>
 <br/>
 <div class="passengers">
-  <%= bootstrap_table headers: %w(Date Name From Terminal To Terminal Departure Arrival), types: [:bordered, :condensed] do %>
+  <table class='table table-bordered table-condensed'>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>From</th>
+        <th>Terminal</th>
+        <th>To</th>
+        <th>Terminal</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+      </tr>
+    </thead>
+    <tbody>
       <% [@ticket.booking, @ticket.return_booking].compact.each do |booking| %>
-          <% @ticket.passengers.each do |passenger| %>
-              <tr>
-                <td>
-                  <%= booking.trip.start_date %>
-                </td>
-                <td>
-                  <%= passenger.full_name %>
-                </td>
-                <td>
-                  <%= booking.stop.from_city_name %>
-                </td>
-                <td>
-                  <%= booking.stop.from_city_venues.first.name %>
-                </td>
-                <td>
-                  <%= booking.stop.to_city_name %>
-                </td>
-                <td>
-                  <%= booking.stop.to_city_venues.first.name %>
-                </td>
-                <td>
-                  <%= time_tag(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
-                </td>
-                <td>
-                  <%= time_tag(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
-                </td>
-              </tr>
-          <% end %>
+        <% @ticket.passengers.each do |passenger| %>
+          <tr>
+            <td>
+              <%= booking.trip.start_date %>
+            </td>
+            <td>
+              <%= passenger.full_name %>
+            </td>
+            <td>
+              <%= booking.stop.from_city_name %>
+            </td>
+            <td>
+              <%= booking.stop.from_city_venues.first.name %>
+            </td>
+            <td>
+              <%= booking.stop.to_city_name %>
+            </td>
+            <td>
+              <%= booking.stop.to_city_venues.first.name %>
+            </td>
+            <td>
+              <%= time_tag(booking.stop.leaving, format: :short) if booking.stop.leaving.present? %>
+            </td>
+            <td>
+              <%= time_tag(booking.stop.arriving, format: :short) if booking.stop.arriving.present? %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
       <tr>
         <td></td>
@@ -70,48 +83,28 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>
           <strong>Price:</strong>
-        </td>
-        <td>
           <strong>
-            <%= number_to_currency @ticket.price, unit: 'R' %>
+            <%= @ticket.price %>
           </strong>
         </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
         <td>
           <strong>Discount:</strong>
-        </td>
-        <td>
           <strong>
-            <%= number_to_currency @ticket.discount, unit: 'R' %>
+            <%= @ticket.discount %>
           </strong>
         </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
         <td>
           <strong>Total:</strong>
-        </td>
-        <td>
           <strong>
-            <%= number_to_currency @ticket.nett, unit: 'R' %>
+            <%= @ticket.nett %>
           </strong>
         </td>
       </tr>
-  <% end %>
+    </tbody>
+  </table>
 </div>
 <br/>
 <br/>

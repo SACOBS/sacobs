@@ -1,19 +1,20 @@
-<%= bootstrap_table headers: ['Client Name', 'Home No', 'Cell No', 'Work No', 'Email'], types: [:condensed] do %>
+<table class='table table-condensed'>
+  <thead>
     <tr>
-      <td>
-        <%= client.full_name %>
-      </td>
-      <td>
-        <%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %>
-      </td>
-      <td>
-        <%= number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %>
-      </td>
-      <td>
-        <%= number_to_phone(client.work_no, area_code: true).presence || 'N/A' %>
-      </td>
-      <td>
-        <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
-      </td>
+      <th>Client Name</th>
+      <th>Home No</th>
+      <th>Cell No</th>
+      <th>Work No</th>
+      <th>Email</th>
     </tr>
-<% end %>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= client.full_name %></td>
+      <td><%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %></td>
+      <td><%= number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %></td>
+      <td><%= number_to_phone(client.work_no, area_code: true).presence || 'N/A' %></td>
+      <td><%= client.email.present? ? mail_to(client.email) : 'N/A' %></td>
+    </tr>
+  </tbody>
+</table>

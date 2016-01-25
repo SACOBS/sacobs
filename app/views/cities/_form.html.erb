@@ -1,25 +1,32 @@
 <%= simple_form_for @city do |f| %>
-
+  <fieldset>
+    <%= f.input :name, required: false, autofocus: true, placeholder: 'Name' %>
+  </fieldset>
+  <div id="venues">
     <fieldset>
-      <%= f.input :name, required: false, autofocus: true, placeholder: 'Name' %>
+      <legend>Venues</legend>
+      <table id='venues_table' class='table table-bordered table-condensed'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.simple_fields_for :venues, wrapper: false do |venue| %>
+            <%= render 'venue_fields', f: venue %>
+          <% end %>
+        </tbody>
+      </table>
     </fieldset>
-    <div id="venues">
-      <fieldset>
-        <legend>Venues</legend>
-        <%= bootstrap_table headers: ['Name', ' '], types: [:condensed], html_options: { id: 'venues_table'} do %>
-            <%= f.simple_fields_for :venues, wrapper: false do |venue| %>
-                <%= render 'venue_fields', f: venue %>
-            <% end %>
-        <% end %>
-      </fieldset>
-      <div class="links">
-        <hr/>
-        <%= link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-sm btn-info', data: { association_insertion_node: '#venues_table > tbody', association_insertion_method: 'append'  } %>
-      </div>
+    <div class="links">
+      <hr/>
+      <%= link_to_add_association 'Add Venue', f, :venues, class: 'btn btn-sm btn-info', data: { association_insertion_node: '#venues_table > tbody', association_insertion_method: 'append'  } %>
     </div>
-    <hr/>
-    <div class="form-group">
-        <%= f.button :submit, class: 'btn btn-success' %>
-        <%= link_to 'Cancel', cities_path, class: 'btn btn-default' %>
-    </div>
+  </div>
+  <hr/>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success' %>
+    <%= link_to 'Cancel', cities_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

@@ -1,13 +1,10 @@
 <%= simple_form_for @charge do |f| %>
-
-    <fieldset>
-      <%= f.input :description, autofocus: true, placeholder: 'Description' %>
-      <%= f.input :percentage, placeholder: 'Percentage' %>
-    </fieldset>
-    <div class="form-group">
-
-        <%= f.button :submit, class: 'btn btn-success'  %>
-        <%= link_to 'Cancel', charges_path, class: 'btn btn-default' %>
-
-    </div>
+  <fieldset>
+    <%= f.input :description, autofocus: true, placeholder: 'Description' %>
+    <%= f.input :percentage, placeholder: 'Percentage' %>
+  </fieldset>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success'  %>
+    <%= link_to 'Cancel', charges_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

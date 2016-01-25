@@ -1,5 +1,5 @@
 <%= simple_form_for :note, url: notes_url, remote: true do |f| %>
-    <%= f.input :content, as: :text, placeholder: 'Add notes here', label: false, input_html: {  rows: 3 } %>
-    <%= f.hidden_field :context, value: context %>
-    <%= f.button :submit, class: 'btn btn-success'  %>
+  <%= f.input :content, as: :text, placeholder: 'Add notes here', label: false, input_html: {  rows: 3 } %>
+  <%= f.hidden_field :context, value: context %>
+  <%= f.button :submit, class: 'btn btn-success'  %>
 <% end %>

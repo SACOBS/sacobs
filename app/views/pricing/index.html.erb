@@ -1,30 +1,31 @@
 <%= content_for :title do %>
-    Quick quote
+  Quick quote
 <% end %>
 <% content_for :sidebar do %>
-    <h3>Quick Quote</h3>
-    <div class="connection-finder">
-      <%= simple_form_for :q do |f| %>
-          <fieldset>
-          <legend><h5>Select route</h5></legend>
-          <%= f.input :route, collection: Route.all, as: :radio_buttons, item_label_class: 'radio-inline', label: false, autofocus: true,  item_wrapper_tag: false %>
-          </fieldset>
-      <% end %>
-
-      <h5>Connections</h5>
-            <div class='form-group'>
+  <h3>Quick Quote</h3>
+  <div class="connection-finder">
+    <%= simple_form_for :q do |f| %>
+      <fieldset>
+        <legend>
+          <h5>Select route</h5>
+        </legend>
+        <%= f.input :route, collection: Route.all, as: :radio_buttons, item_label_class: 'radio-inline', label: false, autofocus: true,  item_wrapper_tag: false %>
+      </fieldset>
+    <% end %>
+    <h5>Connections</h5>
+    <div class='form-group'>
       <input id="connection-search" placeholder="Search Connections" required type="text" class='form-control'>
-      </div>
-      <div class="connections">
-        <ul class="list-unstyled" id="connections-list">
-          <% @connections.each do |connection| %>
-              <%= content_tag_for :li, connection, data: {route: connection.route_id} do %>
-                  <%= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: {type: :html}, remote: true %>
-              <% end %>
-          <% end %>
-        </ul>
-      </div>
     </div>
+    <div class="connections">
+      <ul class="list-unstyled" id="connections-list">
+        <% @connections.each do |connection| %>
+          <%= content_tag_for :li, connection, data: {route: connection.route_id} do %>
+            <%= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: {type: :html}, remote: true %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 <% end %>
 <div class="quote">
   <%= render 'pricing/quote', pricing: @pricing %>

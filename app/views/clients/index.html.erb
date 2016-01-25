@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Clients
+  Clients
 <% end %>
 <div class="page-header">
   <h2>
@@ -7,42 +7,41 @@
   </h2>
   <div class="btn-group">
     <%= link_to new_client_path, class: 'btn btn-primary' do %>
-        <%= fa_icon :plus, text: 'Setup Client' %>
+      <%= fa_icon :plus, text: 'Setup Client' %>
     <% end %>
     <%= link_to clients_path, class: 'btn btn-default' do %>
-        <%= fa_icon :refresh, text: 'Refresh' %>
+      <%= fa_icon :refresh, text: 'Refresh' %>
     <% end %>
     <%= link_to clients_path(format: :xls), class: 'btn btn-info', data: { no_turbolink: true } do %>
-        <%= fa_icon :download, text: 'Download' %>
+      <%= fa_icon :download, text: 'Download' %>
     <% end %>
   </div>
   <div class="search pull-right">
     <%= simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get, id: 'client_search' } do |f| %>
-        <%= f.input :full_name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
-        <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
-        <%= link_to clients_path, class: 'btn btn-sm btn-default' do %>
-          <%= fa_icon :times, text: 'Clear' %>
-        <% end %>
+      <%= f.input :full_name_cont, placeholder: 'Search', input_html: { class: 'input-sm' } %>
+      <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
+      <%= link_to clients_path, class: 'btn btn-sm btn-default' do %>
+        <%= fa_icon :times, text: 'Clear' %>
+      <% end %>
     <% end %>
-     <p>
-     <i class='small'>Search on client full name.</i>
-  </p>   
+    <p>
+      <i class='small'>Search on client full name.</i>
+    </p>
   </div>
 </div>
 <div class="tabbable tabs-left" id="listing">
   <ul class="nav nav-tabs" id="directory">
     <% ('A'..'Z').each_with_index do |letter, index| %>
-        <%= content_tag(:li, class: ('active' if index.zero?)) do %>
-            <%= link_to letter, clients_path(letter: letter), data: { toggle: "tab", target: "##{letter}"},  remote: true %>
-        <% end %>
+      <%= content_tag(:li, class: ('active' if index.zero?)) do %>
+        <%= link_to letter, clients_path(letter: letter), data: { toggle: "tab", target: "##{letter}"},  remote: true %>
+      <% end %>
     <% end %>
   </ul>
   <div class="tab-content col-md-10">
     <% ('A'..'Z').each_with_index do |letter, index| %>
-        <%= content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do %>
-            <%= render(partial: 'clients', locals: { clients: @clients }) if index.zero? %>
-        <% end %>
+      <%= content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do %>
+        <%= render(partial: 'clients', locals: { clients: @clients }) if index.zero? %>
+      <% end %>
     <% end %>
   </div>
 </div>
-

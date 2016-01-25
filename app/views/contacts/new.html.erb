@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Contact and Support
+  Contact and Support
 <% end %>
 <h2>Contact and Support</h2>
 <br/>
@@ -8,9 +8,9 @@
 <h5>Let us get back to you:</h5>
 <div class="row col-md-12">
   <%= simple_form_for @contact, defaults: { required: false } do |f| %>
-      <%= f.input :name %>
-      <%= f.input :email %>
-      <%= f.input :message, as: :text, label: false, input_html: { class: 'input-lg', rows: '10' } %>
-      <%= f.button :submit, 'Send message', class: 'btn btn-success' %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :message, as: :text, label: false, input_html: { class: 'input-lg', rows: '10' } %>
+    <%= f.button :submit, 'Send message', class: 'btn btn-success' %>
   <% end %>
 </div>

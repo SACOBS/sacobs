@@ -1,14 +1,14 @@
 <table class="table table-condensed table-hover table-bordered sortable">
   <thead>
-  <tr>
-    <th>From</th>
-    <th>Ocp</th>
-    <th>Cap</th>
-    <th>To</th>
-  </tr>
+    <tr>
+      <th>From</th>
+      <th>Ocp</th>
+      <th>Cap</th>
+      <th>To</th>
+    </tr>
   </thead>
   <tbody>
-  <% items.each do |item| %>
+    <% items.each do |item| %>
       <tr>
         <td>
           <%= item.from %>
@@ -23,6 +23,6 @@
           <%= item.to %>
         </td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>

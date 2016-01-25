@@ -1,26 +1,22 @@
 <%= content_for :title do %>
-    Edit Settings
+  Edit Settings
 <% end %>
 <div class="page-header">
   <h2>Edit Setting</h2>
 </div>
 <%= simple_form_for @settings, url: settings_path do |f| %>
-   
-    <fieldset>
-      <%= f.input :booking_expiry_period, autofocus: true %>
-      <%= f.input :email, hint: "This is the email address which the tickets are sent from and it will also be bcc'ed on the ticket email." , as: :email %>
-      <%= f.input :ticket_instructions, as: :text %>
-      <%= f.input :default_scripture, as: :text %>
-      <%= f.input :trip_sheet_note1, as: :text %>
-      <%= f.input :trip_sheet_note2, as: :text %>
-      <%= f.input :trip_sheet_note3, as: :text %>
-      <%= f.input :trip_sheet_note4, as: :text %>
-    </fieldset>
-    <div class="form-group">
-
-        <%= f.button :submit, class: 'btn btn-success' %>
-        <%= link_to 'Cancel', settings_path, class: 'btn btn-default' %>
-
-    </div>
-
+  <fieldset>
+    <%= f.input :booking_expiry_period, autofocus: true %>
+    <%= f.input :email, hint: "This is the email address which the tickets are sent from and it will also be bcc'ed on the ticket email." , as: :email %>
+    <%= f.input :ticket_instructions, as: :text %>
+    <%= f.input :default_scripture, as: :text %>
+    <%= f.input :trip_sheet_note1, as: :text %>
+    <%= f.input :trip_sheet_note2, as: :text %>
+    <%= f.input :trip_sheet_note3, as: :text %>
+    <%= f.input :trip_sheet_note4, as: :text %>
+  </fieldset>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success' %>
+    <%= link_to 'Cancel', settings_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

@@ -1,32 +1,29 @@
 <%= content_for(:title) do %>
-    Drivers
+  Drivers
 <% end %>
 <div class="page-header">
   <h2>Drivers</h2>
   <%= link_to new_driver_path,  class: 'btn btn-primary' do %>
-      <%= fa_icon :plus, text: 'Setup driver' %>
+    <%= fa_icon :plus, text: 'Setup driver' %>
   <% end %>
   <%= link_to drivers_path, class: 'btn btn-default' do %>
-      <%= fa_icon :refresh, text: 'Refresh' %>
+    <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-
-<div class="search pull-right">
-  <%= simple_form_for :q, url: search_drivers_path, defaults: { required: false, label: false }, html: { class: 'form-inline' }, method: :get, remote: true do |f| %>
+  <div class="search pull-right">
+    <%= simple_form_for :q, url: search_drivers_path, defaults: { required: false, label: false }, html: { class: 'form-inline' }, method: :get, remote: true do |f| %>
       <%= f.input :name_start, placeholder: 'Search' %>
       <%= f.button :submit, 'Search', class: 'btn btn-sm btn-success'  %>
       <%= link_to drivers_path, class: 'btn btn-sm btn-default' do %>
-          <%= fa_icon :times, text: 'Clear' %>
+        <%= fa_icon :times, text: 'Clear' %>
       <% end %>
-  <% end %>
-   <p>
-     <i class='small'>Search on driver name.</i>
-  </p>   
+    <% end %>
+    <p>
+      <i class='small'>Search on driver name.</i>
+    </p>
+  </div>
 </div>
+<div class='col-md-12'>
+  <ul class="media-list">
+    <%= render @drivers, cache: true %>
+  </ul>
 </div>
- <div class='col-md-12'>
-     <ul class="media-list">
-       <%= render @drivers, cache: true %>
-     </ul>
-</div>
-
-

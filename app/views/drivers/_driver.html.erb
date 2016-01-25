@@ -1,34 +1,32 @@
-
 <% cache driver do %>
-<li class="media">
-<div class='media-left'>
-  <%= fa_icon 'male 3x' %>
-</div>
-
-<div class="media-body">
-  <h4 class="media-heading"><%= driver.full_name %></h4>
-  <dl class="dl-horizontal">
-    <dt>
-      Name:
+  <li class="media">
+    <div class='media-left'>
+      <%= fa_icon 'male 3x' %>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"><%= driver.full_name %></h4>
+      <dl class="dl-horizontal">
+        <dt>
+          Name:
     </dt>
-    <dd>
-      <%= driver.name %>
-    </dd>
-    <dt>
-      Surname:
+        <dd>
+          <%= driver.name %>
+        </dd>
+        <dt>
+          Surname:
     </dt>
-    <dd>
-      <%= driver.surname %>
-    </dd>
-  </dl>
-</div>
-<div class="btn-group btn-group-vertical media-right">
-  <%= link_to edit_driver_path(driver), class: 'btn btn-warning' do %>
-  <%= fa_icon :edit, text: 'Edit' %>
-  <% end %>
-  <%= link_to driver, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :driver) } do %>
-  <%= fa_icon :times, text: 'Destroy' %>
-  <% end %>
-</div>
-</li>
+        <dd>
+          <%= driver.surname %>
+        </dd>
+      </dl>
+    </div>
+    <div class="btn-group btn-group-vertical media-right">
+      <%= link_to edit_driver_path(driver), class: 'btn btn-warning' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+      <% end %>
+      <%= link_to driver, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :driver) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+      <% end %>
+    </div>
+  </li>
 <% end %>

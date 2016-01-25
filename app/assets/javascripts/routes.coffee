@@ -1,9 +1,9 @@
 $(document).on "page:change", ->
   return unless $(".routes").length > 0
+  
   $('.route-destinations').on 'cocoon:after-insert', (event, destination) ->
     destination.find("td input[name*='city']").prop('enabled', true).focus()
     destination.find("td input[name*='sequence']").val(destination.index() + 1)
-   
 
   $('.route-destinations').on 'cocoon:after-remove',(event, destination) ->
     $('#destinations').find('tr').each (index) ->

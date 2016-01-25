@@ -1,22 +1,22 @@
 <tr>
   <td>
     <%= link_to edit_route_destinations_path(route), class: 'btn btn-xs btn-primary', data: { toggle: 'tooltip', title: 'Click here to add a new destination (eg East London) to the route.' }, rel: 'tooltip' do %>
-       <%= fa_icon :plus, text: 'Add destination' %>
+      <%= fa_icon :plus, text: 'Add destination' %>
     <% end %>
     <%= link_to copy_route_path(route), method: :post, class: 'btn btn-xs btn-success', data: { toggle: 'tooltip', title: 'Click here to create a copy of this route.' }, rel: 'tooltip' do %>
-        <%= fa_icon :copy, text: 'Copy' %>
+      <%= fa_icon :copy, text: 'Copy' %>
     <% end %>
     <%= link_to reverse_copy_route_path(route), method: :post, class: 'btn btn-xs btn-success', data: { toggle: 'tooltip', title: 'Click here to create a copy of this route in reverse(eg EL to PE will be copied as PE to EL).' }, rel: 'tooltip' do %>
-        <%= fa_icon :copy, text: 'Reverse Copy' %>
+      <%= fa_icon :copy, text: 'Reverse Copy' %>
     <% end %>
     <%= link_to route, class: 'btn btn-info btn-xs' do %>
-        <%= fa_icon :info, text: 'Show' %>
+      <%= fa_icon :info, text: 'Show' %>
     <% end %>
     <%= link_to edit_route_path(route), class: 'btn btn-warning btn-xs' do %>
-        <%= fa_icon :edit, text: 'Edit' %>
+      <%= fa_icon :edit, text: 'Edit' %>
     <% end %>
     <%= link_to route, method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: t('messages.confirm', resource: :route) } do %>
-        <%= fa_icon :times, text: 'Destroy' %>
+      <%= fa_icon :times, text: 'Destroy' %>
     <% end %>
   </td>
   <td>

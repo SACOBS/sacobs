@@ -1,13 +1,13 @@
 <%= content_tag_for(:tr, user) do %>
-<td><%= user.full_name %></td>
-<td><%= mail_to user.email %></td>
-<td><span class="label label-info"><%= user.role.capitalize %></span></td>
-<td>
-  <%= link_to user_path(user, user: { role: :admin }), method: :patch, class: 'btn btn-xs btn-success' do %>
+  <td><%= user.full_name %></td>
+  <td><%= mail_to user.email %></td>
+  <td><span class="label label-info"><%= user.role.capitalize %></span></td>
+  <td>
+    <%= link_to user_path(user, user: { role: :admin }), method: :patch, class: 'btn btn-xs btn-success' do %>
       <%= fa_icon :user, text: 'Upgrade role' %>
-  <% end %>
-  <%= link_to user_path(user, user: { role: :clerk }), method: :patch, class: 'btn btn-xs btn-warning' do %>
+    <% end %>
+    <%= link_to user_path(user, user: { role: :clerk }), method: :patch, class: 'btn btn-xs btn-warning' do %>
       <%= fa_icon :user, text: 'Downgrade role' %>
-  <% end %>
-</td>
+    <% end %>
+  </td>
 <% end %>

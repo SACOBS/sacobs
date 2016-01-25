@@ -10,14 +10,14 @@
           <%= render notes %>
         </div>
         <% if current_user.admin? %>
-            <div class="note-form">
-              <%= render 'notes/form', context: context %>
-            </div>
+          <div class="note-form">
+            <%= render 'notes/form', context: context %>
+          </div>
         <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div
+    </div>
   </div>
 </div>

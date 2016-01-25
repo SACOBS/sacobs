@@ -1,34 +1,43 @@
-<%= bootstrap_table headers: ['Status', 'Client Name', 'Connection', 'Qty', 'Telephone'], types: %i(hover condensed), html_options: { class: 'sortable' } do %>
+<table class='table table-hover table-condensed sortable'>
+  <thead>
+    <th>Status</th>
+    <th>Client Name</th>
+    <th>Connection</th>
+    <th>Qty</th>
+    <th>Telephone</th>
+  </thead>
+  <tbody>
     <% trip.bookings.each do |booking| %>
-        <% cache booking do %>
-            <tr>
-              <td>
-                <%= status_label_for(booking) %>
-              </td>
-              <td>
-                <%= link_to booking.client, target: '_blank' do %>
-                    <%= content_tag(:em, booking.client.full_name) %>
-                <% end %>
-              </td>
-              <td>
-                <%= content_tag(:span, booking.stop.name, class: 'label label-info') %>
-              </td>
-              <td>
-                <%= badge_for(booking.quantity) %>
-              </td>
-              <td>
-                <address>
-                  <abbr class="initialism" title="Home">H:</abbr>
-                  <%= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A' %>
-                  <br>
-                  <abbr class="initialism" title="Work">W:</abbr>
-                  <%= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A' %>
-                  <br>
-                  <abbr class="initialism" title="Cell">C:</abbr>
-                  <%= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A' %>
-                </address>
-              </td>
-            </tr>
-        <% end %>
+      <% cache booking do %>
+        <tr>
+          <td>
+            <%= status_label_for(booking) %>
+          </td>
+          <td>
+            <%= link_to booking.client, target: '_blank' do %>
+              <%= content_tag(:em, booking.client.full_name) %>
+            <% end %>
+          </td>
+          <td>
+            <%= content_tag(:span, booking.stop.name, class: 'label label-info') %>
+          </td>
+          <td>
+            <%= badge_for(booking.quantity) %>
+          </td>
+          <td>
+            <address>
+              <abbr class="initialism" title="Home">H:</abbr>
+              <%= number_to_phone(booking.client.home_no, area_code: true).presence || 'N/A' %>
+              <br>
+              <abbr class="initialism" title="Work">W:</abbr>
+              <%= number_to_phone(booking.client.work_no, area_code: true).presence || 'N/A' %>
+              <br>
+              <abbr class="initialism" title="Cell">C:</abbr>
+              <%= number_to_phone(booking.client.cell_no, area_code: true).presence || 'N/A' %>
+            </address>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
-<% end %>
+  </tbody>
+</table>

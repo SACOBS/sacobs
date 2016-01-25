@@ -1,34 +1,42 @@
 <%= content_for(:title) do %>
-    <%= @bus.name %>
+  <%= @bus.name %>
 <% end %>
 <% cache @bus do %>
-    <div class="page-header">
-      <h2>Bus</h2>
-      <div class="actions">
-        <%= back_to buses_path %>
-        <%= link_to edit_bus_path(@bus), class: 'btn btn-warning' do %>
-            <%= fa_icon :edit, text: 'Edit' %>
-        <% end %>
-        <%= link_to @bus, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
-            <%= fa_icon :times, text: 'Destroy' %>
-        <% end %>
-      </div>
+  <div class="page-header">
+    <h2>Bus</h2>
+    <div class="actions">
+      <%= back_to buses_path %>
+      <%= link_to edit_bus_path(@bus), class: 'btn btn-warning' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+      <% end %>
+      <%= link_to @bus, method: :delete, class: 'btn btn-danger',  data: { confirm: t('messages.confirm', resource: :bus) } do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+      <% end %>
     </div>
-    <div class="panel panel-default">
-  <div class="panel-heading"><h4 class='panel-title'><%= @bus.name %></h4></div>
-  <div class="panel-body">
-    <dl class="dl-horizontal">
-  <dt>Capacity:</dt>
-  <dd><%= @bus.capacity %></dd>
-  <dt>Year:</dt>
-  <dd><%= @bus.year %></dd>
-  <dt>Model:</dt>
-  <dd><%= @bus.model %></dd>
-  </dl>
   </div>
-
-  <%= bootstrap_table headers: %w(Row Number), types: %i(hover condensed), html_options: { class: 'sortable' } do %>
-      <% @bus.seats.each do |seat| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class='panel-title'><%= @bus.name %></h4>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt>Capacity:</dt>
+        <dd><%= @bus.capacity %></dd>
+        <dt>Year:</dt>
+        <dd><%= @bus.year %></dd>
+        <dt>Model:</dt>
+        <dd><%= @bus.model %></dd>
+      </dl>
+    </div>
+    <table class='table table-hover table-condensed sortable'>
+      <thead>
+        <tr>
+          <th>Row</th>
+          <th>Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bus.seats.each do |seat| %>
           <tr>
             <td>
               <%= seat.row %>
@@ -37,9 +45,8 @@
               <%= seat.number %>
             </td>
           </tr>
-      <% end %>
-  <% end %>
-</div>
-
-
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>

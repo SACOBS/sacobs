@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    New Route
+  New Route
 <% end %>
 <div class="page-header">
   <h2>New Route</h2>
@@ -20,41 +20,49 @@
   </p>
 </div>
 <%= simple_form_for @route do |f| %>
-    <%= render 'shared/error_messages', object: @route %>
-    <div class="form-group">
-        <%= f.button :submit, class: 'btn btn-success'  %>
-        <%= link_to 'Cancel', routes_path, class: 'btn btn-default' %>
+  <%= render 'shared/error_messages', object: @route %>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success'  %>
+    <%= link_to 'Cancel', routes_path, class: 'btn btn-default' %>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-md-5">
+      <fieldset>
+        <legend>Details</legend>
+        <%= f.input :name, autofocus: true %>
+        <%= f.input :cost, label: 'Master Rate' %>
+        <%= f.input :distance %>
+      </fieldset>
     </div>
-    <hr/>
-
-    <div class="row">
-      <div class="col-md-5">
-        <fieldset>
-          <legend>Details</legend>
-          <%= f.input :name, autofocus: true %>
-          <%= f.input :cost, label: 'Master Rate' %>
-          <%= f.input :distance %>
-        </fieldset>
-      </div>
-      <div class="col-md-6">
-        <fieldset>
-          <legend>Destinations</legend>
-          <%= bootstrap_table headers: ['City', 'Order', ''], types: %i(hover condensed), html_options: { class: 'route-destinations' } do %>
-              <%= f.simple_fields_for :destinations, wrapper: false do |destination| %>
-                  <%= render 'destination_fields', f: destination %>
-              <% end %>
-          <% end %>
-          <div class="links">
-            <%= link_to_add_association  f, :destinations, data: { association_insertion_node: '.route-destinations > tbody', association_insertion_method: 'append' },  class: 'btn btn-warning' do %>
-              <%= fa_icon :plus, text: 'Add destination' %>
+    <div class="col-md-6">
+      <fieldset>
+        <legend>Destinations</legend>
+        <table class='route-destinations table table-hover table-condensed sortable'>
+          <thead>
+            <tr>
+              <th>City</th>
+              <th>Order</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= f.simple_fields_for :destinations, wrapper: false do |destination| %>
+              <%= render 'destination_fields', f: destination %>
             <% end %>
-          </div>
-        </fieldset>
-      </div>
+          </tbody>
+        </table>
+        <div class="links">
+          <%= link_to_add_association  f, :destinations, data: { association_insertion_node: '.route-destinations > tbody', association_insertion_method: 'append' },  class: 'btn btn-warning' do %>
+            <%= fa_icon :plus, text: 'Add destination' %>
+          <% end %>
+        </div>
+      </fieldset>
     </div>
-    <hr/>
-     <div class="form-group">
-        <%= f.button :submit, class: 'btn btn-success'  %>
-        <%= link_to 'Cancel', routes_path, class: 'btn btn-default' %>
-    </div>
+  </div>
+  <hr/>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success'  %>
+    <%= link_to 'Cancel', routes_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

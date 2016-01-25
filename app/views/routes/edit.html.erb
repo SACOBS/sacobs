@@ -1,5 +1,5 @@
 <%= content_for(:title) do %>
-    Edit <%= @route.name %>
+  Edit <%= @route.name %>
 <% end %>
 <div class="page-header">
   <h2>Edit Route</h2>
@@ -20,49 +20,59 @@
   </ol>
 </div>
 <%= simple_form_for @route do |f| %>
-    <%= render 'shared/error_messages', object: @route %>
-    <div class="form-group">
-
-        <%= f.button :submit, class: 'btn btn-success' %>
-        <%= back_to routes_path %>
-
-    </div>
-    <hr/>
-
-    <fieldset>
-      <%= f.input :name, autofocus: true, label: 'Name:' %>
-      <%= f.input :cost, label: 'Master Rate:' %>
-      <%= f.input :distance, label: 'Distance:' %>
-    </fieldset>
-    <hr/>
-    <fieldset>
-      <%= bootstrap_table headers: ['Name', 'Percentage', 'Cost', 'Distance', 'Leaving', 'Arriving',''], types: [:condensed], html_options: { id: 'connections', class: 'sortable' } do %>
-          <%= f.simple_fields_for :connections, wrapper: false do |connection| %>
-              <tr>
-                <td>
-                  <%= connection.object.name %>
-                </td>
-                <td>
-                  <%= connection.input :percentage, label: false, class: 'input-sm' %>
-                </td>
-                <td>
-                  <%= connection.input :cost, label: false, class: 'input-sm' %>
-                </td>
-                <td>
-                  <%= connection.input :distance,  label: false, class: 'input-sm' %>
-                </td>
-                <td>
-                  <%= connection.input :leaving, label: false, class: 'input-sm' %>
-                </td>
-                <td>
-                  <%= connection.input :arriving, label: false, class: 'input-sm' %>
-                </td>
-              </tr>
-          <% end %>
-      <% end %>
-    </fieldset>
-    <div class="form-group">
-        <%= f.button :submit, class: 'btn btn-success' %>
-        <%= back_to routes_path %>
-    </div>
+  <%= render 'shared/error_messages', object: @route %>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success' %>
+    <%= back_to routes_path %>
+  </div>
+  <hr/>
+  <fieldset>
+    <%= f.input :name, autofocus: true, label: 'Name:' %>
+    <%= f.input :cost, label: 'Master Rate:' %>
+    <%= f.input :distance, label: 'Distance:' %>
+  </fieldset>
+  <hr/>
+  <fieldset>
+    <table id='connections' class='table table-hover table-condensed sortable'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Percentage</th>
+          <th>Cost</th>
+          <th>Distance</th>
+          <th>Leaving</th>
+          <th>Arriving</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.simple_fields_for :connections, wrapper: false do |connection| %>
+          <tr>
+            <td>
+              <%= connection.object.name %>
+            </td>
+            <td>
+              <%= connection.input :percentage, label: false, class: 'input-sm' %>
+            </td>
+            <td>
+              <%= connection.input :cost, label: false, class: 'input-sm' %>
+            </td>
+            <td>
+              <%= connection.input :distance,  label: false, class: 'input-sm' %>
+            </td>
+            <td>
+              <%= connection.input :leaving, label: false, class: 'input-sm' %>
+            </td>
+            <td>
+              <%= connection.input :arriving, label: false, class: 'input-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </fieldset>
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-success' %>
+    <%= back_to routes_path %>
+  </div>
 <% end %>

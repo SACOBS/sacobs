@@ -1,5 +1,5 @@
 <%= content_for (:title) do %>
-    Bookings
+  Bookings
 <% end %>
 <div class="page-header">
   <h2>Bookings</h2>
@@ -9,14 +9,13 @@
   <%= link_to bookings_path, class: 'btn btn-default' do %>
     <%= fa_icon :refresh, text: 'Refresh' %>
   <% end %>
-<div class="search pull-right">
-  <%= render 'search_form' %>
-  <p>
-     <i class='small'>Search on booking date or reference no or </br> client surname or client home, work and cell numbers.</i>
-  </p>   
+  <div class="search pull-right">
+    <%= render 'search_form' %>
+    <p>
+      <i class='small'>Search on booking date or reference no or </br> client surname or client home, work and cell numbers.</i>
+  </p>
 </div>
 </div>
-
 <div class="tab-wrapper" id="bookings">
   <ul class="nav nav-tabs">
     <li class="active">
@@ -26,17 +25,17 @@
     </li>
     <li>
       <%= link_to bookings_path(type: :open), data: { toggle: 'tab', target: '#open' }, remote: true do %>
-          <p> <strong>Reserved</strong> <span class="label label-info"> <%= @presenter.reserved_booking_count %></span></p>
+        <p> <strong>Reserved</strong> <span class="label label-info"> <%= @presenter.reserved_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :paid), data: { toggle: 'tab', target: '#paid' }, remote: true do %>
-         <p> <strong>Paid</strong> <span class="label label-success"> <%= @presenter.paid_booking_count %></span></p>
+        <p> <strong>Paid</strong> <span class="label label-success"> <%= @presenter.paid_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :cancelled) ,data: { toggle: 'tab', target: '#cancelled' }, remote: true do %>
-          <p><strong>Cancelled</strong> <span class="label label-danger"> <%= @presenter.cancelled_booking_count %></span></p>
+        <p><strong>Cancelled</strong> <span class="label label-danger"> <%= @presenter.cancelled_booking_count %></span></p>
       <% end %>
     </li>
   </ul>
@@ -49,11 +48,10 @@
     <div class="tab-pane" id="cancelled" data-type="cancelled"></div>
   </div>
 </div>
-
 <br/>
 <%= link_to bookings_path, method: :post, class: 'btn btn-primary' do %>
-    <%= fa_icon :plus, text: 'Make Booking' %>
+  <%= fa_icon :plus, text: 'Make Booking' %>
 <% end %>
 <%= link_to bookings_path, class: 'btn btn-default' do %>
-    <%= fa_icon :refresh, text: 'Refresh' %>
+  <%= fa_icon :refresh, text: 'Refresh' %>
 <% end %>

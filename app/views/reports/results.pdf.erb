@@ -23,34 +23,47 @@
                Total: <%= number_to_currency weekly_results.sum(&:price) %>
               </h5>
              </h5>
-          <%= bootstrap_table headers: ['Trip', 'Start Date', 'Status', 'Client', 'Connection', 'Qty', 'Price'], types: [:condensed] do %>
-            <% weekly_results.each do |result| %>
-                <tr>
-                    <td>
-                    <%= result.trip_name %>
-                    </td>
-                    <td>
-                    <%= time_tag(result.trip_date || Date.current) %>
-                    </td>
-                    <td>
-                    <%= status_label_for(result) %>
-                    </td>
-                    <td>
-                    <%= result.client_name %>
-                    </td>
-                    <td>
-                    <%= content_tag(:span, result.connection_name, class: 'label label-info') %>
-                    </td>
-                    <td>
-                    <%= badge_for(result.quantity) %>
-                    </td>
-                    <td>
-                    <%= number_to_currency(result.price) %>
-                    </td>
-                </tr>
-            <% end %>
-        <% end %>
-      <% end%>
+             <table class='table table-condensed'>
+        <thead>
+          <tr>
+            <th>Trip</th>
+            <th>Start Date</th>
+            <th>Status</th>
+            <th>Client</th>
+            <th>Connection</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% weekly_results.each do |result| %>
+            <tr>
+              <td>
+                <%= result.trip_name %>
+              </td>
+              <td>
+                <%= time_tag(result.trip_date || Date.current) %>
+              </td>
+              <td>
+                <%= status_label_for(result) %>
+              </td>
+              <td>
+                <%= result.client_name %>
+              </td>
+              <td>
+                <%= content_tag(:span, result.connection_name, class: 'label label-info') %>
+              </td>
+              <td>
+                <%= badge_for(result.quantity) %>
+              </td>
+              <td>
+                <%= number_to_currency(result.price) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
   <% end %>
 </div>
 
