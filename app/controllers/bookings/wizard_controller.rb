@@ -32,6 +32,7 @@ module Bookings
 
     def update
       @booking.update(booking_params)
+
       case step
       when :trip_details
         @stops = [@booking.stop]
@@ -56,39 +57,42 @@ module Bookings
     end
 
     def search_params
-      params[:q] ||= {}
-      params[:q][:available_seats_gteq] ||= @booking.quantity
-      params[:q][:trip_start_date_eq] ||= start_date
-      params[:q][:connection_from_city_id_eq] ||= from_city
-      params[:q][:connection_to_city_id_eq] ||= to_city
-      params[:q]
+      params.fetch(:q, {}).reverse_merge(default_search_params)
+    end
+
+    def default_search_params
+      {
+        available_seats_gteq:       @booking.quantity,
+        trip_start_date_eq:         start_date,
+        connection_from_city_id_eq: from_city,
+        connection_to_city_id_eq:   to_city
+      }
     end
 
     def start_date
-      @booking.try(:trip).try(:start_date) || Date.current
+      @booking.trip&.start_date || Date.current
     end
 
     def from_city
-      step == :return_trip_details ? @booking.connection.to_city.id : @booking.try(:connection).try(:from_city).try(:id)
+      step == :return_trip_details ? @booking.connection.to_city.id : @booking.connection&.from_city&.id
     end
 
     def to_city
-      step == :return_trip_details ? @booking.connection.from_city.id : @booking.try(:connection).try(:to_city).try(:id)
+      step == :return_trip_details ? @booking.connection.from_city.id : @booking.connection&.to_city&.id
     end
 
     def booking_params
       params.require(:booking).permit(
-        :trip_id, :status, :quantity,
-        :client_id, :stop_id,
+        booking_attributes,
         client_attributes:         client_attributes,
         passengers_attributes:     passengers_attributes,
         invoice_attributes:        invoice_attributes,
         return_booking_attributes: return_booking_attributes
-      ).tap do |whitelist|
-        whitelist[:user_id] = current_user.id
-        whitelist[:client_attributes].try(:merge!, user_id: current_user.id)
-        whitelist[:return_booking_attributes].try(:merge!, user_id: current_user.id)
-      end
+      )
+    end
+
+    def booking_attributes
+      %i(trip_id status quantity client_id stop_id)
     end
 
     def return_booking_attributes
