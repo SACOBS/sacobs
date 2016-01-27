@@ -4,7 +4,7 @@
 <div class="page-header">
   <h2>Edit Setting</h2>
 </div>
-<%= simple_form_for @settings, url: settings_path do |f| %>
+<%= simple_form_for settings, url: settings_path do |f| %>
   <fieldset>
     <%= f.input :booking_expiry_period, autofocus: true %>
     <%= f.input :email, hint: "This is the email address which the tickets are sent from and it will also be bcc'ed on the ticket email." , as: :email %>
