@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
 
   etag { [current_user.try(:id), flash] }
 
-
   def settings
     @settings ||= Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
       Setting.first_or_create
@@ -30,5 +29,4 @@ class ApplicationController < ActionController::Base
     false if request.xhr?
   end
 
-  
 end

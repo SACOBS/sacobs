@@ -9,7 +9,8 @@ class TicketsController < ApplicationController
            layout:      'application.pdf.erb'
   end
 
-  def show; end
+  def show
+  end
 
   def print
     @ticket = Ticket.new(@booking, view_context, settings)
@@ -19,13 +20,8 @@ class TicketsController < ApplicationController
   end
 
   def email
-    if @booking.client.email.present?
-      TicketMailer.send_ticket(@booking).deliver_later
-      redirect_to ticket_url(@booking), notice: 'Ticket has been emailed successfully'
-    else
-      redirect_to ticket_url(@booking), alert: "The client for this booking does not have an email to send to.\
-                                                Please update the client email and try again."
-    end
+    TicketMailer.send_ticket(@booking).deliver_later
+    redirect_to ticket_url(@booking), notice: 'Ticket has been emailed successfully'
   end
 
   private

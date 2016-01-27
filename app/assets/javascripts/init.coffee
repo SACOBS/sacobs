@@ -45,7 +45,8 @@ $.rails.allowAction = (element) ->
 
 $(document).on "page:change", ->
   $.bootstrapSortable(applyLast=true)
-  $('[rel~="tooltip"]').tooltip()
+
+  $('[data-toggle=tooltip]').tooltip()
   $('[data-behaviour~=datepicker]').datepicker(
     autoclose: true,
     autoSize: true,

@@ -52,5 +52,5 @@ class Ticket
     @total_discount ||= [booking, return_booking].compact.sum { |booking| booking.invoice.total_discount }
   end
 
-  attr_reader :view_context, :settings 
+  attr_reader :view_context, :settings
 end

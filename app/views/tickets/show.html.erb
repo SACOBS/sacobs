@@ -1,14 +1,15 @@
 <%= content_for(:title) do %>
   Ticket <%= @booking.reference_no %>
 <% end %>
-<div class="actions text-center">
+<div class="page-header text-center">
+  <h2>Ticket <small>The email button will be disabled if the client does not have an email address.</small></h2>
   <%= link_to print_ticket_path(@booking), class: 'btn btn-primary', target: '_blank' do %>
     <%= fa_icon :print, text: 'Print' %>
   <% end %>
   <%= link_to download_ticket_path(@booking), class: 'btn btn-info',  data: { no_turbolink: true } do %>
     <%= fa_icon :download, text: 'Download' %>
   <% end %>
-  <%= link_to email_ticket_path(@booking), method: :post, class: 'btn btn-success' do %>
+  <%= link_to email_ticket_path(@booking), method: :post, class: "btn btn-success #{'disabled' unless @booking.client.email.present?}"  do %>
     <%= fa_icon :envelope, text: 'Email' %>
   <% end %>
 </div>
