@@ -33,7 +33,7 @@ class Booking::Reserve
   end
 
   def generate_reference(booking)
-    SecureRandom.base64(15).tr("+/=lIO0", "pqrsxyz")[0..4].upcase.concat("%03d" % booking.sequence_id).to_s
+    SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')[0..4].upcase.concat(format('%03d', booking.sequence_id))
   end
 
   def expiry_date

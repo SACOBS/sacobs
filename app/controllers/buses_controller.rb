@@ -50,11 +50,12 @@ class BusesController < ApplicationController
   end
 
   def bus_params
-    params.fetch(:bus, {}).permit(:name,
-                                  :capacity,
-                                  :year,
-                                  :model,
-                                  seats_attributes: %i(id _destroy row number)
-                                 ).merge(user_id: current_user.id)
+    params.require(:bus).
+      permit(:name,
+             :capacity,
+             :year,
+             :model,
+             seats_attributes: %i(id _destroy row number)
+            ).merge(user_id: current_user.id)
   end
 end

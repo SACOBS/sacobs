@@ -30,27 +30,27 @@
 #
 
 module BookingsHelper
-  STATUS_LABEL_CLASSES = {reserved:  "label label-info",
-                          paid:      "label label-success",
-                          cancelled: "label label-important"}.freeze
+  STATUS_LABEL_CLASSES = { reserved:  'label label-info',
+                           paid:      'label label-success',
+                           cancelled: 'label label-important' }.freeze
 
   def status_label_for(booking)
     content_tag :span, booking.status.upcase, class: STATUS_LABEL_CLASSES[booking.status.to_sym]
   end
 
-  def badge_for(value, type=:inverse)
+  def badge_for(value, type = :inverse)
     content_tag :span, value, class: "badge badge-#{type}"
   end
 
   def row_class_for(booking)
     if booking.standby?
-      "warning"
+      'warning'
     elsif booking.paid?
-      "success"
+      'success'
     elsif booking.cancelled?
-      "error"
+      'error'
     else
-      "info"
+      'info'
     end
   end
 end

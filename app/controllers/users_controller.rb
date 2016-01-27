@@ -45,6 +45,6 @@ class UsersController < ApplicationController
   end
 
   def interpolation_options
-    {resource_name: @user.full_name}
+    { resource_name: @user.full_name }
   end
 end

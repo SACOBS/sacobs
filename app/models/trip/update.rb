@@ -14,7 +14,7 @@ class Trip::Update
 
   def perform
     Trip.transaction do
-      raise ActiveRecord::Rollback unless trip.save && create_stops
+      fail ActiveRecord::Rollback unless trip.save && create_stops
     end
     trip
   end
@@ -24,7 +24,7 @@ class Trip::Update
   def create_stops
     if route_changed?
       stops.clear
-      stops.create(route.connections.map {|connection| {connection: connection, available_seats: bus.capacity} })
+      stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity } })
     end
     stops.all?(&:persisted?)
   end

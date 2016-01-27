@@ -21,7 +21,7 @@ class Bus < ActiveRecord::Base
   accepts_nested_attributes_for :seats, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :capacity, :year, :model, presence: true
-  validates :capacity, numericality: {greater_than: 0}
+  validates :capacity, numericality: { greater_than: 0 }
 
   after_create :generate_seats
 

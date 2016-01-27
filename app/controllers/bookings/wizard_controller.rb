@@ -2,7 +2,7 @@ module Bookings
   class WizardController < ApplicationController
     include Wicked::Wizard
 
-    layout "wizard"
+    layout 'wizard'
 
     before_action :set_booking
     before_action :set_stops, only: :show, if: proc { %i(trip_details return_trip_details).include?(step) }
@@ -41,7 +41,7 @@ module Bookings
       when :billing_info
         Booking::Reserve.perform(@booking, @settings)
       end
-      respond_to {|format| format.html { render_wizard @booking } }
+      respond_to { |format| format.html { render_wizard @booking } }
     end
 
     private
@@ -51,9 +51,9 @@ module Bookings
     end
 
     def set_stops
-      @stops = Stop.includes(:trip, :connection)
-                   .merge(Trip.available)
-                   .search(search_params).result.limit(30).order("trips.start_date")
+      @stops = Stop.includes(:trip, :connection).
+               merge(Trip.available).
+               search(search_params).result.limit(30).order('trips.start_date')
     end
 
     def search_params

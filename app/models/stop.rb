@@ -31,15 +31,15 @@ class Stop < ActiveRecord::Base
            to: :connection
 
   scope :along_the_way, lambda { |from, to|
-                          joins(connection: :to)
-                            .where("connections.from_id != ? and destinations.sequence > ?", to, from.sequence)
+                          joins(connection: :to).
+                            where('connections.from_id != ? and destinations.sequence > ?', to, from.sequence)
                         }
 
   def self.assign_seats(quantity)
-    update_all(["available_seats = available_seats - ?", quantity])
+    update_all(['available_seats = available_seats - ?', quantity])
   end
 
   def self.unassign_seats(quantity)
-    update_all(["available_seats = available_seats + ?", quantity])
+    update_all(['available_seats = available_seats + ?', quantity])
   end
 end

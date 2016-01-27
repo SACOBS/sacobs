@@ -21,7 +21,7 @@ class Route < ActiveRecord::Base
   end
 
   accepts_nested_attributes_for :connections,
-                                reject_if: proc {|attrs| [attrs["from_id"], attrs["to_id"]].all?(&:blank?) }
+                                reject_if: proc { |attrs| [attrs['from_id'], attrs['to_id']].all?(&:blank?) }
 
   accepts_nested_attributes_for :destinations,
                                 allow_destroy: true,
@@ -29,7 +29,7 @@ class Route < ActiveRecord::Base
 
   validates :name, :cost, :distance, :destinations, presence: true
   validates :cost, :distance, numericality: true
-  validates :destinations, length: {minimum: 2, too_short: "requires at least %{count}"}
+  validates :destinations, length: { minimum: 2, too_short: 'requires at least %{count}' }
 
   before_save :normalize
 

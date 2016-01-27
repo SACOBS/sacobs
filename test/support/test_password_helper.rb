@@ -4,6 +4,6 @@ module TestPasswordHelper
   end
 
   def default_password
-    "password"
+    'password'
   end
 end

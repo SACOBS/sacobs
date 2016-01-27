@@ -35,7 +35,7 @@ class ClientsController < ApplicationController
     @clients = if request.format.xls?
                  Client.all
                else
-                 Client.surname_starts_with(params[:letter] ||= "A").page(params[:page])
+                 Client.surname_starts_with(params[:letter] ||= 'A').page(params[:page])
                end
     respond_with(@clients) if stale?(@clients)
   end
@@ -82,25 +82,17 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    params.fetch(:client, {}).permit(:title,
-                                     :name,
-                                     :surname,
-                                     :date_of_birth,
-                                     :high_risk,
-                                     :cell_no,
-                                     :home_no,
-                                     :work_no,
-                                     :email,
-                                     :bank,
-                                     :notes,
-                                     :id_number,
-                                     :street_address1,
-                                     :street_address2,
-                                     :city,
-                                     :postal_code).merge(user_id: current_user.id)
+    params.require(:client).permit(:title, :name,
+                                   :surname, :date_of_birth,
+                                   :high_risk, :cell_no,
+                                   :home_no, :work_no,
+                                   :email, :bank,
+                                   :notes, :id_number,
+                                   :street_address1, :street_address2,
+                                   :city, :postal_code).merge(user_id: current_user.id)
   end
 
   def interpolation_options
-    {resource_name: @client.full_name}
+    { resource_name: @client.full_name }
   end
 end

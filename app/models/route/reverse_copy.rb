@@ -22,7 +22,7 @@ class Route::ReverseCopy
   attr_reader :route, :user, :copy
 
   def reverse_dup_connections
-    route.connections.reverse.map {|connection| reverse_dup_connection(connection) }
+    route.connections.reverse.map { |connection| reverse_dup_connection(connection) }
   end
 
   def reverse_dup_connection(connection)
@@ -37,7 +37,7 @@ class Route::ReverseCopy
   end
 
   def find_destination(city)
-    copy.destinations.select {|destination| destination.city == city }
+    copy.destinations.select { |destination| destination.city == city }
   end
 
   def build_destination(city, sequence)

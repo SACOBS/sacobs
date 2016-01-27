@@ -13,7 +13,7 @@ class Route::Create
   end
 
   def perform
-    Route.transaction { raise ActiveRecord::Rollback unless route.save && create_connections }
+    Route.transaction { fail ActiveRecord::Rollback unless route.save && create_connections }
     route
   end
 
@@ -21,9 +21,9 @@ class Route::Create
 
   def create_connections
     destinations.sort_by(&:sequence).each do |from|
-      destinations.sort_by(&:sequence)
-                  .drop(from.sequence)
-                  .each {|to| connections.find_or_create_by(from_id: from.id, to_id: to.id) }
+      destinations.sort_by(&:sequence).
+        drop(from.sequence).
+        each { |to| connections.find_or_create_by(from_id: from.id, to_id: to.id) }
     end
     connections.all?(&:persisted?)
   end

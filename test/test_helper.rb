@@ -1,9 +1,9 @@
-ENV["RAILS_ENV"] ||= "test"
-require File.expand_path("../../config/environment", __FILE__)
-require "rails/test_help"
-require "support/test_password_helper"
-require "minitest/rails/capybara"
-require "minitest/reporters"
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
+require 'support/test_password_helper'
+require 'minitest/rails/capybara'
+require 'minitest/reporters'
 
 Minitest::Reporters.use!
 

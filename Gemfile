@@ -1,99 +1,99 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.3.0"
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails"
+gem 'rails'
 
 # Use SCSS for stylesheets
-gem "sass-rails"
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
+gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem "coffee-rails"
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
-gem "jquery-rails"
-gem "jquery-ui-rails"
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem "turbolinks"
+gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 1.2"
+gem 'jbuilder', '~> 1.2'
 
 # Frontend
-gem "bootstrap-sass"
-gem "normalize-rails"
-gem "bootswatch-rails"
-gem "bootstrap_sortable_rails"
-gem "momentjs-rails"
-gem "kaminari"
-gem "nprogress-rails"
-gem "select2-rails"
+gem 'bootstrap-sass'
+gem 'normalize-rails'
+gem 'bootswatch-rails'
+gem 'bootstrap_sortable_rails'
+gem 'momentjs-rails'
+gem 'kaminari'
+gem 'nprogress-rails'
+gem 'select2-rails'
 
 # Forms
-gem "simple_form"
+gem 'simple_form'
 
 # Authentication
-gem "devise"
+gem 'devise'
 
 # Email
-gem "premailer-rails"
+gem 'premailer-rails'
 
 # Font Awesome
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # Nested Forms
-gem "cocoon"
+gem 'cocoon'
 
 # Caching
-gem "dalli"
-gem "multi_fetch_fragments"
-gem "connection_pool"
+gem 'dalli'
+gem 'multi_fetch_fragments'
+gem 'connection_pool'
 
 # Wizard
-gem "wicked"
+gem 'wicked'
 
 # Search
-gem "ransack"
+gem 'ransack'
 
 # PDF
-gem "wicked_pdf"
-gem "wkhtmltopdf-binary"
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Scriptures
-gem "scripture", "~> 0.1.0"
+gem 'scripture', '~> 0.1.0'
 
 # Background Processing
-gem "sucker_punch", "~> 1.0"
+gem 'sucker_punch', '~> 2.0'
 
 # PG
-gem "pg"
+gem 'pg'
 
 group :development do
-  gem "web-console", "~> 2.0"
-  gem "annotate"
-  gem "quiet_assets"
-  gem "bullet"
+  gem 'web-console', '~> 2.0'
+  gem 'annotate'
+  gem 'quiet_assets'
+  gem 'bullet'
 end
 
 group :production do
-  gem "puma"
-  gem "rails_12factor"
-  gem "rack-timeout"
+  gem 'puma'
+  gem 'rails_12factor'
+  gem 'rack-timeout'
 end
 
 group :doc do
-  gem "sdoc", require: false
+  gem 'sdoc', require: false
 end
 
 group :test do
-  gem "minitest-reporters"
-  gem "minitest-rails-capybara"
+  gem 'minitest-reporters'
+  gem 'minitest-rails-capybara'
 
-  gem "shoulda-context"
-  gem "shoulda-matchers"
+  gem 'shoulda-context'
+  gem 'shoulda-matchers'
 end

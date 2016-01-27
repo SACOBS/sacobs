@@ -71,8 +71,8 @@ class Booking < ActiveRecord::Base
   belongs_to :client
   belongs_to :payment_detail
 
-  belongs_to :main, class_name: "Booking", foreign_key: :main_id
-  has_one :return_booking, class_name: "Booking", foreign_key: :main_id
+  belongs_to :main, class_name: 'Booking', foreign_key: :main_id
+  has_one :return_booking, class_name: 'Booking', foreign_key: :main_id
 
   has_one :invoice
   has_many :passengers, dependent: :delete_all
@@ -81,15 +81,15 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
   with_options if: :in_process? do
-    validates :quantity, numericality: {greater_than: 0}
+    validates :quantity, numericality: { greater_than: 0 }
     validate :seats_are_available
   end
 
-  scope :open, -> { reserved.where("expiry_date > ?", Time.current) }
-  scope :standby, -> { reserved.where("expiry_date <= ?", Time.current) }
+  scope :open, -> { reserved.where('expiry_date > ?', Time.current) }
+  scope :standby, -> { reserved.where('expiry_date <= ?', Time.current) }
   scope :completed, -> { where.not(status: statuses[:in_process]) }
 
-  ransacker(:created_at_date, type: :date) {|_parent| Arel::Nodes::SqlLiteral.new "date(bookings.created_at)" }
+  ransacker(:created_at_date, type: :date) { |_parent| Arel::Nodes::SqlLiteral.new 'date(bookings.created_at)' }
 
   before_save :set_passengers, if: :client_id_changed?
   after_save :synchronize_associations, if: :return_booking
@@ -130,7 +130,7 @@ class Booking < ActiveRecord::Base
     if stop.present? && quantity > stop.available_seats
       errors.add(
         :quantity, "The number of seats #{quantity} selected exceeds \
-                            the available seating #{stop.available_seats} for this connection."
+                    the available seating #{stop.available_seats} for this connection."
       )
     end
   end

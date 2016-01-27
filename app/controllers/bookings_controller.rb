@@ -31,18 +31,18 @@
 
 class BookingsController < ApplicationController
   def index
-    params[:type] ||= "standby"
-    bookings = Booking.includes(:client, :trip, stop: :connection)
-                      .available
-                      .public_send(params[:type])
-                      .page(params["#{params[:type]}_page"])
+    params[:type] ||= 'standby'
+    bookings = Booking.includes(:client, :trip, stop: :connection).
+               available.
+               public_send(params[:type]).
+               page(params["#{params[:type]}_page"])
 
     @presenter = Bookings::IndexPresenter.new(bookings)
     render :index
   end
 
   def search
-    @search = Booking.available.completed.search(params[:q].merge(m: "or"))
+    @search = Booking.available.completed.search(params[:q].merge(m: 'or'))
     @results = @search.result.includes(:client, :trip, stop: :connection).limit(50)
   end
 
@@ -64,6 +64,6 @@ class BookingsController < ApplicationController
   def cancel
     @booking = Booking.find(params[:id])
     Booking::Cancel.perform(@booking, current_user)
-    redirect_to bookings_url, notice: "Booking was successfully cancelled."
+    redirect_to bookings_url, notice: 'Booking was successfully cancelled.'
   end
 end

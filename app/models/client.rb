@@ -44,9 +44,9 @@ class Client < ActiveRecord::Base
   has_many :vouchers
 
   validates :name, :surname, presence: true
-  validates :surname, uniqueness: {scope: :name, message: "and name already exists"}
+  validates :surname, uniqueness: { scope: :name, message: 'and name already exists' }
   validates :date_of_birth,
-            presence: {message: "obtained from id number is not a valid date, please check the id number field."},
+            presence: { message: 'obtained from id number is not a valid date, please check the id number field.' },
             if:       :id_number?
 
   before_validation :set_birth_date, if: :id_number?
@@ -54,10 +54,10 @@ class Client < ActiveRecord::Base
 
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new(
-      "||",
+      '||',
       Arel::Nodes::InfixOperation.new(
-        "||",
-        parent.table[:name], Arel::Nodes.build_quoted(" ")
+        '||',
+        parent.table[:name], Arel::Nodes.build_quoted(' ')
       ),
       parent.table[:surname]
     )
@@ -86,7 +86,7 @@ class Client < ActiveRecord::Base
 
   def set_birth_date
     date = begin
-             Date.strptime(id_number[0..5], "%y%m%d")
+             Date.strptime(id_number[0..5], '%y%m%d')
            rescue
              nil
            end

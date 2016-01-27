@@ -36,13 +36,6 @@ class Passenger < ActiveRecord::Base
     @charges ||= Charge.find(self[:charges])
   end
 
-  def discount
-    @discount ||= (
-                    SeasonalDiscount.where(passenger_type: passenger_type)
-                    .applicable.first || Discount.find_by(passenger_type: passenger_type)
-    )
-  end
-
   private
 
   def normalize

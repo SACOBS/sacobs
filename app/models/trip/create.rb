@@ -15,7 +15,7 @@ class Trip::Create
   def perform
     Trip.transaction do
       trip.name ||= route.name
-      raise ActiveRecord::Rollback unless trip.save && create_stops
+      fail ActiveRecord::Rollback unless trip.save && create_stops
     end
     trip
   end
@@ -23,7 +23,7 @@ class Trip::Create
   private
 
   def create_stops
-    stops.create(route.connections.map {|connection| {connection: connection, available_seats: bus.capacity} })
+    stops.create(route.connections.map { |connection| { connection: connection, available_seats: bus.capacity } })
     stops.all?(&:persisted?)
   end
 end

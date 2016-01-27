@@ -6,14 +6,14 @@ class ErrorsController < ApplicationController
   def show
     respond_to do |format|
       format.html { render action: request.path[1..-1] }
-      format.json { render json: {status: request.path[1..-1], error: @exception.message} }
+      format.json { render json: { status: request.path[1..-1], error: @exception.message } }
     end
   end
 
   private
 
   def set_exception
-    @exception = env["action_dispatch.exception"]
+    @exception = env['action_dispatch.exception']
   end
 
   def backtrace

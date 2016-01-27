@@ -46,18 +46,18 @@ class RoutesController < ApplicationController
   def copy
     copy = Route::Copy.perform(@route, current_user)
     if copy.save!
-      redirect_to copy, notice:  t("flash.routes.copy.notice", resource_name: copy.name)
+      redirect_to copy, notice:  t('flash.routes.copy.notice', resource_name: copy.name)
     else
-      redirect_to routes_url, alert: t("flash.routes.copy.alert", resource_name: @route.name)
+      redirect_to routes_url, alert: t('flash.routes.copy.alert', resource_name: @route.name)
     end
   end
 
   def reverse_copy
     copy = Route::ReverseCopy.perform(@route, current_user)
     if copy.save
-      redirect_to copy, notice:  t("flash.routes.copy.notice", resource_name: copy.name)
+      redirect_to copy, notice:  t('flash.routes.copy.notice', resource_name: copy.name)
     else
-      redirect_to routes_url, alert: t("flash.routes.copy.alert", resource_name: @route.name)
+      redirect_to routes_url, alert: t('flash.routes.copy.alert', resource_name: @route.name)
     end
   end
 
@@ -74,8 +74,8 @@ class RoutesController < ApplicationController
       :distance,
       destinations_attributes: destination_attributes,
       connections_attributes:  connections_attributes
-    )
-          .merge(user_id: current_user.id)
+    ).
+      merge(user_id: current_user.id)
   end
 
   def destination_attributes

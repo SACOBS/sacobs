@@ -25,19 +25,19 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-require "test_helper"
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   should validate_presence_of(:name)
   should validate_presence_of(:surname)
 
-  test "normalizes the name and surname before saving" do
-    user = User.new(name: "Tom  ", surname: " Smith", email: "tom@example.com", password: default_password)
+  test 'normalizes the name and surname before saving' do
+    user = User.new(name: 'Tom  ', surname: ' Smith', email: 'tom@example.com', password: default_password)
 
     user.save
 
-    assert_equal "TOM", user.name
-    assert_equal "SMITH", user.surname
+    assert_equal 'TOM', user.name
+    assert_equal 'SMITH', user.surname
   end
 
   test '#full_name' do

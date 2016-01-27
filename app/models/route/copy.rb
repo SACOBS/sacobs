@@ -22,7 +22,7 @@ class Route::Copy
   attr_reader :copy, :route, :user
 
   def dup_connections
-    route.connections.map {|connection| dup_connection(connection) }
+    route.connections.map { |connection| dup_connection(connection) }
   end
 
   def dup_connection(connection)
@@ -37,7 +37,7 @@ class Route::Copy
   end
 
   def find_destination(city)
-    copy.destinations.select {|destination| destination.city == city }
+    copy.destinations.select { |destination| destination.city == city }
   end
 
   def build_destination(city, sequence)

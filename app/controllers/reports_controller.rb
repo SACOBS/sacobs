@@ -41,15 +41,15 @@ class ReportsController < ApplicationController
 
   def download
     render pdf:         @report.to_file_name,
-           template:    "reports/results.pdf.erb",
+           template:    'reports/results.pdf.erb',
            disposition: :attachment,
-           layout:      "application.pdf.erb"
+           layout:      'application.pdf.erb'
   end
 
   def print
     render pdf:      @report.to_file_name,
-           template: "reports/results.pdf.erb",
-           layout:   "application.pdf.erb"
+           template: 'reports/results.pdf.erb',
+           layout:   'application.pdf.erb'
   end
 
   def destroy

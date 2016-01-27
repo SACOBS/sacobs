@@ -53,6 +53,6 @@ class DriversController < ApplicationController
   end
 
   def interpolation_options
-    {resource_name: @driver.full_name}
+    { resource_name: @driver.full_name }
   end
 end

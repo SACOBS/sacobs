@@ -12,7 +12,7 @@
 #  connections_count :integer          default(0)
 #
 
-require "test_helper"
+require 'test_helper'
 
 class RouteTest < ActiveSupport::TestCase
   should have_many(:connections).inverse_of(:route)
@@ -29,17 +29,17 @@ class RouteTest < ActiveSupport::TestCase
   should validate_numericality_of(:cost)
   should validate_numericality_of(:distance)
 
-  test "should reject connections if from_id and to_id are blank" do
+  test 'should reject connections if from_id and to_id are blank' do
     attributes = Connection.new(from_id: nil, to_id: nil)
     assert Route.nested_attributes_options[:connections][:reject_if].call(attributes)
   end
 
-  test "should reject destinations if attributes are blank" do
+  test 'should reject destinations if attributes are blank' do
     attributes = Destination.new.attributes
     assert Route.nested_attributes_options[:destinations][:reject_if].call(attributes)
   end
 
-  test "should require at least 2 destinations" do
+  test 'should require at least 2 destinations' do
     route = routes(:eltope)
 
     route.destinations.build(city: cities(:east_london), sequence: 1)
@@ -47,6 +47,6 @@ class RouteTest < ActiveSupport::TestCase
     route.validate
 
     assert_not route.valid?
-    assert_equal ["requires at least 2"], route.errors.messages[:destinations]
+    assert_equal ['requires at least 2'], route.errors.messages[:destinations]
   end
 end

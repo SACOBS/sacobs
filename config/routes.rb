@@ -160,7 +160,7 @@ Sacobs::Application.routes.draw do
 
   resources :reports do
     member do
-      get :print, defaults: {format: :pdf}
+      get :print, defaults: { format: :pdf }
       get :download
     end
   end
@@ -180,7 +180,7 @@ Sacobs::Application.routes.draw do
     member do
       patch :cancel
     end
-    resources :wizard, only: %i(show update), controller: "bookings/wizard"
+    resources :wizard, only: %i(show update), controller: 'bookings/wizard'
 
     resources :payment_details, only: %i(new create)
   end
@@ -251,7 +251,7 @@ Sacobs::Application.routes.draw do
 
   resources :tickets, only: [:show] do
     member do
-      get :print, defaults: {format: :pdf}
+      get :print, defaults: { format: :pdf }
       post :email
       get :download
     end
@@ -259,7 +259,7 @@ Sacobs::Application.routes.draw do
 
   resources :trip_sheets, only: %i(show edit update index) do
     member do
-      get :print, defaults: {format: :pdf}
+      get :print, defaults: { format: :pdf }
       get :download
     end
   end
@@ -269,14 +269,14 @@ Sacobs::Application.routes.draw do
   authenticated :user do
     root to: 'dashboard#show', as: :authenticated_root
   end
-  root to: 'pages#show', id: "home"
+  root to: 'pages#show', id: 'home'
 
-  get "/pages/*id" => 'pages#show', :as => :page, :format => false
+  get '/pages/*id' => 'pages#show', :as => :page, :format => false
 
-  get "pricing/:id", to: 'pricing#show', as: :pricing
-  get "/quick_quote", to: 'pricing#index', as: :quick_quote
+  get 'pricing/:id', to: 'pricing#show', as: :pricing
+  get '/quick_quote', to: 'pricing#index', as: :quick_quote
 
-  get "/dashboard", to: 'dashboard#show', as: :dashboard
+  get '/dashboard', to: 'dashboard#show', as: :dashboard
 
-  match "(errors)/:status", to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
+  match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
 end

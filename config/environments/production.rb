@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = {host: "sacobs.herokuapp.com"}
+  config.action_mailer.default_url_options = { host: 'sacobs.herokuapp.com' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -24,7 +24,7 @@ Rails.application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this).
   # config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  config.static_cache_control = "public, max-age=31536000"
+  config.static_cache_control = 'public, max-age=31536000'
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -54,14 +54,14 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :dalli_store,
-                       (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-                       {username:             ENV["MEMCACHIER_USERNAME"],
-                        password:             ENV["MEMCACHIER_PASSWORD"],
-                        failover:             true,
-                        socket_timeout:       1.5,
-                        socket_failure_delay: 0.2,
-                        compress:             true,
-                        pool_size:            5
+                       (ENV['MEMCACHIER_SERVERS'] || '').split(','),
+                       { username:             ENV['MEMCACHIER_USERNAME'],
+                         password:             ENV['MEMCACHIER_PASSWORD'],
+                         failover:             true,
+                         socket_timeout:       1.5,
+                         socket_failure_delay: 0.2,
+                         compress:             true,
+                         pool_size:            5
                        }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -78,8 +78,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              Rails.application.secrets.mandrill_address,
     port:                 Rails.application.secrets.mandrill_port,
-    domain:               "sacobs.herokuapp.com",
-    authentication:       "plain",
+    domain:               'sacobs.herokuapp.com',
+    authentication:       'plain',
     enable_starttls_auto: true,
     user_name:            Rails.application.secrets.mandrill_user_name,
     password:             Rails.application.secrets.mandrill_password
