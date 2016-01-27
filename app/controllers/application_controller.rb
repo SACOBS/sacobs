@@ -6,11 +6,19 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html, :js, :json, :pdf, :xls
 
-  before_action :authenticate_user!, :settings
+  before_action :authenticate_user!
 
   layout :layout_required?
 
   etag { [current_user.try(:id), flash] }
+
+
+  def settings
+    @settings ||= Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
+      Setting.first_or_create
+    end
+  end
+  helper_method :settings
 
   protected
 
@@ -22,9 +30,5 @@ class ApplicationController < ActionController::Base
     false if request.xhr?
   end
 
-  def settings
-    @settings ||= Rails.cache.fetch(:common_app_settings, expires_in: 30.days) do
-      Setting.first_or_create
-    end
-  end
+  
 end

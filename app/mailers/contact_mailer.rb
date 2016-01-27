@@ -1,4 +1,4 @@
-class ContactMailer < ActionMailer::Base
+class ContactMailer < ApplicationMailer
   default from: 'contact@sacobs.com'
 
   def contact_us(name, email, message)

@@ -1,4 +1,4 @@
-class ExceptionMailer < ActionMailer::Base
+class ExceptionMailer < ApplicationMailer
   default from: 'exceptions@sacobs.herokuapp.com'
 
   def notify(exception_name, message, backtrace)

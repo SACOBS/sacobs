@@ -1,7 +1,7 @@
 module TicketHelper
   def scripture_for_today
     Rails.cache.fetch('scripture_for_today', expires_in: 8.hours) do
-      Bible::Scripture.for_today || @settings.default_scripture
+      Bible::Scripture.for_today || settings.default_scripture
     end
   end
 

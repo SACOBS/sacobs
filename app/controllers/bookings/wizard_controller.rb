@@ -39,7 +39,7 @@ module Bookings
       when :return_trip_details
         @stops = [@booking.return_booking.stop]
       when :billing_info
-        Booking::Reserve.perform(@booking, @settings)
+        Booking::Reserve.perform(@booking, settings)
       end
       respond_to { |format| format.html { render_wizard @booking } }
     end

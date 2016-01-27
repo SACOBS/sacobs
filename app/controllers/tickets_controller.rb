@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   before_action :set_bookings
 
   def download
-    @ticket = Ticket.new(@booking, view_context, @settings)
+    @ticket = Ticket.new(@booking, view_context, settings)
     render pdf:         @ticket.to_file_name.to_s,
            template:    'tickets/ticket.pdf.erb',
            disposition: :attachment,
@@ -12,7 +12,7 @@ class TicketsController < ApplicationController
   def show; end
 
   def print
-    @ticket = Ticket.new(@booking, view_context, @settings)
+    @ticket = Ticket.new(@booking, view_context, settings)
     render pdf:      @ticket.to_file_name.to_s,
            template: 'tickets/ticket.pdf.erb',
            layout:   'application.pdf.erb'
