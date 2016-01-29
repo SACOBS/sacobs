@@ -9,9 +9,6 @@ class TicketsController < ApplicationController
            layout:      'application.pdf.erb'
   end
 
-  def show
-  end
-
   def print
     @ticket = Ticket.new(@booking, view_context, settings)
     render pdf:      @ticket.to_file_name.to_s,
