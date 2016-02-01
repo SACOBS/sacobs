@@ -29,7 +29,13 @@
         <div class="content">
           <%= render 'layouts/messages' %>
           <div class="page-header">
-            <%= wizard_progress(step, wizard_steps) %>
+            <h3><%= wizard_name %> Wizard <small>Step <%= step_number(step, wizard_steps) %> of <%= total_steps(wizard_steps) %> </small></h3>
+            <div class='progress'>
+              <div class='progress-bar' role='progress-bar' style="width: <%= wizard_completion_percentage(step_number(step, wizard_steps), total_steps(wizard_steps)) %>%;">
+                <%= "#{wizard_completion_percentage(step_number(step, wizard_steps), total_steps(wizard_steps))}%" %>
+              </div>
+            </div>
+            <h4><%= step.to_s.titleize %></h4>
             <% if content_for?(:actions) %>
               <%= yield(:actions) %>
             <% end %>

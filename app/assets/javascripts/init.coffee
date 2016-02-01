@@ -63,6 +63,7 @@ $(document).on "page:change", ->
 $(document).on "page:change cocoon:after-insert", ->
   $('[data-behaviour~=dropdown]').select2(
     theme: "bootstrap",
+    selectOnClose: true, 
     minimumResultsForSearch: 15,
     width: 'resolve'
   );

@@ -9,88 +9,10 @@
           <td>
             <%= simple_form_for booking, namespace: stop.id, url: wizard_path, method: :patch, wrapper: false ,defaults: {label: false} do |f| %>
               <% if step == :trip_details %>
-                <table class='table table-condensed'>
-                  <thead>
-                    <tr>
-                      <th>Trip</th>
-                      <th>Start Date</th>
-                      <th>Connection</th>
-                      <th>Available Seats</th>
-                      <th>Pricing</th>
-                      <th>Qty</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <%= link_to stop.trip.name, trip_path(stop.trip_id), target: '_blank' %>
-                      </td>
-                      <td>
-                        <%= time_tag(stop.trip.start_date) %>
-                      </td>
-                      <td>
-                        <%= stop.name %>
-                      </td>
-                      <td>
-                        <%= stop.available_seats %>
-                      </td>
-                      <td>
-                        <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
-                      </td>
-                      <td class='row'>
-                        <%= f.input :quantity, as: :integer, input_html: { max: stop.available_seats } %>
-                      </td>
-                      <td>
-                        <%= token_tag %>
-                        <%= f.hidden_field :trip_id, value: stop.trip_id %>
-                        <%= f.hidden_field :stop_id, value: stop.id %>
-                        <%= f.button :submit, 'Book', class: 'btn btn-success' %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <%= render 'stops.html.erb', form: f, stop: stop %>
               <% else %>
                 <%= f.simple_fields_for :return_booking, namespace: stop.id do |return_booking| %>
-                  <table class='table table-condensed'>
-                    <thead>
-                      <tr>
-                        <th>Trip</th>
-                        <th>Start Date</th>
-                        <th>Connection</th>
-                        <th>Available Seats</th>
-                        <th>Pricing</th>
-                        <th>Qty</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <%= link_to stop.trip.name, trip_path(stop.trip_id), target: '_blank' %>
-                        </td>
-                        <td>
-                          <%= time_tag(stop.trip.start_date) %>
-                        </td>
-                        <td>
-                          <%= stop.name %>
-                        </td>
-                        <td>
-                          <%= stop.available_seats %>
-                        </td>
-                        <td>
-                          <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
-                        </td>
-                        <td>
-                          <%= return_booking.input :quantity, as: :integer, input_html: {min: 1, max: stop.available_seats } %>
-                        </td>
-                        <td>
-                          <%= token_tag %>
-                          <%= return_booking.hidden_field :trip_id, value: stop.trip.id %>
-                          <%= return_booking.hidden_field :stop_id, value: stop.id %>
-                          <%= f.button :submit, 'Book Return', class: 'btn btn-success' %>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <%= render 'stops.html.erb', form: return_booking, parent_form: f ,stop: stop %>
                 <% end %>
               <% end %>
             <% end %>

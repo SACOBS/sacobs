@@ -1,31 +1,20 @@
 <p>
- <strong>Name:</strong>
- <%= client.full_name %>
+  <strong>Name:</strong>
+  <%= client.full_name %>
 </p>
 <p>
- <strong>Home No:</strong>
- <%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %> 
+  <strong>Home No:</strong>
+  <%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %>
 </p>
 <p>
- <strong>Cell No:</strong>
- <%=  number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %> 
+  <strong>Cell No:</strong>
+  <%=  number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %>
 </p>
 <p>
- <strong>Work No:</strong>
- <%=  number_to_phone(client.work_no, area_code: true).presence || 'N/A' %> 
+  <strong>Work No:</strong>
+  <%=  number_to_phone(client.work_no, area_code: true).presence || 'N/A' %>
 </p>
 <p>
- <strong>Email:</strong>
-     <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
+  <strong>Email:</strong>
+  <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
 </p>
-
-
-
-
-      
-
-
-
-
-
-

@@ -1,0 +1,44 @@
+<table class='table table-condensed table-responsive' style='table-layout: fixed;'>
+  <thead>
+    <tr>
+      <th>Trip</th>
+      <th>Start Date</th>
+      <th>Connection</th>
+      <th>Avail Seats</th>
+      <th>Pricing</th>
+      <th>Qty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to stop.trip.name, trip_path(stop.trip_id), target: '_blank' %>
+      </td>
+      <td>
+        <%= time_tag(stop.trip.start_date) %>
+      </td>
+      <td>
+        <%= stop.name %>
+      </td>
+      <td>
+        <%= stop.available_seats %>
+      </td>
+      <td>
+        <%= link_to 'View Prices', pricing_path(stop.connection), target: '_blank' %>
+      </td>
+      <td>
+        <%= form.input :quantity, as: :integer, input_html: {min: 1, max: stop.available_seats, class: 'input-sm' } %>
+      </td>
+      <td>
+        <%= token_tag %>
+        <%= form.hidden_field :trip_id, value: stop.trip_id %>
+        <%= form.hidden_field :stop_id, value: stop.id %>
+        <% if local_assigns[:parent_form] %>
+          <%= parent_form.button :submit, 'Book', class: 'btn btn-success btn-sm' %>
+        <% else %>
+          <%= form.button :submit, 'Book', class: 'btn btn-success' %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

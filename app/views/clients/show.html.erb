@@ -72,7 +72,7 @@
         <strong>Email:</strong>
         <%= @client.email.present? ? mail_to(@client.email) : 'N/A' %>
       </p>
-       <h4>Address Info</h4>
+      <h4>Address Info</h4>
       <p>
         <strong>Street Address 1:</strong>
         <%= @client.street_address1.presence || 'N/A' %>
@@ -97,6 +97,7 @@
         <div class="panel-heading">
           <h4 class='panel-title'>
             Credit Vouchers
+            
             <div class='pull-right'>
               <%= link_to new_client_voucher_path(@client), class: 'btn btn-primary btn-xs' do %>
                 <%= fa_icon :money, text: 'Add credit voucher' %>
