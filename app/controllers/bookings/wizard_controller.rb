@@ -53,7 +53,7 @@ module Bookings
     def set_stops
       @stops = Stop.includes(:trip, :connection).
                merge(Trip.available).
-               search(search_params).result.limit(30).order('trips.start_date')
+               search(search_params).result.limit(5).order('trips.start_date')
     end
 
     def search_params
@@ -63,7 +63,7 @@ module Bookings
     def default_search_params
       {
         available_seats_gteq:       @booking.quantity,
-        trip_start_date_eq:         start_date,
+        trip_start_date_gteq:         start_date,
         connection_from_city_id_eq: from_city,
         connection_to_city_id_eq:   to_city
       }

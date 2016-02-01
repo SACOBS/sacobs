@@ -14,7 +14,7 @@ class Booking::BuildInvoice
       booking.build_invoice do |invoice|
         booking.passengers.each do |passenger|
           bill = Passenger::Billing.new(passenger, booking.connection.cost)
-          add_base(invoice, bill)
+          add_base(invoice, bill, passenger)
           add_charges(invoice, bill)
           add_discount(invoice, bill)
         end
@@ -26,7 +26,7 @@ class Booking::BuildInvoice
 
   attr_reader :booking, :return_booking
 
-  def add_base(invoice, bill)
+  def add_base(invoice, bill, passenger)
     invoice.line_items.debit.build(description: passenger.full_name, amount: bill.base)
   end
 

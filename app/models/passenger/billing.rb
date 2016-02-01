@@ -1,7 +1,7 @@
 class Passenger::Billing
   attr_reader :passenger, :discount, :charges, :base
 
-  def initialize(passenger, _price)
+  def initialize(passenger, base)
     @passenger = passenger
     @base = base
   end
@@ -23,8 +23,12 @@ class Passenger::Billing
   end
 
   def gross
-    (price + charges.sum { |charge| charge[:amount] }).round_up(5)
+    (base + total_charges).round_up(5)
   end
+  
+  def total_charges
+     charges.sum { |charge| charge[:amount] } 
+  end 
 
   def nett
     (gross - discount[:amount]).round_up(5)

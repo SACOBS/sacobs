@@ -49,7 +49,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.create(user_id: current_user.id)
+    @booking = Booking.new(user_id: current_user.id).tap { |b| b.save(validate: false) }
     redirect_to booking_wizard_url(@booking, :trip_details)
   end
 
