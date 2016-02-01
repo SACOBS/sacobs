@@ -2,7 +2,7 @@
   <fieldset>
     <div class="row">
       <div class="col-md-4">
-        <%= f.input :title, collection: Client::TITLES, include_blank: true, label: 'Select a title' %>
+        <%= f.input :title, collection: Client::TITLES, include_blank: false, prompt: 'Select a title' %>
         <%= f.input :name %>
         <%= f.input :surname %>
         <%= f.input :city %>

@@ -6,47 +6,66 @@
     <h2>Booking Details</h2>
     <div class="actions text-center">
       <% if @booking.paid? || @booking.reserved? %>
-        <%= link_to ticket_path(@booking), class: 'btn btn-large btn-primary', target: '_blank' do %>
+        <%= link_to ticket_path(@booking), class: 'btn btn-primary', target: '_blank' do %>
           <%= fa_icon :tasks, text: 'Ticket' %>
         <% end %>
       <% end %>
       <% if @booking.reserved? %>
-        <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-success' do %>
+        <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-success' do %>
           <%= fa_icon :money, text: 'Confirm' %>
         <% end %>
       <% end %>
     </div>
   </div>
-  <div class="well">
-    <div class="client-information">
-      <h4>Client information</h4>
-      <%= render 'bookings/shared/client_info', client: @booking.client %>
-    </div>
-    <div class="payment_detail">
-      <% if @booking.payment_detail.present? %>
-        <h4>Payment Detail</h4>
-        <%= render 'bookings/shared/payment_details', payment_detail: @booking.payment_detail %>
-      <% end %>
-    </div>
-    <div class="details">
-      <h4>Booking information</h4>
-      <% [@booking, @booking.return_booking, @booking.main].compact.each do |booking| %>
-        <%= render 'bookings/shared/details', booking: booking %>
-      <% end %>
-    </div>
-    <div class="passengers">
-      <h4>Passengers</h4>
-      <%= render 'bookings/shared/passengers', passengers: @booking.passengers %>
-    </div>
+  <div class='row'>
+    <span class='col-md-6'>
+      <div class="panel panel-default client-information">
+        <div class="panel-heading">
+          <h4 class="panel-title">Client information</h4>
+        </div>
+        <div class="panel-body">
+          <%= render 'bookings/shared/client_info', client: @booking.client %>
+        </div>
+      </div>
+    </span>
+    <span class='col-md-6'>
+      <div class="panel panel-default payment_detail">
+        <div class="panel-heading">
+          <h4 class="panel-title">Payment Detail</h4>
+        </div>
+        <div class="panel-body">
+          <% if @booking.payment_detail.present? %>
+            <%= render 'bookings/shared/payment_details', payment_detail: @booking.payment_detail %>
+          <% else %>
+            <p class='lead'>No payment details present.</p>
+          <% end %>
+        </div>
+      </div>
+    </span>
   </div>
+  <div class="panel panel-default details">
+    <div class="panel-heading">
+      <h4 class="panel-title">Booking information</h4>
+    </div>
+    <% [@booking, @booking.return_booking, @booking.main].compact.each do |booking| %>
+      <%= render 'bookings/shared/details', booking: booking %>
+    <% end %>
+  </div>
+  <div class="panel panel-default passengers">
+    <div class="panel-heading">
+      <h4 class="panel-title">Passengers</h4>
+    </div>
+    <%= render 'bookings/shared/passengers', passengers: @booking.passengers %>
+  </div>
+  <hr>
   <div class="actions text-center">
     <% if @booking.paid? || @booking.reserved? %>
-      <%= link_to ticket_path(@booking), class: 'btn btn-large btn-primary', target: '_blank' do %>
+      <%= link_to ticket_path(@booking), class: 'btn  btn-primary', target: '_blank' do %>
         <%= fa_icon :tasks, text: 'Ticket' %>
       <% end %>
     <% end %>
     <% if @booking.reserved? %>
-      <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-large btn-success' do %>
+      <%= link_to new_booking_payment_detail_url(@booking), class: 'btn btn-success' do %>
         <%= fa_icon :money, text: 'Confirm' %>
       <% end %>
     <% end %>

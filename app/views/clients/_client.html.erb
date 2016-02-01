@@ -1,12 +1,12 @@
-<div class="col-md-4 client well well-sm" id="<%= dom_id(client) %>">
-  <div class="media">
-    <div class="media-left">
-      <i class="fa fa-user fa-2x"></i>
-    </div>
-    <div class="media-body">
-      <h5 class="media-heading">
+<div class="col-md-4 client" id="<%= dom_id(client) %>">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5 class="panel-title">
+        <i class="fa fa-user"></i>
         <%= link_to client.full_name, client %>
       </h5>
+    </div>
+    <div class="panel-body">
       <address>
         <strong>Contact</strong>
         <br/>
@@ -32,17 +32,17 @@
         <abbr class="initialism" title="Email">E:</abbr>
         <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
       </address>
-      <div class="btn-group">
-        <%= link_to client, class: 'btn btn-info btn-sm' do %>
+    </div>
+     <div class="panel-footer">
+        <%= link_to client, class: 'btn btn-info btn-xs' do %>
           <%= fa_icon :info, text: 'Show' %>
         <% end %>
-        <%= link_to edit_client_path(client), class: 'btn btn-warning btn-sm' do %>
+        <%= link_to edit_client_path(client), class: 'btn btn-warning btn-xs' do %>
           <%= fa_icon :edit, text: 'Edit' %>
         <% end %>
-        <%= link_to client, class: 'btn btn-danger btn-sm', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
+        <%= link_to client, class: 'btn btn-danger btn-xs', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
           <%= fa_icon :times, text: 'Destroy' %>
         <% end %>
       </div>
-    </div>
   </div>
 </div>

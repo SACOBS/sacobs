@@ -8,27 +8,45 @@
       <%= back_to bookings_archives_path %>
     </div>
   </div>
-  <div class="well">
-    <div class="client-information">
-      <h4>Client information</h4>
-      <%= render 'bookings/shared/client_info', client: @booking.client %>
+  <div class='row'>
+    <span class='col-md-6'>
+      <div class="panel panel-default client-information">
+        <div class="panel-heading">
+          <h4 class="panel-title">Client information</h4>
+        </div>
+        <div class="panel-body">
+          <%= render 'bookings/shared/client_info', client: @booking.client %>
+        </div>
+      </div>
+    </span>
+    <span class='col-md-6'>
+      <div class="panel panel-default payment_detail">
+        <div class="panel-heading">
+          <h4 class="panel-title">Payment Detail</h4>
+        </div>
+        <div class="panel-body">
+          <% if @booking.payment_detail.present? %>
+            <%= render 'bookings/shared/payment_details', payment_detail: @booking.payment_detail %>
+          <% else %>
+            <p class='lead'>No payment details present.</p>
+          <% end %>
+        </div>
+      </div>
+    </span>
+  </div>
+  <div class="panel panel-default details">
+    <div class="panel-heading">
+      <h4 class="panel-title">Booking information</h4>
     </div>
-    <div class="payment_detail">
-      <% if @booking.payment_detail.present? %>
-        <h4>Payment Detail</h4>
-        <%= render 'bookings/shared/payment_details', payment_detail: @booking.payment_detail %>
-      <% end %>
+    <% [@booking, @booking.return_booking, @booking.main].compact.each do |booking| %>
+      <%= render 'bookings/shared/details', booking: booking %>
+    <% end %>
+  </div>
+  <div class="panel panel-default passengers">
+    <div class="panel-heading">
+      <h4 class="panel-title">Passengers</h4>
     </div>
-    <div class="details">
-      <h4>Booking information</h4>
-      <% [@booking, @booking.return_booking, @booking.main].compact.each do |booking| %>
-        <%= render 'bookings/shared/details', booking: booking %>
-      <% end %>
-    </div>
-    <div class="passengers">
-      <h4>Passengers</h4>
-      <%= render 'bookings/shared/passengers', passengers: @booking.passengers %>
-    </div>
+    <%= render 'bookings/shared/passengers', passengers: @booking.passengers %>
   </div>
   <div class="actions text-center">
     <%= back_to bookings_archives_path %>

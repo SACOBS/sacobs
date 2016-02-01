@@ -1,20 +1,13 @@
-<table class='table table-condensed'>
-  <thead>
-    <th>Payment Date</th>
-    <th>Customer Payment Reference</th>
-    <th>Payment Type</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <%= time_tag(payment_detail.paid_at) %>
-      </td>
-      <td>
-        <%= payment_detail.reference %>
-      </td>
-      <td>
-        <%= payment_detail.payment_type %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<p>
+ <strong>Payment Date:</strong>
+ <%= time_tag(payment_detail.paid_at) %>
+</p>
+<p>
+ <strong>Payment Reference:</strong>
+ <%= payment_detail.reference %>
+</p>
+<p>
+ <strong>Payment Type:</strong>
+  <%= payment_detail.payment_type %>
+</p>
+

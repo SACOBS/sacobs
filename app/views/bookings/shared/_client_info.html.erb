@@ -1,20 +1,31 @@
-<table class='table table-condensed'>
-  <thead>
-    <tr>
-      <th>Client Name</th>
-      <th>Home No</th>
-      <th>Cell No</th>
-      <th>Work No</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= client.full_name %></td>
-      <td><%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %></td>
-      <td><%= number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %></td>
-      <td><%= number_to_phone(client.work_no, area_code: true).presence || 'N/A' %></td>
-      <td><%= client.email.present? ? mail_to(client.email) : 'N/A' %></td>
-    </tr>
-  </tbody>
-</table>
+<p>
+ <strong>Name:</strong>
+ <%= client.full_name %>
+</p>
+<p>
+ <strong>Home No:</strong>
+ <%=  number_to_phone(client.home_no, area_code: true).presence || 'N/A' %> 
+</p>
+<p>
+ <strong>Cell No:</strong>
+ <%=  number_to_phone(client.cell_no, area_code: true).presence || 'N/A' %> 
+</p>
+<p>
+ <strong>Work No:</strong>
+ <%=  number_to_phone(client.work_no, area_code: true).presence || 'N/A' %> 
+</p>
+<p>
+ <strong>Email:</strong>
+     <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
+</p>
+
+
+
+
+      
+
+
+
+
+
+
