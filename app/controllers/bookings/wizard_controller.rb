@@ -12,7 +12,6 @@ module Bookings
           :return_trip_details,
           :client_details,
           :passenger_details,
-          :passenger_charges,
           :billing_info
 
     def show

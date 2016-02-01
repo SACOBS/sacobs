@@ -33,7 +33,7 @@ class DiscountsController < ApplicationController
 
   def update
     @discount.update(discount_params)
-    respond_with @discount
+    respond_with @discount, location: discounts_url
   end
 
   def destroy
@@ -49,7 +49,7 @@ class DiscountsController < ApplicationController
 
   def discount_params
     params.fetch(:discount, {}).permit(:percentage,
-                                       passenger_type_attributes: [:description]
+                                       passenger_type_attributes: [:description, :id]
                                       ).merge(user_id: current_user.id)
   end
 end

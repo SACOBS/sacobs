@@ -18,6 +18,7 @@
           <th>Surname</th>
           <th>Cell No</th>
           <th>Email</th>
+          <th>Charges</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +38,9 @@
             </td>
             <td>
               <%= passenger.input :email, input_html: { class: 'input-sm'} %>
+            </td>
+            <td nowrap='nowrap'>
+              <%= passenger.input :charges, as: :check_boxes, collection: Charge.all, label_method: :description, value_method: :id, label: false, checked: passenger.object.charges.map(&:id), item_wrapper_tag: false, item_label_class: "checkbox-inline",  include_hidden: false %>
             </td>
           </tr>
         <% end %>

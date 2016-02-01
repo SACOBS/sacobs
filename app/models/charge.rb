@@ -12,6 +12,7 @@
 
 class Charge < ActiveRecord::Base
   validates :description, :percentage, presence: true
+  validates :description, uniqueness: { case_sensitive: false }
 
   before_save :normalize
 

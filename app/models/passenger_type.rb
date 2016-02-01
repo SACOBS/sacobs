@@ -12,6 +12,8 @@ class PassengerType < ActiveRecord::Base
   default_scope { order(:description) }
 
   validates :description, presence: true
+  validates :description, uniqueness: { case_sensitive: false }
+  
   before_save :normalize
 
   private

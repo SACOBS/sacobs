@@ -27,7 +27,7 @@
     <div id="main" role="main">
       <div class="container-fluid">
         <div class="content">
-          <div class="unobtrusive-flash-container"></div>
+          <%= render 'layouts/messages' %>
           <div class="page-header">
             <%= wizard_progress(step, wizard_steps) %>
             <% if content_for?(:actions) %>
