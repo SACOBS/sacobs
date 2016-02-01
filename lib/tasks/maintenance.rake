@@ -8,10 +8,10 @@ namespace :maintenance do
   end
 
   task archive_trips: :environment do
-    trips = Trip.where('start_date < ?', Date.current)
+    trips = Trip.available.where('start_date < ?', Date.current)
     trips.find_each do |trip|
       Trip.transaction do
-        if trip.valid? && trip.bookings.present?
+        if trip.bookings.any?
           trip.bookings.each(&:archive!)
           trip.archive!
         else

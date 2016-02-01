@@ -6,13 +6,13 @@
     Clients
   </h2>
   <div class="btn-group">
-    <%= link_to new_client_path, class: 'btn btn-primary' do %>
+    <%= link_to new_client_path, class: 'btn btn-primary btn-sm' do %>
       <%= fa_icon :plus, text: 'Setup Client' %>
     <% end %>
-    <%= link_to clients_path, class: 'btn btn-default' do %>
+    <%= link_to clients_path, class: 'btn btn-default btn-sm' do %>
       <%= fa_icon :refresh, text: 'Refresh' %>
     <% end %>
-    <%= link_to clients_path(format: :xls), class: 'btn btn-info', data: { no_turbolink: true } do %>
+    <%= link_to clients_path(format: :xls), class: 'btn btn-info btn-sm', data: { no_turbolink: true } do %>
       <%= fa_icon :download, text: 'Download' %>
     <% end %>
   </div>

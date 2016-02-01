@@ -33,16 +33,16 @@
         <%= client.email.present? ? mail_to(client.email) : 'N/A' %>
       </address>
     </div>
-     <div class="panel-footer">
-        <%= link_to client, class: 'btn btn-info btn-xs' do %>
-          <%= fa_icon :info, text: 'Show' %>
-        <% end %>
-        <%= link_to edit_client_path(client), class: 'btn btn-warning btn-xs' do %>
-          <%= fa_icon :edit, text: 'Edit' %>
-        <% end %>
-        <%= link_to client, class: 'btn btn-danger btn-xs', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
-          <%= fa_icon :times, text: 'Destroy' %>
-        <% end %>
-      </div>
+    <div class="panel-footer">
+      <%= link_to client, class: 'btn btn-info btn-xs' do %>
+        <%= fa_icon :info, text: 'Show' %>
+      <% end %>
+      <%= link_to edit_client_path(client), class: 'btn btn-warning btn-xs' do %>
+        <%= fa_icon :edit, text: 'Edit' %>
+      <% end %>
+      <%= link_to client, class: 'btn btn-danger btn-xs', method: :delete, data: { behavior: 'delete-client', confirm: t('messages.confirm', resource: :client) }, remote: true do %>
+        <%= fa_icon :times, text: 'Destroy' %>
+      <% end %>
+    </div>
   </div>
 </div>

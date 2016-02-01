@@ -8,16 +8,16 @@
     </h3>
     <div class="actions">
       <%= back_to clients_path %>
-      <%= link_to edit_client_path(@client), class: 'btn btn-success' do %>
+      <%= link_to edit_client_path(@client), class: 'btn btn-warning btn-sm' do %>
         <%= fa_icon :edit, text: 'Edit' %>
       <% end %>
-      <%= link_to @client, class: 'btn btn-danger', method: :delete, data: {  confirm: t('messages.confirm', resource: :client) } do %>
+      <%= link_to @client, class: 'btn btn-danger btn-sm', method: :delete, data: {  confirm: t('messages.confirm', resource: :client) } do %>
         <%= fa_icon :times, text: 'Destroy' %>
       <% end %>
     </div>
   </div>
   <div class="row well well-sm">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <h4>Details</h4>
       <p>
         <strong>Title:</strong>
@@ -51,12 +51,10 @@
         <strong>
           <u>Notes</u>
         </strong>
-        <blockquote>
-          <%= simple_format(@client.notes.presence || 'N/A') %>
-        </blockquote>
+        <%= simple_format(@client.notes.presence || 'N/A') %>
       </p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <h4>Contact Info</h4>
       <p>
         <strong>Home Telephone No:</strong>
@@ -74,9 +72,7 @@
         <strong>Email:</strong>
         <%= @client.email.present? ? mail_to(@client.email) : 'N/A' %>
       </p>
-    </div>
-    <div class="col-md-4">
-      <h4>Address Info</h4>
+       <h4>Address Info</h4>
       <p>
         <strong>Street Address 1:</strong>
         <%= @client.street_address1.presence || 'N/A' %>
@@ -101,68 +97,39 @@
         <div class="panel-heading">
           <h4 class='panel-title'>
             Credit Vouchers
-          
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             <div class='pull-right'>
-              <%= link_to new_client_voucher_path(@client), class: 'btn btn-warning btn-xs' do %>
+              <%= link_to new_client_voucher_path(@client), class: 'btn btn-primary btn-xs' do %>
                 <%= fa_icon :money, text: 'Add credit voucher' %>
               <% end %>
             </div>
           </h4>
         </div>
-        <div class="panel-body">
-          <% if @client.vouchers.any? %>
-            <table class='table table-bordered table-condensed'>
-              <thead>
+        <% if @client.vouchers.any? %>
+          <table class='table table-bordered table-condensed'>
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @client.vouchers.each do |voucher| %>
                 <tr>
-                  <th>Reference</th>
-                  <th>Amount</th>
+                  <td>
+                    <%= voucher.ref_no %>
+                  </td>
+                  <td>
+                    <%= number_to_currency(voucher.amount, unit: 'R') %>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                <% @client.vouchers.each do |voucher| %>
-                  <tr>
-                    <td>
-                      <%= voucher.ref_no %>
-                    </td>
-                    <td>
-                      <%= number_to_currency(voucher.amount, unit: 'R') %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% else %>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <div class="panel-body">
             <p class='lead text-center'>This client has no vouchers</p>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class='col-md-6'>
