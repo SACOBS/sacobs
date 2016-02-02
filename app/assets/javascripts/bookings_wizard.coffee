@@ -1,6 +1,10 @@
 $(document).on "page:change", ->
   return unless $(".bookings-wizard").length > 0
 
+  $("[data-behaviour='show-prices']").on 'ajax:success', (evt, data, status, xhr) ->
+    $(this).popover({ container: 'body', content: data, html: true, trigger: 'hover'});
+    $(this).trigger('mouseenter');
+
   $('#booking_client_id').change ->
     $.getJSON "/clients/" + $(this).val(), (client) ->
       for key, value of client

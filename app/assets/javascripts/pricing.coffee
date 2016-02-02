@@ -7,7 +7,6 @@ $(document).on "page:change", ->
 
   $("input[type=radio]:first").trigger('click')
 
-
   $('#connection-search').on 'keyup', ->
     route_id = parseInt($("input[type='radio']:checked").val());
     search_term = this.value.toLowerCase()
@@ -17,5 +16,5 @@ $(document).on "page:change", ->
         $(this).data('route') == route_id  && $(this).text().toLowerCase().indexOf(search_term) != -1
       ).appendTo('#connections-list')
 
-  $(document).on 'ajax:success', '#show_pricing' ,(evt, data, status, xhr) ->
-    $('.quote').html(data)
+  $(document).on 'ajax:success', "[data-behaviour='show-prices']", (evt, data, status, xhr) ->
+   $('.quote').html(data)

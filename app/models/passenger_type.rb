@@ -13,7 +13,7 @@ class PassengerType < ActiveRecord::Base
 
   validates :description, presence: true
   validates :description, uniqueness: { case_sensitive: false }
-  
+
   before_save :normalize
 
   private

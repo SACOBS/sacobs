@@ -54,7 +54,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    #fresh_when @booking
+    # fresh_when @booking
   end
 
   def destroy

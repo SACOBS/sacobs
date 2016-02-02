@@ -20,13 +20,16 @@
       <ul class="list-unstyled" id="connections-list">
         <% @connections.each do |connection| %>
           <%= content_tag_for :li, connection, data: {route: connection.route_id} do %>
-            <%= link_to connection.name, pricing_path(connection), id: 'show_pricing', data: {type: :html}, remote: true %>
+            <%= link_to connection.name, pricing_path(connection), data: {type: :html, behaviour: 'show-prices' }, remote: true %>
           <% end %>
         <% end %>
       </ul>
     </div>
   </div>
 <% end %>
+<div class='page-header'>
+  <h2>Quotes</h2>
+</div>
 <div class="quote">
-  <%= render 'pricing/quote', pricing: @pricing %>
+  <p class='lead'>Please the search functions to choose the connections for which you wish to see quote information.</p>
 </div>

@@ -2,8 +2,8 @@ module WizardHelper
 
   def step_number(step, steps)
     steps.index(step).next
-  end 
-  
+  end
+
   def total_steps(steps)
     steps.size
   end

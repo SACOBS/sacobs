@@ -23,7 +23,7 @@ class PricingPresenter
       discount = find_seasonal_discount(passenger_type) || find_discount(passenger_type)
       if discount
         key = discount.description
-        @discount_prices[key] = calculate_percentage_amount(discount.percentage)
+        @discount_prices[key] = calculate_percentage(discount.percentage, price)
       end
     end
   end
@@ -32,12 +32,16 @@ class PricingPresenter
     @charges = {}
     Charge.all.each do |charge|
       key = charge.description
-      @charges[key] = calculate_percentage_amount(charge.percentage)
+      @charges[key] = calculate_percentage(charge.percentage, price)
     end
   end
 
-  def calculate_percentage_amount(percentage)
-    percentage.percent_of(price).round_up(5)
+  def calculate_percentage(percentage, amount)
+    Utilities::Calculations.percentage_of(percentage, amount).round
+  end
+
+  def round_up(amount, by = 5)
+    Utilities::Calculations.round_up(amount, by)
   end
 
   def find_seasonal_discount(passenger_type)

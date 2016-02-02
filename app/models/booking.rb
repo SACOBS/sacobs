@@ -80,10 +80,8 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :client, :passengers, :invoice, reject_if: :all_blank
   accepts_nested_attributes_for :return_booking, reject_if: :all_blank
 
-
-
   with_options if: :in_process? do
-    validates :trip, :stop, presence: true 
+    validates :trip, :stop, presence: true
     validates :quantity, numericality: { greater_than: 0 }
     validate :seats_are_available
   end

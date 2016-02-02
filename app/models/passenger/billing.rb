@@ -10,7 +10,7 @@ class Passenger::Billing
     passenger.charges.map do |charge|
       {
         description: charge.description,
-        amount: charge.percentage.percent_of(base).round_up(5)
+        amount: calculate_percentage(charge.percentage, base)
       }
     end
   end
@@ -18,23 +18,31 @@ class Passenger::Billing
   def discount
     {
       description: applicable_discount.description,
-      amount: applicable_discount.percentage.percent_of(gross).round_up(5)
+      amount: calculate_percentage(applicable_discount.percentage, gross)
     }
   end
 
   def gross
-    (base + total_charges).round_up(5)
+    base + total_charges
   end
-  
+
   def total_charges
-     charges.sum { |charge| charge[:amount] } 
-  end 
+    charges.sum { |charge| charge[:amount] }
+  end
 
   def nett
-    (gross - discount[:amount]).round_up(5)
+    round_up(gross - discount[:amount])
   end
 
   private
+
+  def calculate_percentage(percentage, amount)
+    Utilities::Calculations.percentage_of(percentage, amount)
+  end
+
+  def round_up(amount, by = 5)
+    Utilities::Calculations.round_up(amount, by)
+  end
 
   def applicable_discount
     @applicable_discount ||= (seasonal_discount || Discount.find_by(passenger_type: passenger.passenger_type))
