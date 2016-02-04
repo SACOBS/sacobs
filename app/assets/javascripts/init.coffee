@@ -47,7 +47,7 @@ $(document).on "page:change", ->
   $.bootstrapSortable(applyLast=true)
 
   $('[data-toggle=tooltip]').tooltip()
-  $('[data-behaviour~=datepicker]').datepicker(
+  $('.datepicker').datepicker(
     autoclose: true,
     autoSize: true,
     changeYear: true,
@@ -57,12 +57,12 @@ $(document).on "page:change", ->
   $('a[data-toggle="tab"]').on 'click', (e) ->
     e.preventDefault()
     $(this).tab('show');
-  
+
 
 
 
 $(document).on "page:change cocoon:after-insert", ->
-  $('[data-behaviour~=dropdown]').select2(
+  $('.combo-box').select2(
     theme: "bootstrap",
     selectOnClose: true,
     minimumResultsForSearch: 15,

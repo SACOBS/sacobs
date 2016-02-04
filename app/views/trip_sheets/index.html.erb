@@ -10,7 +10,7 @@ Quick Trip Sheet
   </div>
   <div class='input-group pull-right col-xs-3'>
     <span class="input-group-addon"><%= fa_icon 'calendar' %></span>
-    <input type="text" class="form-control input-sm datepicker" placeholder="Search by date" data-behaviour="search-trip-by-date">
+    <input type="text" class="form-control input-sm datepicker" placeholder="Search by date" data-behaviour="search-trip-by-date" readonly="readonly">
   </div>
 </div>
 <div id='trips-calendar' data-source="<%= trip_sheets_path(format: :json) %>"></div>

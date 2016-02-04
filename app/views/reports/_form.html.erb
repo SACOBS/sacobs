@@ -13,10 +13,10 @@
     <%= f.simple_fields_for :criteria do |c| %>
       <div class='row'>
         <div class='col-md-6'>
-          <%= c.input :stop_connection_from_city_id_eq, collection: cities, label: 'From', selected: f.object.criteria['stop_connection_from_city_id_eq'] , input_html: { class: 'input-sm', data: { behaviour: 'dropdown', placeholder: 'Select from city' } } %>
+          <%= c.input :stop_connection_from_city_id_eq, collection: cities, label: 'From', selected: f.object.criteria['stop_connection_from_city_id_eq'] , input_html: { class: 'input-sm combo-box', data: { placeholder: 'Select from city' } } %>
         </div>
         <div class='col-md-6'>
-          <%= c.input :stop_connection_to_city_id_eq, collection: cities, label: 'To', selected: f.object.criteria['stop_connection_to_city_id_eq'] ,input_html: { class: 'input-sm', data: { behaviour: 'dropdown', placeholder: 'Select to city' } } %>
+          <%= c.input :stop_connection_to_city_id_eq, collection: cities, label: 'To', selected: f.object.criteria['stop_connection_to_city_id_eq'] ,input_html: { class: 'input-sm combo-box', data: { placeholder: 'Select to city' } } %>
         </div>
       </div>
       <fieldset>

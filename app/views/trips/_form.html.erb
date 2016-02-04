@@ -8,10 +8,10 @@
       <%= f.input :name, autofocus: true, placeholder: 'Name' %>
       <div class='row'>
         <div class='col-sm-6'>
-          <%= f.input :start_date, placeholder: 'Start date', input_html: {  data: { behaviour: :datepicker } }  %>
+          <%= f.input :start_date, placeholder: 'Start date', input_html: {  class: 'datepicker' }  %>
         </div>
         <div class='col-md-6'>
-          <%= f.input :end_date, placeholder: 'End date', input_html: {  data: { behaviour: :datepicker } }  %>
+          <%= f.input :end_date, placeholder: 'End date', input_html: {  class: 'datepicker' }  %>
         </div>
       </div>
       <%= f.input :notes, as: :text, placeholder: 'Notes', input_html: { rows: 8 } %>
