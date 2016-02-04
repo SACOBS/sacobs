@@ -3,7 +3,7 @@ class TripSheetsController < ApplicationController
 
   def index
     @q = Trip.search(params[:q].try(:merge, m: 'or'))
-    @trips = @q.result(distinct: true).includes(:route).order(:start_date)
+    @trips = @q.result(distinct: true)
   end
 
   def update
@@ -27,7 +27,6 @@ class TripSheetsController < ApplicationController
   private
 
   def set_trip
-    @trip = Trip.includes(bookings: [:passengers, { stop: :connection }], route: [destinations: :city]).
-            find(params[:id])
+    @trip = Trip.includes(bookings: [:passengers, { stop: :connection }], route: [destinations: :city]).find(params[:id])
   end
 end

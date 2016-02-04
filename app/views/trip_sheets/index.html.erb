@@ -1,51 +1,16 @@
 <%= content_for(:title) do %>
-  Quick Trip Sheet
+Quick Trip Sheet
 <% end %>
-<% content_for :sidebar do %>
-  <h5>Search for trips</h5>
-  <%= simple_form_for :q, url: trip_sheets_path, method: :get  do |f| %>
-    <%= f.input :start_date_eq, placeholder: 'Date of trip', label: false, input_html: {  data: { behaviour: :datepicker } }  %>
-    <%= f.input :route_id_in, collection: Route.all, as: :check_boxes, include_blank: false, inline_label: true, label_method: :name, label: 'Route' %>
-    <%= f.button :submit, 'Search', class: 'btn btn-success' %>
-  <% end %>
-<% end %>
-<div class="results">
-  <div class="well">
-    <h5>Quick TripSheet</h5>
-    <% if @trips.any? %>
-      <% @trips.each do |trip| %>
-        <div class="result">
-          <dl class="dl-horizontal">
-            <dt>Name:</dt>
-            <dd>
-              <%= trip.name %>
-            </dd>
-            <dt>Route:</dt>
-            <dd>
-              <%= trip.route_name %>
-            </dd>
-            <dt>Date:</dt>
-            <dd>
-              <%= time_tag(trip.start_date, format: :long) %>
-            </dd>
-            <dt>Day:</dt>
-            <dd>
-              <%= time_tag(trip.start_date, format: :day) %>
-            </dd>
-            <dt>Bookings:</dt>
-            <dd>
-              <%= trip.bookings.size %>
-            </dd>
-            <dd>
-              <%= link_to  trip_sheet_path(trip), target: '_blank', class: 'btn btn-sm btn-info' do %>
-                <%= fa_icon :road, text: 'Generate TripSheet' %>
-              <% end %>
-            </dd>
-          </dl>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="lead text-center">There are currently no trips</p>
+<div class="page-header">
+  <h3>Tripsheets</h3>
+  <div>
+    <%= link_to trip_sheets_path, class: 'btn btn-default' do %>
+      <%= fa_icon :refresh, text: 'Refresh' %>
     <% end %>
   </div>
+  <div class='input-group pull-right col-xs-3'>
+    <span class="input-group-addon"><%= fa_icon 'calendar' %></span>
+    <input type="text" class="form-control input-sm datepicker" placeholder="Search by date" data-behaviour="search-trip-by-date">
+  </div>
 </div>
+<div id='trips-calendar' data-source="<%= trip_sheets_path(format: :json) %>"></div>

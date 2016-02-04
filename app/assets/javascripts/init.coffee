@@ -19,7 +19,7 @@ $.rails.allowAction = (element) ->
   modal_html = """
                <div class="modal modal-fade">
                 <div class='modal-dialog'>
-                   <div class='modal-content'> 
+                   <div class='modal-content'>
                     <div class="modal-header">
                     <a class="close" data-dismiss="modal">×</a>
                     <h4 class='modal-title'>Sacobs</h4>
@@ -30,8 +30,8 @@ $.rails.allowAction = (element) ->
                     <div class="modal-footer">
                     <a data-dismiss="modal" class="btn btn-default">Cancel</a>
                     </div>
-                  </div>  
-                </div>    
+                  </div>
+                </div>
                </div>
                """
   $modal_html = $(modal_html)
@@ -57,13 +57,14 @@ $(document).on "page:change", ->
   $('a[data-toggle="tab"]').on 'click', (e) ->
     e.preventDefault()
     $(this).tab('show');
+  
 
 
 
 $(document).on "page:change cocoon:after-insert", ->
   $('[data-behaviour~=dropdown]').select2(
     theme: "bootstrap",
-    selectOnClose: true, 
+    selectOnClose: true,
     minimumResultsForSearch: 15,
     width: 'resolve'
   );

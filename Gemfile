@@ -73,6 +73,8 @@ gem 'sucker_punch', '~> 2.0'
 # PG
 gem 'pg'
 
+gem 'fullcalendar-rails'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'annotate'

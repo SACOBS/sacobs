@@ -8,6 +8,7 @@
 #= require nprogress-ajax
 #= require nprogress-turbolinks
 #= require moment
+#= require fullcalendar
 #= require bootstrap
 #= require bootstrap-sortable
 #= require cocoon
@@ -17,4 +18,5 @@
 #= require pricing
 #= require routes
 #= require seasonal_discounts
+#= require trip_sheets
 #= require init
