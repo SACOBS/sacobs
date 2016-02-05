@@ -190,7 +190,7 @@ Sacobs::Application.routes.draw do
   resources :clients do
     collection do
       get :search
-      get :download, defaults: { format: 'xml' }
+      get :download, defaults: { format: :xlsx }
     end
     resources :vouchers, only: %i(new create)
   end

@@ -73,7 +73,12 @@ gem 'sucker_punch', '~> 2.0'
 # PG
 gem 'pg'
 
+# Calendar
 gem 'fullcalendar-rails'
+
+# Excel
+gem 'axlsx'
+gem 'axlsx_rails'
 
 group :development do
   gem 'web-console', '~> 2.0'

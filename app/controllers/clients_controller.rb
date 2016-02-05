@@ -29,7 +29,7 @@
 #
 
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy)
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
     @clients = Client.search(surname_start: params[:letter] ||= 'A').result.page(params[:page])
@@ -37,9 +37,8 @@ class ClientsController < ApplicationController
   end
 
   def download
-    @clients = Client.all
-    response.headers['Content-Disposition'] = 'attachment; filename="clients.xls"'
-    respond_with(@clients)
+    @clients = Client.limit(2)
+    render xlsx: 'clients'
   end
 
   def search

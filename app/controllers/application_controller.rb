@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   self.responder = ApplicationResponder
-  respond_to :html, :js, :json, :pdf, :xls
+  respond_to :html, :js, :json, :pdf, :xlsx
 
   before_action :authenticate_user!
 
