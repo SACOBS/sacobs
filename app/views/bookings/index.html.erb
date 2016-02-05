@@ -3,11 +3,14 @@
 <% end %>
 <div class="page-header">
   <h2>Bookings</h2>
-  <%= link_to bookings_path, method: :post, class: 'btn btn-primary' do %>
+  <%= link_to bookings_path, method: :post, class: 'btn btn-primary btn-sm' do %>
     <%= fa_icon :plus, text: 'Make Booking' %>
   <% end %>
-  <%= link_to bookings_path, class: 'btn btn-default' do %>
+  <%= link_to bookings_path, class: 'btn btn-default btn-sm' do %>
     <%= fa_icon :refresh, text: 'Refresh' %>
+  <% end %>
+  <%= link_to download_bookings_path, class: 'btn btn-info btn-sm', data: { no_turbolink: true } do %>
+    <%= fa_icon :download, text: 'Download' %>
   <% end %>
   <div class="search pull-right">
     <%= render 'search_form' %>

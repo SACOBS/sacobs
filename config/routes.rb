@@ -176,6 +176,7 @@ Sacobs::Application.routes.draw do
   resources :bookings, only: %i(create show index destroy) do
     collection do
       get :search
+      get :download, defaults: { format: :xlsx }
     end
     member do
       patch :cancel

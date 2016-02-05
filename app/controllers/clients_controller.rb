@@ -37,7 +37,7 @@ class ClientsController < ApplicationController
   end
 
   def download
-    @clients = Client.limit(2)
+    @clients = Client.all
     render xlsx: 'clients'
   end
 

@@ -48,13 +48,18 @@ class BookingsController < ApplicationController
     @results = @search.result.includes(:client, :trip, stop: :connection).limit(50)
   end
 
+  def download
+    @bookings = Booking.available.completed
+    render xlsx: 'bookings'
+  end
+
   def create
     @booking = Booking.new(user_id: current_user.id).tap { |b| b.save(validate: false) }
     redirect_to booking_wizard_url(@booking, :trip_details)
   end
 
   def show
-    # fresh_when @booking
+    fresh_when @booking
   end
 
   def destroy

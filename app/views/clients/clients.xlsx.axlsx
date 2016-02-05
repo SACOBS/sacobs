@@ -1,7 +1,7 @@
 xlsx_package.workbook.tap do |spreadsheet|
   spreadsheet.add_worksheet(name: "Clients") do |sheet|
     sheet.add_row %w(Name Surname Cell_No Home_No Work_No Email)
-    @clients.each do |client|
+    @clients.find_each do |client|
       sheet.add_row [client.name,client.surname,number_to_phone(client.cell_no),number_to_phone(client.home_no),number_to_phone(client.work_no),client.email]
     end
   end

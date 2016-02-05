@@ -1,0 +1,10 @@
+xlsx_package.workbook.tap do |spreadsheet|
+  @bookings.find_each.group_by(&:status).each do |status, bookings|
+    spreadsheet.add_worksheet(name: status.titleize) do |sheet|
+      sheet.add_row %w(Reference Booked_On Client_Name Qty Trip_Date)
+      bookings.each do |booking|
+        sheet.add_row [booking.reference_no, l(booking.created_at), booking.client.full_name, booking.quantity,  l(booking.trip.start_date, format: :long)]
+      end
+    end
+  end
+end
