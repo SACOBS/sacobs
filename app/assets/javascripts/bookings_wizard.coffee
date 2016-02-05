@@ -5,10 +5,10 @@ $(document).on "page:change", ->
     $(this).popover({ container: 'body', content: data, html: true, trigger: 'hover'});
     $(this).trigger('mouseenter');
 
-  $('#booking_client_id').change ->
+  $("[data-behaviour~=select-client]").change ->
     $.getJSON "/clients/" + $(this).val(), (client) ->
       for key, value of client
-          $input = $('.new-client-fields').find('[name*=' + key + ']')
+          $input = $('.new-client-fields').find("[name*=#{key}]")
           if $input.is(':checkbox')
             $input.prop('checked', value)
           else

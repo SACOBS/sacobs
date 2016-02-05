@@ -29,19 +29,16 @@
 #
 
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i(show edit update destroy)
+  before_action :set_client, only: [:show, :edit, :update, :destroy)
 
   def index
-    @clients = if request.format.xls?
-                 Client.all
-               else
-                 Client.surname_starts_with(params[:letter] ||= 'A').page(params[:page])
-               end
+    @clients = Client.search(surname_start: params[:letter] ||= 'A').result.page(params[:page])
     respond_with(@clients) if stale?(@clients)
   end
 
   def download
     @clients = Client.all
+    response.headers['Content-Disposition'] = 'attachment; filename="clients.xls"'
     respond_with(@clients)
   end
 

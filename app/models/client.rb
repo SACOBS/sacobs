@@ -63,8 +63,6 @@ class Client < ActiveRecord::Base
     )
   end
 
-  scope :surname_starts_with, ->(letter) { where(arel_table[:surname].matches("#{letter}%")) }
-
   def age
     @age ||= ((Date.current - date_of_birth).to_i / 365.25).floor if date_of_birth?
   end

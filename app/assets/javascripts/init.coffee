@@ -65,6 +65,5 @@ $(document).on "page:change cocoon:after-insert", ->
   $('.combo-box').select2(
     theme: "bootstrap",
     selectOnClose: true,
-    minimumResultsForSearch: 15,
     width: 'resolve'
   );
