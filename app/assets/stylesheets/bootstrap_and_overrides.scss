@@ -38,6 +38,14 @@ body
   @extend .row;
 }
 
+.alert-notice {
+  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+}
+
+.alert-alert {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}
+
 .form-inline{
   div {
     display: inline-block;
