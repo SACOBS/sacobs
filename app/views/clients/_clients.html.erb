@@ -7,7 +7,7 @@
 <%= paginate clients, remote: true %>
 <% cache clients do %>
   <div class="clients" data-source="<%= clients_path(page: params[:page], letter: params[:letter]) %>">
-    <% clients.in_groups_of(3, false) do |group| %>
+    <% clients.in_groups_of(4, false) do |group| %>
       <div class="row">
         <%= render group, partial: 'clients/client', cache: true %>
       </div>

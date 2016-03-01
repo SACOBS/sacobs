@@ -29,19 +29,19 @@
     </p>
   </div>
 </div>
-<div class="tabbable tabs-left" id="listing">
-  <ul class="nav nav-tabs" id="directory">
-    <% ('A'..'Z').each_with_index do |letter, index| %>
-      <%= content_tag(:li, class: ('active' if index.zero?)) do %>
-        <%= link_to letter, clients_path(letter: letter), data: { toggle: "tab", target: "##{letter}"},  remote: true %>
-      <% end %>
+<div class='col-md-1 directory'>
+<ul class="nav nav-pills nav-stacked">
+  <% ('A'..'Z').each_with_index do |letter, index| %>
+    <%= content_tag(:li, class: ('active' if index.zero?)) do %>
+      <%= link_to letter, clients_path(letter: letter), data: { toggle: "pill", target: "##{letter}"},  remote: true %>
     <% end %>
-  </ul>
-  <div class="tab-content col-md-10">
-    <% ('A'..'Z').each_with_index do |letter, index| %>
-      <%= content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do %>
-        <%= render(partial: 'clients', locals: { clients: @clients }) if index.zero? %>
-      <% end %>
+  <% end %>
+</ul>
+</div>
+<div class="tab-content col-md-11">
+  <% ('A'..'Z').each_with_index do |letter, index| %>
+    <%= content_tag(:div, id: letter, class: "tab-pane #{'active' if index.zero?}") do %>
+      <%= render(partial: 'clients', locals: { clients: @clients }) if index.zero? %>
     <% end %>
-  </div>
+  <% end %>
 </div>

@@ -19,26 +19,26 @@
   </p>
 </div>
 </div>
-<div class="tab-wrapper" id="bookings">
+<div id="bookings">
   <ul class="nav nav-tabs">
     <li class="active">
       <%= link_to bookings_path(type: :standby), data: { toggle: 'tab', target: '#standby' }, remote: true do %>
-        <p> <strong>Standby/Expired</strong> <span class="label label-warning"> <%= @presenter.standby_booking_count %></span></p>
+        <p class="text-warning"><strong>Standby/Expired</strong> <span class="label label-warning"> <%= @presenter.standby_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :open), data: { toggle: 'tab', target: '#open' }, remote: true do %>
-        <p> <strong>Reserved</strong> <span class="label label-info"> <%= @presenter.reserved_booking_count %></span></p>
+        <p class="text-info"><strong>Reserved</strong> <span class="label label-info"> <%= @presenter.reserved_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :paid), data: { toggle: 'tab', target: '#paid' }, remote: true do %>
-        <p> <strong>Paid</strong> <span class="label label-success"> <%= @presenter.paid_booking_count %></span></p>
+        <p class='text-success'><strong>Paid</strong> <span class="label label-success"> <%= @presenter.paid_booking_count %></span></p>
       <% end %>
     </li>
     <li>
       <%= link_to bookings_path(type: :cancelled) ,data: { toggle: 'tab', target: '#cancelled' }, remote: true do %>
-        <p><strong>Cancelled</strong> <span class="label label-danger"> <%= @presenter.cancelled_booking_count %></span></p>
+        <p class="text-danger"><strong>Cancelled</strong> <span class="label label-danger"> <%= @presenter.cancelled_booking_count %></span></p>
       <% end %>
     </li>
   </ul>
