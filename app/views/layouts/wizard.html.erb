@@ -7,8 +7,8 @@
     </title>
     <meta content="<%= content_for?(:description) ? yield(:description) : 'Sacobs' %>" name="description"/>
     <meta content="<%= content_for?(:keywords) ? yield(:keywords) : 'Sacobs' %>" name="keywords"/>
-    <%= stylesheet_link_tag :application, media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag :application, media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload', async: Rails.env.production? %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'apple-touch-icon-ipad-76x76-precomposed.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <%= favicon_link_tag 'apple-touch-icon-ipad-retina-152x152-precomposed.png', rel: 'apple-touch-icon', type: 'image/png' %>
