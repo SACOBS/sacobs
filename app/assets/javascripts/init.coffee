@@ -43,7 +43,7 @@ $.rails.allowAction = (element) ->
   return false
 
 
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   $.bootstrapSortable(applyLast=true)
 
   $('[data-toggle=tooltip]').tooltip()
@@ -61,7 +61,7 @@ $(document).on "page:change", ->
 
 
 
-$(document).on "page:change cocoon:after-insert", ->
+$(document).on "turbolinks:load cocoon:after-insert", ->
   $('.combo-box').select2(
     theme: "bootstrap",
     selectOnClose: true,

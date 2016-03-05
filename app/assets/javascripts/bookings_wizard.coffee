@@ -1,4 +1,4 @@
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   return unless $(".bookings-wizard").length > 0
 
   $("[data-behaviour='show-prices']").on 'ajax:success', (evt, data, status, xhr) ->

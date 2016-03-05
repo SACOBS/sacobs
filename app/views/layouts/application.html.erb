@@ -19,7 +19,7 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_path.gsub(/\/|_/, "-") %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <header id='sacobs-navigation' class="navbar navbar-fixed-top navbar-inverse" data-turbolinks-permanent>
       <div class="container-fluid">
         <%= render 'layouts/navigation' %>
       </div>

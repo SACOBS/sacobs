@@ -1,4 +1,4 @@
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   return unless $(".seasonal-discounts").length > 0
   $('#discounted-price, #original-price').on 'input',  ->
     discounted_price = Number($('#discounted-price').val())

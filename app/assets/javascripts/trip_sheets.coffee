@@ -1,4 +1,4 @@
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   return unless $(".trip-sheets").length > 0
 
   $('#trips-calendar').fullCalendar(

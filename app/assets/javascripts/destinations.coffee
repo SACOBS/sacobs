@@ -1,8 +1,8 @@
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   return unless $(".destinations").length > 0
   $('[data-behaviour~=sortable]').sortable(
     appendTo: 'body'
-    helper: 'clone'  
+    helper: 'clone'
     axis: 'y'
     items: '.destination'
     cursor: 'move'
@@ -16,4 +16,3 @@ $(document).on "page:change", ->
 
   $('.route-destinations').on 'cocoon:before-insert',(event, destination) ->
     destination.find("td input[name*='sequence']").val(parseInt($(this).find('tr:last').find("td input[name*='sequence']").val()) + 1)
-  

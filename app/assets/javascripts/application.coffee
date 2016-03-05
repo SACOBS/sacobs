@@ -6,7 +6,6 @@
 #= require select2
 #= require nprogress
 #= require nprogress-ajax
-#= require nprogress-turbolinks
 #= require moment
 #= require fullcalendar
 #= require bootstrap

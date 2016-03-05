@@ -1,4 +1,4 @@
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   return unless $(".pricing").length > 0
   $connections = $('#connections-list').find('li')
 
