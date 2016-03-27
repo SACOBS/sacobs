@@ -26,7 +26,6 @@ gem 'jbuilder', '~> 1.2'
 
 # Frontend
 gem 'bootstrap-sass'
-gem 'normalize-rails'
 gem 'bootswatch-rails'
 gem 'bootstrap_sortable_rails'
 gem 'momentjs-rails'
