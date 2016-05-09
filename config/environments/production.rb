@@ -76,13 +76,13 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.smtp_settings = {
-    address:              Rails.application.secrets.mandrill_address,
-    port:                 Rails.application.secrets.mandrill_port,
+    address:              Rails.application.secrets.mail_address,
+    port:                 Rails.application.secrets.mail_port,
     domain:               'sacobs.herokuapp.com',
     authentication:       'plain',
     enable_starttls_auto: true,
-    user_name:            Rails.application.secrets.mandrill_user_name,
-    password:             Rails.application.secrets.mandrill_password
+    user_name:            Rails.application.secrets.mail_user_name,
+    password:             Rails.application.secrets.mail_password
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
